@@ -23,7 +23,7 @@ const resources = {
         bemvindo: "$ Welcome to my Portfolio",
         cargo: "Software Engineering Professor at PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brazil",
-        faculdade: "Software Engineering - PUC Minas",
+        faculdade: "Doctor and Master in Information Systems and Knowledge Management",
         ajuda: "Type `help` to explore all available commands.",
       },
       contato: {
@@ -237,7 +237,7 @@ const resources = {
         bemvindo: "$ Bem-vindo ao meu Portfólio",
         cargo: "Professor de Engenharia de Software na PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brasil",
-        faculdade: "Engenharia de Software - PUC Minas",
+        faculdade: "Doutor e Mestre em Sistemas de Informação e Gestão do Conhecimento",
         ajuda: "Digite `ajuda` para conhecer mais sobre os comandos.",
       },
       contato: {
