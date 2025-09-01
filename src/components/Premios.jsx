@@ -1,41 +1,62 @@
-
 import React from 'react';
 import { awardsData } from '../awardsData';
 import { useTranslation } from 'react-i18next';
-import './Certificacoes.css';
-
+import './Premios.css';
 
 export default function Premios() {
-	const { t, i18n } = useTranslation();
-	const lang = i18n.language.startsWith('en') ? 'en' : 'pt';
-	if (!awardsData.length) {
-		return <div><h2>{t('premios.titulo', 'Prêmios')}</h2><p>{t('premios.nenhum', 'Nenhum prêmio cadastrado ainda.')}</p></div>;
-	}
-	return (
-		<div>
-			<h2 style={{ marginBottom: 24 }}>{t('premios.titulo', 'Prêmios')}</h2>
-			{awardsData.map((award, idx) => (
-				<div className="premio-sobre-container" key={idx}>
-					{award.image && (
-						<div className="premio-avatar-container">
-							<a href={award.link || '#'} target="_blank" rel="noopener noreferrer">
-								<img src={award.image} alt={award.title} className="premio-avatar-image" />
-							</a>
-						</div>
-					)}
-					<div className="premio-info-container">
-						<div className="experience-title" style={{ fontWeight: 'bold', fontSize: 18 }}>{t(`premios.${award.title}.titulo`, award.title)}</div>
-						<div className="experience-company">{t(`premios.${award.title}.org`, award.organization)}</div>
-						{award.year && <div className="experience-period">{award.year}</div>}
-						{award.description && <div style={{ margin: '8px 0' }}>{t(`premios.${award.title}.desc`, award.description)}</div>}
-									{award.link && (
-										<a href={award.link} className="experience-link" target="_blank" rel="noopener noreferrer" style={{ color: '#a78bfa', textDecoration: 'underline', display: 'inline-block', marginTop: 8 }}>
-											<span role="img" aria-label="link">🔗</span> {t('premios.link', 'Ver no Link')}
-										</a>
-									)}
-					</div>
-				</div>
-			))}
-		</div>
-	);
+  const { t } = useTranslation();
+
+  if (!awardsData.length) {
+    return (
+      <div>
+        <h2>{t('premios.titulo')}</h2>
+        <p>{t('premios.nenhum')}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: '0 1.5rem' }}>
+      <h3 style={{ color: '#00ff9d', marginBottom: '2rem', fontSize: '1.8rem' }}>
+        {t('premios.titulo')}
+      </h3>
+      {awardsData.map((award, idx) => (
+        <div className="premio-sobre-container" key={idx}>
+          {award.image && (
+            <div className="premio-avatar-container">
+              <a href={award.link || '#'} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={award.image}
+                  alt={t(`premios.${award.id}.titulo`)}
+                  className="premio-avatar-image"
+                />
+              </a>
+            </div>
+          )}
+          <div className="premio-info-container">
+            <div className="premio-title">
+              {t(`premios.${award.id}.titulo`)}
+            </div>
+            <div className="premio-org">
+              {t(`premios.${award.id}.org`)}
+            </div>
+            {award.year && <div className="premio-year">{award.year}</div>}
+            <div className="premio-desc">
+              {t(`premios.${award.id}.desc`)}
+            </div>
+            {award.link && (
+              <a
+                href={award.link}
+                className="premio-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span role="img" aria-label="link">🔗</span> {t('premios.link')}
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }

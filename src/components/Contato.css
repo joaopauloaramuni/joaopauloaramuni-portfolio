@@ -5,7 +5,7 @@
 }
 
 .contato-titulo {
-  color: #a777e3; /* Nossa cor tema roxa */
+  color: #00ff9d;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
@@ -30,10 +30,11 @@
   text-decoration: none;
   font-size: 1.1rem;
   transition: color 0.3s ease;
+  margin-bottom: 0.5rem;
 }
 
 .contato-item:hover {
-  color: #a777e3; /* Efeito hover com a cor tema */
+  color: #00ff9d; /* Efeito hover com a cor tema */
 }
 
 .contato-icone {

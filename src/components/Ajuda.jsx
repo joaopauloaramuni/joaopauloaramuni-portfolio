@@ -1,6 +1,5 @@
 // src/components/Ajuda.jsx
 
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { commandList } from '../commands';
@@ -19,7 +18,7 @@ const Ajuda = () => {
               <span>{allAliases}</span>
             </div>
             <p style={{ margin: '0.25em 0 0 2.5ch', color: '#a0aec0' }}>
-              {t(`ajuda.${cmd.name}.desc`, cmd.description)}
+              {t(`ajuda.${cmd.name}.desc`)}
             </p>
           </div>
         );

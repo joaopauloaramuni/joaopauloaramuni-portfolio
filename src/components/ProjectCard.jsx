@@ -1,20 +1,16 @@
 // src/components/ProjectCard.jsx
-
 import React from 'react';
-import './ProjectCard.css'; // Vamos criar este arquivo de CSS a seguir
+import './ProjectCard.css';
 
 const ProjectCard = ({ project }) => {
-  // Desestruturando os dados do projeto para facilitar o uso
   const { title, description, gif, repoLink, technologies } = project;
 
   return (
     <div className="card-container">
-      {/* Coluna da Esquerda: GIF */}
       <div className="gif-container">
-        <img src={gif} alt={`Animação do projeto ${title}`} className="project-gif" />
+        <img src={gif} alt={`Project ${title}`} className="project-gif" />
       </div>
 
-      {/* Coluna da Direita: Conteúdo */}
       <div className="content-container">
         <h3 className="card-title">{title}</h3>
         <p className="card-description">{description}</p>
@@ -26,7 +22,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <a href={repoLink} className="repo-link" target="_blank" rel="noopener noreferrer">
-          Ver Repositório →
+          View Repository →
         </a>
       </div>
     </div>

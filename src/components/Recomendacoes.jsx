@@ -1,38 +1,40 @@
-// src/components/Recomendacoes.jsx
 import React from 'react';
 import { recommendationsData } from '../recommendationsData';
 import { useTranslation } from 'react-i18next';
+import './Recomendacoes.css';
 
 export default function Recomendacoes() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language.startsWith('en') ? 'en' : 'pt';
+  const { t } = useTranslation();
 
   if (!recommendationsData.length) {
     return (
       <div>
-        <h2>{t('recomendacoes.titulo', 'Recomendações')}</h2>
-        <p>{t('recomendacoes.nenhum', 'Nenhuma recomendação cadastrada ainda.')}</p>
+        <h2>{t('recomendacoes.titulo')}</h2>
+        <p>{t('recomendacoes.nenhum')}</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2 style={{ marginBottom: 24 }}>{t('recomendacoes.titulo', 'Recomendações')}</h2>
+    <div style={{ padding: '0 1.5rem' }}>
+      <h3 style={{ color: '#00ff9d', marginBottom: '2rem', fontSize: '1.8rem' }}>
+        {t('recomendacoes.titulo')}
+      </h3>
+
       {recommendationsData.map((rec, idx) => (
-        <div className="premio-sobre-container" key={idx}>
+        <div className="recomendacao-sobre-container" key={idx}>
           {rec.image && (
-            <div className="premio-avatar-container">
+            <div className="recomendacao-avatar-container">
               <a href={rec.link || '#'} target="_blank" rel="noopener noreferrer">
-                <img src={rec.image} alt={rec.name} className="premio-avatar-image" />
+                <img src={rec.image} alt={rec.name} className="recomendacao-avatar-image" />
               </a>
             </div>
           )}
-          <div className="premio-info-container">
-            <div className="experience-title" style={{ fontWeight: 'bold', fontSize: 18 }}>
+          <div className="recomendacao-info-container">
+            <div style={{ color: '#00ff9d', fontWeight: 'bold', fontSize: 18 }}>
               {rec.name}
             </div>
-            <div className="experience-company" style={{ fontStyle: 'italic', fontSize: 14 }}>
+            <div style={{ fontStyle: 'italic', fontSize: 14 }}>
               {rec.relationship}
             </div>
             <div style={{ margin: '8px 0', fontSize: 15, color: '#cbd5e1' }}>
@@ -41,7 +43,6 @@ export default function Recomendacoes() {
             {rec.link && (
               <a
                 href={rec.link}
-                className="experience-link"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#a78bfa', textDecoration: 'underline', display: 'inline-block', marginTop: 8 }}

@@ -1,4 +1,4 @@
-// Dados das certificações do Aluno
+// Dados das recomendações
 export const recommendationsData = [
   {
   name: "Michelle Hanne Soares de Andrade",

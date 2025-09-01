@@ -25,11 +25,11 @@
 }
 
 .nome-titulo {
-  margin: 0;
+  margin-top: 1rem;
   font-size: 2.5rem;
   font-weight: bold;
   /* Uma cor nova para dar identidade a esta seção */
-  color: #7fdbff; /* Azul claro */
+  color: #00ff9d;
 }
 
 .cargo-titulo {
@@ -42,18 +42,21 @@
 .biografia {
   line-height: 1.7;
   margin-bottom: 2rem;
-  max-width: 70ch; /* Limita a largura da linha para melhor legibilidade */
+  max-width: 70ch; /* Limita a largura da linha para melhor legibilidade */;
+  text-align: justify; /* Adiciona justificado */
 }
 
 .skills-titulo {
   margin-bottom: 1rem;
-  color: #7fdbff;
+  color: #a0aec0;
 }
 
 .skills-tags-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  max-width: 70ch;
+  text-align: justify;
 }
 
 .skill-tag-sobre {

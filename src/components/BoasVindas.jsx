@@ -6,15 +6,13 @@ import { IoFlash, IoLocationSharp, IoSchool } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
 import './BoasVindas.css';
 
-
 const BoasVindas = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith('en') ? 'en' : 'pt';
 
-  const name = t('boasvindas.nome', 'João Paulo Aramuni');
-  const title = lang === 'en'
-    ? t('boasvindas.titulo', 'Professor at PUC Minas')
-    : t('boasvindas.titulo', 'Professor na PUC Minas');
+  // Pegando direto do i18n
+  const name = t('boasvindas.nome');
+  const title = t('boasvindas.titulo');
 
   const sequence = [
     name,
@@ -35,27 +33,23 @@ const BoasVindas = () => {
         className="name-animation"
       />
       <div className="static-welcome">
-        <p className="welcome-title">
-          {t('boasvindas.bemvindo', lang === 'en' ? '$ Welcome to my Portfolio' : '$ Bem-vindo ao meu Portfólio')}
-        </p>
+        <p className="welcome-title">{t('boasvindas.bemvindo')}</p>
         <hr className="divider" />
         <ul className="info-list">
           <li>
             <IoFlash className="icon" style={{ color: '#f3d956' }} />
-            {t('boasvindas.cargo', title)}
+            {t('boasvindas.cargo')}
           </li>
           <li>
             <IoLocationSharp className="icon" style={{ color: '#ff6b6b' }} />
-            {t('boasvindas.local', lang === 'en' ? 'Belo Horizonte, Minas Gerais, Brazil' : 'Belo Horizonte, Minas Gerais, Brasil')}
+            {t('boasvindas.local')}
           </li>
           <li>
             <IoSchool className="icon" />
-            {t('boasvindas.faculdade', lang === 'en' ? 'Software Engineering - PUC Minas' : 'Engenharia de Software - PUC Minas')}
+            {t('boasvindas.faculdade')}
           </li>
         </ul>
-        <p className="navegue-text">
-          {t('boasvindas.ajuda', lang === 'en' ? 'Type `help` to explore all available commands.' : 'Digite `ajuda` para conhecer mais sobre os comandos.')}
-        </p>
+        <p className="navegue-text">{t('boasvindas.ajuda')}</p>
       </div>
     </div>
   );

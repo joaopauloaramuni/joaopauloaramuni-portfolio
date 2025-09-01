@@ -11,7 +11,6 @@ import SobreMim from './components/SobreMim';
 import Ajuda from './components/Ajuda';
 import Contato from './components/Contato';
 import BoasVindas from './components/BoasVindas';
-import Certificacoes from './components/Certificacoes';
 import Recomendacoes from './components/Recomendacoes';
 import Premios from './components/Premios';
 import FlappyPlaneGame from './components/FlappyPlaneGame';
@@ -63,9 +62,6 @@ function App() {
         case 'limpar':
           setTerminalLineData([]);
           return;
-        // case 'certificacoes':
-        // response = <Certificacoes />;
-        // break;
         case 'recomendacoes':
           response = <Recomendacoes />;
           break;

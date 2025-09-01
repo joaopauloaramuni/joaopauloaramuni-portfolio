@@ -63,7 +63,7 @@
   height: 15px;
   border-radius: 50%;
   background-color: #1a202c;
-  border: 3px solid #ff851b;
+  border: 3px solid #00ff9d;
   z-index: 1;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
@@ -78,10 +78,10 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .role-title { margin: 0; color: #e2e8f0; font-size: 1.4rem; line-height: 1.5; }
-.company-name { color: #ff851b; font-weight: 500; }
+.company-name { color: #00ff9d; font-weight: 500; }
 .date-range { margin: 0.25rem 0 1rem 0; color: #a0aec0; font-style: italic; font-size: 0.9rem; }
 .description-list { padding-left: 20px; margin: 0 0 1rem 0; color: #cbd5e0; line-height: 1.6; }
-.description-list li::marker { color: #ff851b; }
+.description-list li::marker { color: #00ff9d; }
 .company-info { font-size: 0.9rem; color: #a0aec0; border-top: 1px solid #4a5568; padding-top: 1rem; margin-top: 1rem; margin-bottom: 1rem; }
 .skills-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .skill-tag { background-color: #4a5568; color: #cbd5e0; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; }
@@ -89,15 +89,15 @@
 /* Efeitos Hover Aprimorados (sem alterações) */
 .experience-card:hover .timeline-marker {
   transform: scale(1.2) translateY(-50%);
-  background-color: #ff851b;
+  background-color: #00ff9d;
 }
 
 .experience-card:hover::after,
 .experience-card:hover::before {
-  background-color: #ff851b;
+  background-color: #00ff9d;
 }
 
 .experience-card:hover .experience-content {
-  border-color: #ff851b;
+  border-color: #00ff9d;
   box-shadow: 0 10px 25px -5px rgba(255, 133, 27, 0.15);
 }
