@@ -97,7 +97,7 @@ function App() {
   const myPrompt = "visitante@portfolio:~$";
 
   return (
-    <div className="container">
+    <div className="terminal-window">
       <LanguageSwitcher />
       <Terminal
         name=''
