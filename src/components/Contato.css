@@ -1,0 +1,41 @@
+/* src/components/Contato.css */
+
+.contato-container {
+  color: #e2e8f0;
+}
+
+.contato-titulo {
+  color: #a777e3; /* Nossa cor tema roxa */
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.contato-subtitulo {
+  color: #a0aec0;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.contato-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Espaçamento entre os links */
+}
+
+.contato-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  color: #cbd5e0;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.contato-item:hover {
+  color: #a777e3; /* Efeito hover com a cor tema */
+}
+
+.contato-icone {
+  font-size: 1.8rem; /* Tamanho dos ícones */
+}

@@ -1,0 +1,85 @@
+/* src/components/ProjectCard.css */
+
+.card-container {
+  display: flex;
+  background-color: #2d3748;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #4a5568;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* O "salto" foi removido daqui */
+.card-container:hover {
+  border-color: #00ff9d;
+  box-shadow: 0 20px 25px -5px rgba(0, 255, 157, 0.1), 0 10px 10px -5px rgba(0, 255, 157, 0.08);
+}
+
+/* Coluna do GIF */
+.gif-container {
+  flex: 0 0 40%;
+  overflow: hidden;
+}
+
+.project-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Coluna do Conteúdo */
+.content-container {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  margin: 0 0 0.75rem 0;
+  color: #00ff9d;
+  font-size: 1.5rem;
+}
+
+.card-description {
+  margin: 0 0 1rem 0;
+  color: #a0aec0;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.technologies-container {
+  margin-bottom: 1rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: #4a5568;
+  color: #cbd5e0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.tech-tag:hover {
+  background-color: #00ff9d;
+  color: #1a202c;
+}
+
+.repo-link {
+  color: #00ff9d;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+
+.repo-link:hover {
+  color: #66ffc9;
+}

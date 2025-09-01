@@ -1,0 +1,103 @@
+/* src/components/ExperienceCard.css */
+
+@keyframes slideInFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.experience-card {
+  display: flex;
+  position: relative;
+  margin-left: 30px;
+  padding-bottom: 3rem; /* O padding que causa o desalinhamento visual */
+  opacity: 0;
+  animation: slideInFadeIn 0.6s ease-out forwards;
+}
+
+.experience-card:nth-child(1) { animation-delay: 0.2s; }
+.experience-card:nth-child(2) { animation-delay: 0.4s; }
+.experience-card:nth-child(3) { animation-delay: 0.6s; }
+
+
+/* Metade de baixo da linha */
+.experience-card::after {
+  content: '';
+  position: absolute;
+  left: -20px; 
+  top: calc(50% - 1.5rem); /* << AJUSTE FINO */
+  height: calc(50% + 1.5rem);
+  bottom: 0;
+  width: 3px;
+  background-color: #4a5568;
+  transition: background-color 0.3s ease;
+}
+
+/* Metade de cima da linha */
+.experience-card::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  height: calc(50% - 1.5rem); /* << AJUSTE FINO */
+  width: 3px;
+  background-color: #4a5568;
+  transition: background-color 0.3s ease;
+}
+
+.experience-card:first-child::before { display: none; }
+.experience-card:last-child::after { display: none; }
+
+/* Marcador da Timeline (Bolinha) */
+.timeline-marker {
+  position: absolute;
+  left: -27.5px;
+  top: calc(50% - 1.5rem); /* << AJUSTE FINO */
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #1a202c;
+  border: 3px solid #ff851b;
+  z-index: 1;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Conteúdo Principal do Card (sem alterações) */
+.experience-content {
+  background-color: #2d3748;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 100%;
+  border: 1px solid #4a5568;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.role-title { margin: 0; color: #e2e8f0; font-size: 1.4rem; line-height: 1.5; }
+.company-name { color: #ff851b; font-weight: 500; }
+.date-range { margin: 0.25rem 0 1rem 0; color: #a0aec0; font-style: italic; font-size: 0.9rem; }
+.description-list { padding-left: 20px; margin: 0 0 1rem 0; color: #cbd5e0; line-height: 1.6; }
+.description-list li::marker { color: #ff851b; }
+.company-info { font-size: 0.9rem; color: #a0aec0; border-top: 1px solid #4a5568; padding-top: 1rem; margin-top: 1rem; margin-bottom: 1rem; }
+.skills-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.skill-tag { background-color: #4a5568; color: #cbd5e0; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; }
+
+/* Efeitos Hover Aprimorados (sem alterações) */
+.experience-card:hover .timeline-marker {
+  transform: scale(1.2) translateY(-50%);
+  background-color: #ff851b;
+}
+
+.experience-card:hover::after,
+.experience-card:hover::before {
+  background-color: #ff851b;
+}
+
+.experience-card:hover .experience-content {
+  border-color: #ff851b;
+  box-shadow: 0 10px 25px -5px rgba(255, 133, 27, 0.15);
+}
