@@ -15,9 +15,11 @@ import Recomendacoes from './components/Recomendacoes';
 import Premios from './components/Premios';
 import FlappyPlaneGame from './components/FlappyPlaneGame';
 import LanguageSwitcher from './components/LanguageSwitcher';
-
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation();
+
   // Função para gerar a mensagem de boas-vindas
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
 
@@ -78,8 +80,12 @@ function App() {
           break;
       }
     } else {
-      response = <TerminalOutput>Comando não reconhecido: "{userInput}". Digite "ajuda" para ver as opções.</TerminalOutput>;
-    }
+      response = (
+    <TerminalOutput>
+      {t("comando.nao_reconhecido")} "{userInput}"<br />
+      {t("comando.ver_ajuda")}
+    </TerminalOutput>
+  ); }
     if (Array.isArray(response)) {
       newLines.push(...response);
     } else {
