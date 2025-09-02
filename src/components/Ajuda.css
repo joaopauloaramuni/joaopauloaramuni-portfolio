@@ -1,0 +1,34 @@
+.ajuda-container {
+  padding: 0 1.5rem;
+  line-height: 1.6;
+}
+
+.ajuda-item {
+  margin-bottom: 1.2rem;
+}
+
+.ajuda-aliases {
+  color: #00ff9d;
+  font-size: 1.2rem;
+}
+
+.ajuda-aliases-symbol {
+  margin-right: 1ch;
+}
+
+.ajuda-description {
+  margin: 0.25em 0 0 2.5ch;
+  color: #a0aec0;
+  font-size: 1.1rem;
+}
+
+
+@media (max-width: 768px) {
+  .ajuda-aliases {
+    font-size: 1rem; 
+  }
+
+  .ajuda-description {
+    font-size: 0.9rem; 
+  }
+}

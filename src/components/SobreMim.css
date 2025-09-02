@@ -88,28 +88,26 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .sobre-container {
-    padding: 0 8px;
-    align-items: center;
+    flex-direction: column;
     text-align: center;
+    gap: 1.5rem;
   }
-  .avatar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+
   .avatar-image {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
+
   .nome-titulo {
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
+
   .cargo-titulo {
-    font-size: 1rem;
+    font-size: 1rem; 
   }
+
   .biografia {
     font-size: 0.95rem;
   }

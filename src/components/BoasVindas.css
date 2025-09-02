@@ -1,78 +1,26 @@
-/* Corrige bug do título animado no mobile */
-.name-animation {
-  max-width: 100vw;
-  overflow-wrap: break-word;
-  word-break: keep-all;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-}
-
-@media (max-width: 600px) {
-  .name-animation, .whoami-animation, h1 {
-    font-size: 1.05rem !important;
-    max-width: 98vw;
-    overflow-wrap: break-word;
-    word-break: keep-all;
-    margin-bottom: 0.5rem;
-  }
-}
-@media (max-width: 600px) {
-  .welcome-container {
-    padding: 1.2rem 0.7rem 1.5rem 0.7rem;
-    min-width: 0;
-    box-sizing: border-box;
-  }
-  .name-animation, .whoami-animation, h1 {
-    font-size: 1.1rem !important;
-    word-break: break-word;
-    line-height: 1.18;
-    letter-spacing: -0.5px;
-    min-width: 0;
-    max-width: 100vw;
-    overflow-wrap: break-word;
-  }
-  .welcome-title {
-    font-size: 0.93rem;
-    margin-bottom: 0.7rem;
-  }
-  .divider {
-    margin-bottom: 1rem;
-  }
-  .info-list {
-    margin: 1rem 0;
-  }
-  .info-list li {
-    font-size: 0.93rem;
-    gap: 0.3rem;
-    word-break: break-word;
-    min-width: 0;
-  }
-}
-/* src/components/BoasVindas.css */
 
 .welcome-container {
   padding: 1rem 1.5rem;
   line-height: 1.8;
-  color: #a0aec0; /* Cor de texto padrão (cinza claro) */
+  color: #a0aec0; 
 }
 
-/* Estilos para a animação */
+
 .whoami-animation {
   font-family: 'Consolas', 'Monaco', monospace;
   font-size: 1.1rem;
-  white-space: pre-line; /* Permite quebras de linha com \n */
+  white-space: pre-line; 
   margin-bottom: 2rem;
 }
 
-/* Cor verde para o nome e cargo */
 .whoami-animation span:last-child {
   color: #00ff9d;
   font-weight: bold;
 }
 
-/* Estilos para a parte estática */
+
 .welcome-title {
-  color: #ffbd2e; /* Amarelo/Laranja */
+  color: #ffbd2e;
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -95,7 +43,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.75rem;
-  color: #e2e8f0; /* Texto principal um pouco mais claro */
+  color: #e2e8f0;
 }
 
 .info-list .icon {
@@ -105,4 +53,27 @@
 .navegue-text {
   color: #00ff9d;
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .name-animation {
+    font-size: 1.4rem; 
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-title {
+    font-size: 1.1rem; 
+  }
+  
+  .welcome-container p, .info-list li {
+    font-size: 0.95rem;
+  }
+
+  .info-list li {
+    gap: 0.75rem; 
+  }
+
+  .info-list .icon {
+    font-size: 1.1rem;
+  }
 }

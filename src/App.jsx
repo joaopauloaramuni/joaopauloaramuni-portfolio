@@ -97,17 +97,17 @@ function App() {
   const myPrompt = "visitante@portfolio:~$";
 
   return (
-    <div className="terminal-window">
+    <div className="container">
       <LanguageSwitcher />
-      <Terminal
-        name=''
-        colorMode={ColorMode.Dark}
-        onInput={isGameOpen ? undefined : handleInput}
-        prompt={myPrompt}
-        height='95vh'
-      >
-        {terminalLineData}
-      </Terminal>
+        <Terminal
+          name=''
+          colorMode={ColorMode.Dark}
+          onInput={isGameOpen ? undefined : handleInput}
+          prompt={myPrompt}
+          height='85vh'
+        >
+          {terminalLineData}
+        </Terminal>
     </div>
   );
 }

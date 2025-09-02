@@ -1,5 +1,3 @@
-/* src/components/ProjectCard.css */
-
 .card-container {
   display: flex;
   background-color: #2d3748;
@@ -11,13 +9,11 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* O "salto" foi removido daqui */
 .card-container:hover {
   border-color: #00ff9d;
   box-shadow: 0 20px 25px -5px rgba(0, 255, 157, 0.1), 0 10px 10px -5px rgba(0, 255, 157, 0.08);
 }
 
-/* Coluna do GIF */
 .gif-container {
   flex: 0 0 40%;
   overflow: hidden;
@@ -29,7 +25,6 @@
   object-fit: cover;
 }
 
-/* Coluna do Conteúdo */
 .content-container {
   flex: 1;
   padding: 1.5rem;
@@ -82,4 +77,22 @@
 
 .repo-link:hover {
   color: #66ffc9;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+  }
+
+  .content-container {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+  }
 }

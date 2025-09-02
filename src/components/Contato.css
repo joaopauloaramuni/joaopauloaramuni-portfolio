@@ -40,3 +40,10 @@
 .contato-icone {
   font-size: 1.8rem; /* Tamanho dos ícones */
 }
+
+@media (max-width: 768px) {
+  .contato-container {
+    gap: 1.2rem;
+    padding: 0 4px;
+  }
+}
