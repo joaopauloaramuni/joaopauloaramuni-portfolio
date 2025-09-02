@@ -22,7 +22,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <a href={repoLink} className="repo-link" target="_blank" rel="noopener noreferrer">
-          View Repository →
+          Link →
         </a>
       </div>
     </div>

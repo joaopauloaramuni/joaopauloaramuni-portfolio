@@ -42,8 +42,8 @@
 .biografia {
   line-height: 1.7;
   margin-bottom: 2rem;
-  max-width: 70ch; /* Limita a largura da linha para melhor legibilidade */;
-  text-align: justify; /* Adiciona justificado */
+  max-width: 70ch;
+  text-align: justify;
 }
 
 .skills-titulo {

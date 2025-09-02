@@ -30,6 +30,8 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  max-width: 90ch;
+  text-align: justify;
 }
 
 .card-title {

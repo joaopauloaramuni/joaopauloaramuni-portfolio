@@ -73,20 +73,26 @@ const resources = {
         titulo: "My Main Projects",
 
         python_proj_title: "Python Projects",
-        python_proj_desc:
-          "A collection of projects developed in Python, covering automation, data analysis, and web development.",
+        python_proj_desc: "A diverse collection of projects developed in Python, covering areas such as automation, data analysis, web development, and machine learning. These projects showcase practical applications of algorithms, API integration, data manipulation, and interactive interface creation, offering solutions ranging from utility tools and file compressors to art generators, simulators, code metrics analyzers, and intelligent bots. This collection reflects a wide range of Python skills and knowledge, serving as a comprehensive portfolio to explore programming concepts, logic, and applied software development.",
 
         springboot_proj_title: "Spring Boot Projects",
-        springboot_proj_desc:
-          "A collection of projects developed in Java using Spring Boot, including REST APIs, database persistence, and interactive web features.",
+        springboot_proj_desc: "A diverse collection of projects developed in Java using Spring Boot, covering REST APIs, integration with relational and NoSQL databases, authentication and authorization with JWT, data processing, report generation, automation, and interactive web functionalities. These projects include full examples of architecture, services with user interfaces, integration with external APIs such as TMDB, Huggingface, Twilio, and YouTube, as well as secure login systems, file compression, and messaging. The collection demonstrates practical applications of backend development, software architecture, and object-oriented programming concepts, serving as a comprehensive portfolio of Java solutions.",
 
         c_proj_title: "C Language Projects",
-        c_proj_desc:
-          "Projects and exercises in C and C++, including algorithms and data structures, compiled with MinGW/GCC, focusing on programming fundamentals, logic, and efficiency.",
-
+        c_proj_desc: "A comprehensive collection of projects and exercises developed in C and C++, including algorithms, data structures, array manipulation, recursion, pointers, structs, file handling, and control flow. All projects are compiled with MinGW/GCC and focus on programming fundamentals, logic, efficiency, and best practices. The collection ranges from simple programs like calculators and classic games to more advanced implementations such as recursive matrix multiplication, file manipulation, simulations, and sorting and searching algorithms. This portfolio demonstrates practical applications of structured and object-oriented programming concepts, serving as a solid reference for learning and development in C/C++.",
+        
         portfolio_proj_title: "Personal Portfolio",
-        portfolio_proj_desc:
-          "Interactive personal portfolio built with React and Vite, simulating a terminal to navigate projects, experiences, certificates, and awards.",
+        portfolio_proj_desc:  "An interactive personal portfolio built with React and Vite, simulating a terminal interface to navigate through different sections, including projects, professional experiences, certificates, and awards. The project features components such as ProjectCard, Awards, Recommendations, and AboutMe, enabling dynamic and visually organized presentation of information. All pages support multiple languages through i18n.js, ensuring global accessibility. Additionally, it includes an interactive mini-game directly within the terminal, providing a fun and unique experience for visitors. The portfolio combines modern design, intuitive navigation, and interactive features, showcasing advanced skills in React, data management, and user experience.",
+        
+        github_proj_title: "GitHub Readme Profile",
+        github_proj_desc:   "A project focused on building and optimizing GitHub profiles, including custom READMEs with statistics, badges, activity graphs, commit and contribution tracking, and integration with external services such as WakaTime and Spotify. The project also includes practical workshops, interactive profile examples, and recommendations for tools to increase engagement and visibility, as well as guides on best practices, dynamic visual elements, emojis, and automated README content generation. The goal is to provide developers with a comprehensive and visually appealing portfolio, highlighting skills, projects, and contributions on GitHub.",
+        
+        aes_proj1_title: "Landing Page Project - Experimental Software Agency",
+        aes_proj1_desc: "The Landing Page of the Experimental Software Agency serves as the official channel to present the agency, capture client requests, and highlight the projects and talents developed by its teams. The AES Landing Page facilitates communication between clients and developers, offering a direct channel for submitting requests, which are analyzed and directed to the responsible teams. Additionally, the page promotes the agency's institutional visibility, showcasing its projects, achievements, and talents, functioning as a showcase for the market to recognize AES's potential.",
+        
+        aes_proj2_title: "Smart Curriculum Project - Experimental Software Agency",
+        aes_proj2_desc: "The Smart Curriculum is a system designed to help students organize their curriculum, offering graphical visualizations of courses across the periods of the program. With this tool, students can rearrange subjects according to their preferences, track their academic progress, and explore course offerings from other programs, providing a more personalized and flexible learning experience.",
+ 
       },
       recomendacoes: {
         titulo: "Recommendations",
@@ -288,21 +294,28 @@ const resources = {
         titulo: "Meus Principais Projetos",
 
         python_proj_title: "Projetos Python",
-        python_proj_desc:
-          "Uma coleção de projetos desenvolvidos em Python, abrangendo automação, análise de dados e desenvolvimento web.",
+        python_proj_desc: "Uma coleção diversificada de projetos desenvolvidos em Python, abrangendo áreas como automação, análise de dados, desenvolvimento web e aprendizado de máquina. Esses projetos demonstram a aplicação prática de algoritmos, integração com APIs, manipulação de dados e criação de interfaces interativas, oferecendo soluções que vão desde ferramentas utilitárias e compressores de arquivos até geradores de arte, simuladores, analisadores de métricas de código e bots inteligentes. A coleção reflete a variedade de habilidades e conhecimentos em Python, servindo como um portfólio completo para explorar conceitos de programação, lógica e desenvolvimento de software aplicado.",
 
         springboot_proj_title: "Projetos Spring Boot",
-        springboot_proj_desc:
-          "Coleção de projetos desenvolvidos em Java utilizando Spring Boot, incluindo APIs REST, persistência em banco de dados e funcionalidades web interativas.",
+        springboot_proj_desc: "Uma coleção diversificada de projetos desenvolvidos em Java utilizando Spring Boot, abrangendo APIs REST, integração com bancos de dados relacionais e NoSQL, autenticação e autorização com JWT, processamento de dados, geração de relatórios, automação e funcionalidades web interativas. Esses projetos incluem exemplos completos de arquitetura, serviços com interface de usuário, integração com APIs externas como TMDB, Huggingface, Twilio e YouTube, além de sistemas de login seguro, compressão de arquivos e mensageria. A coleção demonstra a aplicação prática de conceitos de desenvolvimento backend, arquitetura de software e programação orientada a objetos, servindo como um portfólio abrangente de soluções em Java.",
 
         c_proj_title: "Projetos Linguagem C",
-        c_proj_desc:
-          "Projetos e exercícios em C e C++, incluindo algoritmos e estruturas de dados, compilados com MinGW/GCC, focando em fundamentos da programação, lógica e eficiência.",
+        c_proj_desc: "Uma coleção extensa de projetos e exercícios desenvolvidos em C e C++, incluindo algoritmos, estruturas de dados, manipulação de arrays, recursão, ponteiros, structs, arquivos e controle de fluxo. Todos os projetos são compilados com MinGW/GCC e focam em fundamentos da programação, lógica, eficiência e boas práticas. A coleção abrange desde programas simples, como calculadoras e jogos clássicos, até implementações mais avançadas, como multiplicação de matrizes recursiva, manipulação de arquivos, simulações e algoritmos de ordenação e busca. Este portfólio demonstra a aplicação prática de conceitos de programação estruturada e orientada a objetos, servindo como referência sólida para aprendizado e desenvolvimento em C/C++.",
 
         portfolio_proj_title: "Portfólio Pessoal",
-        portfolio_proj_desc:
-          "Portfólio pessoal interativo, construído com React e Vite, que simula um terminal para navegar entre projetos, experiências, certificados e premiações.",
-      }, recomendacoes: {
+        portfolio_proj_desc: "Portfólio pessoal interativo, desenvolvido com React e Vite, que simula um terminal para navegação entre diferentes seções, incluindo projetos, experiências profissionais, certificados e premiações. O projeto apresenta componentes como ProjectCard, Awards, Recommendations e SobreMim, permitindo exibir informações de forma dinâmica e visualmente organizada. Todas as páginas possuem suporte a múltiplos idiomas através do i18n.js, garantindo acessibilidade global. Além disso, integra um mini-jogo interativo diretamente no terminal, oferecendo uma experiência divertida e única para o visitante. O portfólio combina design moderno, navegação intuitiva e funcionalidades interativas, demonstrando habilidades avançadas em React, gerenciamento de dados e experiência do usuário.",
+
+        github_proj_title: "GitHub Readme Profile",
+        github_proj_desc: "Projeto voltado à construção e otimização de perfis no GitHub, incluindo a criação de README personalizados com estatísticas, badges, gráficos de atividade, visualização de commits e contribuições, e integração com serviços externos como WakaTime e Spotify. O projeto também inclui workshops práticos, exemplos de perfis interativos e recomendações de ferramentas para aumentar engajamento e visibilidade, além de guias de boas práticas, elementos visuais dinâmicos, emojis e geração automática de conteúdos para README. O objetivo é fornecer aos desenvolvedores um portfólio completo e visualmente atraente, facilitando o destaque de habilidades, projetos e contribuições no GitHub.",
+
+        aes_proj1_title: "Projeto Landing Page - Agência Experimental de Software",
+        aes_proj1_desc: "A Landing Page da Agência Experimental de Software funciona como o canal oficial para apresentar a agência, captar demandas e destacar os projetos e talentos desenvolvidos por suas equipes. A Landing Page da AES facilita a comunicação entre clientes e desenvolvedores, oferecendo um canal direto para o envio de demandas, que são analisadas e direcionadas às equipes responsáveis. Além disso, a página promove a divulgação institucional da agência, destacando seus projetos, conquistas e talentos, funcionando como uma vitrine para o mercado conhecer o potencial da AES.",
+
+        aes_proj2_title: "Projeto Grade Inteligente - Agência Experimental de Software",
+        aes_proj2_desc: "A Grade Inteligente é um sistema projetado para ajudar os alunos a organizarem sua matriz curricular, oferencendo uma visualização gráficas das disciplinas ao longo dos períodos do curso. Com a ferramenta, é possível reorganizar as matérias de acordo com as preferências do aluno, acompanhar o seu progresso acadêmico e explorar ofertas de disciplinas de outros cursos, proporcionando uma experiência de aprendizado mais personalizada e flexível.",
+
+      
+        }, recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.", 
       },
