@@ -89,6 +89,10 @@ const resources = {
         portfolio_proj_desc:
           "Portfolio in React and Vite that simulates a terminal to navigate projects, experiences, and achievements. Includes components like ProjectCard and ExperienceCard, displaying information dynamically. Supports multiple languages and integrates a mini-game, offering a fun experience. Combines modern design, intuitive navigation, and interactive features.",
 
+        github_proj_title: "GitHub Readme Profile",
+        github_proj_desc:
+          "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
+
         aes_proj1_title: "Landing Page - Experimental Software Agency",
         aes_proj1_desc:
           "The AES Landing Page introduces the agency, collects requests, and highlights projects and team talents. It facilitates communication between clients and developers by allowing direct submission of requests to responsible teams. It also promotes the agency, showcasing projects, achievements, talents, and services, serving as a showcase for the market to see AES’s potential.",
