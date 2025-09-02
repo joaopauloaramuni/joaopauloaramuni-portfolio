@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import Terminal, { ColorMode, TerminalInput, TerminalOutput } from 'react-terminal-ui';
-import './index.css';
+import './App.css';
 import { commandList } from './commands';
 import Projetos from './components/Projetos';
 import Experiencias from './components/Experiencias';
@@ -104,6 +104,7 @@ function App() {
         colorMode={ColorMode.Dark}
         onInput={isGameOpen ? undefined : handleInput}
         prompt={myPrompt}
+        height='95vh'
       >
         {terminalLineData}
       </Terminal>

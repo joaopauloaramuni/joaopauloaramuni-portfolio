@@ -1,12 +1,50 @@
-# React + Vite
+# Portfólio Pessoal em React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o repositório do meu portfólio pessoal, um projeto criado com React para exibir meus projetos, habilidades e experiência.
 
-Currently, two official plugins are available:
+## 🚀 Demonstração ao vivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
 
-## Expanding the ESLint configuration
+➡️ **https://aramuni.dev/**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologias Utilizadas
+
+- **React:** Biblioteca principal para a construção da interface.
+- **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
+
+## ⚙️ Como Rodar o Projeto Localmente
+
+Para executar este projeto no seu ambiente de desenvolvimento, siga os passos abaixo.
+
+### Pré-requisitos
+
+Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** instalado na sua máquina. Ele é essencial para gerenciar as dependências do projeto.
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio.git
+    ```
+
+2.  **Acesse o diretório do projeto:**
+    ```bash
+    cd nome-do-diretorio
+    ```
+
+3.  **Instale as dependências:**
+    Use o `npm` para instalar todos os pacotes necessários para o projeto.
+    ```bash
+    npm install
+    ```
+
+4.  **Execute a aplicação:**
+    Este comando iniciará o servidor de desenvolvimento.
+    ```bash
+    npm run dev
+    ```
+
+5.  Após executar o comando, o terminal mostrará um endereço local (geralmente `http://localhost:5173`). Abra este link no seu navegador para ver o projeto em execução.
+
+---
