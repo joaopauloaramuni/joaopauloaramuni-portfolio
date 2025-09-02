@@ -9,7 +9,7 @@
 }
 
 .avatar-container {
-  flex-shrink: 0; /* Impede que a imagem encolha */
+  flex-shrink: 0;
 }
 
 .avatar-image {
@@ -29,7 +29,6 @@
   margin-top: 1rem;
   font-size: 2.5rem;
   font-weight: bold;
-  /* Uma cor nova para dar identidade a esta seção */
   color: #00ff9d;
 }
 

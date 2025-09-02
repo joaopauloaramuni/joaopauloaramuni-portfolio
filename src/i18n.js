@@ -97,9 +97,13 @@ const resources = {
         aes_proj2_desc:
           "The Smart Curriculum helps students organize their course matrix, providing a graphical view of subjects across periods. It allows rearranging subjects according to preferences, tracking academic progress, exploring courses from other programs, and planning future choices, offering a more complete, personalized, and flexible learning experience.",
 
-        aes_proj3_title: "Ajuda-aí App - Experimental Software Agency",
+        aes_proj3_title: "I Care Well - Experimental Software Agency",
         aes_proj3_desc:
-          "Ajuda-aí is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
+          "I Care Well is a project by PUC Minas, in partnership with the Mário Penna Institute and the PUC Minas Physiotherapy Clinical Center, aimed at supporting the discharge of cancer patients. The app guides patients on physiotherapy practices at home, replacing the paper booklet with a more practical digital solution.",
+
+        aes_proj4_title: "Help Out App - Experimental Software Agency",
+        aes_proj4_desc:
+          "Help Out is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
         jedis_proj_desc:
@@ -334,8 +338,12 @@ const resources = {
         aes_proj2_desc:
           "A Grade Inteligente ajuda alunos a organizar sua matriz curricular, oferecendo visualização gráfica das disciplinas ao longo dos períodos. Permite reorganizar matérias conforme preferências, acompanhar progresso acadêmico, explorar disciplinas de outros cursos e planejar escolhas futuras, proporcionando uma experiência de aprendizado mais completa, personalizada e flexível.",
 
-        aes_proj3_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj3_title: "Cuido Bem - Agência Experimental de Software",
         aes_proj3_desc:
+          "O CuidoBem é um projeto da PUC Minas, em parceria com o Instituto Mário Penna e o Centro Clínico de Fisioterapia, que visa apoiar a desospitalização de pacientes com câncer. O aplicativo orienta os pacientes sobre práticas fisioterapêuticas em casa, substituindo a cartilha de papel por uma solução digital mais prática.",
+
+        aes_proj4_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj4_desc:
           "O Ajuda-aí é um aplicativo que otimiza o programa de apadrinhamento do curso de Engenharia de Software da PUC Minas. Centraliza informações dos participantes e melhora a comunicação entre padrinhos e apadrinhados. Com algoritmo de match avançado, garante que cada apadrinhado seja combinado com o padrinho mais adequado, oferecendo uma experiência personalizada.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
