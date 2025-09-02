@@ -17,7 +17,7 @@ const BoasVindas = () => {
   const sequence = [
     name,
     1000,
-    `${name} - ${title}`,
+    `${name} ${title}`,
     2000,
   ];
 

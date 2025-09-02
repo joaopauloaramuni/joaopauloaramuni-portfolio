@@ -18,8 +18,8 @@ const resources = {
           "Main Skills: Teaching, Leadership and people management, Software development, Agile documentation, Global system deployment, Legacy system maintenance, Design patterns, and Agile methodologies: Scrum and Lean.",
       },
       boasvindas: {
-        nome: "Aramuni",
-        titulo: "Professor at PUC Minas",
+        nome: "Professor",
+        titulo: "Aramuni",
         bemvindo: "$ Welcome to my Portfolio",
         cargo: "Software Engineering Professor at PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brazil",
@@ -232,8 +232,8 @@ const resources = {
           "Principais Habilidades: Docência, Liderança e gestão de pessoas, Desenvolvimento de software, Documentação ágil, Implantação de sistemas em âmbito global, Manutenção de sistemas legados, Design patterns e Metodologias ágeis: Scrum e Lean.",
       },
       boasvindas: {
-        nome: "Aramuni",
-        titulo: "Professor na PUC Minas",
+        nome: "Professor",
+        titulo: "Aramuni",
         bemvindo: "$ Bem-vindo ao meu Portfólio",
         cargo: "Professor de Engenharia de Software na PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brasil",
