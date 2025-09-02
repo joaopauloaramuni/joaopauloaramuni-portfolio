@@ -19,3 +19,7 @@ scrollbar-width: thin;
 body {
 background-color: #1a202c;
 }
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
