@@ -8,7 +8,7 @@ const SobreMim = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="sobre-container" style={{ padding: '0 1.5rem' }}>
+    <div className="sobre-container">
       <div className="avatar-container">
         <img src="/avatar.jpeg" alt="Avatar" className="avatar-image" />
       </div>
