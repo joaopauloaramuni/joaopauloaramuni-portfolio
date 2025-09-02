@@ -1,4 +1,5 @@
 .card-container {
+  max-height: 350px;
   display: flex;
   background-color: #2d3748;
   border-radius: 12px;

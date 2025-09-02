@@ -5,9 +5,9 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      "comando": {
-        "nao_reconhecido": "Command not recognized:",
-        "ver_ajuda": "Type 'help' to see the options."
+      comando: {
+        nao_reconhecido: "Command not recognized:",
+        ver_ajuda: "Type 'help' to see the options.",
       },
       sobre: {
         nome: "João Paulo Aramuni",
@@ -23,7 +23,8 @@ const resources = {
         bemvindo: "$ Welcome to my Portfolio",
         cargo: "Software Engineering Professor at PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brazil",
-        faculdade: "Doctor and Master in Information Systems and Knowledge Management",
+        faculdade:
+          "Doctor and Master in Information Systems and Knowledge Management",
         ajuda: "Type `help` to explore all available commands.",
       },
       contato: {
@@ -73,30 +74,41 @@ const resources = {
         titulo: "My Main Projects",
 
         python_proj_title: "Python Projects",
-        python_proj_desc: "A diverse collection of projects developed in Python, covering areas such as automation, data analysis, web development, and machine learning. These projects showcase practical applications of algorithms, API integration, data manipulation, and interactive interface creation, offering solutions ranging from utility tools and file compressors to art generators, simulators, code metrics analyzers, and intelligent bots. This collection reflects a wide range of Python skills and knowledge, serving as a comprehensive portfolio to explore programming concepts, logic, and applied software development.",
+        python_proj_desc:
+          "Collection of Python projects, including automation, data analysis, web development, and machine learning. They demonstrate practical application of algorithms, API integration, data manipulation, and interactive interface creation, offering solutions from utility tools and file compressors to art generators, simulators, and code metrics analyzers.",
 
         springboot_proj_title: "Spring Boot Projects",
-        springboot_proj_desc: "A diverse collection of projects developed in Java using Spring Boot, covering REST APIs, integration with relational and NoSQL databases, authentication and authorization with JWT, data processing, report generation, automation, and interactive web functionalities. These projects include full examples of architecture, services with user interfaces, integration with external APIs such as TMDB, Huggingface, Twilio, and YouTube, as well as secure login systems, file compression, and messaging. The collection demonstrates practical applications of backend development, software architecture, and object-oriented programming concepts, serving as a comprehensive portfolio of Java solutions.",
+        springboot_proj_desc:
+          "Collection of Java projects with Spring Boot, including REST APIs, integration with SQL and NoSQL databases, JWT authentication, data processing, and web functionalities. They showcase architecture, services with user interfaces, integration with APIs like Huggingface and MercadoPago, file compression, messaging, and secure login, offering a concise backend solutions portfolio.",
 
         c_proj_title: "C Language Projects",
-        c_proj_desc: "A comprehensive collection of projects and exercises developed in C and C++, including algorithms, data structures, array manipulation, recursion, pointers, structs, file handling, and control flow. All projects are compiled with MinGW/GCC and focus on programming fundamentals, logic, efficiency, and best practices. The collection ranges from simple programs like calculators and classic games to more advanced implementations such as recursive matrix multiplication, file manipulation, simulations, and sorting and searching algorithms. This portfolio demonstrates practical applications of structured and object-oriented programming concepts, serving as a solid reference for learning and development in C/C++.",
-        
-        portfolio_proj_title: "Personal Portfolio",
-        portfolio_proj_desc:  "An interactive personal portfolio built with React and Vite, simulating a terminal interface to navigate through different sections, including projects, professional experiences, certificates, and awards. The project features components such as ProjectCard, Awards, Recommendations, and AboutMe, enabling dynamic and visually organized presentation of information. All pages support multiple languages through i18n.js, ensuring global accessibility. Additionally, it includes an interactive mini-game directly within the terminal, providing a fun and unique experience for visitors. The portfolio combines modern design, intuitive navigation, and interactive features, showcasing advanced skills in React, data management, and user experience.",
+        c_proj_desc:
+          "Collection of projects in C and C++, including algorithms, data structures, recursion, pointers, structs, files, and control flow. Compiled with MinGW/GCC, they range from simple calculators and games to matrix multiplication, file handling, simulations, and sorting algorithms, providing a portfolio of programming fundamentals, logic, efficiency, and best practices.",
 
-        github_proj_title: "GitHub Readme Profile",
-        github_proj_desc:   "A project focused on building and optimizing GitHub profiles, including custom READMEs with statistics, badges, activity graphs, commit and contribution tracking, and integration with external services such as WakaTime and Spotify. The project also includes practical workshops, interactive profile examples, and recommendations for tools to increase engagement and visibility, as well as guides on best practices, dynamic visual elements, emojis, and automated README content generation. The goal is to provide developers with a comprehensive and visually appealing portfolio, highlighting skills, projects, and contributions on GitHub.",
-        
-        aes_proj1_title: "Landing Page Project - Experimental Software Agency",
-        aes_proj1_desc: "The Landing Page of the Experimental Software Agency serves as the official channel to present the agency, capture client requests, and highlight the projects and talents developed by its teams. The AES Landing Page facilitates communication between clients and developers, offering a direct channel for submitting requests, which are analyzed and directed to the responsible teams. Additionally, the page promotes the agency's institutional visibility, showcasing its projects, achievements, and talents, functioning as a showcase for the market to recognize AES's potential.",
-        
-        aes_proj2_title: "Smart Curriculum Project - Experimental Software Agency",
-        aes_proj2_desc: "The Smart Curriculum is a system designed to help students organize their curriculum, offering graphical visualizations of courses across the periods of the program. With this tool, students can rearrange subjects according to their preferences, track their academic progress, and explore course offerings from other programs, providing a more personalized and flexible learning experience.",
- 
+        portfolio_proj_title: "Personal Portfolio",
+        portfolio_proj_desc:
+          "Portfolio in React and Vite that simulates a terminal to navigate projects, experiences, and achievements. Includes components like ProjectCard and ExperienceCard, displaying information dynamically. Supports multiple languages and integrates a mini-game, offering a fun experience. Combines modern design, intuitive navigation, and interactive features.",
+
+        aes_proj1_title: "Landing Page - Experimental Software Agency",
+        aes_proj1_desc:
+          "The AES Landing Page introduces the agency, collects requests, and highlights projects and team talents. It facilitates communication between clients and developers by allowing direct submission of requests to responsible teams. It also promotes the agency, showcasing projects, achievements, talents, and services, serving as a showcase for the market to see AES’s potential.",
+
+        aes_proj2_title: "Smart Curriculum - Experimental Software Agency",
+        aes_proj2_desc:
+          "The Smart Curriculum helps students organize their course matrix, providing a graphical view of subjects across periods. It allows rearranging subjects according to preferences, tracking academic progress, exploring courses from other programs, and planning future choices, offering a more complete, personalized, and flexible learning experience.",
+
+        aes_proj3_title: "Ajuda-aí App - Experimental Software Agency",
+        aes_proj3_desc:
+          "Ajuda-aí is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
+
+        jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
+        jedis_proj_desc:
+          "RHapido 2.0 is a recruitment management system that uses artificial intelligence to streamline and make talent acquisition more efficient. Developed with cutting-edge technology, it offers intelligent resume screening, reducing time and costs in the hiring process.",
       },
+
       recomendacoes: {
         titulo: "Recommendations",
-        nenhum: "No recommendations yet", 
+        nenhum: "No recommendations yet",
       },
       experiencias: {
         titulo: "Professional Experiences",
@@ -225,9 +237,9 @@ const resources = {
   },
   pt: {
     translation: {
-      "comando": {
-        "nao_reconhecido": "Comando não reconhecido:",
-        "ver_ajuda": "Digite 'ajuda' para ver as opções."
+      comando: {
+        nao_reconhecido: "Comando não reconhecido:",
+        ver_ajuda: "Digite 'ajuda' para ver as opções.",
       },
       sobre: {
         nome: "João Paulo Aramuni",
@@ -243,7 +255,8 @@ const resources = {
         bemvindo: "$ Bem-vindo ao meu Portfólio",
         cargo: "Professor de Engenharia de Software na PUC Minas",
         local: "Belo Horizonte, Minas Gerais, Brasil",
-        faculdade: "Doutor e Mestre em Sistemas de Informação e Gestão do Conhecimento",
+        faculdade:
+          "Doutor e Mestre em Sistemas de Informação e Gestão do Conhecimento",
         ajuda: "Digite `ajuda` para conhecer mais sobre os comandos.",
       },
       contato: {
@@ -294,34 +307,48 @@ const resources = {
         titulo: "Meus Principais Projetos",
 
         python_proj_title: "Projetos Python",
-        python_proj_desc: "Uma coleção diversificada de projetos desenvolvidos em Python, abrangendo áreas como automação, análise de dados, desenvolvimento web e aprendizado de máquina. Esses projetos demonstram a aplicação prática de algoritmos, integração com APIs, manipulação de dados e criação de interfaces interativas, oferecendo soluções que vão desde ferramentas utilitárias e compressores de arquivos até geradores de arte, simuladores, analisadores de métricas de código e bots inteligentes. A coleção reflete a variedade de habilidades e conhecimentos em Python, servindo como um portfólio completo para explorar conceitos de programação, lógica e desenvolvimento de software aplicado.",
+        python_proj_desc:
+          "Coleção de projetos em Python, incluindo automação, análise de dados, desenvolvimento web e aprendizado de máquina. Mostram aplicação prática de algoritmos, integração com APIs, manipulação de dados e criação de interfaces interativas, oferecendo soluções de ferramentas utilitárias, compressores, geradores de arte, simuladores e analisadores de métricas de código.",
 
         springboot_proj_title: "Projetos Spring Boot",
-        springboot_proj_desc: "Uma coleção diversificada de projetos desenvolvidos em Java utilizando Spring Boot, abrangendo APIs REST, integração com bancos de dados relacionais e NoSQL, autenticação e autorização com JWT, processamento de dados, geração de relatórios, automação e funcionalidades web interativas. Esses projetos incluem exemplos completos de arquitetura, serviços com interface de usuário, integração com APIs externas como TMDB, Huggingface, Twilio e YouTube, além de sistemas de login seguro, compressão de arquivos e mensageria. A coleção demonstra a aplicação prática de conceitos de desenvolvimento backend, arquitetura de software e programação orientada a objetos, servindo como um portfólio abrangente de soluções em Java.",
+        springboot_proj_desc:
+          "Coleção de projetos em Java com Spring Boot, incluindo APIs REST, integração com bancos SQL e NoSQL, autenticação JWT, processamento de dados e funcionalidades web. Mostram arquitetura, serviços com interface de usuário, integração com APIs como Huggingface e MercadoPago, compressão de arquivos, mensageria e login seguro, oferecendo portfólio conciso de soluções backend.",
 
         c_proj_title: "Projetos Linguagem C",
-        c_proj_desc: "Uma coleção extensa de projetos e exercícios desenvolvidos em C e C++, incluindo algoritmos, estruturas de dados, manipulação de arrays, recursão, ponteiros, structs, arquivos e controle de fluxo. Todos os projetos são compilados com MinGW/GCC e focam em fundamentos da programação, lógica, eficiência e boas práticas. A coleção abrange desde programas simples, como calculadoras e jogos clássicos, até implementações mais avançadas, como multiplicação de matrizes recursiva, manipulação de arquivos, simulações e algoritmos de ordenação e busca. Este portfólio demonstra a aplicação prática de conceitos de programação estruturada e orientada a objetos, servindo como referência sólida para aprendizado e desenvolvimento em C/C++.",
+        c_proj_desc:
+          "Coleção de projetos em C e C++, incluindo algoritmos, estruturas de dados, recursão, ponteiros, structs, arquivos e controle de fluxo. Compilados com MinGW/GCC, vão de calculadoras e jogos simples até multiplicação de matrizes, manipulação de arquivos, simulações e algoritmos de ordenação, oferecendo portfólio de fundamentos da programação, lógica, eficiência e boas práticas.",
 
         portfolio_proj_title: "Portfólio Pessoal",
-        portfolio_proj_desc: "Portfólio pessoal interativo, desenvolvido com React e Vite, que simula um terminal para navegação entre diferentes seções, incluindo projetos, experiências profissionais, certificados e premiações. O projeto apresenta componentes como ProjectCard, Awards, Recommendations e AboutMe, permitindo exibir informações de forma dinâmica e visualmente organizada. Todas as páginas possuem suporte a múltiplos idiomas através do i18n.js, garantindo acessibilidade global. Além disso, integra um mini-jogo interativo diretamente no terminal, oferecendo uma experiência divertida e única para o visitante. O portfólio combina design moderno, navegação intuitiva e funcionalidades interativas, demonstrando habilidades avançadas em React, gerenciamento de dados e experiência do usuário.",
+        portfolio_proj_desc:
+          "Portfólio em React e Vite que simula um terminal para navegar entre projetos, experiências e premiações. Inclui componentes como ProjectCard e ExperienceCard, exibindo informações de forma dinâmica. Suporta múltiplos idiomas e integra mini-jogo, oferecendo experiência divertida. Combina design moderno, navegação intuitiva e funcionalidades interativas.",
 
         github_proj_title: "GitHub Readme Profile",
-        github_proj_desc: "Projeto voltado à construção e otimização de perfis no GitHub, incluindo a criação de README personalizados com estatísticas, badges, gráficos de atividade, visualização de commits e contribuições, e integração com serviços externos como WakaTime e Spotify. O projeto também inclui workshops práticos, exemplos de perfis interativos e recomendações de ferramentas para aumentar engajamento e visibilidade, além de guias de boas práticas, elementos visuais dinâmicos, emojis e geração automática de conteúdos para README. O objetivo é fornecer aos desenvolvedores um portfólio completo e visualmente atraente, facilitando o destaque de habilidades, projetos e contribuições no GitHub.",
+        github_proj_desc:
+          "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
 
-        aes_proj1_title: "Projeto Landing Page - Agência Experimental de Software",
-        aes_proj1_desc: "A Landing Page da Agência Experimental de Software funciona como o canal oficial para apresentar a agência, captar demandas e destacar os projetos e talentos desenvolvidos por suas equipes. A Landing Page da AES facilita a comunicação entre clientes e desenvolvedores, oferecendo um canal direto para o envio de demandas, que são analisadas e direcionadas às equipes responsáveis. Além disso, a página promove a divulgação institucional da agência, destacando seus projetos, conquistas e talentos, funcionando como uma vitrine para o mercado conhecer o potencial da AES.",
+        aes_proj1_title: "Landing Page - Agência Experimental de Software",
+        aes_proj1_desc:
+          "A Landing Page da AES apresenta a agência, capta demandas e destaca projetos e talentos das equipes. Facilita a comunicação entre clientes e desenvolvedores, oferecendo envio direto de demandas às equipes responsáveis. Também divulga a agência, mostrando projetos, conquistas, talentos e serviços, funcionando como uma vitrine para o mercado conhecer o potencial da AES.",
 
-        aes_proj2_title: "Projeto Grade Inteligente - Agência Experimental de Software",
-        aes_proj2_desc: "A Grade Inteligente é um sistema projetado para ajudar os alunos a organizarem sua matriz curricular, oferencendo uma visualização gráficas das disciplinas ao longo dos períodos do curso. Com a ferramenta, é possível reorganizar as matérias de acordo com as preferências do aluno, acompanhar o seu progresso acadêmico e explorar ofertas de disciplinas de outros cursos, proporcionando uma experiência de aprendizado mais personalizada e flexível.",
+        aes_proj2_title: "Grade Inteligente - Agência Experimental de Software",
+        aes_proj2_desc:
+          "A Grade Inteligente ajuda alunos a organizar sua matriz curricular, oferecendo visualização gráfica das disciplinas ao longo dos períodos. Permite reorganizar matérias conforme preferências, acompanhar progresso acadêmico, explorar disciplinas de outros cursos e planejar escolhas futuras, proporcionando uma experiência de aprendizado mais completa, personalizada e flexível.",
 
-      
-        }, recomendacoes: {
+        aes_proj3_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj3_desc:
+          "O Ajuda-aí é um aplicativo que otimiza o programa de apadrinhamento do curso de Engenharia de Software da PUC Minas. Centraliza informações dos participantes e melhora a comunicação entre padrinhos e apadrinhados. Com algoritmo de match avançado, garante que cada apadrinhado seja combinado com o padrinho mais adequado, oferecendo uma experiência personalizada.",
+
+        jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
+        jedis_proj_desc:
+          "O Rhapido 2.0 é um sistema de gestão de processos seletivos que utiliza inteligência artificial para agilizar e tornar mais eficiente o recrutamento de novos talentos. Desenvolvido com tecnologia de ponta, o sistema oferece uma triagem inteligente de currículos, reduzindo o tempo e o custo do processo seletivo.",
+      },
+      recomendacoes: {
         titulo: "Recomendações",
-        nenhum: "Nenhuma recomendação cadastrada ainda.", 
+        nenhum: "Nenhuma recomendação cadastrada ainda.",
       },
       experiencias: {
         titulo: "Experiência Profissionais",
-   
+
         // Companies
         puc_minas: "PUC Minas",
         centro_newton_paiva: "Centro Universitário Newton Paiva",
