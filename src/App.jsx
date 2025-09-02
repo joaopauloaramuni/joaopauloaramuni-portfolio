@@ -95,7 +95,7 @@ function App() {
   }
 
   const myPrompt = "visitante@portfolio:~$";
-  const terminalTitle = "Portfólio terminal";
+  const terminalTitle = "Portfólio";
 
   return (
     <div className="container">
