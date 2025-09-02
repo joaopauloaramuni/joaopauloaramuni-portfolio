@@ -19,13 +19,3 @@ scrollbar-width: thin;
 body {
 background-color: #1a202c;
 }
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0.5rem;
-  }
-  .react-terminal-wrapper {
-    height: 65vh !important;
-    font-size: 0.85rem;
-  }
-}
