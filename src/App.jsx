@@ -30,7 +30,7 @@ function App() {
 
   // Estado para saber se o jogo está aberto (última linha é FlappyPlaneGame)
   const isGameOpen = terminalLineData.length > 0 && terminalLineData[terminalLineData.length - 1]?.type === FlappyPlaneGame;
-
+  
   function handleInput(input) {
     let newLines = [...terminalLineData];
     newLines.push(<TerminalInput key={`input-${newLines.length}`}>{myPrompt} {input}</TerminalInput>);
@@ -95,7 +95,7 @@ function App() {
   }
 
   const myPrompt = "visitante@portfolio:~$";
-  const terminalTitle = screenWidth > 500 ? 'Portfolio terminal' : '';
+  const terminalTitle = "Portfolio terminal";
 
   return (
     <div className="container">
