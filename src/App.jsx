@@ -95,12 +95,13 @@ function App() {
   }
 
   const myPrompt = "visitante@portfolio:~$";
+  const terminalTitle = screenWidth > 500 ? 'Portfolio terminal' : '';
 
   return (
     <div className="container">
       <LanguageSwitcher />
         <Terminal
-          name=''
+          name={terminalTitle}
           colorMode={ColorMode.Dark}
           onInput={isGameOpen ? undefined : handleInput}
           prompt={myPrompt}
