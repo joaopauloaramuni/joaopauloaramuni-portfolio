@@ -105,8 +105,12 @@ const resources = {
         aes_proj3_desc:
           "I Care Well is a project by PUC Minas, in partnership with the Mário Penna Institute and the PUC Minas Physiotherapy Clinical Center, aimed at supporting the discharge of cancer patients. The app guides patients on physiotherapy practices at home, replacing the paper booklet with a more practical digital solution.",
 
-        aes_proj4_title: "Help Out App - Experimental Software Agency",
+        aes_proj4_title: "Map of Institutions - Experimental Software Agency",
         aes_proj4_desc:
+          "The Map of Institutions project, developed by the Experimental Software Agency of PUC Minas in partnership with BH-Tec, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
+
+        aes_proj5_title: "Help Out App - Experimental Software Agency",
+        aes_proj5_desc:
           "Help Out is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
@@ -346,8 +350,13 @@ const resources = {
         aes_proj3_desc:
           "O CuidoBem é um projeto da PUC Minas, em parceria com o Instituto Mário Penna e o Centro Clínico de Fisioterapia, que visa apoiar a desospitalização de pacientes com câncer. O aplicativo orienta os pacientes sobre práticas fisioterapêuticas em casa, substituindo a cartilha de papel por uma solução digital mais prática.",
 
-        aes_proj4_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj4_title:
+          "Mapa de Instituições - Agência Experimental de Software",
         aes_proj4_desc:
+          "O projeto Mapa de Instituições, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o BH-Tec, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
+
+        aes_proj5_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj5_desc:
           "O Ajuda-aí é um aplicativo que otimiza o programa de apadrinhamento do curso de Engenharia de Software da PUC Minas. Centraliza informações dos participantes e melhora a comunicação entre padrinhos e apadrinhados. Com algoritmo de match avançado, garante que cada apadrinhado seja combinado com o padrinho mais adequado, oferecendo uma experiência personalizada.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
