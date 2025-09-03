@@ -91,7 +91,7 @@
 
 @media (max-width: 480px) {
   .name-animation {
-    font-size: 0.55rem; /* nome animado */
+    font-size: 0.75rem; /* nome animado */
   }
 
   .welcome-title {
