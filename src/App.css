@@ -24,18 +24,42 @@ html, body {
   height: 100%;
 }
 
-.Terminal__Prompt {
-  font-size: 1rem;
-}
+/* ===== Responsividade Geral ===== */
 
+/* Tablet */
 @media (max-width: 768px) {
-  .Terminal__Prompt {
+  body {
+    font-size: 0.85rem; /* ~13px */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 85%; 
+  }
+
+  p, li, a, span, div {
+    font-size: 0.85rem;
+  }
+
+  .icon {
     font-size: 0.85rem;
   }
 }
 
+/* Celular */
 @media (max-width: 480px) {
-  .Terminal__Prompt {
+  body {
+    font-size: 0.55rem; /* ~9px (bem pequeno, igual ao último que fizemos) */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 70%;
+  }
+
+  p, li, a, span, div {
+    font-size: 0.55rem;
+  }
+
+  .icon {
     font-size: 0.55rem;
   }
 }
