@@ -88,3 +88,22 @@
     font-size: 1.1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .whoami-animation {
+    font-size: 0.9rem;
+  }
+
+  .welcome-title {
+    font-size: 1rem;
+  }
+
+  .welcome-container p, 
+  .info-list li {
+    font-size: 0.85rem;
+  }
+
+  .info-list .icon {
+    font-size: 1rem;
+  }
+}
