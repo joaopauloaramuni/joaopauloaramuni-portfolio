@@ -47,6 +47,10 @@ html, body {
 
 /* Celular */
 @media (max-width: 480px) {
+    .react-terminal-wrapper::after {
+    font-size: 0.6rem !important;
+  }
+  
   body {
     font-size: 0.55rem;
   }
