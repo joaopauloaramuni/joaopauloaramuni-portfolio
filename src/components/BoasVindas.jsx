@@ -1,23 +1,24 @@
 // src/components/BoasVindas.jsx
 
-import React from 'react';
-import { TypeAnimation } from 'react-type-animation';
-import { IoLocationSharp, IoSchool, IoSchoolOutline, IoBriefcase } from 'react-icons/io5';
-import { useTranslation } from 'react-i18next';
-import './BoasVindas.css';
+import React from "react";
+import { TypeAnimation } from "react-type-animation";
+import {
+  IoLocationSharp,
+  IoSchool,
+  IoSchoolOutline,
+  IoBriefcase,
+  IoFootballOutline,
+} from "react-icons/io5";
+import { useTranslation } from "react-i18next";
+import "./BoasVindas.css";
 
 const BoasVindas = () => {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language.startsWith('en') ? 'en' : 'pt';
-  const name = t('boasvindas.nome');
-  const title = t('boasvindas.titulo');
+  const lang = i18n.language.startsWith("en") ? "en" : "pt";
+  const name = t("boasvindas.nome");
+  const title = t("boasvindas.titulo");
 
-  const sequence = [
-    name,
-    1000,
-    `${name} ${title}`,
-    2000,
-  ];
+  const sequence = [name, 1000, `${name} ${title}`, 2000];
 
   return (
     <div className="welcome-container">
@@ -31,31 +32,77 @@ const BoasVindas = () => {
         className="name-animation"
       />
       <div className="static-welcome">
-        <p className="welcome-title">{t('boasvindas.bemvindo')}</p>
+        <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
         <hr className="divider" />
         <ul className="info-list">
-            <li>
-            <IoSchoolOutline className="icon" style={{ color: '#f3d956' }} />
-            {t('boasvindas.cargo1')}
+          <li>
+            <a
+              href="https://www.pucminas.br/campus/lourdes/ensino/graduacao/Paginas/Engenharia-de-Software.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoSchoolOutline className="icon" style={{ color: "#f3d956" }} />
+              {t("boasvindas.cargo1")}
+            </a>
           </li>
           <li>
-            <IoBriefcase className="icon" style={{ color: '#8B4513' }} />
-            {t('boasvindas.cargo2')}
+            <a
+              href="https://icei.pucminas.br/aes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoBriefcase className="icon" style={{ color: "#8B4513" }} />
+              {t("boasvindas.cargo2")}
+            </a>
           </li>
           <li>
-            <IoSchool className="icon" style={{ color: '#ccc' }} />
-            {t('boasvindas.formacao1')}
+            <a
+              href="https://www.fumec.br/pos-graduacao-em-tecnologia-da-informacao-e-comunicacao-e-gestao-do-conhecimento/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoSchool className="icon" />
+              {t("boasvindas.formacao1")}
+            </a>
           </li>
           <li>
-            <IoSchool className="icon" style={{ color: '#ccc' }} />
-            {t('boasvindas.formacao2')}
+            <a
+              href="https://processoseletivo.fumec.br/cursos/ciencia-da-computacao/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoSchool className="icon" />
+              {t("boasvindas.formacao2")}
+            </a>
           </li>
           <li>
-            <IoLocationSharp className="icon" style={{ color: '#ff6b6b' }} />
-            {t('boasvindas.local')}
+            <a
+              href="https://atletico.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoFootballOutline className="icon" />
+              {t("boasvindas.esporte")}
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
+              {t("boasvindas.local")}
+            </a>
           </li>
         </ul>
-        <p className="navegue-text">{t('boasvindas.ajuda')}</p>
+        <p className="navegue-text">{t("boasvindas.ajuda")}</p>
       </div>
     </div>
   );

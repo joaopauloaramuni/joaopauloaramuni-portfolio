@@ -27,6 +27,7 @@ const resources = {
           "Doctor and Master in Information Systems and Knowledge Management",
         formacao2: "Bachelor of Computer Science",
         local: "Belo Horizonte, Minas Gerais, Brazil",
+        esporte: "Atlético Mineiro Supporter",
         ajuda: "Type `help` to explore all available commands.",
       },
       contato: {
@@ -274,6 +275,7 @@ const resources = {
           "Doutor e Mestre em Sistemas de Informação e Gestão do Conhecimento",
         formacao2: "Bacharel em Ciência da Computação",
         local: "Belo Horizonte, Minas Gerais, Brasil",
+        esporte: "Torcedor do Clube Atlético Mineiro",
         ajuda: "Digite `ajuda` para conhecer mais sobre os comandos.",
       },
       contato: {
