@@ -2,15 +2,13 @@
 
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { IoFlash, IoLocationSharp, IoSchool } from 'react-icons/io5';
+import { IoLocationSharp, IoSchool, IoSchoolOutline, IoBriefcase } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
 import './BoasVindas.css';
 
 const BoasVindas = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith('en') ? 'en' : 'pt';
-
-  // Pegando direto do i18n
   const name = t('boasvindas.nome');
   const title = t('boasvindas.titulo');
 
@@ -36,17 +34,25 @@ const BoasVindas = () => {
         <p className="welcome-title">{t('boasvindas.bemvindo')}</p>
         <hr className="divider" />
         <ul className="info-list">
+            <li>
+            <IoSchoolOutline className="icon" style={{ color: '#f3d956' }} />
+            {t('boasvindas.cargo1')}
+          </li>
           <li>
-            <IoFlash className="icon" style={{ color: '#f3d956' }} />
-            {t('boasvindas.cargo')}
+            <IoBriefcase className="icon" style={{ color: '#8B4513' }} />
+            {t('boasvindas.cargo2')}
+          </li>
+          <li>
+            <IoSchool className="icon" style={{ color: '#ccc' }} />
+            {t('boasvindas.formacao1')}
+          </li>
+          <li>
+            <IoSchool className="icon" style={{ color: '#ccc' }} />
+            {t('boasvindas.formacao2')}
           </li>
           <li>
             <IoLocationSharp className="icon" style={{ color: '#ff6b6b' }} />
             {t('boasvindas.local')}
-          </li>
-          <li>
-            <IoSchool className="icon" />
-            {t('boasvindas.faculdade')}
           </li>
         </ul>
         <p className="navegue-text">{t('boasvindas.ajuda')}</p>

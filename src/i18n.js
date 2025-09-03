@@ -21,10 +21,12 @@ const resources = {
         nome: "Professor",
         titulo: "Aramuni",
         bemvindo: "$ Welcome to my Portfolio",
-        cargo: "Software Engineering Professor at PUC Minas",
-        local: "Belo Horizonte, Minas Gerais, Brazil",
-        faculdade:
+        cargo1: "Software Engineering Professor at PUC Minas",
+        cargo2: "CTO at the Experimental Software Agency",
+        formacao1:
           "Doctor and Master in Information Systems and Knowledge Management",
+        formacao2: "Bachelor of Computer Science",
+        local: "Belo Horizonte, Minas Gerais, Brazil",
         ajuda: "Type `help` to explore all available commands.",
       },
       contato: {
@@ -265,11 +267,13 @@ const resources = {
       boasvindas: {
         nome: "Professor",
         titulo: "Aramuni",
-        bemvindo: "$ Bem-vindo ao meu Portfólio",
-        cargo: "Professor de Engenharia de Software na PUC Minas",
-        local: "Belo Horizonte, Minas Gerais, Brasil",
-        faculdade:
+        bemvindo: "$ Boas-vindas ao meu Portfólio",
+        cargo1: "Professor de Engenharia de Software na PUC Minas",
+        cargo2: "CTO na Agência Experimental de Software",
+        formacao1:
           "Doutor e Mestre em Sistemas de Informação e Gestão do Conhecimento",
+        formacao2: "Bacharel em Ciência da Computação",
+        local: "Belo Horizonte, Minas Gerais, Brasil",
         ajuda: "Digite `ajuda` para conhecer mais sobre os comandos.",
       },
       contato: {
