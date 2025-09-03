@@ -90,20 +90,24 @@
 }
 
 @media (max-width: 480px) {
-  .whoami-animation {
-    font-size: 0.55rem; /* ~9px */
+  .name-animation {
+    font-size: 0.55rem; /* nome animado */
   }
 
   .welcome-title {
-    font-size: 0.55rem; /* título menor */
+    font-size: 0.55rem; /* título */
+  }
+
+  .welcome-subtitle {
+    font-size: 0.55rem; /* subtítulo */
   }
 
   .welcome-container p {
-    font-size: 0.55rem; /* subtítulo menor */
+    font-size: 0.55rem; /* outros parágrafos */
   }
 
   .info-list li {
-    font-size: 0.6rem; /* lista */
+    font-size: 0.6rem; /* itens da lista */
     gap: 0.5rem;
   }
 
