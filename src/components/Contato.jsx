@@ -1,7 +1,7 @@
 // src/components/Contato.jsx
 
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaWhatsapp, FaDiscord } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaGithub, FaEnvelope, FaWhatsapp, FaDiscord } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import './Contato.css';
 
@@ -13,6 +13,7 @@ const Contato = () => {
   const seuEmail = "joaopauloaramuni@gmail.com";
   const seuWhatsapp = "https://wa.me/5531980402103";
   const seuDiscord = "https://discordapp.com/users/959151773728251914";
+  const seuInstagram = "https://www.instagram.com/joaopauloaramuni";
 
   return (
     <div className="contato-container" style={{ padding: '0 1.5rem' }}>
@@ -28,6 +29,11 @@ const Contato = () => {
         <a href={seuGitHub} target="_blank" rel="noopener noreferrer" className="contato-item">
           <FaGithub className="contato-icone" />
           <span>GitHub</span>
+        </a>
+
+        <a href={seuInstagram} target="_blank" rel="noopener noreferrer" className="contato-item">
+          <FaInstagram className="contato-icone" />
+          <span>Instagram</span>
         </a>
 
         <a href={seuWhatsapp} target="_blank" rel="noopener noreferrer" className="contato-item">
