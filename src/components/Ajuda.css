@@ -3,10 +3,6 @@
   line-height: 1.6;
 }
 
-.ajuda-item {
-  margin-bottom: 1.2rem;
-}
-
 .ajuda-aliases {
   color: #00ff9d;
   font-size: 1.2rem;
@@ -21,7 +17,6 @@
   color: #a0aec0;
   font-size: 1.1rem;
 }
-
 
 @media (max-width: 768px) {
   .ajuda-aliases {
