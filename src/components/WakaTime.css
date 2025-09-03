@@ -1,0 +1,16 @@
+/* src/components/WakaTime.css */
+
+.wakatime-container {
+  padding: 2rem 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .wakatime-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+}

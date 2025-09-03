@@ -37,6 +37,10 @@ export const commandList = {
     name: 'spotify',
     aliases: ['music'],
   },
+  wakatime: {
+    name: 'wakatime',
+    aliases: ['time'],
+  },
   game: {
     name: 'game',
     aliases: ['chaplane', 'chagame'],

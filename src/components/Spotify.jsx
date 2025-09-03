@@ -1,10 +1,8 @@
 // src/components/Spotify.jsx
 import React, { useRef } from "react";
-import { useTranslation } from "react-i18next";
 import "./Spotify.css";
 
 const Spotify = () => {
-  const { t } = useTranslation();
   const containerRef = useRef(null);
 
   const handleImageLoad = () => {

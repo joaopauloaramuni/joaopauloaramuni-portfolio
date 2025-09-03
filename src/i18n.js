@@ -73,6 +73,7 @@ const resources = {
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
+        wakatime: { desc: "Shows how much time I spent coding and in which languages." },
         game: { desc: "Play Flappy Plane directly in the web terminal." },
       },
       projetos: {
@@ -323,6 +324,7 @@ const resources = {
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
+        wakatime: { desc: "Mostra quanto tempo passei programando e em quais linguagens." },
         game: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
       },
       projetos: {

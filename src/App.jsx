@@ -13,6 +13,7 @@ import Experiencias from "./components/Experiencias";
 import SobreMim from "./components/SobreMim";
 import Ajuda from "./components/Ajuda";
 import Spotify from "./components/Spotify";
+import WakaTime from "./components/WakaTime";
 import Contato from "./components/Contato";
 import BoasVindas from "./components/BoasVindas";
 import Recomendacoes from "./components/Recomendacoes";
@@ -62,6 +63,9 @@ function App() {
         case "ajuda":
           response = <Ajuda />;
           break;
+        case "premios":
+          response = <Premios />;
+          break;
         case "projetos":
           response = <Projetos />;
           break;
@@ -80,8 +84,8 @@ function App() {
         case "spotify":
           response = <Spotify />;
           break;
-        case "premios":
-          response = <Premios />;
+        case "wakatime":
+          response = <WakaTime />;
           break;
         case "game":
           response = (
