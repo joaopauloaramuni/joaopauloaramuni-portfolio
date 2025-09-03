@@ -28,8 +28,8 @@ html, body {
 
 /* Tablet */
 @media (max-width: 768px) {
-  body {
-    font-size: 0.85rem; /* ~13px */
+  body, .container {
+    font-size: 0.85rem; /* reduz tudo */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -43,12 +43,16 @@ html, body {
   .icon {
     font-size: 0.85rem;
   }
+
+  .container {
+    padding: 0.75rem; /* ajusta o padding da container */
+  }
 }
 
 /* Celular */
 @media (max-width: 480px) {
-  body {
-    font-size: 0.55rem; /* ~9px (bem pequeno, igual ao último que fizemos) */
+  body, .container {
+    font-size: 0.55rem; /* ~9px */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -61,5 +65,9 @@ html, body {
 
   .icon {
     font-size: 0.55rem;
+  }
+
+  .container {
+    padding: 0.5rem;
   }
 }
