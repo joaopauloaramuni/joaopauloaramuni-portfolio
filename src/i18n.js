@@ -20,6 +20,7 @@ const resources = {
       boasvindas: {
         nome: "Professor",
         titulo: "Aramuni",
+        subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Welcome to my Portfolio",
         cargo1: "Software Engineering Professor at PUC Minas",
         cargo2: "CTO at the Experimental Software Agency",
@@ -268,6 +269,7 @@ const resources = {
       boasvindas: {
         nome: "Professor",
         titulo: "Aramuni",
+        subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Boas-vindas ao meu Portfólio",
         cargo1: "Professor de Engenharia de Software na PUC Minas",
         cargo2: "CTO na Agência Experimental de Software",

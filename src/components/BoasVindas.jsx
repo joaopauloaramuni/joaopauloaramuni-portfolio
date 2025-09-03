@@ -34,6 +34,7 @@ const BoasVindas = () => {
       <div className="static-welcome">
         <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
         <hr className="divider" />
+        <p>{t('boasvindas.subtitulo')}</p>
         <ul className="info-list">
           <li>
             <a
