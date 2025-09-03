@@ -91,19 +91,19 @@
 
 @media (max-width: 480px) {
   .whoami-animation {
-    font-size: 0.7rem;
+    font-size: 0.55rem; /* ~9px */
   }
 
   .welcome-title {
-    font-size: 0.8rem;
+    font-size: 0.65rem; /* ~10px */
   }
 
   .welcome-container p, 
   .info-list li {
-    font-size: 0.75rem;
+    font-size: 0.6rem; /* ~9.5px */
   }
 
   .info-list .icon {
-    font-size: 0.85rem;
+    font-size: 0.7rem; /* ~11px */
   }
 }
