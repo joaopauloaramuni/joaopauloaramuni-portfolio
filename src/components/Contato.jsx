@@ -32,7 +32,7 @@ const Contato = () => {
 
         <a href={seuWhatsapp} target="_blank" rel="noopener noreferrer" className="contato-item">
           <FaWhatsapp className="contato-icone" />
-          <span>Whatsapp</span>
+          <span>WhatsApp</span>
         </a>
 
         <a href={seuDiscord} target="_blank" rel="noopener noreferrer" className="contato-item">
