@@ -107,3 +107,19 @@
     font-size: 0.7rem; /* ~11px */
   }
 }
+
+.Terminal__Prompt {
+  font-size: 1rem; /* tamanho normal no desktop */
+}
+
+@media (max-width: 768px) {
+  .Terminal__Prompt {
+    font-size: 0.85rem; /* tablet */
+  }
+}
+
+@media (max-width: 480px) {
+  .Terminal__Prompt {
+    font-size: 0.55rem; /* celular, mesmo tamanho bem pequeno do último ajuste */
+  }
+}
