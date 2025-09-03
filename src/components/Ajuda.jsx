@@ -9,7 +9,7 @@ const Ajuda = () => {
   const { t } = useTranslation();
   return (
     <div className="ajuda-container">
-      <p>{t('ajuda.titulo', 'Comandos disponíveis:')}</p>
+      <p>{t("ajuda.titulo")}</p>
       {Object.values(commandList).map((cmd, index) => {
         const allAliases = [cmd.name, ...cmd.aliases].join(' | ');
         return (
