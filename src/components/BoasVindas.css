@@ -91,15 +91,15 @@
 
 @media (max-width: 480px) {
   .name-animation {
-    font-size: 0.75rem; /* nome animado */
+    font-size: 0.85rem; /* nome animado */
   }
 
   .welcome-title {
-    font-size: 0.75rem; /* título */
+    font-size: 0.85rem; /* título */
   }
 
   .welcome-subtitle {
-    font-size: 0.75rem; /* subtítulo */
+    font-size: 0.85rem; /* subtítulo */
   }
 
   .welcome-container p {
