@@ -1,6 +1,6 @@
 // src/App.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Terminal, {
   ColorMode,
   TerminalInput,
@@ -32,6 +32,13 @@ function App() {
   const [terminalLineData, setTerminalLineData] = useState([
     getWelcomeMessage(),
   ]);
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Estado para saber se o jogo está aberto (última linha é FlappyPlaneGame)
   const isGameOpen =
@@ -117,7 +124,7 @@ function App() {
   }
 
   const myPrompt = "visitante@portfolio:~$";
-  const terminalTitle = "Portfólio";
+  const terminalTitle = screenWidth > 500 ? "Portfolio terminal" : "";
 
   return (
     <div className="container">
