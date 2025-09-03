@@ -51,12 +51,15 @@ html, body {
 
 /* Celular */
 @media (max-width: 480px) {
+    .Terminal__Name {
+    font-size: 0.55rem; /* mesmo tamanho do prompt */
+  }
   body, .container {
     font-size: 0.55rem; /* ~9px */
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-size: 0.55rem;
+    font-size: 70%;
   }
 
   p, li, a, span, div {
@@ -70,4 +73,11 @@ html, body {
   .container {
     padding: 0.5rem;
   }
+}
+
+/* Desktop */
+.Terminal__Name {
+  font-size: 1rem; /* tamanho normal */
+  color: #00ff9d;
+  font-weight: bold;
 }
