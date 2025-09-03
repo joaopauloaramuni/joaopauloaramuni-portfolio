@@ -33,6 +33,10 @@ export const commandList = {
     name: 'projetos',
     aliases: ['projects'],
   },
+  spotify: {
+    name: 'spotify',
+    aliases: ['music'],
+  },
   game: {
     name: 'game',
     aliases: ['chaplane', 'chagame'],

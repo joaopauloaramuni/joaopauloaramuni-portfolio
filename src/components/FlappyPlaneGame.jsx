@@ -179,23 +179,7 @@ const FlappyPlaneGame = ({ onExit }) => {
   return (
     <div style={{ position: 'relative' }}>
       {onExit && (
-        <button
-          style={{
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            zIndex: 200,
-            background: '#222',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 6,
-            padding: '6px 16px',
-            fontSize: 16,
-            cursor: 'pointer',
-            opacity: 0.85
-          }}
-          onClick={onExit}
-        >
+        <button className="btn-voltar-terminal" onClick={onExit}>
           Voltar ao terminal
         </button>
       )}

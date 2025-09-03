@@ -1,21 +1,25 @@
 // src/App.jsx
 
-
-import React, { useState } from 'react';
-import Terminal, { ColorMode, TerminalInput, TerminalOutput } from 'react-terminal-ui';
-import './App.css';
-import { commandList } from './commands';
-import Projetos from './components/Projetos';
-import Experiencias from './components/Experiencias';
-import SobreMim from './components/SobreMim';
-import Ajuda from './components/Ajuda';
-import Contato from './components/Contato';
-import BoasVindas from './components/BoasVindas';
-import Recomendacoes from './components/Recomendacoes';
-import Premios from './components/Premios';
-import FlappyPlaneGame from './components/FlappyPlaneGame';
-import LanguageSwitcher from './components/LanguageSwitcher';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import Terminal, {
+  ColorMode,
+  TerminalInput,
+  TerminalOutput,
+} from "react-terminal-ui";
+import "./App.css";
+import { commandList } from "./commands";
+import Projetos from "./components/Projetos";
+import Experiencias from "./components/Experiencias";
+import SobreMim from "./components/SobreMim";
+import Ajuda from "./components/Ajuda";
+import Spotify from "./components/Spotify";
+import Contato from "./components/Contato";
+import BoasVindas from "./components/BoasVindas";
+import Recomendacoes from "./components/Recomendacoes";
+import Premios from "./components/Premios";
+import FlappyPlaneGame from "./components/FlappyPlaneGame";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const { t } = useTranslation();
@@ -25,67 +29,81 @@ function App() {
 
   // Estado inicial com mensagem de boas-vindas
   const [terminalLineData, setTerminalLineData] = useState([
-    getWelcomeMessage()
+    getWelcomeMessage(),
   ]);
 
   // Estado para saber se o jogo está aberto (última linha é FlappyPlaneGame)
-  const isGameOpen = terminalLineData.length > 0 && terminalLineData[terminalLineData.length - 1]?.type === FlappyPlaneGame;
-  
+  const isGameOpen =
+    terminalLineData.length > 0 &&
+    terminalLineData[terminalLineData.length - 1]?.type === FlappyPlaneGame;
+
   function handleInput(input) {
     let newLines = [...terminalLineData];
-    newLines.push(<TerminalInput key={`input-${newLines.length}`}>{myPrompt} {input}</TerminalInput>);
+    newLines.push(
+      <TerminalInput key={`input-${newLines.length}`}>
+        {myPrompt} {input}
+      </TerminalInput>
+    );
 
-    const args = input.toLowerCase().trim().split(' ');
+    const args = input.toLowerCase().trim().split(" ");
     const userInput = args[0];
 
     const command = Object.values(commandList).find(
-      cmd => cmd.name === userInput || cmd.aliases.includes(userInput)
+      (cmd) => cmd.name === userInput || cmd.aliases.includes(userInput)
     );
 
     let response;
 
     if (command) {
       switch (command.name) {
-        case 'sobre':
+        case "sobre":
           response = <SobreMim />;
           break;
-        case 'ajuda':
+        case "ajuda":
           response = <Ajuda />;
           break;
-        case 'projetos':
+        case "projetos":
           response = <Projetos />;
           break;
-        case 'experiencias':
+        case "experiencias":
           response = <Experiencias />;
           break;
-        case 'contato':
+        case "contato":
           response = <Contato />;
           break;
-        case 'limpar':
+        case "limpar":
           setTerminalLineData([]);
           return;
-        case 'recomendacoes':
+        case "recomendacoes":
           response = <Recomendacoes />;
           break;
-        case 'premios':
+        case "spotify":
+          response = <Spotify />;
+          break;
+        case "premios":
           response = <Premios />;
           break;
-        case 'game':
-          response = <FlappyPlaneGame onExit={() => {
-            // Remove o último comando (o jogo) do terminal
-            setTerminalLineData(lines => lines.slice(0, -1));
-          }} />;
+        case "game":
+          response = (
+            <FlappyPlaneGame
+              onExit={() => {
+                // Remove o último comando (o jogo) do terminal
+                setTerminalLineData((lines) => lines.slice(0, -1));
+              }}
+            />
+          );
           break;
         default:
           break;
       }
     } else {
       response = (
-    <TerminalOutput>
-      {t("comando.nao_reconhecido")} "{userInput}"<br />
-      {t("comando.ver_ajuda")}
-    </TerminalOutput>
-  ); }
+        <TerminalOutput>
+          {t("comando.nao_reconhecido")} "{userInput}"<br />
+          {t("comando.ver_ajuda")}
+        </TerminalOutput>
+      );
+    }
     if (Array.isArray(response)) {
       newLines.push(...response);
     } else {
@@ -100,15 +118,15 @@ function App() {
   return (
     <div className="container">
       <LanguageSwitcher />
-        <Terminal
-          name={terminalTitle}
-          colorMode={ColorMode.Dark}
-          onInput={isGameOpen ? undefined : handleInput}
-          prompt={myPrompt}
-          height='85vh'
-        >
-          {terminalLineData}
-        </Terminal>
+      <Terminal
+        name={terminalTitle}
+        colorMode={ColorMode.Dark}
+        onInput={isGameOpen ? undefined : handleInput}
+        prompt={myPrompt}
+        height="85vh"
+      >
+        {terminalLineData}
+      </Terminal>
     </div>
   );
 }

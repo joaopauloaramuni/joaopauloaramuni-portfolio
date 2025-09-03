@@ -68,6 +68,7 @@ const resources = {
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
+        spotify: { desc: "Shows what I'm listening to and recent plays." },
         game: { desc: "Play Flappy Plane directly in the web terminal." },
       },
       projetos: {
@@ -313,6 +314,7 @@ const resources = {
         recomendacoes: { desc: "Exibe minhas recomendações do LinkedIn." },
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
+        spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         game: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
       },
       projetos: {
