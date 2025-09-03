@@ -116,8 +116,8 @@ function App() {
     setTerminalLineData(newLines);
   }
 
-  const myPrompt = <span className="custom-prompt">"visitante@portfolio:~$";</span>
-  const terminalTitle = <span className="custom-prompt">"Portfólio"</span>;
+  const myPrompt = "visitante@portfolio:~$";
+  const terminalTitle = "Portfólio";
 
   return (
     <div className="container">

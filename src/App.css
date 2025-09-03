@@ -25,17 +25,17 @@ html, body {
 }
 
 .Terminal__Prompt {
-  font-size: 1rem; /* tamanho normal no desktop */
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
   .Terminal__Prompt {
-    font-size: 0.85rem; /* tablet */
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
   .Terminal__Prompt {
-    font-size: 0.55rem; /* celular, mesmo tamanho bem pequeno do último ajuste */
+    font-size: 0.55rem;
   }
 }
