@@ -124,7 +124,7 @@ function App() {
   }
 
   const myPrompt = "visitante@portfolio:~$";
-  const terminalTitle = screenWidth > 500 ? "Portfolio terminal" : "";
+  const terminalTitle = "Portfolio terminal";
 
   return (
     <div className="container">
