@@ -95,15 +95,19 @@
   }
 
   .welcome-title {
-    font-size: 0.65rem; /* ~10px */
+    font-size: 0.55rem; /* título menor */
   }
 
-  .welcome-container p, 
+  .welcome-container p {
+    font-size: 0.55rem; /* subtítulo menor */
+  }
+
   .info-list li {
-    font-size: 0.6rem; /* ~9.5px */
+    font-size: 0.6rem; /* lista */
+    gap: 0.5rem;
   }
 
   .info-list .icon {
-    font-size: 0.7rem; /* ~11px */
+    font-size: 0.7rem; /* ícones */
   }
 }
