@@ -1,3 +1,13 @@
+.recomendacoes-container {
+  padding: 0 1.5rem;
+}
+
+.recomendacoes-titulo {
+  color: #00ff9d;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
 .recomendacao-sobre-container {
   display: flex;
   align-items: center;
@@ -5,23 +15,55 @@
   color: #e2e8f0;
   margin-bottom: 32px;
 }
+
 .recomendacao-avatar-container {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .recomendacao-avatar-image {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  border: 4px solid #4a5568;
+  border: 2px solid #00ff9d;
   object-fit: cover;
-  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
+
 .recomendacao-info-container {
   flex-grow: 1;
 }
+
+.recomendacao-name {
+  color: #00ff9d;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.recomendacao-relationship {
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.recomendacao-text {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #cbd5e1;
+}
+
+.recomendacao-link {
+  color: #a78bfa;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+/* Responsividade */
+
 @media (max-width: 900px) {
   .recomendacao-sobre-container {
     flex-direction: column;
@@ -45,6 +87,7 @@
     width: 100%;
   }
 }
+
 @media (max-width: 768px) {
   .recomendacao-sobre-container {
     gap: 1.2rem;

@@ -81,7 +81,7 @@
   left: 50px;
   font-size: 3.2rem;
   line-height: 3.2rem;
-  transition: top 0.18s cubic-bezier(.4,1.6,.6,1), filter 0.2s;
+  transition: top 0.18s cubic-bezier(0.4, 1.6, 0.6, 1), filter 0.2s;
   filter: drop-shadow(0 0 2px #fff8);
   text-shadow: 0 2px 8px #fff4, 0 0 2px #fff8;
 }
@@ -112,7 +112,7 @@
   gap: 12px;
 }
 #score::before {
-  content: '★';
+  content: "★";
   color: #ffd700;
   font-size: 1.5rem;
   margin-right: 6px;

@@ -1,8 +1,9 @@
-import React from 'react';
-import FlappyPlaneGame from '../components/FlappyPlaneGame';
+import React from "react";
+import FlappyPlaneGame from "../components/FlappyPlaneGame";
+import "./GamePage.css";
 
 const GamePage = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: '#111' }}>
+  <div className="game-page-container">
     <FlappyPlaneGame />
   </div>
 );

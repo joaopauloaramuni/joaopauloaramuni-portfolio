@@ -1,4 +1,3 @@
-// src/components/WakaTime.jsx
 import React, { useRef } from "react";
 import "./WakaTime.css";
 

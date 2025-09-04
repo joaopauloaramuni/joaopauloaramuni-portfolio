@@ -1,6 +1,7 @@
 .ajuda-container {
   padding: 0 1.5rem;
   line-height: 1.6;
+  margin-bottom: 0.5rem;
 }
 
 .ajuda-aliases {
@@ -20,10 +21,10 @@
 
 @media (max-width: 768px) {
   .ajuda-aliases {
-    font-size: 1rem; 
+    font-size: 1rem;
   }
 
   .ajuda-description {
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
   }
 }

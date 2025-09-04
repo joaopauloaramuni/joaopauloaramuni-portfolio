@@ -15,6 +15,7 @@ import Ajuda from "./components/Ajuda";
 import Spotify from "./components/Spotify";
 import WakaTime from "./components/WakaTime";
 import Contato from "./components/Contato";
+import Curriculo from "./components/Curriculo";
 import BoasVindas from "./components/BoasVindas";
 import Recomendacoes from "./components/Recomendacoes";
 import Premios from "./components/Premios";
@@ -74,6 +75,9 @@ function App() {
           break;
         case "contato":
           response = <Contato />;
+          break;
+        case "curriculo":
+          response = <Curriculo />;
           break;
         case "limpar":
           setTerminalLineData([]);

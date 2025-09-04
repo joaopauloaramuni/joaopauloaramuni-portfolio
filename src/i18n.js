@@ -73,7 +73,12 @@ const resources = {
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
-        wakatime: { desc: "Shows how much time I spent coding and in which languages." },
+        wakatime: {
+          desc: "Shows how much time I spent coding and in which languages.",
+        },
+        curriculo: {
+          desc: "Displays my resume with PDF preview.",
+        },
         game: { desc: "Play Flappy Plane directly in the web terminal." },
       },
       projetos: {
@@ -158,8 +163,11 @@ const resources = {
           "Computer Science Specialist Instructor",
         professor_xp: "Professor",
         professor_fumec: "Professor",
-        analista_sistemas_pl_prosegur: "Systems Analyst Pl",
-        analista_sistemas_pl_capgemini: "Systems Analyst Pl",
+        analista_sistemas_pl_prosegur: "Mid-level Systems Analyst",
+        analista_sistemas_pl_capgemini: "Mid-level Systems Analyst",
+        analista_sistemas_jr_capgemini: "Junior Systems Analyst",
+        programador_sr_capgemini: "Senior Programmer",
+        programador_jr_capgemini: "Junior Programmer",
         tecnico_programador_bb: "Technician/Programmer",
         desenvolvedor_csharp_alamo: "C# Developer",
         estagiario_fumec: "Intern",
@@ -227,9 +235,24 @@ const resources = {
           "Java, JavaFX, JSF, PrimeFaces, EJB, JPA, EclipseLink, PL/SQL, Oracle, Scrum, Automated testing.",
 
         analista_sistemas_pl_capgemini_desc:
-          "Analysis and development in Java / Java Web; Maintenance of VB6 / VB.NET systems. Web development in Classic ASP / ASP.NET. SQLServer / Oracle DB handling. PL/SQL programming. Documentation and UML. Lean Manufacturing methodology.",
+          "Analysis and development in Java / Java Web; Maintenance of VB6 / VB.NET systems. Web development with Classic ASP / ASP.NET. Database management with SQLServer / Oracle. Programming with PL/SQL. Documentation and UML. Agile methodology using Lean Manufacturing.",
         analista_sistemas_pl_capgemini_skills:
           "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        analista_sistemas_jr_capgemini_desc:
+          "Analysis and development in Java / Java Web; Maintenance of VB6 / VB.NET systems. Web development with Classic ASP / ASP.NET. Database management with SQLServer / Oracle. Programming with PL/SQL. Documentation and UML. Agile methodology using Lean Manufacturing.",
+        analista_sistemas_jr_capgemini_skills:
+          "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        programador_sr_capgemini_desc:
+          "Second time in Capgemini Brazil's history that a progression from Junior to Senior occurred, skipping the Mid-level position.",
+        programador_sr_capgemini_skills:
+          "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        programador_jr_capgemini_desc:
+          "Development and maintenance of SIGEP and SIMP systems for ANP (National Agency of Petroleum, Natural Gas, and Biofuels), focusing on web applications, document processing, and regulatory compliance support.",
+        programador_jr_capgemini_skills:
+          "ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
 
         tecnico_programador_bb_desc:
           "Supervised internship in development and support of Java / Java Web applications; Maintenance of SISBB-integrated systems. Development and support of legacy VBA / VB6 applications; PL/SQL programming; Requirements gathering.",
@@ -324,7 +347,12 @@ const resources = {
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
-        wakatime: { desc: "Mostra quanto tempo passei programando e em quais linguagens." },
+        wakatime: {
+          desc: "Mostra quanto tempo passei programando e em quais linguagens.",
+        },
+        curriculo: {
+          desc: "Exibe meu currículo com visualização em PDF.",
+        },
         game: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
       },
       projetos: {
@@ -380,7 +408,7 @@ const resources = {
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       },
       experiencias: {
-        titulo: "Experiência Profissionais",
+        titulo: "Experiências Profissionais",
 
         // Companies
         puc_minas: "PUC Minas",
@@ -409,8 +437,11 @@ const resources = {
           "Computer Science Specialist Instructor",
         professor_xp: "Professor",
         professor_fumec: "Professor",
-        analista_sistemas_pl_prosegur: "Analista de Sistemas Pl",
-        analista_sistemas_pl_capgemini: "Analista de Sistemas Pl",
+        analista_sistemas_pl_prosegur: "Analista de Sistemas Pleno",
+        analista_sistemas_pl_capgemini: "Analista de Sistemas Pleno",
+        analista_sistemas_jr_capgemini: "Analista de Sistemas Júnior",
+        programador_sr_capgemini: "Programador Sênior",
+        programador_jr_capgemini: "Programador Júnior",
         tecnico_programador_bb: "Técnico/Programador",
         desenvolvedor_csharp_alamo: "Desenvolvedor C#",
         estagiario_fumec: "Estagiário",
@@ -431,11 +462,6 @@ const resources = {
           "Liderança de squads responsáveis por múltiplos projetos de desenvolvimento de sistemas para o mercado de milhas aéreas. Facilitador para assegurar execução contínua, alinhamento de demandas e solução de impedimentos. Responsável pela disponibilidade, escalabilidade, performance e segurança das aplicações, integração técnica com produto, dados e negócios, contato direto com clientes, condução de contratações e mentoria de equipes. Tech Stack: Node.js, Next.js, Python, FastAPI, AWS, Docker, Redis, Amazon SQS, GitLab, Grafana, New Relic.",
         tech_manager_in8_skills:
           "Gestão de projetos de tecnologia, Comunicação eficaz, Resolução de problemas, Liderança técnica, Node.js, Next.js, Python, FastAPI, AWS, Docker, CI/CD, Monitoramento de sistemas.",
-
-        dev_backend_in8_desc:
-          "Web scraping e desenvolvimento de crawlers em Python 3 para programas de milhas aéreas. Criação e manutenção de APIs RESTful para extração de dados e automação de navegadores. Arquitetura cloud AWS com HA/DR, CI/CD, administração de containers Docker e monitoramento com Grafana e New Relic.",
-        dev_backend_in8_skills:
-          "Python, Web Scraping, APIs RESTful, AWS, Docker, CI/CD, Observabilidade e monitoramento.",
 
         curriculum_tech_lead_trybe_desc:
           "Responsável pela estrutura curricular em Python e pelo desenvolvimento técnico do time. Tomada de decisão baseada em dados para maximizar empregabilidade dos estudantes. Formação, orientação técnica e mentoria da equipe, produção de conteúdos complexos e desenvolvimento de instrumentos de avaliação.",
@@ -472,8 +498,14 @@ const resources = {
         professor_fumec_skills:
           "Docência, Fundamentos Teóricos da Computação, Compiladores, POO, Engenharia de Software, Programação Web, Desenvolvimento de Scripts.",
 
+        dev_backend_in8_desc:
+          "Web scraping e desenvolvimento de crawlers em Python 3 para programas de milhas aéreas. Criação e manutenção de APIs RESTful para extração de dados e automação de navegadores. Arquitetura cloud AWS com HA/DR, CI/CD, administração de containers Docker e monitoramento com Grafana e New Relic.",
+        dev_backend_in8_skills:
+          "Python, Web Scraping, APIs RESTful, AWS, Docker, CI/CD, Observabilidade e monitoramento.",
+
         analista_sistemas_pl_prosegur_desc:
           "Desenvolvimento de sistema distribuído em Java 8, JavaFX, JSF, PrimeFaces, EJB, JPA, EclipseLink. Implantação em âmbito global. Software Maintenance, refatoração e melhorias de performance. Testes de WebServices e automatizados. Manipulação de Banco de Dados Oracle. Programação PL/SQL. Documentação de Casos de Uso. Metodologia Ágil Scrum.",
+
         analista_sistemas_pl_prosegur_skills:
           "Java, JavaFX, JSF, PrimeFaces, EJB, JPA, EclipseLink, PL/SQL, Oracle, Scrum, Testes automatizados.",
 
@@ -481,6 +513,21 @@ const resources = {
           "Análise e desenvolvimento em Java / Java Web; Manutenção de sistemas em VB6 / VB.NET. Desenvolvimento Web ASP Clássico / ASP.NET. Manipulação de Banco de Dados SQLServer / Oracle. Programação com PL/SQL. Documentação e UML. Metodologia Ágil Lean Manufacturing.",
         analista_sistemas_pl_capgemini_skills:
           "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        analista_sistemas_jr_capgemini_desc:
+          "Análise e desenvolvimento em Java / Java Web; Manutenção de sistemas em VB6 / VB.NET. Desenvolvimento Web ASP Clássico / ASP.NET. Manipulação de Banco de Dados SQLServer / Oracle. Programação com PL/SQL. Documentação e UML. Metodologia Ágil Lean Manufacturing.",
+        analista_sistemas_jr_capgemini_skills:
+          "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        programador_sr_capgemini_desc:
+          "Segunda vez na história da Capgemini no Brasil em que houve uma progressão de Junior para Sênior pulando-se a posição de Pleno.",
+        programador_sr_capgemini_skills:
+          "Java, ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
+
+        programador_jr_capgemini_desc:
+          "Desenvolvimento e manutenção dos sistemas SIGEP e SIMP da ANP (Agência Nacional do Petróleo, Gás Natural e Biocombustíveis), com foco em aplicações web, processamento de documentos e suporte à conformidade regulatória.",
+        programador_jr_capgemini_skills:
+          "ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
 
         tecnico_programador_bb_desc:
           "Estágio supervisionado em desenvolvimento e suporte a aplicativos em Java / Java Web; Manutenção de sistemas integrados ao SISBB. Desenvolvimento e suporte a aplicações legadas VBA / VB6; Programação PL/SQL; Levantamento de requisitos.",

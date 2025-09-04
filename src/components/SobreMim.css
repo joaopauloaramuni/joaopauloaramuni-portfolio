@@ -1,5 +1,3 @@
-/* src/components/SobreMim.css */
-
 .sobre-container {
   padding: "0 1.5rem";
   display: flex;
@@ -16,9 +14,9 @@
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  border: 4px solid #4a5568;
+  border: 4px solid #00ff9d;
   object-fit: cover;
-  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .info-container {
@@ -85,7 +83,7 @@
   }
 
   .cargo-titulo {
-    font-size: 1rem; 
+    font-size: 1rem;
   }
 
   .biografia {

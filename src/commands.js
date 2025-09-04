@@ -17,6 +17,10 @@ export const commandList = {
     name: 'contato',
     aliases: ['contact'],
   },
+  curriculo: {
+    name: 'curriculo',
+    aliases: ['resume'],
+  },
   limpar: {
     name: 'limpar',
     aliases: ['clear'],

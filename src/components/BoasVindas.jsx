@@ -1,5 +1,3 @@
-// src/components/BoasVindas.jsx
-
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
@@ -34,7 +32,7 @@ const BoasVindas = () => {
       <div className="static-welcome">
         <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
         <hr className="divider" />
-        <p className="welcome-subtitle">{t('boasvindas.subtitulo')}</p>
+        <p className="welcome-subtitle">{t("boasvindas.subtitulo")}</p>
         <ul className="info-list">
           <li>
             <a

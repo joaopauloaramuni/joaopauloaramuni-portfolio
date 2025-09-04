@@ -1,4 +1,3 @@
-// src/components/Spotify.jsx
 import React, { useRef } from "react";
 import "./Spotify.css";
 

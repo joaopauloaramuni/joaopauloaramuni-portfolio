@@ -1,9 +1,7 @@
-/* src/components/Spotify.css */
-
 .spotify-container {
   padding: 2rem 1.5rem;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 0.5rem;
   color: #e2e8f0;
 }
