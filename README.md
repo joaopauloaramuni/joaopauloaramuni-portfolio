@@ -80,23 +80,20 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
 
 -----
 
-### 1. Criar uma conta no EmailJS
-
-1. Acesse: [https://www.emailjs.com/](https://www.emailjs.com/)
-2. Clique em **Sign Up** e crie sua conta gratuita.
+### 1. Criar conta no EmailJS
+1. Acesse: [https://www.emailjs.com/](https://www.emailjs.com/)  
+2. Clique em **Sign Up** e crie sua conta gratuita.  
 
 ### 2. Criar um serviço de e-mail
-
-1. Após o login, vá para **Dashboard** → **Email Services**.
-2. Clique em **Add new service**.
-3. Escolha seu provedor de e-mail (Gmail, Outlook, etc.) e conecte sua conta.
-4. Copie o **Service ID** gerado.
+1. Vá para **Dashboard** → **Email Services**.  
+2. Clique em **Add new service**.  
+3. Escolha seu provedor de e-mail (Gmail, Outlook, etc.) e conecte sua conta.  
+4. Copie o **Service ID** gerado.  
 
 ### 3. Criar um template de e-mail
-
-1. Vá para **Email Templates** → **Create New Template**.
-2. Configure os campos que deseja enviar, por exemplo: `user_name`, `user_email`, `message`.
-3. Copie o **Template ID**.
+1. Vá para **Email Templates** → **Create New Template**.  
+2. Configure os campos que deseja enviar, por exemplo: `user_name`, `user_email`, `message`.  
+3. Copie o **Template ID**. 
 
 #### Exemplo de template usado no projeto
 
@@ -166,21 +163,40 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
 ```
 </details>
 
-### 4. Pegar a Public Key
+### 4. Pegar IDs (Service ID, Template ID e Public Key) e configurar variáveis de ambiente
 
-1. Vá para **Integration** → **API Keys**.
-2. Copie a **Public Key**.
+1. Acesse os seguintes links para obter os IDs necessários:
+   - [Service ID](https://dashboard.emailjs.com/admin)
+   - [Template ID](https://dashboard.emailjs.com/admin/templates)
+   - [Public Key](https://dashboard.emailjs.com/admin/account)
+
+2. No Vercel, crie as seguintes variáveis de ambiente:
+   - `VITE_EMAILJS_SERVICE_ID`: seu Service ID
+   - `VITE_EMAILJS_TEMPLATE_ID`: seu Template ID
+   - `VITE_EMAILJS_PUBLIC_KEY`: sua Public Key
+
+   Para adicionar essas variáveis:
+   - Acesse a página de **Environment Variables** do seu projeto no Vercel (ex.: `https://vercel.com/<seu-usuario>/<seu-projeto>/settings/environment-variables`)
+   - Clique em "Add" para adicionar cada variável com o nome e valor correspondente.
+
+   Alternativamente, se estiver desenvolvendo localmente, crie um arquivo `.env.local` na raiz do seu projeto com o seguinte conteúdo:
+
+   ```bash
+   VITE_EMAILJS_SERVICE_ID=seu_service_id_aqui
+   VITE_EMAILJS_TEMPLATE_ID=seu_template_id_aqui
+   VITE_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
+   ```
 
 ### 5. Configurar `emailjsConfig.js`
 
-Crie ou edite o arquivo `emailjsConfig.js` no seu projeto React e substitua pelos IDs obtidos:
+Crie ou edite o arquivo `emailjsConfig.js` no seu projeto React e configure-o para usar as variáveis de ambiente definidas:
 
 ```javascript
-// https://dashboard.emailjs.com/admin
+// emailjsConfig.js
 const EMAILJS_CONFIG = {
-  SERVICE_ID: "seu_service_id_aqui", // substitua pelo seu Service ID
-  TEMPLATE_ID: "seu_template_id_aqui", // substitua pelo seu Template ID
-  PUBLIC_KEY: "seu_public_key_aqui", // substitua pela sua Public Key
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
 export default EMAILJS_CONFIG;
@@ -240,6 +256,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
