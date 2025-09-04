@@ -1,5 +1,3 @@
-// src/commands.js
-
 export const commandList = {
   sobre: {
     name: 'sobre',
