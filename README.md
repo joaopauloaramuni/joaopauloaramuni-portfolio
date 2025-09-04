@@ -63,7 +63,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
 
-## 🔗 Links Úteis e Documentação
+## 🔗 Documentação e links úteis
 
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
 * **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
@@ -71,4 +71,3 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 ## Licença
 
 Este projeto é distribuído sob a MIT License.
-
