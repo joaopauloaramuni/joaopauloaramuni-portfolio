@@ -29,6 +29,18 @@ function App() {
     getWelcomeMessage(),
   ]);
 
+  // Função reutilizável para sair de componentes e focar o terminal
+  const exitComponent = () => {
+    setTerminalLineData((lines) => {
+      const newLines = lines.slice(0, -1);
+      requestAnimationFrame(() => {
+        const input = document.querySelector(".terminal-hidden-input");
+        if (input) input.focus();
+      });
+      return newLines;
+    });
+  };
+
   // Detecta se o jogo está aberto
   const isGameOpen =
     terminalLineData.length > 0 &&
@@ -89,22 +101,10 @@ function App() {
           response = <WakaTime />;
           break;
         case "contato":
-          response = (
-            <Contato
-              onBackToTerminal={() => {
-                setTerminalLineData((lines) => lines.slice(0, -1));
-              }}
-            />
-          );
+          response = <Contato onExit={exitComponent} />;
           break;
         case "game":
-          response = (
-            <FlappyPlaneGame
-              onExit={() => {
-                setTerminalLineData((lines) => lines.slice(0, -1));
-              }}
-            />
-          );
+          response = <FlappyPlaneGame onExit={exitComponent} />;
           break;
         default:
           break;

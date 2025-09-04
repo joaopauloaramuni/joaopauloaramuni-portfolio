@@ -12,7 +12,7 @@ import emailjs from "emailjs-com";
 import "./Contato.css";
 import EMAILJS_CONFIG from "../emailjsConfig";
 
-const Contato = ({ onBackToTerminal }) => { // recebe a função via props
+const Contato = ({ onExit }) => {
   const { t } = useTranslation();
   const form = useRef();
   const [status, setStatus] = useState("");
@@ -79,11 +79,7 @@ const Contato = ({ onBackToTerminal }) => { // recebe a função via props
         </button>
 
         {/* Botão voltar ao terminal */}
-        <button
-          type="button"
-          className="botao-contato"
-          onClick={onBackToTerminal}
-        >
+        <button type="button" className="botao-contato" onClick={onExit}>
           {t("contato.voltar_terminal") || "Voltar ao Terminal"}
         </button>
 
