@@ -5,32 +5,29 @@
   height: 70vw;
   max-height: 480px;
   min-height: 260px;
-  border: 2px solid white;
+  border: 2px solid #00ff9d;
   overflow: hidden;
-  margin: 24px auto;
+  margin: 5px auto;
   background: #111;
   box-sizing: border-box;
   touch-action: manipulation;
 }
 
 .btn-voltar-terminal {
-  position: absolute;
-  top: 20px;
-  z-index: 200;
-  background: #222;
-  color: #fff;
+  width: 99vw;
+  max-width: 600px;
+  background: #00ff9d;
+  color: #0f172a;
   border: none;
-  border-radius: 6px;
-  padding: 6px 16px;
-  font-size: 16px;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .btn-voltar-terminal:hover {
-  opacity: 1;
-  transform: scale(1.05);
+  background: #00cc7a;
 }
 
 @media (max-width: 768px) {

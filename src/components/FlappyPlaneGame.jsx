@@ -178,12 +178,7 @@ const FlappyPlaneGame = ({ onExit }) => {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
-      {onExit && (
-        <button className="btn-voltar-terminal" onClick={onExit}>
-          Voltar ao terminal
-        </button>
-      )}
+    <div style={{ position: "relative", textAlign: "center" }}>
       <div id="game">
         <div id="score">Pontuação: 0</div>
         <div id="achievement"></div>
@@ -191,6 +186,16 @@ const FlappyPlaneGame = ({ onExit }) => {
           ✈️
         </div>
       </div>
+
+      {onExit && (
+        <button
+          className="btn-voltar-terminal"
+          onClick={onExit}
+          style={{ marginTop: "12px" }}
+        >
+          Voltar ao terminal
+        </button>
+      )}
     </div>
   );
 };

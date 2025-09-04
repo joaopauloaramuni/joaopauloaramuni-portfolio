@@ -23,19 +23,21 @@ import { useTranslation } from "react-i18next";
 
 function App() {
   const { t } = useTranslation();
-
-  // Função para gerar a mensagem de boas-vindas
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
 
-  // Estado inicial com mensagem de boas-vindas
   const [terminalLineData, setTerminalLineData] = useState([
     getWelcomeMessage(),
   ]);
 
-  // Estado para saber se o jogo está aberto (última linha é FlappyPlaneGame)
+  // Detecta se o jogo está aberto
   const isGameOpen =
     terminalLineData.length > 0 &&
     terminalLineData[terminalLineData.length - 1]?.type === FlappyPlaneGame;
+
+  // Detecta se o contato está aberto
+  const isContatoOpen =
+    terminalLineData.length > 0 &&
+    terminalLineData[terminalLineData.length - 1]?.type === Contato;
 
   function handleInput(input) {
     let newLines = [...terminalLineData];
@@ -71,9 +73,6 @@ function App() {
         case "experiencias":
           response = <Experiencias />;
           break;
-        case "contato":
-          response = <Contato />;
-          break;
         case "curriculo":
           response = <Curriculo />;
           break;
@@ -89,11 +88,19 @@ function App() {
         case "wakatime":
           response = <WakaTime />;
           break;
+        case "contato":
+          response = (
+            <Contato
+              onBackToTerminal={() => {
+                setTerminalLineData((lines) => lines.slice(0, -1));
+              }}
+            />
+          );
+          break;
         case "game":
           response = (
             <FlappyPlaneGame
               onExit={() => {
-                // Remove o último comando (o jogo) do terminal
                 setTerminalLineData((lines) => lines.slice(0, -1));
               }}
             />
@@ -110,11 +117,13 @@ function App() {
         </TerminalOutput>
       );
     }
+
     if (Array.isArray(response)) {
       newLines.push(...response);
     } else {
       newLines.push(response);
     }
+
     setTerminalLineData(newLines);
   }
 
@@ -127,7 +136,7 @@ function App() {
       <Terminal
         name={terminalTitle}
         colorMode={ColorMode.Dark}
-        onInput={isGameOpen ? undefined : handleInput}
+        onInput={isGameOpen || isContatoOpen ? undefined : handleInput}
         prompt={myPrompt}
         height="85vh"
       >

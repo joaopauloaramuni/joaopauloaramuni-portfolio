@@ -32,6 +32,13 @@ const resources = {
       contato: {
         titulo: "Get in Touch",
         subtitulo: "Feel free to connect or send me a message.",
+        nome: "Your name",
+        email: "Your email",
+        mensagem: "Your message...",
+        enviar: "Send",
+        voltar_terminal: "Back to terminal",
+        sucesso: "✅ Message sent successfully!",
+        erro: "❌ Failed to send, please try again.",
       },
       premios: {
         titulo: "Awards",
@@ -306,6 +313,13 @@ const resources = {
         titulo: "Entre em Contato",
         subtitulo:
           "Sinta-se à vontade para se conectar ou me enviar uma mensagem.",
+        nome: "Seu nome",
+        email: "Seu email",
+        mensagem: "Sua mensagem...",
+        enviar: "Enviar",
+        voltar_terminal: "Voltar ao terminal",
+        sucesso: "✅ Mensagem enviada com sucesso!",
+        erro: "❌ Erro ao enviar, tente novamente.",
       },
       premios: {
         titulo: "Prêmios",

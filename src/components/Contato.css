@@ -1,47 +1,115 @@
-.contato-container {
+.curriculo-container {
+  width: 90%;
+  max-width: 800px;
+  border: 2px solid #00ff9d;
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   color: #e2e8f0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+.curriculo-container.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contato-container {
+  color: #e2e8f0;
+  width: 90%;
+}
+
+/* Título e subtítulo */
 .contato-titulo {
   color: #00ff9d;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .contato-subtitulo {
   color: #a0aec0;
   margin-top: 0;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.contato-links {
+/* Formulário */
+.formulario-contato {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Espaçamento entre os links */
-}
-
-.contato-item {
-  display: inline-flex;
-  align-items: center;
   gap: 1rem;
-  color: #cbd5e0;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-  margin-bottom: 0.5rem;
+  width: 90%;
 }
 
-.contato-item:hover {
-  color: #00ff9d; /* Efeito hover com a cor tema */
+.input-contato,
+textarea {
+  background: #0f172a;
+  border: 2px solid #00ff9d;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #e2e8f0;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-contato:focus,
+textarea:focus {
+  border-color: #00ffaa;
+}
+
+.botao-contato {
+  background: #00ff9d;
+  color: #0f172a;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.botao-contato:hover {
+  background: #00cc7a;
+}
+
+.status-contato {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #00ff9d;
+}
+
+/* Ícones sociais */
+.contato-links {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .contato-icone {
-  font-size: 1.8rem; /* Tamanho dos ícones */
+  font-size: 2rem;
+  color: #00ff9d;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
+.contato-icone:hover {
+  color: #00ffaa;
+  transform: scale(1.1);
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
-  .contato-container {
-    gap: 1.2rem;
-    padding: 0 4px;
+  .curriculo-container {
+    padding: 1.5rem;
   }
 }
