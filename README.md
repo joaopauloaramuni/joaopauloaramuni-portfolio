@@ -6,12 +6,26 @@ Este é o repositório do meu portfólio pessoal, um projeto criado com React pa
 
 A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
 
-➡️ **https://aramuni.dev/**
+➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)  
+➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **React:** Biblioteca principal para a construção da interface.
-- **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
+* **React:** Biblioteca principal para a construção da interface.
+* **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
+
+## 📦 Dependências
+
+O projeto utiliza várias dependências importantes para funcionalidades específicas:
+
+* **i18next & react-i18next:** Para suporte a internacionalização e múltiplos idiomas.
+* **react-icons:** Para adicionar ícones facilmente na interface.
+* **react-router-dom:** Para navegação entre páginas dentro do React.
+* **react-terminal-ui:** Um componente de terminal React com suporte a temas claros e escuros, baseado em termynal.js.
+* **react-type-animation:** Para animações de digitação de texto.
+* **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
+
+Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
 
 ## ⚙️ Como Rodar o Projeto Localmente
 
@@ -23,28 +37,37 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 ### Passo a Passo
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio.git
-    ```
+1. **Clone o repositório:**
 
-2.  **Acesse o diretório do projeto:**
-    ```bash
-    cd nome-do-diretorio
-    ```
+   ```bash
+   git clone https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio.git
+   ```
 
-3.  **Instale as dependências:**
-    Use o `npm` para instalar todos os pacotes necessários para o projeto.
-    ```bash
-    npm install
-    ```
+2. **Acesse o diretório do projeto:**
 
-4.  **Execute a aplicação:**
-    Este comando iniciará o servidor de desenvolvimento.
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   cd joaopauloaramuni-portfolio
+   ```
 
-5.  Após executar o comando, o terminal mostrará um endereço local (geralmente `http://localhost:5173`). Abra este link no seu navegador para ver o projeto em execução.
+3. **Instale as dependências:**
 
----
+   ```bash
+   npm install
+   ```
+
+4. **Execute a aplicação:**
+
+   ```bash
+   npm run dev
+   ```
+
+5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
+
+## 🔗 Links Úteis e Documentação
+
+* **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
+* **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
+
+## Licença
+
+Este projeto é distribuído sob a MIT License.
