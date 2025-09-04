@@ -19,6 +19,16 @@ O portfólio simula um 🖥️ **terminal** web, permitindo que visitantes explo
 
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
+## 🏫 História do projeto
+
+Este projeto surgiu durante a minha disciplina de **Laboratório de Desenvolvimento de Software**, no curso de Engenharia de Software da PUC Minas. A proposta era que cada aluno desenvolvesse seu próprio portfólio profissional, aplicando conceitos de **engenharia de software** aprendidos na disciplina de **Projeto de Software**, da qual também leciono.
+
+O objetivo foi integrar teoria e prática, incentivando a experimentação e o aprendizado “mão na massa”, enquanto os alunos criavam uma apresentação interativa de suas habilidades e projetos.
+
+🏆 O grupo com o melhor portfólio ganhou como premiação 1 ano de domínio gratuito (.dev, .io, etc.) para cada integrante.
+
+O exercício completo pode ser encontrado [aqui](https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/tree/main/LABORATORIOS).
+
 ## 🚀 Demonstração ao vivo
 
 A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
@@ -88,3 +98,4 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 ## 📄 Licença
 
 Este projeto é distribuído sob a MIT License.
+
