@@ -17,6 +17,15 @@ const Contato = ({ onExit }) => {
   const form = useRef();
   const nomeInputRef = useRef(null);
   const [status, setStatus] = useState("");
+  const statusRef = useRef(null);
+
+  useEffect(() => {
+    // Rola a tela automaticamente até a mensagem de status
+    // sempre que ela for exibida (sucesso ou erro no envio do formulário)
+    if (status && statusRef.current) {
+      statusRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [status]);
 
   useEffect(() => {
     // Foca no campo nome quando o componente montar
@@ -92,7 +101,11 @@ const Contato = ({ onExit }) => {
           {t("contato.voltar_terminal")}
         </button>
 
-        {status && <p className="status-contato">{status}</p>}
+        {status && (
+          <p ref={statusRef} className="status-contato">
+            {status}
+          </p>
+        )}
       </form>
 
       {/* Ícones */}
