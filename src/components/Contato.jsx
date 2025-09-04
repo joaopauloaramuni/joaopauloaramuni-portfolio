@@ -89,7 +89,7 @@ const Contato = ({ onExit }) => {
 
         {/* Botão voltar ao terminal */}
         <button type="button" className="botao-contato" onClick={onExit}>
-          {t("contato.voltar_terminal") || "Voltar ao Terminal"}
+          {t("contato.voltar_terminal")}
         </button>
 
         {status && <p className="status-contato">{status}</p>}
