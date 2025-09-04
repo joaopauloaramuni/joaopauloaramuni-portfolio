@@ -33,8 +33,8 @@ O exercício completo pode ser encontrado [aqui](https://github.com/joaopauloara
 
 A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
 
-➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)**  
-➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
+* ➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)**  
+* ➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -98,4 +98,5 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 ## 📄 Licença
 
 Este projeto é distribuído sob a MIT License.
+
 
