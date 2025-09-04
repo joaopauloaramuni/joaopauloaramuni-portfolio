@@ -1,6 +1,23 @@
-# Portfólio Pessoal em React
+# Portfólio Pessoal em React e Vite
 
-Este é o repositório do meu portfólio pessoal, um projeto criado com React para exibir meus projetos, habilidades e experiência.
+Este é o repositório do meu portfólio pessoal, um projeto criado com React e Vite para exibir meus projetos, habilidades e experiências de forma interativa e moderna.
+
+O portfólio simula um **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
+
+* **sobre:** Mostra uma breve descrição sobre mim.
+* **ajuda:** Exibe a lista de comandos disponíveis.
+* **experiencias:** Mostra minha trajetória profissional e experiências.
+* **contato:** Exibe minhas informações de contato.
+* **limpar:** Limpa o histórico do terminal.
+* **recomendacoes:** Exibe minhas recomendações do LinkedIn.
+* **premios:** Mostra prêmios e reconhecimentos.
+* **projetos:** Lista meus projetos desenvolvidos.
+* **spotify:** Mostra o que estou ouvindo e últimas reproduções.
+* **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
+* **curriculo:** Exibe meu currículo com visualização em PDF.
+* **game:** Permite jogar o Flappy Plane diretamente no terminal web.
+
+O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
 ## 🚀 Demonstração ao vivo
 
@@ -71,4 +88,5 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 ## Licença
 
 Este projeto é distribuído sob a MIT License.
+
 
