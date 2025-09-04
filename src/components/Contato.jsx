@@ -54,14 +54,14 @@ const Contato = ({ onBackToTerminal }) => { // recebe a função via props
       <form ref={form} onSubmit={sendEmail} className="formulario-contato">
         <input
           type="text"
-          name="user_name"
+          name="name"
           placeholder={t("contato.nome")}
           required
           className="input-contato"
         />
         <input
           type="email"
-          name="user_email"
+          name="email"
           placeholder={t("contato.email")}
           required
           className="input-contato"
