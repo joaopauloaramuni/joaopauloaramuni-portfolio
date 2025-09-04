@@ -43,8 +43,11 @@ O exercício completo pode ser encontrado [aqui](https://github.com/joaopauloara
 
 A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
 
-* ➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)**  
-* ➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
+- ➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)**
+- ➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
+  - 🔹 O domínio `.dev` é uma extensão popular entre desenvolvedores e profissionais de tecnologia.  
+    Em setembro de 2025, o custo de um domínio `.dev` adquirido através da Vercel é de **US$ 13** por ano.  
+    Você pode adquirir o seu domínio diretamente no [site da Vercel](https://vercel.com/domains).
 
 -----
 
@@ -120,4 +123,5 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
