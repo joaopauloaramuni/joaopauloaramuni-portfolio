@@ -1,14 +1,14 @@
 -----
 
-# Repo Portfólio Pessoal
+# Repo Portfólio Terminal 🖥️
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub directory file count](https://img.shields.io/github/directory-file-count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub stars](https://img.shields.io/github/stars/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=github) ![GitHub forks](https://img.shields.io/github/forks/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=git) ![GitHub language count](https://img.shields.io/github/languages/count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=python) ![GitHub license](https://img.shields.io/github/license/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=opensourceinitiative) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=gitkraken) ![GitHub last commit](https://img.shields.io/github/last-commit/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=clockify) ![Vercel](https://vercelbadge.vercel.app/api/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge) ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2Fjoaopauloaramuni%2Fjoaopauloaramuni-portfolio&leftColor=555555&rightColor=007ec6&type=total&label=RepoViews)  
 
 -----
 
-Este é o repositório do meu portfólio pessoal, um projeto criado com React e Vite para exibir meus projetos, habilidades e experiências de forma interativa e moderna.
+Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com React e Vite para apresentar meus projetos, habilidades e experiências de forma interativa e moderna. Sinta-se à vontade para explorá-lo e utilizá-lo como desejar.
 
-O portfólio simula um 🖥️ **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
+🖥️ O portfólio simula um **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
 
 * 👤 **sobre:** Mostra uma breve descrição sobre mim.
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
@@ -123,6 +123,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
