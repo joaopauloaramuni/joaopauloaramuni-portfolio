@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React, { useState } from "react";
 import Terminal, {
   ColorMode,

@@ -8,6 +8,14 @@
   display: flex;
   gap: 0.5rem;
   color: #e2e8f0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.curriculo-container.loaded {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
