@@ -1,4 +1,10 @@
-# Portfólio Pessoal em React e Vite
+-----
+
+# Repo Portfólio Pessoal
+
+![GitHub repo size](https://img.shields.io/github/repo-size/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub directory file count](https://img.shields.io/github/directory-file-count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub stars](https://img.shields.io/github/stars/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=github) ![GitHub forks](https://img.shields.io/github/forks/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=git) ![GitHub language count](https://img.shields.io/github/languages/count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=python) ![GitHub license](https://img.shields.io/github/license/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=opensourceinitiative) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=gitkraken) ![GitHub last commit](https://img.shields.io/github/last-commit/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=clockify) ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2Fjoaopauloaramuni%2Fjoaopauloaramuni-portfolio&leftColor=555555&rightColor=007ec6&type=total&label=RepoViews)  
+
+-----
 
 Este é o repositório do meu portfólio pessoal, um projeto criado com React e Vite para exibir meus projetos, habilidades e experiências de forma interativa e moderna.
 
@@ -19,6 +25,8 @@ O portfólio simula um 🖥️ **terminal** web, permitindo que visitantes explo
 
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
+-----
+
 ## 🏫 História do projeto
 
 Este projeto surgiu durante a minha disciplina de **Laboratório de Desenvolvimento de Software**, no curso de Engenharia de Software da PUC Minas. A proposta era que cada aluno desenvolvesse seu próprio portfólio profissional, aplicando conceitos de **engenharia de software** aprendidos na disciplina de **Projeto de Software**, da qual também leciono.
@@ -29,6 +37,8 @@ O objetivo foi integrar teoria e prática, incentivando a experimentação e o a
 
 O exercício completo pode ser encontrado [aqui](https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software/tree/main/LABORATORIOS).
 
+-----
+
 ## 🚀 Demonstração ao vivo
 
 A versão online deste projeto está hospedada e pode ser acessada através do link abaixo:
@@ -36,10 +46,14 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 * ➡️ **[https://joaopauloaramuni-portfolio.vercel.app/](https://joaopauloaramuni-portfolio.vercel.app/)**  
 * ➡️ **[https://aramuni.dev/](https://aramuni.dev/)**
 
+-----
+
 ## 🛠️ Tecnologias Utilizadas
 
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
+
+-----
 
 ## 📦 Dependências
 
@@ -53,6 +67,8 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 * **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
 
 Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
+
+-----
 
 ## ⚙️ Como rodar o projeto localmente
 
@@ -90,13 +106,17 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
 
+-----
+
 ## 🔗 Documentação e links úteis
 
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
 * **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
 
+-----
+
 ## 📄 Licença
 
 Este projeto é distribuído sob a MIT License.
 
-
+-----
