@@ -15,8 +15,14 @@ import EMAILJS_CONFIG from "../emailjsConfig";
 const Contato = ({ onExit }) => {
   const { t } = useTranslation();
   const form = useRef();
-  const nomeInputRef = useRef(null);
   const [status, setStatus] = useState("");
+  const nomeInputRef = useRef(null);
+  
+  useEffect(() => {
+    if (status && form.current) {
+      form.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [status]);
 
   useEffect(() => {
     // Foca no campo nome quando o componente montar
