@@ -15,14 +15,8 @@ import EMAILJS_CONFIG from "../emailjsConfig";
 const Contato = ({ onExit }) => {
   const { t } = useTranslation();
   const form = useRef();
-  const [status, setStatus] = useState("");
   const nomeInputRef = useRef(null);
-  
-  useEffect(() => {
-    if (status && form.current) {
-      form.current.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  }, [status]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     // Foca no campo nome quando o componente montar
@@ -95,7 +89,7 @@ const Contato = ({ onExit }) => {
 
         {/* Botão voltar ao terminal */}
         <button type="button" className="botao-contato" onClick={onExit}>
-          {t("contato.voltar_terminal")}
+          {t("contato.voltar_terminal") || "Voltar ao Terminal"}
         </button>
 
         {status && <p className="status-contato">{status}</p>}
