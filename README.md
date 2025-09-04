@@ -13,7 +13,7 @@ Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com Re
 * 👤 **sobre:** Mostra uma breve descrição sobre mim.
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
-* 📧 **contato:** Exibe minhas informações de contato.
+* 📧 **contato:** Exibe minhas informações de contato e envia email.
 * 🧹 **limpar:** Limpa o histórico do terminal.
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
@@ -68,8 +68,125 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 * **react-terminal-ui:** Um componente de terminal React com suporte a temas claros e escuros, baseado em termynal.js.
 * **react-type-animation:** Para animações de digitação de texto.
 * **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
+* **emailjs-com**: Para enviar e-mails diretamente do frontend sem precisar de um backend próprio.
 
 Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
+
+-----
+
+## 📬 Guia de configuração do EmailJS
+
+Este guia descreve o passo a passo para configurar o envio de e-mails no seu projeto React usando EmailJS. Com o EmailJS, você pode enviar até 500 e-mails por dia gratuitamente.
+
+-----
+
+### 1. Criar uma conta no EmailJS
+
+1. Acesse: [https://www.emailjs.com/](https://www.emailjs.com/)
+2. Clique em **Sign Up** e crie sua conta gratuita.
+
+### 2. Criar um serviço de e-mail
+
+1. Após o login, vá para **Dashboard** → **Email Services**.
+2. Clique em **Add new service**.
+3. Escolha seu provedor de e-mail (Gmail, Outlook, etc.) e conecte sua conta.
+4. Copie o **Service ID** gerado.
+
+### 3. Criar um template de e-mail
+
+1. Vá para **Email Templates** → **Create New Template**.
+2. Configure os campos que deseja enviar, por exemplo: `user_name`, `user_email`, `message`.
+3. Copie o **Template ID**.
+
+#### Exemplo de template usado no projeto
+
+<details>
+  <summary>Clique para exibir</summary>
+  
+```html
+<div style="
+  font-family: system-ui, sans-serif, Arial;
+  font-size: 14px;
+  color: #e2e8f0;
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  border: 2px solid #00ff9d;
+  border-radius: 10px;
+  background-color: #0f172a;
+  line-height: 1.6;
+">
+  <!-- Cabeçalho -->
+  <div style="text-align: center; margin-bottom: 1.5rem;">
+    <h2 style="color: #00ff9d; margin-bottom: 0.5rem;">Obrigado por entrar em contato!</h2>
+    <p style="color: #a0aec0; margin: 0;">
+      Recebi sua mensagem e responderei em até <strong>3 dias úteis</strong>.
+    </p>
+  </div>
+
+  <!-- Bloco da mensagem enviada -->
+  <div style="
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed #00ff9d;
+    border-radius: 8px;
+    background-color: #1e293b;
+  ">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+      <tr>
+        <td style="vertical-align: top; width: 50px;">
+          <div style="
+            padding: 10px;
+            background-color: #00ff9d;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            color: #0f172a;
+          " role="img">👤</div>
+        </td>
+        <td style="vertical-align: top; padding-left: 10px;">
+          <div style="color: #e2e8f0; font-size: 16px; font-weight: bold;">{{name}}</div>
+          <div style="color: #a0aec0; font-size: 13px;">{{time}}</div>
+          <p style="font-size: 15px; color: #e2e8f0;">{{message}}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Rodapé com links -->
+  <div style="margin-top: 20px; text-align: center; font-size: 14px; color: #a0aec0;">
+    <p>
+      Enquanto isso, fique à vontade para visitar meu
+      <a href="https://www.linkedin.com/in/joaopauloaramuni/" style="color: #00ff9d; text-decoration: none;">LinkedIn</a>
+      ou
+      <a href="https://github.com/joaopauloaramuni" style="color: #00ff9d; text-decoration: none;">GitHub</a>.
+    </p>
+  </div>
+</div>
+```
+</details>
+
+### 4. Pegar a Public Key
+
+1. Vá para **Integration** → **API Keys**.
+2. Copie a **Public Key**.
+
+### 5. Configurar `emailjsConfig.js`
+
+Crie ou edite o arquivo `emailjsConfig.js` no seu projeto React e substitua pelos IDs obtidos:
+
+```javascript
+// https://dashboard.emailjs.com/admin
+const EMAILJS_CONFIG = {
+  SERVICE_ID: "seu_service_id_aqui", // substitua pelo seu Service ID
+  TEMPLATE_ID: "seu_template_id_aqui", // substitua pelo seu Template ID
+  PUBLIC_KEY: "seu_public_key_aqui", // substitua pela sua Public Key
+};
+
+export default EMAILJS_CONFIG;
+```
+
+Agora o projeto está pronto para enviar e-mails diretamente do frontend.
 
 -----
 
@@ -123,6 +240,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
