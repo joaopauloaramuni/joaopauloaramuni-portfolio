@@ -32,7 +32,7 @@ export const projectsData = [
     titleId: "portfolio_proj_title",
     descriptionId: "portfolio_proj_desc",
     gif: "/terminal.png",
-    repoLink: "https://github.com/joaopauloaramuni/portfolio-terminal",
+    repoLink: "https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio",
     technologies: ["React", "Vite", "Node"],
   },
   {
