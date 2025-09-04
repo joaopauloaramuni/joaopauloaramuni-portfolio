@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   FaLinkedin,
   FaInstagram,
@@ -15,7 +15,15 @@ import EMAILJS_CONFIG from "../emailjsConfig";
 const Contato = ({ onExit }) => {
   const { t } = useTranslation();
   const form = useRef();
+  const nomeInputRef = useRef(null);
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    // Foca no campo nome quando o componente montar
+    if (nomeInputRef.current) {
+      nomeInputRef.current.focus();
+    }
+  }, []);
 
   const seuLinkedIn = "https://www.linkedin.com/in/joaopauloaramuni/";
   const seuGitHub = "https://github.com/joaopauloaramuni";
@@ -53,6 +61,7 @@ const Contato = ({ onExit }) => {
       {/* Formulário */}
       <form ref={form} onSubmit={sendEmail} className="formulario-contato">
         <input
+          ref={nomeInputRef}
           type="text"
           name="name"
           placeholder={t("contato.nome")}
