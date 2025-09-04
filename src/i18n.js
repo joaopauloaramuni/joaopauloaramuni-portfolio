@@ -72,7 +72,7 @@ const resources = {
         experiencias: {
           desc: "Shows my professional trajectory and experiences.",
         },
-        contato: { desc: "Displays my contact information." },
+        contato: { desc: "Displays my contact information and sends an email." },
         limpar: { desc: "Clears the terminal history." },
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
         premios: { desc: "Shows awards and recognitions." },
@@ -353,7 +353,7 @@ const resources = {
         experiencias: {
           desc: "Mostra minha trajetória profissional e experiências.",
         },
-        contato: { desc: "Exibe minhas informações de contato." },
+        contato: { desc: "Exibe minhas informações de contato e envia email." },
         limpar: { desc: "Limpa o histórico do terminal." },
         recomendacoes: { desc: "Exibe minhas recomendações do LinkedIn." },
         premios: { desc: "Exibe prêmios e reconhecimentos." },
