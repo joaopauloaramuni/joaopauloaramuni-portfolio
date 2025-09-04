@@ -54,7 +54,7 @@ const Contato = ({ onExit }) => {
   };
 
   return (
-    <div className="curriculo-container loaded contato-container">
+    <div className="box-container loaded contato-container">
       <h3 className="contato-titulo">{t("contato.titulo")}</h3>
       <p className="contato-subtitulo">{t("contato.subtitulo")}</p>
 
