@@ -175,6 +175,8 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
    - `VITE_EMAILJS_TEMPLATE_ID`: seu Template ID
    - `VITE_EMAILJS_PUBLIC_KEY`: sua Public Key
 
+   Obs: As variáveis de ambiente em projetos Vite precisam começar com **VITE_** para que o Vite as reconheça e as inclua no bundle do frontend; variáveis sem esse prefixo não ficam disponíveis no código do cliente.
+
    Para adicionar essas variáveis:
    - Acesse a página de **Environment Variables** do seu projeto no Vercel (ex.: `https://vercel.com/<seu-usuario>/<seu-projeto>/settings/environment-variables`)
    - Clique em "Add" para adicionar cada variável com o nome e valor correspondente.
@@ -256,6 +258,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
