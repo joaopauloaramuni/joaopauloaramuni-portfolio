@@ -27,7 +27,7 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 
 Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
 
-## ⚙️ Como Rodar o Projeto Localmente
+## ⚙️ Como rodar o projeto localmente
 
 Para executar este projeto no seu ambiente de desenvolvimento, siga os passos abaixo.
 
@@ -35,7 +35,7 @@ Para executar este projeto no seu ambiente de desenvolvimento, siga os passos ab
 
 Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** instalado na sua máquina. Ele é essencial para gerenciar as dependências do projeto.
 
-### Passo a Passo
+### Passo a passo
 
 1. **Clone o repositório:**
 
@@ -71,3 +71,4 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 ## Licença
 
 Este projeto é distribuído sob a MIT License.
+
