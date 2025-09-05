@@ -137,7 +137,7 @@ function App() {
   const terminalTitle = "Portfolio terminal";
 
   return (
-    <div className="container">
+    <div className="terminal-container">
       <LanguageSwitcher onLanguageChange={focusTerminalInput} />
       <Terminal
         name={terminalTitle}
