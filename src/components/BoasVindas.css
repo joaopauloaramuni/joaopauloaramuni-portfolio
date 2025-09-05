@@ -32,14 +32,12 @@
 .info-list {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
 }
 
 .info-list li {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 0.75rem;
   color: #e2e8f0;
 }
 
