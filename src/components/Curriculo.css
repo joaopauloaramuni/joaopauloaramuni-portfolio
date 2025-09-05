@@ -1,6 +1,7 @@
 .curriculo-container {
   width: 75%;
   height: 600px;
+  min-height: 600px;
   border: 2px solid #00ff9d;
   border-radius: 10px;
   padding: 2rem 1.5rem;
