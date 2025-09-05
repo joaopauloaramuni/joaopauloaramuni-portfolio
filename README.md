@@ -74,6 +74,15 @@ Essas dependências permitem funcionalidades avançadas como visualização de P
 
 -----
 
+## 🔤 Fonte utilizada: Fira Code
+
+O portfólio utiliza a fonte **[Fira Code](https://github.com/tonsky/FiraCode)**, uma fonte monoespaçada popular entre desenvolvedores.  
+Fira Code inclui **ligaduras de programação**, tornando a leitura de símbolos como `=>`, `===` ou `!=` mais agradável e estilizada, especialmente em ambientes de terminal ou editores de código.
+
+Essa escolha de fonte melhora a estética do terminal web do portfólio e proporciona uma experiência mais fluida e moderna ao explorar comandos e visualizar códigos.
+
+-----
+
 ## 📬 Guia de configuração do EmailJS
 
 Este guia descreve o passo a passo para configurar o envio de e-mails no seu projeto React usando EmailJS. Com o EmailJS, você pode enviar até 500 e-mails por dia gratuitamente.
@@ -258,6 +267,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
