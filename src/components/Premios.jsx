@@ -1,4 +1,5 @@
 import React from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import { awardsData } from "../data/awardsData";
 import { useTranslation } from "react-i18next";
 import "./Premios.css";
@@ -53,12 +54,11 @@ export default function Premios() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span role="img" aria-label="link">
-                  🔗
-                </span>{" "}
+                <FaExternalLinkAlt className="premio-icone" />
                 {t("premios.link")}
               </a>
             )}
+            <div className="premio-separador" />
           </div>
         </div>
       ))}

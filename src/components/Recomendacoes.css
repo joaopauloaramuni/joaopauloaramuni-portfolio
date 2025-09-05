@@ -37,8 +37,8 @@
 }
 
 .recomendacao-avatar-image {
-  width: 180px;
-  height: 180px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 2px solid #00ff9d;
   object-fit: cover;
