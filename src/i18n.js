@@ -128,7 +128,7 @@ const resources = {
 
         aes_proj4_title: "Map of Institutions - Experimental Software Agency",
         aes_proj4_desc:
-          "The Map of Institutions project, developed by the Experimental Software Agency of PUC Minas in partnership with BH-Tec, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
+          "The Map of Institutions project, developed by the Experimental Software Agency of PUC Minas in partnership with Sustainability Intelligence Center (CIS) of BH-TEC, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
 
         aes_proj5_title: "Help Out App - Experimental Software Agency",
         aes_proj5_desc:
@@ -719,7 +719,7 @@ const resources = {
         aes_proj4_title:
           "Mapa de Instituições - Agência Experimental de Software",
         aes_proj4_desc:
-          "O projeto Mapa de Instituições, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o BH-Tec, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
+          "O projeto Mapa de Instituições, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o Centro de Inteligência em Sustentabilidade (CIS) do BH-TEC, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
 
         aes_proj5_title: "Ajuda-aí App - Agência Experimental de Software",
         aes_proj5_desc:
