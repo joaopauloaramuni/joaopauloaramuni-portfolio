@@ -3,21 +3,21 @@ import { useTranslation } from "react-i18next";
 import "./FlappyPlaneGame.css";
 
 const achievementsList = [
-  "🎓 Doutor em Sistemas de Informação e Gestão do Conhecimento - Universidade FUMEC (2017-2020)",
-  "🎓 Mestre em Sistemas de Informação e Gestão do Conhecimento - Universidade FUMEC (2014-2015)",
-  "🎓 Graduação em Ciência da Computação - Universidade FUMEC (2010-2013)",
-  "👨‍🏫 Professor de Engenharia de Software - PUC Minas (Fundamentos de Projeto, Análise de Algoritmos, Laboratórios e TCC II)",
-  "💻 CTO da Agência Experimental de Software - ICEI, PUC Minas (gestão de 6 times, ~30 pessoas)",
-  "👨‍💻 Tech Lead & Back-end Lead - Trybe (2020-2023)",
-  "👨‍🏫 Professor de Arquitetura de Software - XP Educação",
-  "👨‍🏫 Professor de Linguagens de Programação, Arquitetura Web e Banco de Dados - Centro Universitário Newton Paiva",
-  "👨‍🏫 Professor de POO, Compiladores e FTC - Universidade FUMEC (2016-2020)",
-  "🏆 Professor destaque do curso de Sistemas de Informação - Newton Paiva (2023)",
-  "🏆 Patrono da turma de Ciência da Computação 1SEM/2020 - FUMEC",
-  "🏅 Mejor Trabajo en Equipo - Prosegur (2015)",
-  "💻 Experiência em AWS, Python, Java, C, C++, Spring Boot, DevOps, Cloud Architecture e Observabilidade",
-  "💼 Consultoria em arquitetura de sistemas, monitoramento e AI para recrutamento técnico",
-  "🔧 Desenvolvimento e manutenção de software para Capgemini, Prosegur, Banco do Brasil, HotMilhas, 123milhas, PMMG e outras instituições",
+  "jogo.achievements.phd",
+  "jogo.achievements.masters",
+  "jogo.achievements.bachelor",
+  "jogo.achievements.professorSoftware",
+  "jogo.achievements.cto",
+  "jogo.achievements.techLead",
+  "jogo.achievements.professorSoftwareXP",
+  "jogo.achievements.professorNewtonPaiva",
+  "jogo.achievements.professorPOOFUMEC",
+  "jogo.achievements.professorDestaqueNewtonPaiva",
+  "jogo.achievements.patron",
+  "jogo.achievements.teamAwardProsegur",
+  "jogo.achievements.techSkills",
+  "jogo.achievements.consultancy",
+  "jogo.achievements.devExperience"
 ];
 
 function shuffleArray(array) {
@@ -49,7 +49,7 @@ const FlappyPlaneGame = ({ onExit }) => {
     const shuffledAchievements = shuffleArray([...achievementsList]);
     const achievements = {};
     for (let i = 0; i < shuffledAchievements.length; i++) {
-      achievements[(i + 1) * 2] = shuffledAchievements[i];
+      achievements[(i + 1) * 2] = t(shuffledAchievements[i]);
     }
 
     function createCloud() {

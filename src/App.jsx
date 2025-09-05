@@ -40,6 +40,13 @@ function App() {
     });
   };
 
+  const focusTerminalInput = () => {
+    requestAnimationFrame(() => {
+      const input = document.querySelector(".terminal-hidden-input");
+      if (input) input.focus();
+    });
+  };
+
   // Detecta se o jogo está aberto
   const isGameOpen =
     terminalLineData.length > 0 &&
@@ -131,7 +138,7 @@ function App() {
 
   return (
     <div className="container">
-      <LanguageSwitcher />
+      <LanguageSwitcher onLanguageChange={focusTerminalInput} />
       <Terminal
         name={terminalTitle}
         colorMode={ColorMode.Dark}

@@ -44,6 +44,33 @@ const resources = {
         voltar_terminal: "Back to terminal",
         pontuacao: "Score: ",
         gameover: "GAME OVER! Press R to restart",
+        achievements: {
+          phd: "🎓 PhD in Information Systems and Knowledge Management - FUMEC University (2017-2020)",
+          masters:
+            "🎓 Master's in Information Systems and Knowledge Management - FUMEC University (2014-2015)",
+          bachelor:
+            "🎓 Bachelor's in Computer Science - FUMEC University (2010-2013)",
+          professorSoftware:
+            "👨‍🏫 Software Engineering Professor - PUC Minas (Project Fundamentals, Algorithm Analysis, Labs, and Thesis II)",
+          cto: "💻 CTO of the Experimental Software Agency - ICEI, PUC Minas (managing 6 teams, ~30 people)",
+          techLead: "👨‍💻 Tech Lead & Back-end Lead - Trybe (2020-2023)",
+          professorSoftwareXP:
+            "👨‍🏫 Software Architecture Professor - XP Educação",
+          professorNewtonPaiva:
+            "👨‍🏫 Professor of Programming Languages, Web Architecture, and Databases - Newton Paiva University Center",
+          professorPOOFUMEC:
+            "👨‍🏫 Professor of OOP, Compilers, and FTC - FUMEC University (2016-2020)",
+          professorDestaqueNewtonPaiva:
+            "🏆 Outstanding Professor of Information Systems - Newton Paiva (2023)",
+          patron: "🏆 Patron of the Computer Science Class 1SEM/2020 - FUMEC",
+          teamAwardProsegur: "🏅 Best Teamwork Award - Prosegur (2015)",
+          techSkills:
+            "💻 Experience in AWS, Python, Java, C, C++, Spring Boot, DevOps, Cloud Architecture, and Observability",
+          consultancy:
+            "💼 Consulting in system architecture, monitoring, and AI for technical recruitment",
+          devExperience:
+            "🔧 Software development and maintenance for Capgemini, Prosegur, Banco do Brasil, HotMilhas, 123milhas, PMMG, and other institutions",
+        },
       },
       premios: {
         titulo: "Awards",
@@ -638,6 +665,34 @@ const resources = {
         voltar_terminal: "Voltar ao terminal",
         pontuacao: "Pontuação: ",
         gameover: "GAME OVER! Pressione R para reiniciar",
+        achievements: {
+          phd: "🎓 Doutor em Sistemas de Informação e Gestão do Conhecimento - Universidade FUMEC (2017-2020)",
+          masters:
+            "🎓 Mestre em Sistemas de Informação e Gestão do Conhecimento - Universidade FUMEC (2014-2015)",
+          bachelor:
+            "🎓 Graduação em Ciência da Computação - Universidade FUMEC (2010-2013)",
+          professorSoftware:
+            "👨‍🏫 Professor de Engenharia de Software - PUC Minas (Fundamentos de Projeto, Análise de Algoritmos, Laboratórios e TCC II)",
+          cto: "💻 CTO da Agência Experimental de Software - ICEI, PUC Minas (gestão de 6 times, ~30 pessoas)",
+          techLead: "👨‍💻 Tech Lead & Back-end Lead - Trybe (2020-2023)",
+          professorSoftwareXP:
+            "👨‍🏫 Professor de Arquitetura de Software - XP Educação",
+          professorNewtonPaiva:
+            "👨‍🏫 Professor de Linguagens de Programação, Arquitetura Web e Banco de Dados - Centro Universitário Newton Paiva",
+          professorPOOFUMEC:
+            "👨‍🏫 Professor de POO, Compiladores e FTC - Universidade FUMEC (2016-2020)",
+          professorDestaqueNewtonPaiva:
+            "🏆 Professor destaque do curso de Sistemas de Informação - Newton Paiva (2023)",
+          patron:
+            "🏆 Patrono da turma de Ciência da Computação 1SEM/2020 - FUMEC",
+          teamAwardProsegur: "🏅 Mejor Trabajo en Equipo - Prosegur (2015)",
+          techSkills:
+            "💻 Experiência em AWS, Python, Java, C, C++, Spring Boot, DevOps, Cloud Architecture e Observabilidade",
+          consultancy:
+            "💼 Consultoria em arquitetura de sistemas, monitoramento e AI para recrutamento técnico",
+          devExperience:
+            "🔧 Desenvolvimento e manutenção de software para Capgemini, Prosegur, Banco do Brasil, HotMilhas, 123milhas, PMMG e outras instituições",
+        },
       },
       premios: {
         titulo: "Prêmios",

@@ -3,11 +3,14 @@ import { useTranslation } from "react-i18next";
 import { FaGlobeAmericas } from "react-icons/fa";
 import "./LanguageSwitcher.css";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ onLanguageChange }) => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+     if (onLanguageChange) {
+      onLanguageChange();
+    }
   };
 
   const isPtActive = i18n.language.startsWith("pt");
