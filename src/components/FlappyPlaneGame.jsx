@@ -91,7 +91,7 @@ const FlappyPlaneGame = ({ onExit }) => {
           clouds.splice(i, 1);
           if (!gameOver) {
             score++;
-            scoreEl.innerText = "Pontuação: " + score;
+            scoreEl.innerText = t("jogo.pontuacao") + score;
             if (achievements[score]) {
               achEl.innerText = achievements[score];
               achEl.classList.add("show");
@@ -105,7 +105,7 @@ const FlappyPlaneGame = ({ onExit }) => {
     }
 
     function showGameOverMessage() {
-      achEl.innerText = "GAME OVER! Pressione R para reiniciar";
+      achEl.innerText = t("jogo.gameover");
       achEl.classList.add("show");
       planeEl.style.opacity = "0.5";
     }
@@ -117,7 +117,7 @@ const FlappyPlaneGame = ({ onExit }) => {
       planeEl.style.top = planeY + "%";
       planeEl.style.opacity = "1";
       score = 0;
-      scoreEl.innerText = "Pontuação: 0";
+      scoreEl.innerText = t("jogo.pontuacao") + "0";
       achEl.classList.remove("show");
       gameOver = false;
       requestAnimationFrame(loop);
@@ -186,7 +186,7 @@ const FlappyPlaneGame = ({ onExit }) => {
   return (
     <div style={{ position: "relative", textAlign: "center" }}>
       <div id="game">
-        <div id="score">Pontuação: 0</div>
+        <div id="score">{t("jogo.pontuacao") + "0"}</div>
         <div id="achievement"></div>
         <div className="plane" id="plane">
           ✈️

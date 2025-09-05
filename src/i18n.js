@@ -42,6 +42,8 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Back to terminal",
+        pontuacao: "Score: ",
+        gameover: "GAME OVER! Press R to restart",
       },
       premios: {
         titulo: "Awards",
@@ -634,6 +636,8 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Voltar ao terminal",
+        pontuacao: "Pontuação: ",
+        gameover: "GAME OVER! Pressione R para reiniciar",
       },
       premios: {
         titulo: "Prêmios",
