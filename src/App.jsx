@@ -29,8 +29,6 @@ function App() {
     getWelcomeMessage(),
   ]);
 
-  const [terminalKey, setTerminalKey] = useState(0);
-  
   const exitComponent = () => {
     setTerminalLineData((lines) => {
       const newLines = lines.slice(0, -1);
@@ -40,7 +38,6 @@ function App() {
       });
       return newLines;
     });
-    setTerminalKey((k) => k + 1);
   };
 
   // Detecta se o jogo está aberto
@@ -136,7 +133,6 @@ function App() {
     <div className="container">
       <LanguageSwitcher />
       <Terminal
-        key={terminalKey}
         name={terminalTitle}
         colorMode={ColorMode.Dark}
         onInput={isGameOpen || isContatoOpen ? undefined : handleInput}
