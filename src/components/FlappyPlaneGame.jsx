@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./FlappyPlaneGame.css";
 
 const achievementsList = [
@@ -28,6 +29,8 @@ function shuffleArray(array) {
 }
 
 const FlappyPlaneGame = ({ onExit }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const game = document.getElementById("game");
     const planeEl = document.getElementById("plane");
@@ -193,7 +196,7 @@ const FlappyPlaneGame = ({ onExit }) => {
           onClick={onExit}
           style={{ marginTop: "12px" }}
         >
-          Voltar ao terminal
+          {t("jogo.voltar_terminal")}
         </button>
       )}
     </div>

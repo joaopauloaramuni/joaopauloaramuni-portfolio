@@ -40,6 +40,9 @@ const resources = {
         sucesso: "✅ Message sent successfully!",
         erro: "❌ Failed to send, please try again.",
       },
+      jogo: {
+        voltar_terminal: "Back to terminal",
+      },
       premios: {
         titulo: "Awards",
         nenhum: "No awards registered yet.",
@@ -72,7 +75,9 @@ const resources = {
         experiencias: {
           desc: "Shows my professional trajectory and experiences.",
         },
-        contato: { desc: "Displays my contact information and sends an email." },
+        contato: {
+          desc: "Displays my contact information and sends an email.",
+        },
         limpar: { desc: "Clears the terminal history." },
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
         premios: { desc: "Shows awards and recognitions." },
@@ -320,6 +325,9 @@ const resources = {
         voltar_terminal: "Voltar ao terminal",
         sucesso: "✅ Mensagem enviada com sucesso!",
         erro: "❌ Erro ao enviar, tente novamente.",
+      },
+      jogo: {
+        voltar_terminal: "Voltar ao terminal",
       },
       premios: {
         titulo: "Prêmios",

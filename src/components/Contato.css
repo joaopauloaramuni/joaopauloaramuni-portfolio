@@ -77,7 +77,7 @@ textarea:focus {
 }
 
 .botao-contato:hover {
-  background: #00cc7a;
+  background: #00CC7A;
 }
 
 .status-contato {
@@ -102,7 +102,7 @@ textarea:focus {
 }
 
 .contato-icone:hover {
-  color: #00ffaa;
+  color: #00CC7A;
   transform: scale(1.1);
 }
 
