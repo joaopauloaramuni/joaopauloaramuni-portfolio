@@ -8,12 +8,25 @@
   font-size: 1.8rem;
 }
 
+.recomendacoes-icone {
+  font-size: 1.2rem;
+  color: #00ff9d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.recomendacao-separador {
+  width: 80%;
+  height: 1px;
+  background-color: #00ff9d;
+  margin-top: 16px;
+}
+
 .recomendacao-sobre-container {
   display: flex;
   align-items: center;
   gap: 2.5rem;
   color: #e2e8f0;
-  margin-bottom: 32px;
+  padding: 16px;
 }
 
 .recomendacao-avatar-container {
@@ -34,6 +47,9 @@
 
 .recomendacao-info-container {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .recomendacao-name {
@@ -46,20 +62,27 @@
   font-style: italic;
   font-size: 14px;
   margin-top: 8px;
+  max-width: 80%;
+  text-align: justify;
+  line-height: 1.6;
 }
 
 .recomendacao-text {
   margin: 8px 0;
   font-size: 15px;
   color: #cbd5e1;
+  max-width: 80%;
+  text-align: justify;
+  line-height: 1.6;
 }
 
 .recomendacao-link {
-  color: #a78bfa;
-  text-decoration: underline;
-  display: inline-block;
-  margin-top: 8px;
   font-size: 18px;
+  color: #00ff9d;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Responsividade */

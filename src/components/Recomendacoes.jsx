@@ -1,4 +1,5 @@
 import React from "react";
+import { FaLinkedin } from "react-icons/fa";
 import { recommendationsData } from "../data/recommendationsData";
 import { useTranslation } from "react-i18next";
 import "./Recomendacoes.css";
@@ -8,9 +9,9 @@ export default function Recomendacoes() {
 
   if (!recommendationsData.length) {
     return (
-      <div>
-        <h2>{t("recomendacoes.titulo")}</h2>
-        <p>{t("recomendacoes.nenhum")}</p>
+      <div className="recomendacoes-vazio">
+        <h2 className="recomendacoes-titulo">{t("recomendacoes.titulo")}</h2>
+        <p className="recomendacoes-mensagem">{t("recomendacoes.nenhum")}</p>
       </div>
     );
   }
@@ -19,8 +20,8 @@ export default function Recomendacoes() {
     <div className="recomendacoes-container">
       <h3 className="recomendacoes-titulo">{t("recomendacoes.titulo")}</h3>
 
-      {recommendationsData.map((rec, idx) => (
-        <div className="recomendacao-sobre-container" key={idx}>
+      {recommendationsData.map((rec) => (
+        <div className="recomendacao-sobre-container" key={rec.id}>
           {rec.image && (
             <div className="recomendacao-avatar-container">
               <a
@@ -37,9 +38,15 @@ export default function Recomendacoes() {
             </div>
           )}
           <div className="recomendacao-info-container">
-            <div className="recomendacao-name">{rec.name}</div>
-            <div className="recomendacao-relationship">{rec.relationship}</div>
-            <div className="recomendacao-text">{rec.recommendation}</div>
+            <div className="recomendacao-name">
+              {t(`recomendacoes.nome_${rec.id}`, rec.name)}
+            </div>
+            <div className="recomendacao-relationship">
+              {t(`recomendacoes.${rec.relationshipId}`, rec.relationship)}
+            </div>
+            <div className="recomendacao-text">
+              {t(`recomendacoes.${rec.recommendationId}`, rec.recommendation)}
+            </div>
             {rec.link && (
               <a
                 href={rec.link}
@@ -47,12 +54,11 @@ export default function Recomendacoes() {
                 rel="noopener noreferrer"
                 className="recomendacao-link"
               >
-                <span role="img" aria-label="link">
-                  🔗
-                </span>{" "}
+                <FaLinkedin className="recomendacoes-icone" />
                 {t("recomendacoes.link", "LinkedIn")}
               </a>
             )}
+            <div className="recomendacao-separador" />
           </div>
         </div>
       ))}

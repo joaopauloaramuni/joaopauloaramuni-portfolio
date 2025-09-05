@@ -138,10 +138,316 @@ const resources = {
         jedis_proj_desc:
           "RHapido 2.0 is a recruitment management system that uses artificial intelligence to streamline and make talent acquisition more efficient. Developed with cutting-edge technology, it offers intelligent resume screening, reducing time and costs in the hiring process.",
       },
-
       recomendacoes: {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
+        rec1_relationship:
+          "On August 31, 2025, Michelle Hanne worked with João Paulo on the same team",
+
+        rec1_recommendation:
+          "Aramuni is an excellent educator, committed to the technical and human development of students. He takes care to develop teaching materials as well as workshops that support students. Courses such as Fundamentals of Design, Algorithm Analysis, Software Project, Software Development Labs, among others, are of utmost importance for academic training and for training in Software Engineering. In short, an excellent technical leader and competent teaching professional.",
+
+        rec2_relationship: "On August 5, 2025, Pedro reported to João Paulo",
+
+        rec2_recommendation:
+          "I had the honor of working with Aramuni as my undergraduate thesis advisor, and I can confidently say that his mentorship extended far beyond academic guidance. From day one, he fostered an environment of trust, curiosity, and autonomy, encouraging independent thinking while always being available when needed. What impressed me most was his commitment. No matter how busy his schedule was, he consistently made time to meet, provide thoughtful feedback, and check in on my progress. Beyond his role as a thesis advisor, Aramuni is a truly passionate educator. He brings not only deep technical expertise to the table, but also a genuine sense of purpose in teaching and mentoring others.",
+
+        rec3_relationship: "On July 30, 2025, Bernardo reported to João Paulo",
+
+        rec3_recommendation:
+          "During the first semester of 2025, I had the privilege of working with Professor Aramuni as my thesis advisor. His guidance was instrumental throughout the process. He gave us the freedom to explore different technologies and encouraged independent thinking, while also providing clear and constructive feedback at every stage. What stood out most was his consistent availability — he always made time for me and my partner, setting up regular meetings and ensuring we felt supported. His calm demeanor and genuine care created a welcoming environment that made it easy for us to grow and develop. Professor Aramuni is an excellent mentor and a remarkable educator.",
+
+        rec4_relationship: "On July 25, 2025, Luca reported to João Paulo",
+
+        rec4_recommendation:
+          "Professor Aramuni is one of the most dedicated and inspiring educators I’ve ever had the privilege to learn from. Creative and constantly innovating, he brings not only a deep theoretical foundation to his classes but also a strong focus on real-world application through hands-on exercises, interactive quizzes, and practical projects — many of which are available for free on his GitHub. What truly sets him apart, however, is his availability and genuine care for each student. He consistently makes time for one-on-one meetings, offering mentorship on both academic and career paths. His extensive professional background enriches every class with real-world examples and valuable insights. In my case, the conversations I had with him over the past few months played a key role in shaping important career decisions. Being his student was not just a great academic experience — it was a transformative one.",
+
+        rec5_relationship:
+          "On September 19, 2024, Flavio reported to João Paulo",
+
+        rec5_recommendation:
+          "For approximately a year, I had the privilege of being a student of Professor João Paulo Aramuni. He stands out not only for his vast technical knowledge but also for the evident passion he has for technology, which shows in each of his classes. His distinctive approach combines engaging and dynamic teaching, making learning more accessible and interesting. Furthermore, his ability to offer individualized attention to each student demonstrates his commitment to the personal and academic development of all, creating an environment where everyone feels valued and encouraged to grow.",
+
+        rec6_relationship: "On August 22, 2024, Pedro reported to João Paulo",
+
+        rec6_recommendation:
+          "I had the privilege of being João's student, from whom I learned a lot about databases and Java. He is an excellent teacher, very competent and always willing to help! He demonstrates full mastery of the subjects, transforming complex content into something easy to understand and learn. I strongly recommend him to anyone wishing to deepen their knowledge in these areas. Anyone who has the opportunity to learn from him will be in good hands!",
+
+        rec7_relationship:
+          "On August 22, 2024, Angélica and João Paulo studied at the same institution",
+
+        rec7_recommendation:
+          "I often say that João was 'bitten by the mosquito' that made us fall in love with teaching. We both loved our careers, which had established us, but even so, teaching called us, and today we are fully fulfilled in this field. Moreover, João is a true partner, always attentive to supporting people he considers talented. I have the privilege of being one of those people. Thanks to João, I realized my dream of teaching at the undergraduate level, and he was so generous that he even gave me his classes. What can I say about such an extraordinary person? João, the world is yours, my friend! Count on me for us to leave our mark on the new 'generation' of IT talent.",
+
+        rec8_relationship:
+          "On August 20, 2024, Max and João Paulo studied at the same institution",
+
+        rec8_recommendation:
+          "Talking about João Aramuni is easy, I had the privilege of counting on his help on several occasions, and I can confidently say he is an extraordinarily intelligent and collaborative person. His team spirit is simply remarkable, always willing to contribute to collective success. In addition to his professional skills, he has excellent interpersonal relations, being extremely pleasant and respectful. His ability to work well with others and his willingness to share knowledge make him a remarkable person for any team.",
+
+        rec9_relationship:
+          "On August 19, 2024, Rubens Gabriel was a client of João Paulo",
+
+        rec9_recommendation:
+          "I was fortunate to have Professor João Aramuni as my teacher and thesis advisor. He stands out for making complex concepts more accessible and for his commitment to the development of his students. He was always available to provide guidance and support, which was fundamental for my academic growth. I recommend him to anyone who has the opportunity to work or learn with him.",
+
+        rec10_relationship:
+          "On June 19, 2024, João Paulo was senior to Pedro, but did not directly supervise him",
+
+        rec10_recommendation:
+          "João Paulo Aramuni is a very good professor. During my time in his class, I was impressed with his deep technical knowledge and his ability to convey complex concepts in a clear and accessible way. His didactic approach encourages active student participation, promoting a collaborative and enriching learning environment. Moreover, his passion for the subject is evident in every class, inspiring his students to strive for academic excellence.",
+
+        rec11_relationship: "On March 1, 2024, Tulio reported to João Paulo",
+
+        rec11_recommendation:
+          "I had the pleasure of being led by Aramuni during most of my time at Trybe, and I can affirm that it was an exemplary leadership and an inspiration as a professional. He always cared about the development of his team members, pointing out opportunities within the company for growth and encouraging taking courses and reading books. Whenever I brought observations for improvement in operations, João encouraged me to gather data and document facts to support discussions with higher-level leadership to improve team-wide processes, which led to changes in some tasks carried out by all other instructors and specialists. I strongly recommend him both as a leader and as a technical computing reference.",
+
+        rec12_relationship: "On February 8, 2024, Luíza reported to João Paulo",
+
+        rec12_recommendation:
+          "Professor Aramuni is an exceptional educator in the field of Databases. During the time I was his student, I experienced a truly didactic teaching approach, which made all the difference in my academic journey. He not only has deep mastery of the content but also possesses the unique ability to convey complex concepts in a clear and accessible way. His light and fun approach makes the classes engaging, providing a conducive learning environment. Furthermore, his patience and willingness to help students were essential for my academic development. I am certain he will continue to positively impact the lives of his students, just as he did with me.",
+
+        rec13_relationship:
+          "On January 30, 2024, Thiago reported to João Paulo",
+
+        rec13_recommendation:
+          "Professor João Paulo Aramuni is an excellent teacher! When I started college, I had a lot of difficulty with Java and was developing a dislike/trauma towards the subject, but after his classes, I learned to enjoy it and, with his help, I began to improve and get better constantly. His teaching style is amazing and engaging, demystifying what seems complex and making it simple! He addresses the details and teaches us not only how to do things but also to understand what we are doing. He always gave me tremendous support, even outside of college, and I could always count on him! I am very grateful.",
+
+        rec14_relationship:
+          "On December 18, 2023, Carlos reported to João Paulo",
+
+        rec14_recommendation:
+          "Working under Aramuni's leadership for 18 months was an incredible experience, both for my professional and personal development. Aramuni proved to be an exceptional leader, providing continuous support and the creative freedom the entire team needed, whether to teach or create high-quality content. With his knowledge of Python, algorithms, and web scraping, Aramuni was a cornerstone in the construction and operation of the computer science module. I learned a lot from him, not only technically but also in becoming a more complete and adaptable professional. I am grateful for all his guidance and consider him a mentor, leader, and friend.",
+
+        rec15_relationship:
+          "On November 6, 2023, João Vitor reported to João Paulo",
+
+        rec15_recommendation:
+          "As my leader, Aramuni helped me evolve greatly. He brought excellent PDIs, technical discussions, and also outstanding study recommendations. Furthermore, he created opportunities for both less experienced and more experienced team members, fostering confidence in all his direct reports. He has excellent people management skills, and the whole team admired him. I also emphasize that, besides the benefits for the growth and delivery of his team, he maintained a focus on generating value for the business, which led to excellent outcomes. I recommend Aramuni as a leader who can add value both to the company and to his team.",
+
+        rec16_relationship: "On October 25, 2023, Tiago reported to João Paulo",
+
+        rec16_recommendation:
+          "Aramuni demonstrates very human leadership, paying great attention to areas of improvement and what is needed to achieve goals. I am very grateful to have been led by him and can say that I grew a lot as a professional and person because he is an excellent listener and highly empathetic. His recommendation is well-deserved because he is an extremely committed and responsible professional, who is not afraid to step up when needed.",
+
+        rec17_relationship: "On June 8, 2023, Eli reported to João Paulo",
+
+        rec17_recommendation:
+          "It is a pleasure to recommend Aramuni; he was my leader at Trybe and I also followed his work as Technical Leader of the Computer Science Curriculum. During this period, I witnessed his exceptional skills and his commitment to the success of the team. His unique combination of academic knowledge, practical experience, and leadership skills makes him a remarkable professional. Moreover, he is an incredible person, always willing to help and contribute to others. His guidance and support were essential for my professional growth, both technically and personally. I am extremely grateful for everything I learned from him and proudly recommend him.",
+
+        rec18_relationship: "On May 9, 2023, Cristiano reported to João Paulo",
+
+        rec18_recommendation:
+          "Aramuni is a person who demonstrates extreme responsibility in his professional duties and has a gift for relating to people, making the workplace light and pleasant. Personally, he learns processes quickly, is extremely focused on his activities, demonstrates very high technical potential, and is always concerned with his constant evolution, all while maintaining care and attention towards people. I greatly enjoy working with him because I learn a lot and become a better professional through his examples and advice. I am grateful for this daily opportunity for collaboration and sincerely hope to maintain this productive relationship for a long time.",
+        rec19_relationship:
+          "On March 12, 2023, Will and João Paulo studied at the same institution",
+
+        rec19_recommendation:
+          "An excellent opportunity I had to work with Aramuni; I learned a lot from him. After all, it was my first experience teaching Programming, and he taught me so much. Great Professor and Leader, always providing the team with assertive feedback! Thank you, Aramuni!",
+
+        rec20_relationship:
+          "On February 7, 2022, João Paulo was senior to André but did not directly supervise him",
+
+        rec20_recommendation:
+          "Aramuni is able to organize agendas and bring focus to meetings, keeping the team organized and guided. Additionally, he is super calm and easygoing, and always plays soft music for relaxed moments. A really great person to work with =D",
+
+        rec21_relationship:
+          "On August 10, 2021, Douglas reported to João Paulo",
+
+        rec21_recommendation:
+          "Having Aramuni as an instructor was one of the best experiences of my life. His advice and guidance made me realize exactly my technological strengths and weaknesses. Today I know where I am headed because I know which path to follow. Patience, calmness, clarity, and teaching strategy gave me the confidence to overcome any challenge that came my way. He is brilliant as an instructor, lead, influencer, and a lifelong friend.",
+
+        rec22_relationship:
+          "On October 2, 2020, João Paulo was senior to Bruno but did not directly supervise him",
+
+        rec22_recommendation:
+          "I had the pleasure of being João's student and TCC advisee. He is a person who has always made a difference in academia and helped me greatly to become the professional I am today. As I say, brilliant teachers teach for a profession. Fascinating teachers like João teach for life.",
+
+        rec23_relationship:
+          "On September 11, 2020, Klelvin worked with João Paulo on the same team",
+
+        rec23_recommendation:
+          "I have known João for about 10 years and have shared many life moments with him throughout our careers. He was a college colleague, a work colleague, and became a lifelong friend. Dedicated academic, exemplary educator, and professional with unmatched abilities. I wish every place I worked had a João Paulo.",
+
+        rec24_relationship:
+          "On April 25, 2020, Rafael worked with João Paulo on the same team",
+
+        rec24_recommendation:
+          "João is an exemplary professional and, given his academic background, is always open to learning new technologies and methods. At the same time, he consistently shares knowledge with everyone.",
+        rec25_relationship:
+          "On November 17, 2018, Eduardo and João Paulo studied at the same institution",
+
+        rec25_recommendation:
+          "I had the pleasure of being João Paulo's student at FUMEC, and he is surely one of the most competent teachers/professionals I have ever met. He always seeks to offer the best to his students, preparing differentiated classes and projects. He is a professional with extensive experience and knowledge.",
+
+        rec26_relationship:
+          "On March 27, 2018, Bruno was a client of João Paulo",
+
+        rec26_recommendation:
+          "The talents displayed by Professor João are ineffable. Even from the little I know him as a student, his professional and interpersonal qualities are evident. Always available, he shows complete interest in doing excellent work, in this case, transmitting knowledge. If there is anyone I would like as a teammate, it would be João Paulo.",
+
+        rec27_relationship:
+          "On March 23, 2018, Leonardo was a client of João Paulo",
+
+        rec27_recommendation:
+          "João Paulo is an exceptional teacher, showing that programming goes far beyond syntax. He guides students in their entire quest for knowledge, being not only a teacher but also a companion. Extremely open to answer any questions and help us evolve.",
+
+        rec28_relationship:
+          "On March 20, 2018, Rafaela was a client of João Paulo",
+
+        rec28_recommendation:
+          "I know João Paulo as 'Professor Aramuni', which was the first time I had contact with him. I can say he is one of the best teachers I have ever had: super dedicated, explains the subject well, and demonstrates complete knowledge of what he teaches. I asked for his help a lot during the course and always received a quick response, which was great! He does everything possible to encourage us to study, talks about job and internship opportunities for those in need, and encourages people to deepen their studies in courses, books, scientific initiation, and even pursue master's and Ph.D. degrees. It was a pleasure to attend his classes, and I hope to work with him in the future!",
+
+        rec29_relationship:
+          "On March 19, 2018, Pedro Henrique was a client of João Paulo",
+
+        rec29_recommendation:
+          "Excellent teacher! A distinguished master who stays updated with new teaching methodologies! Intrigues and challenges his students to think differently. Always available and attentive!",
+
+        rec30_relationship:
+          "On March 19, 2018, Henrique was a client of João Paulo",
+
+        rec30_recommendation: "Excellent teacher, with energy and patience!",
+        rec31_relationship:
+          "On March 19, 2018, Rubens was a client of João Paulo",
+
+        rec31_recommendation:
+          "João Paulo is the type of teacher who ensures that students truly understand the subject, both through his teaching methods and his demeanor in the classroom. He demonstrates great knowledge in his field and is willing to understand and assist each student individually, breaking away from the stereotype of a university professor who merely 'points you to the path of learning'.",
+
+        rec32_relationship:
+          "On March 19, 2018, Vicente was a client of João Paulo",
+
+        rec32_recommendation:
+          "As a teacher, João Paulo became fundamental in my education, since I learned programming in depth. He stands out by not teaching just the basics, but what is actually required in practice and in the job market! His concern and care for each student's learning is a strong point, and he spares no effort to ensure students are well-prepared and able to stand out professionally. His experience in the job market gives us confidence in what he teaches and makes learning easier when he shares real problems he has faced throughout his career. I am grateful to have a teacher of this caliber in my academic formation.",
+
+        rec33_relationship:
+          "On March 19, 2018, Igor was a client of João Paulo",
+
+        rec33_recommendation:
+          "João Paulo is a great teacher. Dedicated, he always attends to us in the best possible way. He has a modern teaching methodology that is compatible with the requirements of the job market.",
+
+        rec34_relationship:
+          "On February 15, 2018, Felipe Ferreira reported to João Paulo",
+
+        rec34_recommendation:
+          "João Paulo is a highly motivated and enthusiastic teacher. He shows exceptional care in preparing teaching materials, always clear and up-to-date. His classes are participatory, charismatic, and dynamic. Outside of class, he is attentive and motivating, sharing market experience and valuable advice. One of the best teachers I have ever had and a great friend.",
+
+        rec35_relationship:
+          "On December 28, 2017, Gabriel reported to João Paulo",
+
+        rec35_recommendation:
+          "João is an excellent teacher, making every class interesting. He is also able to convey information simply and consistently challenges his students to learn more.",
+
+        rec36_relationship:
+          "On December 19, 2017, Thiago Brito and João Paulo studied at the same institution",
+
+        rec36_recommendation:
+          "Excellent teacher, always concerned with students' learning, while providing good materials and study tips. Also an outstanding person, remembering names and staying close to students. I am grateful for the opportunity to have him as my teacher.",
+        rec37_relationship:
+          "On December 17, 2017, Gabriel and João Paulo studied at the same institution",
+
+        rec37_recommendation:
+          "He is among the best teachers I have ever had. While he challenges you a lot, he also makes you genuinely interested in the subject, clears any doubts, and is someone you want to carry as a friend for life. Simply sensational. I greatly appreciate all the knowledge he has already shared and continues to share.",
+
+        rec38_relationship:
+          "On December 15, 2017, Amanda was a client of João Paulo",
+
+        rec38_recommendation:
+          "Excellent teacher, attentive, highly knowledgeable, and has good teaching skills.",
+
+        rec39_relationship:
+          "On December 14, 2017, Nilson Junio Paulino was a client of João Paulo",
+
+        rec39_recommendation:
+          "Excellent teacher, dedicated to every subject he teaches, always seeks knowledge beyond the books, and has excellent teaching skills. I hope to be his student in another subject, as I know it will be well taught.",
+
+        rec40_relationship:
+          "On December 13, 2017, Lucas was a client of João Paulo",
+
+        rec40_recommendation:
+          "Despite the difficulties during the semester and the numerous bugs we had to fix, it was possible to deliver a project that applied all the theory and concepts taught in an excellent way. I can confidently say that Professor João Paulo will be a key part of my education, playing a fundamental role in my knowledge journey.",
+
+        rec41_relationship:
+          "On December 13, 2017, Luiz Guilherme was a client of João Paulo",
+
+        rec41_recommendation:
+          "I was fortunate to participate in two courses taught by Professor João Paulo Aramuni, Theoretical Foundations of Computing and Compilers. In both, he showed complete dedication to answering questions, helping students with difficulties, and always had patience and understanding. His classes have dynamics that facilitate understanding and learning, with full mastery of the subjects and practical examples.",
+
+        rec42_relationship:
+          "On December 13, 2017, João Paulo was a client of David",
+
+        rec42_recommendation:
+          "Excellent teacher, great teaching skills, and a strong desire to teach. The classes were very well conducted!",
+        rec43_relationship:
+          "On December 11, 2017, João Paulo was senior to Samuel, but did not directly supervise him",
+
+        rec43_recommendation:
+          "Professor Aramuni is one of the best teachers I have ever had. His teaching style can explain even the most complex abstractions clearly, enabling everyone to absorb knowledge and solve complex problems. There is no better person for guidance than João Paulo.",
+
+        rec44_relationship:
+          "On June 19, 2017, João Lucas Veloso was a client of João Paulo",
+
+        rec44_recommendation:
+          "João is a teacher who seeks and develops methods to help his students learn. He has always shown commitment to assisting, providing well-prepared materials and patience to respect each student's pace.",
+
+        rec45_relationship:
+          "On February 9, 2017, Fábio and João Paulo studied at the same institution",
+
+        rec45_recommendation:
+          "Great teacher, attentive, and highly knowledgeable in what he teaches. His classes were extremely valuable, and his teaching went beyond expectations. I am glad to have shared learning experiences with him.",
+
+        rec46_relationship:
+          "On January 9, 2017, Márcio worked with João Paulo on the same team",
+
+        rec46_recommendation:
+          "I have worked with João Paulo for about a year and can say he is a very dedicated, responsible, and studious professional. He always seeks knowledge and shares solutions with the team, promoting everyone's growth.",
+
+        rec47_relationship:
+          "On October 17, 2016, Felipe and João Paulo studied at the same institution",
+
+        rec47_recommendation:
+          "I had the great pleasure of being a student of João Paulo at FUMEC University. Top-notch professor, competent, attentive, relaxed, able to explain complex subjects clearly and simply. All of this thanks to his love for what he does. Wishing you great success, João!",
+
+        rec48_relationship:
+          "On October 10, 2016, Bruno was a client of João Paulo",
+
+        rec48_recommendation:
+          "I had the pleasure of being a student of João Aramuni at FUMEC University. A serious and dedicated professional, he can convey programming knowledge in a structured and clear way. Excellent teacher, and I hope he stands out greatly in his academic career.",
+        rec49_relationship:
+          "On August 23, 2015, Rafael and João Paulo studied at the same institution",
+
+        rec49_recommendation:
+          "I had the opportunity to study with João Paulo at FUMEC. A distinguished professional: organized, persistent, self-taught, and passionate about agile methodologies. He stood out for his communication skills and knowledge sharing.",
+
+        rec50_relationship:
+          "On March 4, 2015, Gabriela and João Paulo studied at the same institution",
+
+        rec50_recommendation:
+          "I recommend João for his competence, passion for his field, determination, strong will, and easy-going personality. An excellent professional.",
+
+        rec51_relationship:
+          "On November 10, 2014, João Paulo was senior to Glaydson, but did not directly supervise him",
+
+        rec51_recommendation:
+          "I have worked with João Paulo for almost a year, and during this period he proved to be a competent and dedicated professional, performing exceptionally on projects for clients such as OI and ANP.",
+
+        rec52_relationship:
+          "On November 9, 2014, Lucas and João Paulo studied at the same institution",
+
+        rec52_recommendation:
+          "João is a dedicated and proactive student. He stood out in class with excellent assignments and presentations. As a speaker, he addresses agile methodologies in a way that increasingly captivates students.",
+
+        rec53_relationship:
+          "On October 29, 2014, Andre worked with João Paulo but on different teams",
+
+        rec53_recommendation:
+          "I had the opportunity to work with João Paulo at Capgemini for one year. A professional focused on sharing information and always willing to help.",
+
+        rec54_relationship:
+          "On October 14, 2014, Amadeu and João Paulo studied at the same institution",
+
+        rec54_recommendation:
+          "João Paulo is deeply involved in classroom and research activities. We worked together on articles and presentations, always bringing innovative ideas. He has experience with agile methodologies, applied even in his master's dissertation.",
       },
       experiencias: {
         titulo: "Professional Experiences",
@@ -426,6 +732,328 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec1_relationship:
+          "Em 31 de agosto de 2025, Michelle Hanne trabalhava com João Paulo na mesma equipe",
+
+        rec1_recommendation:
+          "Aramuni é um excelente docente, comprometido com o desenvolvimento técnico e humano dos alunos. Se preocupa em desenvolver material didático, bem como oficinas que dão suporte aos alunos. Disciplinas como Fundamentos de Projeto, Análise de Algoritmos, Projeto de Software, Laboratórios de Desenvolvimento de Software entre outras, são de suma importância para a formação acadêmica e para formação em Engenharia de Software. Enfim, excelente líder técnico e competente profissional docente.",
+
+        rec2_relationship:
+          "Em 5 de agosto de 2025, Pedro respondia a João Paulo",
+
+        rec2_recommendation:
+          "I had the honor of working with Aramuni as my undergraduate thesis advisor, and I can confidently say that his mentorship extended far beyond academic guidance. From day one, he fostered an environment of trust, curiosity, and autonomy, encouraging independent thinking while always being available when needed. What impressed me most was his commitment. No matter how busy his schedule was, he consistently made time to meet, provide thoughtful feedback, and check in on my progress. Beyond his role as a thesis advisor, Aramuni is a truly passionate educator. He brings not only deep technical expertise to the table, but also a genuine sense of purpose in teaching and mentoring others.",
+
+        rec3_relationship:
+          "Em 30 de julho de 2025, Bernardo respondia a João Paulo",
+
+        rec3_recommendation:
+          "During the first semester of 2025, I had the privilege of working with Professor Aramuni as my thesis advisor. His guidance was instrumental throughout the process. He gave us the freedom to explore different technologies and encouraged independent thinking, while also providing clear and constructive feedback at every stage. What stood out most was his consistent availability — he always made time for me and my partner, setting up regular meetings and ensuring we felt supported. His calm demeanor and genuine care created a welcoming environment that made it easy for us to grow and develop. Professor Aramuni is an excellent mentor and a remarkable educator.",
+
+        rec4_relationship:
+          "Em 25 de julho de 2025, Luca respondia a João Paulo",
+
+        rec4_recommendation:
+          "Professor Aramuni is one of the most dedicated and inspiring educators I’ve ever had the privilege to learn from. Creative and constantly innovating, he brings not only a deep theoretical foundation to his classes but also a strong focus on real-world application through hands-on exercises, interactive quizzes, and practical projects — many of which are available for free on his GitHub. What truly sets him apart, however, is his availability and genuine care for each student. He consistently makes time for one-on-one meetings, offering mentorship on both academic and career paths. His extensive professional background enriches every class with real-world examples and valuable insights. In my case, the conversations I had with him over the past few months played a key role in shaping important career decisions. Being his student was not just a great academic experience — it was a transformative one.",
+
+        rec5_relationship:
+          "Em 19 de setembro de 2024, Flavio respondia a João Paulo",
+
+        rec5_recommendation:
+          "Durante aproximadamente um ano, tive o privilégio de ser aluno do professor João Paulo Aramuni. Ele se destaca não apenas pelo vasto conhecimento técnico, mas pela evidente paixão que nutre pela tecnologia, a qual transparece em cada uma de suas aulas. Sua abordagem diferenciada combina uma didática envolvente e dinâmica, que torna o aprendizado mais acessível e interessante. Além disso, sua capacidade de oferecer uma atenção individualizada a cada aluno demonstra seu compromisso com o desenvolvimento pessoal e acadêmico de todos, criando um ambiente onde cada um se sente valorizado e estimulado a crescer.",
+
+        rec6_relationship:
+          "Em 22 de agosto de 2024, Pedro respondia a João Paulo",
+
+        rec6_recommendation:
+          "Tive o privilégio de ser aluno do João, com quem aprendi muito sobre banco de dados e Java. Ele é um excelente mestre, muito competente e sempre disposto a ajudar! Ele demonstra total domínio das matérias, transformando conteúdos complexos em algo fácil de entender e aprender. Recomendo-o fortemente a qualquer um que deseje se aprofundar nessas áreas. Qualquer um que tenha a oportunidade de aprender com ele estará em boas mãos!",
+
+        rec7_relationship:
+          "Em 22 de agosto de 2024, Angélica e João Paulo estudavam na mesma instituição",
+
+        rec7_recommendation:
+          "Costumo dizer que o João foi 'picado pelo mosquito' que nos fez apaixonar pela docência. Ambos amávamos nossas carreiras, que nos consolidaram, mas, mesmo assim, a docência nos chamou, e hoje somos plenamente realizados nessa área. Além disso, o João é um verdadeiro parceiro, sempre atento a apoiar as pessoas que ele considera talentosas. Tenho o privilégio de ser uma dessas pessoas. Graças ao João, realizei o sonho de lecionar na graduação, e ele foi tão generoso que até me cedeu suas turmas. O que posso dizer de uma pessoa tão extraordinária? João, o mundo é seu, meu amigo! Conte comigo para deixarmos nossa marca na nova 'safra' de talentos em TI.",
+
+        rec8_relationship:
+          "Em 20 de agosto de 2024, Max e João Paulo estudavam na mesma instituição",
+
+        rec8_recommendation:
+          "Falar do João Aramuni é tarefa fácil, tive o privilégio de contar com sua ajuda em diversas ocasiões, e posso afirmar com segurança que ele é uma pessoa extraordinariamente inteligente e colaborativa. Seu espírito de equipe é simplesmente notável, sempre disposto a contribuir para o sucesso coletivo. Além de suas habilidades profissionais, ele possui um excelente convívio, sendo uma pessoa extremamente agradável e respeitosa. Sua capacidade de trabalhar bem com os outros e sua disposição em compartilhar conhecimentos fazem dele uma pessoa notável para qualquer equipe.",
+
+        rec9_relationship:
+          "Em 19 de agosto de 2024, Rubens Gabriel era cliente de João Paulo",
+
+        rec9_recommendation:
+          "Tive a sorte de ter o Professor João Aramuni como meu professor e orientador de TCC. Ele se destaca por tornar conceitos complexos mais acessíveis e por seu compromisso com o desenvolvimento dos seus alunos. Ele sempre esteve disponível para oferecer orientação e apoio, o que foi fundamental para o meu crescimento acadêmico. Recomendo para qualquer pessoa que tenha a oportunidade de trabalhar ou aprender com ele.",
+
+        rec10_relationship:
+          "Em 19 de junho de 2024, João Paulo era sênior em relação a Pedro, mas não supervisionava Pedro diretamente",
+
+        rec10_recommendation:
+          "João Paulo Aramuni é um professor muito bom, durante meu tempo em sua classe, fiquei impressionado com seu profundo conhecimento técnico e sua habilidade em transmitir conceitos complexos de forma clara e acessível. Sua abordagem didática incentiva a participação ativa dos alunos, promovendo um ambiente de aprendizagem colaborativo e enriquecedor. Além disso, sua paixão pela disciplina é evidente em cada aula, inspirando seus alunos a se esforçarem para alcançar excelência acadêmica.",
+
+        rec11_relationship:
+          "Em 1 de março de 2024, Tulio respondia a João Paulo",
+
+        rec11_recommendation:
+          "Tive o prazer de ser liderado pelo Aramuni durante a maior parte do tempo em que trabalhei na Trybe, e posso afirmar que foi uma liderança exemplar e inspiração como profissional. Sempre se preocupou com o desenvolvimento de seus liderados, apontando oportunidades dentro da empresa para evolução e incentivando a realização de cursos e leitura de livros. Sempre que levava observações de pontos de melhora na operação era incentivado pelo João a reunir dados e documentar fatos para que pudesse embasar discussões com lideranças de níveis superiores a fim de melhorar processos do time com um todo, o que rendeu mudanças em algumas tarefas que eram realizadas por todos os demais instrutores e especialistas da empresa. Recomendo fortemente tanto como liderança como referência técnica de computação.",
+
+        rec12_relationship:
+          "Em 8 de fevereiro de 2024, Luíza respondia a João Paulo",
+
+        rec12_recommendation:
+          "O professor Aramuni é um educador excepcional na área de Banco de Dados. Durante o período em que fui sua aluna, pude experimentar uma abordagem de ensino verdadeiramente didática, que fez toda a diferença em minha jornada acadêmica, não apenas domina profundamente o conteúdo, mas também possui a habilidade única de transmitir conceitos complexos de uma maneira clara e acessível. Sua abordagem leve e divertida torna as aulas envolventes, proporcionando um ambiente propício para o aprendizado. Além disso, sua paciência e disposição em ajudar os alunos foram essenciais para o meu desenvolvimento acadêmico. Tenho certeza de que ele continuará impactando positivamente a vida de seus alunos, assim como fez comigo.",
+
+        rec13_relationship:
+          "Em 30 de janeiro de 2024, Thiago respondia a João Paulo",
+
+        rec13_recommendation:
+          "O Professor João Paulo Aramuni, é um excelente professor! Quando iniciei na faculdade tive muita dificuldade com Java e estava tomando raiva/trauma da matéria, porém após as aulas, eu aprendi a gostar e com a ajuda dele comecei a me aperfeiçoar e melhorar cada vez mais. Sua forma de ensino é incrível e cativante, desmistificando aquilo que parece ser complexo, tornando para algo simples! Ele consegue abordar os detalhes e nos ensina não somente a fazer, mas entender o que estamos fazendo, sempre me deu muito apoio, mesmo fora da faculdade, sempre pude e posso contar com ele! Sou muito grato!",
+
+        rec14_relationship:
+          "Em 18 de dezembro de 2023, Carlos respondia a João Paulo",
+
+        rec14_recommendation:
+          "Trabalhar sob a liderança de Aramuni por 18 meses foi uma baita de uma experiência tanto para o meu desenvolvimento profissional quanto para o pessoal. Aramuni demonstrou ser um líder excepcional, fornecendo suporte contínuo, e a liberdade criativa que todo o time precisava seja para lecionar ou para criar um conteúdo de alta qualidade. Com seus conhecimentos sobre Python, algoritmos e raspagem de dados, Aramuni foi pedra angular na construção e operação do módulo de ciência da computação. Aprendi muito com ele, não só em termos técnicos, mas também em como ser um profissional mais completo e adaptável. Sou grato por toda a sua orientação e o considero um mentor, líder e amigo.",
+
+        rec15_relationship:
+          "Em 6 de novembro de 2023, João Vitor respondia a João Paulo",
+
+        rec15_recommendation:
+          "Atuando como minha liderança, o Aramuni me fez evoluir muito. Trouxe ótimos PDIs, discussões técnicas e, também, recomendações excelentes de estudo. Além disso, foi uma liderança que gerava oportunidades tanto para os menos experientes quanto para os mais experientes, favorecendo a confiança de todos os seus diretos. Possui uma ótima gestão de pessoas, todo o time o admirava. Ressalto, também, que além dos benefícios para crescimento e entrega dos liderados, ele mantinha o foco em gerar valor para o negócio, e com isso, fez entregas excelentes. Recomendo o Aramuni como uma liderança que pode agregar tanto para a empresa tanto para seus diretos.",
+
+        rec16_relationship:
+          "Em 25 de outubro de 2023, Tiago respondia a João Paulo",
+
+        rec16_recommendation:
+          "O Aramuni realiza uma liderança muito humana, com bastante atenção aos pontos de melhoria e o que é necessário fazer para atingir as metas. Sou muito grato por ter sido liderado por ele, e dizer que cresci muito como profissional e pessoa porque ele é um excelente ouvinte e super empático. A sua recomendação é muito merecida porque é um profissional extremamente comprometido e responsável, que não tem medo de dar a cara quando é preciso.",
+
+        rec17_relationship: "Em 8 de junho de 2023, Eli respondia a João Paulo",
+
+        rec17_recommendation:
+          "É um prazer recomendar o Aramuni, ele foi minha liderança na Trybe e também acompanhei seu trabalho como Líder Técnico de Currículo de Ciência da Computação. Durante esse período, pude testemunhar suas habilidades excepcionais e seu comprometimento com o sucesso da equipe. Sua combinação única de conhecimento acadêmico, experiência prática e habilidades de liderança o tornam um profissional notável. Além disso, ele é uma pessoa incrível, sempre disposta a ajudar e contribuir com os outros. Sua orientação e apoio foram essenciais para minha evolução profissional, tanto em termos técnicos quanto em desenvolvimento pessoal. Sou extremamente grato por tudo o que aprendi com ele e recomendo-o com muito orgulho.",
+
+        rec18_relationship:
+          "Em 9 de maio de 2023, Cristiano respondia a João Paulo",
+
+        rec18_recommendation:
+          "Aramuni é uma pessoa que demonstra extrema responsabilidade com suas atribuições profissionais e é uma pessoa que tem o dom de saber se relacionar com as pessoas tornando o ambiente de trabalho local leve e agradável. Pessoalmente aprende rápido os processos, é extremamente focado em suas atividades, demonstra potencial técnico altíssimo, está sempre preocupado com sua constante evolução, isso tudo sem abandonar o carinho e cuidado com as pessoas. Gosto muito de trabalhar com ele pois aprendo muito e me torno um profissional melhor com seus exemplos e conselhos. Sou grato por essa oportunidade diária de parceria em atividades e desejo de coração manter essa relação produtiva por muito tempo.",
+
+        rec19_relationship:
+          "Em 12 de março de 2023, Will e João Paulo estudavam na mesma instituição",
+
+        rec19_recommendation:
+          "Excelente oportunidade que tive em trabalhar com o Aramuni, aprendi muito com ele. Afinal foi minha primeira experiência lecionando Programação, e ele me ensinou e muito. Ótimo Professor e Líder, sempre pontuando o time com feedbacks assertivos! Obrigado Aramuni!",
+
+        rec20_relationship:
+          "Em 7 de fevereiro de 2022, João Paulo era sênior em relação a André, mas não supervisionava André diretamente",
+
+        rec20_recommendation:
+          "O Aramuni consegue organizar pautas e trazer objetividade às reuniões, mantendo o time organizado e orientado. Além disso, é super calmo e gente boa, e sempre traz umas músicas suaves pros momentos descontraídos. Um cara muito legal para se trabalhar com =D",
+
+        rec21_relationship:
+          "Em 10 de agosto de 2021, Douglas respondia a João Paulo",
+
+        rec21_recommendation:
+          "Ter o Aramuni como instrutor foi uma das melhores experiências que eu tive na minha vida. Seus conselhos e direcionamento me fez perceber exatamente minhas qualidades e fraquezas tecnológicas. Hoje eu sei para onde eu vou, pois sei qual caminho percorrer. Paciência, calma, lucidez e estratégia para ensinar, me dava confiança que eu ia vencer qualquer etapa que por ventura surgia. Ele é brilhante como instrutor, lead, influênciador e um amigo para a vida toda.",
+
+        rec22_relationship:
+          "Em 2 de outubro de 2020, João Paulo era sênior em relação a Bruno, mas não supervisionava Bruno diretamente",
+
+        rec22_recommendation:
+          "Tive o prazer de ser Aluno e Orientado do TCC pelo João. Uma pessoa que sempre fez a diferença, no meio acadêmico, e que me ajudou e muito a me tornar o profissional que eu sou hoje. E como eu digo, professores brilhantes ensinam para uma profissão. Professores fascinantes como o João ensinam para a vida.",
+
+        rec23_relationship:
+          "Em 11 de setembro de 2020, Klelvin trabalhava com João Paulo na mesma equipe",
+
+        rec23_recommendation:
+          "Conheço o João tem bem uns 10 anos e compartilhei com ele vários momentos da vida durante a carreira. Foi colega de faculdade, colega de trabalho e se tornou um amigo de vida. Acadêmico dedicado, educador exemplar e profissional de atribuições ímpares. Quem dera todo lugar que eu trabalhasse tivesse um João Paulo.",
+
+        rec24_relationship:
+          "Em 25 de abril de 2020, Rafael trabalhava com João Paulo na mesma equipe",
+
+        rec24_recommendation:
+          "João é um profissional exemplar e por ter background acadêmico, está sempre aberto a aprender novas tecnologias e métodos. Ao mesmo tempo sempre está compartilhando conhecimento com todo mundo.",
+
+        rec25_relationship:
+          "Em 17 de novembro de 2018, Eduardo e João Paulo estudavam na mesma instituição",
+
+        rec25_recommendation:
+          "Tive o prazer de ser aluno do João Paulo na FUMEC e seguramente é um dos professores/profissionais mais competentes com o qual convivi. Sempre busca oferecer o melhor aos seus alunos, preparando aulas e projetos diferenciados. Trata-se de um profissional com bastante experiência e conhecimento.",
+
+        rec26_relationship:
+          "Em 27 de março de 2018, Bruno era cliente de João Paulo",
+
+        rec26_recommendation:
+          "É inefável os talentos exibidos pelo prof. João, o pouco que o conheço, como seu aluno, fica evidente suas qualidades profissionais e interpessoais. Sempre disponível mostra total interesse em fazer um excelente trabalho, no caso transmitir conhecimento. Se existe alguém o qual gostaria de ter como colega de equipe seria o João Paulo.",
+
+        rec27_relationship:
+          "Em 23 de março de 2018, Leonardo era cliente de João Paulo",
+
+        rec27_recommendation:
+          "João Paulo é um professor excepcional, mostra que a programação vai muito além da sintaxe. Guia o aluno em toda a busca pelo conhecimento, sendo não apenas professor, mas também companheiro. Extremamente aberto para responder quaisquer dúvidas e nos ajudar a evoluir.",
+
+        rec28_relationship:
+          "Em 20 de março de 2018, Rafaela era cliente de João Paulo",
+
+        rec28_recommendation:
+          "Eu conheço o João Paulo como 'Professor Aramuni', onde foi a primeira vez que tive contato com ele. Posso dizer que ele é um dois melhores professores que eu tive: super dedicado, explica bem a matéria e mostra ter conhecimento total do que ele está ensinando. Eu pedi bastante a sua ajuda no decorrer do curso e sempre recebi uma resposta rápida, foi ótimo! Ele faz o possível para nos incentivar a estudar, fala de vagas de emprego e estágio para os que estão precisando, e incentiva as pessoas a aprofundar seus estudos em cursos, livros, iniciação científica e até seguir para o mestrado e doutorado. Foi um prazer ter aula com ele, e espero trabalhar com ele no futuro!",
+
+        rec29_relationship:
+          "Em 19 de março de 2018, Pedro Henrique era cliente de João Paulo",
+
+        rec29_recommendation:
+          "Excelente professor! Mestre diferenciado em que está atualizado a novas metodologias de ensino! Intriga e desafia seus alunos a pensar diferente. Sempre disponível e atencioso!",
+
+        rec30_relationship:
+          "Em 19 de março de 2018, Henrique era cliente de João Paulo",
+
+        rec30_recommendation: "Excelente professor, com dinâmica e paciência!",
+
+        rec31_relationship:
+          "Em 19 de março de 2018, Rubens era cliente de João Paulo",
+
+        rec31_recommendation:
+          "João Paulo é o tipo de professor que se propõe a garantir que o aluno assimile a matéria, tanto em sua didática quanto em sua postura perante a classe. Demonstra um grande conhecimento na área que leciona e se dispõe a entender e atender individualmente aos alunos. Fugindo do estereótipo de professor universitário que apenas 'te indica o caminho da aprendizagem'.",
+
+        rec32_relationship:
+          "Em 19 de março de 2018, Vicente era cliente de João Paulo",
+
+        rec32_recommendation:
+          "Como professor, Joāo Paulo tornou-se fundamental na minha formaçāo, tendo em vista que tive/tenho aprendido muito a fundo a programaçāo, se destaca em nāo ensinar o básico e sim o que é cobrado na pratica e no mercado de trabalho! A preocupaçāo e cuidado com o aprendizado de cada um, é ponto forte tambḿ, de modo que nāo mede esforços para que o aluno se capacite e consiga se destacar no mercado de trabalho. Sua experiencia no mercado de trabalho, faz com que tenhamos confiança no que está sendo passado e facilita o aprendizado quando explicita problemas reais que enfrentou em toda sua trajetória. Sou grato de ter um professor deste nivel em minha formaçāo academica.",
+
+        rec33_relationship:
+          "Em 19 de março de 2018, Igor era cliente de João Paulo",
+
+        rec33_recommendation:
+          "João Paulo é ótimo professor. Dedicado, sempre nos atende da melhor maneira. Tem uma metodologia de ensino atual que é compatível com as exigências do mercado de trabalho.",
+
+        rec34_relationship:
+          "Em 15 de fevereiro de 2018, Felipe Ferreira respondia a João Paulo",
+
+        rec34_recommendation:
+          "João Paulo é um professor totalmente motivado e interessado em ensinar. Possui um cuidado ímpar na preparação do material de ensino, sempre claro e atualizado. Sua aula é participativa, carismática e dinâmica. Fora das aulas é interessado e motivador, compartilhando vivência de mercado e bons conselhos. Um dos melhores professores que já tive e grande amigo.",
+
+        rec35_relationship:
+          "Em 28 de dezembro de 2017, Gabriel respondia a João Paulo",
+
+        rec35_recommendation:
+          "O João é um excelente professor, conseguiu deixar todas as aulas interessantes. Também consegue passar a informação de forma simples, está sempre desafiando seus alunos para aprender mais.",
+
+        rec36_relationship:
+          "Em 19 de dezembro de 2017, Thiago Brito e João Paulo estudavam na mesma instituição",
+
+        rec36_recommendation:
+          "Excelente professor, sempre preocupado com o aprendizado, além de proporcionar bons materiais e dicas de estudo. Também excelente como pessoa, procurando guardar nomes e ficar próximo dos alunos. Agradeço a oportunidade de tê-lo como meu professor.",
+
+        rec37_relationship:
+          "Em 17 de dezembro de 2017, Gabriel e João Paulo estudavam na mesma instituição",
+
+        rec37_recommendation:
+          "Está na lista dos melhores professores que já tive na vida. Ao mesmo tempo que te cobra bastante, faz você ter interesse no que está cobrando, tira qualquer dúvida, e é alguém que você quer levar como amigo pro resto da vida. Simplesmente sensacional. Valeu demais pelos conhecimentos que já passou e está me passando.",
+
+        rec38_relationship:
+          "Em 15 de dezembro de 2017, Amanda era cliente de João Paulo",
+
+        rec38_recommendation:
+          "Ótimo professor, atencioso, possui muito conhecimento e didática boa.",
+
+        rec39_relationship:
+          "Em 14 de dezembro de 2017, Nilson Junio Paulino era cliente de João Paulo",
+
+        rec39_recommendation:
+          "Ótimo professor, se empenha em cada matéria que leciona, sempre busca conhecimento além dos livros e tem uma didática excelente. Espero ser aluno dele em outra matéria, pois sei que será bem lecionada.",
+
+        rec40_relationship:
+          "Em 13 de dezembro de 2017, Lucas era cliente de João Paulo",
+
+        rec40_recommendation:
+          "Apesar das dificuldades durante o semestre e dos inúmeros bugs corrigidos, foi possível entregar um projeto que aplicava toda a teoria e conceito que foi ensinado de forma primorosa. Posso dizer com propriedade que o professor João Paulo fará parte da minha formação, sendo peça fundamental na minha trajetória do conhecimento.",
+
+        rec41_relationship:
+          "Em 13 de dezembro de 2017, Luiz Guilherme era cliente de João Paulo",
+
+        rec41_recommendation:
+          "Tive a sorte de participar de duas matérias lecionadas pelo professor João Paulo Aramuni, Fundamentos Teóricos da Computação e Compiladores. Em ambas mostrou completo interesse para tirar dúvidas, ajudar alunos com dificuldades, e sempre teve paciência e compreensão. Suas aulas possuem dinâmicas que facilitam o entendimento e aprendizagem, com total domínio das matérias e exemplos práticos.",
+
+        rec42_relationship:
+          "Em 13 de dezembro de 2017, João Paulo era cliente de David",
+
+        rec42_recommendation:
+          "Excelente professor, ótima didática e uma grande vontade de ensinar. As aulas foram muito bem ministradas!",
+
+        rec43_relationship:
+          "Em 11 de dezembro de 2017, João Paulo era sênior em relação a Samuel, mas não supervisionava Samuel diretamente",
+
+        rec43_recommendation:
+          "O Professor Aramuni é um dos melhores professores que já tive. Seu estilo de lecionar consegue explicar até a maior e mais complexa abstração de forma clara, possibilitando que todos absorvam o conhecimento e solucionem problemas complexos. Não há melhor pessoa para orientação do que o João Paulo.",
+
+        rec44_relationship:
+          "Em 19 de junho de 2017, João Lucas Veloso era cliente de João Paulo",
+
+        rec44_recommendation:
+          "João é um professor que busca e desenvolve métodos para que seus alunos aprendam. Sempre se mostrou comprometido a ajudar, oferecendo material bem preparado e paciência para respeitar o ritmo de cada aluno.",
+
+        rec45_relationship:
+          "Em 9 de fevereiro de 2017, Fábio e João Paulo estudavam na mesma instituição",
+
+        rec45_recommendation:
+          "Grande professor, atencioso, conhece muito bem o que ensina. Suas aulas foram de grande valia e sua didática foi além das expectativas. Feliz de ter compartilhado aprendizados com ele.",
+
+        rec46_relationship:
+          "Em 9 de janeiro de 2017, Márcio trabalhava com João Paulo na mesma equipe",
+
+        rec46_recommendation:
+          "Trabalho com o João Paulo a cerca de um ano e afirmo ser um profissional muito dedicado, responsável e estudioso. Sempre busca conhecimento e compartilha soluções com a equipe, favorecendo o crescimento de todos.",
+
+        rec47_relationship:
+          "Em 17 de outubro de 2016, Felipe e João Paulo estudavam na mesma instituição",
+
+        rec47_recommendation:
+          "Tive o grande prazer de ter sido aluno do João Paulo na Universidade FUMEC. Professor TOP, competente, atencioso, descontraído, que consegue explicar matérias complexas de forma clara e simples. Tudo isso graças ao seu amor pelo que faz. Sucesso João!",
+
+        rec48_relationship:
+          "Em 10 de outubro de 2016, Bruno era cliente de João Paulo",
+
+        rec48_recommendation:
+          "Tive o prazer de ser aluno do João Aramuni na universidade FUMEC. Profissional sério e dedicado, consegue passar o conhecimento da linguagem de programação de forma estruturada e clara. Excelente professor e desejo que se destaque bastante em sua carreira acadêmica.",
+
+        rec49_relationship:
+          "Em 23 de agosto de 2015, Rafael e João Paulo estudavam na mesma instituição",
+
+        rec49_recommendation:
+          "Tive a oportunidade de estudar com o João Paulo na FUMEC. Profissional diferenciado, organizado, persistente, autodidata e apaixonado por metodologias ágeis. Se destacava pela comunicação e pelo compartilhamento de conhecimento.",
+
+        rec50_relationship:
+          "Em 4 de março de 2015, Gabriela e João Paulo estudavam na mesma instituição",
+
+        rec50_recommendation:
+          "Recomendo João pela sua competência, por gostar da área em que atua e ser determinado, com força de vontade e fácil convivência. Ótimo profissional.",
+
+        rec51_relationship:
+          "Em 10 de novembro de 2014, João Paulo era sênior em relação a Glaydson, mas não supervisionava Glaydson diretamente",
+
+        rec51_recommendation:
+          "Trabalho com o João Paulo há quase 1 ano e neste período ele se mostrou um profissional competente e dedicado, atuando de forma excepcional em projetos de clientes como a OI e a ANP.",
+
+        rec52_relationship:
+          "Em 9 de novembro de 2014, Lucas e João Paulo estudavam na mesma instituição",
+
+        rec52_recommendation:
+          "João é um aluno dedicado e proativo. Destacou-se em sala de aula com excelentes trabalhos e apresentações. Como palestrante aborda metodologias ágeis que cativam cada vez mais alunos.",
+
+        rec53_relationship:
+          "Em 29 de outubro de 2014, Andre trabalhava com João Paulo mas em equipes diferentes",
+
+        rec53_recommendation:
+          "Tive a oportunidade de trabalhar com João Paulo na Capgemini durante 1 ano. Profissional que visa o compartilhamento de informação e está sempre à disposição para ajudar.",
+
+        rec54_relationship:
+          "Em 14 de outubro de 2014, Amadeu e João Paulo estudavam na mesma instituição",
+
+        rec54_recommendation:
+          "João Paulo é uma pessoa envolvida nas atividades de sala de aula e pesquisa. Trabalhamos juntos em artigos e apresentações, sempre trazendo ideias inovadoras. Tem experiência com metodologias ágeis, aplicadas inclusive na dissertação de mestrado.",
       },
       experiencias: {
         titulo: "Experiências Profissionais",
