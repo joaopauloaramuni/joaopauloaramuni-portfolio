@@ -32,6 +32,9 @@ const FlappyPlaneGame = ({ onExit }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
+    const hiddenInput = document.querySelector(".terminal-hidden-input"); 
+    hiddenInput?.blur();
+
     const game = document.getElementById("game");
     const planeEl = document.getElementById("plane");
     const scoreEl = document.getElementById("score");
