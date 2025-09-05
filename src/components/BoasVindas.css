@@ -1,3 +1,9 @@
+.name-animation {
+  white-space: pre-line;
+  margin: 0;
+  padding: 0;
+}
+
 .welcome-container {
   padding: 1rem 1.5rem;
   line-height: 1.8;
@@ -5,7 +11,6 @@
 }
 
 .whoami-animation {
-  font-family: "Consolas", "Monaco", monospace;
   font-size: 1.1rem;
   white-space: pre-line;
   margin-bottom: 2rem;
