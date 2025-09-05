@@ -5,7 +5,7 @@
 }
 
 .welcome-container {
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   line-height: 1.8;
   color: #a0aec0;
 }
@@ -53,6 +53,7 @@
 .navegue-text {
   color: #00ff9d;
   font-style: italic;
+  margin-bottom: 0.5rem;
 }
 
 .icon-link {
