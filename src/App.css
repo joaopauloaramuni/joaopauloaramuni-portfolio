@@ -55,19 +55,24 @@ body {
   }
 
   html,
+body {
+  height: 100%;
+  overflow: hidden; /* desativa scroll global */
+}
+
+.terminal-container {
+  height: 100dvh;         /* ocupa toda a tela no celular */
+  overflow: hidden;       /* impede que crie scroll duplo */
+}
+
+.react-terminal-wrapper {
+  height: 100%;
+  overflow-y: auto;       /* só o terminal terá scroll */
+  -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
+}
+
   body {
-    height: 100dvh;
-        font-size: 0.85rem;
-    overflow-y: auto;   /* deixa rolar só no celular */
-    overflow-x: hidden;
-  }
-
-  .terminal-container {
-    height: 100dvh; /* ocupa a tela toda */
-  }
-
-  .react-terminal-wrapper {
-    height: 85dvh;  /* terminal proporcional */
+    font-size: 0.85rem;
   }
 
   h1,
