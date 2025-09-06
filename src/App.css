@@ -34,7 +34,6 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .react-terminal {
