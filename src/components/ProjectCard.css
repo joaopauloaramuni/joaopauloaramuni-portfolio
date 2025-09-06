@@ -90,9 +90,10 @@
   .card-container {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0; /* gap entre cards apenas, sem afetar imagem */
     text-align: center;
     max-height: none; /* permite crescer conforme conteúdo */
+    padding: 0; /* sem padding no container */
   }
 
   .gif-container {
@@ -118,8 +119,13 @@
 
 @media (max-width: 768px) {
   .card-container {
-    gap: 1.5rem;
-    max-height: none;
+    gap: 0;
+    max-height: none; /* permite crescer conforme conteúdo */
+    padding: 0;
+  }
+
+  .gif-container {
+    margin-bottom: 12px; /* ajusta espaçamento no mobile menor */
   }
 
   .project-gif {
