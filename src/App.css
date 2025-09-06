@@ -54,8 +54,20 @@ body {
     font-size: 0.6rem;
   }
 
+  html,
   body {
-    font-size: 0.85rem;
+    height: 100dvh;
+        font-size: 0.85rem;
+    overflow-y: auto;   /* deixa rolar só no celular */
+    overflow-x: hidden;
+  }
+
+  .terminal-container {
+    height: 100dvh; /* ocupa a tela toda */
+  }
+
+  .react-terminal-wrapper {
+    height: 85dvh;  /* terminal proporcional */
   }
 
   h1,
@@ -86,14 +98,8 @@ body {
     font-size: 0.6rem;
   }
 
-   html,
   body {
-    height: 100dvh; /* usa altura dinâmica para não estourar com o teclado */
-    overflow: hidden;
-     font-size: 0.55rem;
-  }
-  .terminal-container {
-    height: 100dvh; /* garante que o terminal ocupe exatamente a tela */
+    font-size: 0.55rem;
   }
 
   h1,

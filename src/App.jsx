@@ -144,7 +144,7 @@ function App() {
         colorMode={ColorMode.Dark}
         onInput={isGameOpen || isContatoOpen ? undefined : handleInput}
         prompt={myPrompt}
-        height={window.innerWidth <= 480 ? "85dvh" : "85vh"} 
+        height="85vh"
       >
         {terminalLineData}
       </Terminal>
