@@ -66,11 +66,13 @@
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
+/* Responsividade */
+@media (max-width: 900px) {
   .sobre-container {
     flex-direction: column;
     text-align: center;
-    gap: 1.5rem;
+    gap: 2rem;
+    padding: 0 1rem;
   }
 
   .avatar-image {
@@ -78,6 +80,12 @@
     height: 150px;
   }
 
+  .info-container {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
   .nome-titulo {
     font-size: 2rem;
   }
@@ -88,5 +96,38 @@
 
   .biografia {
     font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .skills-tags-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .nome-titulo {
+    font-size: 1.5rem;
+  }
+
+  .cargo-titulo {
+    font-size: 0.85rem;
+  }
+
+  .biografia {
+    font-size: 0.8rem;
+  }
+
+  .skills-tags-container {
+    gap: 0.5rem;
+  }
+
+  .skill-tag-sobre {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
   }
 }
