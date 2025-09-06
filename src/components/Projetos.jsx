@@ -16,7 +16,7 @@ const Projetos = () => {
 
   return (
     <div className="projeto-container">
-      <h3>
+      <h3 className="projeto-title">
         {t("projetos.titulo")}
       </h3>
 
