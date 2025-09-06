@@ -1,6 +1,7 @@
 @font-face {
   font-family: "JetBrainsMono";
-  src: url("./assets/fonts/JetBrainsMono-2.304/fonts/webfonts/JetBrainsMono-Regular.woff2") format("woff2");
+  src: url("./assets/fonts/JetBrainsMono-2.304/fonts/webfonts/JetBrainsMono-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +9,8 @@
 
 @font-face {
   font-family: "FiraCode";
-  src: url("./assets/fonts/Fira_Code_v6.2/woff2/FiraCode-Regular.woff2") format("woff2");
+  src: url("./assets/fonts/Fira_Code_v6.2/woff2/FiraCode-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -34,17 +36,17 @@ body {
   overflow: hidden;
 }
 
+.react-terminal {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .react-terminal-wrapper {
   flex: 1;
   display: flex;
   overflow: hidden;
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
-}
-
-.react-terminal {
-  flex: 1; /* ocupa todo espaço do wrapper */
-  overflow-y: auto; /* único scroll */
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Garante altura mínima para cada linha, evitando deslocamentos */
@@ -77,6 +79,10 @@ body {
 /* ===== Responsividade Geral ===== */
 
 @media (max-width: 768px) {
+  .react-terminal-wrapper {
+    padding-right: 8px !important;
+  }
+
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
   }
@@ -108,6 +114,9 @@ body {
 }
 
 @media (max-width: 480px) {
+  .react-terminal-wrapper {
+    padding-right: 8px !important;
+  }
 
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
