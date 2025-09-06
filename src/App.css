@@ -50,8 +50,6 @@ body {
 .react-terminal-input {
   min-height: 1.5em;
   line-height: 1.5em;
-  display: flex;
-  align-items: baseline;
 }
 
 ::-webkit-scrollbar {
