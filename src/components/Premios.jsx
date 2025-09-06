@@ -17,7 +17,7 @@ export default function Premios() {
   }
 
   return (
-    <div style={{ padding: "0 1.5rem" }}>
+    <div>
       <h3 className="premios-titulo">
         {t("premios.titulo")}
       </h3>
