@@ -32,10 +32,7 @@ body {
 }
 
 .terminal-container {
-  height: 85vh; /* Já existe, mas é bom reforçar */
-  overflow-y: auto; /* Permite a rolagem vertical apenas dentro do terminal */
-  display: flex; /* Garante que o conteúdo se ajuste bem */
-  flex-direction: column;
+  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
