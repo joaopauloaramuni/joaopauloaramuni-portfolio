@@ -126,14 +126,14 @@
 
 @media (max-width: 480px) {
   .card-container {
-    max-height: 250px; /* reduz altura do card */
+    max-height: 220px; /* reduz altura do card */
     flex-direction: column;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .gif-container {
-    flex: 0 0 30%; /* reduz tamanho da imagem */
-    max-height: 120px;
+    flex: 0 0 35%; /* imagem menor */
+    max-height: 100px;
   }
 
   .project-gif {
@@ -142,24 +142,24 @@
   }
 
   .content-container {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 
   .card-title {
-    font-size: 0.2rem; /* título menor */
+    font-size: clamp(0.8rem, 3vw, 1rem); /* adapta entre 12px e 16px */
   }
 
   .card-description {
-    font-size: 0.1rem; /* descrição menor */
-    line-height: 1.4;
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem); /* adapta entre 11px e 14px */
+    line-height: 1.3;
   }
 
   .tech-tag {
-    font-size: 0.2rem; /* tags menores */
-    padding: 0.2rem 0.5rem;
+    font-size: clamp(0.6rem, 2vw, 0.75rem); /* adapta entre 10px e 12px */
+    padding: 0.15rem 0.4rem;
   }
 
   .repo-link {
-    font-size: 0.2rem; /* link menor */
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
   }
 }
