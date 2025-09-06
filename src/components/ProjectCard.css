@@ -84,42 +84,43 @@
   color: #66ffc9;
 }
 
-@media (max-width: 768px) {
+/* Responsividade */
+
+@media (max-width: 900px) {
   .card-container {
     flex-direction: column;
-    max-height: 300px; /* reduz altura do card */
-    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    padding: 0 8px;
   }
 
   .gif-container {
-    flex: 0 0 35%; /* imagem menor */
-    max-height: 140px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 12px;
   }
 
   .project-gif {
-    height: 100%;
-    object-fit: cover;
+    width: 120px;
+    height: 120px;
   }
 
   .content-container {
-    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    gap: 1.2rem;
+    padding: 0 4px;
   }
 
-  .card-title {
-    font-size: 1.2rem; /* título menor */
-  }
-
-  .card-description {
-    font-size: 0.9rem; /* descrição menor */
-    line-height: 1.4;
-  }
-
-  .tech-tag {
-    font-size: 0.75rem; /* tags menores */
-    padding: 0.2rem 0.5rem;
-  }
-
-  .repo-link {
-    font-size: 0.85rem; /* link menor */
+  .project-gif {
+    width: 90px;
+    height: 90px;
   }
 }
