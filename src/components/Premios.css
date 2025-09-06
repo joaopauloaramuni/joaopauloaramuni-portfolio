@@ -81,36 +81,43 @@
   font-size: 1.8rem;
 }
 
+/* Responsividade para prêmios */
 @media (max-width: 900px) {
   .premio-sobre-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
     padding: 0 8px;
   }
 
   .premio-avatar-container {
-    width: 100%;
+    display: flex;
     justify-content: center;
+    width: 100%;
     margin-bottom: 12px;
   }
 
   .premio-avatar-image {
     width: 120px;
     height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .premio-info-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: auto; /* não forçar 100% */
   }
 }
 
 @media (max-width: 768px) {
   .premio-sobre-container {
-    gap: 1.2rem;
+    gap: 1rem;
     padding: 0 4px;
   }
 
