@@ -36,6 +36,10 @@ body {
   flex-direction: column;
 }
 
+.terminal-container {
+  overflow-x: hidden;
+}
+
 .react-terminal {
   flex: 1;
   min-height: 0;
