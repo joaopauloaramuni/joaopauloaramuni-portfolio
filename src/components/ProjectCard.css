@@ -153,6 +153,10 @@
   color: #000000 !important; /* força preto */
   }
 
+    .repo-link {
+  color: #000000 !important; /* força preto */
+  }
+
   .card-description {
     font-size: 0.95rem;
     line-height: 1.5;
