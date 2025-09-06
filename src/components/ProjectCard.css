@@ -87,13 +87,13 @@
 @media (max-width: 768px) {
   .card-container {
     flex-direction: column;
-    max-height: 300px; /* reduz altura do card */
+    max-height: 400px; /* aumenta a altura total do card */
     margin-bottom: 1.5rem;
   }
 
   .gif-container {
-    flex: 0 0 35%; /* imagem menor */
-    max-height: 140px;
+    flex: 0 0 30%; /* imagem menor */
+    max-height: 120px;
   }
 
   .project-gif {
@@ -102,24 +102,26 @@
   }
 
   .content-container {
-    padding: 1rem;
+    padding: 1.2rem;
+    flex: 1 1 auto; /* permite ocupar mais espaço vertical */
   }
 
   .card-title {
-    font-size: 1.2rem; /* título menor */
+    font-size: 1.2rem;
   }
 
   .card-description {
-    font-size: 0.9rem; /* descrição menor */
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 
   .tech-tag {
-    font-size: 0.75rem; /* tags menores */
-    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
   }
 
   .repo-link {
-    font-size: 0.85rem; /* link menor */
+    font-size: 0.9rem;
   }
 }
+
