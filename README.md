@@ -279,6 +279,9 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
 * **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
+* **i18next & react-i18next (internacionalização):** [i18next Docs](https://www.i18next.com/) | [react-i18next Docs](https://react.i18next.com/)
+* **@react-pdf-viewer/core & @react-pdf-viewer/default-layout:** [Documentação oficial](https://react-pdf-viewer.dev/)
+* **pdfjs-dist (renderização de PDFs):** [Mozilla PDF.js GitHub](https://github.com/mozilla/pdfjs-dist)
 * **EmailJS:** [Documentação oficial](https://www.emailjs.com/docs/) | [Dashboard](https://dashboard.emailjs.com/)
 * **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)
 * **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  
@@ -292,6 +295,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
