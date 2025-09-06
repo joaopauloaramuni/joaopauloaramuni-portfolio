@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectCard from "./ProjectCard";
 import { projectsData } from "../data/projectsData";
+import "./Projetos.css";
 
 const Projetos = () => {
   const { t } = useTranslation();
@@ -14,10 +15,8 @@ const Projetos = () => {
   }));
 
   return (
-    <div style={{ padding: "0 1.5rem" }}>
-      <h3
-        style={{ color: "#00ff9d", marginBottom: "2rem", fontSize: "1.8rem" }}
-      >
+    <div className="projeto-container">
+      <h3>
         {t("projetos.titulo")}
       </h3>
 
