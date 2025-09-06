@@ -29,11 +29,15 @@ body {
 }
 
 .terminal-container {
-  height: 100vh;
+  min-height: 100vh;
   max-height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.terminal-container {
+  overflow-x: hidden;
 }
 
 .react-terminal-wrapper {
