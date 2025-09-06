@@ -40,6 +40,20 @@ body {
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
 }
 
+/* Garante altura mínima para cada linha, evitando deslocamentos */
+.react-terminal-line {
+  min-height: 1.5em;
+  line-height: 1.5em;
+}
+
+/* Para o input especificamente */
+.react-terminal-input {
+  min-height: 1.5em;
+  line-height: 1.5em;
+  display: flex;
+  align-items: baseline;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
