@@ -35,6 +35,8 @@ body {
 
 .terminal-container {
   overflow-x: hidden;
+  flex-grow: 1;
+  overflow-y: auto; /* único scroll vertical */
 }
 
 .react-terminal-wrapper {
