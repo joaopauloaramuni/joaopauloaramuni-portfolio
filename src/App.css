@@ -46,6 +46,16 @@ body {
   background-color: gray;
 }
 
+.terminal-hidden-input {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ===== Responsividade Geral ===== */
 
 /* Tablet */
@@ -53,23 +63,6 @@ body {
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
   }
-
-  html,
-body {
-  height: 100%;
-  overflow: hidden; /* desativa scroll global */
-}
-
-.terminal-container {
-  height: 100dvh;         /* ocupa toda a tela no celular */
-  overflow: hidden;       /* impede que crie scroll duplo */
-}
-
-.react-terminal-wrapper {
-  height: 100%;
-  overflow-y: auto;       /* só o terminal terá scroll */
-  -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
-}
 
   body {
     font-size: 0.85rem;
