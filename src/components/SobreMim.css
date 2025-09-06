@@ -71,7 +71,7 @@
   .sobre-container {
     flex-direction: column;
     text-align: center;
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 1rem;
   }
 
