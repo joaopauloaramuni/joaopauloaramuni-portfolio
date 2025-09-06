@@ -115,6 +115,7 @@ const resources = {
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
+        habilidades: { desc: "Show my programming skills." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
         wakatime: {
           desc: "Shows how much time I spent coding and in which languages.",
@@ -743,6 +744,7 @@ const resources = {
         recomendacoes: { desc: "Exibe minhas recomendações do LinkedIn." },
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
+        habilidades: { desc: "Exibe minhas habilidades em programação." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         wakatime: {
           desc: "Mostra quanto tempo passei programando e em quais linguagens.",
