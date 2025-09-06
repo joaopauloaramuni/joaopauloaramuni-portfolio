@@ -86,8 +86,14 @@ body {
     font-size: 0.6rem;
   }
 
+   html,
   body {
-    font-size: 0.55rem;
+    height: 100dvh; /* usa altura dinâmica para não estourar com o teclado */
+    overflow: hidden;
+     font-size: 0.55rem;
+  }
+  .terminal-container {
+    height: 100dvh; /* garante que o terminal ocupe exatamente a tela */
   }
 
   h1,
