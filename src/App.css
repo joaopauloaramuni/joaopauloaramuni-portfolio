@@ -28,7 +28,15 @@ body {
 
 }
 
+.react-terminal {
+  height: 100%;       /* ocupa o wrapper inteiro */
+  overflow-y: auto;   /* scroll interno só para as linhas do terminal */
+  -webkit-overflow-scrolling: touch; /* rolagem suave no iOS */
+}
+
 .react-terminal-wrapper {
+
+  overflow: hidden; /* pro wrapper externo não criar scroll */
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
 }
 
