@@ -44,6 +44,7 @@ body {
 }
 
 .react-terminal-wrapper {
+  padding-right: 16px !important;
   flex: 1;
   display: flex;
   overflow: hidden;
