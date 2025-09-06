@@ -1,12 +1,13 @@
 import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
-  IoLocationSharp,
+  IoLocationOutline,
   IoSchool,
   IoSchoolOutline,
   IoBriefcaseOutline,
   IoFootballOutline,
   IoBookOutline,
+  IoMailOutline,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import "./BoasVindas.css";
@@ -53,7 +54,10 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoBriefcaseOutline className="icon" style={{ color: "#8B4513" }} />
+              <IoBriefcaseOutline
+                className="icon"
+                style={{ color: "#8B4513" }}
+              />
               {t("boasvindas.cargo2")}
             </a>
           </li>
@@ -108,8 +112,22 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
+              <IoLocationOutline
+                className="icon"
+                style={{ color: "#ff6b6b" }}
+              />
               {t("boasvindas.local")}
+            </a>
+          </li>
+          <li>
+            <a
+              href="mailto:joaopauloaramuni@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoMailOutline className="icon" style={{ color: "#519bd8ff" }} />
+              joaopauloaramuni@gmail.com
             </a>
           </li>
         </ul>
