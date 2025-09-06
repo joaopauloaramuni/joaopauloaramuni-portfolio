@@ -1,0 +1,134 @@
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("./assets/fonts/JetBrainsMono-2.304/fonts/webfonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FiraCode";
+  src: url("./assets/fonts/Fira_Code_v6.2/woff2/FiraCode-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff9d #1a202c;
+}
+body {
+  background-color: #1a202c;
+}
+html,
+body {
+  overflow: hidden;
+}
+
+.terminal-container {
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-container {
+  overflow-x: hidden;
+}
+
+.react-terminal-wrapper {
+  font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
+}
+
+/* Garante altura mínima para cada linha, evitando deslocamentos */
+.react-terminal-line {
+  min-height: 1.5em;
+  line-height: 1.5em;
+}
+
+/* Para o input especificamente */
+.react-terminal-input {
+  min-height: 1.5em;
+  line-height: 1.5em;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #1a202c;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
+  border-radius: 20px;
+  border: 3px solid #1a202c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: gray;
+}
+
+/* ===== Responsividade Geral ===== */
+
+@media (max-width: 768px) {
+  .react-terminal-wrapper::after {
+    font-size: 0.6rem;
+  }
+
+  body {
+    font-size: 0.85rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 85%;
+  }
+
+  p,
+  li,
+  a,
+  span,
+  div {
+    font-size: 0.85rem;
+  }
+
+  .icon {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .react-terminal-wrapper::after {
+    font-size: 0.6rem;
+  }
+
+  body {
+    font-size: 0.55rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 70%;
+  }
+
+  p,
+  li,
+  a,
+  span,
+  div {
+    font-size: 0.55rem;
+  }
+
+  .icon {
+    font-size: 0.55rem;
+  }
+}
