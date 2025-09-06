@@ -48,7 +48,7 @@ export const projectsData = [
     titleId: "prosegur_proj_title",
     descriptionId: "prosegur_proj_desc",
     gif: "/prosegur.png",
-    repoLink: "https://github.com/joaopauloaramuni",
+    repoLink: "https://www.prosegur.com.br/",
     technologies: ["Java", "JavaFX", "Primefaces"],
   },
   {
