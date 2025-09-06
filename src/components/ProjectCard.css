@@ -1,5 +1,5 @@
 .card-container {
-  max-height: 350px;
+  max-height: 400px;
   display: flex;
   background-color: #2d3748;
   border-radius: 12px;
@@ -84,7 +84,6 @@
   color: #66ffc9;
 }
 
-/* Responsividade */
 /* Responsividade */
 
 @media (max-width: 900px) {
