@@ -146,20 +146,20 @@
   }
 
   .card-title {
-    font-size: 1rem; /* título menor */
+    font-size: 0.2remrem; /* título menor */
   }
 
   .card-description {
-    font-size: 0.2rem; /* descrição menor */
+    font-size: 0.1rem; /* descrição menor */
     line-height: 1.4;
   }
 
   .tech-tag {
-    font-size: 0.7rem; /* tags menores */
+    font-size: 0.2rem; /* tags menores */
     padding: 0.2rem 0.5rem;
   }
 
   .repo-link {
-    font-size: 0.8rem; /* link menor */
+    font-size: 0.2rem; /* link menor */
   }
 }
