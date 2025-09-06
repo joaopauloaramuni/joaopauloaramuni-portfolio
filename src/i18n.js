@@ -144,6 +144,10 @@ const resources = {
         github_proj_desc:
           "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
 
+        prosegur_proj_title: "SOL - Logistics Operations System",
+        prosegur_proj_desc:
+          "The Prosegur SOL Project unifies cash logistics systems across several countries, allowing the control of operations, resources, vehicles, personnel, routes, and services. It is a robust, configurable, and easy-to-maintain platform, incorporating the best existing features and facilitating the work of the analysis team.",
+
         aes_proj1_title: "Landing Page - Experimental Software Agency",
         aes_proj1_desc:
           "The AES Landing Page introduces the agency, collects requests, and highlights projects and team talents. It facilitates communication between clients and developers by allowing direct submission of requests to responsible teams. It also promotes the agency, showcasing projects, achievements, talents, and services, serving as a showcase for the market to see AES’s potential.",
@@ -764,6 +768,10 @@ const resources = {
         github_proj_title: "GitHub Readme Profile",
         github_proj_desc:
           "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
+
+        prosegur_proj_title: "SOL - Sistema de Operações Logísticas",
+        prosegur_proj_desc:
+          "O Projeto SOL da Prosegur unifica os sistemas de logística de valores em vários países, permitindo controlar operações, recursos, veículos, pessoas, rotas e serviços. É uma plataforma robusta, parametrizável e de fácil manutenção, incorporando as melhores funcionalidades existentes e facilitando o trabalho da equipe de análise.",
 
         aes_proj1_title: "Landing Page - Agência Experimental de Software",
         aes_proj1_desc:

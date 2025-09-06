@@ -45,6 +45,14 @@ export const projectsData = [
   },
   {
     id: 6,
+    titleId: "prosegur_proj_title",
+    descriptionId: "prosegur_proj_desc",
+    gif: "/prosegur.png",
+    repoLink: "https://github.com/joaopauloaramuni",
+    technologies: ["Java", "JavaFX", "Primefaces"],
+  },
+  {
+    id: 7,
     titleId: "aes_proj1_title",
     descriptionId: "aes_proj1_desc",
     gif: "/aes.png",
@@ -52,7 +60,7 @@ export const projectsData = [
     technologies: ["JavaScript", "HTML", "CSS", "Docker"],
   },
   {
-    id: 7,
+    id: 8,
     titleId: "aes_proj2_title",
     descriptionId: "aes_proj2_desc",
     gif: "/grade.png",
@@ -60,7 +68,7 @@ export const projectsData = [
     technologies: ["Java", "JavaScript", "HTML", "CSS", "Docker"],
   },
   {
-    id: 8,
+    id: 9,
     titleId: "aes_proj3_title",
     descriptionId: "aes_proj3_desc",
     gif: "/cuidobem.png",
@@ -68,7 +76,7 @@ export const projectsData = [
     technologies: ["Dart", "Java", "Flutter"],
   },
   {
-    id: 9,
+    id: 10,
     titleId: "aes_proj4_title",
     descriptionId: "aes_proj4_desc",
     gif: "/bhtec.jpg",
@@ -76,7 +84,7 @@ export const projectsData = [
     technologies: ["React", "Vite", "Java", "SpringBoot"],
   },
   {
-    id: 10,
+    id: 11,
     titleId: "aes_proj5_title",
     descriptionId: "aes_proj5_desc",
     gif: "/ajudaai.jpeg",
@@ -84,7 +92,7 @@ export const projectsData = [
     technologies: ["Dart", "Java", "Flutter"],
   },
   {
-    id: 11,
+    id: 12,
     titleId: "jedis_proj_title",
     descriptionId: "jedis_proj_desc",
     gif: "/jedis.jpg",
