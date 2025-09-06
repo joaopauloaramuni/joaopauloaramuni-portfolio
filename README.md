@@ -42,21 +42,21 @@ O grupo com o melhor portfólio ganhou como premiação um ano de domínio **pag
 Grupo vencedor:
 
 - João Vitor Santana Lopes:
-- :octocat: https://github.com/JoaoSantanaLopes/Portifolio-Terminal
-- ☁️ https://joao-santana.vercel.app/
+    - :octocat: https://github.com/JoaoSantanaLopes/Portifolio-Terminal
+    - ☁️ https://joao-santana.vercel.app/
 
 - Gabriel Chagas Lage:
-- :octocat: https://github.com/gabrielchagas13/gabriel-chagas-lage
-- ☁️ https://gabriel-chagas-lage.vercel.app/
+    - :octocat: https://github.com/gabrielchagas13/gabriel-chagas-lage
+    - ☁️ https://gabriel-chagas-lage.vercel.app/
 
 - Pedro Maia da Costa Silva:
-- :octocat: https://github.com/PedroMaia312/Portf-lio
-- ☁️ https://portfolio-pedro-maia.vercel.app/
+    - :octocat: https://github.com/PedroMaia312/Portf-lio
+    - ☁️ https://portfolio-pedro-maia.vercel.app/
  
 - Arthur Henrique Santana Pedra:
-- :octocat: https://github.com/arthies2323/portfolioLab001
-- ☁️ https://meu-portfolio-arthur-pedra.vercel.app/
- 
+    - :octocat: https://github.com/arthies2323/portfolioLab001
+    - ☁️ https://meu-portfolio-arthur-pedra.vercel.app/
+
 -----
 
 ## 🚀 Demonstração ao vivo
@@ -287,6 +287,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
