@@ -100,6 +100,28 @@ const BoasVindas = () => {
               {t("boasvindas.local")}
             </a>
           </li>
+                    <li>
+            <a
+              href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
+              {t("boasvindas.local")}
+            </a>
+          </li>
+                    <li>
+            <a
+              href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
+              {t("boasvindas.local")}
+            </a>
+          </li>
         </ul>
         <p className="navegue-text">{t("boasvindas.ajuda")}</p>
       </div>
