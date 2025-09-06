@@ -50,8 +50,6 @@ body {
 
 /* ===== Responsividade Geral ===== */
 
-/* ===== Responsividade Geral ===== */
-
 /* Tablet */
 @media (max-width: 768px) {
   .react-terminal-wrapper::after {
@@ -82,9 +80,13 @@ body {
   .icon {
     font-size: 0.85rem;
   }
+    /* Ajuste da altura do terminal no celular */
+  .react-terminal-wrapper {
+    height: 50vh; /* antes estava 85vh, diminui para evitar scroll quando abre o teclado */
+    max-height: 300px; /* garante que não fique muito pequeno */
+  }
 }
 
-/* Celular */
 @media (max-width: 480px) {
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
@@ -118,6 +120,6 @@ body {
   /* Ajuste da altura do terminal no celular */
   .react-terminal-wrapper {
     height: 50vh; /* antes estava 85vh, diminui para evitar scroll quando abre o teclado */
-    min-height: 300px; /* garante que não fique muito pequeno */
+    max-height: 300px; /* garante que não fique muito pequeno */
   }
 }
