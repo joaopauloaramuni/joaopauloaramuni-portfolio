@@ -46,6 +46,10 @@
   color: #e2e8f0;
 }
 
+.info-list li:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
 .info-list .icon {
   font-size: 1.2rem;
 }
