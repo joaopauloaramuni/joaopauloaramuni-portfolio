@@ -90,8 +90,8 @@
     gap: 1.5rem;
     text-align: center;
     padding: 0 8px;
-    max-width: 100%;
-    margin: 0 auto 24px auto;
+    max-width: 360px;    /* limitar largura do container no mobile */
+    margin: 0 auto 24px auto; /* centraliza horizontalmente */
   }
 
   .premio-avatar-container {
@@ -116,16 +116,15 @@
     width: 100%;
   }
 
-  /* Limitar largura do texto, igual recomendacoes */
   .premio-title,
   .premio-org,
   .premio-desc {
-    max-width: 80%;
+    max-width: 100%;  /* agora ocupa todo o container */
     text-align: justify;
   }
 
   .premio-separador {
-    width: 80%;
+    width: 100%;
   }
 }
 
@@ -133,6 +132,7 @@
   .premio-sobre-container {
     gap: 1rem;
     padding: 0 4px;
+    max-width: 300px; /* ainda menor em telas muito pequenas */
   }
 
   .premio-avatar-image {
