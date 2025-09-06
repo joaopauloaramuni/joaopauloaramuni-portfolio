@@ -18,6 +18,7 @@ Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com Re
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos.
+* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação.
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
@@ -295,6 +296,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
