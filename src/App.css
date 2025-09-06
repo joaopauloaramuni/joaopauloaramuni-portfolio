@@ -45,11 +45,6 @@ body {
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
 }
 
-.react-terminal {
-  flex: 1; /* ocupa todo espaço do wrapper */
-  overflow-y: auto; /* único scroll */
-  -webkit-overflow-scrolling: touch;
-}
 
 
 /* Garante altura mínima para cada linha, evitando deslocamentos */
