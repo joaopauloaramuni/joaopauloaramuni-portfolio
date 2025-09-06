@@ -80,7 +80,7 @@ body {
 
 @media (max-width: 768px) {
   .react-terminal-wrapper {
-    padding-right: 8px !important;
+    padding-right: 2px !important;
   }
 
   .react-terminal-wrapper::after {
@@ -115,7 +115,7 @@ body {
 
 @media (max-width: 480px) {
   .react-terminal-wrapper {
-    padding-right: 8px !important;
+    padding-right: 2px !important;
   }
 
   .react-terminal-wrapper::after {
