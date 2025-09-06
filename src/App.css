@@ -24,15 +24,12 @@ body {
 html,
 body {
   overflow: hidden;
-  height: 100%;
+  height: 100vh;
+
 }
 
 .react-terminal-wrapper {
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
-}
-
-.terminal-container {
-  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
