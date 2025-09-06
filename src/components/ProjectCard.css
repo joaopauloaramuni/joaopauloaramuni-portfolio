@@ -160,6 +160,7 @@
   .card-description {
     font-size: 0.95rem;
     line-height: 1.5;
+      color: #000000 !important; /* força preto */
   }
 
   .tech-tag {
