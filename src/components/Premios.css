@@ -89,9 +89,9 @@
     align-items: center;
     gap: 1.5rem;
     text-align: center;
-    padding: 0 8px;        /* pouco padding interno */
-    max-width: 100%;        /* garante que não ultrapasse a tela */
-    margin: 0 auto 24px auto; /* centraliza horizontalmente */
+    padding: 0 8px;
+    max-width: 100%;
+    margin: 0 auto 24px auto;
   }
 
   .premio-avatar-container {
@@ -113,24 +113,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;           /* ocupa todo o espaço disponível */
+    width: 100%;
   }
 
+  /* Limitar largura do texto, igual recomendacoes */
+  .premio-title,
+  .premio-org,
   .premio-desc {
-    max-width: 100%;       /* ocupa toda a largura do container */
-    margin: 8px 0;
+    max-width: 80%;
     text-align: justify;
   }
 
   .premio-separador {
-    width: 100%;           /* linha cheia do container */
+    width: 80%;
   }
 }
 
 @media (max-width: 768px) {
   .premio-sobre-container {
     gap: 1rem;
-    padding: 0 4px;        /* ainda menos padding para telas pequenas */
+    padding: 0 4px;
   }
 
   .premio-avatar-image {
