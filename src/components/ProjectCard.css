@@ -86,13 +86,13 @@
 
 @media (max-width: 768px) {
   .card-container {
-    flex-direction: column;
-    max-height: 400px; /* aumenta a altura total do card */
+    flex-direction: column-reverse; /* conteúdo em cima, imagem embaixo */
+    max-height: 400px; 
     margin-bottom: 1.5rem;
   }
 
   .gif-container {
-    flex: 0 0 30%; /* imagem menor */
+    flex: 0 0 30%; 
     max-height: 120px;
   }
 
@@ -103,7 +103,7 @@
 
   .content-container {
     padding: 1.2rem;
-    flex: 1 1 auto; /* permite ocupar mais espaço vertical */
+    flex: 1 1 auto; 
   }
 
   .card-title {
@@ -125,3 +125,43 @@
   }
 }
 
+@media (max-width: 480px) {
+  .card-container {
+    flex-direction: column-reverse; /* conteúdo em cima, imagem embaixo */
+    max-height: 400px; 
+    margin-bottom: 1.5rem;
+  }
+
+  .gif-container {
+    flex: 0 0 30%; 
+    max-height: 120px;
+  }
+
+  .project-gif {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content-container {
+    padding: 1.2rem;
+    flex: 1 1 auto; 
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .tech-tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .repo-link {
+    font-size: 0.9rem;
+  }
+}
