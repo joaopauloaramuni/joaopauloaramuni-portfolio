@@ -83,12 +83,12 @@ body {
 
 /* Celular */
 @media (max-width: 480px) {
-  .react-terminal-wrapper::after {
-    font-size: 0.6rem;
+  .react-terminal {
+    height: 70vh;
   }
 
-  .terminal-container {
-    height: 70vh; /* altura menor no celular */
+  .react-terminal-wrapper::after {
+    font-size: 0.6rem;
   }
 
   body {
