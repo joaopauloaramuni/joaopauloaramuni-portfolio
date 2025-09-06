@@ -124,6 +124,7 @@
   }
 }
 
+
 @media (max-width: 480px) {
   .card-container {
     max-height: 220px; /* mantém altura reduzida do card */
@@ -146,7 +147,7 @@
   }
 
   .card-title {
-    font-size: 4px !important; /* força o título bem pequeno */
+    font-size: 2px !important; /* força o título bem pequeno */
   }
 
   .card-description {
