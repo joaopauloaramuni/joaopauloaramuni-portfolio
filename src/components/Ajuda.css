@@ -25,6 +25,17 @@
   }
 
   .ajuda-description {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 }
+
+@media (max-width: 480px) {
+  .ajuda-aliases {
+    font-size: 0.9rem;
+  }
+
+  .ajuda-description {
+    font-size: 0.6rem;
+  }
+}
+

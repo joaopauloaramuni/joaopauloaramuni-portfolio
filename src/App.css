@@ -24,8 +24,16 @@ body {
 html,
 body {
   overflow: hidden;
-  height: 75vh;
+  height: 100vh;
 
+}
+
+.terminal-container {
+  height: 100vh;      /* força a ocupar exatamente a altura da tela */
+  max-height: 100vh;  /* garante que não passe */
+  overflow: hidden;   /* evita overflow interno */
+  display: flex;
+  flex-direction: column;
 }
 
 .react-terminal-wrapper {
