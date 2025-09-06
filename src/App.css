@@ -21,21 +21,29 @@ html {
 body {
   background-color: #1a202c;
 }
-html,
-body {
-  overflow: hidden;
+html, body {
+  height: 100%;
+  overflow: hidden; /* evita scroll do body */
 }
 
 .terminal-container {
-  max-height: 100vh;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* ocupa toda a tela */
+  overflow: hidden; /* evita scroll extra */
+}
+
+.react-terminal-wrapper {
+  flex: 1; /* preenche o container */
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.terminal-container {
-  overflow-x: hidden;
+.react-terminal {
+  flex: 1; /* ocupa todo espaço do wrapper */
+  overflow-y: auto; /* único scroll */
+  -webkit-overflow-scrolling: touch;
 }
 
 .react-terminal-wrapper {
