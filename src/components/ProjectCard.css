@@ -86,27 +86,27 @@
 
 /* Responsividade */
 
-/* Responsividade */
-
 @media (max-width: 900px) {
   .card-container {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
     text-align: center;
-    padding: 0 12px; /* um pouco mais de padding */
-    max-height: 500px; /* aumenta altura do card */
+    padding: 0 12px;
+    max-height: none; /* permite crescer conforme conteúdo */
   }
 
   .gif-container {
     width: 100%;
+    display: flex;
     justify-content: center;
     margin-bottom: 16px;
   }
 
   .project-gif {
-    width: 200px;  /* aumenta a imagem */
-    height: 200px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
   }
 
   .content-container {
@@ -120,11 +120,12 @@
   .card-container {
     gap: 1.5rem;
     padding: 0 8px;
-    max-height: 480px; /* altura um pouco menor que 900px mas maior que antes */
+    max-height: none; /* permite crescer conforme conteúdo */
   }
 
   .project-gif {
-    width: 180px;  /* mantém imagem maior que antes */
-    height: 180px;
+    width: 70%;  
+    height: auto;
+    object-fit: contain;
   }
 }
