@@ -126,7 +126,7 @@
 
 @media (max-width: 480px) {
   .card-container {
-    max-height: 220px; /* reduz altura do card */
+    max-height: 220px; /* altura do card */
     flex-direction: column;
     margin-bottom: 1rem;
   }
@@ -146,16 +146,16 @@
   }
 
   .card-title {
-    font-size: clamp(0.8rem, 3vw, 1rem); /* adapta entre 12px e 16px */
+    font-size: clamp(0.6rem, 3vw, 0.8rem); /* agora varia entre ~10px e 13px */
   }
 
   .card-description {
-    font-size: clamp(0.7rem, 2.5vw, 0.9rem); /* adapta entre 11px e 14px */
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
     line-height: 1.3;
   }
 
   .tech-tag {
-    font-size: clamp(0.6rem, 2vw, 0.75rem); /* adapta entre 10px e 12px */
+    font-size: clamp(0.6rem, 2vw, 0.75rem);
     padding: 0.15rem 0.4rem;
   }
 

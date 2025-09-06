@@ -83,9 +83,6 @@ body {
 
 /* Celular */
 @media (max-width: 480px) {
-  .react-terminal {
-    height: 70vh;
-  }
 
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
