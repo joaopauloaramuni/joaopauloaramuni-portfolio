@@ -279,6 +279,11 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
 * **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
+* **EmailJS:** [Documentação oficial](https://www.emailjs.com/docs/) | [Dashboard](https://dashboard.emailjs.com/)
+* **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)
+* **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  
+* **Spotify e Last.fm:** [Spotify GitHub Profile - Kittinan](https://github.com/kittinan/spotify-github-profile) | [Spotify Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/spotify-recently-played-readme) | [Data Card for Spotify](https://data-card-for-spotify.herokuapp.com/) | [Last.fm Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/lastfm-recently-played-readme)
+* **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
 
 -----
 
@@ -287,13 +292,6 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
-
-
-
-
-
-
-
 
 
 
