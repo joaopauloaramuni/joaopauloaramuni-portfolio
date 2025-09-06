@@ -14,6 +14,11 @@
   font-display: swap;
 }
 
+.terminal-container,
+.react-terminal-wrapper {
+  overscroll-behavior: contain; /* impede scroll automático no foco do input */
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: #00ff9d #1a202c;
@@ -49,13 +54,8 @@ body {
 
 /* ===== Responsividade Geral ===== */
 
+/* Tablet */
 @media (max-width: 768px) {
-
-  .terminal-container,
-.react-terminal-wrapper {
-  overscroll-behavior: contain; /* impede scroll automático no foco do input */
-}
-
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
   }
@@ -86,12 +86,8 @@ body {
   }
 }
 
+/* Celular */
 @media (max-width: 480px) {
-
-  .terminal-container,
-.react-terminal-wrapper {
-  overscroll-behavior: contain; /* impede scroll automático no foco do input */
-}
 
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
