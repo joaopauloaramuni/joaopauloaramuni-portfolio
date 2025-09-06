@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 function App() {
   const { t } = useTranslation();
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
-
+  
   const [terminalLineData, setTerminalLineData] = useState([
     getWelcomeMessage(),
   ]);
