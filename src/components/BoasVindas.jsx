@@ -4,8 +4,9 @@ import {
   IoLocationSharp,
   IoSchool,
   IoSchoolOutline,
-  IoBriefcase,
+  IoBriefcaseOutline,
   IoFootballOutline,
+  IoBookOutline,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import "./BoasVindas.css";
@@ -52,8 +53,19 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoBriefcase className="icon" style={{ color: "#8B4513" }} />
+              <IoBriefcaseOutline className="icon" style={{ color: "#8B4513" }} />
               {t("boasvindas.cargo2")}
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/joaopauloaramuni/trabalho-de-conclusao-de-curso-ii"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoBookOutline className="icon" style={{ color: "#B03060" }} />
+              {t("boasvindas.orientacao")}
             </a>
           </li>
           <li>
@@ -90,28 +102,6 @@ const BoasVindas = () => {
             </a>
           </li>
           <li>
-            <a
-              href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon-link"
-            >
-              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
-              {t("boasvindas.local")}
-            </a>
-          </li>
-                    <li>
-            <a
-              href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon-link"
-            >
-              <IoLocationSharp className="icon" style={{ color: "#ff6b6b" }} />
-              {t("boasvindas.local")}
-            </a>
-          </li>
-                    <li>
             <a
               href="https://www.pucminas.br/campus/coracao-eucaristico/Paginas/como-chegar.aspx"
               target="_blank"
