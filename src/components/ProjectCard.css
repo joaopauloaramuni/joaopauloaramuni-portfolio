@@ -85,35 +85,33 @@
 }
 
 /* Responsividade */
+/* Responsividade */
 
 @media (max-width: 900px) {
   .card-container {
     flex-direction: column;
-    align-items: center;
-    gap: 0; /* gap entre cards apenas, sem afetar imagem */
+    align-items: stretch; /* faz o card ocupar toda largura */
+    gap: 0; /* sem gap extra entre imagem e texto */
     text-align: center;
     max-height: none; /* permite crescer conforme conteúdo */
-    padding: 0; /* sem padding no container */
+    padding: 0; /* sem padding no card */
   }
 
   .gif-container {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px; /* espaçamento entre imagem e texto */
+    display: block; /* mantém a imagem encostada nas bordas */
+    margin-bottom: 0; /* sem gap extra entre imagem e texto */
   }
 
   .project-gif {
-    width: 100%;   
-    height: auto;  
-    object-fit: contain; 
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* imagem ocupa largura inteira */
   }
 
   .content-container {
-    align-items: center;
-    justify-content: center;
-    width: 100%;
     padding: 1.5rem; /* padding só no texto */
+    align-items: stretch; /* mantém largura do conteúdo igual ao card */
   }
 }
 
@@ -125,16 +123,19 @@
   }
 
   .gif-container {
-    margin-bottom: 12px; /* ajusta espaçamento no mobile menor */
+    width: 100%;
+    display: block;
+    margin-bottom: 0;
   }
 
   .project-gif {
-    width: 100%;  
+    width: 100%;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .content-container {
     padding: 1.2rem; /* padding só no texto */
+    align-items: stretch;
   }
 }
