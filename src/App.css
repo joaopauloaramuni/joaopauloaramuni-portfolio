@@ -29,9 +29,9 @@ body {
 }
 
 .terminal-container {
-  height: 100vh;      /* força a ocupar exatamente a altura da tela */
-  max-height: 100vh;  /* garante que não passe */
-  overflow: hidden;   /* evita overflow interno */
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
