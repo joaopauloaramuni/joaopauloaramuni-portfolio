@@ -76,7 +76,7 @@
   }
 
   .avatar-container {
-    margin-top: 1.5rem; /* espaço acima da imagem só em telas pequenas */
+    margin-top: 1rem;
   }
 
   .avatar-image {
@@ -86,7 +86,7 @@
 
   .info-container {
     align-items: center;
-    margin-right: 1.5rem; /* espaço à direita do texto só em telas pequenas */
+    margin-right: 1.5rem;
   }
 }
 
