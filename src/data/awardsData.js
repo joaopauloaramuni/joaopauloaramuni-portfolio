@@ -1,4 +1,3 @@
-// awardsData.js
 export const awardsData = [
   {
     id: "professor_newton",

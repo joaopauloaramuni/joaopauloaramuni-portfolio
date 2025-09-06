@@ -10,6 +10,7 @@ import Projetos from "./components/Projetos";
 import Experiencias from "./components/Experiencias";
 import SobreMim from "./components/SobreMim";
 import Ajuda from "./components/Ajuda";
+import Habilidades from "./components/Habilidades";
 import Spotify from "./components/Spotify";
 import WakaTime from "./components/WakaTime";
 import Contato from "./components/Contato";
@@ -94,6 +95,9 @@ function App() {
         case "curriculo":
           response = <Curriculo />;
           break;
+        case "habilidades":
+          response = <Habilidades />;
+        break;
         case "limpar":
           setTerminalLineData([]);
           return;

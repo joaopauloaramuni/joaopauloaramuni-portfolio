@@ -18,9 +18,7 @@ export default function Premios() {
 
   return (
     <div style={{ padding: "0 1.5rem" }}>
-      <h3
-        style={{ color: "#00ff9d", marginBottom: "2rem", fontSize: "1.8rem" }}
-      >
+      <h3 className="premios-titulo">
         {t("premios.titulo")}
       </h3>
       {awardsData.map((award, idx) => (

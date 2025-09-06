@@ -73,6 +73,9 @@ const resources = {
             "🔧 Software development and maintenance for Capgemini, Prosegur, Banco do Brasil, HotMilhas, 123milhas, PMMG, and other institutions",
         },
       },
+      habilidades: {
+        titulo: "Skills",
+      },
       premios: {
         titulo: "Awards",
         nenhum: "No awards registered yet.",
@@ -699,6 +702,9 @@ const resources = {
           devExperience:
             "🔧 Desenvolvimento e manutenção de software para Capgemini, Prosegur, Banco do Brasil, HotMilhas, 123milhas, PMMG e outras instituições",
         },
+      },
+      habilidades: {
+        titulo: "Habilidades",
       },
       premios: {
         titulo: "Prêmios",

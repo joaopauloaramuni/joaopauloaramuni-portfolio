@@ -1,4 +1,3 @@
-// Dados das recomendações no padrão flat
 export const recommendationsData = [
   {
     id: 1,

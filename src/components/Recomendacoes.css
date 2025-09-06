@@ -14,6 +14,7 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
+
 .recomendacao-separador {
   width: 80%;
   height: 1px;
@@ -84,6 +85,21 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.recomendacao-link:hover {
+  color: #00d18b;
+}
+
+.recomendacoes-icone {
+  font-size: 1.2rem;
+  color: #00ff9d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.recomendacao-link:hover .recomendacoes-icone {
+  color: #00d18b;
+}
+
 
 /* Responsividade */
 
