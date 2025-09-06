@@ -90,7 +90,7 @@
   .card-container {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
     padding: 0 12px;
     max-height: none; /* permite crescer conforme conteúdo */
@@ -104,9 +104,9 @@
   }
 
   .project-gif {
-    width: 80%;
-    height: auto;
-    object-fit: contain;
+    width: 100%;   /* ocupa toda a largura do card */
+    height: auto;  /* mantém proporção */
+    object-fit: contain; 
   }
 
   .content-container {
@@ -124,7 +124,7 @@
   }
 
   .project-gif {
-    width: 70%;  
+    width: 100%;  
     height: auto;
     object-fit: contain;
   }
