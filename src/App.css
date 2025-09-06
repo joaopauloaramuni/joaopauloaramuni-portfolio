@@ -23,15 +23,17 @@ body {
 }
 html,
 body {
-  overflow: hidden;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden; /* evita scroll do body */
 }
 
 .terminal-container {
-  max-height: 100vh;
+  height: 100%;
+  max-height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .terminal-container {
@@ -39,6 +41,10 @@ body {
 }
 
 .react-terminal-wrapper {
+  flex: 1; /* ocupa todo o espaço disponível */
+  overflow-y: auto; /* único scroll vertical */
+  -webkit-overflow-scrolling: touch; /* suaviza no mobile */
+  box-sizing: border-box;
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
 }
 
