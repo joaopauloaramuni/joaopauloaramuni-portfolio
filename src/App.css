@@ -53,6 +53,11 @@ body {
   line-height: 1.5em;
 }
 
+.react-terminal-output {
+  min-height: 1.5em;
+  line-height: 1.5em;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }

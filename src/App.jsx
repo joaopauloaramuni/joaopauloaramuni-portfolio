@@ -122,8 +122,7 @@ function App() {
     } else {
       response = (
         <TerminalOutput>
-          {t("comando.nao_reconhecido")} "{userInput}"<br />
-          {t("comando.ver_ajuda")}
+          {t("comando.nao_reconhecido")} "{userInput}" - {t("comando.ver_ajuda")}
         </TerminalOutput>
       );
     }
