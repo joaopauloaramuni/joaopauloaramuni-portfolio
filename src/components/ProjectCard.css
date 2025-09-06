@@ -92,7 +92,6 @@
     align-items: center;
     gap: 1.5rem;
     text-align: center;
-    padding: 0 12px;
     max-height: none; /* permite crescer conforme conteúdo */
   }
 
@@ -100,12 +99,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 16px; /* espaçamento entre imagem e texto */
   }
 
   .project-gif {
-    width: 100%;   /* ocupa toda a largura do card */
-    height: auto;  /* mantém proporção */
+    width: 100%;   
+    height: auto;  
     object-fit: contain; 
   }
 
@@ -113,19 +112,23 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 1.5rem; /* padding só no texto */
   }
 }
 
 @media (max-width: 768px) {
   .card-container {
     gap: 1.5rem;
-    padding: 0 8px;
-    max-height: none; /* permite crescer conforme conteúdo */
+    max-height: none;
   }
 
   .project-gif {
     width: 100%;  
     height: auto;
     object-fit: contain;
+  }
+
+  .content-container {
+    padding: 1.2rem; /* padding só no texto */
   }
 }
