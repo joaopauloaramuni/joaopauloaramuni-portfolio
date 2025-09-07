@@ -120,6 +120,58 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
    - É enviado para o email que o usuário digitou no formulário (`{{email}}` no template).  
    - Inclui o nome do usuário, a data/hora e pode exibir a própria mensagem como confirmação.
 
+```javascript
+// Email para você (notificação)
+emailjs
+  .send(
+    EMAILJS_CONFIG.SERVICE_ID,
+    EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
+    {
+      name: nome,
+      email: email,
+      message: mensagem,
+      title: `Nova mensagem do site de: ${nome}`, // assunto do email
+      time: time,
+    },
+    EMAILJS_CONFIG.PUBLIC_KEY
+  )
+  .then(
+    () => {
+      console.log("Email para você enviado!");
+    },
+    (err) => {
+      console.error("Erro ao enviar para você:", err);
+      setStatus(t("contato.erro"));
+    }
+  );
+
+// Email de confirmação para o remetente
+emailjs
+  .send(
+    EMAILJS_CONFIG.SERVICE_ID,
+    EMAILJS_CONFIG.TEMPLATE_ID_FOR_SENDER,
+    {
+      name: nome,
+      email: email,
+      message: mensagem,
+      title: "Recebemos sua mensagem!", // assunto do email de confirmação
+      time: time,
+    },
+    EMAILJS_CONFIG.PUBLIC_KEY
+  )
+  .then(
+    () => {
+      console.log("Email de confirmação enviado ao remetente!");
+      setStatus(t("contato.sucesso"));
+      e.target.reset();
+    },
+    (err) => {
+      console.error("Erro ao enviar confirmação:", err);
+      setStatus(t("contato.erro"));
+    }
+  );
+```
+
 -----
 
 ### 1. Criar conta no EmailJS
@@ -383,6 +435,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
