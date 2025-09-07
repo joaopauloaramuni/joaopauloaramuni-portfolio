@@ -1,7 +1,7 @@
 .calendly-title {
   color: #00ff9d;
   font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .calendly-inline-widget {
@@ -9,5 +9,19 @@
   height: 700px;
   border-radius: 10px;
   margin-bottom: 0;
+  width: 100% !important; /* garante que ocupe toda a largura do container */
+  box-sizing: border-box; /* respeita padding do pai */
 }
 
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+  .calendly-inline-widget {
+    height: 550px;       /* menor altura no celular */
+    margin: 0 auto;      /* centraliza */
+    width: 100% !important;
+  }
+
+  .calendly-title {
+    text-align: center;  /* deixa título alinhado no mobile */
+  }
+}
