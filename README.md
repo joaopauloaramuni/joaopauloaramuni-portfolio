@@ -122,6 +122,8 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
    - Inclui o nome do usuário, a data/hora e pode exibir a própria mensagem como confirmação.
 
 ```javascript
+import EMAILJS_CONFIG from "../config/emailJsConfig";
+
 // Email para você (notificação)
 emailjs
   .send(
@@ -360,10 +362,10 @@ emailjs
 
 ### 5. Configurar `emailjsConfig.js`
 
-Crie ou edite o arquivo `emailjsConfig.js` no seu projeto React e configure-o para usar as variáveis de ambiente definidas:
+Crie ou edite o arquivo `emailJsConfig.js` no seu projeto React e configure-o para usar as variáveis de ambiente definidas:
 
 ```javascript
-// emailjsConfig.js
+// emailJsConfig.js
 const EMAILJS_CONFIG = {
   SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
   TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_ME,
@@ -413,10 +415,10 @@ VITE_GITHUB_TOKEN=seu_token_aqui
 
 #### 3️⃣ Criar a configuração da GitHub API
 
-Crie um arquivo `GitHubAPIConfig.js` em `src/config/`:
+Crie um arquivo `gitHubApiConfig.js` em `src/config/`:
 
 ```javascript
-// GitHubAPIConfig.js
+// gitHubApiConfig.js
 const GITHUB_API_CONFIG = {
   USERNAME: "joaopauloaramuni",
   TOKEN: import.meta.env.VITE_GITHUB_TOKEN,
@@ -446,7 +448,7 @@ export default GITHUB_API_CONFIG;
 No seu componente `ProjetosGitHub.jsx`, você pode fazer algo como:
 
 ```javascript
-import GITHUB_API_CONFIG from "../config/GitHubAPIConfig";
+import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
 
 const { USERNAME, TOKEN, BASE_URL, PER_PAGE } = GITHUB_API_CONFIG;
 
@@ -560,6 +562,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
