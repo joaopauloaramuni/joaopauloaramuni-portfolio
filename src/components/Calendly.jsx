@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { InlineWidget } from "react-calendly";
 import "./Calendly.css";
 
 export default function Calendly() {
   const { t } = useTranslation();
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div>
-        <InlineWidget
-          url="https://calendly.com/aramuni"
-          className="calendly-frame"
-        />
+      <h3 className="calendly-title">{t("calendly.titulo")}</h3>
+      <div
+        className="calendly-inline-widget"
+        data-url="https://calendly.com/aramuni"
+        data-resize="true"
+      ></div>
     </div>
   );
 }

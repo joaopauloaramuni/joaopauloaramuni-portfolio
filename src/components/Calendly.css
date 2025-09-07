@@ -2,15 +2,12 @@
   color: #00ff9d;
   margin-bottom: 2rem;
   font-size: 1.8rem;
+  margin-bottom: 0;
 }
 
-.calendly-frame {
-  height: 70vh;
+.calendly-inline-widget {
+  min-width: 320px;
+  height: 700px;
+  border-radius: 10px;
 }
 
-/* Responsivo para celular */
-@media (max-width: 768px) {
-  .calendly-frame {
-    height: 30vh;
-  }
-}
