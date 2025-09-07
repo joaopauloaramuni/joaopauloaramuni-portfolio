@@ -3,3 +3,14 @@
   margin-bottom: 2rem;
   font-size: 1.8rem;
 }
+
+.calendly-frame {
+  height: 70vh;
+}
+
+/* Responsivo para celular */
+@media (max-width: 768px) {
+  .calendly-frame {
+    height: 30vh;
+  }
+}
