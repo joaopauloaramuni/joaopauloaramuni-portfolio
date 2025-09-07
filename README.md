@@ -92,8 +92,72 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 * **react-type-animation:** Para animações de digitação de texto.
 * **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
 * **emailjs-com**: Para enviar e-mails diretamente do frontend sem precisar de um backend próprio.
+* **react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
 
 Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
+
+-----
+
+## 📌 Diferença entre usar `react-calendly` e o embed oficial
+
+Existem duas formas principais de integrar o Calendly em uma aplicação React:
+
+### 1. Usando `react-calendly`
+
+```bash
+npm install react-calendly
+```
+
+* O `react-calendly` é um **wrapper React** para o Calendly.
+* Permite inserir o widget usando componentes React (`<InlineWidget>` ou `<PopupWidget>`).
+* É fácil de usar e se integra bem com o fluxo React.
+* Limitações:
+
+  * O controle de altura e responsividade não é tão refinado.
+  * Pode gerar espaço extra em dispositivos móveis.
+  * Menos flexível para rastrear eventos avançados ou pré-preencher campos.
+
+**Exemplo de uso:**
+
+```jsx
+import { InlineWidget } from "react-calendly";
+
+<InlineWidget url="https://calendly.com/aramuni" styles={{ height: "100vh" }} />
+```
+
+---
+
+### 2. Usando o embed oficial via script (o método que estamos usando)
+
+* Carregamos o **script oficial do Calendly** diretamente no React.
+* Permite usar atributos como `data-resize` para ajuste automático da altura.
+* Mais flexível: possibilita pré-preencher campos, rastrear eventos e personalizar o comportamento do widget.
+* Melhor responsividade em dispositivos móveis, sem espaço extra.
+
+**Exemplo de uso:**
+
+```jsx
+import React, { useEffect } from "react";
+
+useEffect(() => {
+  const script = document.createElement("script");
+  script.src = "https://assets.calendly.com/assets/external/widget.js";
+  script.async = true;
+  document.body.appendChild(script);
+}, []);
+
+<div
+  className="calendly-inline-widget"
+  data-url="https://calendly.com/aramuni"
+  data-resize="true"
+  style={{ minWidth: "320px", height: "700px" }}
+></div>
+```
+
+**Resumo:**
+
+* `react-calendly`: mais rápido e integrado ao React, porém menos flexível.
+* Embed oficial: mais controle, melhor responsividade e recursos avançados, mas requer incluir o script manualmente.
 
 -----
 
@@ -555,7 +619,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 * **Spotify e Last.fm:** [Spotify GitHub Profile - Kittinan](https://github.com/kittinan/spotify-github-profile) | [Spotify Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/spotify-recently-played-readme) | [Data Card for Spotify](https://data-card-for-spotify.herokuapp.com/) | [Last.fm Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/lastfm-recently-played-readme)
 * **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
 * **GitHubAPI:** [Documentação](https://docs.github.com/pt/rest) | [Token](https://github.com/settings/tokens)
-* **Calendly (agendamento online):** [Embed options overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [How to add Calendly to your website](https://help.calendly.com/hc/en-us/articles/4409838727703-How-to-add-Calendly-to-your-website) | [Embed Inline](https://www.calendly-embed.com/embed-inline)
+* **Calendly (agendamento online):** [Embed options overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [How to add Calendly to your website](https://help.calendly.com/hc/en-us/articles/4409838727703-How-to-add-Calendly-to-your-website) | [Embed Inline](https://www.calendly-embed.com/embed-inline) | [Embed Options Overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [Advanced Calendly Embed for Developers](https://help.calendly.com/hc/en-us/articles/31618265722775-Advanced-Calendly-embed-for-developers)
 
 -----
 
@@ -564,6 +628,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
