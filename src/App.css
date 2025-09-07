@@ -90,10 +90,11 @@ body {
 /* ===== Responsividade Geral ===== */
 
 @media (max-width: 768px) {
-
-    html, body {
-    overflow: hidden !important; /* garante que não rola no mobile */
-    height: 100vh;               /* corrige bug da barra de endereço móvel */
+  html,
+  body {
+    height: 100dvh;
+    min-height: 100vh;
+    overflow: hidden;
   }
 
   .react-terminal-wrapper::after {
@@ -128,9 +129,11 @@ body {
 
 @media (max-width: 480px) {
 
-    html, body {
-    overflow: hidden !important; /* garante que não rola no mobile */
-    height: 100vh;               /* corrige bug da barra de endereço móvel */
+    html,
+  body {
+    height: 100dvh;
+    min-height: 100vh;
+    overflow: hidden;
   }
   
   .react-terminal-wrapper::after {
