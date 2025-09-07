@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProjectCard from "./ProjectCard";
 import "./Projetos.css";
-import GITHUB_API_CONFIG from "../config/GitHubAPIConfig";
+import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
 
 const ProjetosGitHub = () => {
   const { t } = useTranslation();

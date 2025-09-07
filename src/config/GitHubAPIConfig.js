@@ -1,4 +1,4 @@
-// GitHubAPIConfig.js
+// gitHubApiConfig.js
 const GITHUB_API_CONFIG = {
   USERNAME: "joaopauloaramuni",
   TOKEN: import.meta.env.VITE_GITHUB_TOKEN,

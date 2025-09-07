@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import emailjs from "emailjs-com";
 import "./Contato.css";
-import EMAILJS_CONFIG from "../config/EmailjsConfig";
+import EMAILJS_CONFIG from "../config/emailJsConfig";
 
 const Contato = ({ onExit }) => {
   const { t } = useTranslation();
