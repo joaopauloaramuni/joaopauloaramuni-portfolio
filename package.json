@@ -16,7 +16,6 @@
     "i18next": "^25.4.2",
     "pdfjs-dist": "^3.11.174",
     "react": "^19.1.1",
-    "react-calendly": "^4.4.0",
     "react-dom": "^19.1.1",
     "react-i18next": "^15.7.2",
     "react-icons": "^5.5.0",
