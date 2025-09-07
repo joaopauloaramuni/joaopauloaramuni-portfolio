@@ -8,12 +8,10 @@ export default function Calendly() {
 
   return (
     <div>
-      <h3 className="calendly-title">{t("calendly.titulo")}</h3>
-      <div className="calendly-container">
         <InlineWidget
           url="https://calendly.com/aramuni"
+          styles={{ height: "80vh" }}
         />
-      </div>
     </div>
   );
 }
