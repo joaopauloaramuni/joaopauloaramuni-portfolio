@@ -108,6 +108,18 @@ Essa escolha de fonte melhora a estética do terminal web do portfólio e propor
 
 Este guia descreve o passo a passo para configurar o envio de e-mails no seu projeto React usando EmailJS. Com o EmailJS, você pode enviar até 500 e-mails por dia gratuitamente.
 
+💡 No projeto, cada envio do formulário gera **dois e-mails distintos**:
+
+1. **Email de notificação para você (FOR ME)**  
+   - Contém as informações do usuário: nome, email, mensagem e horário.  
+   - É enviado para o seu email fixo, configurado no template.  
+   - Permite que você receba todas as mensagens enviadas pelo formulário.
+
+2. **Email de confirmação para o usuário (FOR SENDER)**  
+   - Contém uma mensagem de agradecimento, mostrando que a mensagem foi recebida.  
+   - É enviado para o email que o usuário digitou no formulário (`{{email}}` no template).  
+   - Inclui o nome do usuário, a data/hora e pode exibir a própria mensagem como confirmação.
+
 -----
 
 ### 1. Criar conta no EmailJS
@@ -122,10 +134,10 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
 
 ### 3. Criar um template de e-mail
 1. Vá para **Email Templates** → **Create New Template**.  
-2. Configure os campos que deseja enviar, por exemplo: `user_name`, `user_email`, `message`.  
+2. Configure os campos que deseja enviar, por exemplo: `{{name}}`, `{{email}}`, `{{title}}`, `{{message}}`, `{{time}}`.  
 3. Copie o **Template ID**. 
 
-#### Exemplo de template usado no projeto
+#### Exemplo de template usado no projeto - TEMPLATE FOR SENDER
 
 <details>
   <summary>Clique para exibir</summary>
@@ -183,15 +195,87 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
   <!-- Rodapé com links -->
   <div style="margin-top: 20px; text-align: center; font-size: 14px; color: #a0aec0;">
     <p>
-      Enquanto isso, fique à vontade para visitar meu
-      <a href="https://www.linkedin.com/in/joaopauloaramuni/" style="color: #00ff9d; text-decoration: none;">LinkedIn</a>
-      ou
+      Enquanto isso, fique à vontade para visitar meu 
+      <a href="https://www.linkedin.com/in/joaopauloaramuni/" style="color: #00ff9d; text-decoration: none;">LinkedIn</a> 
+      ou 
       <a href="https://github.com/joaopauloaramuni" style="color: #00ff9d; text-decoration: none;">GitHub</a>.
     </p>
   </div>
 </div>
 ```
 </details>
+
+#### Exemplo de template usado no projeto - TEMPLATE FOR ME
+
+<details>
+  <summary>Clique para exibir</summary>
+  
+```html
+<div style="
+  font-family: system-ui, sans-serif, Arial;
+  font-size: 14px;
+  color: #e2e8f0;
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  border: 2px solid #00ff9d;
+  border-radius: 10px;
+  background-color: #0f172a;
+  line-height: 1.6;
+">
+  <!-- Cabeçalho -->
+  <div style="text-align: center; margin-bottom: 1.5rem;">
+    <h2 style="color: #00ff9d; margin-bottom: 0.5rem;">Nova mensagem do site</h2>
+    <p style="color: #a0aec0; margin: 0;">
+      Você recebeu uma nova mensagem do formulário de contato.
+    </p>
+  </div>
+
+  <!-- Bloco da mensagem enviada -->
+  <div style="
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed #00ff9d;
+    border-radius: 8px;
+    background-color: #1e293b;
+  ">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+      <tr>
+        <td style="vertical-align: top; width: 50px;">
+          <div style="
+            padding: 10px;
+            background-color: #00ff9d;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            color: #0f172a;
+          " role="img">👤</div>
+        </td>
+        <td style="vertical-align: top; padding-left: 10px;">
+          <div style="color: #e2e8f0; font-size: 16px; font-weight: bold;">{{name}}</div>
+          <div style="color: #a0aec0; font-size: 13px;">{{email}} | {{time}}</div>
+          <p style="font-size: 15px; color: #e2e8f0;">{{message}}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Rodapé -->
+  <div style="margin-top: 20px; text-align: center; font-size: 14px; color: #a0aec0;">
+    <p>
+      Essa mensagem foi enviada pelo formulário do seu site.
+    </p>
+  </div>
+</div>
+```
+</details>
+
+#### Variáveis importantes para o envio de email
+
+- `time`: deve ser gerada no envio (`new Date().toLocaleString()`) e enviada como variável para aparecer nos templates.  
+- `title`: título do email, enviado como variável `{{title}}` para aparecer no assunto.  
+- No template FOR SENDER (confirmação para usuário), coloque `{{email}}` no campo "To Email" para que o email seja enviado corretamente para o usuário que preencheu o formulário.  
+- No template FOR ME, coloque seu email fixo no campo "To Email" para receber notificações de todas as mensagens.
 
 ### 4. Pegar IDs (Service ID, Template ID e Public Key) e configurar variáveis de ambiente
 
@@ -202,7 +286,8 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
 
 2. No Vercel, crie as seguintes variáveis de ambiente:
    - `VITE_EMAILJS_SERVICE_ID`: seu Service ID
-   - `VITE_EMAILJS_TEMPLATE_ID`: seu Template ID
+   - `VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER`: seu Template ID FOR SENDER
+   - `VITE_EMAILJS_TEMPLATE_ID_FOR_ME`: seu Template ID FOR ME
    - `VITE_EMAILJS_PUBLIC_KEY`: sua Public Key
 
    Obs: As variáveis de ambiente em projetos Vite precisam começar com **VITE_** para que o Vite as reconheça e as inclua no bundle do frontend; variáveis sem esse prefixo não ficam disponíveis no código do cliente.
@@ -215,7 +300,8 @@ Este guia descreve o passo a passo para configurar o envio de e-mails no seu pro
 
    ```bash
    VITE_EMAILJS_SERVICE_ID=seu_service_id_aqui
-   VITE_EMAILJS_TEMPLATE_ID=seu_template_id_aqui
+   VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER=seu_template_id_for_sender_aqui
+   VITE_EMAILJS_TEMPLATE_ID_FOR_ME=seu_template_id_for_me_aqui
    VITE_EMAILJS_PUBLIC_KEY=sua_public_key_aqui
    ```
 
@@ -227,7 +313,8 @@ Crie ou edite o arquivo `emailjsConfig.js` no seu projeto React e configure-o pa
 // emailjsConfig.js
 const EMAILJS_CONFIG = {
   SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER,
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_ME,
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
@@ -296,6 +383,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
