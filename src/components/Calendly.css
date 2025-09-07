@@ -1,12 +1,13 @@
 .calendly-title {
   color: #00ff9d;
   font-size: 1.8rem;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }
 
 .calendly-inline-widget {
   min-width: 320px;
   height: 700px;
   border-radius: 10px;
+  margin-bottom: 0;
 }
 

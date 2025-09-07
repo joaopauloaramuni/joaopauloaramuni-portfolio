@@ -19,6 +19,9 @@ export default function Calendly() {
         className="calendly-inline-widget"
         data-url="https://calendly.com/aramuni"
       ></div>
+
+      {/*import { InlineWidget } from "react-calendly";*/}
+      {/*<InlineWidget url="https://calendly.com/aramuni" styles={{ height: "100vh" }} /> */}
     </div>
   );
 }
