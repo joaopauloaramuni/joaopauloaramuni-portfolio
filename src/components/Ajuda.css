@@ -6,19 +6,15 @@
 
 .ajuda-item {
   display: flex;
-  flex-wrap: wrap; /* mantém responsividade */
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem; /* espaço entre alias e descrição */
-  min-width: 0; /* permite que os elementos encolham corretamente */
 }
 
 .ajuda-aliases {
   color: #00ff9d;
   font-size: 1.2rem;
   flex-wrap: nowrap;
-  display: flex; /* garante que os aliases fiquem em linha */
-  white-space: nowrap; /* impede quebra de linha dentro dos aliases */
-  flex-shrink: 0; /* não deixa os aliases encolherem */
 }
 
 .ajuda-aliases-symbol {
@@ -29,9 +25,6 @@
   margin: 0;
   color: #a0aec0;
   font-size: 1.1rem;
-  min-width: 0; /* importante para encolher dentro do flex */
-  flex-shrink: 1; /* permite que a descrição encolha se necessário */
-  white-space: normal; /* só quebra se realmente não couber */
 }
 
 @media (max-width: 768px) {
@@ -53,3 +46,4 @@
     font-size: 0.6rem;
   }
 }
+
