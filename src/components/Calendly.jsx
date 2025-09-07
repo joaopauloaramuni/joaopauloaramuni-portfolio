@@ -12,7 +12,6 @@ export default function Calendly() {
       <div className="calendly-container">
         <InlineWidget
           url="https://calendly.com/aramuni"
-          styles={{ height: "100vh" }}
         />
       </div>
     </div>

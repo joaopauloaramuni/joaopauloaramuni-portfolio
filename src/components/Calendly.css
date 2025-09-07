@@ -13,20 +13,15 @@
   font-size: 1.8rem;
 }
 
-/* Responsivo para celular */
-@media (max-width: 768px) {
-  .calendly-container {
-    width: 95%;
-    padding: 0.5rem;
-  }
-
-  .calendly-container .calendly-inline-widget {
-    min-height: 400px; /* altura menor no celular */
-  }
+/* Altura padrão para desktop */
+.calendly-container .calendly-inline-widget {
+  min-height: 700px;
+  height: 100vh;
 }
 
-.calendly-title {
-  color: #00ff9d;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
+/* Responsivo para celular */
+@media (max-width: 768px) {
+  .calendly-container .calendly-inline-widget {
+    min-height: 400px;
+  }
 }
