@@ -14,6 +14,7 @@ Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com Re
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
 * 📧 **contato:** Exibe minhas informações de contato e envia email.
+* 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🧹 **limpar:** Limpa o histórico do terminal.
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
@@ -554,6 +555,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 * **Spotify e Last.fm:** [Spotify GitHub Profile - Kittinan](https://github.com/kittinan/spotify-github-profile) | [Spotify Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/spotify-recently-played-readme) | [Data Card for Spotify](https://data-card-for-spotify.herokuapp.com/) | [Last.fm Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/lastfm-recently-played-readme)
 * **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
 * **GitHubAPI:** [Documentação](https://docs.github.com/pt/rest) | [Token](https://github.com/settings/tokens)
+* **Calendly (agendamento online):** [Embed options overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [How to add Calendly to your website](https://help.calendly.com/hc/en-us/articles/4409838727703-How-to-add-Calendly-to-your-website) | [Embed Inline](https://www.calendly-embed.com/embed-inline)
 
 -----
 
@@ -562,6 +564,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
