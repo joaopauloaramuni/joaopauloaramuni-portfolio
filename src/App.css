@@ -16,31 +16,23 @@
   font-display: swap;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background-color: #1a202c;
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: #00ff9d #1a202c;
 }
-body {
-  background-color: #1a202c;
-}
-html,
-body {
-  overflow: hidden;
-}
 
 .terminal-container {
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.terminal-container {
-  overflow-x: hidden;
-}
-
-.react-terminal-wrapper {
-  overflow-x: hidden;
-  width: 100%;
 }
 
 .react-terminal {
@@ -51,6 +43,7 @@ body {
 }
 
 .react-terminal-wrapper {
+  width: 100%;
   padding-right: 16px !important;
   flex: 1;
   display: flex;
