@@ -7,6 +7,7 @@ import Terminal, {
 import "./App.css";
 import { commandList } from "./commands";
 import Projetos from "./components/Projetos";
+import ProjetosGitHub from "./components/ProjetosGitHub";
 import Experiencias from "./components/Experiencias";
 import SobreMim from "./components/SobreMim";
 import Ajuda from "./components/Ajuda";
@@ -88,6 +89,9 @@ function App() {
           break;
         case "projetos":
           response = <Projetos />;
+          break;
+        case "github":
+          response = <ProjetosGitHub />;
           break;
         case "experiencias":
           response = <Experiencias />;

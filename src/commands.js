@@ -39,6 +39,10 @@ export const commandList = {
     name: 'projetos',
     aliases: ['projects'],
   },
+  github: {
+    name: 'github',
+    aliases: ['git', 'api'],
+  },
   spotify: {
     name: 'spotify',
     aliases: ['music'],
