@@ -16,7 +16,7 @@ const Ajuda = () => {
               <span className="ajuda-aliases-symbol">&gt;</span>
               <span>{allAliases}</span>
             </div>
-            <p className="ajuda-description">{t(`ajuda.${cmd.name}.desc`)}</p>
+            <span className="ajuda-description">- {t(`ajuda.${cmd.name}.desc`)}</span>
           </div>
         );
       })}

@@ -4,6 +4,12 @@
   margin-bottom: 0.5rem;
 }
 
+.ajuda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* espaço entre alias e descrição */
+}
+
 .ajuda-aliases {
   color: #00ff9d;
   font-size: 1.2rem;
@@ -14,7 +20,7 @@
 }
 
 .ajuda-description {
-  margin: 0 0 0 2.5ch;
+  margin: 0;
   color: #a0aec0;
   font-size: 1.1rem;
 }
