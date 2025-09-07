@@ -90,12 +90,6 @@ body {
 /* ===== Responsividade Geral ===== */
 
 @media (max-width: 768px) {
-  html,
-  body {
-    height: 100dvh;
-    min-height: 100vh;
-    overflow: hidden;
-  }
 
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
@@ -129,13 +123,6 @@ body {
 
 @media (max-width: 480px) {
 
-    html,
-  body {
-    height: 100dvh;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  
   .react-terminal-wrapper::after {
     font-size: 0.6rem;
   }
