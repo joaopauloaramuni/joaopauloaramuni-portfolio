@@ -17,7 +17,8 @@ Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com Re
 * 🧹 **limpar:** Limpa o histórico do terminal.
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
-* 📂 **projetos:** Lista meus projetos desenvolvidos.
+* 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
+* 🐙 **github:** Exibe meus repositórios usando a GitHub API.
 * 👨‍💻 **habilidades:** Exibe minhas habilidades em programação.
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
@@ -559,6 +560,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
