@@ -17,9 +17,6 @@ const Curriculo = () => {
 
     const handleDocumentLoad = () => {
         setIsLoaded(true);
-        if (containerRef.current) {
-            containerRef.current.scrollIntoView({ behavior: "smooth" });
-        }
     };
 
     return (

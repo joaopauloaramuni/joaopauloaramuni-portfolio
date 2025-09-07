@@ -17,7 +17,6 @@ const Spotify = () => {
           width="820px"
           src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=22lih5eniohc7dawfxohlo7wy"
           alt="Data Card for Spotify"
-          onLoad={handleImageLoad}
         />
       </div>
       <div>
@@ -28,7 +27,6 @@ const Spotify = () => {
                 alt="Spotify"
                 height="400px"
                 src="https://spotify-github-profile.kittinanx.com/api/view?uid=22lih5eniohc7dawfxohlo7wy&cover_image=true&theme=default&show_offline=false&background_color=121212&interchange=false"
-                onLoad={handleImageLoad}
               />
             </td>
             <td>
@@ -36,7 +34,6 @@ const Spotify = () => {
                 alt="Spotify list"
                 height="400px"
                 src="https://spotify-recently-played-readme.vercel.app/api?user=22lih5eniohc7dawfxohlo7wy&count=10"
-                onLoad={handleImageLoad}
               />
             </td>
             <td>
@@ -45,7 +42,6 @@ const Spotify = () => {
                   height="400px"
                   alt="lastfm"
                   src="https://lastfm-recently-played.vercel.app/api?user=joaoaramuni&count=10"
-                  onLoad={handleImageLoad}
                 />
               </a>
             </td>

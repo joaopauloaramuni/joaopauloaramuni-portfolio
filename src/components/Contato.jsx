@@ -20,14 +20,6 @@ const Contato = ({ onExit }) => {
   const statusRef = useRef(null);
 
   useEffect(() => {
-    // Rola a tela automaticamente até a mensagem de status
-    // sempre que ela for exibida (sucesso ou erro no envio do formulário)
-    if (status && statusRef.current) {
-      statusRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [status]);
-
-  useEffect(() => {
     // Foca no campo nome quando o componente montar
     if (nomeInputRef.current) {
       nomeInputRef.current.focus();
@@ -65,8 +57,14 @@ const Contato = ({ onExit }) => {
   return (
     <div className="box-container loaded contato-container">
       <h3 className="contato-titulo">{t("contato.titulo")}</h3>
-      <p className="contato-subtitulo">{t("contato.subtitulo")}</p>
-
+      <div className="box-status">
+        <p
+          ref={statusRef}
+          className={status ? "status-contato" : "contato-subtitulo"}
+        >
+          {status || t("contato.subtitulo")}
+        </p>
+      </div>
       {/* Formulário */}
       <form ref={form} onSubmit={sendEmail} className="formulario-contato">
         <input
@@ -100,12 +98,6 @@ const Contato = ({ onExit }) => {
         <button type="button" className="botao-contato" onClick={onExit}>
           {t("contato.voltar_terminal")}
         </button>
-
-        {status && (
-          <p ref={statusRef} className="status-contato">
-            {status}
-          </p>
-        )}
       </form>
 
       {/* Ícones */}
