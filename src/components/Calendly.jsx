@@ -18,7 +18,6 @@ export default function Calendly() {
       <div
         className="calendly-inline-widget"
         data-url="https://calendly.com/aramuni"
-        data-resize="true"
       ></div>
     </div>
   );

@@ -1,6 +1,5 @@
 .calendly-title {
   color: #00ff9d;
-  margin-bottom: 2rem;
   font-size: 1.8rem;
   margin-bottom: 0;
 }
@@ -11,3 +10,9 @@
   border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+  .calendly-title {
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+}
