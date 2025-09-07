@@ -36,19 +36,59 @@ const Contato = ({ onExit }) => {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const formData = new FormData(form.current);
+    const nome = formData.get("name");
+    const email = formData.get("email");
+    const mensagem = formData.get("message");
+    const now = new Date();
+    const time = now.toLocaleString();
+
+    // Email para você (notificação)
     emailjs
-      .sendForm(
+      .send(
         EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        form.current,
+        EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
+        {
+          name: nome,
+          email: email,
+          message: mensagem,
+          title: `Nova mensagem do site de: ${nome}`, // assunto do email
+          time: time,
+        },
         EMAILJS_CONFIG.PUBLIC_KEY
       )
       .then(
         () => {
+          console.log("Email para você enviado!");
+        },
+        (err) => {
+          console.error("Erro ao enviar para você:", err);
+          setStatus(t("contato.erro"));
+        }
+      );
+
+    // Email de confirmação para o remetente
+    emailjs
+      .send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_FOR_SENDER,
+        {
+          name: nome,
+          email: email,
+          message: mensagem,
+          title: "Recebemos sua mensagem!", // assunto do email de confirmação
+          time: time,
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      )
+      .then(
+        () => {
+          console.log("Email de confirmação enviado ao remetente!");
           setStatus(t("contato.sucesso"));
           e.target.reset();
         },
-        () => {
+        (err) => {
+          console.error("Erro ao enviar confirmação:", err);
           setStatus(t("contato.erro"));
         }
       );
