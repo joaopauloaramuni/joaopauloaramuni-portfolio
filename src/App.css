@@ -21,7 +21,6 @@ body {
   height: 100dvh; 
   overflow: hidden;
   background-color: #1a202c;
-  overscroll-behavior: none; 
 }
 
 html {
