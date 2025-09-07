@@ -377,6 +377,129 @@ Agora o projeto está pronto para enviar e-mails diretamente do frontend.
 
 -----
 
+### :octocat: Guia de configuração da GitHub API
+
+Este guia mostra como configurar o acesso à GitHub API para buscar seus repositórios e exibi-los no seu portfolio React.
+
+---
+
+## 1️⃣ Criar o Token no GitHub
+
+1. Acesse: **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
+2. Clique em **Generate new token**.
+3. Configure:
+   - **Nome do token**: ex. `Portfolio ReadOnly`.
+   - **Repositórios**: selecione **All public repositories** (ou privados específicos se necessário).
+   - **Permissões**: apenas leitura para repositórios (`Read-only access`).
+4. Clique em **Generate token**.
+5. Copie o token gerado. ⚠️ **Importante:** você não poderá ver novamente depois de sair da página.
+
+> Dica: prefira **Fine-grained tokens** para maior segurança. Tokens **General use** dão acesso mais amplo e são menos seguros.
+
+---
+
+## 2️⃣ Configurar o token localmente
+
+Crie um arquivo `.env.local` na raiz do projeto React:
+
+```env
+VITE_GITHUB_TOKEN=seu_token_aqui
+```
+
+> Observação: No Vite, todas as variáveis de ambiente expostas ao front-end devem começar com `VITE_`.
+
+---
+
+## 3️⃣ Criar a configuração da GitHub API
+
+Crie um arquivo `GitHubAPIConfig.js` em `src/config/`:
+
+```javascript
+// GitHubAPIConfig.js
+const GITHUB_API_CONFIG = {
+  USERNAME: "joaopauloaramuni",
+  TOKEN: import.meta.env.VITE_GITHUB_TOKEN,
+  BASE_URL: "https://api.github.com",
+  PER_PAGE: 100, // quantidade máxima de repositórios por página
+};
+
+export default GITHUB_API_CONFIG;
+```
+
+---
+
+## 4️⃣ Configurar variáveis de ambiente no Vercel
+
+1. Acesse seu projeto no Vercel.
+2. Vá em **Settings → Environment Variables**.
+3. Adicione a variável:
+   - **Name**: `VITE_GITHUB_TOKEN`
+   - **Value**: o token que você gerou
+   - **Environment**: Production / Preview / Development conforme necessário.
+4. Salve as alterações.
+
+---
+
+## 5️⃣ Buscar os repositórios no React
+
+No seu componente `ProjetosGitHub.jsx`, você pode fazer algo como:
+
+```javascript
+import GITHUB_API_CONFIG from "../config/GitHubAPIConfig";
+
+const { USERNAME, TOKEN, BASE_URL, PER_PAGE } = GITHUB_API_CONFIG;
+
+const response = await fetch(
+  `${BASE_URL}/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`,
+  {
+    headers: {
+      Authorization: `token ${TOKEN}`,
+      Accept: "application/vnd.github.mercy-preview+json", // para incluir topics
+    },
+  }
+);
+
+const data = await response.json();
+```
+
+### Explicação do fetch:
+
+- **URL**: `${BASE_URL}/users/${USERNAME}/repos` busca todos os repositórios do usuário.
+- **Query params**:
+  - `sort=updated`: ordena pelos mais recentemente atualizados.
+  - `per_page=100`: quantidade máxima de repositórios por página.
+- **Headers**:
+  - `Authorization`: envia o token para autenticação.
+  - `Accept`: especifica a versão da API que inclui os topics dos repositórios.
+- **data**: retorna um array de objetos com informações dos repositórios.
+
+---
+
+## 6️⃣ Exibir os projetos
+
+Depois de buscar os repositórios, você pode mapear para seu `ProjectCard`:
+
+```javascript
+const mappedRepos = data
+  .filter(repo => !repo.fork)
+  .map(repo => ({
+    id: repo.id,
+    title: repo.name,
+    description: repo.description || "Sem descrição disponível",
+    gif: `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
+    repoLink: repo.html_url,
+    technologies: repo.topics || [],
+  }));
+```
+
+> Dessa forma, cada `ProjectCard` recebe todas as informações necessárias: título, descrição, gif, link e tecnologias.
+
+---
+
+✅ Pronto! Agora seu portfolio consegue buscar e exibir seus repositórios públicos usando a GitHub API.
+
+-----
+
 ## ⚙️ Como rodar o projeto localmente
 
 Para executar este projeto no seu ambiente de desenvolvimento, siga os passos abaixo.
@@ -427,6 +550,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 * **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  
 * **Spotify e Last.fm:** [Spotify GitHub Profile - Kittinan](https://github.com/kittinan/spotify-github-profile) | [Spotify Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/spotify-recently-played-readme) | [Data Card for Spotify](https://data-card-for-spotify.herokuapp.com/) | [Last.fm Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/lastfm-recently-played-readme)
 * **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
+* **GitHubAPI:** [Documentação](https://docs.github.com/pt/rest) | [Token](https://github.com/settings/tokens)
 
 -----
 
@@ -435,6 +559,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
