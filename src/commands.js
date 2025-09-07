@@ -15,6 +15,10 @@ export const commandList = {
     name: 'contato',
     aliases: ['contact'],
   },
+  calendly: {
+    name: 'calendly',
+    aliases: ['meeting', 'meet'],
+  },
   curriculo: {
     name: 'curriculo',
     aliases: ['resume'],

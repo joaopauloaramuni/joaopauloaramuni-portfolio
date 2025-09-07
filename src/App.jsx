@@ -17,6 +17,7 @@ import WakaTime from "./components/WakaTime";
 import Contato from "./components/Contato";
 import Curriculo from "./components/Curriculo";
 import BoasVindas from "./components/BoasVindas";
+import Calendly from "./components/Calendly";
 import Recomendacoes from "./components/Recomendacoes";
 import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
@@ -26,7 +27,7 @@ import { useTranslation } from "react-i18next";
 function App() {
   const { t } = useTranslation();
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
-  
+
   const [terminalLineData, setTerminalLineData] = useState([
     getWelcomeMessage(),
   ]);
@@ -96,12 +97,15 @@ function App() {
         case "experiencias":
           response = <Experiencias />;
           break;
+        case "calendly":
+          response = <Calendly />;
+          break;
         case "curriculo":
           response = <Curriculo />;
           break;
         case "habilidades":
           response = <Habilidades />;
-        break;
+          break;
         case "limpar":
           setTerminalLineData([]);
           return;
@@ -126,7 +130,8 @@ function App() {
     } else {
       response = (
         <TerminalOutput>
-          {t("comando.nao_reconhecido")} "{userInput}" - {t("comando.ver_ajuda")}
+          {t("comando.nao_reconhecido")} "{userInput}" -{" "}
+          {t("comando.ver_ajuda")}
         </TerminalOutput>
       );
     }

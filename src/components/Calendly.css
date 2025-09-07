@@ -1,0 +1,14 @@
+.calendly-container {
+  width: 70%;
+  border: 2px solid #00ff9d;
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: #e2e8f0;
+  padding: 1rem;
+}
+
+.calendly-title {
+  color: #00ff9d;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}

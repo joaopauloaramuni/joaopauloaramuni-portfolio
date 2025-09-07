@@ -76,6 +76,9 @@ const resources = {
       habilidades: {
         titulo: "Skills",
       },
+      calendly: {
+        titulo: "Book a meeting via Calendly",
+      },
       premios: {
         titulo: "Awards",
         nenhum: "No awards registered yet.",
@@ -113,9 +116,10 @@ const resources = {
         },
         limpar: { desc: "Clears the terminal history." },
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
-        github: {desc: "Displays my repositories using the GitHub API."},
+        github: { desc: "Displays my repositories using the GitHub API." },
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
+        calendly: { desc: "Schedule a meeting with me via Calendly." },
         habilidades: { desc: "Show my programming skills." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
         wakatime: {
@@ -708,6 +712,9 @@ const resources = {
       habilidades: {
         titulo: "Habilidades",
       },
+      calendly: {
+        titulo: "Agende uma reunião pelo Calendly",
+      },
       premios: {
         titulo: "Prêmios",
         nenhum: "Nenhum prêmio cadastrado ainda.",
@@ -743,9 +750,10 @@ const resources = {
         contato: { desc: "Exibe minhas informações de contato e envia email." },
         limpar: { desc: "Limpa o histórico do terminal." },
         recomendacoes: { desc: "Exibe minhas recomendações do LinkedIn." },
-        github: {desc: "Exibe meus repositórios usando a GitHub API."},
+        github: { desc: "Exibe meus repositórios usando a GitHub API." },
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
+        calendly: { desc: "Agende uma reunião comigo via Calendly." },
         habilidades: { desc: "Exibe minhas habilidades em programação." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         wakatime: {
