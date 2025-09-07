@@ -384,7 +384,7 @@ Este guia mostra como configurar o acesso à GitHub API para buscar seus reposit
 
 ---
 
-## 1️⃣ Criar o Token no GitHub
+#### 1️⃣ Criar o Token no GitHub
 
 1. Acesse: **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
 2. Clique em **Generate new token**.
@@ -399,7 +399,7 @@ Este guia mostra como configurar o acesso à GitHub API para buscar seus reposit
 
 ---
 
-## 2️⃣ Configurar o token localmente
+#### 2️⃣ Configurar o token localmente
 
 Crie um arquivo `.env.local` na raiz do projeto React:
 
@@ -411,7 +411,7 @@ VITE_GITHUB_TOKEN=seu_token_aqui
 
 ---
 
-## 3️⃣ Criar a configuração da GitHub API
+#### 3️⃣ Criar a configuração da GitHub API
 
 Crie um arquivo `GitHubAPIConfig.js` em `src/config/`:
 
@@ -429,7 +429,7 @@ export default GITHUB_API_CONFIG;
 
 ---
 
-## 4️⃣ Configurar variáveis de ambiente no Vercel
+#### 4️⃣ Configurar variáveis de ambiente no Vercel
 
 1. Acesse seu projeto no Vercel.
 2. Vá em **Settings → Environment Variables**.
@@ -441,7 +441,7 @@ export default GITHUB_API_CONFIG;
 
 ---
 
-## 5️⃣ Buscar os repositórios no React
+#### 5️⃣ Buscar os repositórios no React
 
 No seu componente `ProjetosGitHub.jsx`, você pode fazer algo como:
 
@@ -463,7 +463,7 @@ const response = await fetch(
 const data = await response.json();
 ```
 
-### Explicação do fetch:
+##### Explicação do fetch:
 
 - **URL**: `${BASE_URL}/users/${USERNAME}/repos` busca todos os repositórios do usuário.
 - **Query params**:
@@ -476,7 +476,7 @@ const data = await response.json();
 
 ---
 
-## 6️⃣ Exibir os projetos
+#### 6️⃣ Exibir os projetos
 
 Depois de buscar os repositórios, você pode mapear para seu `ProjectCard`:
 
@@ -560,6 +560,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
