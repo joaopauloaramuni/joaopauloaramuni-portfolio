@@ -10,9 +10,3 @@
   border-radius: 10px;
 }
 
-@media (max-width: 768px) {
-  .calendly-title {
-    margin-bottom: 1rem;
-    font-size: 14px;
-  }
-}
