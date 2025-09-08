@@ -758,6 +758,7 @@ em servidores próprios.
 * **i18next & react-i18next (internacionalização):** [i18next Docs](https://www.i18next.com/) | [react-i18next Docs](https://react.i18next.com/)
 * **@react-pdf-viewer/core & @react-pdf-viewer/default-layout:** [Documentação oficial](https://react-pdf-viewer.dev/)
 * **pdfjs-dist (renderização de PDFs):** [Mozilla PDF.js GitHub](https://github.com/mozilla/pdfjs-dist)
+* **react-calendly: (Opcional)** [NPM](https://www.npmjs.com/package/react-calendly) | [GitHub](https://github.com/tcampb/react-calendly)
 * **EmailJS:** [Documentação oficial](https://www.emailjs.com/docs/) | [Dashboard](https://dashboard.emailjs.com/)
 * **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)
 * **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  
@@ -765,6 +766,9 @@ em servidores próprios.
 * **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
 * **GitHubAPI:** [Documentação](https://docs.github.com/pt/rest) | [Token](https://github.com/settings/tokens)
 * **Calendly (agendamento online):** [Embed options overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [How to add Calendly to your website](https://help.calendly.com/hc/en-us/articles/4409838727703-How-to-add-Calendly-to-your-website) | [Embed Inline](https://www.calendly-embed.com/embed-inline) | [Embed Options Overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [Advanced Calendly Embed for Developers](https://help.calendly.com/hc/en-us/articles/31618265722775-Advanced-Calendly-embed-for-developers)
+* **Docker (containerização de aplicações):** [Documentação oficial](https://docs.docker.com/)  
+* **Docker Desktop (ferramenta para rodar Docker no Mac e Windows; no Linux, use Docker Engine):** [Documentação oficial](https://www.docker.com/products/docker-desktop/)  
+* **Docker Hub (repositório de imagens Docker):** [Documentação oficial](https://hub.docker.com/)
 
 -----
 
@@ -773,6 +777,7 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
