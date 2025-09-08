@@ -614,7 +614,7 @@ const resources = {
           "ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
 
         tecnico_programador_bb_desc:
-          "Supervised internship in development and support of Java / Java Web applications; Maintenance of SISBB-integrated systems. Development and support of legacy VBA / VB6 applications; PL/SQL programming; Requirements gathering.",
+          "Mandatory supervised internship in development and support of Java / Java Web applications; Maintenance of systems integrated with SISBB. Development and support of legacy VBA / VB6 applications; PL/SQL programming; Requirements gathering.",
         tecnico_programador_bb_skills:
           "Java, Java Web, VBA, VB6, PL/SQL, Banking automation.",
 
@@ -1265,7 +1265,7 @@ const resources = {
           "ASP.NET, VB6, SQLServer, Oracle, PL/SQL, UML, Lean Manufacturing.",
 
         tecnico_programador_bb_desc:
-          "Estágio supervisionado em desenvolvimento e suporte a aplicativos em Java / Java Web; Manutenção de sistemas integrados ao SISBB. Desenvolvimento e suporte a aplicações legadas VBA / VB6; Programação PL/SQL; Levantamento de requisitos.",
+          "Estágio supervisionado obrigatório em desenvolvimento e suporte a aplicativos em Java / Java Web; Manutenção de sistemas integrados ao SISBB. Desenvolvimento e suporte a aplicações legadas VBA / VB6; Programação PL/SQL; Levantamento de requisitos.",
         tecnico_programador_bb_skills:
           "Java, Java Web, VBA, VB6, PL/SQL, Automação Bancária.",
 
