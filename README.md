@@ -621,6 +621,7 @@ O **Docker** é uma plataforma que permite criar, executar e gerenciar aplicaç�
 > O Vercel já cuida automaticamente do processo de build e deploy.  
 > Nativamente, o Vercel suporta uma ampla gama de tecnologias modernas sem necessidade de Docker, incluindo **React, Next.js, Vue, Svelte, Angular, Node.js, APIs Serverless**, além de projetos estáticos gerados por ferramentas como **Vite, Gatsby e Hugo**.  
 > Ele faz o build, gera os arquivos estáticos ou funções serverless e gerencia automaticamente o deploy, cache e CDN, permitindo que você publique aplicações complexas sem precisar configurar containers manualmente.  
+
 > ⚠️ **Observação:** o Vercel **não oferece suporte nativo a aplicações Java** (como Spring Boot ou Jakarta EE). Para rodar projetos Java, seria necessário usar **Docker** ou outra nuvem/serviço que suporte JVM, como **AWS, Google Cloud, Heroku ou Render**.
 
 Aqui, o Dockerfile foi criado **apenas a título de aprendizado**, mas pode ser útil em cenários futuros, como:  
@@ -630,7 +631,7 @@ Aqui, o Dockerfile foi criado **apenas a título de aprendizado**, mas pode ser 
 
 -----
 
-#### ⚙️ Docker Compose
+#### 🔗 Docker Compose
 
 O **Docker Compose** é uma ferramenta que permite **definir e gerenciar múltiplos containers Docker** como parte de uma mesma aplicação.  
 Em vez de subir manualmente cada container com `docker run`, você descreve todos os serviços da sua aplicação (ex.: frontend, backend, banco de dados, cache) em um único arquivo chamado **`docker-compose.yml`**.  
@@ -781,6 +782,7 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
