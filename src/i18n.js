@@ -157,6 +157,10 @@ const resources = {
         prosegur_proj_desc:
           "The Prosegur SOL Project unifies cash logistics systems across several countries, allowing the control of operations, resources, vehicles, personnel, routes, and services. It is a robust, configurable, and easy-to-maintain platform, incorporating the best existing features and facilitating the work of the analysis team.",
 
+        hotmilhas_proj_title: "HotMilhas Crawlers",
+        hotmilhas_proj_desc:
+          "Development of Python 3 crawlers for airline mileage programs, with browser automation and structured data extraction. Includes creation of RESTful APIs for integration with internal systems, use of scalable cloud architecture (AWS), Docker containers, and CI/CD pipelines with GitLab. Project with messaging services (SQS, Redis) and observability using Grafana and New Relic.",
+
         aes_proj1_title: "Landing Page - Experimental Software Agency",
         aes_proj1_desc:
           "The AES Landing Page introduces the agency, collects requests, and highlights projects and team talents. It facilitates communication between clients and developers by allowing direct submission of requests to responsible teams. It also promotes the agency, showcasing projects, achievements, talents, and services, serving as a showcase for the market to see AES’s potential.",
@@ -790,6 +794,10 @@ const resources = {
         prosegur_proj_title: "SOL - Sistema de Operações Logísticas",
         prosegur_proj_desc:
           "O Projeto SOL da Prosegur unifica os sistemas de logística de valores em vários países, permitindo controlar operações, recursos, veículos, pessoas, rotas e serviços. É uma plataforma robusta, parametrizável e de fácil manutenção, incorporando as melhores funcionalidades existentes e facilitando o trabalho da equipe de análise.",
+
+        hotmilhas_proj_title: "HotMilhas Crawlers",
+        hotmilhas_proj_desc:
+          "Desenvolvimento de crawlers em Python 3 para programas de milhas aéreas, com automação de navegadores e extração estruturada de dados. Inclui criação de APIs RESTful para integração com sistemas internos, uso de arquitetura cloud (AWS) escalável, containers Docker e pipelines de CI/CD no GitLab. Projeto com mensageria (SQS, Redis) e observabilidade via Grafana e New Relic.",
 
         aes_proj1_title: "Landing Page - Agência Experimental de Software",
         aes_proj1_desc:
