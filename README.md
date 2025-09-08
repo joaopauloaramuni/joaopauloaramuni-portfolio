@@ -10,7 +10,7 @@
 
 -----
 
-Este é o repositório do meu portfólio pessoal, um projeto desenvolvido com React e Vite para apresentar meus projetos, habilidades e experiências de forma interativa e moderna. Sinta-se à vontade para explorá-lo e utilizá-lo como desejar.
+Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido com React e Vite para apresentar meus projetos, habilidades e experiências de forma interativa e moderna. Sinta-se à vontade para explorá-lo e utilizá-lo como desejar.
 
 🖥️ O portfólio simula um **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
 
@@ -781,6 +781,7 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
