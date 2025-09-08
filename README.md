@@ -647,6 +647,25 @@ Com o Docker Compose, basta rodar um comando e todos esses serviços sobem junto
 
 👉 Em resumo, o **Docker Compose** é como um “orquestrador simplificado” que facilita rodar aplicações multi-containers de forma prática e padronizada.
 
+> ⚠️ **Observação:** Neste projeto, não há um arquivo `docker-compose.yml`, pois ele utiliza apenas um container para servir a aplicação frontend com NGINX.
+
+-----
+
+#### 🔗 NGINX
+
+O **NGINX** é um servidor web de alta performance, leve e amplamente utilizado para servir arquivos estáticos, atuar como proxy reverso e balanceador de carga.  
+
+Neste Dockerfile, ele é usado para **servir a aplicação frontend** gerada pelo Vite (React).  
+
+📌 **Funções principais no container:**  
+- **Imagem base:** `nginx:stable-alpine` fornece uma versão leve e pronta do NGINX;  
+- **Limpeza de arquivos padrão:** remove arquivos default do NGINX para evitar conflitos;  
+- **Servir arquivos estáticos:** copia os arquivos gerados pelo build da aplicação para o diretório do NGINX (`/usr/share/nginx/html`);  
+- **Exposição da porta 80:** permite que o container receba requisições HTTP;  
+- **Execução contínua:** `nginx -g "daemon off;"` mantém o servidor em execução dentro do container.  
+
+✅ Em resumo: O NGINX neste Dockerfile atua como servidor web, entregando a aplicação frontend pronta de forma rápida, eficiente e confiável para qualquer cliente HTTP.
+
 -----
 
 #### Exemplo de Dockerfile utilizado
@@ -772,6 +791,7 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **Docker (containerização de aplicações):** [Documentação oficial](https://docs.docker.com/)  
 * **Docker Desktop (ferramenta para rodar Docker no Mac e Windows; no Linux, use Docker Engine):** [Documentação oficial](https://www.docker.com/products/docker-desktop/)  
 * **Docker Hub (repositório de imagens Docker):** [Documentação oficial](https://hub.docker.com/)
+* **NGINX (servidor web e proxy reverso):** [Documentação oficial](https://nginx.org/en/docs/)
 
 -----
 
@@ -780,4 +800,5 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
