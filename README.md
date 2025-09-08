@@ -725,15 +725,16 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
     docker build -t portfolio .
     ```
 
-3.  Rode o container mapeando a porta **8080** do host para a porta
-    **80** do Nginx:
+3.  Rode o container mapeando a porta **8080** do host para a porta **80** do Nginx:  
 
     ``` bash
     docker run -p 8080:80 portfolio
     ```
 
-4.  Abra no navegador:\
-    👉 <http://localhost:8080>
+    > ⚠️ Observação: você pode escolher qualquer porta disponível no host, por exemplo `5173:80`, para acessar no navegador usando `http://localhost:5173`.  
+
+4.  Abra no navegador:  
+    👉 <http://localhost:8080> (ou a porta que você escolheu, como 5173)  
 
 5.  Para parar o container em execução, descubra o ID ou nome com:
 
@@ -749,11 +750,9 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 
 -----
 
-✅ Em resumo: este Dockerfile não é necessário para deploys no Vercel,
-mas oferece conhecimento valioso e flexibilidade para cenários em que o
-projeto precise rodar em **ambientes Dockerizados**, seja em nuvem, seja
-em servidores próprios.
+✅ Em resumo: este Dockerfile não é necessário para deploys no Vercel, mas oferece conhecimento valioso e flexibilidade para cenários em que o projeto precise rodar em **ambientes Dockerizados**, seja em nuvem, seja em servidores próprios.  
 
+-----
 
 ## 🔗 Documentação e links úteis
 
@@ -781,12 +780,4 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
-
-
-
-
-
-
-
-
 
