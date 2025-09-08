@@ -132,6 +132,8 @@
 @media (max-width: 768px) {
   .premio-sobre-container {
     gap: 1rem;
+    align-items: center;
+    text-align: center;
     padding: 0 4px;
   }
 
