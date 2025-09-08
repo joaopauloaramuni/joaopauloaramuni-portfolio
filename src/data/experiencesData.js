@@ -4,7 +4,7 @@ export const experiencesData = [
     roleId: "professor_puc",
     companyId: "puc_minas",
     startDate: "2024",
-    endDate: "Atual / Current",
+    endDate: "Atual",
     descriptionId: "professor_puc_desc",
     skillsId: "professor_puc_skills",
     logo: "/logos/puc.jpg",
