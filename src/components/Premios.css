@@ -122,6 +122,9 @@
   .premio-desc {
     max-width: 80%;
     text-align: justify;
+  }
+
+  .premio-title{
     align-items: center;
     text-align: center;
   }
@@ -145,7 +148,7 @@
     height: 90px;
   }
 
-  .premios-titulo {
+  .premio-title{
     align-items: center;
     text-align: center;
   }
