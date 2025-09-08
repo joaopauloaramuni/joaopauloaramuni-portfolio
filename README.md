@@ -613,9 +613,11 @@ O **Docker** é uma plataforma que permite criar, executar e gerenciar aplicaç�
 - **Imagens** são modelos imutáveis que descrevem como o container deve ser construído e executado.  
 - O **Docker Hub** é um repositório público (semelhante ao GitHub, mas para imagens Docker) onde desenvolvedores podem armazenar e compartilhar imagens prontas para uso.  
 
-> ⚠️ É importante destacar que **projetos React + Vite não precisam de
-> um Dockerfile para serem publicados no Vercel**.\
-> O Vercel já cuida automaticamente do processo de build e deploy.
+> ⚠️ É importante destacar que **projetos React + Vite não precisam de um Dockerfile para serem publicados no Vercel**.  
+> O Vercel já cuida automaticamente do processo de build e deploy.  
+> Nativamente, o Vercel suporta uma ampla gama de tecnologias modernas sem necessidade de Docker, incluindo **React, Next.js, Vue, Svelte, Angular, Node.js, APIs Serverless**, além de projetos estáticos gerados por ferramentas como **Vite, Gatsby e Hugo**.  
+> Ele faz o build, gera os arquivos estáticos ou funções serverless e gerencia automaticamente o deploy, cache e CDN, permitindo que você publique aplicações complexas sem precisar configurar containers manualmente.  
+> ⚠️ **Observação:** o Vercel **não oferece suporte nativo a aplicações Java** (como Spring Boot ou Jakarta EE). Para rodar projetos Java, seria necessário usar **Docker** ou outra nuvem/serviço que suporte JVM, como **AWS, Google Cloud, Heroku ou Render**.
 
 Aqui, o Dockerfile foi criado **apenas a título de aprendizado**, mas pode ser útil em cenários futuros, como:  
 - 📦 Hospedar o projeto em um servidor próprio usando **DigitalOcean**, **AWS EC2** ou **Google Cloud Run**;  
@@ -696,9 +698,8 @@ CMD ["nginx", "-g", "daemon off;"]
 Antes de tudo, certifique-se de que o **Docker Desktop** (no
 Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 
--   **No Mac/Windows**: basta abrir o aplicativo **Docker Desktop**.\
-
--   **No Linux**: rode o comando abaixo para iniciar o serviço:
+-   **No Mac/Windows**: basta abrir o aplicativo **Docker Desktop**.  
+-   **No Linux**: rode o comando abaixo para iniciar o serviço:  
 
     ``` bash
     sudo systemctl start docker
@@ -772,6 +773,7 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
