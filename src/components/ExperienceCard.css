@@ -80,31 +80,58 @@
   border: 1px solid #4a5568;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.role-container {
+  display: flex;
+  align-items: flex-start; /* Alinha logo e texto verticalmente */
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.role-text {
+  display: flex;
+  flex-direction: column; /* Cargo em cima, empresa abaixo */
+}
+
 .role-title {
   margin: 0;
   color: #e2e8f0;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   line-height: 1.5;
 }
+
 .company-name {
+  margin: 0;
   color: #00ff9d;
   font-weight: 500;
+  font-size: 1.4rem;
 }
+
 .date-range {
   margin: 0.25rem 0 1rem 0;
   color: #a0aec0;
   font-style: italic;
   font-size: 0.9rem;
 }
+
 .description-list {
   padding-left: 20px;
   margin: 0 0 1rem 0;
   color: #cbd5e0;
   line-height: 1.6;
 }
+
 .description-list li::marker {
   color: #00ff9d;
 }
+
 .company-info {
   font-size: 0.9rem;
   color: #a0aec0;
@@ -113,11 +140,13 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
 .skills-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
 .skill-tag {
   background-color: #4a5568;
   color: #cbd5e0;

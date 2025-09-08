@@ -7,6 +7,7 @@ export const experiencesData = [
     endDate: "Atual",
     descriptionId: "professor_puc_desc",
     skillsId: "professor_puc_skills",
+    logo: "/logos/puc.jpg",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const experiencesData = [
     endDate: "2024",
     descriptionId: "professor_newton_desc",
     skillsId: "professor_newton_skills",
+    logo: "/logos/newton.jpg",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const experiencesData = [
     endDate: "2023",
     descriptionId: "tech_manager_in8_desc",
     skillsId: "tech_manager_in8_skills",
+    logo: "/logos/in8.jpeg",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const experiencesData = [
     endDate: "2023",
     descriptionId: "curriculum_tech_lead_trybe_desc",
     skillsId: "curriculum_tech_lead_trybe_skills",
+    logo: "/logos/trybe.jpeg",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const experiencesData = [
     endDate: "2023",
     descriptionId: "curriculum_lead_tech_trybe_desc",
     skillsId: "curriculum_lead_tech_trybe_skills",
+    logo: "/logos/trybe.jpeg",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const experiencesData = [
     endDate: "2022",
     descriptionId: "cs_lead_instructor_trybe_desc",
     skillsId: "cs_lead_instructor_trybe_skills",
+    logo: "/logos/trybe.jpeg",
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ export const experiencesData = [
     endDate: "2021",
     descriptionId: "backend_cs_lead_instructor_trybe_desc",
     skillsId: "backend_cs_lead_instructor_trybe_skills",
+    logo: "/logos/trybe.jpeg",
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ export const experiencesData = [
     endDate: "2020",
     descriptionId: "cs_specialist_instructor_trybe_desc",
     skillsId: "cs_specialist_instructor_trybe_skills",
+    logo: "/logos/trybe.jpeg",
   },
   {
     id: 9,
@@ -79,6 +87,7 @@ export const experiencesData = [
     endDate: "2021",
     descriptionId: "professor_xp_desc",
     skillsId: "professor_xp_skills",
+    logo: "/logos/xpe.jpeg",
   },
   {
     id: 10,
@@ -88,6 +97,7 @@ export const experiencesData = [
     endDate: "2020",
     descriptionId: "professor_fumec_desc",
     skillsId: "professor_fumec_skills",
+    logo: "/logos/fumec.jpg",
   },
   {
     id: 11,
@@ -97,6 +107,7 @@ export const experiencesData = [
     endDate: "2020",
     descriptionId: "dev_backend_in8_desc",
     skillsId: "dev_backend_in8_skills",
+    logo: "/logos/in8.jpeg",
   },
   {
     id: 12,
@@ -106,6 +117,7 @@ export const experiencesData = [
     endDate: "2017",
     descriptionId: "analista_sistemas_pl_prosegur_desc",
     skillsId: "analista_sistemas_pl_prosegur_skills",
+    logo: "/logos/prosegur.jpg",
   },
   {
     id: 13,
@@ -115,6 +127,7 @@ export const experiencesData = [
     endDate: "2017",
     descriptionId: "analista_sistemas_pl_capgemini_desc",
     skillsId: "analista_sistemas_pl_capgemini_skills",
+    logo: "/logos/capgemini.jpeg",
   },
   {
     id: 14,
@@ -124,6 +137,7 @@ export const experiencesData = [
     endDate: "2015",
     descriptionId: "analista_sistemas_jr_capgemini_desc",
     skillsId: "analista_sistemas_jr_capgemini_skills",
+    logo: "/logos/capgemini.jpeg",
   },
   {
     id: 15,
@@ -133,6 +147,7 @@ export const experiencesData = [
     endDate: "2014",
     descriptionId: "programador_sr_capgemini_desc",
     skillsId: "programador_sr_capgemini_skills",
+    logo: "/logos/capgemini.jpeg",
   },
   {
     id: 16,
@@ -142,6 +157,7 @@ export const experiencesData = [
     endDate: "2014",
     descriptionId: "programador_jr_capgemini_desc",
     skillsId: "programador_sr_capgemini_skills",
+    logo: "/logos/capgemini.jpeg",
   },
   {
     id: 17,
@@ -151,6 +167,7 @@ export const experiencesData = [
     endDate: "2013",
     descriptionId: "tecnico_programador_bb_desc",
     skillsId: "tecnico_programador_bb_skills",
+    logo: "/logos/bb.png",
   },
   {
     id: 18,
@@ -160,6 +177,7 @@ export const experiencesData = [
     endDate: "2011",
     descriptionId: "desenvolvedor_csharp_alamo_desc",
     skillsId: "desenvolvedor_csharp_alamo_skills",
+    logo: "/logos/alamoti.jpeg",
   },
   {
     id: 19,
@@ -169,6 +187,7 @@ export const experiencesData = [
     endDate: "2010",
     descriptionId: "estagiario_fumec_desc",
     skillsId: "estagiario_fumec_skills",
+    logo: "/logos/fumec.jpg",
   },
   {
     id: 20,
@@ -178,5 +197,6 @@ export const experiencesData = [
     endDate: "2010",
     descriptionId: "bolsista_pibic_desc",
     skillsId: "bolsista_pibic_skills",
+    logo: "/logos/cnpq.jpg",
   },
 ];
