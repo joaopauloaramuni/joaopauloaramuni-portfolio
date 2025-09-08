@@ -617,8 +617,7 @@ O **Docker** é uma plataforma que permite criar, executar e gerenciar aplicaç�
 - **Imagens** são modelos imutáveis que descrevem como o container deve ser construído e executado.  
 - O **Docker Hub** é um repositório público (semelhante ao GitHub, mas para imagens Docker) onde desenvolvedores podem armazenar e compartilhar imagens prontas para uso.  
 
-> ⚠️ É importante destacar que **projetos React + Vite não precisam de um Dockerfile para serem publicados no Vercel**.  
-> O Vercel já cuida automaticamente do processo de build e deploy.  
+> ⚠️ É importante destacar que **projetos React + Vite não precisam de um Dockerfile para serem publicados no Vercel**. O Vercel já cuida automaticamente do processo de build e deploy.   
 > Nativamente, o Vercel suporta uma ampla gama de tecnologias modernas sem necessidade de Docker, incluindo **React, Next.js, Vue, Svelte, Angular, Node.js, APIs Serverless**, além de projetos estáticos gerados por ferramentas como **Vite, Gatsby e Hugo**.  
 > Ele faz o build, gera os arquivos estáticos ou funções serverless e gerencia automaticamente o deploy, cache e CDN, permitindo que você publique aplicações complexas sem precisar configurar containers manualmente.  
 
@@ -782,6 +781,7 @@ em servidores próprios.
 Este projeto é distribuído sob a MIT License.
 
 -----
+
 
 
 
