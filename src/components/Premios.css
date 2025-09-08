@@ -122,16 +122,14 @@
   .premio-desc {
     max-width: 80%;
     text-align: justify;
+    align-items: center;
+    text-align: center;
   }
 
   .premio-separador {
     width: 80%;
   }
 
-  .premios-titulo {
-    align-items: center;
-    text-align: center;
-  }
 }
 
 @media (max-width: 768px) {
