@@ -606,6 +606,150 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 -----
 
+### 🐳 Docker
+
+O **Docker** é uma plataforma que permite criar, executar e gerenciar aplicações de forma isolada através de **containers**.  
+- **Containers** são ambientes leves e portáteis que empacotam a aplicação junto com todas as suas dependências.  
+- **Imagens** são modelos imutáveis que descrevem como o container deve ser construído e executado.  
+- O **Docker Hub** é um repositório público (semelhante ao GitHub, mas para imagens Docker) onde desenvolvedores podem armazenar e compartilhar imagens prontas para uso.  
+
+> ⚠️ É importante destacar que **projetos React + Vite não precisam de
+> um Dockerfile para serem publicados no Vercel**.\
+> O Vercel já cuida automaticamente do processo de build e deploy.
+
+Aqui, o Dockerfile foi criado **apenas a título de aprendizado**, mas pode ser útil em cenários futuros, como:  
+- 📦 Hospedar o projeto em um servidor próprio usando **DigitalOcean**, **AWS EC2** ou **Google Cloud Run**;  
+- 📦 Padronizar ambientes de desenvolvimento e testes com **Docker Compose**;  
+- 📦 Utilizar pipelines de **CI/CD no GitHub Actions, GitLab CI ou Jenkins**, garantindo que o build seja sempre reproduzível.  
+
+-----
+
+#### ⚙️ Docker Compose
+
+O **Docker Compose** é uma ferramenta que permite **definir e gerenciar múltiplos containers Docker** como parte de uma mesma aplicação.  
+Em vez de subir manualmente cada container com `docker run`, você descreve todos os serviços da sua aplicação (ex.: frontend, backend, banco de dados, cache) em um único arquivo chamado **`docker-compose.yml`**.  
+
+Com esse arquivo, você pode:  
+- Subir toda a aplicação de uma vez com `docker compose up`;  
+- Derrubar todos os serviços com `docker compose down`;  
+- Definir volumes, redes e variáveis de ambiente entre containers;  
+- Padronizar ambientes de desenvolvimento e testes sem depender da máquina do desenvolvedor.  
+
+📦 **Exemplo prático:**  
+Um projeto pode precisar de um frontend React, um backend Node.js e um banco PostgreSQL.  
+Com o Docker Compose, basta rodar um comando e todos esses serviços sobem juntos, prontos para se comunicarem entre si.  
+
+👉 Em resumo, o **Docker Compose** é como um “orquestrador simplificado” que facilita rodar aplicações multi-containers de forma prática e padronizada.
+
+-----
+
+#### Exemplo de Dockerfile utilizado
+
+<details>
+  <summary>Clique para exibir</summary>
+
+  
+``` dockerfile
+# ----------------------------
+# Stage 1: Build da aplicação
+# ----------------------------
+FROM node:18-alpine AS build
+
+WORKDIR /app
+
+# Copiar package.json e package-lock.json (ou yarn.lock/pnpm-lock.yaml)
+COPY package*.json ./
+
+# Instalar dependências
+RUN npm install
+
+# Copiar todo o código
+COPY . .
+
+# Build do Vite (gera arquivos estáticos em /dist)
+RUN npm run build
+
+
+# ----------------------------
+# Stage 2: Servir com Nginx
+# ----------------------------
+FROM nginx:stable-alpine
+
+# Remover arquivos default do Nginx
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copiar build do Vite
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expor a porta padrão do Nginx
+EXPOSE 80
+
+# Comando de inicialização do Nginx
+CMD ["nginx", "-g", "daemon off;"]
+```
+</details>
+
+-----
+
+#### 🚀 Como executar localmente com Docker
+
+Antes de tudo, certifique-se de que o **Docker Desktop** (no
+Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
+
+-   **No Mac/Windows**: basta abrir o aplicativo **Docker Desktop**.\
+
+-   **No Linux**: rode o comando abaixo para iniciar o serviço:
+
+    ``` bash
+    sudo systemctl start docker
+    ```
+
+-----
+
+#### 📦 Passos para build e execução
+
+1.  Acesse a pasta do projeto:
+
+    ``` bash
+    cd /caminho/do/projeto/joaopauloaramuni-portfolio
+    ```
+
+2.  Gere a imagem a partir do Dockerfile:
+
+    ``` bash
+    docker build -t portfolio .
+    ```
+
+3.  Rode o container mapeando a porta **8080** do host para a porta
+    **80** do Nginx:
+
+    ``` bash
+    docker run -p 8080:80 portfolio
+    ```
+
+4.  Abra no navegador:\
+    👉 <http://localhost:8080>
+
+5.  Para parar o container em execução, descubra o ID ou nome com:
+
+    ``` bash
+    docker ps
+    ```
+
+    E então pare-o com:
+
+    ``` bash
+    docker stop <id_ou_nome_do_container>
+    ```
+
+-----
+
+✅ Em resumo: este Dockerfile não é necessário para deploys no Vercel,
+mas oferece conhecimento valioso e flexibilidade para cenários em que o
+projeto precise rodar em **ambientes Dockerizados**, seja em nuvem, seja
+em servidores próprios.
+
+
 ## 🔗 Documentação e links úteis
 
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
@@ -628,18 +772,6 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 Este projeto é distribuído sob a MIT License.
 
 -----
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
