@@ -75,9 +75,9 @@
   margin-top: 16px;
 }
 
-.premios-titulo{
-  color: #00ff9d; 
-  margin-bottom: 2rem; 
+.premios-titulo {
+  color: #00ff9d;
+  margin-bottom: 2rem;
   font-size: 1.8rem;
 }
 
@@ -127,6 +127,11 @@
   .premio-separador {
     width: 80%;
   }
+
+  .premios-titulo {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -140,5 +145,10 @@
   .premio-avatar-image {
     width: 90px;
     height: 90px;
+  }
+
+  .premios-titulo {
+    align-items: center;
+    text-align: center;
   }
 }
