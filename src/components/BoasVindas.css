@@ -1,6 +1,6 @@
 .name-animation {
   white-space: pre-line;
-  margin: 0;
+  margin: 0 0 2rem 0;
   padding: 0;
 }
 
@@ -31,7 +31,7 @@
 .divider {
   border: none;
   border-top: 1px solid #4a5568;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .info-list {
@@ -44,10 +44,6 @@
   align-items: center;
   gap: 1rem;
   color: #e2e8f0;
-}
-
-.info-list li:not(:last-child) {
-  margin-bottom: 0.5rem;
 }
 
 .info-list .icon {
