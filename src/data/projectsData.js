@@ -85,7 +85,7 @@ export const projectsData = [
     id: 11,
     titleId: "aes_proj4_title",
     descriptionId: "aes_proj4_desc",
-    gif: "/cartaoprog.png",
+    gif: "/cartaoprograma.jpeg",
     repoLink: "https://icei.pucminas.br/aes/",
     technologies: ["Java", "Spring Boot", "Angular"],
   },
