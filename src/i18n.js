@@ -153,6 +153,10 @@ const resources = {
         github_proj_desc:
           "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
 
+        anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
+        anp_proj_desc:
+          "Projects developed for ANP (National Agency of Petroleum, Natural Gas and Biofuels), focused on managing exploration, production, and product movement data in the oil and gas sector. Included the modernization of SIGEP/i-SIGEP for secure document submission with protocols and digital signatures, as well as SIMP/i-SIMP for integrated monitoring of the downstream chain.",
+
         prosegur_proj_title: "SOL - Logistics Operations System",
         prosegur_proj_desc:
           "The Prosegur SOL Project unifies cash logistics systems across several countries, allowing the control of operations, resources, vehicles, personnel, routes, and services. It is a robust, configurable, and easy-to-maintain platform, incorporating the best existing features and facilitating the work of the analysis team.",
@@ -794,6 +798,10 @@ const resources = {
         github_proj_title: "GitHub Readme Profile",
         github_proj_desc:
           "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
+
+        anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
+        anp_proj_desc:
+          "Projetos desenvolvidos para a ANP (Agência Nacional do Petróleo, Gás Natural e Biocombustíveis), voltados à gestão de informações de exploração, produção e movimentação de petróleo, gás e derivados. Incluíram modernização do SIGEP/i-SIGEP para envio seguro de documentos com protocolos e assinaturas digitais, além do SIMP/i-SIMP para monitoramento integrado da cadeia downstream.",
 
         prosegur_proj_title: "SOL - Sistema de Operações Logísticas",
         prosegur_proj_desc:
