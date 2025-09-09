@@ -153,8 +153,8 @@ const resources = {
         github_proj_desc:
           "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
 
-        stor_proj_title: "",
-        stor_proj_desc: "",
+        stor_proj_title: "STOR - Extracting Value from Industrial Asset Data",
+        stor_proj_desc: "STOR is a modular solution that supports the implementation of BIM (Business Information Modelling), integrating all stages of engineering, maintenance, and operations projects. The platform allows for the management of documents, materials, purchases, and processes within a virtual plant, reducing costs, eliminating waste, and improving the quality of the final product.",
 
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
@@ -809,8 +809,8 @@ const resources = {
         github_proj_desc:
           "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
 
-        stor_proj_title: "",
-        stor_proj_desc: "",
+        stor_proj_title: "STOR - Plataforma de Gestão Integrada de Projetos e Ativos",
+        stor_proj_desc: "O STOR é uma solução modular que apoia a aplicação do BIM (Business Information Modelling), integrando todas as etapas de projetos de engenharia, manutenção e operação. A plataforma permite controlar documentos, materiais, compras e processos em uma planta virtual, reduzindo custos, eliminando desperdícios e aumentando a qualidade do produto final.",
 
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
