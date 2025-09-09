@@ -45,7 +45,7 @@ export const projectsData = [
     id: 6,
     titleId: "stor_proj_title",
     descriptionId: "stor_proj_desc",
-    gif: "/stor.png",
+    gif: "/stor.gif",
     repoLink: "https://www.linkedin.com/company/storglobal/",
     technologies: ["C#", "ASP", ".Net"],
   },
