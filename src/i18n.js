@@ -153,6 +153,9 @@ const resources = {
         github_proj_desc:
           "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
 
+        stor_proj_title: "",
+        stor_proj_desc: "",
+
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
           "Projects developed for ANP (National Agency of Petroleum, Natural Gas and Biofuels), focused on managing exploration, production, and product movement data in the oil and gas sector. Included the modernization of SIGEP/i-SIGEP for secure document submission with protocols and digital signatures, as well as SIMP/i-SIMP for integrated monitoring of the downstream chain.",
@@ -196,6 +199,13 @@ const resources = {
       recomendacoes: {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
+
+        rec0_relationship:
+          "On September 9, 2025, Raphael reported to João Paulo",
+
+        rec0_recommendation:
+          "João Aramuni is, by far, the best professor I could have at the University. His lectures are clear, and the content presented is aligned with the realities of the market. Beyond being an excellent tutor, he gave me a golden opportunity by trusting my work to lead one of the largest projects of the Experimental Software Agency, impacting the entire State and proving that students have real chances and are more than just numbers in academia. I wholeheartedly recommend this professional and will carry with me for life all the lessons I’ve learned.",
+
         rec1_relationship:
           "On August 31, 2025, Michelle Hanne worked with João Paulo on the same team",
 
@@ -799,6 +809,9 @@ const resources = {
         github_proj_desc:
           "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
 
+        stor_proj_title: "",
+        stor_proj_desc: "",
+
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
           "Projetos desenvolvidos para a ANP (Agência Nacional do Petróleo, Gás Natural e Biocombustíveis), voltados à gestão de informações de exploração, produção e movimentação de petróleo, gás e derivados. Incluíram modernização do SIGEP/i-SIGEP para envio seguro de documentos com protocolos e assinaturas digitais, além do SIMP/i-SIMP para monitoramento integrado da cadeia downstream.",
@@ -843,6 +856,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec0_relationship:
+          "Em 9 de setembro de 2025, Raphael respondia a João Paulo",
+
+        rec0_recommendation:
+          "O João Aramuni é, de longe, o melhor Professor que eu poderia ter na Universidade. As aulas são claras e o conteúdo apresentado é condizente com a realidade do mercado. Além de ótimo tutor, ele me deu uma oportunidade de ouro ao confiar em meu trabalho para liderar um dos maiores projetos da Agência Experimental de Software, impactando todo o Estado e mostrando que os alunos têm chances e que são mais que números na academia. Recomendo de olhos vendados este profissional e levo para a vida todos os aprendizados.",
 
         rec1_relationship:
           "Em 31 de agosto de 2025, Michelle Hanne trabalhava com João Paulo na mesma equipe",
