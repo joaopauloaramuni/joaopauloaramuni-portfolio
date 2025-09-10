@@ -154,7 +154,8 @@ const resources = {
           "Project for building GitHub profiles with personalized READMEs, statistics, badges, activity and contribution charts. Includes integration with WakaTime and Spotify, examples of interactive profiles, best practice guides, dynamic visual elements, and automatic content generation. The goal is to provide a complete and attractive portfolio, highlighting skills and projects.",
 
         stor_proj_title: "STOR - Extracting Value from Industrial Asset Data",
-        stor_proj_desc: "STOR is a modular solution that supports the implementation of BIM (Business Information Modelling), integrating all stages of engineering, maintenance, and operations projects. The platform allows for the management of documents, materials, purchases, and processes within a virtual plant, reducing costs, eliminating waste, and improving the quality of the final product.",
+        stor_proj_desc:
+          "STOR is a modular solution that supports the implementation of BIM (Business Information Modelling), integrating all stages of engineering, maintenance, and operations projects. The platform allows for the management of documents, materials, purchases, and processes within a virtual plant, reducing costs, eliminating waste, and improving the quality of the final product.",
 
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
@@ -180,16 +181,20 @@ const resources = {
         aes_proj3_desc:
           "I Care Well is a project by PUC Minas, in partnership with the Mário Penna Institute and the PUC Minas Physiotherapy Clinical Center, aimed at supporting the discharge of cancer patients. The app guides patients on physiotherapy practices at home, replacing the paper booklet with a more practical digital solution.",
 
-        aes_proj4_title: "Program Card - Experimental Software Agency",
+        aes_proj4_title: "PMMG - Program Card - Experimental Software Agency",
         aes_proj4_desc:
           "The Program Card is a project in partnership with the Military Police of Minas Gerais, aimed at facilitating the planning of police officers' itineraries in the state. The digital solution replaces the current manual process and will be accessed through SIGOp, a system used for the management and analysis of operational information.",
 
-        aes_proj5_title: "Map of Institutions - Experimental Software Agency",
+        aes_proj5_title: "PMMG - HR Contest - Experimental Software Agency",
         aes_proj5_desc:
+          "The HR Contest project is the result of a partnership between the ESA and the Military Police of Minas Gerais, aiming to modernize and digitize the candidate selection processes. The proposed solution replaces the manual handling of documents, ensuring greater traceability, reliability, and agility in data analysis. The system will be integrated into the PMMG environment and will have a direct impact on the efficiency of managing public contests.",
+
+        aes_proj6_title: "Map of Institutions - Experimental Software Agency",
+        aes_proj6_desc:
           "The Map of Institutions project, developed by the Experimental Software Agency of PUC Minas in partnership with Sustainability Intelligence Center (CIS) of BH-TEC, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
 
-        aes_proj6_title: "Help Out App - Experimental Software Agency",
-        aes_proj6_desc:
+        aes_proj7_title: "Help Out App - Experimental Software Agency",
+        aes_proj7_desc:
           "Help Out is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
@@ -809,8 +814,10 @@ const resources = {
         github_proj_desc:
           "Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos.",
 
-        stor_proj_title: "STOR - Plataforma de Gestão Integrada de Projetos e Ativos",
-        stor_proj_desc: "O STOR é uma solução modular que apoia a aplicação do BIM (Business Information Modelling), integrando todas as etapas de projetos de engenharia, manutenção e operação. A plataforma permite controlar documentos, materiais, compras e processos em uma planta virtual, reduzindo custos, eliminando desperdícios e aumentando a qualidade do produto final.",
+        stor_proj_title:
+          "STOR - Plataforma de Gestão Integrada de Projetos e Ativos",
+        stor_proj_desc:
+          "O STOR é uma solução modular que apoia a aplicação do BIM (Business Information Modelling), integrando todas as etapas de projetos de engenharia, manutenção e operação. A plataforma permite controlar documentos, materiais, compras e processos em uma planta virtual, reduzindo custos, eliminando desperdícios e aumentando a qualidade do produto final.",
 
         anp_proj_title: "SIMP, I-SIMP, SIGEP, I-SIGEP",
         anp_proj_desc:
@@ -836,17 +843,23 @@ const resources = {
         aes_proj3_desc:
           "O CuidoBem é um projeto da PUC Minas, em parceria com o Instituto Mário Penna e o Centro Clínico de Fisioterapia, que visa apoiar a desospitalização de pacientes com câncer. O aplicativo orienta os pacientes sobre práticas fisioterapêuticas em casa, substituindo a cartilha de papel por uma solução digital mais prática.",
 
-        aes_proj4_title: "Cartão Programa - Agência Experimental de Software",
+        aes_proj4_title:
+          "PMMG - Cartão Programa - Agência Experimental de Software",
         aes_proj4_desc:
           "O Cartão Programa é um projeto em parceria com a Polícia Militar de Minas Gerais, que visa facilitar o planejamento de itinerários dos policiais no estado. A solução digital substitui o processo manual atual e será acessada dentro do SIGOp, sistema utilizado para gestão e análise de informações operacionais.",
 
         aes_proj5_title:
-          "Mapa de Instituições - Agência Experimental de Software",
+          "PMMG - RH Concurso - Agência Experimental de Software",
         aes_proj5_desc:
+          "O projeto RH Concurso é fruto da parceria entre a AES e a Polícia Militar de Minas Gerais, com o objetivo de modernizar e digitalizar os processos de seleção de candidatos. A solução proposta substitui a tramitação manual de documentos, garantindo maior rastreabilidade, confiabilidade e agilidade na análise de dados. O sistema será integrado ao ambiente da PMMG e trará impacto direto na eficiência da gestão de concursos públicos.",
+
+        aes_proj6_title:
+          "Mapa de Instituições - Agência Experimental de Software",
+        aes_proj6_desc:
           "O projeto Mapa de Instituições, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o Centro de Inteligência em Sustentabilidade (CIS) do BH-TEC, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
 
-        aes_proj6_title: "Ajuda-aí App - Agência Experimental de Software",
-        aes_proj6_desc:
+        aes_proj7_title: "Ajuda-aí App - Agência Experimental de Software",
+        aes_proj7_desc:
           "O Ajuda-aí é um aplicativo que otimiza o programa de apadrinhamento do curso de Engenharia de Software da PUC Minas. Centraliza informações dos participantes e melhora a comunicação entre padrinhos e apadrinhados. Com algoritmo de match avançado, garante que cada apadrinhado seja combinado com o padrinho mais adequado, oferecendo uma experiência personalizada.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
