@@ -205,6 +205,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec55_relationship:
+          "On September 13, 2025, Jonathan was a client of João Paulo",
+
+        rec55_recommendation:
+          "I had the opportunity to be a student of Professor João Paulo Aramuni and I can say that his way of teaching goes far beyond technical content. He is a mentor who inspires, always willing to help and make learning lighter, more human, and motivating. The exercises and projects proposed in class not only enrich the portfolio but also contribute significantly to our development as students and to our preparation for the professional market. Without a doubt, he is a professor who leaves a positive mark on the academic journey and makes a real difference in students’ education.",
+
         rec0_relationship:
           "On September 9, 2025, Raphael reported to João Paulo",
 
@@ -869,6 +875,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec55_relationship:
+          "Em 13 de setembro de 2025, Jonathan era cliente de João Paulo",
+
+        rec55_recommendation:
+          "Tive a oportunidade de ser aluno do professor João Paulo Aramuni e posso afirmar que sua forma de ensinar vai muito além do conteúdo técnico. Ele é um orientador que inspira, sempre disposto a auxiliar e tornar o aprendizado mais leve, humano e motivador. Os exercícios e projetos propostos em aula não apenas enriquecem o portfólio, mas também contribuem de forma significativa para o nosso desenvolvimento como estudantes e para a preparação para o mercado profissional. Sem dúvida, é um professor que deixa uma marca positiva na trajetória acadêmica e faz a diferença na formação dos alunos.",
 
         rec0_relationship:
           "Em 9 de setembro de 2025, Raphael respondia a João Paulo",
