@@ -205,6 +205,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec56_relationship:
+          "On September 15, 2025, Nataniel was a client of João Paulo",
+
+        rec56_recommendation:
+          "Excellent professor. Has complete mastery of the content taught and conveys knowledge in a light, didactic manner, demystifying more dense and complex subjects. Always available, willing to help, and contributing to the personal and professional growth of students.",
+
         rec55_relationship:
           "On September 13, 2025, Jonathan was a client of João Paulo",
 
@@ -875,6 +881,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec56_relationship:
+          "Em 15 de setembro de 2025, Nataniel era cliente de João Paulo",
+
+        rec56_recommendation:
+          "Excelente Professor. Tem completo domínio do conteúdo lecionado, e transmite o conhecimento de maneira leve, didática, desmistificando conteúdos mais densos e complexos. Está sempre disponível, disposto a ajudar e contribuir para o crescimento pessoal e profissional dos alunos.",
 
         rec55_relationship:
           "Em 13 de setembro de 2025, Jonathan era cliente de João Paulo",
