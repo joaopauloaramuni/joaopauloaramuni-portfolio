@@ -205,6 +205,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec57_relationship:
+          "On September 16, 2025, Davi reported to João Paulo",
+
+        rec57_recommendation:
+          "I had the opportunity to spend time with João Paulo during the course, and I can say he is a really great guy, a true partner. Always open to chatting, joking around, having conversations, and at the same time showing that he really knows what he’s talking about. What stands out the most to me is his willingness to help at any time, always with patience and a genuine desire to see others grow. That makes a huge difference in the learning environment and shows how collaborative he is. On top of that, his technical knowledge is remarkable, both in development and in best practices, which gives confidence when he’s explaining or guiding an activity. I highly recommend João Paulo, both for the professional he is and for the incredible person he shows himself to be every day.",
+
         rec56_relationship:
           "On September 15, 2025, Nataniel was a client of João Paulo",
 
@@ -881,6 +887,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec57_relationship:
+          "Em 16 de setembro de 2025, Davi respondia a João Paulo",
+
+        rec57_recommendation:
+          "Tive a oportunidade de conviver com o João Paulo durante o curso e posso dizer que ele é um cara muito gente boa, parceiro de verdade. Sempre aberto para trocar ideia, brincar, conversar e ao mesmo tempo mostrar que sabe muito do que fala. O que mais me chama atenção é a disposição em ajudar independente da hora, sempre com paciência e vontade de ver o outro crescer. Isso faz toda diferença no ambiente de aprendizado e mostra o quanto ele é colaborativo. Além disso, é notável o conhecimento técnico que ele tem, tanto em desenvolvimento quanto em boas práticas, o que dá segurança quando está explicando ou guiando alguma atividade. Recomendo muito o João Paulo, tanto pelo profissional que é quanto pela pessoa incrível que se mostra no dia a dia.",
 
         rec56_relationship:
           "Em 15 de setembro de 2025, Nataniel era cliente de João Paulo",
