@@ -205,6 +205,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec58_relationship:
+          "On September 27, 2025, Gabriel was a client of João Paulo",
+
+        rec58_recommendation:
+          "I have the privilege of being Professor Aramuni’s student, and I can say with absolute certainty that his classes go far beyond theoretical content. He has an approach that is strongly connected to the market, always bringing real-world examples, relevant case studies, and inviting experienced professionals from the field to share their insights and everyday challenges. This practical connection with the industry makes his classes much richer, more up-to-date, and truly inspiring. Professor Aramuni has a clear, objective, and at the same time thought-provoking teaching style, always encouraging critical thinking and the professional development of his students.",
+
         rec57_relationship:
           "On September 16, 2025, Davi reported to João Paulo",
 
@@ -887,6 +893,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec58_relationship:
+          "Em 27 de setembro de 2025, Gabriel era cliente de João Paulo",
+
+        rec58_recommendation:
+          "Tenho o privilégio de ser aluno do professor Aramuni, e posso dizer com toda certeza que suas aulas vão muito além do conteúdo teórico. Ele tem uma abordagem extremamente conectada com o mercado, sempre trazendo exemplos reais, cases relevantes e convidando profissionais experientes da área para compartilhar vivências e desafios do dia a dia. Essa conexão prática com o mercado torna suas aulas muito mais ricas, atualizadas e inspiradoras. O professor Aramuni tem uma didática clara, objetiva e, ao mesmo tempo, instigante, sempre incentivando a reflexão crítica e o desenvolvimento profissional dos alunos.",
 
         rec57_relationship:
           "Em 16 de setembro de 2025, Davi respondia a João Paulo",
