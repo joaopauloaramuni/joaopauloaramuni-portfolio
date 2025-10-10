@@ -131,6 +131,14 @@ export const projectsData = [
   },
   {
     id: 17,
+    titleId: "aes_proj8_title",
+    descriptionId: "aes_proj8_desc",
+    gif: "/mrv.png",
+    repoLink: "https://www.mrv.com.br/",
+    technologies: ["Javascript", "React", "Python"],
+  },
+  {
+    id: 18,
     titleId: "jedis_proj_title",
     descriptionId: "jedis_proj_desc",
     gif: "/jedis.jpg",

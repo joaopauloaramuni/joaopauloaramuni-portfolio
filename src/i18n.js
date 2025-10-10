@@ -197,6 +197,10 @@ const resources = {
         aes_proj7_desc:
           "Help Out is an app that optimizes the mentorship program of the Software Engineering course at PUC Minas. It centralizes participant information and improves communication between mentors and mentees. Using an advanced matching algorithm, it ensures each mentee is paired with the most suitable mentor, providing a personalized experience.",
 
+        aes_proj8_title: "Sustainable Concrete - Experimental Software Agency",
+        aes_proj8_desc:
+          "The Sustainable Concrete project, developed by the Experimental Software Agency (AES) at PUC Minas in partnership with MRV Engenharia, aims to significantly reduce concrete waste and disposal in the company's construction processes — one of the main environmental challenges faced by the construction industry.",
+
         jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
         jedis_proj_desc:
           "RHapido 2.0 is a recruitment management system that uses artificial intelligence to streamline and make talent acquisition more efficient. Developed with cutting-edge technology, it offers intelligent resume screening, reducing time and costs in the hiring process.",
@@ -885,6 +889,11 @@ const resources = {
         aes_proj7_title: "Ajuda-aí App - Agência Experimental de Software",
         aes_proj7_desc:
           "O Ajuda-aí é um aplicativo que otimiza o programa de apadrinhamento do curso de Engenharia de Software da PUC Minas. Centraliza informações dos participantes e melhora a comunicação entre padrinhos e apadrinhados. Com algoritmo de match avançado, garante que cada apadrinhado seja combinado com o padrinho mais adequado, oferecendo uma experiência personalizada.",
+
+        aes_proj8_title:
+          "Concreto Sustentável - Agência Experimental de Software",
+        aes_proj8_desc:
+          "O projeto Concreto Sustentável, desenvolvido pela Agência Experimental de Software (AES) da PUC Minas em parceria com a MRV Engenharia, tem como objetivo reduzir significativamente o descarte e desperdício de concreto nos processos construtivos da empresa — um dos principais desafios ambientais enfrentados pelo setor da construção civil.",
 
         jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
         jedis_proj_desc:
