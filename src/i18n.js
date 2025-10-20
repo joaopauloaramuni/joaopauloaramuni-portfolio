@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec59_relationship:
+          "On October 20, 2025, Paulo reported to João Paulo",
+
+        rec59_recommendation:
+          "João Paulo Aramuni was my professor in two very important courses during my college years, Algorithms and Data Structures 1 and Software Project. He is a teacher with excellent teaching skills and outstanding materials, especially on his GitHub, which contains various slides, projects, Figma designs, and other resources that are essential for a student’s development. I highly recommend him as both a professor and a developer.",
+
         rec58_relationship:
           "On September 27, 2025, Gabriel was a client of João Paulo",
 
@@ -902,6 +908,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec59_relationship:
+          "Em 20 de outubro de 2025, Paulo respondia a João Paulo",
+
+        rec59_recommendation:
+          "João Paulo Aramuni foi meu professor em duas matérias muito importante na minha faculdade, Algoritmos e Estrutura de Dados 1 e Projeto de Software, sendo um professor que possui uma ótima didática e materiais espetaculares, principalmente no seu GitHub, tendo diversos slides, projetos, figmas e outros materiais que são essenciais para um bom desenvolvimento como aluno. Super indico como professor e desenvolvedor.",
 
         rec58_relationship:
           "Em 27 de setembro de 2025, Gabriel era cliente de João Paulo",
