@@ -142,7 +142,7 @@ export const projectsData = [
     titleId: "jedis_proj_title",
     descriptionId: "jedis_proj_desc",
     gif: "/jedis.jpg",
-    repoLink: "https://www.jedis.com.br/#solutions",
+    repoLink: "https://www.rhapido.com.br/",
     technologies: ["JavaScript", "Next", "SpringBoot"],
   },
 ];
