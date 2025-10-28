@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec60_relationship:
+          "On October 28, 2025, Fernanda reported to João Paulo",
+
+        rec60_recommendation:
+          "I had the opportunity to be a student of Professor João Paulo Aramuni, and I can say that he is one of the most accessible and dedicated professors I have ever had. He is always willing to help and genuinely cares about his students' learning, being present for whatever is needed: answering questions, guiding projects, or giving career advice. He is a complete professional and an incredible person, who makes all the difference in the academic journey of those who are lucky enough to learn from him.",
+        
         rec59_relationship:
           "On October 20, 2025, Paulo reported to João Paulo",
 
@@ -908,6 +914,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec60_relationship:
+          "Em 28 de outubro de 2025, Fernanda respondia a João Paulo",
+
+        rec60_recommendation:
+          "Tive a oportunidade de ser aluna do professor João Paulo Aramuni, e posso dizer que ele é um dos professores mais acessíveis e dedicados que já tive. Está sempre disposto a ajudar e realmente se preocupa com o aprendizado dos alunos, estando presente para o que for preciso: tirando dúvidas, orientando projetos ou dando conselhos sobre a carreira. É um profissional completo e uma pessoa incrível, que faz toda a diferença na trajetória acadêmica de quem tem a sorte de aprender com ele.",
 
         rec59_relationship:
           "Em 20 de outubro de 2025, Paulo respondia a João Paulo",
