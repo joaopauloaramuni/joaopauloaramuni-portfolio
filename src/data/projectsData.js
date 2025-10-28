@@ -117,7 +117,7 @@ export const projectsData = [
     id: 15,
     titleId: "aes_proj6_title",
     descriptionId: "aes_proj6_desc",
-    gif: "/bhtec.jpg",
+    gif: "/bhtec.gif",
     repoLink: "https://bhtec.org.br/",
     technologies: ["React", "Vite", "Java", "SpringBoot"],
   },
