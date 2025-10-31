@@ -189,9 +189,9 @@ const resources = {
         aes_proj5_desc:
           "The HR Contest project is the result of a partnership between the ESA and the Military Police of Minas Gerais, aiming to modernize and digitize the candidate selection processes. The proposed solution replaces the manual handling of documents, ensuring greater traceability, reliability, and agility in data analysis. The system will be integrated into the PMMG environment and will have a direct impact on the efficiency of managing public contests.",
 
-        aes_proj6_title: "Map of Institutions - Experimental Software Agency",
+        aes_proj6_title: "Sustainability Map - Experimental Software Agency",
         aes_proj6_desc:
-          "The Map of Institutions project, developed by the Experimental Software Agency of PUC Minas in partnership with Sustainability Intelligence Center (CIS) of BH-TEC, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
+          "The Sustainability Map project, developed by the Experimental Software Agency of PUC Minas in partnership with Sustainability Intelligence Center (CIS) of BH-TEC, is an initiative aimed at mapping sustainable actions throughout the state of Minas Gerais. The mapping contributes to giving visibility to these initiatives, in addition to providing metrics that support governmental discussions on sustainability.",
 
         aes_proj7_title: "Help Out App - Experimental Software Agency",
         aes_proj7_desc:
@@ -894,9 +894,9 @@ const resources = {
           "O projeto RH Concurso é fruto da parceria entre a AES e a Polícia Militar de Minas Gerais, com o objetivo de modernizar e digitalizar os processos de seleção de candidatos. A solução proposta substitui a tramitação manual de documentos, garantindo maior rastreabilidade, confiabilidade e agilidade na análise de dados. O sistema será integrado ao ambiente da PMMG e trará impacto direto na eficiência da gestão de concursos públicos.",
 
         aes_proj6_title:
-          "Mapa de Instituições - Agência Experimental de Software",
+          "Mapa de Sustentabilidade - Agência Experimental de Software",
         aes_proj6_desc:
-          "O projeto Mapa de Instituições, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o Centro de Inteligência em Sustentabilidade (CIS) do BH-TEC, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
+          "O projeto Mapa de Sustentabilidade, desenvolvido pela Agência Experimental de Software da PUC Minas em parceria com o Centro de Inteligência em Sustentabilidade (CIS) do BH-TEC, é uma iniciativa voltada ao mapeamento de ações sustentáveis em todo o estado de Minas Gerais. O mapeamento contribui para dar visibilidade a essas iniciativas, além de fornecer métricas que subsidiam discussões governamentais sobre sustentabilidade.",
 
         aes_proj7_title: "Ajuda-aí App - Agência Experimental de Software",
         aes_proj7_desc:
