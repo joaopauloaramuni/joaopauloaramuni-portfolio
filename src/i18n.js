@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec61_relationship:
+          "On November 18, 2025, Otávio reported to João Paulo",
+
+        rec61_recommendation:
+          "I strongly recommend João Paulo Aramuni as a professional and as a professor. I had the opportunity to be his student in technology projects, and I can say that he manages to combine, in a rare way, technical depth with very clear teaching. João Paulo has a very solid strategic vision, brings real market examples, and always seeks to connect theory with practice, which generates a direct impact on the quality of the work. In addition to his technical competence as a CTO and Tech Lead, what stands out the most to me is his willingness to help and his genuine concern for the development of those around him. On several occasions, he went beyond the “basic” expectations of a consultant/professor to provide career guidance, review technical decisions, and suggest more sustainable paths for the project. He is an ethical, up-to-date professional who truly adds value to any team or initiative he is involved in.",
+        
         rec60_relationship:
           "On October 28, 2025, Fernanda reported to João Paulo",
 
@@ -914,6 +920,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec61_relationship:
+          "Em 18 de novembro de 2025, Otávio respondia a João Paulo",
+
+        rec61_recommendation:
+          "Recomendo fortemente o João Paulo Aramuni como profissional e como professor. Tive a oportunidade de ser seu aluno em projetos de tecnologia e posso dizer que ele consegue unir, de forma rara, profundidade técnica com uma didática muito clara. João Paulo tem uma visão estratégica muito sólida, traz exemplos reais do mercado e sempre busca conectar teoria com prática, o que gera um impacto direto no resultado do trabalho. Além da competência técnica como CTO e Tech Lead, o que mais me chama atenção é a disponibilidade em ajudar e a preocupação genuína com o desenvolvimento das pessoas ao redor. Em diversos momentos ele saiu do “básico” esperado de um consultor/professor para orientar carreira, revisar decisões técnicas e sugerir caminhos mais sustentáveis para o projeto. É um profissional ético, atualizado e que realmente soma a qualquer equipe ou iniciativa em que esteja envolvido.",
 
         rec60_relationship:
           "Em 28 de outubro de 2025, Fernanda respondia a João Paulo",
