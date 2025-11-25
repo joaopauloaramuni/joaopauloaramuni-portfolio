@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec63_relationship:
+          "On November 25, 2025, Leonardo reported to João Paulo",
+
+        rec63_recommendation:
+          "Learning from João Paulo Aramuni was one of the best experiences I’ve ever had. He explains everything in a clear, direct way without beating around the bush, even when the subject is complicated. You can tell he really understands what he’s talking about and, more importantly, truly knows how to teach. What I like most about him is that he doesn’t stick only to the class content: he brings real-world examples, gives career tips, shows different paths, and genuinely cares about our development. He has already helped me with technical questions, project decisions, and even how to think better as a professional. He is a teacher who motivates, who adds value, and who makes a difference. Anyone who has the chance to learn from him should take it — it’s really worth it.",
+        
         rec62_relationship:
           "On November 19, 2025, Bruna was a client of João Paulo",
 
@@ -926,6 +932,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+
+        rec63_relationship:
+          "Em 25 de novembro de 2025, Leonardo respondia a João Paulo",
+
+        rec63_recommendation:
+          "Aprender com o João Paulo Aramuni foi uma das melhores experiências que tive. Ele explica tudo de um jeito claro, direto e sem enrolação, mesmo quando o assunto é complicado. Dá pra ver que ele realmente entende do que fala e, mais importante, sabe ensinar de verdade. O que mais gosto nele é que ele não fica só no conteúdo da aula: ele puxa exemplos do mercado, dá dicas de carreira, mostra caminhos e realmente se preocupa com o nosso desenvolvimento. Já me ajudou em dúvidas técnicas, decisões de projeto e até em como pensar melhor como profissional. É um professor que motiva, que soma e que faz a diferença. Quem tiver a chance de aprender com ele, aproveite, vale muito a pena.",
 
         rec62_relationship:
           "Em 19 de novembro de 2025, Bruna era cliente de João Paulo",
