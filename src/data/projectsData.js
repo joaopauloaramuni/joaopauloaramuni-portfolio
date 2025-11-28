@@ -118,7 +118,7 @@ export const projectsData = [
     titleId: "aes_proj6_title",
     descriptionId: "aes_proj6_desc",
     gif: "/bhtec.gif",
-    repoLink: "https://bhtec.org.br/",
+    repoLink: "https://bh-tec.vercel.app/",
     technologies: ["React", "Vite", "Java", "SpringBoot"],
   },
   {
