@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec64_relationship:
+          "On December 12, 2025, Lucas was a client of João Paulo",
+
+        rec64_recommendation:
+          "I had the privilege this semester of being a student of professor João Paulo Aramuni in FPAA in Software Engineering. In addition to mastering the content and explaining the subject clearly, he was always available to answer questions, provide career guidance, and recommend studies and extracurricular activities that truly add value and contribute to the academic and professional development of his students. A competent, accessible, and committed professor to the development of the students.",           
+        
         rec63_relationship:
           "On November 25, 2025, Leonardo reported to João Paulo",
 
@@ -932,6 +938,12 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
+        
+        rec64_relationship:
+          "Em 12 de dezembro de 2025, Lucas era cliente de a João Paulo",
+
+        rec64_recommendation:
+          "Tive o privilégio nesse semestre de ser aluno do professor João Paulo Aramuni em FPAA na Engenharia de Software. Além de dominar o conteúdo e explicar a matéria de forma clara, sempre esteve presente para tirar dúvidas, orientar sobre carreira e indicar estudos, e atividades extracurriculares que realmente agregam e contribuem para a formação acadêmica e profissional dos seus alunos. Um professor competente, acessível e comprometido com o desenvolvimento dos alunos.",
 
         rec63_relationship:
           "Em 25 de novembro de 2025, Leonardo respondia a João Paulo",
