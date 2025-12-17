@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec65_relationship:
+          "On December 16, 2025, Guilherme was a client of João Paulo",
+
+        rec65_recommendation:
+          "I was fortunate to have João Paulo Aramuni as my professor in the Software Design course. He is the kind of professor who not only masters the subject but also has a way of explaining things that makes everything seem simpler. What I value most about him is the partnership: always approachable, ready to chat about the job market and offer those career tips you don’t find in books. He is a professional who genuinely roots for his students’ success. I highly recommend him!",
+
         rec64_relationship:
           "On December 12, 2025, Lucas was a client of João Paulo",
 
@@ -939,6 +945,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec65_relationship:
+          "Em 16 de dezembro de 2025, Guilherme era cliente de João Paulo",
+
+        rec65_recommendation:
+          "Tive a sorte de ter o João Paulo Aramuni como professor na disciplina de Projeto de Software. Ele é aquele tipo de professor que não só domina o assunto, mas tem um jeito de explicar que faz tudo parecer mais simples. O que mais valorizo nele é a parceria: sempre acessível, pronto para trocar uma ideia sobre o mercado e dar aquelas dicas de carreira que a gente não encontra nos livros. É um profissional que torce de verdade pelo sucesso dos alunos. Recomendo demais!",
+
         rec64_relationship:
           "Em 12 de dezembro de 2025, Lucas era cliente de a João Paulo",
 
