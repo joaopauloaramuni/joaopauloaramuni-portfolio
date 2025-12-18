@@ -209,6 +209,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec66_relationship:
+          "On December 18, 2025, Tito was a client of João Paulo",
+
+        rec66_recommendation:
+          "It is with great pleasure that I recommend Professor João Paulo Aramuni. As my undergraduate thesis advisor, his availability and technical expertise were crucial to the development of the software 'Keep', an innovative solution for managing a fleet of machines. His ability to guide and stimulate critical thinking was fundamental to the success of the project and to my professional development, in addition to all the supplementary materials he introduced to me, which were crucial to my improved learning.",
+
         rec65_relationship:
           "On December 16, 2025, Guilherme was a client of João Paulo",
 
@@ -944,7 +950,13 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
-        
+      
+        rec66_relationship:
+          "Em 18 de dezembro de 2025, Tito era cliente de João Paulo",
+
+        rec66_recommendation:
+          "É com grande satisfação que recomendo o Professor João Paulo Aramuni. Como meu orientador de TCC, sua disponibilidade e conhecimento técnico foram cruciais para o desenvolvimento do software 'Keep', uma solução inovadora para o gerenciamento de parque de máquinas. Sua capacidade de guiar e estimular o pensamento crítico foi fundamental para o êxito do projeto e para meu desenvolvimento profissional, além de todo material complementar que ele me apresentou foram cruciais para meu melhor aprendizado.",
+
         rec65_relationship:
           "Em 16 de dezembro de 2025, Guilherme era cliente de João Paulo",
 
