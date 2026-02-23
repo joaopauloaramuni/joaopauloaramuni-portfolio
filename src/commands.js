@@ -57,6 +57,6 @@ export const commandList = {
   },
   game: {
     name: 'game',
-    aliases: ['chaplane', 'chagame'],
+    aliases: ['araplane', 'aragame'],
   }
 };
