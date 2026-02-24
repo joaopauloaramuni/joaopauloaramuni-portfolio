@@ -661,6 +661,8 @@ VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_0PA9Ebt8bdx30Bs9Pab4jg_fUpfsl-R
 
 > Observação: No Vite, todas as variáveis de ambiente expostas ao front-end devem começar com `VITE_`.
 
+> Lembre-se de criar estas variáveis de ambiente também no Vercel.
+
 ----
 
 ### 6️⃣ Configurar o Supabase no React
