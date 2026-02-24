@@ -29,6 +29,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
+* 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio, funcionando como um livro de visitas interativo no terminal web.
 
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
@@ -82,6 +83,7 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
+* **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas.
 
 -----
 
@@ -96,7 +98,8 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 * **react-type-animation:** Para animações de digitação de texto.
 * **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
 * **emailjs-com**: Para enviar e-mails diretamente do frontend sem precisar de um backend próprio.
-* **react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
+**react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
+* **@supabase/supabase-js:** Backend as a Service (BaaS) utilizado para banco de dados, autenticação e APIs REST automáticas, responsável pelo armazenamento e leitura das mensagens do Guestbook.
 
 Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
 
@@ -449,13 +452,13 @@ Agora o projeto está pronto para enviar e-mails diretamente do frontend.
 
 -----
 
-### :octocat: Guia de configuração da GitHub API
+## :octocat: Guia de configuração da GitHub API
 
 Este guia mostra como configurar o acesso à GitHub API para buscar seus repositórios e exibi-los no seu portfolio React.
 
 ---
 
-#### 1️⃣ Criar o Token no GitHub
+### 1️⃣ Criar o Token no GitHub
 
 1. Acesse: **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
 2. Clique em **Generate new token**.
@@ -470,7 +473,7 @@ Este guia mostra como configurar o acesso à GitHub API para buscar seus reposit
 
 ---
 
-#### 2️⃣ Configurar o token localmente
+### 2️⃣ Configurar o token localmente
 
 Crie um arquivo `.env.local` na raiz do projeto React:
 
@@ -482,7 +485,7 @@ VITE_GITHUB_TOKEN=seu_token_aqui
 
 ---
 
-#### 3️⃣ Criar a configuração da GitHub API
+### 3️⃣ Criar a configuração da GitHub API
 
 Crie um arquivo `gitHubApiConfig.js` em `src/config/`:
 
@@ -500,7 +503,7 @@ export default GITHUB_API_CONFIG;
 
 ---
 
-#### 4️⃣ Configurar variáveis de ambiente no Vercel
+### 4️⃣ Configurar variáveis de ambiente no Vercel
 
 1. Acesse seu projeto no Vercel.
 2. Vá em **Settings → Environment Variables**.
@@ -512,7 +515,7 @@ export default GITHUB_API_CONFIG;
 
 ---
 
-#### 5️⃣ Buscar os repositórios no React
+### 5️⃣ Buscar os repositórios no React
 
 No seu componente `ProjetosGitHub.jsx`, você pode fazer algo como:
 
@@ -534,7 +537,7 @@ const response = await fetch(
 const data = await response.json();
 ```
 
-##### Explicação do fetch:
+#### Explicação do fetch:
 
 - **URL**: `${BASE_URL}/users/${USERNAME}/repos` busca todos os repositórios do usuário.
 - **Query params**:
@@ -547,7 +550,7 @@ const data = await response.json();
 
 ---
 
-#### 6️⃣ Exibir os projetos
+### 6️⃣ Exibir os projetos
 
 Depois de buscar os repositórios, você pode mapear para seu `ProjectCard`:
 
@@ -571,6 +574,132 @@ const mappedRepos = data
 ✅ Pronto! Agora seu portfolio consegue buscar e exibir seus repositórios públicos usando a GitHub API.
 
 -----
+
+## 📝 Guia de configuração do Supabase para o Livro de Visitas
+
+Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
+
+-----
+
+### 1️⃣ Criar o projeto no Supabase
+
+1. Acesse: [https://app.supabase.com](https://app.supabase.com) e faça login.
+2. Clique em **New Project**.
+3. Preencha:
+   - **Project name**: ex. `PortfolioGuestbook`.
+   - **Password**: crie uma senha segura.
+   - **Region**: selecione a região mais próxima.
+4. Clique em **Create new project** e aguarde a criação.
+
+-----
+
+### 2️⃣ Criar a tabela para mensagens
+
+No Supabase, vá em **SQL Editor** e execute o seguinte script para criar a tabela `guestbook_messages`:
+
+```sql
+create table if not exists public.guestbook_messages (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  message text not null,
+  created_at timestamptz default now()
+);
+```
+
+> Essa tabela armazenará:  
+> - `id`: identificador único da mensagem.  
+> - `name`: nome do visitante.  
+> - `message`: texto da mensagem.  
+> - `created_at`: data e hora de criação da mensagem.
+
+-----
+
+### 3️⃣ Ativar Row Level Security (RLS)
+
+Para permitir controle de acesso, ative o RLS:
+
+```sql
+alter table public.guestbook_messages enable row level security;
+```
+
+-----
+
+### 4️⃣ Criar políticas públicas
+
+#### 4.1 Leitura pública
+
+```sql
+create policy "Allow public read"
+on public.guestbook_messages
+for select
+to anon
+using (true);
+```
+
+#### 4.2 Inserção pública
+
+```sql
+create policy "Allow public insert"
+on public.guestbook_messages
+for insert
+to anon
+with check (true);
+```
+
+> Essas políticas permitem que qualquer usuário leia e adicione mensagens sem precisar de autenticação.
+
+----
+
+### 5️⃣ Configurar variáveis de ambiente no React
+
+Crie um arquivo `.env.local` na raiz do projeto React:
+
+```env
+VITE_SUPABASE_URL=https://qbghyeghcmraernvnxsn.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_0PA9Ebt8bdx30Bs9Pab4jg_fUpfsl-R
+```
+
+> Observação: No Vite, todas as variáveis de ambiente expostas ao front-end devem começar com `VITE_`.
+
+----
+
+### 6️⃣ Configurar o Supabase no React
+
+Crie o arquivo `supabase.js` em `src/lib/`:
+
+```javascript
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+```
+
+----
+
+### 7️⃣ Usar o Supabase no componente Livro de Visitas
+
+No seu componente `LivroVisitas.jsx`, você pode buscar e adicionar mensagens assim:
+
+```javascript
+import { supabase } from "../lib/supabase";
+
+// Buscar mensagens
+const { data, error } = await supabase
+  .from("guestbook_messages")
+  .select("*")
+  .order("created_at", { ascending: false });
+
+// Inserir nova mensagem
+const { error: insertError } = await supabase
+  .from("guestbook_messages")
+  .insert([{ name, message }]);
+```
+
+> Agora seu portfólio consegue armazenar e exibir mensagens do **Livro de Visitas** diretamente do Supabase.
+
+----
 
 ## ⚙️ Como rodar o projeto localmente
 
@@ -792,6 +921,7 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **Docker Desktop (ferramenta para rodar Docker no Mac e Windows; no Linux, use Docker Engine):** [Documentação oficial](https://www.docker.com/products/docker-desktop/)  
 * **Docker Hub (repositório de imagens Docker):** [Documentação oficial](https://hub.docker.com/)
 * **NGINX (servidor web e proxy reverso):** [Documentação oficial](https://nginx.org/en/docs/)
+* **Supabase:** [Documentação oficial](https://supabase.com/docs) | [Dashboard](https://app.supabase.com/) | [JavaScript Client (@supabase/supabase-js)](https://supabase.com/docs/reference/javascript/introduction)
 
 -----
 
@@ -800,6 +930,3 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 Este projeto é distribuído sob a MIT License.
 
 -----
-
-
-

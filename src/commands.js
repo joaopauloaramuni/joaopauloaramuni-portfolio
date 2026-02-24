@@ -58,5 +58,9 @@ export const commandList = {
   game: {
     name: 'game',
     aliases: ['araplane', 'aragame'],
+  },
+  guestbook: {
+    name: 'guestbook',
+    aliases: ['guest', 'book'],
   }
 };

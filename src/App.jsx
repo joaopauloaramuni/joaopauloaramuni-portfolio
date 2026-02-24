@@ -21,6 +21,7 @@ import Calendly from "./components/Calendly";
 import Recomendacoes from "./components/Recomendacoes";
 import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
+import LivroVisitas from "./components/LivroVisitas";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -60,6 +61,11 @@ function App() {
     terminalLineData.length > 0 &&
     terminalLineData[terminalLineData.length - 1]?.type === Contato;
 
+  // Detecta se o GuestBook está no modo ADD
+  const lastLine = terminalLineData[terminalLineData.length - 1];
+  const isGuestBookAddOpen =
+    lastLine?.type === LivroVisitas && lastLine?.props?.mode === "add";
+
   function handleInput(input) {
     let newLines = [...terminalLineData];
     newLines.push(
@@ -70,11 +76,15 @@ function App() {
 
     const args = input.toLowerCase().trim().split(" ");
     const userInput = args[0];
-
+    const subCommand = args[1];
     const command = Object.values(commandList).find(
       (cmd) => cmd.name === userInput || cmd.aliases.includes(userInput)
     );
-
+    const getInvalidCommandOutput = (cmd) => (
+      <TerminalOutput>
+        {t("comando.nao_reconhecido")} "{cmd}" - {t("comando.ver_ajuda")}
+      </TerminalOutput>
+    );
     let response;
 
     if (command) {
@@ -124,16 +134,25 @@ function App() {
         case "game":
           response = <FlappyPlaneGame onExit={exitComponent} />;
           break;
+        case "guestbook": {
+          const validSubCommands = ["add", "list", "help"];
+          if (!subCommand) {
+            // Sem subcomando → mostra home
+            response = <LivroVisitas mode="home" onExit={exitComponent} />;
+          } else if (validSubCommands.includes(subCommand)) {
+            // Subcomando válido
+            response = <LivroVisitas mode={subCommand} onExit={exitComponent} />;
+          } else {
+            // Subcomando inválido → padrão TerminalOutput
+            response = getInvalidCommandOutput(subCommand);
+          }
+          break;
+        }
         default:
           break;
       }
     } else {
-      response = (
-        <TerminalOutput>
-          {t("comando.nao_reconhecido")} "{userInput}" -{" "}
-          {t("comando.ver_ajuda")}
-        </TerminalOutput>
-      );
+      response = getInvalidCommandOutput(userInput);
     }
 
     if (Array.isArray(response)) {
@@ -154,7 +173,11 @@ function App() {
       <Terminal
         name={terminalTitle}
         colorMode={ColorMode.Dark}
-        onInput={isGameOpen || isContatoOpen ? undefined : handleInput}
+        onInput={
+          isGameOpen || isContatoOpen || isGuestBookAddOpen
+            ? undefined
+            : handleInput
+        }
         prompt={myPrompt}
         height="85vh"
       >

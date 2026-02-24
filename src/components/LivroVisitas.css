@@ -1,0 +1,118 @@
+.guestbook-container {
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #e2e8f0;
+}
+
+.guestbook-header {
+  border-left: 3px solid #00ff9d;
+  padding-left: 1rem;
+}
+
+.guestbook-title {
+  font-size: 1.8rem;
+  color: #00ff9d;
+  margin-bottom: 0.5rem;
+}
+
+.guestbook-subtitle {
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+
+.guestbook-commands,
+.guestbook-messages,
+.guestbook-cli-add {
+  font-family: monospace;
+}
+
+.command-line {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.command {
+  color: #00ff9d;
+  font-weight: 600;
+}
+
+.command-desc {
+  color: #a0aec0;
+}
+
+.cli-hint {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.guestbook-entry {
+  border-left: 2px solid #00ff9d;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.guestbook-name {
+  color: #00ff9d;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.guestbook-message {
+  color: #cbd5e0;
+}
+
+/* CLI INPUT */
+
+.cli-input-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cli-prefix {
+  color: #00ff9d;
+  font-weight: bold;
+}
+
+.cli-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #334155;
+  color: #e2e8f0;
+  font-family: monospace;
+  width: 50%;
+  padding: 4px 0;
+  outline: none;
+}
+
+.cli-input:focus {
+  border-bottom: 1px solid #00ff9d;
+}
+
+.cli-success {
+  color: #22c55e;
+  margin-top: 1rem;
+  font-family: monospace;
+}
+
+.btn-voltar-terminal {
+  background: #00ff9d;
+  color: #0f172a;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 12px;
+  font-family: monospace;
+  width: fit-content;
+}
+
+.btn-voltar-terminal:hover {
+  background: #00cc7a;
+}
