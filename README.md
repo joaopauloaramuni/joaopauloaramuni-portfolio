@@ -17,7 +17,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 👤 **sobre:** Mostra uma breve descrição sobre mim.
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
-* 📧 **contato:** Exibe minhas informações de contato e envia email.
+* 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS.
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🧹 **limpar:** Limpa o histórico do terminal.
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
@@ -29,7 +29,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
-* 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio, funcionando como um livro de visitas interativo no terminal web.
+* 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
@@ -109,7 +109,7 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 **react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
 * **@supabase/supabase-js:** Backend as a Service (BaaS) utilizado para banco de dados, autenticação e APIs REST automáticas, responsável pelo armazenamento e leitura das mensagens do Guestbook.
 
-Essas dependências permitem funcionalidades avançadas como visualização de PDFs, animações de terminal e suporte multilíngue.
+Essas dependências possibilitam uma experiência interativa em estilo terminal, com suporte multilíngue, persistência de dados em nuvem e sistema de notificações por e-mail.
 
 -----
 
