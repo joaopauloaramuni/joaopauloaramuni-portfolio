@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabase";
 import "./LivroVisitas.css";
+import emailjs from "emailjs-com";
+import EMAILJS_CONFIG from "../config/emailJsConfig";
 
 const LivroVisitas = ({ mode = "home", onExit }) => {
   const { t } = useTranslation();
@@ -44,16 +46,45 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   }
 
   async function handleSubmit() {
+    const now = new Date();
+    const time = now.toLocaleString();
+
+    // Salva no Supabase
     const { error } = await supabase
       .from("guestbook_messages")
       .insert([{ name, message }]);
 
     if (error) {
       console.error(error);
-    } else {
-      setStep("done");
-      fetchMessages();
+      return;
     }
+
+    // Envia email notificando novo registro
+    emailjs
+      .send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
+        {
+          name: name,
+          email: "",
+          message: `[guestbook add] ${message}`,
+          title: `Nova mensagem registrada no guestbook por: ${name}`,
+          time: time,
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      )
+      .then(
+        () => {
+          console.log("Email do guestbook enviado com sucesso!");
+        },
+        (err) => {
+          console.error("Erro ao enviar email do guestbook:", err);
+        }
+      );
+
+    // Atualiza UI
+    setStep("done");
+    fetchMessages();
   }
 
   return (

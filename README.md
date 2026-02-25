@@ -35,6 +35,14 @@ O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exib
 
 -----
 
+## 🖼️ Capturas de Tela
+
+| <img src="https://joaopauloaramuni.github.io/image/portfolio1.png" alt="Portfolio Home" width="600"/> | <img src="https://joaopauloaramuni.github.io/image/portfolio2.png" alt="Portfolio Ajuda" width="600"/> |
+|:----:|:-----:|
+| Home | Ajuda | 
+
+-----
+
 ## 🏫 História do projeto
 
 Este projeto surgiu durante a minha disciplina de **Laboratório de Desenvolvimento de Software**, no curso de Engenharia de Software da PUC Minas. A proposta era que cada aluno desenvolvesse seu próprio portfólio profissional, aplicando conceitos de **engenharia de software** aprendidos na disciplina de **Projeto de Software**, da qual também leciono.
