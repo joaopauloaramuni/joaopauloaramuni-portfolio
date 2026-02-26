@@ -17,11 +17,20 @@ const BoasVindas = () => {
   const lang = i18n.language.startsWith("en") ? "en" : "pt";
   const name = t("boasvindas.nome");
   const title = t("boasvindas.titulo");
-
   const sequence = [name, 1000, `${name} ${title}`, 2000];
 
   return (
     <div className="welcome-container">
+      <pre className="aramuni-ascii">
+{`
+ █████╗ ██████╗  █████╗ ███╗   ███╗██╗   ██╗███╗   ██╗██╗
+██╔══██╗██╔══██╗██╔══██╗████╗ ████║██║   ██║████╗  ██║██║
+███████║██████╔╝███████║██╔████╔██║██║   ██║██╔██╗ ██║██║
+██╔══██║██╔══██╗██╔══██║██║╚██╔╝██║██║   ██║██║╚██╗██║██║
+██║  ██║██║  ██║██║  ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝
+`}
+      </pre>
       {/* key muda quando o idioma muda, forçando recriação */}
       <TypeAnimation
         key={lang}

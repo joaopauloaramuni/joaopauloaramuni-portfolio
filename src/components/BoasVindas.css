@@ -1,3 +1,11 @@
+.aramuni-ascii {
+  font-family: "Fira Code", monospace;
+  color: #a0aec0;
+  font-size: 12px;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
 .name-animation {
   white-space: pre-line;
   margin: 0 0 2rem 0;
