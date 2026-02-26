@@ -37,7 +37,7 @@ O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exib
 
 ## 🖼️ Capturas de Tela
 
-| <img src="https://joaopauloaramuni.github.io/image/portfolio1.png" alt="Portfolio Home" width="600"/> | <img src="https://joaopauloaramuni.github.io/image/portfolio2.png" alt="Portfolio Ajuda" width="600"/> |
+| <img src="https://joaopauloaramuni.github.io/image/portfolio3.png" alt="Portfolio Home" width="600"/> | <img src="https://joaopauloaramuni.github.io/image/portfolio2.png" alt="Portfolio Ajuda" width="600"/> |
 |:----:|:-----:|
 | Home | Ajuda | 
 
