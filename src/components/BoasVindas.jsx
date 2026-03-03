@@ -8,6 +8,7 @@ import {
   IoFootballOutline,
   IoBookOutline,
   IoMailOutline,
+  IoLogoGithub,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import "./BoasVindas.css";
@@ -65,7 +66,7 @@ const BoasVindas = () => {
             >
               <IoBriefcaseOutline
                 className="icon"
-                style={{ color: "#8B4513" }}
+                style={{ color: "#f57c00ff" }}
               />
               {t("boasvindas.cargo2")}
             </a>
@@ -135,8 +136,30 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoMailOutline className="icon" style={{ color: "#519bd8ff" }} />
+              <IoMailOutline className="icon" style={{ color: "#e53935ff" }} />
               joaopauloaramuni@gmail.com
+            </a>
+          </li>
+          <li>
+            <a
+              href="mailto:joaoaramuni@pucminas.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoMailOutline className="icon" style={{ color: "#519bd8ff" }} />
+              joaoaramuni@pucminas.br
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-link"
+            >
+              <IoLogoGithub className="icon" style={{ color: "#d1d5dbff" }} />
+              GitHub Portfolio
             </a>
           </li>
         </ul>
