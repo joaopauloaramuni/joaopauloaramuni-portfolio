@@ -1,0 +1,19 @@
+name: Keep Supabase Awake
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: https://qbghyeghcmraernvnxsn.supabase.co
+      SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
+
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl "$SUPABASE_URL/rest/v1/guestbook_messages?apikey=$SUPABASE_API_KEY"
