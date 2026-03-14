@@ -737,7 +737,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      # Substitua pela URL do seu projeto no Supabase
       SUPABASE_URL: https://qbghyeghcmraernvnxsn.supabase.co
+      
+      # Esta chave deve ser criada no repositório do seu projeto no GitHub em Settings →  Secrets and Variables → Actions
       SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
 
     steps:
