@@ -774,6 +774,12 @@ Para não expor a chave no repositório, usamos **Secrets**.
 2. Vá em **Settings → Secrets and variables → Actions**  
 3. Clique em **New repository secret**
 
+Exemplo:
+
+```texto
+https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio/settings/secrets/actions
+```
+
 Preencha:
 
 ```texto
@@ -797,6 +803,46 @@ Copie a **Publishable Key**.
 ### ✅ Resultado
 
 O GitHub executará automaticamente uma requisição ao Supabase a cada 12 horas, evitando que o banco **entre em pausa após 7 dias sem atividade**.
+
+----
+
+## 🧪 Testar a API do Supabase no navegador
+
+Você pode verificar rapidamente se a tabela do **Livro de Visitas** está funcionando acessando a API diretamente pelo navegador.
+
+### Exemplo de teste
+
+Abra a seguinte URL no navegador:
+
+```texto
+https://seu-projeto.supabase.co/rest/v1/guestbook_messages?apikey=sb_publishable_xxxx
+```
+
+Se tudo estiver configurado corretamente, o Supabase retornará um **JSON com as mensagens armazenadas** na tabela `guestbook_messages`.
+
+### Exemplo de resposta
+
+```json
+[
+  {
+    "id": "70a3e9c7-5202-45a3-ad63-5c9efabcad4a",
+    "name": "Aramuni",
+    "message": "Primeira mensagem do guestbook!",
+    "created_at": "2026-02-24T03:55:45.917753+00:00"
+  }
+]
+```
+
+### Observação
+
+- Substitua **`seu-projeto`** pelo identificador do seu projeto no Supabase (ex.: `qbghyeghcmraernvnxsn`).
+- Substitua **`sb_publishable_xxxx`** pela **Publishable Key** do seu projeto.
+
+Essas informações podem ser encontradas em:
+
+```texto
+Supabase Dashboard → Settings → API → Project URL / Project API Keys
+```
 
 ----
 
