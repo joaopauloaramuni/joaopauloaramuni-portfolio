@@ -711,6 +711,92 @@ const { error: insertError } = await supabase
 
 ----
 
+## ⚙️ Manter o Supabase ativo (GitHub Actions)
+
+Projetos gratuitos do **Supabase** entram em pausa após **7 dias sem atividade**.  
+Para evitar isso, podemos criar um **workflow no GitHub Actions** que faz uma requisição periódica à API do banco.
+
+----
+
+### 📌 Workflow
+
+Crie o arquivo:
+
+#### .github/workflows/keep-supabase-awake.yml
+
+```yml
+name: Keep Supabase Awake
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: https://qbghyeghcmraernvnxsn.supabase.co
+      SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
+
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl "$SUPABASE_URL/rest/v1/guestbook_messages?apikey=$SUPABASE_API_KEY"
+```
+
+----
+
+### ⏱ Execução
+
+- `cron: "0 */12 * * *"` → executa **a cada 12 horas**
+- `workflow_dispatch` → permite rodar manualmente no **GitHub Actions**
+
+Essa requisição acessa a tabela:
+
+```texto
+/rest/v1/guestbook_messages
+```
+
+Registrando atividade no banco e impedindo que o projeto pause.
+
+----
+
+### 🔐 Criar a SUPABASE_API_KEY no GitHub
+
+Para não expor a chave no repositório, usamos **Secrets**.
+
+1. Abra seu repositório no GitHub  
+2. Vá em **Settings → Secrets and variables → Actions**  
+3. Clique em **New repository secret**
+
+Preencha:
+
+```texto
+Name: SUPABASE_API_KEY
+```
+
+```texto
+Secret: sb_publishable_XXXXXXXXXXXX
+```
+
+Essa chave pode ser encontrada em:
+
+```texto
+Supabase Dashboard → Settings → API → Project API Keys
+```
+
+Copie a **Publishable Key**.
+
+---
+
+### ✅ Resultado
+
+O GitHub executará automaticamente uma requisição ao Supabase a cada 12 horas, evitando que o banco **entre em pausa após 7 dias sem atividade**.
+
+----
+
 ## ⚙️ Como rodar o projeto localmente
 
 Para executar este projeto no seu ambiente de desenvolvimento, siga os passos abaixo.
