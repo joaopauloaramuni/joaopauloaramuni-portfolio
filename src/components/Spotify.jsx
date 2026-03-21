@@ -48,6 +48,18 @@ const Spotify = () => {
           </tr>
         </table>
       </div>
+      <div>
+        <iframe
+          data-testid="embed-iframe"
+          style={{ borderRadius: "12px", border: "none" }}
+          src="https://open.spotify.com/embed/track/0o8AsVRLRF15nT8GsLz5zO?utm_source=generator&theme=0"
+          width="820px"
+          height="352px"
+          allowFullScreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 };
