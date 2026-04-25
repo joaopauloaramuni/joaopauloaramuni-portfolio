@@ -232,6 +232,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec67_relationship:
+          "On April 25, 2026, Artur was a client of João Paulo",
+
+        rec67_recommendation:
+          "I have the opportunity to be a student of Professor João Paulo Aramuni and I can affirm that his teaching stands out for the dynamic and engaging way in which he conducts his classes. One of his great differentiators is the focus on practical activities, always encouraging the development of projects using technologies relevant to the market. This makes the learning process much more applied and closer to professional reality. Additionally, his high level of knowledge is evident, both in the academic context, as a professor of Software Design, structuring and modeling solutions, and through his industry experience, always bringing a practical and up-to-date perspective to the classes. Professor Aramuni is also always available to support students, clarifying doubts and contributing proactively to the development of assignments and projects, which makes a significant difference in the progress of those who are learning. Without a doubt, he is a professor who positively impacts students' education and prepares them solidly for the challenges of the technology field.",
+        
         rec66_relationship:
           "On December 18, 2025, Tito was a client of João Paulo",
 
@@ -997,6 +1003,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec67_relationship:
+          "Em 25 de abril de 2026, Artur foi cliente de João Paulo",
+
+        rec67_recommendation:
+          "Tenho a oportunidade de ser aluno do professor João Paulo Aramuni e posso afirmar que sua didática se destaca pela forma dinâmica e envolvente com que conduz as aulas. Um dos seus grandes diferenciais é o foco em atividades práticas, sempre incentivando o desenvolvimento de projetos com tecnologias relevantes para o mercado. Isso torna o aprendizado muito mais aplicado e próximo da realidade profissional. Além disso, é nítido o alto nível de conhecimento que ele possui, tanto no contexto acadêmico, como professor de Projeto de Software, estruturando e modelando soluções, quanto pela sua vivência de mercado, trazendo sempre uma visão prática e atualizada para as aulas. O professor Aramuni também está sempre disponível para apoiar os alunos, esclarecendo dúvidas e contribuindo de forma proativa no desenvolvimento de trabalhos e projetos, o que faz toda a diferença na evolução de quem está aprendendo. Sem dúvida, é um professor que impacta positivamente a formação dos alunos e os prepara de forma sólida para os desafios da área de tecnologia.",
+
         rec66_relationship:
           "Em 18 de dezembro de 2025, Tito era cliente de João Paulo",
 
