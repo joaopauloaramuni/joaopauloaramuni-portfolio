@@ -232,6 +232,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec68_relationship:
+          "On April 27, 2026, Felipe was a client of João Paulo",
+
+        rec68_recommendation:
+          "I had João Paulo as a professor at PUC Minas, and I can say he is an excellent professional. Always very available, he helped me several times with questions related to personal projects, demonstrating a genuine interest in students' learning. He played an important role in my deepening understanding of software architecture, bringing a practical and well-structured perspective to a topic I consider essential in the field. In addition, he also shares great career advice, which adds even more value to his role as a professor.",
+
         rec67_relationship:
           "On April 25, 2026, Artur was a client of João Paulo",
 
@@ -1011,6 +1017,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec68_relationship:
+          "Em 27 de abril de 2026, Felipe foi cliente de João Paulo",
+
+        rec68_recommendation:
+          "Tive o João Paulo como professor na PUC Minas e posso dizer que é um excelente profissional. Sempre muito disponível, me ajudou diversas vezes com dúvidas relacionadas a projetos pessoais, demonstrando um real interesse no aprendizado dos alunos. Ele teve um papel importante no meu aprofundamento em arquitetura de software, trazendo uma visão prática e bem estruturada de um tema que considero essencial na área. Além disso, também compartilha ótimas dicas sobre carreira, o que agrega ainda mais valor à sua atuação como professor.",
+
         rec67_relationship:
           "Em 25 de abril de 2026, Artur foi cliente de João Paulo",
 
