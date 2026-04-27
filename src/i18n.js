@@ -626,13 +626,15 @@ const resources = {
       },
       experiencias: {
         titulo: "Professional Experiences",
+        present: "Present",
 
         // Companies
+        jedis: "Jedis - Jedis - Technology and Recruitment",
         puc_minas: "PUC Minas",
         centro_newton_paiva: "Newton Paiva University Center",
         in8: "IN8",
         trybe: "Trybe",
-        xp_educacao: "XP Educação",
+        xp_educacao: "XP Education",
         universidade_fumec: "FUMEC University",
         prosegur: "Prosegur",
         capgemini: "Capgemini",
@@ -642,6 +644,7 @@ const resources = {
         pibic_cnpq: "PIBIC/CNPq",
 
         // Roles
+        consultor:"Technology Consultant",
         professor_puc: "Professor",
         professor_newton: "Professor",
         tech_manager_in8: "Tech Manager",
@@ -665,6 +668,11 @@ const resources = {
         bolsista_pibic: "Undergraduate Research Fellow",
 
         // Descriptions & Skills
+        consultor_desc:
+          "Technical leadership in microservices and cloud-native architectures, ensuring scalability, security, high availability, and observability. Mentorship of development teams, technical recruitment, removal of blockers, and support in architectural decisions. Led the migration of RHápido from AWS (EC2/S3) to Kubernetes on Eficify Private Cloud, implementing segmented network architecture with Bastion Host, Load Balancer, GitOps with drift detection, Zero Trust (RBAC, MFA, session auditing), Infrastructure as Code, and automated backups with S3 retention and PITR. Acted as a bridge between technology and business, ensuring communication with stakeholders, leading hiring processes, and defining development plans.",
+        consultor_skills:
+          "Cloud-native architecture, Kubernetes, DevOps & GitOps, Zero Trust security, Microservices migration, Infrastructure as Code, Observability & monitoring, Technical mentoring, Stakeholder communication, Infrastructure troubleshooting.",
+
         professor_puc_desc:
           "In the Software Engineering course, teaches Project and Algorithm Analysis, Software Project, Software Development Lab, Software Experimentation Lab, and Interdisciplinary Work: Applications for Real Scenarios. Guided TCCII projects and leads the ICEI Experimental Software Agency with 6 teams (~30 people). Conducts workshops and lectures on Python, Spring Boot, Docker, PostgreSQL, MongoDB, Cloud, AI, and more, creating technical content and support material.",
         professor_puc_skills:
@@ -1411,8 +1419,10 @@ const resources = {
       },
       experiencias: {
         titulo: "Experiências Profissionais",
+        present: "Atual",
 
         // Companies
+        jedis: "Jedis - Tecnologia e Recrutamento",
         puc_minas: "PUC Minas",
         centro_newton_paiva: "Centro Universitário Newton Paiva",
         in8: "IN8",
@@ -1427,6 +1437,7 @@ const resources = {
         pibic_cnpq: "PIBIC/CNPq",
 
         // Roles
+        consultor:"Consultor de Tecnologia",
         professor_puc: "Professor",
         professor_newton: "Professor",
         tech_manager_in8: "Tech Manager",
@@ -1450,6 +1461,11 @@ const resources = {
         bolsista_pibic: "Bolsista de Iniciação Científica",
 
         // Descriptions & Skills
+        consultor_desc:
+          "Liderança técnica em arquiteturas de microsserviços e cloud-native, garantindo escalabilidade, segurança, alta disponibilidade e observabilidade. Mentoria de equipes de desenvolvimento, apoio na contratação de profissionais, remoção de impedimentos técnicos e suporte na tomada de decisões arquiteturais. Liderança na migração do sistema RHápido da AWS (EC2/S3) para Kubernetes no Eficify Private Cloud, com arquitetura de rede segmentada com Bastion Host e Load Balancer, GitOps com detecção de drift, Zero Trust (RBAC, MFA e auditoria de sessões), infraestrutura como código e backups automatizados com retenção em S3 e PITR. Atuação como ponte entre tecnologia e negócio, garantindo comunicação com stakeholders, conduzindo processos de contratação e definição de planos de desenvolvimento.",
+        consultor_skills:
+          "Arquitetura cloud-native, Kubernetes, DevOps e GitOps, Segurança Zero Trust, Migração para microsserviços, Infraestrutura como código, Observabilidade e monitoramento, Mentoria técnica, Comunicação com stakeholders, Troubleshooting de infraestrutura.",
+
         professor_puc_desc:
           "No curso de Engenharia de Software, é professor das disciplinas de Fundamentos de Projeto e Análise de Algoritmos, Projeto de Software, Laboratório de Desenvolvimento de Software, Laboratório de Experimentação de Software e Trabalho Interdisciplinar: Aplicações para Cenários Reais. Também foi professor das disciplinas de Trabalho Interdisciplinar: Aplicações Web e Algoritmos e Estruturas de Dados I (Linguagem C) do curso de Engenharia de Software e da disciplina de Laboratório de Iniciação à Programação do curso de Ciência da Computação. Orientador na disciplina de TCCII e CTO da Agência Experimental de Software do ICEI, responsável por 6 times (~30 pessoas). Condução de oficinas e aulões sobre tópicos de desenvolvimento de software, abordando Python, Spring Boot, Docker, PostgreSQL, MongoDB, Nuvem, Inteligência Artificial e mais, além da criação de conteúdo técnico e material de apoio.",
         professor_puc_skills:

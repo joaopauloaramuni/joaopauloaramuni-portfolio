@@ -1,16 +1,26 @@
 export const experiencesData = [
   {
     id: 1,
+    roleId: "consultor",
+    companyId: "jedis",
+    startDate: "2025",
+    endDate: "present",
+    descriptionId: "consultor_desc",
+    skillsId: "consultor_skills",
+    logo: "/logos/jedis.jpeg",
+  },
+  {
+    id: 2,
     roleId: "professor_puc",
     companyId: "puc_minas",
     startDate: "2024",
-    endDate: "Atual",
+    endDate: "present",
     descriptionId: "professor_puc_desc",
     skillsId: "professor_puc_skills",
     logo: "/logos/puc.jpg",
   },
   {
-    id: 2,
+    id: 3,
     roleId: "professor_newton",
     companyId: "centro_newton_paiva",
     startDate: "2023",
@@ -20,7 +30,7 @@ export const experiencesData = [
     logo: "/logos/newton.jpg",
   },
   {
-    id: 3,
+    id: 4,
     roleId: "tech_manager_in8",
     companyId: "in8",
     startDate: "2023",
@@ -30,7 +40,7 @@ export const experiencesData = [
     logo: "/logos/in8.jpeg",
   },
   {
-    id: 4,
+    id: 5,
     roleId: "curriculum_tech_lead_trybe",
     companyId: "trybe",
     startDate: "2023",
@@ -40,7 +50,7 @@ export const experiencesData = [
     logo: "/logos/trybe.jpeg",
   },
   {
-    id: 5,
+    id: 6,
     roleId: "curriculum_lead_tech_trybe",
     companyId: "trybe",
     startDate: "2022",
@@ -50,7 +60,7 @@ export const experiencesData = [
     logo: "/logos/trybe.jpeg",
   },
   {
-    id: 6,
+    id: 7,
     roleId: "cs_lead_instructor_trybe",
     companyId: "trybe",
     startDate: "2021",
@@ -60,7 +70,7 @@ export const experiencesData = [
     logo: "/logos/trybe.jpeg",
   },
   {
-    id: 7,
+    id: 8,
     roleId: "backend_cs_lead_instructor_trybe",
     companyId: "trybe",
     startDate: "2020",
@@ -70,7 +80,7 @@ export const experiencesData = [
     logo: "/logos/trybe.jpeg",
   },
   {
-    id: 8,
+    id: 9,
     roleId: "cs_specialist_instructor_trybe",
     companyId: "trybe",
     startDate: "2020",
@@ -80,7 +90,7 @@ export const experiencesData = [
     logo: "/logos/trybe.jpeg",
   },
   {
-    id: 9,
+    id: 10,
     roleId: "professor_xp",
     companyId: "xp_educacao",
     startDate: "2020",
@@ -90,7 +100,7 @@ export const experiencesData = [
     logo: "/logos/xpe.jpeg",
   },
   {
-    id: 10,
+    id: 11,
     roleId: "professor_fumec",
     companyId: "universidade_fumec",
     startDate: "2016",
@@ -100,7 +110,7 @@ export const experiencesData = [
     logo: "/logos/fumec.jpg",
   },
   {
-    id: 11,
+    id: 12,
     roleId: "dev_backend_in8",
     companyId: "in8",
     startDate: "2019",
@@ -110,7 +120,7 @@ export const experiencesData = [
     logo: "/logos/in8.jpeg",
   },
   {
-    id: 12,
+    id: 13,
     roleId: "analista_sistemas_pl_prosegur",
     companyId: "prosegur",
     startDate: "2014",
@@ -120,7 +130,7 @@ export const experiencesData = [
     logo: "/logos/prosegur.jpg",
   },
   {
-    id: 13,
+    id: 14,
     roleId: "analista_sistemas_pl_capgemini",
     companyId: "capgemini",
     startDate: "2013",
@@ -130,7 +140,7 @@ export const experiencesData = [
     logo: "/logos/capgemini.jpeg",
   },
   {
-    id: 14,
+    id: 15,
     roleId: "analista_sistemas_jr_capgemini",
     companyId: "capgemini",
     startDate: "2014",
@@ -140,7 +150,7 @@ export const experiencesData = [
     logo: "/logos/capgemini.jpeg",
   },
   {
-    id: 15,
+    id: 16,
     roleId: "programador_sr_capgemini",
     companyId: "capgemini",
     startDate: "2014",
@@ -150,7 +160,7 @@ export const experiencesData = [
     logo: "/logos/capgemini.jpeg",
   },
   {
-    id: 16,
+    id: 17,
     roleId: "programador_jr_capgemini",
     companyId: "capgemini",
     startDate: "2013",
@@ -160,7 +170,7 @@ export const experiencesData = [
     logo: "/logos/capgemini.jpeg",
   },
   {
-    id: 17,
+    id: 18,
     roleId: "tecnico_programador_bb",
     companyId: "banco_brasil",
     startDate: "2012",
@@ -170,7 +180,7 @@ export const experiencesData = [
     logo: "/logos/bb.png",
   },
   {
-    id: 18,
+    id: 19,
     roleId: "desenvolvedor_csharp_alamo",
     companyId: "alamo_ti",
     startDate: "2011",
@@ -180,7 +190,7 @@ export const experiencesData = [
     logo: "/logos/alamoti.jpeg",
   },
   {
-    id: 19,
+    id: 20,
     roleId: "estagiario_fumec",
     companyId: "cpd_face_fumec",
     startDate: "2010",
@@ -190,7 +200,7 @@ export const experiencesData = [
     logo: "/logos/fumec.jpg",
   },
   {
-    id: 20,
+    id: 21,
     roleId: "bolsista_pibic",
     companyId: "pibic_cnpq",
     startDate: "2010",

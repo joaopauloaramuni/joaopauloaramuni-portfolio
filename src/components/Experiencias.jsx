@@ -17,6 +17,7 @@ const Experiencias = () => {
     skills: t(`experiencias.${exp.skillsId}`)
       .split(", ")
       .filter((s) => s), // transforma em array
+    endDate: t(`experiencias.${exp.endDate}`),
   }));
 
   return (
