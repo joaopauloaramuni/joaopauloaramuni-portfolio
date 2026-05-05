@@ -232,6 +232,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec69_relationship:
+          "On May 4, 2026, Pedro was a client of João Paulo",
+
+        rec69_recommendation:
+          "Professor João Paulo, better known as Aramuni, stands out for his excellence in conducting Information Technology courses in the Software Engineering program. His performance is marked by a high level of technical competence, professionalism, and deep mastery of the subjects taught. He has a clear and well-structured teaching style, making complex topics understandable while consistently connecting theory and practice in an effective way. Additionally, he presents an important differentiator by incorporating content aligned with current market demands, addressing modern technologies and encouraging the use of cutting-edge tools and approaches. His methodology promotes continuous learning, student autonomy, and the development of critical thinking, thereby providing solid preparation for real-world challenges in the field. Another relevant point is his ability to motivate students to keep up with the rapid evolution of technology, fostering a dynamic and innovation-oriented environment. He is a professional committed to the quality of education and to the strong development of future software engineers, and is highly recommended.",
+        
         rec68_relationship:
           "On April 27, 2026, Felipe was a client of João Paulo",
 
@@ -1017,6 +1023,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec69_relationship:
+          "Em 04 de maio de 2026, Pedro foi cliente de João Paulo",
+
+        rec69_recommendation:
+          "O professor João Paulo, mais conhecido como Aramuni tem bastante destaque pela excelência na condução das disciplinas de Tecnologia da Informação no curso de Engenharia de Software. Sua atuação é marcada por alto nível de competência técnica, profissionalismo e domínio aprofundado dos conteúdos ministrados. Possui uma didática clara e estruturada, consegue tornar compreensíveis temas complexos, sempre conectando teoria e prática de forma eficiente. Além disso, apresenta um diferencial importante ao incorporar conteúdos alinhados às demandas atuais do mercado, abordando tecnologias modernas e incentivando o uso de ferramentas e abordagens de ponta. Sua metodologia estimula o aprendizado contínuo, a autonomia dos alunos e o desenvolvimento de pensamento crítico, gerando assim uma preparação de forma consistente para os desafios reais da área. Outro ponto relevante é sua capacidade de motivar os estudantes a acompanharem a rápida evolução tecnológica, promovendo um ambiente dinâmico e orientado à inovação. Trata-se de um profissional comprometido com a qualidade do ensino e com a formação sólida de futuros engenheiros de software, sendo altamente recomendável.",
+
         rec68_relationship:
           "Em 27 de abril de 2026, Felipe foi cliente de João Paulo",
 
