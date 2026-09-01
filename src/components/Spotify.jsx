@@ -14,7 +14,7 @@ const Spotify = () => {
     <div className="spotify-container" ref={containerRef}>
       <div>
         <img
-          width="820px"
+          width="875px"
           src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=22lih5eniohc7dawfxohlo7wy"
           alt="Data Card for Spotify"
         />
@@ -33,7 +33,7 @@ const Spotify = () => {
               <img
                 alt="Spotify list"
                 height="400px"
-                src="https://spotify-recently-played-readme.vercel.app/api?user=22lih5eniohc7dawfxohlo7wy&count=10"
+                src="https://spotify-recently-played.jeffreyca.workers.dev/svg?user=22lih5eniohc7dawfxohlo7wy&amp;count=10&amp;width=540&amp;radius=40&amp;unique=1&amp;duration=1&amp;album=1&amp;footer=wave"
               />
             </td>
             <td>
@@ -41,7 +41,7 @@ const Spotify = () => {
                 <img
                   height="400px"
                   alt="lastfm"
-                  src="https://lastfm-recently-played.vercel.app/api?user=joaoaramuni&count=10"
+                  src="https://lastfm-recently-played.jeffreyca.workers.dev/svg?user=joaoaramuni&amp;count=10&amp;radius=40&amp;stats=compact&amp;footer=wave&amp;loved=off"
                 />
               </a>
             </td>
@@ -53,7 +53,7 @@ const Spotify = () => {
           data-testid="embed-iframe"
           style={{ borderRadius: "12px", border: "none" }}
           src="https://open.spotify.com/embed/track/0o8AsVRLRF15nT8GsLz5zO?utm_source=generator&theme=0"
-          width="820px"
+          width="875px"
           height="352px"
           allowFullScreen
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
