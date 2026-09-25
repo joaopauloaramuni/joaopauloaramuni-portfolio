@@ -573,10 +573,11 @@ const resources = {
           "I was fortunate to participate in two courses taught by Professor João Paulo Aramuni, Theoretical Foundations of Computing and Compilers. In both, he showed complete dedication to answering questions, helping students with difficulties, and always had patience and understanding. His classes have dynamics that facilitate understanding and learning, with full mastery of the subjects and practical examples.",
 
         rec42_relationship:
-          "On December 13, 2017, João Paulo was a client of David",
+          "On December 13, 2017, David was a client of João Paulo",
 
         rec42_recommendation:
           "Excellent teacher, great teaching skills, and a strong desire to teach. The classes were very well conducted!",
+        
         rec43_relationship:
           "On December 11, 2017, João Paulo was senior to Samuel, but did not directly supervise him",
 
@@ -1078,7 +1079,7 @@ const resources = {
           "Tive a sorte de ter o João Paulo Aramuni como professor na disciplina de Projeto de Software. Ele é aquele tipo de professor que não só domina o assunto, mas tem um jeito de explicar que faz tudo parecer mais simples. O que mais valorizo nele é a parceria: sempre acessível, pronto para trocar uma ideia sobre o mercado e dar aquelas dicas de carreira que a gente não encontra nos livros. É um profissional que torce de verdade pelo sucesso dos alunos. Recomendo demais!",
 
         rec64_relationship:
-          "Em 12 de dezembro de 2025, Lucas era cliente de a João Paulo",
+          "Em 12 de dezembro de 2025, Lucas era cliente de João Paulo",
 
         rec64_recommendation:
           "Tive o privilégio nesse semestre de ser aluno do professor João Paulo Aramuni em FPAA na Engenharia de Software. Além de dominar o conteúdo e explicar a matéria de forma clara, sempre esteve presente para tirar dúvidas, orientar sobre carreira e indicar estudos, e atividades extracurriculares que realmente agregam e contribuem para a formação acadêmica e profissional dos seus alunos. Um professor competente, acessível e comprometido com o desenvolvimento dos alunos.",
@@ -1388,7 +1389,7 @@ const resources = {
           "Tive a sorte de participar de duas matérias lecionadas pelo professor João Paulo Aramuni, Fundamentos Teóricos da Computação e Compiladores. Em ambas mostrou completo interesse para tirar dúvidas, ajudar alunos com dificuldades, e sempre teve paciência e compreensão. Suas aulas possuem dinâmicas que facilitam o entendimento e aprendizagem, com total domínio das matérias e exemplos práticos.",
 
         rec42_relationship:
-          "Em 13 de dezembro de 2017, João Paulo era cliente de David",
+          "Em 13 de dezembro de 2017, David era cliente de João Paulo",
 
         rec42_recommendation:
           "Excelente professor, ótima didática e uma grande vontade de ensinar. As aulas foram muito bem ministradas!",

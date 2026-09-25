@@ -1,6 +1,7 @@
 export const recommendationsData = [
   {
     id: 1,
+    year: 2026,
     name: "Fernando Pagani",
     relationshipId: "rec71_relationship",
     recommendationId: "rec71_recommendation",
@@ -9,6 +10,7 @@ export const recommendationsData = [
   },
   {
     id: 2,
+    year: 2026,
     name: "Eric Jardim",
     relationshipId: "rec70_relationship",
     recommendationId: "rec70_recommendation",
@@ -17,6 +19,7 @@ export const recommendationsData = [
   },
   {
     id: 3,
+    year: 2026,
     name: "Pedro Carbonaro",
     relationshipId: "rec69_relationship",
     recommendationId: "rec69_recommendation",
@@ -25,6 +28,7 @@ export const recommendationsData = [
   },
   {
     id: 4,
+    year: 2026,
     name: "Felipe Giannetti",
     relationshipId: "rec68_relationship",
     recommendationId: "rec68_recommendation",
@@ -33,6 +37,7 @@ export const recommendationsData = [
   },
   {
     id: 5,
+    year: 2026,
     name: "Artur Bomtempo",
     relationshipId: "rec67_relationship",
     recommendationId: "rec67_recommendation",
@@ -41,6 +46,7 @@ export const recommendationsData = [
   },
   {
     id: 6,
+    year: 2025,
     name: "Tito Chen",
     relationshipId: "rec66_relationship",
     recommendationId: "rec66_recommendation",
@@ -49,6 +55,7 @@ export const recommendationsData = [
   },
   {
     id: 7,
+    year: 2025,
     name: "Guilherme Vieira",
     relationshipId: "rec65_relationship",
     recommendationId: "rec65_recommendation",
@@ -57,6 +64,7 @@ export const recommendationsData = [
   },
   {
     id: 8,
+    year: 2025,
     name: "Lucas Cerqueira",
     relationshipId: "rec64_relationship",
     recommendationId: "rec64_recommendation",
@@ -65,6 +73,7 @@ export const recommendationsData = [
   },
   {
     id: 9,
+    year: 2025,
     name: "Leonardo Viana",
     relationshipId: "rec63_relationship",
     recommendationId: "rec63_recommendation",
@@ -73,6 +82,7 @@ export const recommendationsData = [
   },
   {
     id: 10,
+    year: 2025,
     name: "Bruna Lopes",
     relationshipId: "rec62_relationship",
     recommendationId: "rec62_recommendation",
@@ -81,6 +91,7 @@ export const recommendationsData = [
   },
   {
     id: 11,
+    year: 2025,
     name: "Otávio Mendes",
     relationshipId: "rec61_relationship",
     recommendationId: "rec61_recommendation",
@@ -89,6 +100,7 @@ export const recommendationsData = [
   },
   {
     id: 12,
+    year: 2025,
     name: "Fernanda Soares",
     relationshipId: "rec60_relationship",
     recommendationId: "rec60_recommendation",
@@ -97,6 +109,7 @@ export const recommendationsData = [
   },
   {
     id: 13,
+    year: 2025,
     name: "Paulo Henrique Assis",
     relationshipId: "rec59_relationship",
     recommendationId: "rec59_recommendation",
@@ -105,6 +118,7 @@ export const recommendationsData = [
   },
   {
     id: 14,
+    year: 2025,
     name: "Gabriel Chagas Lage",
     relationshipId: "rec58_relationship",
     recommendationId: "rec58_recommendation",
@@ -113,6 +127,7 @@ export const recommendationsData = [
   },
   {
     id: 15,
+    year: 2025,
     name: "Davi Mendes",
     relationshipId: "rec57_relationship",
     recommendationId: "rec57_recommendation",
@@ -121,6 +136,7 @@ export const recommendationsData = [
   },
   {
     id: 16,
+    year: 2025,
     name: "Nataniel Peixoto",
     relationshipId: "rec56_relationship",
     recommendationId: "rec56_recommendation",
@@ -129,6 +145,7 @@ export const recommendationsData = [
   },
   {
     id: 17,
+    year: 2025,
     name: "Jonathan Sena",
     relationshipId: "rec55_relationship",
     recommendationId: "rec55_recommendation",
@@ -137,6 +154,7 @@ export const recommendationsData = [
   },
   {
     id: 18,
+    year: 2025,
     name: "Raphael Sena",
     relationshipId: "rec0_relationship",
     recommendationId: "rec0_recommendation",
@@ -145,6 +163,7 @@ export const recommendationsData = [
   },
   {
     id: 19,
+    year: 2025,
     name: "Michelle Hanne Soares de Andrade",
     relationshipId: "rec1_relationship",
     recommendationId: "rec1_recommendation",
@@ -153,6 +172,7 @@ export const recommendationsData = [
   },
   {
     id: 20,
+    year: 2025,
     name: "Pedro Rodrigues",
     relationshipId: "rec2_relationship",
     recommendationId: "rec2_recommendation",
@@ -161,6 +181,7 @@ export const recommendationsData = [
   },
   {
     id: 21,
+    year: 2025,
     name: "Bernardo Rohlfs",
     relationshipId: "rec3_relationship",
     recommendationId: "rec3_recommendation",
@@ -169,6 +190,7 @@ export const recommendationsData = [
   },
   {
     id: 22,
+    year: 2025,
     name: "Luca Azalim",
     relationshipId: "rec4_relationship",
     recommendationId: "rec4_recommendation",
@@ -177,6 +199,7 @@ export const recommendationsData = [
   },
   {
     id: 23,
+    year: 2024,
     name: "Flavio Junior",
     relationshipId: "rec5_relationship",
     recommendationId: "rec5_recommendation",
@@ -185,6 +208,7 @@ export const recommendationsData = [
   },
   {
     id: 24,
+    year: 2024,
     name: "Pedro Mendes",
     relationshipId: "rec6_relationship",
     recommendationId: "rec6_recommendation",
@@ -193,6 +217,7 @@ export const recommendationsData = [
   },
   {
     id: 25,
+    year: 2024,
     name: "Angélica Guimarães",
     relationshipId: "rec7_relationship",
     recommendationId: "rec7_recommendation",
@@ -201,6 +226,7 @@ export const recommendationsData = [
   },
   {
     id: 26,
+    year: 2024,
     name: "Max Santiago",
     relationshipId: "rec8_relationship",
     recommendationId: "rec8_recommendation",
@@ -209,6 +235,7 @@ export const recommendationsData = [
   },
   {
     id: 27,
+    year: 2024,
     name: "Rubens Gabriel Romão Jerônimo",
     relationshipId: "rec9_relationship",
     recommendationId: "rec9_recommendation",
@@ -217,6 +244,7 @@ export const recommendationsData = [
   },
   {
     id: 28,
+    year: 2024,
     name: "Pedro Duarte",
     relationshipId: "rec10_relationship",
     recommendationId: "rec10_recommendation",
@@ -225,6 +253,7 @@ export const recommendationsData = [
   },
   {
     id: 29,
+    year: 2024,
     name: "Tulio Olivieri",
     relationshipId: "rec11_relationship",
     recommendationId: "rec11_recommendation",
@@ -233,6 +262,7 @@ export const recommendationsData = [
   },
   {
     id: 30,
+    year: 2024,
     name: "Luíza Paiva",
     relationshipId: "rec12_relationship",
     recommendationId: "rec12_recommendation",
@@ -241,6 +271,7 @@ export const recommendationsData = [
   },
   {
     id: 31,
+    year: 2024,
     name: "Thiago Henrique",
     relationshipId: "rec13_relationship",
     recommendationId: "rec13_recommendation",
@@ -249,6 +280,7 @@ export const recommendationsData = [
   },
   {
     id: 32,
+    year: 2023,
     name: "Carlos Melo, Ph.D.",
     relationshipId: "rec14_relationship",
     recommendationId: "rec14_recommendation",
@@ -257,6 +289,7 @@ export const recommendationsData = [
   },
   {
     id: 33,
+    year: 2023,
     name: "João Vitor S. Oliveira",
     relationshipId: "rec15_relationship",
     recommendationId: "rec15_recommendation",
@@ -265,6 +298,7 @@ export const recommendationsData = [
   },
   {
     id: 34,
+    year: 2023,
     name: "Tiago Bovolin",
     relationshipId: "rec16_relationship",
     recommendationId: "rec16_recommendation",
@@ -273,6 +307,7 @@ export const recommendationsData = [
   },
   {
     id: 35,
+    year: 2023,
     name: "Eli Candido",
     relationshipId: "rec17_relationship",
     recommendationId: "rec17_recommendation",
@@ -281,6 +316,7 @@ export const recommendationsData = [
   },
   {
     id: 36,
+    year: 2023,
     name: "Cristiano Benites (Ph.D)",
     relationshipId: "rec18_relationship",
     recommendationId: "rec18_recommendation",
@@ -289,6 +325,7 @@ export const recommendationsData = [
   },
   {
     id: 37,
+    year: 2023,
     name: "Will Marcondes",
     relationshipId: "rec19_relationship",
     recommendationId: "rec19_recommendation",
@@ -297,6 +334,7 @@ export const recommendationsData = [
   },
   {
     id: 38,
+    year: 2022,
     name: "André Vicente",
     relationshipId: "rec20_relationship",
     recommendationId: "rec20_recommendation",
@@ -305,6 +343,7 @@ export const recommendationsData = [
   },
   {
     id: 39,
+    year: 2021,
     name: "Douglas Eduardo da Silveira Lopes",
     relationshipId: "rec21_relationship",
     recommendationId: "rec21_recommendation",
@@ -313,6 +352,7 @@ export const recommendationsData = [
   },
   {
     id: 40,
+    year: 2020,
     name: "Bruno Azevedo",
     relationshipId: "rec22_relationship",
     recommendationId: "rec22_recommendation",
@@ -321,6 +361,7 @@ export const recommendationsData = [
   },
   {
     id: 41,
+    year: 2020,
     name: "Klelvin Carvalho",
     relationshipId: "rec23_relationship",
     recommendationId: "rec23_recommendation",
@@ -329,6 +370,7 @@ export const recommendationsData = [
   },
   {
     id: 42,
+    year: 2020,
     name: "Rafael Silvério Amaral",
     relationshipId: "rec24_relationship",
     recommendationId: "rec24_recommendation",
@@ -337,6 +379,7 @@ export const recommendationsData = [
   },
   {
     id: 43,
+    year: 2018,
     name: "Eduardo Marun",
     relationshipId: "rec25_relationship",
     recommendationId: "rec25_recommendation",
@@ -345,6 +388,7 @@ export const recommendationsData = [
   },
   {
     id: 44,
+    year: 2018,
     name: "Bruno Lima",
     relationshipId: "rec26_relationship",
     recommendationId: "rec26_recommendation",
@@ -353,6 +397,7 @@ export const recommendationsData = [
   },
   {
     id: 45,
+    year: 2018,
     name: "Leonardo Vargas",
     relationshipId: "rec27_relationship",
     recommendationId: "rec27_recommendation",
@@ -361,6 +406,7 @@ export const recommendationsData = [
   },
   {
     id: 46,
+    year: 2018,
     name: "Rafaela S. P. Marcolino",
     relationshipId: "rec28_relationship",
     recommendationId: "rec28_recommendation",
@@ -369,6 +415,7 @@ export const recommendationsData = [
   },
   {
     id: 47,
+    year: 2018,
     name: "Pedro Henrique Seabra Goulart",
     relationshipId: "rec29_relationship",
     recommendationId: "rec29_recommendation",
@@ -377,6 +424,7 @@ export const recommendationsData = [
   },
   {
     id: 48,
+    year: 2018,
     name: "Henrique Camilo Mapa",
     relationshipId: "rec30_relationship",
     recommendationId: "rec30_recommendation",
@@ -385,6 +433,7 @@ export const recommendationsData = [
   },
   {
     id: 49,
+    year: 2018,
     name: "Rubens Lemos",
     relationshipId: "rec31_relationship",
     recommendationId: "rec31_recommendation",
@@ -393,6 +442,7 @@ export const recommendationsData = [
   },
   {
     id: 50,
+    year: 2018,
     name: "Vicente Mourão",
     relationshipId: "rec32_relationship",
     recommendationId: "rec32_recommendation",
@@ -401,6 +451,7 @@ export const recommendationsData = [
   },
   {
     id: 51,
+    year: 2018,
     name: "Igor Horta Ferreira",
     relationshipId: "rec33_relationship",
     recommendationId: "rec33_recommendation",
@@ -409,6 +460,7 @@ export const recommendationsData = [
   },
   {
     id: 52,
+    year: 2018,
     name: "Felipe Ferreira Mendes",
     relationshipId: "rec34_relationship",
     recommendationId: "rec34_recommendation",
@@ -417,6 +469,7 @@ export const recommendationsData = [
   },
   {
     id: 53,
+    year: 2017,
     name: "Gabriel Cavalcante",
     relationshipId: "rec35_relationship",
     recommendationId: "rec35_recommendation",
@@ -425,6 +478,7 @@ export const recommendationsData = [
   },
   {
     id: 54,
+    year: 2017,
     name: "Thiago Brito Freitas",
     relationshipId: "rec36_relationship",
     recommendationId: "rec36_recommendation",
@@ -433,6 +487,7 @@ export const recommendationsData = [
   },
   {
     id: 55,
+    year: 2017,
     name: "Gabriel Faleri",
     relationshipId: "rec37_relationship",
     recommendationId: "rec37_recommendation",
@@ -441,6 +496,7 @@ export const recommendationsData = [
   },
   {
     id: 56,
+    year: 2017,
     name: "Amanda Lott",
     relationshipId: "rec38_relationship",
     recommendationId: "rec38_recommendation",
@@ -449,6 +505,7 @@ export const recommendationsData = [
   },
   {
     id: 57,
+    year: 2017,
     name: "Nilson Junio Paulino Sena",
     relationshipId: "rec39_relationship",
     recommendationId: "rec39_recommendation",
@@ -457,6 +514,7 @@ export const recommendationsData = [
   },
   {
     id: 58,
+    year: 2017,
     name: "Lucas Santos",
     relationshipId: "rec40_relationship",
     recommendationId: "rec40_recommendation",
@@ -465,6 +523,7 @@ export const recommendationsData = [
   },
   {
     id: 59,
+    year: 2017,
     name: "Luiz Guilherme Costa",
     relationshipId: "rec41_relationship",
     recommendationId: "rec41_recommendation",
@@ -473,6 +532,7 @@ export const recommendationsData = [
   },
   {
     id: 60,
+    year: 2017,
     name: "David Hazan",
     relationshipId: "rec42_relationship",
     recommendationId: "rec42_recommendation",
@@ -481,6 +541,7 @@ export const recommendationsData = [
   },
   {
     id: 61,
+    year: 2017,
     name: "Samuel Pavlovic",
     relationshipId: "rec43_relationship",
     recommendationId: "rec43_recommendation",
@@ -489,6 +550,7 @@ export const recommendationsData = [
   },
   {
     id: 62,
+    year: 2017,
     name: "João Lucas Veloso Gouveia",
     relationshipId: "rec44_relationship",
     recommendationId: "rec44_recommendation",
@@ -497,6 +559,7 @@ export const recommendationsData = [
   },
   {
     id: 63,
+    year: 2017,
     name: "Fábio Jourdan",
     relationshipId: "rec45_relationship",
     recommendationId: "rec45_recommendation",
@@ -505,6 +568,7 @@ export const recommendationsData = [
   },
   {
     id: 64,
+    year: 2017,
     name: "Márcio Brandão",
     relationshipId: "rec46_relationship",
     recommendationId: "rec46_recommendation",
@@ -513,6 +577,7 @@ export const recommendationsData = [
   },
   {
     id: 65,
+    year: 2016,
     name: "Felipe Martins",
     relationshipId: "rec47_relationship",
     recommendationId: "rec47_recommendation",
@@ -521,6 +586,7 @@ export const recommendationsData = [
   },
   {
     id: 66,
+    year: 2016,
     name: "Bruno Santos",
     relationshipId: "rec48_relationship",
     recommendationId: "rec48_recommendation",
@@ -529,6 +595,7 @@ export const recommendationsData = [
   },
   {
     id: 67,
+    year: 2015,
     name: "Rafael A Lott",
     relationshipId: "rec49_relationship",
     recommendationId: "rec49_recommendation",
@@ -537,6 +604,7 @@ export const recommendationsData = [
   },
   {
     id: 68,
+    year: 2015,
     name: "Gabriela Mendonça de Carvalho",
     relationshipId: "rec50_relationship",
     recommendationId: "rec50_recommendation",
@@ -545,6 +613,7 @@ export const recommendationsData = [
   },
   {
     id: 69,
+    year: 2014,
     name: "Glaydson Von Rondon de Freitas",
     relationshipId: "rec51_relationship",
     recommendationId: "rec51_recommendation",
@@ -553,6 +622,7 @@ export const recommendationsData = [
   },
   {
     id: 70,
+    year: 2014,
     name: "Lucas Romualdo Fernandes de Sá",
     relationshipId: "rec52_relationship",
     recommendationId: "rec52_recommendation",
@@ -561,6 +631,7 @@ export const recommendationsData = [
   },
   {
     id: 71,
+    year: 2014,
     name: "Andre Campos",
     relationshipId: "rec53_relationship",
     recommendationId: "rec53_recommendation",
@@ -569,6 +640,7 @@ export const recommendationsData = [
   },
   {
     id: 72,
+    year: 2014,
     name: "Amadeu Cappanelli",
     relationshipId: "rec54_relationship",
     recommendationId: "rec54_recommendation",

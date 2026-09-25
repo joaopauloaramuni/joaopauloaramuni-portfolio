@@ -10,6 +10,35 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
+/* Divisor de ano */
+
+.recomendacao-ano-divisor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 2.5rem 0 1rem;
+}
+
+.recomendacao-ano-divisor::before,
+.recomendacao-ano-divisor::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #00ff9d, transparent);
+}
+
+.recomendacao-ano-texto {
+  color: #00ff9d;
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 0.25rem 1rem;
+  border: 1px solid #00ff9d;
+  border-radius: 999px;
+}
+
+/* Recomendação */
 
 .recomendacao-separador {
   width: 80%;
@@ -86,16 +115,9 @@
   color: #00d18b;
 }
 
-.recomendacoes-icone {
-  font-size: 1.2rem;
-  color: #00ff9d;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
 .recomendacao-link:hover .recomendacoes-icone {
   color: #00d18b;
 }
-
 
 /* Responsividade */
 
@@ -131,5 +153,11 @@
   .recomendacao-avatar-image {
     width: 90px;
     height: 90px;
+  }
+  .recomendacao-ano-divisor {
+    margin: 1.5rem 0 0.75rem;
+  }
+  .recomendacao-ano-texto {
+    font-size: 1.1rem;
   }
 }
