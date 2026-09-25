@@ -224,6 +224,10 @@ const resources = {
         aes_proj8_desc:
           "The Sustainable Concrete project, developed by the Experimental Software Agency (AES) at PUC Minas in partnership with MRV Engenharia, aims to significantly reduce concrete waste and disposal in the company's construction processes — one of the main environmental challenges faced by the construction industry.",
 
+        aes_proj9_title: "APAC Feminina BH - Experimental Software Agency",
+        aes_proj9_desc:
+          "The APAC Feminina BH system, developed by the Experimental Software Agency (AES) at PUC Minas in partnership with the Nursing Department of ICBS at PUC Minas, is a pharmacy management platform that centralizes the control of medications for inmates, recording their intake, distribution, and use, tracking each treatment individually, and keeping inventory up to date.",
+        
         jedis_proj_title: "RHapido 2.0 - Jedis Technology and Recruitment",
         jedis_proj_desc:
           "RHapido 2.0 is a recruitment management system that uses artificial intelligence to streamline and make talent acquisition more efficient. Developed with cutting-edge technology, it offers intelligent resume screening, reducing time and costs in the hiring process.",
@@ -1028,6 +1032,11 @@ const resources = {
         aes_proj8_desc:
           "O projeto Concreto Sustentável, desenvolvido pela Agência Experimental de Software (AES) da PUC Minas em parceria com a MRV Engenharia, tem como objetivo reduzir significativamente o descarte e desperdício de concreto nos processos construtivos da empresa — um dos principais desafios ambientais enfrentados pelo setor da construção civil.",
 
+        aes_proj9_title:
+          "APAC Feminina BH - Agência Experimental de Software",
+        aes_proj9_desc:
+          "O sistema da APAC Feminina BH, desenvolvido pela Agência Experimental de Software (AES) da PUC Minas em parceria com o Departamento de Enfermagem do ICBS da PUC Minas, é uma plataforma de gestão da farmácia que centraliza o controle de medicamentos das detentas, registrando entrada, distribuição e consumo, acompanhando cada tratamento individualmente e mantendo o estoque atualizado.",
+        
         jedis_proj_title: "RHapido 2.0 - Jedis Tecnologia e Recrutamento",
         jedis_proj_desc:
           "O Rhapido 2.0 é um sistema de gestão de processos seletivos que utiliza inteligência artificial para agilizar e tornar mais eficiente o recrutamento de novos talentos. Desenvolvido com tecnologia de ponta, o sistema oferece uma triagem inteligente de currículos, reduzindo o tempo e o custo do processo seletivo.",

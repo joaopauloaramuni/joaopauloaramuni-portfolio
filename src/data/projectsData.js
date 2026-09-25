@@ -139,6 +139,14 @@ export const projectsData = [
   },
   {
     id: 18,
+    titleId: "aes_proj9_title",
+    descriptionId: "aes_proj9_desc",
+    gif: "/apac.jpg",
+    repoLink: "https://www.instagram.com/apacfemininabh/",
+    technologies: ["Javascript", "React", "Spring Boot"],
+  },
+  {
+    id: 19,
     titleId: "jedis_proj_title",
     descriptionId: "jedis_proj_desc",
     gif: "/jedis.jpg",
