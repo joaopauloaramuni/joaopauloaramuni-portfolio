@@ -232,6 +232,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec71_relationship:
+        "On September 25, 2026, Fernando was a client of João Paulo.",
+
+        rec71_recommendation:
+        "One of the best professors I have ever had. He is truly someone who not only understands the tools he uses and teaches, but also genuinely enjoys them. His teaching style and understanding of the topics are always impressive and consistently help students put things into context and learn.",
+
         rec70_relationship:
           "On June 26, 2026, Eric was responding directly to João Paulo.",
 
@@ -1029,6 +1035,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec71_relationship:
+          "Em 25 de setembro de 2026, Fernando foi cliente de João Paulo.",
+
+        rec71_recommendation:
+          "Um dos melhores professores que tive. Realmente alguém que não só entende como gosta das ferramentas que usa e ensina. Sua didática e compreensão dos tópicos são sempre surpreendentes e sempre ajudam a situar e ensinar os alunos.",
+
         rec70_relationship:
           "Em 26 de junho de 2026, Eric respondia diretamente a João Paulo.",
 
