@@ -1,5 +1,5 @@
 .sobre-container {
-  padding: "0 1.5rem";
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   gap: 2.5rem;
@@ -86,7 +86,6 @@
 
   .info-container {
     align-items: center;
-    margin-right: 1.5rem;
   }
 }
 
