@@ -18,7 +18,9 @@
 
 html,
 body {
-  height: 100dvh; 
+  margin: 0;
+  height: 100vh; /* fallback para navegadores sem dvh */
+  height: 100dvh;
   overflow: hidden;
   background-color: #1a202c;
 }
@@ -45,11 +47,13 @@ html {
 
 .react-terminal-wrapper {
   width: 100%;
+  box-sizing: border-box;
   padding-right: 16px !important;
   flex: 1;
   display: flex;
   overflow: hidden;
   font-family: "FiraCode", "JetBrainsMono", "Consolas", "Monaco", monospace !important;
+  font-size: 1rem; /* tamanho base: os componentes herdam daqui */
 }
 
 /* Garante altura mínima para cada linha, evitando deslocamentos */
@@ -58,10 +62,14 @@ html {
   line-height: 1.5em;
 }
 
-/* Para o input especificamente */
 .react-terminal-input {
   min-height: 1.5em;
   line-height: 1.5em;
+}
+
+/* iOS dá zoom automático em inputs com fonte < 16px */
+.terminal-hidden-input {
+  font-size: 16px !important;
 }
 
 ::-webkit-scrollbar {
@@ -80,67 +88,28 @@ html {
 }
 
 /* ===== Responsividade Geral ===== */
+/* Só o tamanho base muda; cada componente ajusta o resto no próprio CSS */
 
 @media (max-width: 768px) {
+  .react-terminal-wrapper {
+    font-size: 0.9rem;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
 
   .react-terminal-wrapper::after {
-    font-size: 0.6rem;
-  }
-
-  body {
-    font-size: 0.85rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 85%;
-  }
-
-  p,
-  li,
-  a,
-  span,
-  div {
-    font-size: 0.85rem;
-  }
-
-  .icon {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 480px) {
+  .react-terminal-wrapper {
+    font-size: 0.85rem;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 
   .react-terminal-wrapper::after {
-    font-size: 0.6rem;
-  }
-
-  body {
-    font-size: 0.55rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 70%;
-  }
-
-  p,
-  li,
-  a,
-  span,
-  div {
-    font-size: 0.55rem;
-  }
-
-  .icon {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
   }
 }

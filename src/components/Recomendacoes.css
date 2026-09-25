@@ -7,6 +7,7 @@
 .recomendacoes-icone {
   font-size: 1.2rem;
   color: #00ff9d;
+  flex-shrink: 0;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -73,6 +74,7 @@
 
 .recomendacao-info-container {
   flex-grow: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -125,23 +127,27 @@
   .recomendacao-sobre-container {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
     padding: 0 8px;
   }
   .recomendacao-avatar-container {
     width: 100%;
     justify-content: center;
-    margin-bottom: 12px;
-  }
-  .recomendacao-avatar-image {
-    width: 120px;
-    height: 120px;
   }
   .recomendacao-info-container {
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+  /* no layout empilhado: relação centralizada, texto alinhado à esquerda */
+  .recomendacao-relationship {
+    max-width: 100%;
+    text-align: center;
+  }
+  .recomendacao-text {
+    max-width: 100%;
+    text-align: left;
   }
 }
 
@@ -159,5 +165,38 @@
   }
   .recomendacao-ano-texto {
     font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recomendacoes-titulo {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .recomendacao-avatar-image {
+    width: 80px;
+    height: 80px;
+  }
+  .recomendacao-name {
+    font-size: 16px;
+  }
+  .recomendacao-relationship {
+    font-size: 13px;
+  }
+  .recomendacao-text {
+    font-size: 14px;
+  }
+  .recomendacao-link {
+    font-size: 16px;
+  }
+  .recomendacao-ano-divisor {
+    gap: 0.6rem;
+  }
+  .recomendacao-ano-texto {
+    font-size: 1rem;
+    padding: 0.2rem 0.8rem;
+  }
+  .recomendacao-separador {
+    width: 100%;
   }
 }
