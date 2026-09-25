@@ -239,7 +239,7 @@ const resources = {
           "One of the best professors I have ever had. He is truly someone who not only understands the tools he uses and teaches, but also genuinely enjoys them. His teaching style and understanding of the topics are always impressive and consistently help students put things into context and learn.",
 
         rec70_relationship:
-          "On June 26, 2026, Eric was responding directly to João Paulo.",
+          "On June 26, 2026, Eric reported directly to João Paulo",
 
         rec70_recommendation:
           "I had the pleasure of working with João Paulo as my advisor for my undergraduate thesis (TCC). Throughout the project, he provided valuable guidance not only on the technical aspects of the development but also on the documentation and structuring of UML and architectural diagrams. His feedback consistently improved the quality and clarity of our work. What I appreciated most was his advising style: he gave us the autonomy to make decisions and explore solutions on our own while always being available to answer questions, discuss ideas, and provide insightful feedback whenever needed. This balance between independence and support made the learning experience both challenging and rewarding. I highly recommend him to anyone looking for a knowledgeable, approachable, and supportive advisor.",
@@ -654,7 +654,7 @@ const resources = {
         present: "Present",
 
         // Companies
-        jedis: "Jedis - Jedis - Technology and Recruitment",
+        jedis: "Jedis - Technology and Recruitment",
         puc_minas: "PUC Minas",
         centro_newton_paiva: "Newton Paiva University Center",
         in8: "IN8",
@@ -1037,13 +1037,13 @@ const resources = {
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
         rec71_relationship:
-          "Em 25 de setembro de 2026, Fernando foi cliente de João Paulo.",
+          "Em 25 de setembro de 2026, Fernando foi cliente de João Paulo",
 
         rec71_recommendation:
           "Um dos melhores professores que tive. Realmente alguém que não só entende como gosta das ferramentas que usa e ensina. Sua didática e compreensão dos tópicos são sempre surpreendentes e sempre ajudam a situar e ensinar os alunos.",
 
         rec70_relationship:
-          "Em 26 de junho de 2026, Eric respondia diretamente a João Paulo.",
+          "Em 26 de junho de 2026, Eric respondia diretamente a João Paulo",
 
         rec70_recommendation:
           "Tive o prazer de trabalhar com João Paulo como meu orientador durante o Trabalho de Conclusão de Curso (TCC). Ao longo de todo o projeto, ele forneceu orientações valiosas não apenas sobre os aspectos técnicos do desenvolvimento, mas também sobre a documentação e a estruturação dos diagramas UML e de arquitetura. Seus feedbacks contribuíram de forma consistente para melhorar a qualidade e a clareza do nosso trabalho. O que mais admirei foi seu estilo de orientação: ele nos deu autonomia para tomar decisões e explorar soluções por conta própria, ao mesmo tempo em que sempre esteve disponível para esclarecer dúvidas, discutir ideias e oferecer feedbacks valiosos sempre que necessário. Esse equilíbrio entre independência e apoio tornou a experiência de aprendizado desafiadora e, ao mesmo tempo, extremamente enriquecedora. Recomendo fortemente o João Paulo a qualquer pessoa que esteja em busca de um orientador experiente, acessível e verdadeiramente comprometido com o desenvolvimento de seus alunos.",
