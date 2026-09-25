@@ -96,11 +96,12 @@
 }
 
 .recomendacao-text {
-  max-width: 100%;
+  margin: 8px 0;
+  font-size: 15px;
+  color: #cbd5e1;
+  max-width: 80%;
   text-align: justify;
-  text-align-last: left;
-  hyphens: auto;
-  -webkit-hyphens: auto;
+  line-height: 1.5;
 }
 
 .recomendacao-link {
@@ -139,14 +140,17 @@
     justify-content: center;
     width: 100%;
   }
-  /* no layout empilhado: relação centralizada, texto alinhado à esquerda */
+  /* no layout empilhado: relação centralizada, texto justificado com hifenização */
   .recomendacao-relationship {
     max-width: 100%;
     text-align: center;
   }
   .recomendacao-text {
     max-width: 100%;
-    text-align: left;
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 }
 
