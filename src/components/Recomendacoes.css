@@ -96,12 +96,11 @@
 }
 
 .recomendacao-text {
-  margin: 8px 0;
-  font-size: 15px;
-  color: #cbd5e1;
-  max-width: 80%;
+  max-width: 100%;
   text-align: justify;
-  line-height: 1.5;
+  text-align-last: left;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .recomendacao-link {

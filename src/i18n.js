@@ -1627,4 +1627,11 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
 });
 
+const setHtmlLang = (lng) => {
+  document.documentElement.lang = lng.startsWith("en") ? "en" : "pt-BR";
+};
+
+setHtmlLang(i18n.language);
+i18n.on("languageChanged", setHtmlLang);
+
 export default i18n;
