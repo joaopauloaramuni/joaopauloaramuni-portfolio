@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 1.5rem;
   color: #e2e8f0;
+  min-width: 0;
 }
 
 .guestbook-header {
@@ -22,15 +23,16 @@
   font-size: 0.95rem;
 }
 
+/* herda a FiraCode do terminal em vez da monospace do sistema */
 .guestbook-commands,
 .guestbook-messages,
 .guestbook-cli-add {
-  font-family: monospace;
+  font-family: inherit;
 }
 
 .command-line {
   display: flex;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
@@ -59,10 +61,12 @@
   color: #00ff9d;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  overflow-wrap: anywhere;
 }
 
 .guestbook-message {
   color: #cbd5e0;
+  overflow-wrap: anywhere; /* mensagens sem espaço (links, "kkkkkk") não estouram */
 }
 
 /* CLI INPUT */
@@ -76,15 +80,19 @@
 .cli-prefix {
   color: #00ff9d;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
 .cli-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid #334155;
+  border-radius: 0;
   color: #e2e8f0;
-  font-family: monospace;
+  font-family: inherit; /* inputs não herdam fonte por padrão */
+  font-size: inherit;
   width: 50%;
+  min-width: 0;
   padding: 4px 0;
   outline: none;
 }
@@ -96,7 +104,7 @@
 .cli-success {
   color: #22c55e;
   margin-top: 1rem;
-  font-family: monospace;
+  font-family: inherit;
 }
 
 .btn-voltar-terminal {
@@ -109,10 +117,67 @@
   cursor: pointer;
   transition: background 0.3s ease;
   margin-top: 12px;
-  font-family: monospace;
+  font-family: inherit; /* botões também não herdam */
+  font-size: inherit;
   width: fit-content;
 }
 
 .btn-voltar-terminal:hover {
   background: #00cc7a;
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+  .guestbook-container {
+    padding: 0 0.75rem;
+    gap: 1.25rem;
+  }
+
+  .guestbook-title {
+    font-size: 1.5rem;
+  }
+
+  /* no celular o campo ocupa toda a linha */
+  .cli-input {
+    flex: 1;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .guestbook-container {
+    padding: 0 0.25rem;
+    gap: 1rem;
+  }
+
+  .guestbook-header {
+    padding-left: 0.75rem;
+  }
+
+  .guestbook-title {
+    font-size: 1.25rem;
+  }
+
+  .guestbook-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .command-line {
+    margin-bottom: 0.6rem;
+  }
+
+  .guestbook-entry {
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  /* iOS dá zoom automático em inputs com fonte menor que 16px */
+  .cli-input {
+    font-size: 16px;
+  }
+
+  .btn-voltar-terminal {
+    width: 100%;
+  }
 }
