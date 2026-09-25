@@ -179,7 +179,7 @@ function App() {
             : handleInput
         }
         prompt={myPrompt}
-        height="85vh"
+        height="85dvh"
       >
         {terminalLineData}
       </Terminal>
