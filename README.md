@@ -31,6 +31,8 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 
+🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
+
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
 -----
@@ -182,6 +184,84 @@ O portfólio utiliza a fonte **[Fira Code](https://github.com/tonsky/FiraCode)**
 Fira Code inclui **ligaduras de programação**, tornando a leitura de símbolos como `=>`, `===` ou `!=` mais agradável e estilizada, especialmente em ambientes de terminal ou editores de código.
 
 Essa escolha de fonte melhora a estética do terminal web do portfólio e proporciona uma experiência mais fluida e moderna ao explorar comandos e visualizar códigos.
+
+-----
+
+## 💻 Sequência de boot
+
+Antes da tela de boas-vindas, o portfólio exibe uma animação que simula a inicialização de um sistema Linux, reforçando a proposta de terminal do projeto.
+
+| Recurso | Descrição |
+|:--|:--|
+| ⏱️ Duração | ~3 segundos: as linhas surgem com atraso aleatório (60–220 ms), como num boot real, seguidas de uma barra de progresso |
+| ⏭️ Pular | Qualquer tecla, clique ou toque encerra a animação na hora |
+| 🔁 Uma vez por aba | Usa `sessionStorage` para não repetir o boot a cada recarregamento; em uma aba nova, ele aparece de novo |
+| 📺 Efeito CRT | Scanlines sutis via `repeating-linear-gradient` e saída com fade + blur |
+| 🎨 Visual | Mesmo fundo do terminal (`#252a33`) e as cores do portfólio (`#00ff9d`, `#f3d956`, `#60a5fa`) |
+
+### 📂 Arquivos
+
+```texto
+src/
+  components/
+    BootSequence.jsx   → lógica e linhas do boot
+    BootSequence.css   → estilos, efeito CRT e animações
+  App.jsx              → exibe o boot antes do terminal
+```
+
+### ⚙️ Como funciona
+
+O `App.jsx` controla a exibição com um estado `booted`. Enquanto ele for `false`, o `BootSequence` é renderizado em tela cheia (`position: fixed`) por cima do terminal. Ao terminar, o componente chama `onFinish`, o boot é removido e o foco vai para o input do terminal.
+
+<details>
+  <summary>Clique para exibir o trecho do App.jsx</summary>
+
+```jsx
+const [booted, setBooted] = useState(false);
+
+const handleBootFinish = useCallback(() => {
+  setBooted(true);
+  focusTerminalInput();
+}, []);
+
+return (
+  <>
+    {!booted && <BootSequence onFinish={handleBootFinish} />}
+    <div className="terminal-container">
+      {/* terminal */}
+    </div>
+  </>
+);
+```
+</details>
+
+### ✏️ Personalizando as linhas
+
+As mensagens ficam no array `BOOT_LINES`, dentro de `BootSequence.jsx`. Cada item é um par `[status, texto]`:
+
+```javascript
+const BOOT_LINES = [
+  [null, "AramuniOS 6.18.0-puc #1 SMP PREEMPT_DYNAMIC x86_64"], // linha crua, com timestamp
+  ["info", "Detectando CPU: Engenheiro de Software (16 núcleos de café)"],
+  ["ok", "Loading PhD module..."],
+  ["warn", "cafe.service: nível de café abaixo de 20%, reabastecendo..."],
+];
+```
+
+- `"ok"` → `[  OK  ]` em verde
+- `"warn"` → `[ WARN ]` em amarelo
+- `"info"` → `[ INFO ]` em azul
+- `null` → timestamp no estilo `dmesg`, ex.: `[    0.137000]`
+
+### 🧪 Testando localmente
+
+Como o boot aparece só uma vez por aba, para vê-lo de novo durante o desenvolvimento rode no console do navegador:
+
+```javascript
+sessionStorage.clear();
+```
+
+Depois é só recarregar a página. Outra opção é abrir o site numa aba nova.
 
 -----
 
@@ -448,8 +528,8 @@ Crie ou edite o arquivo `emailJsConfig.js` no seu projeto React e configure-o pa
 // emailJsConfig.js
 const EMAILJS_CONFIG = {
   SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_ME,
-  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER,
+  TEMPLATE_ID_FOR_ME: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_ME,
+  TEMPLATE_ID_FOR_SENDER: import.meta.env.VITE_EMAILJS_TEMPLATE_ID_FOR_SENDER,
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
@@ -1054,7 +1134,7 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **i18next & react-i18next (internacionalização):** [i18next Docs](https://www.i18next.com/) | [react-i18next Docs](https://react.i18next.com/)
 * **@react-pdf-viewer/core & @react-pdf-viewer/default-layout:** [Documentação oficial](https://react-pdf-viewer.dev/)
 * **pdfjs-dist (renderização de PDFs):** [Mozilla PDF.js GitHub](https://github.com/mozilla/pdfjs-dist)
-* **react-calendly: (Opcional)** [NPM](https://www.npmjs.com/package/react-calendly) | [GitHub](https://github.com/tcampb/react-calendly)
+* **react-calendly**: (Opcional)** [NPM](https://www.npmjs.com/package/react-calendly) | [GitHub](https://github.com/tcampb/react-calendly)
 * **EmailJS:** [Documentação oficial](https://www.emailjs.com/docs/) | [Dashboard](https://dashboard.emailjs.com/)
 * **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)
 * **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  

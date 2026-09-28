@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Terminal, {
   ColorMode,
   TerminalInput,
@@ -23,6 +23,7 @@ import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
 import LivroVisitas from "./components/LivroVisitas";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
   const [terminalLineData, setTerminalLineData] = useState([
     getWelcomeMessage(),
   ]);
+
+  // Controla a tela de boot (some quando termina ou o visitante pula)
+  const [booted, setBooted] = useState(false);
 
   const exitComponent = () => {
     setTerminalLineData((lines) => {
@@ -50,6 +54,12 @@ function App() {
       if (input) input.focus();
     });
   };
+
+  // Chamado pelo BootSequence ao terminar: libera o terminal e foca o input
+  const handleBootFinish = useCallback(() => {
+    setBooted(true);
+    focusTerminalInput();
+  }, []);
 
   // Detecta se o jogo está aberto
   const isGameOpen =
@@ -168,22 +178,25 @@ function App() {
   const terminalTitle = "Portfolio terminal";
 
   return (
-    <div className="terminal-container">
-      <LanguageSwitcher onLanguageChange={focusTerminalInput} />
-      <Terminal
-        name={terminalTitle}
-        colorMode={ColorMode.Dark}
-        onInput={
-          isGameOpen || isContatoOpen || isGuestBookAddOpen
-            ? undefined
-            : handleInput
-        }
-        prompt={myPrompt}
-        height="85dvh"
-      >
-        {terminalLineData}
-      </Terminal>
-    </div>
+    <>
+      {!booted && <BootSequence onFinish={handleBootFinish} />}
+      <div className="terminal-container">
+        <LanguageSwitcher onLanguageChange={focusTerminalInput} />
+        <Terminal
+          name={terminalTitle}
+          colorMode={ColorMode.Dark}
+          onInput={
+            isGameOpen || isContatoOpen || isGuestBookAddOpen
+              ? undefined
+              : handleInput
+          }
+          prompt={myPrompt}
+          height="85dvh"
+        >
+          {terminalLineData}
+        </Terminal>
+      </div>
+    </>
   );
 }
 

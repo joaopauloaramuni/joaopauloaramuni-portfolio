@@ -1,0 +1,81 @@
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #252a33; /* mesmo fundo do terminal (tela de boas-vindas) */
+  color: #cbd5e1;
+  font-family: "FiraCode", "JetBrainsMono", "Consolas", monospace;
+  font-size: clamp(0.72rem, 1.6vw, 0.95rem);
+  line-height: 1.55;
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+/* leve efeito de monitor CRT */
+.boot-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+.boot-leaving {
+  opacity: 0;
+  filter: brightness(2) blur(2px);
+}
+
+.boot-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+}
+
+.boot-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  animation: boot-in 0.08s linear;
+}
+
+.boot-tag { margin-right: 0.6em; font-weight: 600; }
+.boot-tag.ok { color: #00ff9d; }
+.boot-tag.warn { color: #f3d956; }
+.boot-tag.info { color: #60a5fa; }
+.boot-time { color: #64748b; margin-right: 0.6em; }
+
+.boot-progress { color: #00ff9d; margin-top: 0.5em; }
+
+.boot-cursor {
+  color: #00ff9d;
+  animation: boot-blink 1s steps(1) infinite;
+}
+
+.boot-skip {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  animation: boot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes boot-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes boot-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes boot-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
