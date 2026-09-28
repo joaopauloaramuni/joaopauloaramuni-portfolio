@@ -7,6 +7,15 @@ const resources = {
         nao_reconhecido: "Command not recognized:",
         ver_ajuda: "Type 'help' to see the options.",
       },
+      boot: {
+        cpu: "Detecting CPU: Software Engineer (16 coffee cores)",
+        graduacao: "Started Undergraduate in Computer Science",
+        teaching: "Started PUC Minas teaching daemon (software-engineering.service)",
+        cafe: "coffee.service: coffee level below 20%, refilling...",
+        projetos: "Reached target Projects and Experiences",
+        carregando: "loading portfolio",
+        pular: "press any key to skip",
+      },
       sobre: {
         nome: "João Paulo Aramuni",
         cargo: "Software Engineering Professor at PUC Minas",
@@ -809,6 +818,15 @@ const resources = {
       comando: {
         nao_reconhecido: "Comando não reconhecido:",
         ver_ajuda: "Digite 'ajuda' para ver as opções.",
+      },
+      boot: {
+        cpu: "Detectando CPU: Engenheiro de Software (16 núcleos de café)",
+        graduacao: "Started Graduação em Ciência da Computação",
+        teaching: "Started PUC Minas teaching daemon (engenharia-de-software.service)",
+        cafe: "cafe.service: nível de café abaixo de 20%, reabastecendo...",
+        projetos: "Reached target Projetos e Experiências",
+        carregando: "carregando portfolio",
+        pular: "pressione qualquer tecla para pular",
       },
       sobre: {
         nome: "João Paulo Aramuni",

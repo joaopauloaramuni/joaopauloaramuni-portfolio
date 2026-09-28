@@ -1,18 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 import "./BootSequence.css";
 
 // [status, texto]  — status: "ok" | "warn" | "info" | null (linha crua do kernel)
+// Textos que começam com "boot." são chaves do i18n (mudam com o seletor PT | EN)
 const BOOT_LINES = [
   [null, "AramuniOS 6.18.0-puc #1 SMP PREEMPT_DYNAMIC x86_64"],
   [null, "Command line: BOOT_IMAGE=/vmlinuz-aramuni root=/dev/aramuni ro quiet"],
-  ["info", "Detectando CPU: Engenheiro de Software (16 núcleos de café)"],
+  ["info", "boot.cpu"],
   ["ok", "Mounting /dev/aramuni..."],
-  ["ok", "Started Graduação em Sistemas de Informação"],
+  ["ok", "boot.graduacao"],
   ["ok", "Loading Masters module..."],
   ["ok", "Loading PhD module..."],
-  ["ok", "Started PUC Minas teaching daemon (engenharia-de-software.service)"],
-  ["warn", "cafe.service: nível de café abaixo de 20%, reabastecendo..."],
-  ["ok", "Reached target Projetos e Experiências"],
+  ["ok", "boot.teaching"],
+  ["warn", "boot.cafe"],
+  ["ok", "boot.projetos"],
   ["ok", "Started Supabase guestbook listener"],
   ["ok", "Started i18n (pt-BR, en-US)"],
   ["ok", "Reached target Portfolio Terminal"],
@@ -29,6 +32,7 @@ const alreadyBooted = () => {
 };
 
 export default function BootSequence({ onFinish }) {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(0); // quantas linhas já apareceram
   const [progress, setProgress] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -73,7 +77,11 @@ export default function BootSequence({ onFinish }) {
 
   // Qualquer tecla, clique ou toque pula
   useEffect(() => {
-    const skip = () => finish();
+    // Cliques no seletor de idioma (cabeçalho) não pulam o boot
+    const skip = (e) => {
+      if (e.target instanceof Element && e.target.closest(".switcherContainer")) return;
+      finish();
+    };
     window.addEventListener("keydown", skip);
     window.addEventListener("pointerdown", skip);
     return () => {
@@ -85,8 +93,17 @@ export default function BootSequence({ onFinish }) {
   const bar = Math.round(progress / 5);
 
   return (
-    <div className={`boot-screen ${leaving ? "boot-leaving" : ""}`} aria-hidden="true">
-      <div className="boot-lines">
+    <div className={`boot-screen ${leaving ? "boot-leaving" : ""}`}>
+      {/* Cabeçalho igual ao do terminal: botões da janela, título e seletor PT | EN */}
+      <div className="react-terminal-window-buttons" aria-hidden="true">
+        <button className="red-btn" disabled tabIndex={-1} />
+        <button className="yellow-btn" disabled tabIndex={-1} />
+        <button className="green-btn" disabled tabIndex={-1} />
+      </div>
+      <div className="boot-title" aria-hidden="true">Portfolio terminal</div>
+      <LanguageSwitcher />
+
+      <div className="boot-lines" aria-hidden="true">
         {BOOT_LINES.slice(0, visible).map(([status, text], i) => (
           <div key={i} className="boot-line">
             {status === "ok" && <span className="boot-tag ok">[  OK  ]</span>}
@@ -95,20 +112,20 @@ export default function BootSequence({ onFinish }) {
             {!status && (
               <span className="boot-time">[{(i * 0.137).toFixed(6).padStart(12, " ")}]</span>
             )}
-            <span>{text}</span>
+            <span>{text.startsWith("boot.") ? t(text) : text}</span>
           </div>
         ))}
 
         {visible >= BOOT_LINES.length && (
           <div className="boot-line boot-progress">
-            carregando portfolio [{"#".repeat(bar)}
+            {t("boot.carregando")} [{"#".repeat(bar)}
             {".".repeat(20 - bar)}] {progress}%
           </div>
         )}
         <span className="boot-cursor">▋</span>
       </div>
 
-      <div className="boot-skip">pressione qualquer tecla para pular</div>
+      <div className="boot-skip">{t("boot.pular")}</div>
     </div>
   );
 }

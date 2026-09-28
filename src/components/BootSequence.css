@@ -7,7 +7,7 @@
   font-family: "FiraCode", "JetBrainsMono", "Consolas", monospace;
   font-size: clamp(0.72rem, 1.6vw, 0.95rem);
   line-height: 1.55;
-  padding: 1.25rem 1rem;
+  padding: 3.25rem 1rem 1.25rem; /* espaço para o cabeçalho */
   box-sizing: border-box;
   overflow: hidden;
   transition: opacity 0.35s ease, filter 0.35s ease;
@@ -24,6 +24,26 @@
     rgba(255, 255, 255, 0.025) 0 1px,
     transparent 1px 3px
   );
+}
+
+/* Título igual ao do react-terminal-ui ("Portfolio terminal") */
+.boot-title {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #a2a2a2;
+  font-size: 18px; /* mesmo tamanho do título do react-terminal-ui */
+  line-height: normal; /* não herda o 1.55 do boot */
+  pointer-events: none;
+}
+
+/* O seletor fica fora do terminal na página: não herda a fonte do boot */
+.boot-screen .switcherContainer {
+  font-family: initial;
+  font-size: 1rem;
+  line-height: normal;
 }
 
 .boot-leaving {
@@ -78,4 +98,13 @@
 @keyframes boot-pulse {
   0%, 100% { opacity: 0.35; }
   50% { opacity: 1; }
+}
+
+/* mesmos tamanhos do título do terminal (App.css) */
+@media (max-width: 768px) {
+  .boot-title { font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .boot-title { font-size: 0.65rem; }
 }
