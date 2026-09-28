@@ -18,7 +18,7 @@ const resources = {
       },
       sobre: {
         nome: "João Paulo Aramuni",
-        cargo: "Software Engineering Professor at PUC Minas",
+        cargo: "Software Engineering and Computer Science Professor at PUC Minas",
         biografia:
           "Doctor and Master in Information Systems and Knowledge Management from Universidade FUMEC, with a degree in Computer Science. He has 14 years of experience in systems development and 10 years of experience in technology education. He is a professor in the Software Engineering course at PUC Minas, also serving as CTO of the Experimental Software Agency at ICEI. He has been a Tech Lead at Trybe and Tech Manager at IN8, as well as a consultant in artificial intelligence and system architecture. He has experience in team leadership, agile methodologies, design patterns, back-end development (Java and Python), and has participated in projects for companies such as Banco do Brasil, Oi, ANP, Prosegur, HotMilhas, and 123milhas.",
         titulo_skills:
@@ -29,7 +29,7 @@ const resources = {
         titulo: "Aramuni",
         subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Welcome to my Portfolio",
-        cargo1: "Software Engineering Professor at PUC Minas",
+        cargo1: "Software Engineering and Computer Science Professor at PUC Minas",
         cargo2: "CTO at the Experimental Software Agency",
         orientacao: "Undergraduate Student Advisor",
         formacao1:
@@ -830,7 +830,7 @@ const resources = {
       },
       sobre: {
         nome: "João Paulo Aramuni",
-        cargo: "Professor de Engenharia de Software na PUC Minas",
+        cargo: "Professor de Engenharia de Software e Ciência da Computação na PUC Minas",
         biografia:
           "Doutor e mestre em Sistemas de Informação e Gestão do Conhecimento pela Universidade FUMEC, com graduação em Ciência da Computação. Possui 14 anos de experiência em desenvolvimento de sistemas e 10 anos com ensino de tecnologia. É professor do curso de Engenharia de Software da PUC Minas, atuando também como CTO da Agência Experimental de Software do ICEI. Já foi Tech Lead na Trybe e Tech Manager na IN8, além de atuar como consultor em inteligência artificial e arquitetura de sistemas. Tem experiência em liderança de equipes, metodologias ágeis, design patterns, desenvolvimento back-end (Java e Python) e participou de projetos para empresas como Banco do Brasil, Oi, ANP, Prosegur, HotMilhas e 123milhas.",
         titulo_skills:
@@ -841,7 +841,7 @@ const resources = {
         titulo: "Aramuni",
         subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Boas-vindas ao meu Portfólio",
-        cargo1: "Professor de Engenharia de Software na PUC Minas",
+        cargo1: "Professor de Engenharia de Software e Ciência da Computação na PUC Minas",
         cargo2: "CTO na Agência Experimental de Software",
         orientacao: "Orientador de TCCI e TCCII",
         formacao1:
