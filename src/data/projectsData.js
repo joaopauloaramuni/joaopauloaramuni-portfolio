@@ -142,7 +142,7 @@ export const projectsData = [
     titleId: "aes_proj9_title",
     descriptionId: "aes_proj9_desc",
     gif: "/apac.jpg",
-    repoLink: "https://www.instagram.com/apacfemininabh/",
+    repoLink: "https://www.youtube.com/watch?v=2sxA9d-2pb4",
     technologies: ["Javascript", "React", "Spring Boot"],
   },
   {
