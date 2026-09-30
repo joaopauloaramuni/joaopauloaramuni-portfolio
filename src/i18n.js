@@ -245,6 +245,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec72_relationship:
+          "On September 29, 2026, João Gabriel was a client of João Paulo",
+
+        rec72_recommendation:
+          "I had the opportunity to learn a lot from Aramuni, in both theory and practice. His support and guidance were key to my growth and, above all, helped me see Software Engineering in a broader and more professional way. I am grateful for everything I learned and for the reflections he sparked along the way. They have made a real difference in how I see the field and my own career path.",
+        
         rec71_relationship:
           "On September 25, 2026, Fernando was a client of João Paulo.",
 
@@ -1063,6 +1069,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec72_relationship:
+          "Em 29 de setembro de 2026, João Gabriel foi cliente de João Paulo",
+
+        rec72_recommendation:
+          "Tive a oportunidade de aprender muito com Aramuni, tanto na parte teórica quanto na prática. Seu suporte e seus direcionamentos foram importantes para minha evolução e, principalmente, para que eu passasse a enxergar a Engenharia de Software com uma visão mais ampla e profissional. Sou grato por todos os aprendizados e pelas reflexões que ele proporcionou ao longo desse processo, que certamente fizeram diferença na forma como vejo a área e minha própria trajetória profissional.",
+
         rec71_relationship:
           "Em 25 de setembro de 2026, Fernando foi cliente de João Paulo",
 

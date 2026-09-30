@@ -1,6 +1,15 @@
 export const recommendationsData = [
-  {
+    {
     id: 1,
+    year: 2026,
+    name: "João Gabriel Maia",
+    relationshipId: "rec72_relationship",
+    recommendationId: "rec72_recommendation",
+    image: "/linkedin/joao-gabriel-maia.png",
+    link: "https://www.linkedin.com/in/jo%C3%A3ogabrielmaia/",
+  },
+  {
+    id: 2,
     year: 2026,
     name: "Fernando Pagani",
     relationshipId: "rec71_relationship",
@@ -9,7 +18,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/fernandoleitepagani/",
   },
   {
-    id: 2,
+    id: 3,
     year: 2026,
     name: "Eric Jardim",
     relationshipId: "rec70_relationship",
@@ -18,7 +27,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/eric-jardim/",
   },
   {
-    id: 3,
+    id: 4,
     year: 2026,
     name: "Pedro Carbonaro",
     relationshipId: "rec69_relationship",
@@ -27,7 +36,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/pedrocarbonaro/",
   },
   {
-    id: 4,
+    id: 5,
     year: 2026,
     name: "Felipe Giannetti",
     relationshipId: "rec68_relationship",
@@ -36,7 +45,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/felipe-giannetti-fontenelle-095501312/",
   },
   {
-    id: 5,
+    id: 6,
     year: 2026,
     name: "Artur Bomtempo",
     relationshipId: "rec67_relationship",
@@ -45,7 +54,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/artur-bomtempo/",
   },
   {
-    id: 6,
+    id: 7,
     year: 2025,
     name: "Tito Chen",
     relationshipId: "rec66_relationship",
@@ -54,7 +63,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/tito-chen/",
   },
   {
-    id: 7,
+    id: 8,
     year: 2025,
     name: "Guilherme Vieira",
     relationshipId: "rec65_relationship",
@@ -63,7 +72,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/guilherme-arvieira/",
   },
   {
-    id: 8,
+    id: 9,
     year: 2025,
     name: "Lucas Cerqueira",
     relationshipId: "rec64_relationship",
@@ -72,7 +81,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/lucas-cerqueira-azevedo-125221287/",
   },
   {
-    id: 9,
+    id: 10,
     year: 2025,
     name: "Leonardo Viana",
     relationshipId: "rec63_relationship",
@@ -81,7 +90,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/leonardo-de-freitas-viana/",
   },
   {
-    id: 10,
+    id: 11,
     year: 2025,
     name: "Bruna Lopes",
     relationshipId: "rec62_relationship",
@@ -90,7 +99,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/bruna-lopes-de-souza/",
   },
   {
-    id: 11,
+    id: 12,
     year: 2025,
     name: "Otávio Mendes",
     relationshipId: "rec61_relationship",
@@ -99,7 +108,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/otavio-mendes/",
   },
   {
-    id: 12,
+    id: 13,
     year: 2025,
     name: "Fernanda Soares",
     relationshipId: "rec60_relationship",
@@ -108,7 +117,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/fernandasoaress-/",
   },
   {
-    id: 13,
+    id: 14,
     year: 2025,
     name: "Paulo Henrique Assis",
     relationshipId: "rec59_relationship",
@@ -117,7 +126,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/paulo-assis-a5a78326b/",
   },
   {
-    id: 14,
+    id: 15,
     year: 2025,
     name: "Gabriel Chagas Lage",
     relationshipId: "rec58_relationship",
@@ -126,7 +135,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/gabriel-chagas-lage/",
   },
   {
-    id: 15,
+    id: 16,
     year: 2025,
     name: "Davi Mendes",
     relationshipId: "rec57_relationship",
@@ -135,7 +144,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/dmendes7",
   },
   {
-    id: 16,
+    id: 17,
     year: 2025,
     name: "Nataniel Peixoto",
     relationshipId: "rec56_relationship",
@@ -144,7 +153,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/nataniel-peixoto-279259192/",
   },
   {
-    id: 17,
+    id: 18,
     year: 2025,
     name: "Jonathan Sena",
     relationshipId: "rec55_relationship",
@@ -153,7 +162,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/jonathan3sena/",
   },
   {
-    id: 18,
+    id: 19,
     year: 2025,
     name: "Raphael Sena",
     relationshipId: "rec0_relationship",
@@ -162,7 +171,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/raphael-sena/",
   },
   {
-    id: 19,
+    id: 20,
     year: 2025,
     name: "Michelle Hanne Soares de Andrade",
     relationshipId: "rec1_relationship",
@@ -171,7 +180,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/michellehanne/",
   },
   {
-    id: 20,
+    id: 21,
     year: 2025,
     name: "Pedro Rodrigues",
     relationshipId: "rec2_relationship",
@@ -180,7 +189,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/pedrohrf/",
   },
   {
-    id: 21,
+    id: 22,
     year: 2025,
     name: "Bernardo Rohlfs",
     relationshipId: "rec3_relationship",
@@ -189,7 +198,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/bernardorohlfs/",
   },
   {
-    id: 22,
+    id: 23,
     year: 2025,
     name: "Luca Azalim",
     relationshipId: "rec4_relationship",
@@ -198,7 +207,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/lucaazalim/",
   },
   {
-    id: 23,
+    id: 24,
     year: 2024,
     name: "Flavio Junior",
     relationshipId: "rec5_relationship",
@@ -207,7 +216,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/flaviojrdev/",
   },
   {
-    id: 24,
+    id: 25,
     year: 2024,
     name: "Pedro Mendes",
     relationshipId: "rec6_relationship",
@@ -216,7 +225,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/pedro-mendes-16814a279/",
   },
   {
-    id: 25,
+    id: 26,
     year: 2024,
     name: "Angélica Guimarães",
     relationshipId: "rec7_relationship",
@@ -225,7 +234,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/angelica-guimaraes-326961b6/",
   },
   {
-    id: 26,
+    id: 27,
     year: 2024,
     name: "Max Santiago",
     relationshipId: "rec8_relationship",
@@ -234,7 +243,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/maxvsantiago/",
   },
   {
-    id: 27,
+    id: 28,
     year: 2024,
     name: "Rubens Gabriel Romão Jerônimo",
     relationshipId: "rec9_relationship",
@@ -243,7 +252,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/rubens-gabriel-rom%C3%A3o-jer%C3%B4nimo-622692138/",
   },
   {
-    id: 28,
+    id: 29,
     year: 2024,
     name: "Pedro Duarte",
     relationshipId: "rec10_relationship",
@@ -252,7 +261,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/pedro-duart3/",
   },
   {
-    id: 29,
+    id: 30,
     year: 2024,
     name: "Tulio Olivieri",
     relationshipId: "rec11_relationship",
@@ -261,7 +270,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/tuliolivieri/",
   },
   {
-    id: 30,
+    id: 31,
     year: 2024,
     name: "Luíza Paiva",
     relationshipId: "rec12_relationship",
@@ -270,7 +279,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/luizadpaiva/",
   },
   {
-    id: 31,
+    id: 32,
     year: 2024,
     name: "Thiago Henrique",
     relationshipId: "rec13_relationship",
@@ -279,7 +288,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/thiihenrique/",
   },
   {
-    id: 32,
+    id: 33,
     year: 2023,
     name: "Carlos Melo, Ph.D.",
     relationshipId: "rec14_relationship",
@@ -288,7 +297,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/casm3/",
   },
   {
-    id: 33,
+    id: 34,
     year: 2023,
     name: "João Vitor S. Oliveira",
     relationshipId: "rec15_relationship",
@@ -297,7 +306,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/joao-vitor-oliveira/",
   },
   {
-    id: 34,
+    id: 35,
     year: 2023,
     name: "Tiago Bovolin",
     relationshipId: "rec16_relationship",
@@ -306,7 +315,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/tiago-bovolin/",
   },
   {
-    id: 35,
+    id: 36,
     year: 2023,
     name: "Eli Candido",
     relationshipId: "rec17_relationship",
@@ -315,7 +324,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/elicandido/",
   },
   {
-    id: 36,
+    id: 37,
     year: 2023,
     name: "Cristiano Benites (Ph.D)",
     relationshipId: "rec18_relationship",
@@ -324,7 +333,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/cristiano-benites-ph-d-687647a8/",
   },
   {
-    id: 37,
+    id: 38,
     year: 2023,
     name: "Will Marcondes",
     relationshipId: "rec19_relationship",
@@ -333,7 +342,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/williamarcondes/",
   },
   {
-    id: 38,
+    id: 39,
     year: 2022,
     name: "André Vicente",
     relationshipId: "rec20_relationship",
@@ -342,7 +351,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/isquicha/",
   },
   {
-    id: 39,
+    id: 40,
     year: 2021,
     name: "Douglas Eduardo da Silveira Lopes",
     relationshipId: "rec21_relationship",
@@ -351,7 +360,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/dougfunny/",
   },
   {
-    id: 40,
+    id: 41,
     year: 2020,
     name: "Bruno Azevedo",
     relationshipId: "rec22_relationship",
@@ -360,7 +369,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/bruno-azevedo-dev/",
   },
   {
-    id: 41,
+    id: 42,
     year: 2020,
     name: "Klelvin Carvalho",
     relationshipId: "rec23_relationship",
@@ -369,7 +378,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/klelvin-carvalho/",
   },
   {
-    id: 42,
+    id: 43,
     year: 2020,
     name: "Rafael Silvério Amaral",
     relationshipId: "rec24_relationship",
@@ -378,7 +387,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/rafaelsilverioamaral/",
   },
   {
-    id: 43,
+    id: 44,
     year: 2018,
     name: "Eduardo Marun",
     relationshipId: "rec25_relationship",
@@ -387,7 +396,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/eduardo-marun/",
   },
   {
-    id: 44,
+    id: 45,
     year: 2018,
     name: "Bruno Lima",
     relationshipId: "rec26_relationship",
@@ -396,7 +405,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/bruno-lima-73762a25/",
   },
   {
-    id: 45,
+    id: 46,
     year: 2018,
     name: "Leonardo Vargas",
     relationshipId: "rec27_relationship",
@@ -405,7 +414,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/leonardo-vargas-6a2216116/",
   },
   {
-    id: 46,
+    id: 47,
     year: 2018,
     name: "Rafaela S. P. Marcolino",
     relationshipId: "rec28_relationship",
@@ -414,7 +423,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/rafaela-marcolino/",
   },
   {
-    id: 47,
+    id: 48,
     year: 2018,
     name: "Pedro Henrique Seabra Goulart",
     relationshipId: "rec29_relationship",
@@ -423,7 +432,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/pedrogoulartdeveloper/",
   },
   {
-    id: 48,
+    id: 49,
     year: 2018,
     name: "Henrique Camilo Mapa",
     relationshipId: "rec30_relationship",
@@ -432,7 +441,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/henriquemapa/",
   },
   {
-    id: 49,
+    id: 50,
     year: 2018,
     name: "Rubens Lemos",
     relationshipId: "rec31_relationship",
@@ -441,7 +450,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/rubenslemos/",
   },
   {
-    id: 50,
+    id: 51,
     year: 2018,
     name: "Vicente Mourão",
     relationshipId: "rec32_relationship",
@@ -450,7 +459,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/vicente-mourao/",
   },
   {
-    id: 51,
+    id: 52,
     year: 2018,
     name: "Igor Horta Ferreira",
     relationshipId: "rec33_relationship",
@@ -459,7 +468,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/igor-hferreira/",
   },
   {
-    id: 52,
+    id: 53,
     year: 2018,
     name: "Felipe Ferreira Mendes",
     relationshipId: "rec34_relationship",
@@ -468,7 +477,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/felipe-ferreira-mendes-72131b4b/",
   },
   {
-    id: 53,
+    id: 54,
     year: 2017,
     name: "Gabriel Cavalcante",
     relationshipId: "rec35_relationship",
@@ -477,7 +486,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/cavalcante/",
   },
   {
-    id: 54,
+    id: 55,
     year: 2017,
     name: "Thiago Brito Freitas",
     relationshipId: "rec36_relationship",
@@ -486,7 +495,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/thiago-brito-freitas-6a82a92a/",
   },
   {
-    id: 55,
+    id: 56,
     year: 2017,
     name: "Gabriel Faleri",
     relationshipId: "rec37_relationship",
@@ -495,7 +504,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/gabriel-faleri-9a7021b9/",
   },
   {
-    id: 56,
+    id: 57,
     year: 2017,
     name: "Amanda Lott",
     relationshipId: "rec38_relationship",
@@ -504,7 +513,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/amanda-lott/",
   },
   {
-    id: 57,
+    id: 58,
     year: 2017,
     name: "Nilson Junio Paulino Sena",
     relationshipId: "rec39_relationship",
@@ -513,7 +522,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/nilson-junio-paulino-sena-068743b1/",
   },
   {
-    id: 58,
+    id: 59,
     year: 2017,
     name: "Lucas Santos",
     relationshipId: "rec40_relationship",
@@ -522,7 +531,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/lucasmas16/",
   },
   {
-    id: 59,
+    id: 60,
     year: 2017,
     name: "Luiz Guilherme Costa",
     relationshipId: "rec41_relationship",
@@ -531,7 +540,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/luiz-guilherme-costa/",
   },
   {
-    id: 60,
+    id: 61,
     year: 2017,
     name: "David Hazan",
     relationshipId: "rec42_relationship",
@@ -540,7 +549,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/david-hazan-93a740143/",
   },
   {
-    id: 61,
+    id: 62,
     year: 2017,
     name: "Samuel Pavlovic",
     relationshipId: "rec43_relationship",
@@ -549,7 +558,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/samuel-pavlovic-a70a80a4/",
   },
   {
-    id: 62,
+    id: 63,
     year: 2017,
     name: "João Lucas Veloso Gouveia",
     relationshipId: "rec44_relationship",
@@ -558,7 +567,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/jo%C3%A3o-lucas-veloso-gouveia-1319a38a/",
   },
   {
-    id: 63,
+    id: 64,
     year: 2017,
     name: "Fábio Jourdan",
     relationshipId: "rec45_relationship",
@@ -567,7 +576,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/f%C3%A1bio-jourdan-473ba54a/",
   },
   {
-    id: 64,
+    id: 65,
     year: 2017,
     name: "Márcio Brandão",
     relationshipId: "rec46_relationship",
@@ -576,7 +585,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/mrcio-sb/",
   },
   {
-    id: 65,
+    id: 66,
     year: 2016,
     name: "Felipe Martins",
     relationshipId: "rec47_relationship",
@@ -585,7 +594,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/felipe-martins-18436a6b/",
   },
   {
-    id: 66,
+    id: 67,
     year: 2016,
     name: "Bruno Santos",
     relationshipId: "rec48_relationship",
@@ -594,7 +603,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/brunojsantos/",
   },
   {
-    id: 67,
+    id: 68,
     year: 2015,
     name: "Rafael A Lott",
     relationshipId: "rec49_relationship",
@@ -603,7 +612,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/rafaellott/",
   },
   {
-    id: 68,
+    id: 69,
     year: 2015,
     name: "Gabriela Mendonça de Carvalho",
     relationshipId: "rec50_relationship",
@@ -612,7 +621,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/gabriela-mendon%C3%A7a-de-carvalho-63b46066/",
   },
   {
-    id: 69,
+    id: 70,
     year: 2014,
     name: "Glaydson Von Rondon de Freitas",
     relationshipId: "rec51_relationship",
@@ -621,7 +630,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/glaydson-von-rondon-de-freitas-67966045/",
   },
   {
-    id: 70,
+    id: 71,
     year: 2014,
     name: "Lucas Romualdo Fernandes de Sá",
     relationshipId: "rec52_relationship",
@@ -630,7 +639,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/lrfsa/",
   },
   {
-    id: 71,
+    id: 72,
     year: 2014,
     name: "Andre Campos",
     relationshipId: "rec53_relationship",
@@ -639,7 +648,7 @@ export const recommendationsData = [
     link: "https://www.linkedin.com/in/andrecamposfs/",
   },
   {
-    id: 72,
+    id: 73,
     year: 2014,
     name: "Amadeu Cappanelli",
     relationshipId: "rec54_relationship",
