@@ -561,6 +561,7 @@ const resources = {
 
         rec36_recommendation:
           "Excellent teacher, always concerned with students' learning, while providing good materials and study tips. Also an outstanding person, remembering names and staying close to students. I am grateful for the opportunity to have him as my teacher.",
+        
         rec37_relationship:
           "On December 17, 2017, Gabriel and João Paulo studied at the same institution",
 
