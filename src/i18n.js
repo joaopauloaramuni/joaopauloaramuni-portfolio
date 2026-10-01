@@ -457,6 +457,7 @@ const resources = {
 
         rec18_recommendation:
           "Aramuni is a person who demonstrates extreme responsibility in his professional duties and has a gift for relating to people, making the workplace light and pleasant. Personally, he learns processes quickly, is extremely focused on his activities, demonstrates very high technical potential, and is always concerned with his constant evolution, all while maintaining care and attention towards people. I greatly enjoy working with him because I learn a lot and become a better professional through his examples and advice. I am grateful for this daily opportunity for collaboration and sincerely hope to maintain this productive relationship for a long time.",
+        
         rec19_relationship:
           "On March 12, 2023, Will and João Paulo studied at the same institution",
 
@@ -492,6 +493,7 @@ const resources = {
 
         rec24_recommendation:
           "João is an exemplary professional and, given his academic background, is always open to learning new technologies and methods. At the same time, he consistently shares knowledge with everyone.",
+        
         rec25_relationship:
           "On November 17, 2018, Eduardo and João Paulo studied at the same institution",
 
@@ -526,6 +528,7 @@ const resources = {
           "On March 19, 2018, Henrique was a client of João Paulo",
 
         rec30_recommendation: "Excellent teacher, with energy and patience!",
+        
         rec31_relationship:
           "On March 19, 2018, Rubens was a client of João Paulo",
 
