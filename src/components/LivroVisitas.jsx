@@ -29,6 +29,9 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   }, [mode]);
 
   async function fetchMessages() {
+    // Sem Supabase configurado, a lista fica vazia
+    if (!supabase) return;
+
     setLoading(true);
 
     const { data, error } = await supabase
@@ -49,6 +52,12 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
     const now = new Date();
     const time = now.toLocaleString();
 
+    // Sem Supabase configurado, avisa o visitante em vez de não fazer nada
+    if (!supabase) {
+      setStep("error");
+      return;
+    }
+
     // Salva no Supabase
     const { error } = await supabase
       .from("guestbook_messages")
@@ -56,6 +65,7 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
 
     if (error) {
       console.error(error);
+      setStep("error");
       return;
     }
 
@@ -198,6 +208,10 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
 
           {step === "done" && (
             <p className="cli-success">{t("guestbook.sucesso")}</p>
+          )}
+
+          {step === "error" && (
+            <p className="cli-hint">{t("guestbook.erro")}</p>
           )}
 
           <br />
