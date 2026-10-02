@@ -18,8 +18,9 @@ const ProjetosGitHub = () => {
           `${BASE_URL}/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`,
           {
             headers: {
-              Authorization: `token ${TOKEN}`,
               Accept: "application/vnd.github.mercy-preview+json",
+              // Só manda o token se ele existir; sem token, usa a API pública
+              ...(TOKEN && { Authorization: `token ${TOKEN}` }),
             },
           }
         );
