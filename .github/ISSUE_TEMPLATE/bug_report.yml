@@ -1,0 +1,104 @@
+name: 🐛 Relatar um problema
+description: Algo não funciona como deveria no portfólio.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar! Antes de enviar, confira se já não existe uma issue igual.
+
+  - type: textarea
+    id: o-que-aconteceu
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema.
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que era esperado?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduzir
+    attributes:
+      label: Como reproduzir
+      description: Os comandos digitados no terminal, na ordem.
+      placeholder: |
+        1. `ajuda`
+        2. `guestbook add`
+        3. ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: onde
+    attributes:
+      label: Onde aconteceu?
+      options:
+        - Site publicado (aramuni.dev)
+        - Rodando localmente (npm run dev)
+        - Rodando com Docker
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tema
+    attributes:
+      label: Tema
+      options:
+        - Escuro
+        - Claro
+        - Nos dois
+    validations:
+      required: true
+
+  - type: dropdown
+    id: idioma
+    attributes:
+      label: Idioma
+      options:
+        - PT
+        - EN
+        - Nos dois
+    validations:
+      required: true
+
+  - type: input
+    id: navegador
+    attributes:
+      label: Navegador e versão
+      placeholder: "Ex.: Chrome 129, Safari 18"
+    validations:
+      required: true
+
+  - type: input
+    id: dispositivo
+    attributes:
+      label: Sistema / dispositivo
+      placeholder: "Ex.: macOS 15, iPhone 15, Android 14"
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Erros do console
+      description: Abra o DevTools (F12 → Console) e cole aqui o que aparecer em vermelho.
+      render: shell
+
+  - type: textarea
+    id: prints
+    attributes:
+      label: Prints ou GIF
+      description: Arraste as imagens para este campo.
+
+  - type: checkboxes
+    id: confirmacao
+    attributes:
+      label: Confirmação
+      options:
+        - label: Procurei nas issues e não encontrei uma igual.
+          required: true

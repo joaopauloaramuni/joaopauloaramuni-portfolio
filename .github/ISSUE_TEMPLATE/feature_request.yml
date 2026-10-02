@@ -1,0 +1,57 @@
+name: 💡 Propor uma ideia
+description: Um comando novo ou uma melhoria em algo que já existe.
+title: "[Ideia]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Mudanças grandes (comando novo, dependência nova, visual do terminal) são discutidas aqui antes do PR.
+
+        Lembrete: o conteúdo pessoal do autor (bio, experiências, prêmios, recomendações e contatos) não é alterado por contribuições.
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      options:
+        - Novo comando
+        - Melhoria em algo que já existe
+        - Documentação
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual problema isso resolve?
+      description: Por que essa mudança deixaria o portfólio melhor?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Como seria?
+      description: Se for um comando, mostre como seria usá-lo no terminal.
+      placeholder: |
+        visitante@portfolio:~$ quiz
+        Pergunta 1: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+      description: Outras formas de resolver o mesmo problema, se houver.
+
+  - type: checkboxes
+    id: confirmacao
+    attributes:
+      label: Confirmação
+      options:
+        - label: Li o CONTRIBUTING.md.
+          required: true
+        - label: Gostaria de abrir o PR com essa mudança.

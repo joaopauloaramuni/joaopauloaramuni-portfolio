@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Guia de contribuição
+    url: https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio/blob/main/CONTRIBUTING.md
+    about: Leia antes de abrir uma issue ou um pull request.
+  - name: 💬 Falar com o autor
+    url: https://aramuni.dev/
+    about: Para assuntos que não são sobre o código, use o comando "contato" no portfólio.

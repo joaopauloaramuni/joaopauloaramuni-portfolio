@@ -1,0 +1,36 @@
+name: ❓ Tirar uma dúvida
+description: Dúvidas sobre rodar o projeto, configurar os serviços ou criar o seu portfólio a partir deste.
+title: "[Dúvida]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Antes de perguntar, vale dar uma olhada no README: ele tem guias passo a passo para EmailJS, GitHub API, Supabase e Docker.
+
+  - type: dropdown
+    id: assunto
+    attributes:
+      label: Sobre o quê?
+      options:
+        - Rodar o projeto localmente
+        - Configurar EmailJS, GitHub API ou Supabase
+        - Docker
+        - Criar meu portfólio a partir deste
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: duvida
+    attributes:
+      label: Qual é a sua dúvida?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tentativas
+    attributes:
+      label: O que você já tentou?
+      description: Comandos que rodou, mensagens de erro, trechos do README que seguiu.
+      render: shell
