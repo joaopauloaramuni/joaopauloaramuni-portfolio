@@ -1,17 +1,18 @@
 # ----------------------------
 # Stage 1: Build da aplicação
 # ----------------------------
-FROM node:18-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
-# Copiar package.json e package-lock.json (ou yarn.lock/pnpm-lock.yaml)
+# Copiar package.json e package-lock.json
 COPY package*.json ./
 
-# Instalar dependências
-RUN npm install
+# Instalar dependências exatamente como estão no package-lock.json
+RUN npm ci
 
-# Copiar todo o código
+# Copiar o código (node_modules e dist ficam de fora pelo .dockerignore)
+# O .env.local é copiado de propósito: o Vite embute as variáveis VITE_ no build
 COPY . .
 
 # Build do Vite (gera arquivos estáticos em /dist)
