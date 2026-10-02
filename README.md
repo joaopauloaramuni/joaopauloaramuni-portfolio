@@ -20,6 +20,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS.
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🧹 **limpar:** Limpa o histórico do terminal.
+* 🌗 **tema / theme:** Alterna entre o tema escuro e o claro (`tema claro` | `tema escuro`).
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
@@ -33,7 +34,9 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
-O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
+🌗 O portfólio tem **tema escuro e tema claro**: o escuro é o padrão, e o visitante pode trocar pelo botão sol/lua ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
+
+O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas, tema claro e escuro e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
 -----
 
@@ -197,7 +200,7 @@ Antes da tela de boas-vindas, o portfólio exibe uma animação que simula a ini
 | ⏭️ Pular | Qualquer tecla, clique ou toque encerra a animação na hora |
 | 🔁 Uma vez por aba | Usa `sessionStorage` para não repetir o boot a cada recarregamento; em uma aba nova, ele aparece de novo |
 | 📺 Efeito CRT | Scanlines sutis via `repeating-linear-gradient` e saída com fade + blur |
-| 🎨 Visual | Mesmo fundo do terminal (`#252a33`) e as cores do portfólio (`#00ff9d`, `#f3d956`, `#60a5fa`) |
+| 🎨 Visual | Mesmo fundo e cores do terminal, via tokens do tema (`--bg-terminal`, `--accent`, `--warn`, `--info`), então o boot já abre no tema salvo (claro ou escuro) |
 
 ### 📂 Arquivos
 
@@ -262,6 +265,154 @@ sessionStorage.clear();
 ```
 
 Depois é só recarregar a página. Outra opção é abrir o site numa aba nova.
+
+-----
+
+## 🌗 Tema claro e escuro
+
+Além do tema escuro original, o portfólio tem um **tema claro**. O escuro continua sendo o padrão, e o visitante pode trocar de duas formas:
+
+- ☀️ / 🌙 **Botão sol/lua**, ao lado do seletor de idioma: o sol aparece no tema escuro (ativa o claro) e a lua no tema claro (volta ao escuro).
+- ⌨️ **Comando `tema`** (ou `theme`), direto no terminal.
+
+| Recurso | Descrição |
+|:--|:--|
+| 🌑 Padrão | Abre sempre no tema escuro, com as cores originais do site, até o visitante escolher outro (não segue a preferência do sistema operacional) |
+| 💾 Persistência | A escolha fica salva no `localStorage` (chave `aramuni-theme`) e vale nas próximas visitas; só é salva quando o visitante troca o tema |
+| ⚡ Sem piscar | Um script inline no `index.html` aplica o tema salvo antes do React carregar, evitando que o tema escuro apareça por um instante |
+| 🖥️ Terminal | O `react-terminal-ui` alterna entre `ColorMode.Dark` e `ColorMode.Light` junto com o resto do site |
+| 🎨 Tokens CSS | Todas as cores vêm de variáveis CSS em `theme.css`; os componentes usam apenas `var(--token)` |
+| ♿ Contraste | As cores do tema claro têm contraste ≥ 4.5:1 para texto e ≥ 3:1 para ícones e bordas sobre o fundo `#ddd` do terminal |
+| 🕶️ Navegação privada | Se o `localStorage` estiver bloqueado, o tema troca normalmente e vale só para aquela visita |
+
+### ⌨️ Comando no terminal
+
+| Comando | Resultado |
+|:--|:--|
+| `tema` / `theme` | Alterna entre o tema escuro e o claro |
+| `tema claro` / `theme light` | Ativa o tema claro |
+| `tema escuro` / `theme dark` | Ativa o tema escuro |
+| `tema xyz` | Opção inválida: exibe `Uso: tema [claro \| escuro] (sem opção, alterna o tema)` |
+
+As opções valem nos dois idiomas, então `theme claro` e `tema dark` também funcionam. A mensagem de confirmação aparece no idioma selecionado.
+
+### 📂 Arquivos
+
+```texto
+index.html                 → script inline que aplica o tema salvo antes do React
+src/
+  main.jsx                 → importa theme.css e envolve o App com o ThemeProvider
+  App.jsx                  → comando "tema" e ColorMode do terminal
+  App.css                  → ajustes do ColorMode.Light do react-terminal-ui
+  commands.js              → registro do comando "tema" (alias "theme")
+  i18n.js                  → textos do comando e do botão (pt/en)
+  theme/
+    theme.css              → tokens de cor do tema escuro (:root) e do claro
+    themeContext.js        → contexto, hook useTheme e constantes
+    ThemeProvider.jsx      → estado do tema, data-theme no <html> e localStorage
+  components/
+    ThemeToggle.jsx        → botão sol/lua
+    LanguageSwitcher.jsx   → exibe o ThemeToggle ao lado dos idiomas
+```
+
+### ⚙️ Como funciona
+
+O `ThemeProvider` guarda o tema atual em estado e escreve o atributo `data-theme` na tag `<html>`. O `theme.css` define os tokens do tema escuro em `:root`, e o tema claro apenas sobrescreve esses valores em `[data-theme="light"]`. Como o CSS dos componentes usa só `var(--token)`, trocar o atributo já muda as cores do site inteiro.
+
+```css
+/* src/theme/theme.css (trecho) */
+:root {
+  color-scheme: dark;
+  --bg-terminal: #252a33;
+  --text: #e2e8f0;
+  --accent: #00ff9d;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-terminal: #dddddd;
+  --text: #1a1e24;
+  --accent: #00663f;
+}
+```
+
+<details>
+  <summary>Clique para exibir o script inline do index.html</summary>
+
+```html
+<script>
+  // Aplica o tema salvo antes do React carregar (evita piscar o dark)
+  try {
+    if (localStorage.getItem("aramuni-theme") === "light") {
+      document.documentElement.dataset.theme = "light";
+    }
+  } catch (e) {}
+</script>
+```
+</details>
+
+<details>
+  <summary>Clique para exibir o trecho do main.jsx</summary>
+
+```jsx
+import "./theme/theme.css";
+import "./App.css";
+import ThemeProvider from "./theme/ThemeProvider";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </StrictMode>
+);
+```
+</details>
+
+Em qualquer componente, o hook `useTheme` dá acesso ao tema atual e às funções de troca. É assim que o `App.jsx` escolhe o `ColorMode` do terminal:
+
+```jsx
+import { useTheme } from "./theme/themeContext";
+
+const { theme, setTheme, toggleTheme } = useTheme();
+
+<Terminal
+  colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
+  // ...
+/>
+```
+
+### 🎨 Principais tokens
+
+| Token | Escuro | Claro | Uso |
+|:--|:--|:--|:--|
+| `--bg-page` | `#1a202c` | `#cfcfcf` | Fundo da página e trilho da scrollbar |
+| `--bg-terminal` | `#252a33` | `#dddddd` | Fundo do boot, igual ao do terminal em cada `ColorMode` |
+| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências e projetos |
+| `--text` | `#e2e8f0` | `#1a1e24` | Texto principal |
+| `--text-muted` | `#a0aec0` | `#4a5568` | Texto secundário e ícones do seletor |
+| `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
+| `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" |
+| `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot |
+| `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot |
+
+A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
+
+### ✏️ Personalizando as cores
+
+- Para ajustar uma cor, altere o token em `src/theme/theme.css` e ela muda no site inteiro.
+- Ao criar um componente novo, use os tokens em vez de cores fixas, inclusive em estilos inline: `style={{ color: "var(--accent)" }}`.
+- Se criar um token novo, defina-o em `:root` e, caso ele precise de outro valor no tema claro, também em `[data-theme="light"]`.
+
+### 🧪 Testando localmente
+
+A troca pode ser testada pelo botão sol/lua ou pelo comando `tema`. Para simular um visitante novo, apague a escolha salva no console do navegador:
+
+```javascript
+localStorage.removeItem("aramuni-theme");
+```
+
+Depois é só recarregar a página: o portfólio volta a abrir no tema padrão (escuro).
 
 -----
 
@@ -1147,6 +1298,7 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **Docker Hub (repositório de imagens Docker):** [Documentação oficial](https://hub.docker.com/)
 * **NGINX (servidor web e proxy reverso):** [Documentação oficial](https://nginx.org/en/docs/)
 * **Supabase:** [Documentação oficial](https://supabase.com/docs) | [Dashboard](https://app.supabase.com/) | [JavaScript Client (@supabase/supabase-js)](https://supabase.com/docs/reference/javascript/introduction)
+* **Tema claro e escuro:** [CSS Custom Properties (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) | [color-scheme (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) | [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
 -----
 
