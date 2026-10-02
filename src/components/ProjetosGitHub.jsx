@@ -52,10 +52,10 @@ const ProjetosGitHub = () => {
     <div className="projeto-container">
       <h3 className="projeto-title">{t("projetos.titulo")}</h3>
 
-      {loading && <div className="spinner">Carregando projetos...</div>}
+      {loading && <div className="spinner">{t("projetos.carregando")}</div>}
 
       {!loading && repos.length === 0 && (
-        <p style={{ color: "var(--accent)" }}>Nenhum projeto encontrado.</p>
+        <p style={{ color: "var(--accent)" }}>{t("projetos.nenhum")}</p>
       )}
 
       <div>

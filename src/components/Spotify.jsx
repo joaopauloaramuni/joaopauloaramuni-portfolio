@@ -14,6 +14,7 @@ const Spotify = () => {
     <div className="spotify-container" ref={containerRef}>
       <div>
         <img
+          onLoad={handleImageLoad}
           width="875px"
           src="https://data-card-for-spotify.herokuapp.com/api/card?user_id=22lih5eniohc7dawfxohlo7wy"
           alt="Data Card for Spotify"
@@ -24,6 +25,7 @@ const Spotify = () => {
           <tr>
             <td>
               <img
+                onLoad={handleImageLoad}
                 alt="Spotify"
                 height="400px"
                 src="https://spotify-github-profile.kittinanx.com/api/view?uid=22lih5eniohc7dawfxohlo7wy&cover_image=true&theme=default&show_offline=false&background_color=121212&interchange=false"
@@ -31,6 +33,7 @@ const Spotify = () => {
             </td>
             <td>
               <img
+                onLoad={handleImageLoad}
                 alt="Spotify list"
                 height="400px"
                 src="https://spotify-recently-played.jeffreyca.workers.dev/svg?user=22lih5eniohc7dawfxohlo7wy&amp;count=10&amp;width=540&amp;radius=40&amp;unique=1&amp;duration=1&amp;album=1&amp;footer=wave"
@@ -39,6 +42,7 @@ const Spotify = () => {
             <td>
               <a href="https://www.last.fm/pt/user/joaoaramuni" target="_blank">
                 <img
+                  onLoad={handleImageLoad}
                   height="400px"
                   alt="lastfm"
                   src="https://lastfm-recently-played.jeffreyca.workers.dev/svg?user=joaoaramuni&amp;count=10&amp;radius=40&amp;stats=compact&amp;footer=wave&amp;loved=off"

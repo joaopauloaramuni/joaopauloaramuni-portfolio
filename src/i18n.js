@@ -172,7 +172,9 @@ const resources = {
       },
       projetos: {
         titulo: "My Main Projects",
-
+        carregando: "Loading projects...",
+        nenhum: "No projects found.",
+        
         python_proj_title: "Python Projects",
         python_proj_desc:
           "Collection of Python projects, including automation, data analysis, web development, and machine learning. They demonstrate practical application of algorithms, API integration, data manipulation, and interactive interface creation, offering solutions from utility tools and file compressors to art generators, simulators, and code metrics analyzers.",
@@ -1002,6 +1004,8 @@ const resources = {
       },
       projetos: {
         titulo: "Meus Principais Projetos",
+        carregando: "Carregando projetos...",
+        nenhum: "Nenhum projeto encontrado.",
 
         python_proj_title: "Projetos Python",
         python_proj_desc:

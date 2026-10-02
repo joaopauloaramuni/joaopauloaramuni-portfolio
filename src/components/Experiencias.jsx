@@ -4,7 +4,7 @@ import { experiencesData } from "../data/experiencesData";
 import ExperienceCard from "./ExperienceCard";
 
 const Experiencias = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   // Transformar dados brutos em objetos traduzidos
   const translatedExperiences = experiencesData.map((exp) => ({
