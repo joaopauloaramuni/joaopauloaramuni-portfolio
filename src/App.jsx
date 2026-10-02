@@ -25,9 +25,11 @@ import LivroVisitas from "./components/LivroVisitas";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "./theme/themeContext";
 
 function App() {
   const { t } = useTranslation();
+  const { theme, setTheme } = useTheme();
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
 
   const [terminalLineData, setTerminalLineData] = useState([
@@ -129,6 +131,28 @@ function App() {
         case "limpar":
           setTerminalLineData([]);
           return;
+        case "tema": {
+          // "tema" alterna; "tema claro|light" e "tema escuro|dark" escolhem
+          const themeArgs = {
+            claro: "light",
+            light: "light",
+            escuro: "dark",
+            dark: "dark",
+          };
+          if (subCommand && !themeArgs[subCommand]) {
+            response = <TerminalOutput>{t("tema.uso")}</TerminalOutput>;
+            break;
+          }
+          const nextTheme =
+            themeArgs[subCommand] ?? (theme === "dark" ? "light" : "dark");
+          setTheme(nextTheme);
+          response = (
+            <TerminalOutput>
+              {t(nextTheme === "light" ? "tema.claro_ativado" : "tema.escuro_ativado")}
+            </TerminalOutput>
+          );
+          break;
+        }
         case "recomendacoes":
           response = <Recomendacoes />;
           break;
@@ -184,14 +208,14 @@ function App() {
         <LanguageSwitcher onLanguageChange={focusTerminalInput} />
         <Terminal
           name={terminalTitle}
-          colorMode={ColorMode.Dark}
+          colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
           onInput={
             isGameOpen || isContatoOpen || isGuestBookAddOpen
               ? undefined
               : handleInput
           }
           prompt={myPrompt}
-          height="85dvh"
+          height="calc(100dvh - 110px)"
         >
           {terminalLineData}
         </Terminal>

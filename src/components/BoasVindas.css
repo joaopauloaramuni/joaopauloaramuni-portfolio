@@ -1,15 +1,15 @@
 .welcome-container {
   padding: 0.5rem 1rem;
   line-height: 1.5; /* sem unidade: cada filho calcula pela própria fonte */
-  color: #a0aec0;
+  color: var(--text-muted);
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip não cria área de rolagem (hidden forçava overflow-y: auto) */
 }
 
 /* ASCII art: diminui junto com a tela para caber sem rolar */
 .aramuni-ascii {
   font-family: "FiraCode", "JetBrainsMono", monospace; /* mesmo nome do @font-face */
-  color: #a0aec0;
+  color: var(--text-muted);
   font-size: clamp(4px, 2.2vw, 12px);
   line-height: 1.15;
   letter-spacing: 0;
@@ -26,7 +26,7 @@
 }
 
 .welcome-title {
-  color: #ffbd2e;
+  color: var(--highlight);
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -38,7 +38,7 @@
 
 .divider {
   border: none;
-  border-top: 1px solid #4a5568;
+  border-top: 1px solid var(--border);
   margin-bottom: 1rem;
 }
 
@@ -51,7 +51,7 @@
 .info-list li {
   display: flex;
   align-items: center;
-  color: #e2e8f0;
+  color: var(--text);
   font-size: 1rem;
 }
 
@@ -61,14 +61,14 @@
 }
 
 .navegue-text {
-  color: #00ff9d;
+  color: var(--accent);
   font-style: italic;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .icon-link {
-  color: #e2e8f0;
+  color: var(--text);
   text-decoration: none;
   display: inline-flex;
   align-items: center;

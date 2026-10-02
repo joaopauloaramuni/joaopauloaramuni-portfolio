@@ -23,7 +23,7 @@ const Experiencias = () => {
   return (
     <div style={{ padding: "0 1.5rem" }}>
       <h3
-        style={{ color: "#00ff9d", marginBottom: "2rem", fontSize: "1.8rem" }}
+        style={{ color: "var(--accent)", marginBottom: "2rem", fontSize: "1.8rem" }}
       >
         {t("experiencias.titulo")}
       </h3>

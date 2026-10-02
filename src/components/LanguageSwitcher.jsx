@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaGlobeAmericas } from "react-icons/fa";
+import ThemeToggle from "./ThemeToggle";
 import "./LanguageSwitcher.css";
 
 const LanguageSwitcher = ({ onLanguageChange }) => {
@@ -18,6 +19,8 @@ const LanguageSwitcher = ({ onLanguageChange }) => {
 
   return (
     <div className="switcherContainer">
+      <ThemeToggle onToggle={onLanguageChange} />
+      <span className="switcherDivider">|</span>
       <FaGlobeAmericas className={`icon ${isEnActive ? "active" : ""}`} />
       <span
         className={`langText ${isPtActive ? "active" : ""}`}

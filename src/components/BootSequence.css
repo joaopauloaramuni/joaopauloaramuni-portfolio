@@ -2,8 +2,8 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #252a33; /* mesmo fundo do terminal (tela de boas-vindas) */
-  color: #cbd5e1;
+  background: var(--bg-terminal); /* mesmo fundo do terminal (tela de boas-vindas) */
+  color: var(--text-soft);
   font-family: "FiraCode", "JetBrainsMono", "Consolas", monospace;
   font-size: clamp(0.72rem, 1.6vw, 0.95rem);
   line-height: 1.55;
@@ -21,7 +21,7 @@
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.025) 0 1px,
+    var(--scanline) 0 1px,
     transparent 1px 3px
   );
 }
@@ -33,7 +33,7 @@
   left: 0;
   width: 100%;
   text-align: center;
-  color: #a2a2a2;
+  color: var(--terminal-chrome);
   font-size: 18px; /* mesmo tamanho do título do react-terminal-ui */
   line-height: normal; /* não herda o 1.55 do boot */
   pointer-events: none;
@@ -65,15 +65,15 @@
 }
 
 .boot-tag { margin-right: 0.6em; font-weight: 600; }
-.boot-tag.ok { color: #00ff9d; }
-.boot-tag.warn { color: #f3d956; }
-.boot-tag.info { color: #60a5fa; }
-.boot-time { color: #64748b; margin-right: 0.6em; }
+.boot-tag.ok { color: var(--accent); }
+.boot-tag.warn { color: var(--warn); }
+.boot-tag.info { color: var(--info); }
+.boot-time { color: var(--text-dim); margin-right: 0.6em; }
 
-.boot-progress { color: #00ff9d; margin-top: 0.5em; }
+.boot-progress { color: var(--accent); margin-top: 0.5em; }
 
 .boot-cursor {
-  color: #00ff9d;
+  color: var(--accent);
   animation: boot-blink 1s steps(1) infinite;
 }
 
@@ -81,7 +81,7 @@
   position: absolute;
   right: 1rem;
   bottom: 1rem;
-  color: #64748b;
+  color: var(--text-dim);
   font-size: 0.75rem;
   animation: boot-pulse 2s ease-in-out infinite;
 }

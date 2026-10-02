@@ -3,23 +3,23 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: #e2e8f0;
+  color: var(--text);
   min-width: 0;
 }
 
 .guestbook-header {
-  border-left: 3px solid #00ff9d;
+  border-left: 3px solid var(--accent);
   padding-left: 1rem;
 }
 
 .guestbook-title {
   font-size: 1.8rem;
-  color: #00ff9d;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
 .guestbook-subtitle {
-  color: #a0aec0;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
@@ -38,34 +38,34 @@
 }
 
 .command {
-  color: #00ff9d;
+  color: var(--accent);
   font-weight: 600;
 }
 
 .command-desc {
-  color: #a0aec0;
+  color: var(--text-muted);
 }
 
 .cli-hint {
-  color: #64748b;
+  color: var(--text-dim);
   font-size: 0.85rem;
 }
 
 .guestbook-entry {
-  border-left: 2px solid #00ff9d;
+  border-left: 2px solid var(--accent);
   padding-left: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .guestbook-name {
-  color: #00ff9d;
+  color: var(--accent);
   font-weight: 600;
   margin-bottom: 0.25rem;
   overflow-wrap: anywhere;
 }
 
 .guestbook-message {
-  color: #cbd5e0;
+  color: var(--text-soft);
   overflow-wrap: anywhere; /* mensagens sem espaço (links, "kkkkkk") não estouram */
 }
 
@@ -78,7 +78,7 @@
 }
 
 .cli-prefix {
-  color: #00ff9d;
+  color: var(--accent);
   font-weight: bold;
   flex-shrink: 0;
 }
@@ -86,9 +86,9 @@
 .cli-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--border-input);
   border-radius: 0;
-  color: #e2e8f0;
+  color: var(--text);
   font-family: inherit; /* inputs não herdam fonte por padrão */
   font-size: inherit;
   width: 50%;
@@ -98,18 +98,18 @@
 }
 
 .cli-input:focus {
-  border-bottom: 1px solid #00ff9d;
+  border-bottom: 1px solid var(--accent);
 }
 
 .cli-success {
-  color: #22c55e;
+  color: var(--success);
   margin-top: 1rem;
   font-family: inherit;
 }
 
 .btn-voltar-terminal {
-  background: #00ff9d;
-  color: #0f172a;
+  background: var(--accent);
+  color: var(--on-accent);
   border: none;
   padding: 0.8rem;
   border-radius: 8px;
@@ -123,7 +123,7 @@
 }
 
 .btn-voltar-terminal:hover {
-  background: #00cc7a;
+  background: var(--accent-hover);
 }
 
 /* Responsividade */

@@ -5,10 +5,10 @@
   height: 70vw;
   max-height: 480px;
   min-height: 260px;
-  border: 2px solid #00ff9d;
+  border: 2px solid var(--accent);
   overflow: hidden;
   margin: 5px auto;
-  background: #111;
+  background: var(--game-sky);
   box-sizing: border-box;
   touch-action: manipulation;
 }
@@ -16,8 +16,8 @@
 .btn-voltar-terminal {
   width: 99vw;
   max-width: 600px;
-  background: #00ff9d;
-  color: #0f172a;
+  background: var(--accent);
+  color: var(--on-accent);
   border: none;
   padding: 0.8rem;
   border-radius: 8px;
@@ -27,7 +27,7 @@
 }
 
 .btn-voltar-terminal:hover {
-  background: #00CC7A;
+  background: var(--accent-hover);
 }
 
 @media (max-width: 768px) {

@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  color: #e2e8f0;
+  color: var(--text);
 }
 
 .avatar-container {
@@ -14,7 +14,7 @@
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  border: 2px solid #00ff9d;
+  border: 2px solid var(--accent);
   object-fit: cover;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
@@ -27,14 +27,14 @@
   margin-top: 1rem;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #00ff9d;
+  color: var(--accent);
 }
 
 .cargo-titulo {
   margin: 0.25rem 0 1.5rem 0;
   font-size: 1.2rem;
   font-weight: 400;
-  color: #a0aec0;
+  color: var(--text-muted);
 }
 
 .biografia {
@@ -46,7 +46,7 @@
 
 .skills-titulo {
   margin-bottom: 1rem;
-  color: #a0aec0;
+  color: var(--text-muted);
 }
 
 .skills-tags-container {
@@ -58,8 +58,8 @@
 }
 
 .skill-tag-sobre {
-  background-color: #4a5568;
-  color: #cbd5e0;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
   padding: 0.4rem 1rem;
   border-radius: 6px;
   font-size: 0.9rem;

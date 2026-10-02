@@ -36,7 +36,7 @@
   height: calc(50% + 1.5rem);
   bottom: 0;
   width: 3px;
-  background-color: #4a5568;
+  background-color: var(--border);
   transition: background-color 0.3s ease;
 }
 
@@ -47,7 +47,7 @@
   top: 0;
   height: calc(50% - 1.5rem); /* << AJUSTE FINO */
   width: 3px;
-  background-color: #4a5568;
+  background-color: var(--border);
   transition: background-color 0.3s ease;
 }
 
@@ -66,18 +66,18 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #1a202c;
-  border: 3px solid #00ff9d;
+  background-color: var(--bg-page);
+  border: 3px solid var(--accent);
   z-index: 1;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .experience-content {
-  background-color: #2d3748;
+  background-color: var(--surface);
   border-radius: 8px;
   padding: 1.5rem;
   width: 100%;
-  border: 1px solid #4a5568;
+  border: 1px solid var(--border);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -102,21 +102,21 @@
 
 .role-title {
   margin: 0;
-  color: #e2e8f0;
+  color: var(--text);
   font-size: 1.5rem;
   line-height: 1.5;
 }
 
 .company-name {
   margin: 0;
-  color: #00ff9d;
+  color: var(--accent);
   font-weight: 500;
   font-size: 1.4rem;
 }
 
 .date-range {
   margin: 0.25rem 0 1rem 0;
-  color: #a0aec0;
+  color: var(--text-muted);
   font-style: italic;
   font-size: 0.9rem;
 }
@@ -124,18 +124,18 @@
 .description-list {
   padding-left: 20px;
   margin: 0 0 1rem 0;
-  color: #cbd5e0;
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
 .description-list li::marker {
-  color: #00ff9d;
+  color: var(--accent);
 }
 
 .company-info {
   font-size: 0.9rem;
-  color: #a0aec0;
-  border-top: 1px solid #4a5568;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
   padding-top: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -148,8 +148,8 @@
 }
 
 .skill-tag {
-  background-color: #4a5568;
-  color: #cbd5e0;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.8rem;
@@ -158,17 +158,17 @@
 
 .experience-card:hover .timeline-marker {
   transform: scale(1.2) translateY(-50%);
-  background-color: #00ff9d;
+  background-color: var(--accent);
 }
 
 .experience-card:hover::after,
 .experience-card:hover::before {
-  background-color: #00ff9d;
+  background-color: var(--accent);
 }
 
 .experience-card:hover .experience-content {
-  border-color: #00ff9d;
-  box-shadow: 0 10px 25px -5px rgba(255, 133, 27, 0.15);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-xp-hover);
 }
 
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 .box-container {
   width: 90%;
   max-width: 800px;
-  border: 2px solid #00ff9d;
+  border: 2px solid var(--accent);
   border-radius: 10px;
   padding: 1.5rem 1.5rem;
   margin: 0.5rem auto;
@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  color: #e2e8f0;
+  color: var(--text);
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -25,13 +25,13 @@
 }
 
 .contato-container {
-  color: #e2e8f0;
+  color: var(--text);
   width: 90%;
 }
 
 /* Título e subtítulo */
 .contato-titulo {
-  color: #00ff9d;
+  color: var(--accent);
   font-size: 1.8rem;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -39,7 +39,7 @@
 }
 
 .contato-subtitulo {
-  color: #a0aec0;
+  color: var(--text-muted);
   margin-top: 0;
   margin-bottom: 0;
   text-align: center;
@@ -56,11 +56,11 @@
 
 .input-contato,
 textarea {
-  background: #0f172a;
-  border: 2px solid #00ff9d;
+  background: var(--surface-input);
+  border: 2px solid var(--accent);
   border-radius: 8px;
   padding: 0.75rem 1rem;
-  color: #e2e8f0;
+  color: var(--text);
   font-size: 1rem;
   outline: none;
   transition: border 0.3s ease;
@@ -68,12 +68,12 @@ textarea {
 
 .input-contato:focus,
 textarea:focus {
-  border-color: #00ffaa;
+  border-color: var(--accent-focus);
 }
 
 .botao-contato {
-  background: #00ff9d;
-  color: #0f172a;
+  background: var(--accent);
+  color: var(--on-accent);
   border: none;
   padding: 0.8rem;
   border-radius: 8px;
@@ -83,7 +83,7 @@ textarea:focus {
 }
 
 .botao-contato:hover {
-  background: #00CC7A;
+  background: var(--accent-hover);
 }
 
 .status-contato {
@@ -91,7 +91,7 @@ textarea:focus {
   margin-bottom: 0;
   text-align: center;
   font-size: 1rem;
-  color: #00ff9d;
+  color: var(--accent);
 }
 
 /* Ícones sociais */
@@ -104,12 +104,12 @@ textarea:focus {
 
 .contato-icone {
   font-size: 2rem;
-  color: #00ff9d;
+  color: var(--accent);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .contato-icone:hover {
-  color: #00CC7A;
+  color: var(--accent-hover);
   transform: scale(1.1);
 }
 

@@ -31,6 +31,10 @@ export const commandList = {
     name: 'limpar',
     aliases: ['clear'],
   },
+  tema: {
+    name: 'tema',
+    aliases: ['theme'],
+  },
   recomendacoes: {
     name: 'recomendacoes',
     aliases: ['recommendations', 'recs'],

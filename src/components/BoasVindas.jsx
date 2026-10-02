@@ -53,7 +53,7 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoSchoolOutline className="icon" style={{ color: "#f3d956" }} />
+              <IoSchoolOutline className="icon" style={{ color: "var(--icon-school)" }} />
               {t("boasvindas.cargo1")}
             </a>
           </li>
@@ -66,7 +66,7 @@ const BoasVindas = () => {
             >
               <IoBriefcaseOutline
                 className="icon"
-                style={{ color: "#f57c00ff" }}
+                style={{ color: "var(--icon-work)" }}
               />
               {t("boasvindas.cargo2")}
             </a>
@@ -78,7 +78,7 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoBookOutline className="icon" style={{ color: "#B03060" }} />
+              <IoBookOutline className="icon" style={{ color: "var(--icon-book)" }} />
               {t("boasvindas.orientacao")}
             </a>
           </li>
@@ -124,7 +124,7 @@ const BoasVindas = () => {
             >
               <IoLocationOutline
                 className="icon"
-                style={{ color: "#ff6b6b" }}
+                style={{ color: "var(--icon-location)" }}
               />
               {t("boasvindas.local")}
             </a>
@@ -136,7 +136,7 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoMailOutline className="icon" style={{ color: "#e53935ff" }} />
+              <IoMailOutline className="icon" style={{ color: "var(--icon-mail-gmail)" }} />
               joaopauloaramuni@gmail.com
             </a>
           </li>
@@ -147,7 +147,7 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoMailOutline className="icon" style={{ color: "#519bd8ff" }} />
+              <IoMailOutline className="icon" style={{ color: "var(--icon-mail-puc)" }} />
               joaoaramuni@pucminas.br
             </a>
           </li>
@@ -158,7 +158,7 @@ const BoasVindas = () => {
               rel="noopener noreferrer"
               className="icon-link"
             >
-              <IoLogoGithub className="icon" style={{ color: "#d1d5dbff" }} />
+              <IoLogoGithub className="icon" style={{ color: "var(--icon-github)" }} />
               GitHub Portfolio
             </a>
           </li>

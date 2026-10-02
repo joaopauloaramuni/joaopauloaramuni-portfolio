@@ -12,7 +12,7 @@
 }
 
 .ajuda-aliases {
-  color: #00ff9d;
+  color: var(--accent);
   font-size: 1.2rem;
   flex-wrap: nowrap;
 }
@@ -23,7 +23,7 @@
 
 .ajuda-description {
   margin: 0;
-  color: #a0aec0;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 

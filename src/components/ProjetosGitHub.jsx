@@ -55,7 +55,7 @@ const ProjetosGitHub = () => {
       {loading && <div className="spinner">Carregando projetos...</div>}
 
       {!loading && repos.length === 0 && (
-        <p style={{ color: "#00ff9d" }}>Nenhum projeto encontrado.</p>
+        <p style={{ color: "var(--accent)" }}>Nenhum projeto encontrado.</p>
       )}
 
       <div>

@@ -1,12 +1,12 @@
 .recomendacoes-titulo {
-  color: #00ff9d;
+  color: var(--accent);
   margin-bottom: 2rem;
   font-size: 1.8rem;
 }
 
 .recomendacoes-icone {
   font-size: 1.2rem;
-  color: #00ff9d;
+  color: var(--accent);
   flex-shrink: 0;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -26,16 +26,16 @@
   content: "";
   flex: 1;
   height: 2px;
-  background: linear-gradient(to right, transparent, #00ff9d, transparent);
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
 }
 
 .recomendacao-ano-texto {
-  color: #00ff9d;
+  color: var(--accent);
   font-size: 1.4rem;
   font-weight: bold;
   letter-spacing: 2px;
   padding: 0.25rem 1rem;
-  border: 1px solid #00ff9d;
+  border: 1px solid var(--accent);
   border-radius: 999px;
 }
 
@@ -44,7 +44,7 @@
 .recomendacao-separador {
   width: 80%;
   height: 1px;
-  background-color: #00ff9d;
+  background-color: var(--accent);
   margin: 16px 0;
 }
 
@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  color: #e2e8f0;
+  color: var(--text);
   padding: 16px;
 }
 
@@ -67,7 +67,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px solid #00ff9d;
+  border: 2px solid var(--accent);
   object-fit: cover;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
@@ -81,7 +81,7 @@
 }
 
 .recomendacao-name {
-  color: #00ff9d;
+  color: var(--accent);
   font-weight: bold;
   font-size: 18px;
 }
@@ -98,7 +98,7 @@
 .recomendacao-text {
   margin: 8px 0;
   font-size: 15px;
-  color: #cbd5e1;
+  color: var(--text-soft);
   max-width: 80%;
   text-align: justify;
   line-height: 1.5;
@@ -106,7 +106,7 @@
 
 .recomendacao-link {
   font-size: 18px;
-  color: #00ff9d;
+  color: var(--accent);
   transition: color 0.3s ease, transform 0.3s ease;
   display: inline-flex;
   align-items: center;
@@ -114,11 +114,11 @@
 }
 
 .recomendacao-link:hover {
-  color: #00d18b;
+  color: var(--accent-hover);
 }
 
 .recomendacao-link:hover .recomendacoes-icone {
-  color: #00d18b;
+  color: var(--accent-hover);
 }
 
 /* Responsividade */

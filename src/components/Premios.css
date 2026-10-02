@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  color: #e2e8f0;
+  color: var(--text);
   margin-bottom: 32px;
 }
 
@@ -17,7 +17,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px solid #00ff9d;
+  border: 2px solid var(--accent);
   object-fit: cover;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
@@ -29,7 +29,7 @@
 .premio-title {
   font-size: 18px;
   font-weight: bold;
-  color: #00ff9d;
+  color: var(--accent);
 }
 
 .premio-org {
@@ -39,19 +39,19 @@
 
 .premio-year {
   font-size: 14px;
-  color: #cbd5e1;
+  color: var(--text-soft);
 }
 
 .premio-desc {
   max-width: 80%;
   margin: 8px 0;
   font-size: 15px;
-  color: #cbd5e1;
+  color: var(--text-soft);
   text-align: justify;
 }
 
 .premio-link {
-  color: #00ff9d;
+  color: var(--accent);
   text-decoration: underline;
   margin-top: 8px;
   font-size: 18px;
@@ -63,19 +63,19 @@
 
 .premio-icone {
   font-size: 1.2rem;
-  color: #00ff9d;
+  color: var(--accent);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .premio-separador {
   width: 80%;
   height: 1px;
-  background-color: #00ff9d;
+  background-color: var(--accent);
   margin-top: 16px;
 }
 
 .premios-titulo {
-  color: #00ff9d;
+  color: var(--accent);
   margin-bottom: 2rem;
   font-size: 1.8rem;
 }

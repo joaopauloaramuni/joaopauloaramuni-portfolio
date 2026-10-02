@@ -1,5 +1,5 @@
 .calendly-title {
-  color: #00ff9d;
+  color: var(--accent);
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }

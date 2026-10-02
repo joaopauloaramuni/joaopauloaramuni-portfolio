@@ -1,0 +1,123 @@
+/* =====================================================================
+   TEMAS — tokens de cor do portfólio
+   ---------------------------------------------------------------------
+   • Dark é o padrão (:root) e mantém as cores originais do site.
+   • Light só sobrescreve os valores, ativado por <html data-theme="light">.
+   • Os CSS dos componentes usam apenas var(--token); para ajustar uma cor,
+     mude aqui e ela muda no site inteiro.
+   • Importado em main.jsx antes de App.css.
+   • As cores do tema light foram escolhidas para ter contraste ≥ 4.5:1
+     (texto) ou ≥ 3:1 (ícones/bordas) sobre o fundo #ddd do
+     ColorMode.Light do react-terminal-ui.
+   ===================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Fundos e superfícies */
+  --bg-page: #1a202c;         /* fundo da página / trilho da scrollbar */
+  --bg-terminal: #252a33;     /* mesmo fundo do react-terminal-ui (dark) */
+  --surface: #2d3748;         /* cards (experiências, projetos) */
+  --surface-input: #0f172a;   /* inputs e textarea */
+  --track: #1e293b;           /* fundo das barras de habilidade */
+
+  /* Bordas */
+  --border: #4a5568;
+  --border-input: #334155;
+
+  /* Texto */
+  --text: #e2e8f0;
+  --text-soft: #cbd5e0;
+  --text-muted: #a0aec0;
+  --text-dim: #64748b;
+  --terminal-chrome: #a2a2a2; /* título "Portfolio terminal" e prompt */
+  --cursor: #ffffff;
+
+  /* Cor de destaque (verde neon) */
+  --accent: #00ff9d;
+  --accent-hover: #00cc7a;
+  --accent-focus: #00ffaa;
+  --link-hover: #66ffc9;
+  --on-accent: #0f172a;       /* texto em cima de botões verdes */
+
+  /* Tags */
+  --tag-bg: #4a5568;
+  --tag-text: #cbd5e0;
+
+  /* Cores semânticas */
+  --highlight: #ffbd2e;       /* "$ Boas-vindas ao meu Portfólio" */
+  --warn: #f3d956;
+  --info: #60a5fa;
+  --success: #22c55e;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #4a5568;
+  --scrollbar-thumb-hover: gray;
+
+  /* Efeitos */
+  --scanline: rgba(255, 255, 255, 0.025);
+  --shadow-xp-hover: 0 10px 25px -5px rgba(255, 133, 27, 0.15);
+  --shadow-project-hover: 0 20px 25px -5px rgba(0, 255, 157, 0.1),
+    0 10px 10px -5px rgba(0, 255, 157, 0.08);
+  --game-sky: #111;
+
+  /* Ícones da tela de boas-vindas */
+  --icon-school: #f3d956;
+  --icon-work: #f57c00;
+  --icon-book: #b03060;
+  --icon-location: #ff6b6b;
+  --icon-mail-gmail: #e53935;
+  --icon-mail-puc: #519bd8;
+  --icon-github: #d1d5db;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-page: #cfcfcf;
+  --bg-terminal: #dddddd;     /* mesmo fundo do react-terminal-ui (light) */
+  --surface: #f2f2f2;
+  --surface-input: #f7f7f7;
+  --track: #c4c8cf;
+
+  --border: #a0a7b2;
+  --border-input: #6b7280;
+
+  --text: #1a1e24;            /* mesmo texto do react-terminal-ui (light) */
+  --text-soft: #2d3748;
+  --text-muted: #4a5568;
+  --text-dim: #525c6b;
+  --terminal-chrome: #a8323f; /* rosa da lib (#D76D77) escurecido: 2.4 → 4.8:1 */
+  --cursor: #1a1e24;
+
+  --accent: #00663f;          /* verde da marca escurecido: 5.2:1 no #ddd */
+  --accent-hover: #004d33;
+  --accent-focus: #004d33;
+  --link-hover: #004d33;
+  --on-accent: #ffffff;
+
+  --tag-bg: #c9ced6;
+  --tag-text: #1f2937;
+
+  --highlight: #9a3412;
+  --warn: #92400e;
+  --info: #1d4ed8;
+  --success: #166534;
+
+  --scrollbar-thumb: #9aa1ac;
+  --scrollbar-thumb-hover: #6b7280;
+
+  --scanline: rgba(0, 0, 0, 0.035);
+  --shadow-xp-hover: 0 10px 25px -5px rgba(0, 102, 63, 0.2);
+  --shadow-project-hover: 0 20px 25px -5px rgba(0, 102, 63, 0.15),
+    0 10px 10px -5px rgba(0, 102, 63, 0.1);
+  --game-sky: linear-gradient(to bottom, #8ecbff 0%, #dff0ff 100%);
+
+  --icon-school: #a16207;
+  --icon-work: #c2410c;
+  --icon-book: #b03060;
+  --icon-location: #dc2626;
+  --icon-mail-gmail: #c62828;
+  --icon-mail-puc: #2563eb;
+  --icon-github: #1a1e24;
+}

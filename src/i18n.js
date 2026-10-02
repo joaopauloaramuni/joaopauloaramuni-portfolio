@@ -7,6 +7,13 @@ const resources = {
         nao_reconhecido: "Command not recognized:",
         ver_ajuda: "Type 'help' to see the options.",
       },
+      tema: {
+        claro_ativado: "Light theme enabled. Type 'theme dark' to go back.",
+        escuro_ativado: "Dark theme enabled. Type 'theme light' to switch.",
+        uso: "Usage: theme [light | dark] (no option toggles the theme)",
+        ativar_claro: "Switch to light theme",
+        ativar_escuro: "Switch to dark theme",
+      },
       boot: {
         cpu: "Detecting CPU: Software Engineer (16 coffee cores)",
         graduacao: "Started Undergraduate in Computer Science",
@@ -146,6 +153,7 @@ const resources = {
           desc: "Displays my contact information and sends an email.",
         },
         limpar: { desc: "Clears the terminal history." },
+        tema: { desc: "Toggles between dark and light theme (theme light | theme dark)." },
         recomendacoes: { desc: "Shows my LinkedIn recommendations." },
         github: { desc: "Displays my repositories using the GitHub API." },
         premios: { desc: "Shows awards and recognitions." },
@@ -829,6 +837,13 @@ const resources = {
         nao_reconhecido: "Comando não reconhecido:",
         ver_ajuda: "Digite 'ajuda' para ver as opções.",
       },
+      tema: {
+        claro_ativado: "Tema claro ativado. Digite 'tema escuro' para voltar.",
+        escuro_ativado: "Tema escuro ativado. Digite 'tema claro' para trocar.",
+        uso: "Uso: tema [claro | escuro] (sem opção, alterna o tema)",
+        ativar_claro: "Ativar tema claro",
+        ativar_escuro: "Ativar tema escuro",
+      },
       boot: {
         cpu: "Detectando CPU: Engenheiro de Software (16 núcleos de café)",
         graduacao: "Started Graduação em Ciência da Computação",
@@ -968,6 +983,7 @@ const resources = {
         },
         contato: { desc: "Exibe minhas informações de contato e envia email." },
         limpar: { desc: "Limpa o histórico do terminal." },
+        tema: { desc: "Alterna entre o tema escuro e o claro (tema claro | tema escuro)." },
         recomendacoes: { desc: "Exibe minhas recomendações do LinkedIn." },
         github: { desc: "Exibe meus repositórios usando a GitHub API." },
         premios: { desc: "Exibe prêmios e reconhecimentos." },

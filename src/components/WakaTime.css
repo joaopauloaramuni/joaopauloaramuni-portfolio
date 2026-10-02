@@ -2,7 +2,7 @@
   padding: 2rem 1.5rem;
   display: flex;
   gap: 0.5rem;
-  color: #e2e8f0;
+  color: var(--text);
 }
 
 @media (max-width: 768px) {
