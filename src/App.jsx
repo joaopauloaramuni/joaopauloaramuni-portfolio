@@ -96,18 +96,22 @@ function App() {
     runCommandRef.current = handleInput;
   });
 
-  // Chamado pelo BootSequence ao terminar: libera o terminal, foca o input e,
-  // se a página foi aberta por um link direto, executa o comando do link
+  // Chamado pelo BootSequence ao terminar: libera o terminal e foca o input
   const handleBootFinish = useCallback(() => {
     setBooted(true);
     focusTerminalInput();
+  }, []);
 
-    if (deepLinkCommand && !deepLinkDone.current) {
-      deepLinkDone.current = true;
-      runCommandRef.current?.(deepLinkCommand);
-      scrollLastCommandToTop();
-    }
-  }, [deepLinkCommand]);
+  // Com o terminal liberado, executa o comando do link direto (?cmd=...).
+  // Fica aqui, e não no handleBootFinish, porque quando o boot já rodou nesta
+  // aba (F5, outro link) o BootSequence chama onFinish no efeito de montagem
+  // dele, que roda antes dos efeitos do App: o runCommandRef ainda estaria vazio.
+  useEffect(() => {
+    if (!booted || !deepLinkCommand || deepLinkDone.current) return;
+    deepLinkDone.current = true;
+    runCommandRef.current?.(deepLinkCommand);
+    scrollLastCommandToTop();
+  }, [booted, deepLinkCommand]);
 
   // Detecta se o jogo está aberto
   const isGameOpen =
