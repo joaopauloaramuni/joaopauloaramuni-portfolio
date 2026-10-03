@@ -1,20 +1,32 @@
 .ajuda-container {
   padding: 0 1.5rem;
-  line-height: 1.6;
+  font-size: 1rem; /* mesmo tamanho do texto das boas-vindas */
+  line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 
+.ajuda-titulo {
+  margin: 0 0 0.5rem;
+}
+
+/* Duas colunas alinhadas: a primeira tem a largura do maior comando e a
+   segunda fica com o resto. Cada comando ocupa uma linha só. */
+.ajuda-lista {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 2ch;
+  row-gap: 0.1rem;
+  align-items: baseline;
+}
+
+/* O item some do layout e os filhos viram células da grade */
 .ajuda-item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem; /* espaço entre alias e descrição */
+  display: contents;
 }
 
 .ajuda-aliases {
   color: var(--accent);
-  font-size: 1.2rem;
-  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .ajuda-aliases-symbol {
@@ -24,17 +36,16 @@
 .ajuda-description {
   margin: 0;
   color: var(--text-muted);
-  font-size: 1.1rem;
 }
 
 .ajuda-dicas {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .ajuda-dicas p {
-  margin: 0.2rem 0;
+  margin: 0.1rem 0;
   overflow-wrap: anywhere; /* o link de exemplo não estoura no celular */
 }
 
@@ -42,25 +53,48 @@
   color: var(--accent);
 }
 
+/* Telas estreitas: sem colunas. Comando e descrição seguem na mesma linha
+   e quebram juntos, o que gasta bem menos altura que um embaixo do outro. */
 @media (max-width: 768px) {
-  .ajuda-aliases {
-    font-size: 1rem;
+  .ajuda-container {
+    padding: 0 0.5rem;
   }
 
-  .ajuda-description,
+  .ajuda-lista {
+    display: block;
+  }
+
+  /* A fonte fica no item (e não só nos filhos) para a altura da linha
+     acompanhar o texto menor */
+  .ajuda-item {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+  }
+
+  .ajuda-aliases,
+  .ajuda-description {
+    display: inline;
+  }
+
+  .ajuda-aliases {
+    font-size: 1.1em;
+    white-space: normal;
+    margin-right: 1ch;
+  }
+
   .ajuda-dicas {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .ajuda-aliases {
-    font-size: 0.9rem;
+  .ajuda-container {
+    padding: 0;
   }
 
-  .ajuda-description,
+  .ajuda-item,
   .ajuda-dicas {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
   }
 }
-

@@ -11,6 +11,7 @@ import {
   IoLogoGithub,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
+import { ARAMUNI_ASCII } from "../data/brandData";
 import "./BoasVindas.css";
 
 const BoasVindas = () => {
@@ -22,16 +23,7 @@ const BoasVindas = () => {
 
   return (
     <div className="welcome-container">
-      <pre className="aramuni-ascii">
-{`
- █████╗ ██████╗  █████╗ ███╗   ███╗██╗   ██╗███╗   ██╗██╗
-██╔══██╗██╔══██╗██╔══██╗████╗ ████║██║   ██║████╗  ██║██║
-███████║██████╔╝███████║██╔████╔██║██║   ██║██╔██╗ ██║██║
-██╔══██║██╔══██╗██╔══██║██║╚██╔╝██║██║   ██║██║╚██╗██║██║
-██║  ██║██║  ██║██║  ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝
-`}
-      </pre>
+      <pre className="aramuni-ascii">{ARAMUNI_ASCII}</pre>
       {/* key muda quando o idioma muda, forçando recriação */}
       <TypeAnimation
         key={lang}

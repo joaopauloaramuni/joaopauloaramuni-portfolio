@@ -3,6 +3,9 @@
    ---------------------------------------------------------------------
    • Dark é o padrão (:root) e mantém as cores originais do site.
    • Light só sobrescreve os valores, ativado por <html data-theme="light">.
+   • Os dois seletores também valem dentro da página: um elemento com
+     data-theme="dark" ou "light" usa as cores daquele tema (o comando
+     "design" usa isso para mostrar os dois temas lado a lado).
    • Os CSS dos componentes usam apenas var(--token); para ajustar uma cor,
      mude aqui e ela muda no site inteiro.
    • Importado em main.jsx antes de App.css.
@@ -11,7 +14,8 @@
      ColorMode.Light do react-terminal-ui.
    ===================================================================== */
 
-:root {
+:root,
+[data-theme="dark"] {
   color-scheme: dark;
 
   /* Fundos e superfícies */

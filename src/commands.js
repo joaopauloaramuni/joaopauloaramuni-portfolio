@@ -74,5 +74,9 @@ export const commandList = {
     name: 'guestbook',
     aliases: ['guest', 'book'],
     subcommands: ['add', 'list', 'help'],
-  }
+  },
+  design: {
+    name: 'design',
+    aliases: ['ds', 'designsystem'],
+  },
 };

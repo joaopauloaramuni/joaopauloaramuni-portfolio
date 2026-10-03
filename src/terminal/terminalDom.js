@@ -46,19 +46,30 @@ export function scrollTerminalToBottom() {
 // Leva a última linha de comando executada para o topo do terminal.
 // Usado nos links diretos: o visitante cai direto na saída do comando,
 // com as boas-vindas logo acima (é só rolar para cima).
+function scrollLastCommandToTopNow() {
+  const body = document.querySelector(TERMINAL_BODY);
+  if (!body) return;
+  const commands = body.querySelectorAll(
+    ":scope > .react-terminal-input:not(.react-terminal-active-input)"
+  );
+  const last = commands[commands.length - 1];
+  if (!last) return;
+  const paddingTop = parseFloat(getComputedStyle(body).paddingTop) || 0;
+  body.scrollTop +=
+    last.getBoundingClientRect().top -
+    body.getBoundingClientRect().top -
+    paddingTop;
+}
+
 export function scrollLastCommandToTop() {
-  afterPaint(() => {
-    const body = document.querySelector(TERMINAL_BODY);
-    if (!body) return;
-    const commands = body.querySelectorAll(
-      ":scope > .react-terminal-input:not(.react-terminal-active-input)"
-    );
-    const last = commands[commands.length - 1];
-    if (!last) return;
-    const paddingTop = parseFloat(getComputedStyle(body).paddingTop) || 0;
-    body.scrollTop +=
-      last.getBoundingClientRect().top -
-      body.getBoundingClientRect().top -
-      paddingTop;
-  });
+  afterPaint(scrollLastCommandToTopNow);
+}
+
+// Depois do Enter, a react-terminal-ui espera 500ms e rola até o input
+// (scrollIntoView). Numa saída longa isso joga o visitante para o fim dela;
+// rolamos de novo logo depois da lib para o comando continuar no topo.
+const LIB_ENTER_SCROLL_MS = 500;
+export function keepLastCommandAtTop() {
+  scrollLastCommandToTop();
+  setTimeout(scrollLastCommandToTopNow, LIB_ENTER_SCROLL_MS + 1);
 }

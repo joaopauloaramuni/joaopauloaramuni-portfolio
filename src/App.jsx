@@ -9,6 +9,7 @@ import "./App.css";
 import { commandList } from "./commands";
 import useTerminalKeys from "./terminal/useTerminalKeys";
 import {
+  keepLastCommandAtTop,
   scrollLastCommandToTop,
   scrollTerminalToBottom,
 } from "./terminal/terminalDom";
@@ -29,6 +30,7 @@ import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
 import LivroVisitas from "./components/LivroVisitas";
 import Neofetch from "./components/Neofetch";
+import DesignSystem from "./components/DesignSystem";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
@@ -241,6 +243,11 @@ function App() {
           break;
         case "neofetch":
           response = <Neofetch />;
+          break;
+        case "design":
+          response = <DesignSystem />;
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          keepLastCommandAtTop();
           break;
         case "contato":
           response = <Contato onExit={exitComponent} />;

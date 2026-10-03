@@ -8,19 +8,22 @@ const Ajuda = () => {
   const exampleLink = `${window.location.origin}/${t("ajuda.dicas.link_exemplo")}`;
   return (
     <div className="ajuda-container">
-      <p>{t("ajuda.titulo")}</p>
-      {Object.values(commandList).map((cmd, index) => {
-        const allAliases = [cmd.name, ...cmd.aliases].join(" | ");
-        return (
-          <div key={`help-${index}`} className="ajuda-item">
-            <div className="ajuda-aliases">
-              <span className="ajuda-aliases-symbol">&gt;</span>
-              <span>{allAliases}</span>
+      <p className="ajuda-titulo">{t("ajuda.titulo")}</p>
+      {/* Tabela de duas colunas (comando | descrição), como um --help */}
+      <div className="ajuda-lista">
+        {Object.values(commandList).map((cmd, index) => {
+          const allAliases = [cmd.name, ...cmd.aliases].join(" | ");
+          return (
+            <div key={`help-${index}`} className="ajuda-item">
+              <div className="ajuda-aliases">
+                <span className="ajuda-aliases-symbol">&gt;</span>
+                <span>{allAliases}</span>
+              </div>
+              <span className="ajuda-description">- {t(`ajuda.${cmd.name}.desc`)}</span>
             </div>
-            <span className="ajuda-description">- {t(`ajuda.${cmd.name}.desc`)}</span>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
       {/* Atalhos do terminal e link direto (?cmd=) */}
       <div className="ajuda-dicas">

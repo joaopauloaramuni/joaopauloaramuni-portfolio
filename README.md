@@ -32,6 +32,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
+* 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
@@ -428,6 +429,7 @@ A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas
 - Para ajustar uma cor, altere o token em `src/theme/theme.css` e ela muda no site inteiro.
 - Ao criar um componente novo, use os tokens em vez de cores fixas, inclusive em estilos inline: `style={{ color: "var(--accent)" }}`.
 - Se criar um token novo, defina-o em `:root` e, caso ele precise de outro valor no tema claro, também em `[data-theme="light"]`.
+- Para o token aparecer no comando `design`, adicione o nome dele no grupo certo em `src/data/designSystemData.js` e a descrição em `design.tokens` no `i18n.js`. O valor não precisa ser repetido: ele é lido do `theme.css`.
 
 ### 🧪 Testando localmente
 
@@ -438,6 +440,58 @@ localStorage.removeItem("aramuni-theme");
 ```
 
 Depois é só recarregar a página: o portfólio volta a abrir no tema padrão (escuro).
+
+-----
+
+## 🎨 Design system
+
+O comando `design` (ou `ds`, `designsystem`) mostra, dentro do próprio terminal, as decisões visuais do portfólio: a marca, as cores, as fontes, os espaçamentos, os raios e os breakpoints. Ele também funciona por link direto: [aramuni.dev/?cmd=design](https://aramuni.dev/?cmd=design).
+
+| Seção | O que mostra |
+|:--|:--|
+| 🏷️ Marca | Logo (`aramunilogo.png`), banner ASCII da tela de boas-vindas e a janela do terminal nos dois temas |
+| 🌈 Escala cromática | Todas as cores sólidas dos dois temas, agrupadas por família e ordenadas da mais escura para a mais clara |
+| 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos e ícones calculado pelo WCAG |
+| 🔤 Tipografia | Fira Code e JetBrains Mono, pilhas de fontes, regras e a escala de tamanhos |
+| 📏 Espaçamento | Os valores de padding, margin e gap mais usados nos componentes |
+| ⬜ Raios | Os arredondamentos e onde aparece cada um |
+| 📱 Breakpoints | As larguras em que o layout se adapta |
+
+### 📂 Arquivos
+
+```texto
+src/
+  App.jsx                    → comando "design"
+  commands.js                → registro do comando (aliases "ds" e "designsystem")
+  i18n.js                    → textos do design system (pt/en)
+  data/
+    designSystemData.js      → grupos de tokens, fontes, escala de tamanhos, espaçamentos, raios e breakpoints
+    brandData.js             → banner ASCII, logo, prompt e cores dos botões da janela
+  theme/
+    theme.css                → tokens de cor (fonte da verdade das cores)
+    colorUtils.js            → normaliza cores, calcula contraste e agrupa por família
+  components/
+    DesignSystem.jsx         → saída do comando
+    DesignSystem.css         → estilos (só usa var(--token))
+```
+
+### ⚙️ Como funciona
+
+As cores não são repetidas no design system: o componente lê os valores direto do `theme.css` enquanto a página roda. Para isso, ele renderiza duas "sondas" invisíveis, uma com `data-theme="dark"` e outra com `data-theme="light"`, e lê os tokens de cada uma com `getComputedStyle`. Como o `theme.css` declara os tokens em `:root, [data-theme="dark"]` e em `[data-theme="light"]`, qualquer elemento com esse atributo usa as cores daquele tema, mesmo com a página no outro. É assim que as amostras mostram os dois temas lado a lado.
+
+```css
+/* src/theme/theme.css (trecho) */
+:root,
+[data-theme="dark"] {
+  --accent: #00ff9d;
+}
+
+[data-theme="light"] {
+  --accent: #00663f;
+}
+```
+
+O contraste segue a fórmula do WCAG 2: texto precisa de 4.5:1 (AA) e ícones, de 3:1. Se uma cor mudar no `theme.css`, a amostra, o valor e o selo de contraste mudam juntos.
 
 -----
 
