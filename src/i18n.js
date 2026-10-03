@@ -14,6 +14,14 @@ const resources = {
         ativar_claro: "Switch to light theme",
         ativar_escuro: "Switch to dark theme",
       },
+      neofetch: {
+        comandos: "commands",
+        claro: "Light",
+        escuro: "Dark",
+        cpu: "Software Engineer (16 coffee cores)",
+        time_label: "Team",
+        logo_alt: "Atlético Mineiro crest in braille characters",
+      },
       boot: {
         cpu: "Detecting CPU: Software Engineer (16 coffee cores)",
         graduacao: "Started Undergraduate in Computer Science",
@@ -164,6 +172,7 @@ const resources = {
         wakatime: {
           desc: "Shows how much time I spent coding and in which languages.",
         },
+        neofetch: { desc: "Shows system info with the Galo crest, neofetch style." },
         curriculo: {
           desc: "Displays my resume with PDF preview.",
         },
@@ -853,6 +862,14 @@ const resources = {
         ativar_claro: "Ativar tema claro",
         ativar_escuro: "Ativar tema escuro",
       },
+      neofetch: {
+        comandos: "comandos",
+        claro: "Claro",
+        escuro: "Escuro",
+        cpu: "Engenheiro de Software (16 núcleos de café)",
+        time_label: "Time",
+        logo_alt: "Escudo do Atlético Mineiro em caracteres braille",
+      },
       boot: {
         cpu: "Detectando CPU: Engenheiro de Software (16 núcleos de café)",
         graduacao: "Started Graduação em Ciência da Computação",
@@ -1002,6 +1019,9 @@ const resources = {
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         wakatime: {
           desc: "Mostra quanto tempo passei programando e em quais linguagens.",
+        },
+        neofetch: {
+          desc: "Mostra as informações do sistema com o escudo do Galo, no estilo neofetch.",
         },
         curriculo: {
           desc: "Exibe meu currículo com visualização em PDF.",

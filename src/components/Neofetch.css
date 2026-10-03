@@ -1,0 +1,80 @@
+/* Saída do comando neofetch: logo à esquerda, informações à direita.
+   Em telas estreitas o flex-wrap joga as informações para baixo da logo. */
+.neofetch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem 2.5rem;
+  padding: 0.5rem 1rem 1rem;
+  color: var(--text);
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* FiraCode e JetBrainsMono não têm braille: as fontes abaixo têm,
+   e o line-height fixo evita espaços entre as linhas da logo */
+.neofetch-logo {
+  font-family: "DejaVu Sans Mono", Menlo, "Segoe UI Symbol", "Apple Braille",
+    monospace;
+  font-size: clamp(10px, 2.6vw, 16px);
+  line-height: 1.15;
+  letter-spacing: 0;
+  white-space: pre;
+  color: var(--text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.neofetch-info {
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.neofetch-info p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.neofetch-accent {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.neofetch-separator {
+  color: var(--text-muted);
+}
+
+.neofetch-colors {
+  margin-top: 1rem;
+}
+
+.neofetch-colors-row {
+  display: flex;
+}
+
+.neofetch-block {
+  width: 2.25rem;
+  height: 1.25rem;
+  background: var(--block);
+}
+
+/* Primeira fileira: as mesmas cores, mais escuras (como as cores "normais"
+   x "bright" do terminal) */
+.neofetch-block--dark {
+  background: color-mix(in srgb, var(--block) 65%, black);
+}
+
+@media (max-width: 480px) {
+  .neofetch {
+    padding: 0.5rem 0.25rem 1rem;
+  }
+
+  .neofetch-info {
+    font-size: 0.85rem;
+  }
+
+  .neofetch-block {
+    width: 1.75rem;
+    height: 1rem;
+  }
+}

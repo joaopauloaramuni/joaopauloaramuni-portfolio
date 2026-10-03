@@ -28,6 +28,7 @@ import Recomendacoes from "./components/Recomendacoes";
 import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
 import LivroVisitas from "./components/LivroVisitas";
+import Neofetch from "./components/Neofetch";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
@@ -233,6 +234,9 @@ function App() {
           break;
         case "wakatime":
           response = <WakaTime />;
+          break;
+        case "neofetch":
+          response = <Neofetch />;
           break;
         case "contato":
           response = <Contato onExit={exitComponent} />;

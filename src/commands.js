@@ -62,6 +62,10 @@ export const commandList = {
     name: 'wakatime',
     aliases: ['time'],
   },
+  neofetch: {
+    name: 'neofetch',
+    aliases: ['fetch', 'galo'],
+  },
   game: {
     name: 'game',
     aliases: ['araplane', 'aragame'],
