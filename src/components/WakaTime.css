@@ -25,6 +25,15 @@
   color: var(--text);
 }
 
+/* Sonda invisível: só serve para ler os tokens do tema atual */
+.wakatime-probe {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* Largura dos dois cards, centralizada como as outras molduras; o rodapé de
    estilos fica embaixo. margin auto (e não justify-content: center) para não
    cortar o lado esquerdo quando a tela for mais estreita que os cards. */

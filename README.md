@@ -960,7 +960,7 @@ O comando `wakatime` tem quatro estilos, no mesmo formato do `skills`:
 | `wakatime` ou `wakatime --terminal` | Saída estilo CLI com barras em blocos para linguagens, editores, categorias e sistemas operacionais (padrão) |
 | `wakatime --grade` (`--grid`) | Indicadores (total, média diária, dias ativos e editor principal) e um card com anel de progresso por linguagem |
 | `wakatime --lista` (`--list`) | Barra com a fatia de cada linguagem e ranking com o logo e o tempo de cada uma |
-| `wakatime --cards` | Os dois cards de imagem do [helio-github-stats](https://helio-github-stats.vercel.app) |
+| `wakatime --cards` | Os dois cards de imagem do [helio-github-stats](https://helio-github-stats.vercel.app), nas cores do tema do portfólio (`--surface`, `--accent`, `--text` e `--border`): trocam junto com `tema claro` / `tema escuro` |
 
 Os três primeiros leem a rota pública `GET /api/v1/users/:usuario/stats/all_time` da [API do WakaTime](https://wakatime.com/developers). Ela **não precisa de chave** (basta o perfil estar público) e traz o total, a média diária, os dias ativos e o tempo por linguagem, editor, categoria e sistema operacional.
 

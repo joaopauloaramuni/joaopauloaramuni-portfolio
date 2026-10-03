@@ -1,4 +1,11 @@
-import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { FiActivity, FiCalendar, FiClock, FiCode } from "react-icons/fi";
 import WAKATIME_CONFIG from "../config/wakaTimeConfig";
@@ -21,6 +28,8 @@ import {
   isLastTerminalOutput,
   scrollLastCommandToTop,
 } from "../terminal/terminalDom";
+import { useTheme } from "../theme/themeContext";
+import { toHex } from "../theme/colorUtils";
 import SkinsFooter from "./SkinsFooter";
 import "./WakaTime.css";
 
@@ -29,29 +38,73 @@ const { USERNAME, LIMITS, PROFILE_URL } = WAKATIME_CONFIG;
 /* =====================================================================
    wakatime --cards: os dois cards de imagem (helio-github-stats)
    ===================================================================== */
-const cardUrl = (layout, langsCount) =>
+
+// Cores do card → token do theme.css. A imagem é gerada no servidor do
+// helio-github-stats, então não enxerga var(--token): lemos o valor de cada
+// token no tema atual e mandamos como hex na URL (sem o "#").
+const CARD_COLORS = {
+  bg_color: "--surface",
+  title_color: "--accent",
+  text_color: "--text",
+  icon_color: "--accent",
+  border_color: "--border",
+};
+
+const readCardColors = (element) => {
+  const style = getComputedStyle(element);
+  return Object.entries(CARD_COLORS)
+    .map(([param, token]) => {
+      const hex = toHex(style.getPropertyValue(token).trim());
+      return hex ? `&${param}=${hex.slice(1)}` : "";
+    })
+    .join("");
+};
+
+const cardUrl = (layout, langsCount, colors) =>
   `https://helio-github-stats.vercel.app/api/wakatime?username=${USERNAME}` +
   `&custom_title=WakaTime+Stats&card_width=466&line_height=25&layout=${layout}` +
-  `&display_format=time&disable_animations=false&langs_count=${langsCount}`;
+  `&display_format=time&disable_animations=false&langs_count=${langsCount}` +
+  `&border_radius=10${colors}`;
 
 function WakaTimeCards() {
+  const { theme } = useTheme();
+  const probe = useRef(null);
+  const [colors, setColors] = useState(null);
+
+  // Lê as cores antes da primeira pintura (a imagem já nasce no tema certo)
+  // e de novo a cada "tema claro/escuro": os cards trocam junto com o site
+  useLayoutEffect(() => {
+    setColors(readCardColors(probe.current));
+  }, [theme]);
+
   return (
     <div className="wakatime-container">
+      {/* Sonda invisível com o tema atual, só para ler os tokens (como no design) */}
+      <span
+        ref={probe}
+        data-theme={theme}
+        className="wakatime-probe"
+        aria-hidden="true"
+      />
       <div className="wakatime-cards">
         {/* Lado a lado no desktop; um embaixo do outro quando não couber */}
         <div className="wakatime-cards-imgs">
-          <img
-            src={cardUrl("compact", 22)}
-            alt="WakaTime Stats"
-            width="466"
-            loading="lazy"
-          />
-          <img
-            src={cardUrl("default", 12)}
-            alt="WakaTime Stats"
-            width="466"
-            loading="lazy"
-          />
+          {colors !== null && (
+            <>
+              <img
+                src={cardUrl("compact", 22, colors)}
+                alt="WakaTime Stats"
+                width="466"
+                loading="lazy"
+              />
+              <img
+                src={cardUrl("default", 12, colors)}
+                alt="WakaTime Stats"
+                width="466"
+                loading="lazy"
+              />
+            </>
+          )}
         </div>
         <SkinsFooter skins={SKINS} active="cards" namespace="wakatime" />
       </div>
