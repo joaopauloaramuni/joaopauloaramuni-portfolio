@@ -65,6 +65,13 @@ export function scrollLastCommandToTop() {
   afterPaint(scrollLastCommandToTopNow);
 }
 
+// A saída é a última do terminal (logo acima do input)? Serve para quem
+// carrega dados depois: só mexe no scroll se o visitante ainda estiver nela.
+export const isLastTerminalOutput = (element) =>
+  Boolean(
+    element?.nextElementSibling?.classList.contains("react-terminal-active-input")
+  );
+
 // Depois do Enter, a react-terminal-ui espera 500ms e rola até o input
 // (scrollIntoView). Numa saída longa isso joga o visitante para o fim dela;
 // rolamos de novo logo depois da lib para o comando continuar no topo.

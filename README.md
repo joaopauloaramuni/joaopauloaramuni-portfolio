@@ -25,9 +25,9 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
 * 🐙 **github:** Exibe meus repositórios usando a GitHub API.
-* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação.
+* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem três estilos: `skills --terminal` (padrão), `skills --cards` e `skills --lista`.
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
-* ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens.
+* ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
@@ -414,12 +414,12 @@ const { theme, setTheme, toggleTheme } = useTheme();
 |:--|:--|:--|:--|
 | `--bg-page` | `#1a202c` | `#cfcfcf` | Fundo da página e trilho da scrollbar |
 | `--bg-terminal` | `#252a33` | `#dddddd` | Fundo do boot, igual ao do terminal em cada `ColorMode` |
-| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências e projetos |
+| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências, projetos, habilidades e WakaTime |
 | `--text` | `#e2e8f0` | `#1a1e24` | Texto principal |
 | `--text-muted` | `#a0aec0` | `#4a5568` | Texto secundário e ícones do seletor |
 | `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
 | `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" |
-| `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot |
+| `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot e erro do WakaTime |
 | `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot |
 
 A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
@@ -515,7 +515,7 @@ src/
     useTerminalKeys.js   → hook do histórico (↑/↓) e do autocomplete (Tab)
     autocomplete.js      → função pura que decide o que completar
     terminalDom.js       → escreve no input da lib e controla o scroll
-  commands.js            → campo "subcommands" (tema e guestbook) usado pelo Tab
+  commands.js            → campo "subcommands" (tema, guestbook, skills e wakatime) usado pelo Tab
   App.jsx                → liga o hook, executa o ?cmd= e lista as opções do Tab
   main.jsx               → envolve o App com o BrowserRouter
   i18n.js                → lê o ?lang= e traz as dicas do comando "ajuda"
@@ -948,6 +948,79 @@ const mappedRepos = data
 ---
 
 ✅ Pronto! Agora seu portfolio consegue buscar e exibir seus repositórios públicos usando a GitHub API.
+
+-----
+
+## ⏱️ Guia de configuração da WakaTime API
+
+O comando `wakatime` tem quatro estilos, no mesmo formato do `skills`:
+
+| Comando | O que mostra |
+|:--|:--|
+| `wakatime` ou `wakatime --terminal` | Saída estilo CLI com barras em blocos para linguagens, editores, categorias e sistemas operacionais (padrão) |
+| `wakatime --grade` (`--grid`) | Indicadores (total, média diária, dias ativos e editor principal) e um card com anel de progresso por linguagem |
+| `wakatime --lista` (`--list`) | Barra com a fatia de cada linguagem e ranking com o logo e o tempo de cada uma |
+| `wakatime --cards` | Os dois cards de imagem do [helio-github-stats](https://helio-github-stats.vercel.app) |
+
+Os três primeiros leem a rota pública `GET /api/v1/users/:usuario/stats/all_time` da [API do WakaTime](https://wakatime.com/developers). Ela **não precisa de chave** (basta o perfil estar público) e traz o total, a média diária, os dias ativos e o tempo por linguagem, editor, categoria e sistema operacional.
+
+> ⚠️ Para quem não está logado, essa rota é mais enxuta que a `users/current`: não vem `start`, `end`, `timezone` nem `best_day` (a data de início sai do texto `human_readable_range`, ex.: `"since Sep 6 2022"`). Outros períodos (`last_7_days`, `last_year`) e os `insights` respondem `400`/`401` para visitantes, então os estilos usam só o `all_time`. Para conferir o que um visitante recebe, teste numa janela anônima.
+
+### 1️⃣ Deixar o perfil público
+
+Em [wakatime.com/settings/profile](https://wakatime.com/settings/profile), marque as opções para mostrar o tempo de código e as linguagens, editores, categorias e sistemas operacionais. Para conferir, abra no navegador:
+
+```
+https://wakatime.com/api/v1/users/<seu-usuario>/stats/all_time
+```
+
+> ⚠️ Não use a rota `users/current?api_key=...` no front-end: a chave do WakaTime dá acesso de escrita à sua conta, e tudo que o Vite embute no build fica visível para qualquer visitante.
+
+### 2️⃣ Por que existe um proxy
+
+A API do WakaTime não envia o cabeçalho `Access-Control-Allow-Origin`, então o navegador bloqueia (CORS) qualquer `fetch` feito direto do portfólio. Por isso o front chama um caminho do próprio site, `/api/wakatime/...`, e quem repassa para o WakaTime é:
+
+- **`npm run dev` e `npm run preview`:** o `server.proxy` do `vite.config.js`;
+- **Vercel:** o `rewrite` do `vercel.json`.
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/api/wakatime/:path*",
+      "destination": "https://wakatime.com/api/v1/users/aramuni/:path*"
+    }
+  ]
+}
+```
+
+O destino já fixa o usuário, então o proxy só serve para os seus dados públicos.
+
+### 3️⃣ Trocar para o seu usuário
+
+1. Em `src/config/wakaTimeConfig.js`, troque `USERNAME` e `PROFILE_URL` (o `vite.config.js` lê esse arquivo).
+2. No `vercel.json`, troque `aramuni` no `destination`.
+
+No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo mostra (`LIMITS`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
+
+### 📂 Arquivos
+
+```text
+vercel.json                    → rewrite /api/wakatime → API do WakaTime (produção)
+vite.config.js                 → o mesmo proxy no npm run dev / preview
+src/
+  config/wakaTimeConfig.js     → usuário, período, limites de cada estilo
+  lib/wakatime.js              → busca (com cache), normaliza e formata os dados
+  data/wakaTimeSkins.js        → estilos e nomes aceitos (PT e EN)
+  data/wakaTimeLanguages.js    → ícone e cores de cada linguagem
+  terminal/parseSkin.js        → lê "--estilo" (compartilhado com o skills)
+  components/WakaTime.jsx      → os quatro estilos (terminal é o padrão)
+  components/SkinsFooter.jsx   → rodapé "Estilos:" (compartilhado com o skills)
+```
+
+> 🐳 No container do `Dockerfile` (NGINX), o caminho `/api/wakatime` não existe: os estilos `--terminal` (inclusive o `wakatime` sem opção), `--grade` e `--lista` mostram uma mensagem de erro e o `wakatime --cards` continua funcionando. Para usar os três, adicione um `location /api/wakatime/` com `proxy_pass https://wakatime.com/api/v1/users/<seu-usuario>/;` na configuração do NGINX.
+
+✅ Pronto! A busca acontece uma vez por visita: trocar de estilo reaproveita os dados.
 
 -----
 

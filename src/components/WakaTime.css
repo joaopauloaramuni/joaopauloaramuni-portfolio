@@ -1,3 +1,23 @@
+/* =====================================================================
+   WAKATIME — quatro estilos, escolhidos pelo comando:
+     wakatime / wakatime --terminal   resumo e barras em blocos, estilo CLI (padrão)
+     wakatime --grade                 indicadores + cards com anel de progresso
+     wakatime --lista                 fatia de cada linguagem + ranking em barras
+     wakatime --cards                 os dois cards de imagem (helio-github-stats)
+   Os três primeiros usam a API pública do WakaTime. Cada item recebe, via
+   style inline (data/wakaTimeLanguages.js):
+     --lang       cor do logo
+     --lang-from  início do degradê (anel / barra)
+     --lang-to    fim do degradê
+     --i          posição na lista (atraso da animação de entrada)
+   No tema light, --lang-ink escurece a cor da marca para manter o
+   contraste (mesma regra das habilidades). Cores que já são tokens
+   (var(--text-muted), var(--accent)) vêm com --lang-ink pronto.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   wakatime --cards (layout original)
+   --------------------------------------------------------------------- */
 .wakatime-container {
   padding: 2rem 1.5rem;
   display: flex;
@@ -5,10 +25,647 @@
   color: var(--text);
 }
 
+/* Largura dos dois cards, centralizada como as outras molduras; o rodapé de
+   estilos fica embaixo. margin auto (e não justify-content: center) para não
+   cortar o lado esquerdo quando a tela for mais estreita que os cards. */
+.wakatime-cards {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.wakatime-cards-imgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.wakatime-cards-imgs img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wakatime-cards .skins-footer {
+  margin-top: 1rem;
+}
+
+/* ---------------------------------------------------------------------
+   Moldura dos estilos com dados (mesma das habilidades)
+   --------------------------------------------------------------------- */
+.wakatime-painel {
+  width: 50%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: var(--text);
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.wakatime-titulo {
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.wakatime-subtitulo {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.wakatime-subtitulo a {
+  color: var(--text-muted);
+  text-underline-offset: 3px;
+}
+
+.wakatime-subtitulo a:hover,
+.wakatime-subtitulo a:focus-visible {
+  color: var(--accent);
+}
+
+/* Carregando / calculando / erro */
+.wakatime-status {
+  margin: 1.5rem 0 0.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.wakatime-status.loading::after {
+  content: "▍";
+  margin-left: 0.25rem;
+  color: var(--accent);
+  animation: waka-blink 1s steps(1) infinite;
+}
+
+.wakatime-status.error {
+  color: var(--warn);
+}
+
+.waka-kpis,
+.waka-grid,
+.waka-list,
+.waka-term-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.waka-card,
+.waka-row,
+.waka-term-row {
+  --lang-ink: var(--lang);
+}
+
+[data-theme="light"] :is(.waka-card, .waka-row, .waka-term-row) {
+  --lang-ink: color-mix(in oklab, var(--lang) 58%, black);
+}
+
+.waka-name {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.waka-pct {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.resto .waka-name {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------------
+   wakatime --grade
+   --------------------------------------------------------------------- */
+.waka-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.waka-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: waka-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+.waka-kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.waka-kpi-label svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.waka-kpi-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.waka-kpi-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.waka-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.waka-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 1rem 0.75rem 0.9rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: waka-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 60ms + 120ms);
+}
+
+.waka-card:hover {
+  border-color: var(--lang-ink);
+  box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--lang) 55%, transparent);
+}
+
+.waka-card .waka-name {
+  max-width: 100%;
+}
+
+/* Anel de progresso: pathLength=100 faz o dashoffset ser a porcentagem */
+.waka-ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 0.35rem;
+}
+
+.waka-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* começa no topo */
+}
+
+.waka-ring circle {
+  fill: none;
+  stroke-width: 6;
+}
+
+.waka-ring-track {
+  stroke: var(--track);
+}
+
+.waka-ring-fill {
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: var(--offset);
+  animation: waka-ring 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 60ms + 250ms);
+}
+
+.waka-ring-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  font-size: 32px;
+  color: var(--lang-ink);
+  transition: transform 0.25s ease;
+}
+
+.waka-card:hover .waka-ring-icon {
+  transform: scale(1.12);
+}
+
+.waka-card-time {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.waka-card-pct {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   wakatime --lista
+   --------------------------------------------------------------------- */
+.waka-resumo {
+  margin: 0 0 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.waka-resumo strong {
+  color: var(--text);
+}
+
+/* Barra única: cada fatia cresce na proporção do tempo (flex-grow) */
+.waka-stack {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  margin: 0 0.75rem 1.25rem;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Mesma cor das barras de baixo (cor da marca), nos dois temas */
+.waka-stack-seg {
+  flex-basis: 0;
+  min-width: 3px;
+  background: var(--lang);
+  transform-origin: left;
+  animation: waka-grow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+.waka-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.waka-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.waka-row:hover {
+  background: color-mix(in srgb, var(--lang) 8%, transparent);
+  border-color: color-mix(in srgb, var(--lang) 30%, transparent);
+}
+
+.waka-tile {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 22px;
+  color: var(--lang-ink);
+  background: color-mix(in srgb, var(--lang) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--lang) 30%, transparent);
+}
+
+.waka-row-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.waka-row-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.waka-row-time {
+  margin-left: auto;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.waka-row .waka-pct {
+  width: 3.6rem;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+/* Comprimento proporcional ao tempo; a maior linguagem ocupa tudo */
+.waka-bar {
+  width: var(--rel);
+  min-width: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lang-from), var(--lang-to));
+  transform-origin: left;
+  animation: waka-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+/* ---------------------------------------------------------------------
+   wakatime --terminal
+   --------------------------------------------------------------------- */
+.waka-term {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: "FiraCode", "JetBrainsMono", monospace;
+}
+
+/* Resumo no estilo neofetch: chave alinhada à esquerda, valor ao lado */
+.waka-term-info {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0 0.6rem;
+}
+
+.waka-term-kv {
+  display: contents;
+}
+
+.waka-term-kv dt {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.waka-term-kv dt::after {
+  content: ":";
+  color: var(--text-dim);
+}
+
+.waka-term-kv dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Uma grade para todas as seções (subgrid): ícone, nome, barra, tempo, % */
+.waka-term-table {
+  display: grid;
+  grid-template-columns: 20px max-content minmax(0, 1fr) max-content max-content;
+  column-gap: 0.9rem;
+  row-gap: 1.25rem;
+}
+
+.waka-term-section,
+.waka-term-list,
+.waka-term-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.waka-term-section {
+  row-gap: 0.35rem;
+}
+
+.waka-term-heading {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.waka-term-heading::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+.waka-term-list {
+  row-gap: 0.1rem;
+}
+
+.waka-term-row {
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.waka-term-row:hover {
+  background: color-mix(in srgb, var(--lang) 9%, transparent);
+}
+
+.waka-term-icon {
+  font-size: 18px;
+  color: var(--lang-ink);
+}
+
+.waka-term-bullet {
+  text-align: center;
+  color: var(--text-dim);
+}
+
+.waka-term-time {
+  text-align: right;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.waka-term-row .waka-pct {
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.waka-term-bar {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  height: 12px;
+}
+
+.waka-seg {
+  border-radius: 2px;
+  background: var(--track);
+}
+
+/* Cada bloco mostra a sua fatia do degradê da marca */
+.waka-seg.on {
+  background: linear-gradient(90deg, var(--lang-from), var(--lang-to));
+  background-size: 2000% 100%;
+  background-position: calc(var(--s) * 100% / 19) 0;
+  animation: waka-seg 0.25s ease both;
+  animation-delay: calc(var(--i) * 50ms + var(--s) * 25ms);
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes waka-ring {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes waka-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes waka-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes waka-seg {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes waka-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Responsividade e acessibilidade
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .wakatime-painel {
+    width: 70%;
+  }
+}
+
+@media (max-width: 900px) {
+  .wakatime-painel {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+
+  /* Terminal: barra desce para a linha de baixo */
+  .waka-term-table {
+    grid-template-columns: 20px minmax(0, 1fr) max-content max-content;
+  }
+
+  .waka-term-row {
+    row-gap: 0.4rem;
+  }
+
+  .waka-term-bar {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+}
+
 @media (max-width: 768px) {
   .wakatime-container {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .waka-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .waka-card {
+    padding: 0.9rem 0.5rem;
+  }
+
+  .waka-ring {
+    width: 72px;
+    height: 72px;
+  }
+
+  .waka-ring-icon {
+    font-size: 28px;
+  }
+
+  .waka-kpis {
+    gap: 0.5rem;
+  }
+
+  .waka-kpi {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .waka-kpi-value {
+    font-size: 1.05rem;
+  }
+
+  .waka-row {
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .waka-tile {
+    width: 34px;
+    height: 34px;
+    font-size: 19px;
+  }
+
+  .waka-row .waka-pct {
+    display: none;
+  }
+
+  .waka-stack {
+    margin-inline: 0;
+  }
+
+  /* Terminal: sem a coluna de %, o nome ganha espaço (a barra mostra a fatia) */
+  .waka-term-table {
+    grid-template-columns: 20px minmax(0, 1fr) max-content;
+    column-gap: 0.6rem;
+  }
+
+  .waka-term-row .waka-pct {
+    display: none;
+  }
+
+  .waka-term-kv dd {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waka-kpi,
+  .waka-card,
+  .waka-ring-fill,
+  .waka-stack-seg,
+  .waka-bar,
+  .waka-seg.on,
+  .wakatime-status.loading::after {
+    animation: none;
+  }
+
+  .waka-card:hover .waka-ring-icon {
+    transform: none;
   }
 }

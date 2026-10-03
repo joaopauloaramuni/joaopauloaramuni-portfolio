@@ -1,8 +1,8 @@
 /* =====================================================================
    HABILIDADES — três estilos, escolhidos pelo comando:
-     skills / skills --cards   grid de cards com anel de progresso
-     skills --lista            lista com logo e barra em degradê
-     skills --terminal         barras em blocos, estilo CLI
+     skills / skills --terminal   barras em blocos, estilo CLI (padrão)
+     skills --cards               grid de cards com anel de progresso
+     skills --lista               lista com logo e barra em degradê
    Cada item recebe, via style inline (skillsData.js):
      --skill       cor do logo (versão da marca legível no fundo escuro)
      --skill-from  início do degradê (anel / barra)
@@ -63,28 +63,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Rodapé com os estilos disponíveis */
-.skills-skins {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  gap: 0.35rem 0.9rem;
-  margin: 1.5rem 0 0;
-  font-size: 0.8rem;
-  color: var(--text-dim);
-}
-
-.skills-skin {
-  font-family: inherit;
-  color: var(--text-dim);
-}
-
-.skills-skin.ativo {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
+/* O rodapé com os estilos disponíveis fica em SkinsFooter.css */
 
 /* ---------------------------------------------------------------------
    skills --cards

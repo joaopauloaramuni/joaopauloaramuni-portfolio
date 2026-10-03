@@ -1,10 +1,13 @@
+import { parseSkin } from "../terminal/parseSkin";
+
 // Estilos (skins) do comando "skills". Todas estas formas funcionam:
 //   skills --terminal   skills terminal   skills --skin terminal
 //   skills --skin=terminal
-// Sem opção, abre o estilo padrão.
+// Sem opção, abre o estilo terminal. A ordem abaixo é a do rodapé
+// "Estilos:" (o padrão vem primeiro), a mesma do comando "wakatime".
 
-export const SKINS = ["cards", "lista", "terminal"];
-export const DEFAULT_SKIN = "cards";
+export const SKINS = ["terminal", "cards", "lista"];
+export const DEFAULT_SKIN = "terminal";
 
 // Nomes aceitos (PT e EN) → estilo
 const SKIN_ALIASES = {
@@ -18,13 +21,5 @@ const SKIN_ALIASES = {
 
 // Recebe as palavras depois do comando e devolve o estilo,
 // ou null se a opção não existir (o App mostra a mensagem de uso)
-export function parseSkin(args) {
-  const words = args
-    .flatMap((arg) => arg.split("="))
-    .map((word) => word.replace(/^-+/, ""))
-    .filter((word) => word && word !== "skin");
-
-  if (words.length === 0) return DEFAULT_SKIN;
-  if (words.length > 1) return null;
-  return SKIN_ALIASES[words[0]] ?? null;
-}
+export const parseSkillSkin = (args) =>
+  parseSkin(args, SKIN_ALIASES, DEFAULT_SKIN);

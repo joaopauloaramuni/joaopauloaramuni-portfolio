@@ -1,0 +1,22 @@
+/* Rodapé com os estilos disponíveis de um comando (skills, wakatime) */
+.skins-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  margin: 1.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.skins-footer-skin {
+  font-family: inherit;
+  color: var(--text-dim);
+}
+
+.skins-footer-skin.ativo {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

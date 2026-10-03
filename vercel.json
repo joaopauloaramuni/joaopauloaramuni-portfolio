@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/api/wakatime/:path*",
+      "destination": "https://wakatime.com/api/v1/users/aramuni/:path*"
+    }
+  ]
+}

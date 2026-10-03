@@ -4,6 +4,7 @@ import { SKINS, DEFAULT_SKIN } from "../data/skillSkins";
 import { useTranslation } from "react-i18next";
 import { FaGithub } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
+import SkinsFooter from "./SkinsFooter";
 import "./Habilidades.css";
 
 // Faixa de nível exibida ao lado da porcentagem
@@ -114,7 +115,7 @@ function ListaSkill({ skill, index }) {
   );
 }
 
-/* ---------- skills --terminal: barra em blocos, estilo CLI ---------- */
+/* ---------- skills / skills --terminal (padrão): barra em blocos, estilo CLI ---------- */
 const SEGMENTS = 20;
 function TerminalSkill({ skill, index }) {
   const { t } = useTranslation();
@@ -173,18 +174,7 @@ export default function Habilidades({ skin = DEFAULT_SKIN }) {
       )}
 
       {/* Mostra os outros estilos, como a ajuda de um comando de terminal */}
-      <p className="skills-skins">
-        <span className="skills-skins-label">{t("habilidades.estilos")}</span>
-        {SKINS.map((name) => (
-          <code
-            key={name}
-            className={name === skin ? "skills-skin ativo" : "skills-skin"}
-            aria-current={name === skin ? "true" : undefined}
-          >
-            --{t(`habilidades.skins.${name}`)}
-          </code>
-        ))}
-      </p>
+      <SkinsFooter skins={SKINS} active={skin} namespace="habilidades" />
     </div>
   );
 }

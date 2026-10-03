@@ -35,7 +35,8 @@ import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "./theme/themeContext";
-import { parseSkin } from "./data/skillSkins";
+import { parseSkillSkin } from "./data/skillSkins";
+import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -207,7 +208,7 @@ function App() {
           break;
         case "habilidades": {
           // "skills --lista", "skills --terminal" ou "skills --skin=cards"
-          const skin = parseSkin(args.slice(1));
+          const skin = parseSkillSkin(args.slice(1));
           response = skin ? (
             <Habilidades skin={skin} />
           ) : (
@@ -246,9 +247,20 @@ function App() {
         case "spotify":
           response = <Spotify />;
           break;
-        case "wakatime":
-          response = <WakaTime />;
+        case "wakatime": {
+          // "wakatime" abre o estilo terminal; "--grade" e "--lista" também
+          // desenham os dados da API do WakaTime e "--cards" mostra as imagens
+          // (ver data/wakaTimeSkins.js)
+          const skin = parseWakaTimeSkin(args.slice(1));
+          if (!skin) {
+            response = <TerminalOutput>{t("wakatime.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <WakaTime skin={skin} />;
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          if (skin !== "cards") keepLastCommandAtTop();
           break;
+        }
         case "neofetch":
           response = <Neofetch />;
           break;

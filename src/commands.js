@@ -28,8 +28,8 @@ export const commandList = {
   habilidades: {
     name: 'habilidades',
     aliases: ['skills'],
-    // Estilos: skills --cards | --lista | --terminal (ver data/skillSkins.js)
-    subcommands: ['--cards', '--lista', '--list', '--terminal'],
+    // Estilos: skills --terminal | --cards | --lista (ver data/skillSkins.js)
+    subcommands: ['--terminal', '--cards', '--lista', '--list'],
   },
   limpar: {
     name: 'limpar',
@@ -63,6 +63,8 @@ export const commandList = {
   wakatime: {
     name: 'wakatime',
     aliases: ['time'],
+    // Estilos: wakatime --terminal | --grade | --lista | --cards (ver data/wakaTimeSkins.js)
+    subcommands: ['--terminal', '--grade', '--grid', '--lista', '--list', '--cards'],
   },
   neofetch: {
     name: 'neofetch',

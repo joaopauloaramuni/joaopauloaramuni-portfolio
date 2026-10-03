@@ -124,10 +124,11 @@ Alguns cuidados com as chaves:
 │   ├── i18n.js            → todos os textos, em PT e EN
 │   ├── components/        → um componente (.jsx + .css) por comando ou recurso
 │   ├── data/              → estrutura dos dados (projetos, experiências, prêmios...)
-│   ├── config/            → configuração do EmailJS e da GitHub API
-│   ├── lib/supabase.js    → cliente do Supabase (Livro de Visitas)
+│   ├── config/            → configuração do EmailJS, da GitHub API e do WakaTime
+│   ├── lib/               → cliente do Supabase (Livro de Visitas) e busca do WakaTime
 │   └── theme/             → tokens de cor, contexto e ThemeProvider
 ├── .github/workflows/     → workflow que mantém o Supabase ativo
+├── vercel.json            → rewrite que repassa /api/wakatime para a API do WakaTime
 ├── .env.example           → modelo das variáveis de ambiente
 ├── Dockerfile             → build com Node + NGINX (opcional)
 └── README.md              → documentação completa e guias de configuração
@@ -340,7 +341,8 @@ O que trocar para deixar o portfólio com a sua cara:
 | `src/config/gitHubApiConfig.js` | `USERNAME` do GitHub |
 | `src/components/Contato.jsx` | Links de LinkedIn, GitHub, e-mail, WhatsApp, Discord e Instagram |
 | `src/components/Calendly.jsx` | URL do seu Calendly |
-| `src/components/Spotify.jsx` e `WakaTime.jsx` | Seus usuários do Spotify/Last.fm e do WakaTime |
+| `src/components/Spotify.jsx` | Seus usuários do Spotify e do Last.fm |
+| `src/config/wakaTimeConfig.js` e `vercel.json` | Seu usuário do WakaTime (veja o guia da WakaTime API no README) |
 | `src/components/BoasVindas.jsx` e `BootSequence.jsx` | Arte ASCII, tela de boas-vindas e as linhas do boot (`BOOT_LINES`) |
 | `index.html` | Título da aba e favicon |
 | `.github/workflows/keep-supabase-awake.yml` | URL do seu projeto Supabase (e o secret `SUPABASE_API_KEY`) |

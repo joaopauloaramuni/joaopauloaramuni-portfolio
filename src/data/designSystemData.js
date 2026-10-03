@@ -146,13 +146,14 @@ export const radii = [
   { id: "r8", value: "8px" },
   { id: "r10", value: "10px" },
   { id: "r12", value: "12px" },
+  { id: "r14", value: "14px" },
   { id: "r20", value: "20px" },
   { id: "pill", value: "9999px" },
   { id: "circle", value: "50%" },
 ];
 
 export const breakpoints = [
-  { id: "bp1024", value: "1024px" },
+  { id: "bp1280", value: "1280px" },
   { id: "bp900", value: "900px" },
   { id: "bp768", value: "768px", main: true },
   { id: "bp500", value: "500px" },
