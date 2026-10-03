@@ -35,6 +35,7 @@ import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "./theme/themeContext";
+import { parseSkin } from "./data/skillSkins";
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -204,9 +205,16 @@ function App() {
         case "curriculo":
           response = <Curriculo />;
           break;
-        case "habilidades":
-          response = <Habilidades />;
+        case "habilidades": {
+          // "skills --lista", "skills --terminal" ou "skills --skin=cards"
+          const skin = parseSkin(args.slice(1));
+          response = skin ? (
+            <Habilidades skin={skin} />
+          ) : (
+            <TerminalOutput>{t("habilidades.uso")}</TerminalOutput>
+          );
           break;
+        }
         case "limpar":
           setTerminalLineData([]);
           return;

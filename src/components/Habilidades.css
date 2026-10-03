@@ -1,90 +1,467 @@
+/* =====================================================================
+   HABILIDADES — três estilos, escolhidos pelo comando:
+     skills / skills --cards   grid de cards com anel de progresso
+     skills --lista            lista com logo e barra em degradê
+     skills --terminal         barras em blocos, estilo CLI
+   Cada item recebe, via style inline (skillsData.js):
+     --skill       cor do logo (versão da marca legível no fundo escuro)
+     --skill-from  início do degradê (anel / barra)
+     --skill-to    fim do degradê
+     --level       porcentagem (ex.: 90%)
+     --i           posição na lista (atraso da animação de entrada)
+   No tema light, --skill-ink escurece a cor da marca para manter o
+   contraste sobre o fundo claro (JavaScript amarelo, React ciano etc.).
+   ===================================================================== */
+
 .habilidades-container {
   width: 50%;
   border: 2px solid var(--accent);
   border-radius: 10px;
   margin: 1rem auto;
   color: var(--text);
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 1.25rem;
 }
 
 .habilidades-titulo {
   color: var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.8rem;
   text-align: center;
 }
 
-/* Container de cada habilidade */
-.habilidade-sobre-container {
+.habilidades-vazio {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.skills-grid,
+.skills-list,
+.skills-term {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-card,
+.skill-row,
+.skill-term {
+  --skill-ink: var(--skill);
+}
+
+[data-theme="light"] :is(.skill-card, .skill-row, .skill-term) {
+  --skill-ink: color-mix(in oklab, var(--skill) 58%, black);
+}
+
+.skill-name {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.skill-pct {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Rodapé com os estilos disponíveis */
+.skills-skins {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  margin: 1.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.skills-skin {
+  font-family: inherit;
+  color: var(--text-dim);
+}
+
+.skills-skin.ativo {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------------------------------------------------------------------
+   skills --cards
+   --------------------------------------------------------------------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+/* Card inteiro é o link para o repositório */
+.skill-card-link {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.habilidade-info-container {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-}
-
-/* Link da habilidade com hover */
-.habilidade-nome a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--accent);
+  gap: 0.35rem;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1.1rem 0.75rem 1rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: inherit;
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: skill-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 60ms);
 }
 
-.habilidade-nome a:hover {
-  color: var(--accent-hover);
+.skill-card-link:hover,
+.skill-card-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--skill-ink);
+  box-shadow: 0 12px 24px -10px
+    color-mix(in srgb, var(--skill) 55%, transparent);
+  outline: none;
 }
 
-.habilidade-icone {
-  font-size: 18px;
-  color: var(--accent);
-  transition: color 0.3s ease, transform 0.3s ease;
+.skill-card-github {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 14px;
+  color: var(--text-dim);
+  opacity: 0.6;
+  transition: opacity 0.25s ease, color 0.25s ease;
 }
 
-.habilidade-nome a:hover .habilidade-icone {
-  color: var(--accent-hover);
+.skill-card-link:hover .skill-card-github,
+.skill-card-link:focus-visible .skill-card-github {
+  opacity: 1;
+  color: var(--skill-ink);
 }
 
-.habilidade-level {
-  font-weight: bold;
-  color: var(--accent);
+/* Anel de progresso: pathLength=100 faz o dashoffset ser a porcentagem */
+.skill-ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 0.35rem;
 }
 
-.habilidade-barra-fundo {
+.skill-ring-svg {
   width: 100%;
-  height: 12px;
-  background-color: var(--track);
-  border-radius: 6px;
+  height: 100%;
+  transform: rotate(-90deg); /* começa no topo */
+}
+
+.skill-ring circle {
+  fill: none;
+  stroke-width: 6;
+}
+
+.skill-ring-track {
+  stroke: var(--track);
+}
+
+.skill-ring-fill {
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: var(--offset);
+  animation: skill-ring 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 60ms + 150ms);
+}
+
+.skill-ring-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  font-size: 32px;
+  color: var(--skill-ink);
+  transition: transform 0.25s ease;
+}
+
+.skill-card-link:hover .skill-ring-icon {
+  transform: scale(1.12);
+}
+
+.skill-card-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------
+   skills --lista
+   --------------------------------------------------------------------- */
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.skill-row-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.skill-row-link:hover,
+.skill-row-link:focus-visible {
+  background: color-mix(in srgb, var(--skill) 8%, transparent);
+  border-color: color-mix(in srgb, var(--skill) 35%, transparent);
+  transform: translateX(4px);
+  outline: none;
+}
+
+.skill-tile {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 24px;
+  color: var(--skill-ink);
+  background: color-mix(in srgb, var(--skill) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--skill) 30%, transparent);
+}
+
+.skill-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.45rem;
+}
+
+.skill-head .skill-pct {
+  margin-left: auto;
+}
+
+.skill-badge {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  color: var(--skill-ink);
+  background: color-mix(in srgb, var(--skill) 12%, transparent);
+  white-space: nowrap;
+}
+
+.skill-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--track);
   overflow: hidden;
 }
 
-.habilidade-barra-progresso {
+.skill-fill {
+  width: var(--level);
   height: 100%;
-  background-color: var(--accent);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--skill-from), var(--skill-to));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--skill-to) 45%, transparent);
+  transform-origin: left;
+  animation: skill-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+.skill-go {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.skill-row-link:hover .skill-go,
+.skill-row-link:focus-visible .skill-go {
+  opacity: 1;
+  color: var(--skill-ink);
+}
+
+/* ---------------------------------------------------------------------
+   skills --terminal
+   --------------------------------------------------------------------- */
+.skills-term {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: "FiraCode", "JetBrainsMono", monospace;
+}
+
+.skill-term-link {
+  display: grid;
+  grid-template-columns: 22px 9.5rem 1fr 3.2rem 7.5rem;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
-  transition: width 0.6s ease;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-  .habilidade-sobre-container {
-    gap: 6px;
+.skill-term-link:hover,
+.skill-term-link:focus-visible {
+  background: color-mix(in srgb, var(--skill) 9%, transparent);
+  outline: none;
+}
+
+.skill-term-icon {
+  font-size: 20px;
+  color: var(--skill-ink);
+}
+
+.skill-term .skill-pct {
+  text-align: right;
+}
+
+.skill-term-bar {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  height: 14px;
+}
+
+.seg {
+  border-radius: 2px;
+  background: var(--track);
+}
+
+/* Cada bloco mostra a sua fatia do degradê da marca */
+.seg.on {
+  background: linear-gradient(90deg, var(--skill-from), var(--skill-to));
+  background-size: 2000% 100%;
+  background-position: calc(var(--s) * 100% / 19) 0;
+  animation: skill-seg 0.25s ease both;
+  animation-delay: calc(var(--i) * 60ms + var(--s) * 25ms);
+}
+
+.skill-term-level {
+  font-size: 0.8rem;
+  color: var(--skill-ink);
+  white-space: nowrap;
+}
+
+.skill-term-level::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes skill-ring {
+  from {
+    stroke-dashoffset: 100;
   }
 }
 
-@media (max-width: 768px) {
-  .habilidade-info-container {
-    font-size: 14px;
+@keyframes skill-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes skill-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes skill-seg {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Responsividade e acessibilidade
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .habilidades-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 900px) {
+  .habilidades-container {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
   }
 
-  .habilidade-barra-fundo {
-    height: 10px;
+  /* Terminal: barra desce para a linha de baixo */
+  .skill-term-link {
+    grid-template-columns: 20px 1fr 2.8rem;
+    row-gap: 0.4rem;
+  }
+
+  .skill-term-bar {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+
+  .skill-term-level {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .skill-card-link {
+    padding: 0.9rem 0.5rem;
+  }
+
+  .skill-ring {
+    width: 72px;
+    height: 72px;
+  }
+
+  .skill-ring-icon {
+    font-size: 28px;
+  }
+
+  .skill-card-meta {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .skill-badge {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card-link,
+  .skill-ring-fill,
+  .skill-fill,
+  .seg.on {
+    animation: none;
+  }
+
+  .skill-card-link:hover,
+  .skill-card-link:hover .skill-ring-icon,
+  .skill-row-link:hover {
+    transform: none;
   }
 }

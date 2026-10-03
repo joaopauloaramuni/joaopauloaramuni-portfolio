@@ -121,6 +121,16 @@ const resources = {
       },
       habilidades: {
         titulo: "Skills",
+        nenhuma: "No skills registered yet.",
+        nivel: {
+          avancado: "Advanced",
+          intermediario: "Intermediate",
+          basico: "Beginner",
+        },
+        verRepositorio: "View {{name}} repositories on GitHub",
+        estilos: "Styles:",
+        skins: { cards: "cards", lista: "list", terminal: "terminal" },
+        uso: "Usage: skills [--cards | --list | --terminal] (no option opens cards)",
       },
       calendly: {
         titulo: "Book a meeting via Calendly",
@@ -167,7 +177,7 @@ const resources = {
         premios: { desc: "Shows awards and recognitions." },
         projetos: { desc: "Displays my developed projects." },
         calendly: { desc: "Schedule a meeting with me via Calendly." },
-        habilidades: { desc: "Show my programming skills." },
+        habilidades: { desc: "Show my programming skills (skills --list | --terminal changes the style)." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
         wakatime: {
           desc: "Shows how much time I spent coding and in which languages.",
@@ -1154,6 +1164,16 @@ const resources = {
       },
       habilidades: {
         titulo: "Habilidades",
+        nenhuma: "Nenhuma habilidade cadastrada ainda.",
+        nivel: {
+          avancado: "Avançado",
+          intermediario: "Intermediário",
+          basico: "Básico",
+        },
+        verRepositorio: "Ver repositórios de {{name}} no GitHub",
+        estilos: "Estilos:",
+        skins: { cards: "cards", lista: "lista", terminal: "terminal" },
+        uso: "Uso: skills [--cards | --lista | --terminal] (sem opção, abre os cards)",
       },
       calendly: {
         titulo: "Agende uma reunião pelo Calendly",
@@ -1198,7 +1218,7 @@ const resources = {
         premios: { desc: "Exibe prêmios e reconhecimentos." },
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
         calendly: { desc: "Agende uma reunião comigo via Calendly." },
-        habilidades: { desc: "Exibe minhas habilidades em programação." },
+        habilidades: { desc: "Exibe minhas habilidades em programação (skills --lista | --terminal muda o estilo)." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         wakatime: {
           desc: "Mostra quanto tempo passei programando e em quais linguagens.",

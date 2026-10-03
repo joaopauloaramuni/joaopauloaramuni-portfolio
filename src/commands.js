@@ -28,6 +28,8 @@ export const commandList = {
   habilidades: {
     name: 'habilidades',
     aliases: ['skills'],
+    // Estilos: skills --cards | --lista | --terminal (ver data/skillSkins.js)
+    subcommands: ['--cards', '--lista', '--list', '--terminal'],
   },
   limpar: {
     name: 'limpar',
