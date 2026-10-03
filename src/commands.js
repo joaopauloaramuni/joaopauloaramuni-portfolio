@@ -1,3 +1,5 @@
+// Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
+// segunda palavra, ex.: "tema c" + Tab → "tema claro".
 export const commandList = {
   sobre: {
     name: 'sobre',
@@ -34,6 +36,7 @@ export const commandList = {
   tema: {
     name: 'tema',
     aliases: ['theme'],
+    subcommands: ['claro', 'escuro', 'light', 'dark'],
   },
   recomendacoes: {
     name: 'recomendacoes',
@@ -66,5 +69,6 @@ export const commandList = {
   guestbook: {
     name: 'guestbook',
     aliases: ['guest', 'book'],
+    subcommands: ['add', 'list', 'help'],
   }
 };

@@ -134,3 +134,11 @@ html {
     font-size: 0.65rem;
   }
 }
+
+/* Tab duplo: opções do autocomplete lado a lado, como as colunas do bash */
+.autocomplete-options {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 3ch;
+  color: var(--accent);
+}

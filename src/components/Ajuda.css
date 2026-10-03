@@ -27,12 +27,28 @@
   font-size: 1.1rem;
 }
 
+.ajuda-dicas {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.ajuda-dicas p {
+  margin: 0.2rem 0;
+  overflow-wrap: anywhere; /* o link de exemplo não estoura no celular */
+}
+
+.ajuda-dicas .ajuda-aliases-symbol {
+  color: var(--accent);
+}
+
 @media (max-width: 768px) {
   .ajuda-aliases {
     font-size: 1rem;
   }
 
-  .ajuda-description {
+  .ajuda-description,
+  .ajuda-dicas {
     font-size: 0.7rem;
   }
 }
@@ -42,7 +58,8 @@
     font-size: 0.9rem;
   }
 
-  .ajuda-description {
+  .ajuda-description,
+  .ajuda-dicas {
     font-size: 0.6rem;
   }
 }

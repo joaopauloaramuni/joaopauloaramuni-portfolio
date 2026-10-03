@@ -6,7 +6,7 @@
 
 # Repo Portfólio Terminal 🖥️
 
-![React](https://img.shields.io/badge/React-19.1.1-007ec6?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-7.1.2-007ec6?style=for-the-badge&logo=vite&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-2.97.0-007ec6?style=for-the-badge&logo=supabase&logoColor=white) ![GitHub repo size](https://img.shields.io/github/repo-size/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub directory file count](https://img.shields.io/github/directory-file-count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub stars](https://img.shields.io/github/stars/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=github) ![GitHub forks](https://img.shields.io/github/forks/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=git) ![GitHub language count](https://img.shields.io/github/languages/count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=python) ![GitHub license](https://img.shields.io/github/license/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=opensourceinitiative) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=gitkraken) ![GitHub last commit](https://img.shields.io/github/last-commit/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=clockify) ![Vercel](https://vercelbadge.vercel.app/api/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge) ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2Fjoaopauloaramuni%2Fjoaopauloaramuni-portfolio&leftColor=555555&rightColor=007ec6&type=total&label=RepoViews) ![GitHub Actions](https://img.shields.io/github/actions/workflow/status/joaopauloaramuni/joaopauloaramuni-portfolio/keep-supabase-awake.yml?style=for-the-badge&logo=githubactions&label=SupabaseAlive)
+![React](https://img.shields.io/badge/React-19.1.1-007ec6?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-7.1.3-007ec6?style=for-the-badge&logo=vite&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-2.97.0-007ec6?style=for-the-badge&logo=supabase&logoColor=white) ![GitHub repo size](https://img.shields.io/github/repo-size/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub directory file count](https://img.shields.io/github/directory-file-count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=files) ![GitHub stars](https://img.shields.io/github/stars/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=github) ![GitHub forks](https://img.shields.io/github/forks/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=git) ![GitHub language count](https://img.shields.io/github/languages/count/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=python) ![GitHub license](https://img.shields.io/github/license/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=opensourceinitiative) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&color=007ec6&logo=gitkraken) ![GitHub last commit](https://img.shields.io/github/last-commit/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge&logo=clockify) ![Vercel](https://vercelbadge.vercel.app/api/joaopauloaramuni/joaopauloaramuni-portfolio?style=for-the-badge) ![Views Counter](https://views-counter.vercel.app/badge?pageId=https%3A%2F%2Fgithub%2Ecom%2Fjoaopauloaramuni%2Fjoaopauloaramuni-portfolio&leftColor=555555&rightColor=007ec6&type=total&label=RepoViews) ![GitHub Actions](https://img.shields.io/github/actions/workflow/status/joaopauloaramuni/joaopauloaramuni-portfolio/keep-supabase-awake.yml?style=for-the-badge&logo=githubactions&label=SupabaseAlive)
 
 -----
 
@@ -35,6 +35,19 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
 🌗 O portfólio tem **tema escuro e tema claro**: o escuro é o padrão, e o visitante pode trocar pelo botão sol/lua ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
+
+⌨️ O terminal se comporta como um **shell de verdade**:
+
+* **Histórico (↑ / ↓):** navega pelos comandos já digitados. O histórico guarda os últimos 50 comandos, ignora repetições seguidas e continua lá mesmo depois de recarregar a página (como o `~/.bash_history`).
+* **Autocomplete (Tab):** completa comandos, aliases e subcomandos (`tem` → `tema `, `tema c` → `tema claro`, `guestbook l` → `guestbook list`). Quando há mais de uma opção, **Tab duas vezes** lista todas, como no bash. Com a linha vazia, o Tab continua navegando pela página, para quem usa só o teclado.
+
+🔗 **Links diretos:** o portfólio pode ser aberto já executando um comando, com `?cmd=` na URL. Com `?lang=en`, abre em inglês. Ótimo para mandar para recrutadores:
+
+* [aramuni.dev/?cmd=curriculo](https://aramuni.dev/?cmd=curriculo): abre direto no currículo.
+* [aramuni.dev/?cmd=resume&lang=en](https://aramuni.dev/?cmd=resume&lang=en): abre o currículo em inglês.
+* [aramuni.dev/?cmd=projetos](https://aramuni.dev/?cmd=projetos), [?cmd=tema claro](https://aramuni.dev/?cmd=tema%20claro), [?cmd=guestbook list](https://aramuni.dev/?cmd=guestbook%20list)...
+
+O comando roda depois da sequência de boot, aparece no terminal como se tivesse sido digitado e o terminal rola até a saída dele. A leitura da URL usa o `useSearchParams` do **react-router-dom**.
 
 O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exibindo informações de forma dinâmica, além de suporte a múltiplos idiomas, tema claro e escuro e visualização interativa de PDFs. Ele combina design moderno, navegação intuitiva e funcionalidades interativas, proporcionando uma experiência imersiva para quem deseja conhecer meu trabalho.
 
@@ -106,7 +119,7 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 
 * **i18next & react-i18next:** Para suporte a internacionalização e múltiplos idiomas.
 * **react-icons:** Para adicionar ícones facilmente na interface.
-* **react-router-dom:** Para navegação entre páginas dentro do React.
+* **react-router-dom:** Para ler os parâmetros da URL (`?cmd=`) dos links diretos.
 * **react-terminal-ui:** Um componente de terminal React com suporte a temas claros e escuros, baseado em termynal.js.
 * **react-type-animation:** Para animações de digitação de texto.
 * **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
@@ -214,7 +227,7 @@ src/
 
 ### ⚙️ Como funciona
 
-O `App.jsx` controla a exibição com um estado `booted`. Enquanto ele for `false`, o `BootSequence` é renderizado em tela cheia (`position: fixed`) por cima do terminal. Ao terminar, o componente chama `onFinish`, o boot é removido e o foco vai para o input do terminal.
+O `App.jsx` controla a exibição com um estado `booted`. Enquanto ele for `false`, o `BootSequence` é renderizado em tela cheia (`position: fixed`) por cima do terminal. Ao terminar, o componente chama `onFinish`, o boot é removido e o foco vai para o input do terminal. Se a página foi aberta por um link direto (`?cmd=`), é nesse momento que o comando do link é executado (detalhes na seção **⌨️ Histórico, autocomplete e links diretos**).
 
 <details>
   <summary>Clique para exibir o trecho do App.jsx</summary>
@@ -225,7 +238,15 @@ const [booted, setBooted] = useState(false);
 const handleBootFinish = useCallback(() => {
   setBooted(true);
   focusTerminalInput();
-}, []);
+
+  // Link direto (?cmd=): executa o comando assim que o boot termina.
+  // O ref evita rodar duas vezes (no dev, o StrictMode pode chamar o onFinish em dobro)
+  if (deepLinkCommand && !deepLinkDone.current) {
+    deepLinkDone.current = true;
+    runCommandRef.current?.(deepLinkCommand); // mesmo handleInput da digitação
+    scrollLastCommandToTop();
+  }
+}, [deepLinkCommand]);
 
 return (
   <>
@@ -355,15 +376,18 @@ O `ThemeProvider` guarda o tema atual em estado e escreve o atributo `data-theme
   <summary>Clique para exibir o trecho do main.jsx</summary>
 
 ```jsx
+import { BrowserRouter } from "react-router-dom";
 import "./theme/theme.css";
 import "./App.css";
 import ThemeProvider from "./theme/ThemeProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
   </StrictMode>
 );
 ```
@@ -413,6 +437,64 @@ localStorage.removeItem("aramuni-theme");
 ```
 
 Depois é só recarregar a página: o portfólio volta a abrir no tema padrão (escuro).
+
+-----
+
+## ⌨️ Histórico, autocomplete e links diretos
+
+Três recursos que fazem o portfólio se comportar como um terminal de verdade.
+
+| Recurso | Como usar | Detalhes |
+|:--|:--|:--|
+| 🕘 Histórico | `↑` / `↓` | Últimos 50 comandos, sem repetições seguidas (como o `HISTCONTROL=ignoredups`). Fica salvo no `localStorage` (`aramuni-history`), então sobrevive ao recarregamento. Ao descer além do último, volta o que estava sendo digitado |
+| ⇥ Autocomplete | `Tab` | Completa comandos, aliases e subcomandos. Se houver várias opções, avança até o prefixo comum; **Tab duas vezes** lista todas. Com a linha vazia (ou `Shift+Tab`), o Tab navega pela página normalmente |
+| 🔗 Link direto | `?cmd=` e `?lang=` | `aramuni.dev/?cmd=curriculo` roda o comando assim que o boot termina. `?lang=en` abre o site em inglês. O comando entra no histórico e o terminal rola até a saída dele |
+
+Com o jogo, o formulário de contato ou o `guestbook add` abertos, as setas e o Tab ficam com eles: o histórico e o autocomplete só funcionam no prompt.
+
+### 📂 Arquivos
+
+```texto
+src/
+  terminal/
+    useTerminalKeys.js   → hook do histórico (↑/↓) e do autocomplete (Tab)
+    autocomplete.js      → função pura que decide o que completar
+    terminalDom.js       → escreve no input da lib e controla o scroll
+  commands.js            → campo "subcommands" (tema e guestbook) usado pelo Tab
+  App.jsx                → liga o hook, executa o ?cmd= e lista as opções do Tab
+  main.jsx               → envolve o App com o BrowserRouter
+  i18n.js                → lê o ?lang= e traz as dicas do comando "ajuda"
+```
+
+### ⚙️ Como funciona
+
+O `react-terminal-ui` guarda o texto digitado num estado interno e não tem uma prop para controlá-lo (o `startingInputValue` só reage quando o valor muda, e ainda faz `trim`). Por isso o `terminalDom.js` escreve no input oculto com o setter nativo e dispara um evento `input`, o mesmo truque usado pelo Testing Library: o React enxerga como digitação e a lib atualiza o próprio estado.
+
+O `useTerminalKeys` escuta o `keydown` no `document`, na fase de captura. Assim ele roda antes do React e, quando trata a tecla, chama `stopPropagation()` para a lib não reagir também (por padrão ela usa `↑` para levar o cursor ao início da linha).
+
+<details>
+  <summary>Clique para exibir o trecho do autocomplete</summary>
+
+```javascript
+autocomplete("aj", commandList);      // { value: "ajuda" }
+autocomplete("tem", commandList);     // { value: "tema " } → já deixa o espaço para o subcomando
+autocomplete("tema c", commandList);  // { value: "tema claro" }
+autocomplete("gi", commandList);      // { value: "git" } → prefixo comum de git e github
+autocomplete("git", commandList);     // { options: ["git", "github"] } → Tab duplo lista
+```
+</details>
+
+Para o link direto, o `App.jsx` lê o `?cmd=` com o `useSearchParams` do **react-router-dom** uma única vez, ao abrir a página. Quando o `BootSequence` chama o `onFinish`, o comando é executado pelo mesmo `handleInput` usado na digitação. Para evitar textos gigantes na URL, o comando é limitado a 60 caracteres.
+
+### 🧪 Testando localmente
+
+Para começar com o histórico vazio, rode no console do navegador:
+
+```javascript
+localStorage.removeItem("aramuni-history");
+```
+
+Para testar os links diretos, abra `http://localhost:5173/?cmd=projetos` ou `http://localhost:5173/?cmd=resume&lang=en`.
 
 -----
 

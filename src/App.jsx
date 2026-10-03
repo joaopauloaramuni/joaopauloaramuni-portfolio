@@ -1,11 +1,17 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import Terminal, {
   ColorMode,
   TerminalInput,
   TerminalOutput,
 } from "react-terminal-ui";
+import { useSearchParams } from "react-router-dom";
 import "./App.css";
 import { commandList } from "./commands";
+import useTerminalKeys from "./terminal/useTerminalKeys";
+import {
+  scrollLastCommandToTop,
+  scrollTerminalToBottom,
+} from "./terminal/terminalDom";
 import Projetos from "./components/Projetos";
 import ProjetosGitHub from "./components/ProjetosGitHub";
 import Experiencias from "./components/Experiencias";
@@ -27,6 +33,19 @@ import BootSequence from "./components/BootSequence";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "./theme/themeContext";
 
+const myPrompt = "visitante@portfolio:~$";
+const terminalTitle = "Portfolio terminal";
+
+// Link direto: aramuni.dev/?cmd=curriculo abre o portfólio já rodando o comando
+const DEEP_LINK_MAX_LENGTH = 60;
+const readDeepLinkCommand = (searchParams) => {
+  const command = (searchParams.get("cmd") ?? "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, DEEP_LINK_MAX_LENGTH);
+  return command || null;
+};
+
 function App() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
@@ -38,6 +57,19 @@ function App() {
 
   // Controla a tela de boot (some quando termina ou o visitante pula)
   const [booted, setBooted] = useState(false);
+
+  // Comando vindo do link (?cmd=...), lido uma vez ao abrir a página
+  const [searchParams] = useSearchParams();
+  const [deepLinkCommand] = useState(() => readDeepLinkCommand(searchParams));
+  const deepLinkDone = useRef(false);
+
+  // Chave única para cada linha adicionada ao terminal
+  const lineId = useRef(0);
+  const nextKey = (prefix) => `${prefix}-${lineId.current++}`;
+
+  const appendLines = (...lines) => {
+    setTerminalLineData((current) => [...current, ...lines]);
+  };
 
   const exitComponent = () => {
     setTerminalLineData((lines) => {
@@ -57,11 +89,24 @@ function App() {
     });
   };
 
-  // Chamado pelo BootSequence ao terminar: libera o terminal e foca o input
+  // Sempre aponta para o handleInput mais recente (usado pelo link direto)
+  const runCommandRef = useRef(null);
+  useEffect(() => {
+    runCommandRef.current = handleInput;
+  });
+
+  // Chamado pelo BootSequence ao terminar: libera o terminal, foca o input e,
+  // se a página foi aberta por um link direto, executa o comando do link
   const handleBootFinish = useCallback(() => {
     setBooted(true);
     focusTerminalInput();
-  }, []);
+
+    if (deepLinkCommand && !deepLinkDone.current) {
+      deepLinkDone.current = true;
+      runCommandRef.current?.(deepLinkCommand);
+      scrollLastCommandToTop();
+    }
+  }, [deepLinkCommand]);
 
   // Detecta se o jogo está aberto
   const isGameOpen =
@@ -78,10 +123,37 @@ function App() {
   const isGuestBookAddOpen =
     lastLine?.type === LivroVisitas && lastLine?.props?.mode === "add";
 
+  // Jogo, contato e guestbook (add) usam o teclado: o terminal fica em pausa
+  const isTerminalPaused = isGameOpen || isContatoOpen || isGuestBookAddOpen;
+
+  // Tab duplo sem completar: mostra as opções, como no bash
+  const showCompletions = (typed, options) => {
+    appendLines(
+      <TerminalInput key={nextKey("input")}>
+        {myPrompt} {typed}
+      </TerminalInput>,
+      <TerminalOutput key={nextKey("options")}>
+        <span className="autocomplete-options">
+          {options.map((option) => (
+            <span key={option}>{option}</span>
+          ))}
+        </span>
+      </TerminalOutput>
+    );
+    scrollTerminalToBottom();
+  };
+
+  // Histórico com ↑/↓ e autocomplete com Tab
+  const { addToHistory } = useTerminalKeys({
+    enabled: booted && !isTerminalPaused,
+    commands: commandList,
+    onShowOptions: showCompletions,
+  });
+
   function handleInput(input) {
-    let newLines = [...terminalLineData];
-    newLines.push(
-      <TerminalInput key={`input-${newLines.length}`}>
+    addToHistory(input);
+    const inputLine = (
+      <TerminalInput key={nextKey("input")}>
         {myPrompt} {input}
       </TerminalInput>
     );
@@ -169,11 +241,10 @@ function App() {
           response = <FlappyPlaneGame onExit={exitComponent} />;
           break;
         case "guestbook": {
-          const validSubCommands = ["add", "list", "help"];
           if (!subCommand) {
             // Sem subcomando → mostra home
             response = <LivroVisitas mode="home" onExit={exitComponent} />;
-          } else if (validSubCommands.includes(subCommand)) {
+          } else if (command.subcommands.includes(subCommand)) {
             // Subcomando válido
             response = <LivroVisitas mode={subCommand} onExit={exitComponent} />;
           } else {
@@ -189,17 +260,13 @@ function App() {
       response = getInvalidCommandOutput(userInput);
     }
 
-    if (Array.isArray(response)) {
-      newLines.push(...response);
-    } else {
-      newLines.push(response);
-    }
+    const outputLines = [response]
+      .flat()
+      .filter(Boolean)
+      .map((line) => React.cloneElement(line, { key: nextKey("output") }));
 
-    setTerminalLineData(newLines);
+    appendLines(inputLine, ...outputLines);
   }
-
-  const myPrompt = "visitante@portfolio:~$";
-  const terminalTitle = "Portfolio terminal";
 
   return (
     <>
@@ -209,11 +276,7 @@ function App() {
         <Terminal
           name={terminalTitle}
           colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
-          onInput={
-            isGameOpen || isContatoOpen || isGuestBookAddOpen
-              ? undefined
-              : handleInput
-          }
+          onInput={isTerminalPaused ? undefined : handleInput}
           prompt={myPrompt}
           height="calc(100dvh - 110px)"
         >

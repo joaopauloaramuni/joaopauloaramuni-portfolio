@@ -169,6 +169,13 @@ const resources = {
         },
         game: { desc: "Play Flappy Plane directly in the web terminal." },
         guestbook: { desc: "Leave a message in my public guestbook." },
+        dicas: {
+          titulo: "Tips:",
+          historico: "↑ / ↓ browse the commands you already typed.",
+          autocomplete: "Tab completes commands; press Tab twice to list the options.",
+          link: "Direct link: {{url}} opens the portfolio already running the command.",
+          link_exemplo: "?cmd=resume&lang=en",
+        },
       },
       projetos: {
         titulo: "My Main Projects",
@@ -1001,6 +1008,13 @@ const resources = {
         },
         game: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
         guestbook: { desc: "Deixe uma mensagem no meu livro de visitas público." },
+        dicas: {
+          titulo: "Dicas:",
+          historico: "↑ / ↓ navegam pelos comandos já digitados.",
+          autocomplete: "Tab completa os comandos; Tab duas vezes lista as opções.",
+          link: "Link direto: {{url}} abre o portfólio já executando o comando.",
+          link_exemplo: "?cmd=curriculo",
+        },
       },
       projetos: {
         titulo: "Meus Principais Projetos",
@@ -1683,9 +1697,22 @@ const resources = {
   },
 };
 
+// Idioma pelo link (?lang=en): junto com o ?cmd=, permite mandar o portfólio
+// já em inglês, ex.: aramuni.dev/?cmd=resume&lang=en
+const languageFromUrl = () => {
+  try {
+    const lang = new URLSearchParams(window.location.search).get("lang");
+    if (lang?.toLowerCase().startsWith("en")) return "en";
+    if (lang?.toLowerCase().startsWith("pt")) return "pt";
+  } catch {
+    /* sem URL válida: segue o padrão */
+  }
+  return null;
+};
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: "pt",
+  lng: languageFromUrl() ?? "pt",
   fallbackLng: "en",
   interpolation: { escapeValue: false },
 });
