@@ -464,6 +464,7 @@
 
 .cal-linha-campus {
   color: var(--text-dim);
+  white-space: nowrap;
 }
 
 .cal-linha-sala {
