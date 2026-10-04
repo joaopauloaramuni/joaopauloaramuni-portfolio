@@ -21,6 +21,12 @@ export const commandList = {
     name: 'calendly',
     aliases: ['meeting', 'meet'],
   },
+  cal: {
+    name: 'cal',
+    aliases: ['horario', 'horarios', 'schedule'],
+    // Visões: cal --mes | --semana | --hoje (ver data/calSkins.js)
+    subcommands: ['--mes', '--semana', '--hoje', '--month', '--week', '--today'],
+  },
   curriculo: {
     name: 'curriculo',
     aliases: ['resume'],

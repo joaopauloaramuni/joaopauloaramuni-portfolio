@@ -73,6 +73,13 @@
   --icon-mail-gmail: #e53935;
   --icon-mail-puc: #519bd8;
   --icon-github: #d1d5db;
+
+  /* Comando "cal": cor de cada campus na grade de horários */
+  --cal-coreu: #f0abfc;
+  --cal-lourdes: #d9c46a;
+  --cal-oficinas: #67e8f9;
+  --cal-teams: #fdba74;
+  --cal-tinta: 14%;           /* fundo das aulas na grade: cor do campus a 14% */
 }
 
 [data-theme="light"] {
@@ -124,4 +131,10 @@
   --icon-mail-gmail: #c62828;
   --icon-mail-puc: #2563eb;
   --icon-github: #1a1e24;
+
+  --cal-coreu: #94158f;       /* contraste ≥ 4.6:1 no #ddd, mesmo com a tinta */
+  --cal-lourdes: #685a00;
+  --cal-oficinas: #0a5f6c;
+  --cal-teams: #93330b;
+  --cal-tinta: 6%;
 }

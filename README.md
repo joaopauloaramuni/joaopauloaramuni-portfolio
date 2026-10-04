@@ -19,6 +19,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
 * 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS.
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
+* 🗓️ **cal / horario:** Mostra meus horários de aula no estilo do `cal` do Linux, com os feriados e recessos do calendário acadêmico da PUC Minas. Tem três visões: `cal --mes` (padrão), `cal --semana`, com a grade e a lista de turmas e salas, e `cal --hoje`, com a agenda do dia e a aula em andamento.
 * 🧹 **limpar:** Limpa o histórico do terminal.
 * 🌗 **tema / theme:** Alterna entre o tema escuro e o claro (`tema claro` | `tema escuro`).
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
@@ -48,6 +49,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 * [aramuni.dev/?cmd=curriculo](https://aramuni.dev/?cmd=curriculo): abre direto no currículo.
 * [aramuni.dev/?cmd=resume&lang=en](https://aramuni.dev/?cmd=resume&lang=en): abre o currículo em inglês.
+* [aramuni.dev/?cmd=cal --hoje](https://aramuni.dev/?cmd=cal%20--hoje): mostra para os alunos onde e quando é a próxima aula.
 * [aramuni.dev/?cmd=projetos](https://aramuni.dev/?cmd=projetos), [?cmd=tema claro](https://aramuni.dev/?cmd=tema%20claro), [?cmd=guestbook list](https://aramuni.dev/?cmd=guestbook%20list)...
 
 O comando roda depois da sequência de boot, aparece no terminal como se tivesse sido digitado e o terminal rola até a saída dele. A leitura da URL usa o `useSearchParams` do **react-router-dom**.
@@ -421,7 +423,12 @@ const { theme, setTheme, toggleTheme } = useTheme();
 | `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
 | `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" |
 | `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot e erro do WakaTime |
-| `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot |
+| `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot e recessos no `cal` |
+| `--cal-coreu` | `#f0abfc` | `#94158f` | Aulas no campus Coração Eucarístico (`cal`) |
+| `--cal-lourdes` | `#d9c46a` | `#685a00` | Aulas no campus Lourdes (`cal`) |
+| `--cal-oficinas` | `#67e8f9` | `#0a5f6c` | Oficinas (`cal`) |
+| `--cal-teams` | `#fdba74` | `#93330b` | Reuniões online pelo Teams (`cal`) |
+| `--cal-tinta` | `14%` | `6%` | Intensidade do fundo das aulas na grade do `cal --semana` (no claro é menor para manter o contraste do texto) |
 
 A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
 
@@ -516,7 +523,7 @@ src/
     useTerminalKeys.js   → hook do histórico (↑/↓) e do autocomplete (Tab)
     autocomplete.js      → função pura que decide o que completar
     terminalDom.js       → escreve no input da lib e controla o scroll
-  commands.js            → campo "subcommands" (tema, guestbook, skills, wakatime e stats) usado pelo Tab
+  commands.js            → campo "subcommands" (tema, guestbook, skills, wakatime, stats e cal) usado pelo Tab
   App.jsx                → liga o hook, executa o ?cmd= e lista as opções do Tab
   main.jsx               → envolve o App com o BrowserRouter
   i18n.js                → lê o ?lang= e traz as dicas do comando "ajuda"
@@ -1107,6 +1114,90 @@ src/
 > 🐳 No container do `Dockerfile` (NGINX), os caminhos `/api/github/*` não existem: as visitas ao perfil e o `stats --repos` mostram um aviso e o resto continua funcionando. Para usar os dois, adicione um `location` com `proxy_pass` para cada destino na configuração do NGINX.
 
 ✅ Pronto! Cada fonte é buscada uma vez por visita: trocar de gráfico reaproveita os dados.
+
+-----
+
+## 🗓️ Guia do comando cal (horários de aula)
+
+O comando `cal` (aliases `horario`, `horarios` e `schedule`) mostra meus horários de aula no formato do `cal` do Linux. A ideia é que os alunos consigam ver, de qualquer lugar e até pelo celular, quando e onde é a próxima aula. Cada opção abre uma visão:
+
+| Comando | O que mostra |
+|:--|:--|
+| `cal` ou `cal --mes` (`--month`) | O mês com o dia de hoje em vídeo invertido, dias com aula em verde, feriados em amarelo e recessos em azul. Ao lado, um resumo: hoje, próxima aula (com contagem regressiva), semana do semestre, total de aulas e horas em sala na semana e os dias sem aula do mês (padrão) |
+| `cal --semana` (`--week`) | A grade da semana, com cada aula num bloco tingido com a cor do campus, horários em laranja e a sala de cada aula (`P34 · 114`); a aula em andamento fica com a cor mais forte. Embaixo, a lista **Turmas e salas**, com dia, horário, turma, código e o endereço completo (prédio na cor do campus e sala em destaque), e o glossário das siglas. Feriados e recessos da semana aparecem num aviso logo abaixo do título e as aulas desses dias ficam riscadas. No fim de semana, já mostra a semana seguinte |
+| `cal --hoje` (`--today`, `agora`, `now`) | A agenda do dia, com as colunas horário, disciplina e local. Aulas que já passaram ficam com `✓`, a aula em andamento ganha `▶` e "termina em…", e as próximas mostram quanto falta. Sem aula no dia, mostra a próxima |
+
+Todas as informações ficam visíveis na tela, sem depender de passar o mouse, para funcionar igual no celular. Lá, as colunas se reorganizam: o local e o detalhe descem para baixo do nome da disciplina.
+
+As cores de cada campus seguem os tokens `--cal-coreu`, `--cal-lourdes`, `--cal-oficinas` e `--cal-teams` do `theme.css`, ajustados para ter contraste de pelo menos 4,5:1 nos dois temas, inclusive sobre o fundo tingido da grade. Os links diretos funcionam como nos outros comandos: [aramuni.dev/?cmd=cal --semana](https://aramuni.dev/?cmd=cal%20--semana).
+
+### 1️⃣ Fuso horário
+
+Tudo é calculado no horário de Brasília (`FUSO_HORARIO = "America/Sao_Paulo"`), e não no relógio do navegador. Assim, um aluno em intercâmbio vê a mesma agenda de quem está em BH. O `cal --hoje` e a aula em andamento se atualizam sozinhos a cada 30 segundos.
+
+### 2️⃣ Cadastrando as aulas
+
+As aulas ficam na lista `AULAS` de `src/data/horarioData.js`, uma entrada por aula:
+
+```javascript
+{
+  dia: 2,                     // 1 = segunda ... 5 = sexta
+  inicio: "20:50",
+  fim: "22:30",
+  campus: "coreu",            // coreu | lourdes | oficinas | teams
+  disciplina: "diaw",         // chave de DISCIPLINAS (sigla) e do i18n (nome)
+  turma: "G3",                // opcional
+  curso: "CC",                // opcional: mostra a etiqueta CC
+  codigo: "8218.1.03",        // opcional: código da turma no SGA
+  local: { predio: 34, andar: 1, espaco: "Laboratório de Informática 08", sala: "114" },
+}
+```
+
+O `local` aceita `edificio` (as aulas da Lourdes usam o atalho `...FERNANDA`, que preenche `predio: 4` e `edificio: "Ed. Fernanda"`) e, para reuniões online, `{ online: "Teams" }`. Sem `local`, a aula aparece com "—" na coluna. Os horários da grade são montados a partir das próprias aulas, então um horário novo (como 15:00) vira uma linha nova automaticamente.
+
+Para uma disciplina nova, acrescente a sigla em `DISCIPLINAS` e o nome em `cal.disciplinas` no `i18n.js` (PT e EN).
+
+### 3️⃣ Feriados, recessos e semestre letivo
+
+Os dias sem aula vêm do [Calendário Acadêmico da PUC Minas](https://www.pucminas.br/calendario/Documents/calendario-academico-2026.pdf), cadastrado em `src/data/calendarioPuc.js`, só com o que vale para os campi de BH:
+
+| Tipo | Exemplos em 2026 | No `cal` |
+|:--|:--|:--|
+| `feriado` | Tiradentes, Corpus Christi, Nossa Senhora Aparecida, Assunção e Imaculada Conceição (BH) | Amarelo (`--warn`) |
+| `recesso` | Carnaval e Cinzas (14 a 18/2), Semana Santa (30/3 a 5/4), Dia do Professor e do Funcionário (13/10) | Azul (`--info`) |
+| `recesso_docente` | 13 a 27/7 e 24 a 31/12 | Azul (`--info`) |
+| `ferias` | Férias coletivas do corpo docente (2 a 31/1) | Azul (`--info`) |
+
+Os semestres letivos (`semestres`) definem em quais dias as aulas contam e alimentam a linha `semestre` do `cal` ("2º · semana 9 · termina em 22 de dez."). Usei o calendário dos veteranos de 20 semanas, que termina em 10/7 e 22/12; as datas de 18 semanas estão comentadas no arquivo. Quando dois tipos caem no mesmo dia (o Natal dentro do recesso), vale o feriado.
+
+Para um ano novo, copie o bloco de 2026 em `calendarioPuc.js` e preencha com o PDF do ano. Enquanto o ano não estiver cadastrado, o `cal` mostra os feriados nacionais e de BH calculados em `src/data/feriados.js` (os móveis saem da data da Páscoa), mas não marca aulas, porque não há como saber quando o semestre começa. A linha `semestre` avisa que o calendário ainda não foi cadastrado.
+
+### 🧪 Testando localmente
+
+Para ver como o `cal` se comporta em outro dia e horário (um feriado, uma aula em andamento, as férias), rode `npm run dev` e teste as funções de `lib/horario.js` direto no console do navegador, passando a data que quiser:
+
+```javascript
+const { agoraEmBH, proximaAula } = await import("/src/lib/horario.js");
+const agora = agoraEmBH(new Date("2026-10-13T09:00:00-03:00")); // Dia do Professor
+proximaAula(agora); // → quarta, 07:00
+```
+
+### 📂 Arquivos
+
+```text
+src/
+  data/horarioData.js      → aulas, campi, siglas das disciplinas e fuso horário
+  data/calendarioPuc.js    → feriados, recessos e semestres letivos da PUC Minas, por ano
+  data/feriados.js         → junta o calendário da PUC e calcula os feriados dos anos sem calendário
+  data/calSkins.js         → visões do comando e nomes aceitos (PT e EN)
+  lib/horario.js           → "agora" em BH, próxima aula, semana do semestre e status de cada aula
+  components/Calendario.jsx → as três visões (mês é o padrão)
+  components/Calendario.css → grade, agenda e lista de turmas, com layout para celular
+  components/SkinsFooter.jsx → rodapé "Visões:" (compartilhado com skills, wakatime e stats)
+  theme/theme.css          → cores de cada campus (--cal-coreu, --cal-lourdes, --cal-oficinas, --cal-teams)
+```
+
+✅ Pronto! Não há API nem chave: tudo é calculado no navegador, a partir dos arquivos de dados.
 
 -----
 

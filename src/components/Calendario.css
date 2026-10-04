@@ -1,0 +1,542 @@
+/* =====================================================================
+   CAL — horários de aula, em três visões:
+     cal / cal --mes   mês no estilo do cal do Linux + resumo ao lado
+     cal --semana      grade da semana, colorida por campus
+     cal --hoje        agenda do dia
+   A cor de cada campus chega por style inline em --campus, apontando
+   para os tokens --cal-coreu, --cal-lourdes, --cal-oficinas e
+   --cal-teams de theme.css (já ajustados para os dois temas).
+   ===================================================================== */
+
+.cal {
+  padding: 0.5rem 1rem 1rem;
+  color: var(--text);
+  max-width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal .skins-footer {
+  justify-content: flex-start;
+  margin-top: 1.25rem;
+}
+
+/* Letra do campus (C, L, O, T) e textos pintados com a cor do campus */
+.cal-campus,
+.cal-tinta {
+  color: var(--campus, var(--text));
+  font-weight: 700;
+}
+
+.cal-sep {
+  color: var(--text-dim);
+}
+
+.cal-curso {
+  margin-left: 0.4em;
+  padding: 0 0.3em;
+  font-size: 0.7em;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  color: var(--text-muted);
+  vertical-align: 0.15em;
+}
+
+.cal-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 1rem 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Na legenda, o nome do campus também vai na cor dele */
+.cal-legenda > span {
+  color: var(--campus);
+}
+
+/* ---------------------------------------------------------------------
+   cal --mes
+   --------------------------------------------------------------------- */
+.cal-mes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem 3rem;
+}
+
+.cal-mes-titulo {
+  margin: 0 0 0.25rem;
+  text-align: center;
+  color: var(--text);
+}
+
+/* Cada dia ocupa 3 caracteres, como no cal: "12 13 14" */
+.cal-mes-dias {
+  display: grid;
+  grid-template-columns: repeat(7, 3ch);
+  justify-content: start;
+  row-gap: 0.15rem;
+}
+
+.cal-dia {
+  text-align: right;
+  padding-right: 0.5ch;
+  color: var(--text-dim);
+}
+
+.cal-dia--cabecalho {
+  color: var(--text-muted);
+}
+
+.cal-dia--aula {
+  color: var(--accent);
+}
+
+.cal-dia--feriado {
+  color: var(--warn);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* Recesso escolar, recesso docente e férias */
+.cal-dia--recesso {
+  color: var(--info);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* Hoje em vídeo invertido, como o cal real */
+.cal-dia--hoje {
+  background: var(--text);
+  color: var(--bg-terminal);
+  border-radius: 2px;
+}
+
+.cal-mes-chaves {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.cal-chave {
+  margin-left: 0.9em;
+  text-decoration: none;
+}
+
+.cal-chave:first-child {
+  margin-left: 0;
+}
+
+.cal-chave--hoje {
+  color: var(--text);
+}
+
+/* Resumo ao lado, no mesmo formato rótulo/valor do neofetch */
+.cal-info {
+  flex: 1 1 22rem;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.3rem 1rem;
+  margin: 1.6rem 0 0;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.cal-info dt {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.cal-info dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.cal-feriado-linha {
+  display: block;
+}
+
+/* ---------------------------------------------------------------------
+   cal --semana
+   --------------------------------------------------------------------- */
+.cal-semana-titulo {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+}
+
+/* A grade tem largura mínima; em telas estreitas ela rola sozinha,
+   com a coluna de horário presa à esquerda */
+.cal-semana-rolagem {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.cal-tabela {
+  border-collapse: collapse;
+  min-width: 46rem;
+  font-size: 0.9rem;
+}
+
+.cal-tabela th,
+.cal-tabela td {
+  padding: 0.3rem 0.75rem 0.3rem 0;
+  text-align: left;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+.cal-tabela thead th {
+  color: var(--info);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.cal-th-data {
+  color: var(--text-dim);
+}
+
+.cal-th--hoje {
+  color: var(--accent) !important;
+  font-weight: bold !important;
+}
+
+.cal-th--hoje .cal-th-data {
+  color: var(--accent);
+}
+
+.cal-th--feriado,
+.cal-th--feriado .cal-th-data {
+  color: var(--warn) !important;
+}
+
+.cal-th--recesso,
+.cal-th--recesso .cal-th-data {
+  color: var(--info) !important;
+}
+
+/* Horários em laranja, como na grade oficial */
+.cal-hora {
+  position: sticky;
+  left: 0;
+  background: var(--bg-terminal);
+  color: var(--highlight) !important;
+  padding-right: 1.25rem !important;
+}
+
+.cal-hora-fim {
+  margin-left: 0.35em;
+  font-size: 0.75em;
+  color: var(--text-dim);
+}
+
+.cal-tabela tbody tr + tr > * {
+  border-top: 1px dashed color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+.cal-vazio {
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+/* Cada aula é um bloco tingido com a cor do campus, com uma barra à
+   esquerda; a intensidade da tinta (--cal-tinta) vem do tema */
+.cal-tabela td.cal-aula {
+  color: var(--text);
+  padding-left: 0.5rem;
+  background: color-mix(in srgb, var(--campus) var(--cal-tinta, 14%), transparent);
+  box-shadow: inset 2px 0 0 var(--campus);
+}
+
+.cal-aula .cal-campus {
+  margin-right: 0.5em;
+}
+
+.cal-sigla {
+  color: var(--campus);
+}
+
+.cal-semana-aviso {
+  margin: -0.4rem 0 0.75rem;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+/* Código da turma no SGA: "8218.1.03" */
+.cal-codigo {
+  color: var(--text-dim);
+  font-size: 0.85em;
+}
+
+.cal-linha-nome .cal-codigo {
+  margin-left: 0.6em;
+}
+
+/* Lista de turmas: quando | campus | turma | código | local */
+.cal-turmas-titulo {
+  margin: 1.25rem 0 0.25rem;
+  color: var(--text-muted);
+}
+
+.cal-turmas {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.cal-turma {
+  display: grid;
+  grid-template-columns: 7rem 1rem 8rem 6.5rem minmax(0, 1fr);
+  gap: 0 0.75rem;
+  align-items: baseline;
+  padding: 0.15rem 0;
+}
+
+.cal-turma + .cal-turma {
+  border-top: 1px dashed color-mix(in srgb, var(--border) 45%, transparent);
+}
+
+.cal-turma--cabecalho {
+  font-size: 0.75rem;
+  color: var(--info);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-turma-quando {
+  white-space: nowrap;
+}
+
+.cal-turma-dia {
+  color: var(--info);
+}
+
+.cal-turma-hora {
+  color: var(--highlight);
+}
+
+.cal-turma .cal-codigo {
+  color: var(--text-muted);
+}
+
+/* Local colorido: prédio na cor do campus, andar apagado, sala em destaque */
+.cal-local-predio {
+  color: var(--campus);
+  font-weight: 700;
+}
+
+.cal-local-andar {
+  color: var(--text-dim);
+}
+
+.cal-local-espaco {
+  color: var(--text);
+}
+
+.cal-local-sala {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cal-local-online {
+  color: var(--info);
+}
+
+/* Sala embaixo da sigla: "P34 · 114" */
+.cal-aula-local {
+  display: block;
+  margin-left: 1.15em;
+  font-size: 0.72em;
+  color: var(--text-dim);
+}
+
+.cal-aula--passada {
+  opacity: 0.45;
+}
+
+.cal-aula--sem_aula {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+/* Aula acontecendo agora: fundo na cor do campus */
+.cal-tabela td.cal-aula--atual {
+  background: color-mix(in srgb, var(--campus) calc(var(--cal-tinta, 14%) * 2), transparent);
+  box-shadow: inset 4px 0 0 var(--campus);
+}
+
+.cal-agora {
+  margin-left: 0.5em;
+  color: var(--campus);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cal-agora {
+    animation: cal-pisca 1.2s steps(2, start) infinite;
+  }
+}
+
+@keyframes cal-pisca {
+  to {
+    visibility: hidden;
+  }
+}
+
+.cal-glossario {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.1rem 1rem;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.cal-glossario dt {
+  color: var(--accent);
+}
+
+.cal-glossario dd {
+  color: var(--text-muted);
+}
+
+.cal-glossario dd {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   cal --hoje
+   --------------------------------------------------------------------- */
+.cal-hoje-titulo {
+  margin: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.cal-hoje-hora {
+  margin-left: 0.5em;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.cal-hoje-sub {
+  margin: 0.25rem 0 0.5rem;
+  color: var(--text-muted);
+}
+
+.cal-lista {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+/* Colunas: marca | horário | campus | disciplina | local | detalhe.
+   Cada linha é um grid próprio, então as larguras são fixas em rem
+   (e não max-content) para o cabeçalho alinhar com as aulas. */
+.cal-linha {
+  display: grid;
+  grid-template-columns: 1rem 9rem 1rem minmax(0, 1.1fr) minmax(0, 1fr) 7.5rem;
+  align-items: baseline;
+  gap: 0 0.9rem;
+  padding: 0.2rem 0.5rem 0.2rem 0;
+}
+
+.cal-linha--cabecalho {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.2rem;
+}
+
+.cal-linha--cabecalho .cal-linha-sala {
+  font-size: inherit;
+  color: inherit;
+}
+
+.cal-linha-marca {
+  color: var(--campus);
+  text-align: center;
+}
+
+.cal-linha-hora {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.cal-linha-campus {
+  color: var(--text-dim);
+}
+
+.cal-linha-sala {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.cal-linha-detalhe {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.cal-linha--passada {
+  opacity: 0.5;
+}
+
+.cal-linha--atual {
+  background: color-mix(in srgb, var(--campus) 14%, transparent);
+  box-shadow: inset 2px 0 0 var(--campus);
+}
+
+.cal-linha--atual .cal-linha-detalhe {
+  color: var(--campus);
+}
+
+.cal-linha a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .cal {
+    padding: 0.5rem 0.25rem 1rem;
+  }
+
+  /* No celular: horário e campus na primeira linha; disciplina, sala e
+     detalhe embaixo, usando a largura toda */
+  .cal-linha {
+    grid-template-columns: 1rem max-content 1rem minmax(0, 1fr);
+    gap: 0.1rem 0.6rem;
+    padding: 0.4rem 0.5rem 0.4rem 0;
+    font-size: 0.85rem;
+  }
+
+  .cal-linha-nome,
+  .cal-linha-sala,
+  .cal-linha-detalhe {
+    grid-column: 2 / -1;
+    text-align: left;
+  }
+
+  .cal-linha-sala {
+    font-size: 0.8rem;
+  }
+
+  .cal-linha-detalhe:empty {
+    display: none;
+  }
+
+  .cal-linha--cabecalho {
+    display: none;
+  }
+
+  /* Turmas no celular: local desce para a linha de baixo */
+  .cal-turma {
+    grid-template-columns: 5.5rem 1rem minmax(0, 1fr) max-content;
+  }
+
+  .cal-turma-local {
+    grid-column: 3 / -1;
+  }
+
+  .cal-turma--cabecalho {
+    display: none;
+  }
+}

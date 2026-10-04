@@ -26,6 +26,7 @@ import Contato from "./components/Contato";
 import Curriculo from "./components/Curriculo";
 import BoasVindas from "./components/BoasVindas";
 import Calendly from "./components/Calendly";
+import Calendario from "./components/Calendario";
 import Recomendacoes from "./components/Recomendacoes";
 import Premios from "./components/Premios";
 import FlappyPlaneGame from "./components/FlappyPlaneGame";
@@ -39,6 +40,7 @@ import { useTheme } from "./theme/themeContext";
 import { parseSkillSkin } from "./data/skillSkins";
 import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
+import { parseCalSkin } from "./data/calSkins";
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -208,6 +210,19 @@ function App() {
         case "curriculo":
           response = <Curriculo />;
           break;
+        case "cal": {
+          // "cal" abre o mês; "--semana" mostra a grade e "--hoje" a agenda
+          // do dia (ver data/calSkins.js e data/horarioData.js)
+          const skin = parseCalSkin(args.slice(1));
+          if (!skin) {
+            response = <TerminalOutput>{t("cal.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <Calendario skin={skin} />;
+          // A grade da semana é longa: leva o comando para o topo
+          if (skin === "semana") keepLastCommandAtTop();
+          break;
+        }
         case "habilidades": {
           // "skills --lista", "skills --terminal" ou "skills --skin=cards"
           const skin = parseSkillSkin(args.slice(1));
