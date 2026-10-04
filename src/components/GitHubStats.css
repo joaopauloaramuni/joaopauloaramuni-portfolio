@@ -1,0 +1,1183 @@
+/* =====================================================================
+   GITHUB STATS — comando "stats", um grupo de gráficos por opção:
+     stats / stats --resumo   perfil + 12 indicadores (padrão)
+     stats --linguagens       fatia de cada linguagem + anéis com o logo
+     stats --atividade        sequências, calendário, anos e dias da semana
+     stats --horarios         commits por hora do dia e por período
+     stats --repos            ranking de visitas dos repositórios
+     stats --tudo             todos os grupos, um embaixo do outro
+   Mesma moldura e mesmos padrões do WakaTime.css. Variáveis via style inline:
+     --lang / --lang-from / --lang-to   cor e degradê da linguagem
+     --tone                             cor do ícone (token do theme.css)
+     --i                                posição (atraso da animação de entrada)
+   No tema light, --lang-ink escurece a cor da marca para manter o contraste.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Moldura
+   --------------------------------------------------------------------- */
+.ghs-painel {
+  width: 50%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: var(--text);
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.ghs-titulo {
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.ghs-subtitulo {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.ghs-subtitulo a {
+  color: var(--text-muted);
+  text-underline-offset: 3px;
+}
+
+.ghs-subtitulo a:hover,
+.ghs-subtitulo a:focus-visible {
+  color: var(--accent);
+}
+
+.ghs-secao + .ghs-secao {
+  margin-top: 2.25rem;
+}
+
+/* Título de cada grupo no "stats --tudo", estilo comentário de shell */
+.ghs-secao-titulo {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.ghs-secao-titulo::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+.ghs-resumo {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.ghs-resumo strong {
+  color: var(--text);
+}
+
+.ghs-nota {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Só para leitor de tela (tabelas com os valores dos gráficos) */
+.ghs-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ghs-kpis,
+.ghs-langs,
+.ghs-semana,
+.ghs-periodos,
+.ghs-repos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ghs-name {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ghs-lang,
+.ghs-repo {
+  --lang-ink: var(--lang);
+}
+
+[data-theme="light"] :is(.ghs-lang, .ghs-repo) {
+  --lang-ink: color-mix(in oklab, var(--lang) 58%, black);
+}
+
+/* Carregando / limite da API / erro */
+.ghs-status p {
+  margin: 1.25rem 0 0.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.ghs-status.loading p::after {
+  content: "▍";
+  margin-left: 0.25rem;
+  color: var(--accent);
+  animation: ghs-blink 1s steps(1) infinite;
+}
+
+.ghs-status-progress {
+  font-variant-numeric: tabular-nums;
+}
+
+.ghs-status:is(.error, .limit) p {
+  color: var(--warn);
+}
+
+.ghs-progress {
+  position: relative;
+  display: block;
+  width: min(260px, 80%);
+  height: 4px;
+  margin: 0.5rem auto 0;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.ghs-progress::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--p);
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+/* Leitura do valor sob o ponteiro (colunas e calendário) */
+.ghs-readout {
+  min-height: 1.4em;
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------
+   stats --resumo
+   --------------------------------------------------------------------- */
+.ghs-perfil {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding: 0.25rem 0.25rem 0;
+}
+
+.ghs-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+}
+
+.ghs-perfil-texto {
+  min-width: 0;
+}
+
+.ghs-perfil-texto p {
+  margin: 0;
+}
+
+.ghs-perfil-nome {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ghs-perfil-nome a {
+  margin-left: 0.25rem;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-underline-offset: 3px;
+}
+
+.ghs-perfil-nome a:hover,
+.ghs-perfil-nome a:focus-visible {
+  color: var(--accent);
+}
+
+.ghs-perfil-bio {
+  margin-top: 0.15rem !important;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.ghs-perfil-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin-top: 0.3rem !important;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.ghs-perfil-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ghs-perfil-meta svg {
+  color: var(--accent);
+}
+
+.ghs-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+.ghs-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease;
+  animation: ghs-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+.ghs-kpi:hover {
+  border-color: var(--tone);
+}
+
+.ghs-kpi-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ghs-kpi-label svg {
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  font-size: 0.95rem;
+  color: var(--tone);
+}
+
+.ghs-kpi-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ghs-kpi.loading .ghs-kpi-value {
+  color: var(--text-dim);
+  animation: ghs-blink 1.2s steps(1) infinite;
+}
+
+.ghs-kpi-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.ghs-kpi:is(.error, .limit) .ghs-kpi-note {
+  color: var(--warn);
+}
+
+/* ---------------------------------------------------------------------
+   stats --linguagens
+   --------------------------------------------------------------------- */
+
+/* Barra única: cada fatia cresce na proporção do valor (flex-grow) */
+.ghs-stack {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  margin: 0 0.75rem 1.5rem;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ghs-stack-seg {
+  flex-basis: 0;
+  min-width: 3px;
+  background: var(--lang);
+  transform-origin: left;
+  animation: ghs-grow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+.ghs-langs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 1rem;
+}
+
+.ghs-lang {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 1rem 0.6rem 0.85rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: ghs-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 55ms + 100ms);
+}
+
+.ghs-lang:hover {
+  border-color: var(--lang-ink);
+  box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--lang) 55%, transparent);
+}
+
+.ghs-lang .ghs-name {
+  max-width: 100%;
+  font-size: 0.85rem;
+}
+
+.ghs-lang.resto .ghs-name {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Anel de progresso: pathLength=100 faz o dashoffset ser a porcentagem */
+.ghs-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.35rem;
+}
+
+.ghs-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ghs-ring circle {
+  fill: none;
+  stroke-width: 6;
+}
+
+.ghs-ring-track {
+  stroke: var(--track);
+}
+
+.ghs-ring-fill {
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: var(--offset);
+  animation: ghs-ring 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 55ms + 250ms);
+}
+
+.ghs-ring-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  font-size: 30px;
+  color: var(--lang-ink);
+  transition: transform 0.25s ease;
+}
+
+.ghs-lang:hover .ghs-ring-icon {
+  transform: scale(1.12);
+}
+
+.ghs-lang-pct {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.ghs-lang-amount {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   stats --atividade
+   --------------------------------------------------------------------- */
+
+/* Total | sequência atual | maior sequência (formato do streak-stats) */
+.ghs-streak {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 1.25rem 0.5rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: ghs-pop 0.5s ease both;
+}
+
+.ghs-streak-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0 0.75rem;
+  text-align: center;
+}
+
+.ghs-streak-col + .ghs-streak-col {
+  border-left: 1px solid var(--border);
+}
+
+.ghs-streak-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.ghs-unit {
+  margin-left: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.ghs-streak-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.ghs-streak-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* Anel com a chama, no meio */
+.ghs-streak-ring {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  margin: 0.4rem 0 0.2rem;
+  border-radius: 50%;
+  border: 5px solid var(--icon-work);
+}
+
+.ghs-streak-flame {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  font-size: 24px;
+  color: var(--icon-work);
+  background: var(--surface);
+}
+
+.ghs-streak-col.atual .ghs-streak-value {
+  font-size: 1.9rem;
+}
+
+.ghs-streak-ring .ghs-unit {
+  margin: 0;
+  font-size: 0.7rem;
+}
+
+/* Calendário de contribuições */
+.ghs-cal {
+  margin: 1.75rem 0 0;
+}
+
+.ghs-cal-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.ghs-cal-head .ghs-resumo {
+  margin: 0;
+  text-align: left;
+}
+
+.ghs-cal-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.ghs-cal-legend .ghs-cell {
+  width: 10px;
+  height: 10px;
+}
+
+.ghs-cal-legend .ghs-cell:first-child {
+  margin-left: 0.3rem;
+}
+
+.ghs-cal-legend .ghs-cell:last-of-type {
+  margin-right: 0.3rem;
+}
+
+.ghs-cal-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.45rem;
+}
+
+.ghs-cal-months {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+  margin-bottom: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.ghs-cal-months span {
+  white-space: nowrap;
+}
+
+.ghs-cal-days {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  row-gap: 3px;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.ghs-cal-grid {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+  grid-template-rows: repeat(7, auto);
+  grid-auto-flow: column;
+  gap: 3px;
+  border-radius: 4px;
+  touch-action: pan-y;
+}
+
+.ghs-cell {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--track);
+}
+
+/* Dia sem contribuição: um pouco mais claro que o trilho, para a grade aparecer
+   no fundo escuro do terminal (no light o trilho já se destaca) */
+.ghs-cell[data-level="0"] {
+  background: color-mix(in srgb, var(--track) 78%, var(--text-dim));
+}
+
+[data-theme="light"] .ghs-cell[data-level="0"] {
+  background: var(--track);
+}
+
+/* Uma cor só (a de destaque), do claro ao escuro conforme o nível */
+.ghs-cell[data-level="1"] {
+  background: color-mix(in srgb, var(--accent) 28%, var(--track));
+}
+
+.ghs-cell[data-level="2"] {
+  background: color-mix(in srgb, var(--accent) 50%, var(--track));
+}
+
+.ghs-cell[data-level="3"] {
+  background: color-mix(in srgb, var(--accent) 75%, var(--track));
+}
+
+.ghs-cell[data-level="4"] {
+  background: var(--accent);
+}
+
+.ghs-cell.ativo {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+}
+
+/* Anos e dias da semana, lado a lado */
+.ghs-duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+}
+
+.ghs-bloco-titulo {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+/* Colunas (anos, horas): barra fina, ponta arredondada, base reta */
+.ghs-cols {
+  margin: 0;
+}
+
+.ghs-cols .ghs-readout {
+  margin: 0 0 0.4rem;
+}
+
+.ghs-cols-plot {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  column-gap: 2px;
+  height: 150px;
+  padding-top: 18px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border);
+  border-radius: 2px;
+  touch-action: pan-y;
+}
+
+.ghs-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+.ghs-col-bar {
+  width: min(100%, 24px);
+  height: var(--h);
+  min-height: 2px;
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in srgb, var(--accent) 42%, var(--track));
+  transform-origin: bottom;
+  transition: background-color 0.15s ease;
+  animation: ghs-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 30ms);
+}
+
+.ghs-col.ativo .ghs-col-bar {
+  background: color-mix(in srgb, var(--accent) 72%, var(--track));
+}
+
+.ghs-col.pico .ghs-col-bar {
+  background: var(--accent);
+}
+
+.ghs-col-cap {
+  position: absolute;
+  bottom: calc(var(--h) + 3px);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.ghs-cols-axis {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  column-gap: 2px;
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ghs-cols-axis span {
+  white-space: nowrap;
+}
+
+.ghs-cols-plot:focus-visible,
+.ghs-cal-grid:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Dias da semana: barras horizontais com o total na ponta */
+.ghs-semana {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 1.3rem;
+}
+
+.ghs-dia {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr) 3.4rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.ghs-dia-nome {
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.ghs-dia-trilho {
+  display: block;
+  height: 12px;
+}
+
+.ghs-dia-barra {
+  display: block;
+  width: var(--rel);
+  min-width: 2px;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: color-mix(in srgb, var(--accent) 42%, var(--track));
+  transform-origin: left;
+  animation: ghs-grow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+.ghs-dia.pico .ghs-dia-barra {
+  background: var(--accent);
+}
+
+.ghs-dia-valor {
+  text-align: right;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.ghs-dia.pico :is(.ghs-dia-nome, .ghs-dia-valor) {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------
+   stats --horarios
+   --------------------------------------------------------------------- */
+.ghs-cols.horas {
+  margin-bottom: 1.5rem;
+}
+
+.ghs-periodos {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.ghs-periodo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon nome"
+    "icon faixa"
+    "pct pct"
+    "trilho trilho";
+  column-gap: 0.6rem;
+  row-gap: 0.1rem;
+  align-items: center;
+  min-width: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: ghs-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+.ghs-periodo.pico {
+  border-color: var(--accent);
+}
+
+.ghs-periodo-icon {
+  grid-area: icon;
+  font-size: 22px;
+  color: var(--tone);
+}
+
+.ghs-periodo-nome {
+  grid-area: nome;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.ghs-periodo-faixa {
+  grid-area: faixa;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.ghs-periodo-pct {
+  grid-area: pct;
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ghs-periodo-trilho {
+  grid-area: trilho;
+  display: block;
+  height: 6px;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.ghs-periodo-barra {
+  display: block;
+  width: var(--p);
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: ghs-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 60ms + 150ms);
+}
+
+/* ---------------------------------------------------------------------
+   stats --repos
+   --------------------------------------------------------------------- */
+.ghs-repos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ghs-repo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.ghs-repo:hover {
+  background: color-mix(in srgb, var(--lang) 8%, transparent);
+  border-color: color-mix(in srgb, var(--lang) 30%, transparent);
+}
+
+.ghs-repo-rank {
+  flex-shrink: 0;
+  width: 1.5rem;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.ghs-tile {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 19px;
+  color: var(--lang-ink);
+  background: color-mix(in srgb, var(--lang) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--lang) 30%, transparent);
+}
+
+.ghs-repo-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ghs-repo-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.ghs-repo-head .ghs-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.ghs-repo-head .ghs-name:hover,
+.ghs-repo-head .ghs-name:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ghs-repo-meta {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.ghs-repo-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.ghs-repo-views {
+  min-width: 4.2rem;
+  text-align: right;
+  font-weight: 600;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Comprimento proporcional às visitas; o mais visto ocupa a largura toda */
+.ghs-bar {
+  width: var(--rel);
+  min-width: 3px;
+  height: 6px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(90deg, var(--lang-from), var(--lang-to));
+  transform-origin: left;
+  animation: ghs-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(min(var(--i), 20) * 35ms);
+}
+
+.ghs-repo.sem-dados .ghs-bar {
+  visibility: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes ghs-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes ghs-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes ghs-rise {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes ghs-ring {
+  from {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes ghs-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Responsividade e acessibilidade
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .ghs-painel {
+    width: 70%;
+  }
+}
+
+@media (max-width: 900px) {
+  .ghs-painel {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+
+  .ghs-duo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ghs-periodos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .ghs-repo-meta {
+    display: none;
+  }
+
+  .ghs-cal-grid,
+  .ghs-cal-days {
+    gap: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ghs-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .ghs-kpi {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .ghs-kpi-value {
+    font-size: 1.1rem;
+  }
+
+  .ghs-perfil {
+    align-items: flex-start;
+  }
+
+  .ghs-langs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .ghs-lang {
+    padding: 0.75rem 0.3rem 0.65rem;
+  }
+
+  .ghs-lang .ghs-name {
+    font-size: 0.75rem;
+  }
+
+  .ghs-lang-pct {
+    font-size: 0.8rem;
+  }
+
+  .ghs-lang-amount {
+    font-size: 0.68rem;
+  }
+
+  .ghs-ring {
+    width: 58px;
+    height: 58px;
+  }
+
+  .ghs-ring-icon {
+    font-size: 22px;
+  }
+
+  /* Card de sequências: um embaixo do outro */
+  .ghs-streak {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .ghs-streak-col {
+    padding: 1rem 0;
+  }
+
+  .ghs-streak-col + .ghs-streak-col {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .ghs-cal-grid,
+  .ghs-cal-days {
+    gap: 1px;
+  }
+
+  .ghs-cal-months {
+    font-size: 0.6rem;
+  }
+
+  .ghs-cal-days {
+    font-size: 0.55rem;
+  }
+
+  .ghs-cols-axis {
+    font-size: 0.6rem;
+  }
+
+  .ghs-col-cap {
+    font-size: 0.62rem;
+  }
+
+  .ghs-repo {
+    gap: 0.6rem;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .ghs-repo-rank {
+    display: none;
+  }
+
+  .ghs-tile {
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  .ghs-repo-head .ghs-name {
+    font-size: 0.82rem;
+  }
+
+  .ghs-repo-views {
+    min-width: 3.4rem;
+    font-size: 0.82rem;
+  }
+
+  .ghs-stack {
+    margin-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghs-kpi,
+  .ghs-lang,
+  .ghs-streak,
+  .ghs-periodo,
+  .ghs-stack-seg,
+  .ghs-ring-fill,
+  .ghs-col-bar,
+  .ghs-dia-barra,
+  .ghs-periodo-barra,
+  .ghs-bar,
+  .ghs-kpi.loading .ghs-kpi-value,
+  .ghs-status.loading p::after {
+    animation: none;
+  }
+
+  .ghs-lang:hover .ghs-ring-icon {
+    transform: none;
+  }
+}

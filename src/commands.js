@@ -60,6 +60,25 @@ export const commandList = {
     name: 'spotify',
     aliases: ['music'],
   },
+  stats: {
+    name: 'stats',
+    aliases: ['githubstats', 'ghstats'],
+    // Gráficos: stats --resumo | --linguagens | --atividade | --horarios | --repos | --tudo
+    // (ver data/gitHubStatsSections.js)
+    subcommands: [
+      '--resumo',
+      '--linguagens',
+      '--atividade',
+      '--horarios',
+      '--repos',
+      '--tudo',
+      '--summary',
+      '--languages',
+      '--activity',
+      '--hours',
+      '--all',
+    ],
+  },
   wakatime: {
     name: 'wakatime',
     aliases: ['time'],

@@ -21,6 +21,7 @@ import Ajuda from "./components/Ajuda";
 import Habilidades from "./components/Habilidades";
 import Spotify from "./components/Spotify";
 import WakaTime from "./components/WakaTime";
+import GitHubStats from "./components/GitHubStats";
 import Contato from "./components/Contato";
 import Curriculo from "./components/Curriculo";
 import BoasVindas from "./components/BoasVindas";
@@ -37,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "./theme/themeContext";
 import { parseSkillSkin } from "./data/skillSkins";
 import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
+import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -259,6 +261,20 @@ function App() {
           response = <WakaTime skin={skin} />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
           if (skin !== "cards") keepLastCommandAtTop();
+          break;
+        }
+        case "stats": {
+          // "stats" abre o resumo; "--linguagens", "--atividade", "--horarios",
+          // "--repos" e "--tudo" trocam o grupo de gráficos
+          // (ver data/gitHubStatsSections.js)
+          const section = parseGitHubStatsSection(args.slice(1));
+          if (!section) {
+            response = <TerminalOutput>{t("stats.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <GitHubStats section={section} />;
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          keepLastCommandAtTop();
           break;
         }
         case "neofetch":

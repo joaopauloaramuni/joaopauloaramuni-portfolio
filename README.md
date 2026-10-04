@@ -28,6 +28,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem três estilos: `skills --terminal` (padrão), `skills --cards` e `skills --lista`.
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
+* 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
@@ -515,7 +516,7 @@ src/
     useTerminalKeys.js   → hook do histórico (↑/↓) e do autocomplete (Tab)
     autocomplete.js      → função pura que decide o que completar
     terminalDom.js       → escreve no input da lib e controla o scroll
-  commands.js            → campo "subcommands" (tema, guestbook, skills e wakatime) usado pelo Tab
+  commands.js            → campo "subcommands" (tema, guestbook, skills, wakatime e stats) usado pelo Tab
   App.jsx                → liga o hook, executa o ?cmd= e lista as opções do Tab
   main.jsx               → envolve o App com o BrowserRouter
   i18n.js                → lê o ?lang= e traz as dicas do comando "ajuda"
@@ -1021,6 +1022,91 @@ src/
 > 🐳 No container do `Dockerfile` (NGINX), o caminho `/api/wakatime` não existe: os estilos `--terminal` (inclusive o `wakatime` sem opção), `--grade` e `--lista` mostram uma mensagem de erro e o `wakatime --cards` continua funcionando. Para usar os três, adicione um `location /api/wakatime/` com `proxy_pass https://wakatime.com/api/v1/users/<seu-usuario>/;` na configuração do NGINX.
 
 ✅ Pronto! A busca acontece uma vez por visita: trocar de estilo reaproveita os dados.
+
+-----
+
+## 📊 Guia do comando stats (GitHub Stats)
+
+O comando `stats` (aliases `githubstats` e `ghstats`) desenha as estatísticas do GitHub com ícones do `react-icons`, no mesmo estilo do `skills` e do `wakatime`. Cada opção abre um grupo de gráficos:
+
+| Comando | O que mostra |
+|:--|:--|
+| `stats` ou `stats --resumo` (`--summary`) | Perfil e 12 indicadores: contribuições, commits dos últimos 12 meses, PRs, issues, estrelas, forks, seguidores, repositórios, sequência atual, maior sequência, melhor dia e visitas ao perfil (padrão) |
+| `stats --linguagens` (`--languages`) | Barra com a fatia de cada linguagem e um card com anel de progresso e o logo de cada uma |
+| `stats --atividade` (`--activity`) | Card de sequências (total, atual e maior), calendário dos últimos 12 meses, contribuições por ano e por dia da semana |
+| `stats --horarios` (`--hours`) | Commits por hora do dia (horário de Brasília) e por período: madrugada, manhã, tarde e noite |
+| `stats --repos` (`--views`) | Ranking de visitas dos repositórios que têm o badge RepoViews no README |
+| `stats --tudo` (`--all`) | Todos os grupos, um embaixo do outro |
+
+Nos gráficos de colunas e no calendário, passe o mouse, toque ou use as setas (com o gráfico focado) para ver cada valor.
+
+### 1️⃣ De onde vêm os dados
+
+| Dado | Fonte | Observação |
+|:--|:--|:--|
+| Perfil, seguidores, estrelas e forks | [GitHub REST API](https://docs.github.com/rest) (`/users/:usuario` e `/users/:usuario/repos`) | Repositórios que começam com `trybe` ficam de fora (`HIDDEN_REPO_PREFIXES`) |
+| Linguagens (bytes de código) | [GitHub GraphQL API](https://docs.github.com/graphql), com o token | Uma chamada só para todos os repositórios; sem token, conta a linguagem principal de cada um |
+| PRs, issues e commits dos últimos 12 meses | Busca da GitHub API (`/search/issues` e `/search/commits`) | |
+| Horários dos commits | Busca de commits, uma amostra de 100 por trimestre | Cada amostra pesa o total do trimestre; o resultado é uma estimativa |
+| Contribuições, sequências e calendário | [github-contributions-api](https://github-contributions-api.jogruber.de) | O mesmo calendário do perfil, de todos os anos |
+| Visitas ao perfil | [komarev.com/ghpvc](https://komarev.com/ghpvc/?username=joaopauloaramuni) | Só lê: o contador só soma quando quem pede é o proxy de imagens do GitHub |
+| Visitas dos repositórios | [views-counter.vercel.app](https://views-counter.vercel.app) | Só os repositórios com o badge no README (`REPO_VIEWS_REPOS`). ⚠️ Cada leitura soma +1 no contador |
+
+> ⚠️ O views-counter não tem rota só de leitura: o `stats --repos` (e o `stats --tudo`) soma +1 visita em cada repositório. Por isso o resumo não lê esses contadores, e a leitura acontece uma vez por visita.
+
+Sem token, a GitHub API permite **60 chamadas por hora** e **10 buscas por minuto** por IP do visitante. Abrir todos os gráficos usa 2 chamadas comuns e 7 buscas; se o limite estourar, só o grupo afetado mostra o aviso.
+
+### 2️⃣ Proxy para os contadores de visitas
+
+O komarev e o views-counter não enviam `Access-Control-Allow-Origin`, então, como no WakaTime, o front chama caminhos do próprio site e quem repassa é o `server.proxy` do `vite.config.js` (`npm run dev` e `npm run preview`) e os `rewrites` do `vercel.json` (Vercel):
+
+```json
+{
+  "source": "/api/github/profile-views",
+  "destination": "https://komarev.com/ghpvc/?username=joaopauloaramuni"
+},
+{
+  "source": "/api/github/repo-views",
+  "destination": "https://views-counter.vercel.app/badge"
+}
+```
+
+O `stats --repos` só lê os repositórios listados em `REPO_VIEWS_REPOS` (os que têm o badge no README); ao colocar o badge num repositório novo, acrescente o nome na lista. O pageId vai na URL exatamente como está no badge do README, já codificado (`https%3A%2F%2Fgithub%2Ecom%2F<usuário>%2F<repo>`): o views-counter guarda cada forma de codificar como um contador diferente. Por isso o badge de todo repositório da lista precisa seguir esse mesmo formato.
+
+### 3️⃣ Token do GitHub
+
+Com o `VITE_GITHUB_TOKEN` (o mesmo do comando `github`), o `stats --linguagens` soma os **bytes de código** de cada linguagem em todos os repositórios, numa chamada só à GraphQL API (se ela recusar o token, cai para `/repos/:usuario/:repo/languages`, uma chamada por repositório). Sem token, conta a linguagem principal de cada repositório.
+
+As outras chamadas continuam sem token, no limite por IP de cada visitante, e só repetem com o token quando esse limite acaba (por exemplo, vários alunos na mesma rede da faculdade). O limite do token (5.000 chamadas por hora e 30 buscas por minuto) é um só para todos os visitantes, por isso ele fica de reserva.
+
+1. Em [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens), crie um **fine-grained token** com **Repository access → Public repositories (read-only)** e nenhuma outra permissão.
+2. Local: coloque no `.env.local` (`VITE_GITHUB_TOKEN=github_pat_...`) e reinicie o `npm run dev`.
+3. Vercel: em **Settings → Environment Variables**, crie `VITE_GITHUB_TOKEN` e faça um novo deploy (o Vite embute a variável no build).
+
+> ⚠️ Tudo que começa com `VITE_` vai para o build e fica visível no navegador. Por isso o token não deve ter nenhuma permissão além de ler repositórios públicos; no pior caso, alguém gasta o limite de chamadas dele.
+
+### 4️⃣ Trocar para o seu usuário
+
+1. Em `src/config/gitHubStatsConfig.js`, troque `USERNAME` e ajuste `TIME_ZONE`, `HIDDEN_REPO_PREFIXES` e `REPO_VIEWS_REPOS` (o `vite.config.js` lê esse arquivo).
+2. No `vercel.json`, troque `joaopauloaramuni` no `destination` do komarev.
+
+### 📂 Arquivos
+
+```text
+vercel.json                    → rewrites /api/github/* → komarev e views-counter (produção)
+vite.config.js                 → o mesmo proxy no npm run dev / preview
+src/
+  config/gitHubStatsConfig.js  → usuário, fuso, repositórios escondidos e repositórios com badge
+  lib/githubStats.js           → busca (com cache), sequências, horários e leitura dos badges
+  data/gitHubStatsSections.js  → grupos de gráficos e nomes aceitos (PT e EN)
+  data/wakaTimeLanguages.js    → ícone e cores de cada linguagem (compartilhado com o wakatime)
+  components/GitHubStats.jsx   → os grupos de gráficos (resumo é o padrão)
+  components/SkinsFooter.jsx   → rodapé "Gráficos:" (compartilhado com skills e wakatime)
+```
+
+> 🐳 No container do `Dockerfile` (NGINX), os caminhos `/api/github/*` não existem: as visitas ao perfil e o `stats --repos` mostram um aviso e o resto continua funcionando. Para usar os dois, adicione um `location` com `proxy_pass` para cada destino na configuração do NGINX.
+
+✅ Pronto! Cada fonte é buscada uma vez por visita: trocar de gráfico reaproveita os dados.
 
 -----
 

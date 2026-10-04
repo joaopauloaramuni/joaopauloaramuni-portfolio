@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import WAKATIME_CONFIG from './src/config/wakaTimeConfig.js'
+import GITHUB_STATS_CONFIG from './src/config/gitHubStatsConfig.js'
 
 // O WakaTime não libera CORS: o navegador chama /api/wakatime/... e o
 // servidor do Vite repassa para a API pública do usuário. Em produção quem
@@ -17,9 +18,28 @@ const wakatimeProxy = {
   },
 }
 
+// Comando "stats": os badges de visitas (komarev e views-counter) também não
+// liberam CORS. Em produção quem repassa são os rewrites do vercel.json.
+const { USERNAME, PROFILE_VIEWS_PATH, REPO_VIEWS_PATH } = GITHUB_STATS_CONFIG
+const githubStatsProxy = {
+  [PROFILE_VIEWS_PATH]: {
+    target: 'https://komarev.com',
+    changeOrigin: true,
+    rewrite: () => `/ghpvc/?username=${USERNAME}`,
+  },
+  [REPO_VIEWS_PATH]: {
+    target: 'https://views-counter.vercel.app',
+    changeOrigin: true,
+    // Mantém a query (?pageId=...&type=total)
+    rewrite: (path) => path.replace(REPO_VIEWS_PATH, '/badge'),
+  },
+}
+
+const proxy = { ...wakatimeProxy, ...githubStatsProxy }
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: { proxy: wakatimeProxy },
-  preview: { proxy: wakatimeProxy },
+  server: { proxy },
+  preview: { proxy },
 })
