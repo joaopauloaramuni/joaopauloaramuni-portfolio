@@ -307,9 +307,11 @@
   text-align: left;
 }
 
+/* Nome da linha quebra (cursos longos, como o mestrado); os números não */
 .lattes-tabela tbody th {
   color: var(--text);
   font-weight: 600;
+  white-space: normal;
 }
 
 .lattes-tabela td {
@@ -745,9 +747,6 @@
     gap: 0.5rem;
   }
 
-  .lattes-tabela tbody th {
-    white-space: normal;
-  }
 
   .lattes-pdf {
     flex-direction: column;

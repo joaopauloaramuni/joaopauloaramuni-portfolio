@@ -547,6 +547,8 @@ const resources = {
           ciencia_da_computacao: "Computer Science",
           engenharia_de_software: "Software Engineering",
           sistemas_de_informacao: "Information Systems",
+          sistemas_de_informacao_e_gestao_do_conhecimento:
+            "Master's in Information Systems and Knowledge Management",
           fisioterapia: "Physical Therapy",
         },
         disciplinas: {
@@ -1992,6 +1994,8 @@ const resources = {
           ciencia_da_computacao: "Ciência da Computação",
           engenharia_de_software: "Engenharia de Software",
           sistemas_de_informacao: "Sistemas de Informação",
+          sistemas_de_informacao_e_gestao_do_conhecimento:
+            "Mestrado em Sistemas de Informação e Gestão do Conhecimento",
           fisioterapia: "Fisioterapia",
         },
         disciplinas: {
