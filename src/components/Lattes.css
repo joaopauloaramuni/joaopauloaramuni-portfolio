@@ -1,6 +1,7 @@
 /* =====================================================================
    LATTES — comando "lattes", uma seção por opção:
-     lattes / lattes --resumo     totais, gráfico por ano e tabela (padrão)
+     lattes / lattes --resumo     card de docência, totais, gráfico por ano
+                                  e tabelas (padrão)
      lattes --docencia            tempo lecionando por instituição, curso e
                                   disciplina (gráficos e tabelas)
      lattes --tccs                TCCs orientados, por ano
@@ -170,6 +171,138 @@
 }
 
 /* ---------------------------------------------------------------------
+   Resumo: card de docência (os números do lattes --docencia), em cima dos
+   cards de trabalhos e com o mesmo fundo. Não tem cor própria: a cor fica
+   na barra de disciplinas, uma por instituição (--docencia-<id>).
+   --------------------------------------------------------------------- */
+.lattes-docencia {
+  position: relative;
+  container-type: inline-size; /* os números se ajeitam à largura do card */
+  margin: 0 0 1.5rem;
+  padding: 0.9rem 1rem 0.85rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: lattes-pop 0.45s ease both;
+}
+
+.lattes-docencia p {
+  margin: 0;
+}
+
+.lattes-docencia .lattes-kpi-icone {
+  color: var(--text-muted);
+}
+
+.lattes-docencia-titulo {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+/* Card estreito: o tempo numa linha só dele e, embaixo, disciplinas,
+   cursos e instituições em três colunas. Card largo: os quatro lado a lado. */
+.lattes-docencia-numeros {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.lattes-docencia-numero:first-child {
+  grid-column: 1 / -1;
+}
+
+@container (min-width: 44rem) {
+  .lattes-docencia-numeros {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .lattes-docencia-numero:first-child {
+    grid-column: auto;
+  }
+}
+
+/* No HTML o rótulo (dt) vem antes do valor (dd); aqui o valor sobe */
+.lattes-docencia-numero {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0.15rem;
+}
+
+.lattes-docencia-numero dd {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lattes-docencia-numero dt {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.lattes-docencia-barra-titulo {
+  margin-top: 1.1rem !important;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Barra de disciplinas: um segmento por instituição, largura proporcional
+   ao número de disciplinas, 2px entre eles e pontas arredondadas */
+.lattes-docencia-barra {
+  display: flex;
+  gap: 2px;
+  height: 12px;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.lattes-docencia-seg {
+  position: relative;
+  flex-basis: 0;
+  min-width: 3px;
+  background: var(--serie);
+  transform-origin: left center;
+  animation: lattes-cresce 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.lattes-docencia-seg:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.lattes-docencia-seg:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.lattes-legenda.lattes-docencia-legenda {
+  margin: 0;
+}
+
+.lattes-docencia-legenda-qtd {
+  color: var(--text-soft);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.lattes-docencia-educacao {
+  margin-top: 0.75rem !important;
+}
+
+.lattes-docencia-educacao strong {
+  color: var(--text-soft);
+}
+
+.lattes-docencia .lattes-kpi-cmd {
+  display: block;
+}
+
+/* ---------------------------------------------------------------------
    Resumo: barras empilhadas por ano
    --------------------------------------------------------------------- */
 .lattes-legenda {
@@ -249,8 +382,10 @@
   border-radius: 0 4px 4px 0;
 }
 
-/* Dica ao passar o mouse: "2025 · Bancas: 26" */
-.lattes-ano-seg::after {
+/* Dica ao passar o mouse: "2025 · Bancas: 26" (e, no card de docência,
+   "PUC Minas · 13 disciplinas · 3 anos lecionando") */
+.lattes-ano-seg::after,
+.lattes-docencia-seg::after {
   content: attr(data-tip);
   position: absolute;
   bottom: calc(100% + 6px);
@@ -269,11 +404,13 @@
   z-index: 2;
 }
 
-.lattes-ano-seg:hover::after {
+.lattes-ano-seg:hover::after,
+.lattes-docencia-seg:hover::after {
   opacity: 1;
 }
 
-.lattes-ano-seg:hover {
+.lattes-ano-seg:hover,
+.lattes-docencia-seg:hover {
   filter: brightness(1.15);
 }
 
@@ -343,6 +480,12 @@
 .lattes-tabela .lattes-tabela-total {
   color: var(--text);
   font-weight: 700;
+}
+
+/* Disciplinas lecionadas: separadas dos trabalhos por uma linha, porque o
+   Total soma só os trabalhos */
+.lattes-tabela .lattes-tabela-disciplinas {
+  border-right: 1px solid var(--border);
 }
 
 /* ---------------------------------------------------------------------
@@ -1085,6 +1228,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .lattes-kpi,
+  .lattes-docencia,
+  .lattes-docencia-seg,
   .lattes-pdf,
   .lattes-ano-seg,
   .lattes-tech-fill,
@@ -1121,6 +1266,10 @@
 @media (max-width: 600px) {
   .lattes-kpis {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lattes-docencia-numero dd {
+    font-size: 1.75rem;
   }
 
   .lattes-ano {

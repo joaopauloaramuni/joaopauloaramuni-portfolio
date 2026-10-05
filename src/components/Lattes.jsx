@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useId, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FaChalkboardTeacher,
@@ -6,6 +6,7 @@ import {
   FaFilePdf,
   FaLaptopCode,
   FaRocket,
+  FaUniversity,
   FaUserGraduate,
 } from "react-icons/fa";
 import { FiArrowUpRight, FiExternalLink } from "react-icons/fi";
@@ -27,6 +28,16 @@ import {
   isLastTerminalOutput,
   scrollLastCommandToTop,
 } from "../terminal/terminalDom";
+import {
+  CURSOS as CURSOS_LECIONADOS,
+  INSTITUICOES as INSTITUICOES_DE_ENSINO,
+  ITENS as DISCIPLINAS_LECIONADAS,
+  MESES_NA_EDUCACAO,
+  PRIMEIRO_ANO as PRIMEIRO_ANO_LECIONANDO,
+  TODOS_OS_MESES,
+  corStyle,
+  useDocencia,
+} from "../lib/docencia";
 import SkinsFooter from "./SkinsFooter";
 import LattesDocencia from "./LattesDocencia";
 import "./Lattes.css";
@@ -154,6 +165,94 @@ function GroupTitle({ title, detail }) {
 }
 
 /* ---------- lattes / lattes --resumo ---------- */
+
+// Card de docência (dados do docenciaData.js, os mesmos do lattes --docencia):
+// tempo lecionando, disciplinas, cursos e instituições de ensino, e uma barra
+// com as disciplinas de cada instituição, na cor dela. Fica em cima dos
+// trabalhos orientados ou avaliados, que vêm do Lattes.
+function Docencia() {
+  const { t } = useTranslation();
+  const f = useDocencia();
+  const tituloId = useId(); // o terminal pode ter vários "lattes" abertos
+  const cursos = new Set(DISCIPLINAS_LECIONADAS.flatMap((item) => item.cursos));
+  const numeros = [
+    {
+      key: "tempo",
+      valor: f.tempo(TODOS_OS_MESES.size),
+      rotulo: t("lattes.docencia.resumo.lecionando", { inicio: PRIMEIRO_ANO_LECIONANDO }),
+    },
+    {
+      key: "disciplinas",
+      valor: DISCIPLINAS_LECIONADAS.length,
+      rotulo: t("lattes.docencia.resumo.disciplinas", { count: DISCIPLINAS_LECIONADAS.length }),
+    },
+    {
+      key: "cursos",
+      valor: cursos.size,
+      rotulo: t("lattes.docencia.resumo.cursos", { count: cursos.size }),
+    },
+    {
+      key: "instituicoes",
+      valor: INSTITUICOES_DE_ENSINO.length,
+      rotulo: t("lattes.docencia.resumo.instituicoes", { count: INSTITUICOES_DE_ENSINO.length }),
+    },
+  ];
+
+  return (
+    <section className="lattes-docencia" aria-labelledby={tituloId}>
+      <FaUniversity className="lattes-kpi-icone" aria-hidden="true" />
+      <h4 id={tituloId} className="lattes-docencia-titulo">
+        {t("lattes.docencia.resumo.titulo")}
+      </h4>
+      {/* Rótulo (dt) antes do valor (dd) no HTML; o CSS põe o valor em cima */}
+      <dl className="lattes-docencia-numeros">
+        {numeros.map(({ key, valor, rotulo }) => (
+          <div key={key} className="lattes-docencia-numero">
+            <dt>{rotulo}</dt>
+            <dd>{valor}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <p className="lattes-docencia-barra-titulo">{t("lattes.docencia.resumo.barra")}</p>
+      {/* A legenda embaixo é a versão em texto da barra */}
+      <div className="lattes-docencia-barra" aria-hidden="true">
+        {INSTITUICOES_DE_ENSINO.map((instituicao) => (
+          <span
+            key={instituicao.id}
+            className="lattes-docencia-seg"
+            style={{ ...corStyle(instituicao.id), flexGrow: instituicao.itens.length }}
+            data-tip={[
+              instituicao.sigla,
+              t("lattes.kpi.disciplinas", { count: instituicao.itens.length }),
+              f.lecionando(instituicao.total),
+            ].join(" · ")}
+          />
+        ))}
+      </div>
+      <ul className="lattes-legenda lattes-docencia-legenda">
+        {INSTITUICOES_DE_ENSINO.map((instituicao) => (
+          <li key={instituicao.id} style={corStyle(instituicao.id)}>
+            <span className="lattes-legenda-cor" aria-hidden="true" />
+            {instituicao.sigla}
+            <span className="lattes-docencia-legenda-qtd">{instituicao.itens.length}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Com os cargos de coordenação e liderança (Trybe), o tempo na educação */}
+      {MESES_NA_EDUCACAO.size > TODOS_OS_MESES.size && (
+        <p className="lattes-kpi-detalhe lattes-docencia-educacao">
+          {t("lattes.docencia.educacao_antes")} <strong>{f.tempo(MESES_NA_EDUCACAO.size)}</strong>{" "}
+          {t("lattes.docencia.educacao_depois")}
+        </p>
+      )}
+      <code className="lattes-kpi-cmd">
+        <span>lattes</span> <span>--{t("lattes.skins.docencia")}</span>
+      </code>
+    </section>
+  );
+}
 
 // "206 trabalhos orientados ou avaliados desde 2017"
 function Total() {
@@ -300,8 +399,41 @@ function countBy(series, keyOf) {
     .sort((a, b) => (a.id ? 0 : 1) - (b.id ? 0 : 1) || b.total - a.total);
 }
 
-// Tabela linha × tipo (também é a versão em texto do gráfico)
-function Tabela({ cabecalho, series, rows, nome, detalhe }) {
+// Junta às linhas dos trabalhos (countBy) as disciplinas lecionadas, pela
+// mesma chave (sigla da instituição ou id do curso). Instituições e cursos
+// só da docência (Newton Paiva, Redes de Computadores...) ganham linha nova,
+// sem trabalhos. A ordem é a de quem tem mais atividade (trabalhos +
+// disciplinas); no empate, mais disciplinas primeiro.
+function juntarDocencia(rows, series, docencia) {
+  const porId = new Map(rows.map((row) => [row.id, { ...row, disciplinas: 0 }]));
+  for (const linha of docencia) {
+    const row = porId.get(linha.id) ?? {
+      id: linha.id,
+      item: null,
+      counts: Object.fromEntries(series.map((serie) => [serie.key, 0])),
+      instituicoes: new Set(),
+      total: 0,
+    };
+    porId.set(linha.id, {
+      ...row,
+      disciplinas: linha.disciplinas,
+      modalidade: linha.modalidade,
+      instituicoes: new Set([...row.instituicoes, ...(linha.instituicoes ?? [])]),
+    });
+  }
+  const atividade = (row) => row.total + row.disciplinas;
+  return [...porId.values()].sort(
+    (a, b) =>
+      (a.id ? 0 : 1) - (b.id ? 0 : 1) ||
+      atividade(b) - atividade(a) ||
+      b.disciplinas - a.disciplinas
+  );
+}
+
+// Tabela linha × tipo (também é a versão em texto do gráfico). Com
+// `disciplinas`, ganha antes dos tipos a coluna das disciplinas lecionadas,
+// separada por uma linha: o Total soma só os trabalhos.
+function Tabela({ cabecalho, series, rows, nome, detalhe, disciplinas = false }) {
   const { t } = useTranslation();
   return (
     <div className="lattes-tabela-wrap">
@@ -309,6 +441,14 @@ function Tabela({ cabecalho, series, rows, nome, detalhe }) {
         <thead>
           <tr>
             <th scope="col">{cabecalho}</th>
+            {disciplinas && (
+              <th scope="col" className="lattes-tabela-disciplinas">
+                <span className="lattes-th-longo">{t("lattes.tabela.disciplinas")}</span>
+                <abbr className="lattes-th-curto" title={t("lattes.tabela.disciplinas")}>
+                  {t("lattes.tabela.disciplinas_curta")}
+                </abbr>
+              </th>
+            )}
             {series.map(({ key }) => (
               <th key={key} scope="col">
                 <span className="lattes-th-longo">{t(`lattes.legenda.${key}`)}</span>
@@ -327,10 +467,13 @@ function Tabela({ cabecalho, series, rows, nome, detalhe }) {
                 {nome(row)}
                 {detalhe?.(row) && <span className="lattes-tabela-sub">{detalhe(row)}</span>}
               </th>
+              {disciplinas && (
+                <td className="lattes-tabela-disciplinas">{row.disciplinas || "—"}</td>
+              )}
               {series.map(({ key }) => (
                 <td key={key}>{row.counts[key] || "—"}</td>
               ))}
-              <td className="lattes-tabela-total">{row.total}</td>
+              <td className="lattes-tabela-total">{row.total || "—"}</td>
             </tr>
           ))}
         </tbody>
@@ -339,34 +482,79 @@ function Tabela({ cabecalho, series, rows, nome, detalhe }) {
   );
 }
 
+// As 5 instituições em que lecionei, mesmo as sem trabalhos no Lattes.
+// O Lattes usa a sigla ("PUC Minas", "FUMEC"), a mesma do docenciaData.js.
 function PorInstituicao() {
   const { t } = useTranslation();
-  const rows = useMemo(() => countBy(SERIES, (item) => item.instituicao), []);
+  const rows = useMemo(
+    () =>
+      juntarDocencia(
+        countBy(SERIES, (item) => item.instituicao),
+        SERIES,
+        INSTITUICOES_DE_ENSINO.map((instituicao) => ({
+          id: instituicao.sigla,
+          disciplinas: instituicao.itens.length,
+        }))
+      ),
+    []
+  );
   return (
-    <Tabela
-      cabecalho={t("lattes.tabela.instituicao")}
-      series={SERIES}
-      rows={rows}
-      nome={(row) => row.id || t("lattes.sem_instituicao")}
-    />
+    <>
+      <Tabela
+        cabecalho={t("lattes.tabela.instituicao")}
+        series={SERIES}
+        rows={rows}
+        nome={(row) => row.id || t("lattes.sem_instituicao")}
+        disciplinas
+      />
+      <p className="lattes-tabela-nota">
+        {t("lattes.nota_disciplinas_total", { cmd: `lattes --${t("lattes.skins.docencia")}` })}
+      </p>
+    </>
   );
 }
 
 // Ciência da Computação existe na FUMEC e na PUC: a linha junta as duas e
 // mostra as instituições embaixo do nome
+// Os cursos da docência entram também (Redes de Computadores, Desenvolvimento
+// Web...), com a modalidade quando todas as disciplinas do curso têm a mesma,
+// como no lattes --docencia: "Arquitetura de Software (Bootcamp)"
 function PorCurso() {
   const { t } = useTranslation();
-  const course = useCourse();
-  const rows = useMemo(() => countBy(SERIES_COM_CURSO, (item) => item.cursoId), []);
+  const f = useDocencia();
+  const rows = useMemo(
+    () =>
+      juntarDocencia(
+        countBy(SERIES_COM_CURSO, (item) => item.cursoId),
+        SERIES_COM_CURSO,
+        CURSOS_LECIONADOS.map((curso) => ({
+          id: curso.id,
+          disciplinas: curso.itens.length,
+          modalidade: curso.modalidade,
+          instituicoes: curso.siglas,
+        }))
+      ),
+    []
+  );
+  // Curso traduzido quando a chave existe; senão, o nome como está no Lattes
+  const nome = (row) => {
+    if (!row.id) return t("lattes.sem_curso");
+    const curso = t(`lattes.cursos.${row.id}`, { defaultValue: row.item?.curso ?? row.id });
+    return row.modalidade
+      ? t(`lattes.docencia.modalidades.${row.modalidade}`, { curso })
+      : curso;
+  };
   return (
     <>
       <Tabela
         cabecalho={t("lattes.tabela.curso")}
         series={SERIES_COM_CURSO}
         rows={rows}
-        nome={(row) => (row.id ? course(row.item) : t("lattes.sem_curso"))}
-        detalhe={(row) => [...row.instituicoes].sort().join(" · ")}
+        nome={nome}
+        detalhe={(row) => [...row.instituicoes].sort((a, b) => a.localeCompare(b, f.locale)).join(" · ")}
+        disciplinas
       />
+      <p className="lattes-tabela-nota">{t("lattes.nota_disciplinas_curso")}</p>
       {agencia.length > 0 && <p className="lattes-tabela-nota">{t("lattes.nota_aes_curso")}</p>}
     </>
   );
@@ -416,6 +604,7 @@ function Resumo() {
   const { t } = useTranslation();
   return (
     <>
+      <Docencia />
       <Total />
       <Kpis />
       <h4 className="lattes-secao-titulo">{t("lattes.por_ano")}</h4>

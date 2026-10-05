@@ -434,7 +434,7 @@ const { theme, setTheme, toggleTheme } = useTheme();
 | `--lattes-interdisciplinares` | `#4f8ff7` | `#1d4ed8` | Trabalhos interdisciplinares (`lattes`) |
 | `--lattes-aes` | `#d0609f` | `#9d1d7a` | Projetos da Agência Experimental de Software (`lattes`) |
 | `--lattes-bancas` | `#bf8a12` | `#92400e` | Bancas (`lattes`) |
-| `--docencia-puc` | `#2393f1` | `#0076d3` | PUC Minas no `lattes --docencia` (linha do tempo, barras e tabelas) |
+| `--docencia-puc` | `#2393f1` | `#0076d3` | PUC Minas no `lattes --docencia` (linha do tempo, barras e tabelas) e no card de docência do resumo |
 | `--docencia-newton` | `#be5a55` | `#8c2d2b` | Newton Paiva (`lattes --docencia`) |
 | `--docencia-igti` | `#a59000` | `#a46400` | IGTI (`lattes --docencia`) |
 | `--docencia-trybe` | `#1aa598` | `#00897d` | Trybe (`lattes --docencia`) |
@@ -1217,7 +1217,7 @@ O comando `lattes` (aliases `cnpq` e `academic`) mostra a parte acadêmica do me
 
 | Comando | O que mostra |
 |:--|:--|
-| `lattes` ou `lattes --resumo` (`--summary`) | O total geral, os quatro totais (com período, alunos orientados, disciplinas, cursos e parcerias), um gráfico de barras empilhadas por ano (TCCs, interdisciplinares, AES e bancas, cada um com sua cor), as tabelas por instituição e por curso e as tecnologias mais usadas nos projetos (padrão) |
+| `lattes` ou `lattes --resumo` (`--summary`) | Um card de docência (tempo lecionando, disciplinas lecionadas, cursos e instituições de ensino, com uma barra das disciplinas de cada instituição), o total de trabalhos, os quatro totais (com período, alunos orientados, disciplinas, cursos e parcerias), um gráfico de barras empilhadas por ano (TCCs, interdisciplinares, AES e bancas, cada um com sua cor), as tabelas por instituição e por curso (com a coluna de disciplinas lecionadas, inclusive nas instituições e cursos em que só lecionei) e as tecnologias mais usadas nos projetos (padrão) |
 | `lattes --docencia` (`--teaching`, `--disciplinas`) | O tempo total lecionando, um card por instituição, a linha do tempo (uma faixa por instituição, de 2016 até hoje), barras de tempo por instituição, por curso e por disciplina (separadas por instituição, com o curso embaixo de cada disciplina) e uma tabela por instituição com disciplina, curso, quantidade de semestres (de turmas, na Trybe), tempo e período. Cada instituição tem sua cor |
 | `lattes --tccs` (`--theses`, `--tcc`) | Os TCCs orientados, agrupados por ano, com alunos, instituição e curso |
 | `lattes --tis` (`--ti`, `--interdisciplinares`, `--interdisciplinary`) | Os trabalhos interdisciplinares, um grupo por disciplina (Trabalho Interdisciplinar I, II, III e V, com o curso de cada uma), em cards com descrição, tecnologias e a equipe |
@@ -1261,7 +1261,9 @@ O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob de
 
 As disciplinas ficam em `src/data/docenciaData.js`, uma por objeto, com a instituição, os cursos e os semestres em que foram lecionadas (`semestres("2024.2", "2026.1")` gera a lista de semestres). O campo `modalidade` (`ead`, `bootcamp` ou `curso_livre`) entra junto do nome do curso, como em "Arquitetura de Software (Bootcamp)". A Trybe, curso livre, usa `meses` no lugar de semestres, `turmas` (a tabela mostra "Qtd. de Turmas") e `modulo` (o módulo Ciência da Computação com Python, do curso de Desenvolvimento Web). Começou a lecionar uma disciplina nova ou fechou mais um semestre? Edite esse arquivo.
 
-No mesmo arquivo, a lista `cargos` guarda os cargos de cada instituição como no LinkedIn. Hoje só a Trybe tem: depois dos 8 meses lecionando (Especialista em Instrução), vieram cargos de coordenação e liderança até junho de 2023. Eles entram no tempo total da instituição (cards, linha do tempo e "tempo por instituição", onde aparecem vazados, só com o contorno) e numa tabela própria, mas não no tempo lecionando. O resumo mostra os dois: 8 anos e meio lecionando e 11 anos na educação. O nome em inglês fica em `lattes.docencia.disciplinas.<id>` no `i18n.js`.
+No mesmo arquivo, a lista `cargos` guarda os cargos de cada instituição como no LinkedIn. Hoje só a Trybe tem: depois dos 8 meses lecionando (Especialista em Instrução), vieram cargos de coordenação e liderança até junho de 2023. Eles entram no tempo total da instituição (cards, linha do tempo e "tempo por instituição", onde aparecem vazados, só com o contorno) e numa tabela própria, mas não no tempo lecionando. O total do `lattes --docencia` mostra os dois: 8 anos e meio lecionando e 11 anos na educação. O nome em inglês fica em `lattes.docencia.disciplinas.<id>` no `i18n.js`.
+
+O `lattes --resumo` usa os mesmos dados. No topo, um card de docência mostra o tempo lecionando, as disciplinas lecionadas, os cursos e as instituições de ensino, com uma barra das disciplinas de cada instituição na cor dela (passe o mouse para ver o tempo lecionando em cada uma). As tabelas por instituição e por curso ganham a coluna **Disciplinas**, separada dos trabalhos por uma linha: o Total continua somando só os trabalhos do Lattes. As instituições e os cursos em que só lecionei (Newton Paiva, IGTI, Trybe, Redes de Computadores...) também aparecem, e as linhas vão de quem tem mais atividade (trabalhos + disciplinas) para quem tem menos. Na tabela por curso, uma disciplina oferecida para mais de um curso (como as da Newton Paiva) conta em cada um deles. Os cálculos (meses de cada disciplina, uniões por instituição e por curso) e a formatação do tempo ficam no `src/lib/docencia.js`, usado pelas duas seções.
 
 Os tempos são calculados em meses (um semestre = 6 meses). O tempo de uma instituição ou de um curso é a **união** dos meses das disciplinas, então dois semestres com várias disciplinas ao mesmo tempo contam uma vez só. Dentro de cada instituição, as disciplinas aparecem por curso (primeiro o curso com mais tempo, como Engenharia de Software na PUC) e, dentro dele, da mais longa para a mais curta. As cinco cores das instituições (`--docencia-puc`, `--docencia-newton`, `--docencia-igti`, `--docencia-trybe` e `--docencia-fumec`, no `theme.css`) foram validadas como paleta categórica nos dois temas: separação para daltonismo, separação sem daltonismo e contraste ≥ 3:1 no fundo do terminal.
 
@@ -1273,7 +1275,8 @@ src/
   data/lattesData.js        → dados gerados pelo script (não edite à mão)
   data/docenciaData.js      → disciplinas lecionadas e seus semestres (mantido à mão)
   data/lattesSections.js    → seções do comando e nomes aceitos (PT e EN)
-  components/Lattes.jsx     → resumo, listas, cards e o card de download
+  lib/docencia.js           → cálculos e formatação da docência (lattes --docencia e card do resumo)
+  components/Lattes.jsx     → resumo (com o card de docência), listas, cards e o card de download
   components/LattesDocencia.jsx → lattes --docencia: cards, linha do tempo, barras e tabelas
   components/Lattes.css     → gráficos, tabelas, listas e cards, com layout para celular
   theme/theme.css           → cor de cada tipo (--lattes-*) e de cada instituição (--docencia-*)
