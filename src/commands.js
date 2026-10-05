@@ -31,6 +31,26 @@ export const commandList = {
     name: 'curriculo',
     aliases: ['resume'],
   },
+  lattes: {
+    name: 'lattes',
+    aliases: ['cnpq', 'academic'],
+    // Seções: lattes --resumo | --tccs | --tis | --aes | --bancas | --tudo | --pdf
+    // (ver data/lattesSections.js)
+    subcommands: [
+      '--resumo',
+      '--tccs',
+      '--tis',
+      '--aes',
+      '--bancas',
+      '--tudo',
+      '--pdf',
+      '--summary',
+      '--theses',
+      '--interdisciplinary',
+      '--committees',
+      '--all',
+    ],
+  },
   habilidades: {
     name: 'habilidades',
     aliases: ['skills'],

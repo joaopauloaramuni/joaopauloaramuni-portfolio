@@ -127,6 +127,7 @@ Alguns cuidados com as chaves:
 │   ├── config/            → configuração do EmailJS, da GitHub API, do GitHub Stats e do WakaTime
 │   ├── lib/               → cliente do Supabase (Livro de Visitas) e buscas do WakaTime e do GitHub Stats
 │   └── theme/             → tokens de cor, contexto e ThemeProvider
+├── scripts/               → script que importa o currículo Lattes (npm run lattes)
 ├── .github/workflows/     → workflow que mantém o Supabase ativo
 ├── vercel.json            → rewrites que repassam /api/wakatime e /api/github/* (contadores de visitas)
 ├── .env.example           → modelo das variáveis de ambiente
@@ -338,6 +339,7 @@ O que trocar para deixar o portfólio com a sua cara:
 | `src/i18n.js` | Biografia, cargos, descrições e todos os textos |
 | `src/data/*.js` | Projetos, experiências, habilidades, prêmios e recomendações |
 | `public/` | Avatar, logos, imagens dos projetos, favicon e os currículos `cv-pt.pdf` / `cv-en.pdf` |
+| `scripts/lattes.mjs` | Rode `npm run lattes -- <CV_xxx.zip> [curriculo.pdf]` com a exportação do **seu** Lattes (veja o guia do comando lattes no README) |
 | `src/config/gitHubApiConfig.js` | `USERNAME` do GitHub |
 | `src/components/Contato.jsx` | Links de LinkedIn, GitHub, e-mail, WhatsApp, Discord e Instagram |
 | `src/components/Calendly.jsx` | URL do seu Calendly |

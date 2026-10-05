@@ -31,6 +31,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
+* 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
@@ -1198,6 +1199,65 @@ src/
 ```
 
 ✅ Pronto! Não há API nem chave: tudo é calculado no navegador, a partir dos arquivos de dados.
+
+-----
+
+## 🎓 Guia do comando lattes (currículo Lattes)
+
+O comando `lattes` (aliases `cnpq` e `academic`) mostra a parte acadêmica do meu [currículo Lattes](http://lattes.cnpq.br/1208427665892059): os TCCs que orientei, os trabalhos interdisciplinares que orientei na PUC Minas, os projetos da Agência Experimental de Software (AES) e as bancas de que participei. Cada opção abre uma seção:
+
+| Comando | O que mostra |
+|:--|:--|
+| `lattes` ou `lattes --resumo` (`--summary`) | O total geral, os quatro totais (com período, alunos orientados, disciplinas, cursos e parcerias), um gráfico de barras empilhadas por ano (TCCs, interdisciplinares, AES e bancas, cada um com sua cor), as tabelas por instituição e por curso e as tecnologias mais usadas nos projetos (padrão) |
+| `lattes --tccs` (`--theses`, `--tcc`) | Os TCCs orientados, agrupados por ano, com alunos, instituição e curso |
+| `lattes --tis` (`--ti`, `--interdisciplinares`, `--interdisciplinary`) | Os trabalhos interdisciplinares, um grupo por disciplina (Trabalho Interdisciplinar I, II, III e V, com o curso de cada uma), em cards com descrição, tecnologias e a equipe |
+| `lattes --aes` (`--agencia`, `--agency`) | Os projetos da Agência Experimental de Software, agrupados por ano, nos mesmos cards dos TIs e com o parceiro de cada projeto |
+| `lattes --bancas` (`--committees`) | As bancas de trabalhos de conclusão, agrupadas por ano, com o candidato, a instituição e os outros membros da banca |
+| `lattes --tudo` (`--all`) | Todas as seções acima, uma embaixo da outra |
+| `lattes --pdf` (`--download`) | Um card para baixar o PDF completo do Lattes, abrir em outra aba ou ir para o Lattes online |
+
+Os links diretos funcionam como nos outros comandos: [aramuni.dev/?cmd=lattes --pdf](https://aramuni.dev/?cmd=lattes%20--pdf).
+
+### 1️⃣ De onde vêm os dados
+
+Tudo sai da exportação XML do Lattes. Na Plataforma Lattes, em **Atualizar currículo**, use **Exportar** → **XML** para baixar o `CV_<id>.zip`, e **Imprimir** → **Salvar como PDF** para gerar o PDF. Depois, rode:
+
+```bash
+npm run lattes -- ~/Downloads/CV_1208427665892059.zip ~/Downloads/curriculo-lattes.pdf
+```
+
+O script `scripts/lattes.mjs` (sem dependências) lê o `.zip` (ou o `.xml` já descompactado), converte do ISO-8859-1 e grava `src/data/lattesData.js`. Como o ISO-8859-1 não tem aspas curvas nem travessão, o Lattes exporta esses caracteres como `?` (`O “Partiu!”` vira `O ?Partiu!?`); o script devolve as aspas e o travessão. Ele também junta grafias diferentes da mesma tecnologia (`NextJs`, `Next.Js` e `NextJS` viram `Next.js`) e, quando a descrição de um projeto termina com um link, usa esse link no card. O PDF é opcional: se for passado, é copiado para `public/lattes.pdf` e o número de páginas e o tamanho entram no card do `lattes --pdf`.
+
+| Seção | No XML do Lattes |
+|:--|:--|
+| TCCs orientados | `OUTRAS-ORIENTACOES-CONCLUIDAS` com natureza `TRABALHO_DE_CONCLUSAO_DE_CURSO_GRADUACAO` |
+| Trabalhos interdisciplinares | `SOFTWARE` com título no formato `Nome (Trabalho Interdisciplinar V: Aplicações Distribuídas - PUC Minas)`. O curso vem das atividades de ensino (`ENSINO`), onde a disciplina aparece dentro do curso |
+| Projetos da AES | `SOFTWARE` com título no formato `Nome (Agência Experimental de Software - PUC Minas)` ou, com parceiro, `Nome (MRV Engenharia e Agência Experimental de Software - PUC Minas)` |
+| Bancas | `PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO` (graduação, especialização, mestrado, qualificação e doutorado) |
+
+### 2️⃣ Privacidade
+
+⚠️ O XML do Lattes traz **CPF, RG, data de nascimento, nome dos pais e endereço residencial**. Por isso ele nunca é publicado: o script grava em `lattesData.js` só o que o comando mostra, e o `.gitignore` ignora `CV_*.zip` e `*.xml` na raiz do projeto. O PDF gerado pelo Lattes é a versão pública do currículo, sem esses dados.
+
+### 3️⃣ Atualizando
+
+Atualizou o Lattes? Exporte de novo e rode o mesmo comando. Como o `lattesData.js` tem um item por linha, o diff do commit mostra só o que entrou ou mudou. Para um curso ou disciplina nova aparecer traduzida em inglês, acrescente a chave em `lattes.cursos` ou `lattes.disciplinas` no `i18n.js`; sem a chave, o nome aparece como está no Lattes.
+
+O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob demanda (`React.lazy` no `App.jsx`): o código só é baixado na primeira vez que o comando roda.
+
+### 📂 Arquivos
+
+```text
+scripts/lattes.mjs          → importa o XML (.zip ou .xml) e o PDF do Lattes (npm run lattes)
+src/
+  data/lattesData.js        → dados gerados pelo script (não edite à mão)
+  data/lattesSections.js    → seções do comando e nomes aceitos (PT e EN)
+  components/Lattes.jsx     → resumo, listas, cards e o card de download
+  components/Lattes.css     → gráfico por ano, tabela, listas e cards, com layout para celular
+  theme/theme.css           → cor de cada tipo (--lattes-tccs, --lattes-interdisciplinares, --lattes-aes, --lattes-bancas)
+public/
+  lattes.pdf                → PDF do currículo, baixado pelo lattes --pdf
+```
 
 -----
 

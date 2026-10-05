@@ -25,3 +25,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exportação do Lattes: o XML tem CPF, RG e endereço (npm run lattes)
+/CV_*.zip
+/*.xml

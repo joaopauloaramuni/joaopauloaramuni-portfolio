@@ -36,7 +36,7 @@ export const DISCIPLINAS = {
   spring: { sigla: "Spring" },
   devlabs: { sigla: "DevLabs" },
   aeds1: { sigla: "AEDS I" },
-  oficinas: { sigla: "Oficinas" },
+  oficina_diw: { sigla: "Oficina DIW" },
 };
 
 // Prédios mais usados (só para não repetir o nome do edifício)
@@ -130,6 +130,9 @@ export const AULAS = [
     codigo: "4354.1.03",
     local: { ...FERNANDA, andar: 3, sala: "302" },
   },
-  { dia: 5, inicio: "13:30", fim: "15:10", campus: "lourdes", disciplina: "oficinas", curso: "CC" },
+  {
+    dia: 5, inicio: "13:30", fim: "15:10", campus: "lourdes", disciplina: "oficina_diw", curso: "CC",
+    local: { ...FERNANDA, andar: 13, espaco: "Laboratório", sala: "1301" },
+  },
   { dia: 5, inicio: "17:00", fim: "18:00", campus: "oficinas", disciplina: "aeds1" },
 ];

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from "react";
 import Terminal, {
   ColorMode,
   TerminalInput,
@@ -41,6 +41,11 @@ import { parseSkillSkin } from "./data/skillSkins";
 import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 import { parseCalSkin } from "./data/calSkins";
+import { parseLattesSection } from "./data/lattesSections";
+
+// O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas): o código dele
+// só é baixado na primeira vez que o comando roda
+const Lattes = lazy(() => import("./components/Lattes"));
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -210,6 +215,24 @@ function App() {
         case "curriculo":
           response = <Curriculo />;
           break;
+        case "lattes": {
+          // "lattes" abre o resumo; "--tccs", "--tis" (interdisciplinares),
+          // "--aes", "--bancas" e "--tudo" trocam a seção e "--pdf" mostra o card de
+          // download (ver data/lattesSections.js e scripts/lattes.mjs)
+          const section = parseLattesSection(args.slice(1));
+          if (!section) {
+            response = <TerminalOutput>{t("lattes.uso")}</TerminalOutput>;
+            break;
+          }
+          response = (
+            <Suspense fallback={<TerminalOutput>{t("lattes.carregando")}</TerminalOutput>}>
+              <Lattes section={section} />
+            </Suspense>
+          );
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          if (section !== "pdf") keepLastCommandAtTop();
+          break;
+        }
         case "cal": {
           // "cal" abre o mês; "--semana" mostra a grade e "--hoje" a agenda
           // do dia (ver data/calSkins.js e data/horarioData.js)
