@@ -55,6 +55,10 @@ html {
 .react-terminal-wrapper {
   width: 100%;
   box-sizing: border-box;
+  /* A lib usa 75px em cima e 35px embaixo: 60px ainda livra a barra de
+     título (bolinhas, nome e idioma vão até ~46px) e devolve altura útil */
+  padding-top: 60px !important;
+  padding-bottom: 20px !important;
   padding-right: 16px !important;
   flex: 1;
   display: flex;

@@ -49,6 +49,35 @@ const BoasVindas = () => {
               {t("boasvindas.cargo1")}
             </a>
           </li>
+          {/* Dois links na mesma linha: o item não é um <a>, cada nome é */}
+          <li>
+            <span className="icon-link icon-link-multi">
+              <IoBriefcaseOutline
+                className="icon"
+                style={{ color: "var(--icon-work)" }}
+              />
+              <span>
+                {t("boasvindas.consultoria")}{" "}
+                <a
+                  href="https://www.linkedin.com/company/jedis/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-link"
+                >
+                  JDSDEV
+                </a>
+                {" - "}
+                <a
+                  href="https://www.jedis.com.br/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-link"
+                >
+                  Jedis Tecnologia
+                </a>
+              </span>
+            </span>
+          </li>
           <li>
             <a
               href="https://icei.pucminas.br/aes"

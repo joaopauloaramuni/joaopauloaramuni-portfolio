@@ -367,7 +367,7 @@ function App() {
           colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
           onInput={isTerminalPaused ? undefined : handleInput}
           prompt={myPrompt}
-          height="calc(100dvh - 110px)"
+          height="calc(100dvh - 80px)" /* 60px + 20px de padding do .react-terminal-wrapper (App.css) */
         >
           {terminalLineData}
         </Terminal>

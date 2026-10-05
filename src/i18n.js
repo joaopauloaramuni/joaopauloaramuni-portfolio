@@ -45,6 +45,7 @@ const resources = {
         subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Welcome to my Portfolio",
         cargo1: "Software Engineering and Computer Science Professor at PUC Minas",
+        consultoria: "Technology Consultant at",
         cargo2: "CTO at the Experimental Software Agency",
         orientacao: "Undergraduate Student Advisor",
         formacao1:
@@ -1625,6 +1626,7 @@ const resources = {
         subtitulo: "Prof. Dr. João Paulo Carneiro Aramuni",
         bemvindo: "$ Boas-vindas ao meu Portfólio",
         cargo1: "Professor de Engenharia de Software e Ciência da Computação na PUC Minas",
+        consultoria: "Consultor de Tecnologia na",
         cargo2: "CTO na Agência Experimental de Software",
         orientacao: "Orientador de TCCI e TCCII",
         formacao1:
