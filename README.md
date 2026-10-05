@@ -67,6 +67,62 @@ O portfólio integra componentes como **ProjectCard** e **ExperienceCard**, exib
 
 -----
 
+## 🧩 Diagrama de Componentes e Implantação
+
+<a href="https://joaopauloaramuni.github.io/react-imgs/joaopauloaramuni-portfolio/imgs/diagrama-componentes-implantacao-portfolio.png">
+  <img src="https://joaopauloaramuni.github.io/react-imgs/joaopauloaramuni-portfolio/imgs/diagrama-componentes-implantacao-portfolio-v2.png" alt="Diagrama de componentes e implantação do portfólio" width="100%"/>
+</a>
+
+> 🔍 Clique na imagem para abrir em tamanho original e dar zoom.
+
+O diagrama junta duas visões da arquitetura: **componentes** (que partes o código tem e com quem cada uma conversa) e **implantação** (onde cada parte roda). Ele se lê da esquerda para a direita, do código até os serviços externos.
+
+### 🗺️ As quatro áreas
+
+1. **Código & CI/CD (à esquerda)**
+   - A máquina do desenvolvedor roda o `npm run dev` e o `npm run lattes`, que lê a exportação XML da Plataforma Lattes e gera o `src/data/lattesData.js`.
+   - Cada `git push` no GitHub dispara o deploy automático na Vercel.
+   - O GitHub Actions (`keep-supabase-awake.yml`) faz uma requisição ao Supabase a cada 12 horas para o projeto gratuito não entrar em pausa.
+   - Logo abaixo fica a implantação alternativa com Docker: um stage de build com Node e um stage com NGINX, que usa o `nginx.conf` para repassar `/api/*`.
+
+2. **Vercel (no centro, em cima)**
+   - O visitante acessa `aramuni.dev` pelo navegador, no computador ou no celular.
+   - O build roda `npm ci` e `vite build`, com as variáveis `VITE_*` embutidas, e gera a pasta `dist/`.
+   - A Edge Network (CDN) entrega o `dist/` ao navegador.
+   - Os rewrites do `vercel.json` funcionam como proxy para as três APIs que não liberam CORS.
+
+3. **Navegador do visitante (no centro, embaixo)**
+   - É onde a aplicação roda de fato: uma SPA em React 19, empacotada pelo Vite.
+   - O `main.jsx` monta o roteador (que lê `?cmd=` e `?lang=`), o tema e o i18n. O `App.jsx` é o terminal, que resolve cada comando pelo `commands.js`.
+   - Os comandos de **conteúdo local** (`sobre`, `projetos`, `lattes`...) só leem arquivos de `src/data/`, sem chamadas de rede.
+   - Os comandos de **integração** (coluna da direita) chamam serviços externos com a ajuda dos módulos de `src/lib/` e `src/config/`.
+   - Na parte de baixo está o fluxo de um comando, do que o visitante digita até a saída no terminal.
+
+4. **Serviços externos (à direita)**
+   - Em laranja, as APIs acessadas pelo proxy: WakaTime, komarev e views-counter.
+   - Em verde, os serviços chamados direto do navegador: GitHub API, GitHub Contributions, OpenGraph, helio-github-stats, Spotify, Last.fm, Calendly, unpkg, EmailJS e Supabase (com o PostgreSQL por trás).
+
+### 🎨 Como ler as setas
+
+| Seta | Significado |
+|:--|:--|
+| Preta, com duas pontas | Requisição do visitante (HTTPS) |
+| Azul | Chamada direta do navegador (`fetch`, SDK, `<img>`, `<iframe>`, `<script>`) |
+| Laranja | Chamada via proxy: `/api/*` repassado pelos rewrites da Vercel (ou pelo `nginx.conf`, no Docker) |
+| Verde tracejada | Build e deploy |
+| Verde pontilhada | Tarefa agendada (cron) |
+| Cinza tracejada | Dependência interna da SPA |
+
+O símbolo `(●` perto do fim das setas é a notação UML de interface: a bolinha (●) é a interface que o serviço fornece e a meia-lua é o componente que a usa.
+
+### 💡 O que o diagrama mostra
+
+- **O portfólio não tem back-end próprio.** Tudo roda no navegador; a Vercel só entrega os arquivos estáticos e repassa três rotas.
+- **O proxy existe só por causa do CORS.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker).
+- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e um token do GitHub só de leitura.
+
+-----
+
 ## 🏫 História do projeto
 
 Este projeto surgiu durante a minha disciplina de **Laboratório de Desenvolvimento de Software**, no curso de Engenharia de Software da PUC Minas. A proposta era que cada aluno desenvolvesse seu próprio portfólio profissional, aplicando conceitos de **engenharia de software** aprendidos na disciplina de **Projeto de Software**, da qual também leciono.
