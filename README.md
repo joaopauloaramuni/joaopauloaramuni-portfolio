@@ -999,7 +999,8 @@ https://wakatime.com/api/v1/users/<seu-usuario>/stats/all_time
 A API do WakaTime não envia o cabeçalho `Access-Control-Allow-Origin`, então o navegador bloqueia (CORS) qualquer `fetch` feito direto do portfólio. Por isso o front chama um caminho do próprio site, `/api/wakatime/...`, e quem repassa para o WakaTime é:
 
 - **`npm run dev` e `npm run preview`:** o `server.proxy` do `vite.config.js`;
-- **Vercel:** o `rewrite` do `vercel.json`.
+- **Vercel:** o `rewrite` do `vercel.json`;
+- **Docker:** o `location /api/wakatime/` do `nginx.conf` (veja [Proxy de `/api/*` no NGINX](#-proxy-de-api-no-nginx)).
 
 ```json
 {
@@ -1018,6 +1019,7 @@ O destino já fixa o usuário, então o proxy só serve para os seus dados públ
 
 1. Em `src/config/wakaTimeConfig.js`, troque `USERNAME` e `PROFILE_URL` (o `vite.config.js` lê esse arquivo).
 2. No `vercel.json`, troque `aramuni` no `destination`.
+3. No `nginx.conf`, troque `aramuni` no `proxy_pass` do `/api/wakatime/` (usado só no Docker).
 
 No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo mostra (`LIMITS`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
 
@@ -1026,6 +1028,7 @@ No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo m
 ```text
 vercel.json                    → rewrite /api/wakatime → API do WakaTime (produção)
 vite.config.js                 → o mesmo proxy no npm run dev / preview
+nginx.conf                     → o mesmo proxy no container Docker (NGINX)
 src/
   config/wakaTimeConfig.js     → usuário, período, limites de cada estilo
   lib/wakatime.js              → busca (com cache), normaliza e formata os dados
@@ -1036,7 +1039,7 @@ src/
   components/SkinsFooter.jsx   → rodapé "Estilos:" (compartilhado com o skills)
 ```
 
-> 🐳 No container do `Dockerfile` (NGINX), o caminho `/api/wakatime` não existe: os estilos `--terminal` (inclusive o `wakatime` sem opção), `--grade` e `--lista` mostram uma mensagem de erro e o `wakatime --cards` continua funcionando. Para usar os três, adicione um `location /api/wakatime/` com `proxy_pass https://wakatime.com/api/v1/users/<seu-usuario>/;` na configuração do NGINX.
+> 🐳 No container do `Dockerfile`, quem repassa `/api/wakatime/*` é o `nginx.conf`, então os quatro estilos funcionam também no Docker. Sem ele (com a configuração padrão do NGINX), o caminho não existe: `--terminal`, `--grade` e `--lista` mostram uma mensagem de erro e só o `--cards` funciona.
 
 ✅ Pronto! A busca acontece uma vez por visita: trocar de estilo reaproveita os dados.
 
@@ -1075,7 +1078,7 @@ Sem token, a GitHub API permite **60 chamadas por hora** e **10 buscas por minut
 
 ### 2️⃣ Proxy para os contadores de visitas
 
-O komarev e o views-counter não enviam `Access-Control-Allow-Origin`, então, como no WakaTime, o front chama caminhos do próprio site e quem repassa é o `server.proxy` do `vite.config.js` (`npm run dev` e `npm run preview`) e os `rewrites` do `vercel.json` (Vercel):
+O komarev e o views-counter não enviam `Access-Control-Allow-Origin`, então, como no WakaTime, o front chama caminhos do próprio site e quem repassa é o `server.proxy` do `vite.config.js` (`npm run dev` e `npm run preview`), os `rewrites` do `vercel.json` (Vercel) e o `nginx.conf` (Docker):
 
 ```json
 {
@@ -1106,12 +1109,14 @@ As outras chamadas continuam sem token, no limite por IP de cada visitante, e s�
 
 1. Em `src/config/gitHubStatsConfig.js`, troque `USERNAME` e ajuste `TIME_ZONE`, `HIDDEN_REPO_PREFIXES` e `REPO_VIEWS_REPOS` (o `vite.config.js` lê esse arquivo).
 2. No `vercel.json`, troque `joaopauloaramuni` no `destination` do komarev.
+3. No `nginx.conf`, troque `joaopauloaramuni` no `proxy_pass` do komarev (usado só no Docker).
 
 ### 📂 Arquivos
 
 ```text
 vercel.json                    → rewrites /api/github/* → komarev e views-counter (produção)
 vite.config.js                 → o mesmo proxy no npm run dev / preview
+nginx.conf                     → o mesmo proxy no container Docker (NGINX)
 src/
   config/gitHubStatsConfig.js  → usuário, fuso, repositórios escondidos e repositórios com badge
   lib/githubStats.js           → busca (com cache), sequências, horários e leitura dos badges
@@ -1121,7 +1126,7 @@ src/
   components/SkinsFooter.jsx   → rodapé "Gráficos:" (compartilhado com skills e wakatime)
 ```
 
-> 🐳 No container do `Dockerfile` (NGINX), os caminhos `/api/github/*` não existem: as visitas ao perfil e o `stats --repos` mostram um aviso e o resto continua funcionando. Para usar os dois, adicione um `location` com `proxy_pass` para cada destino na configuração do NGINX.
+> 🐳 No container do `Dockerfile`, quem repassa `/api/github/*` é o `nginx.conf`, então as visitas ao perfil e o `stats --repos` funcionam também no Docker. Sem ele (com a configuração padrão do NGINX), esses caminhos não existem e os dois mostram um aviso.
 
 ✅ Pronto! Cada fonte é buscada uma vez por visita: trocar de gráfico reaproveita os dados.
 
@@ -1632,16 +1637,88 @@ Com o Docker Compose, basta rodar um comando e todos esses serviços sobem junto
 
 O **NGINX** é um servidor web de alta performance, leve e amplamente utilizado para servir arquivos estáticos, atuar como proxy reverso e balanceador de carga.  
 
-Neste Dockerfile, ele é usado para **servir a aplicação frontend** gerada pelo Vite (React).  
+Neste Dockerfile, ele é usado para **servir a aplicação frontend** gerada pelo Vite (React) e para **repassar as chamadas de `/api/*`** que, na Vercel, são repassadas pelos `rewrites` do `vercel.json`.  
 
 📌 **Funções principais no container:**  
 - **Imagem base:** `nginx:stable-alpine` fornece uma versão leve e pronta do NGINX;  
 - **Limpeza de arquivos padrão:** remove arquivos default do NGINX para evitar conflitos;  
 - **Servir arquivos estáticos:** copia os arquivos gerados pelo build da aplicação para o diretório do NGINX (`/usr/share/nginx/html`);  
+- **Proxy de `/api/*`:** copia o `nginx.conf` do projeto por cima da configuração padrão (`/etc/nginx/conf.d/default.conf`);  
 - **Exposição da porta 80:** permite que o container receba requisições HTTP;  
 - **Execução contínua:** `nginx -g "daemon off;"` mantém o servidor em execução dentro do container.  
 
-✅ Em resumo: O NGINX neste Dockerfile atua como servidor web, entregando a aplicação frontend pronta de forma rápida, eficiente e confiável para qualquer cliente HTTP.
+✅ Em resumo: O NGINX neste Dockerfile atua como servidor web, entregando a aplicação frontend pronta de forma rápida, eficiente e confiável para qualquer cliente HTTP, e como proxy reverso para as APIs que não liberam CORS.
+
+-----
+
+#### 🔀 Proxy de `/api/*` no NGINX
+
+WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador não pode chamá-los direto. O front chama caminhos do próprio site e quem repassa depende de onde o portfólio está rodando:
+
+| Ambiente | Quem repassa `/api/*` |
+|:--|:--|
+| `npm run dev` / `npm run preview` | `server.proxy` do `vite.config.js` |
+| Vercel | `rewrites` do `vercel.json` |
+| Docker | `nginx.conf` |
+
+As rotas são as mesmas nos três:
+
+| Caminho do site | Destino | Comando |
+|:--|:--|:--|
+| `/api/wakatime/*` | `https://wakatime.com/api/v1/users/aramuni/*` | `wakatime` (`--terminal`, `--grade` e `--lista`) |
+| `/api/github/profile-views` | `https://komarev.com/ghpvc/?username=joaopauloaramuni` | `stats` (visitas ao perfil) |
+| `/api/github/repo-views` | `https://views-counter.vercel.app/badge` | `stats --repos` |
+
+<details>
+  <summary>Clique para exibir o nginx.conf</summary>
+
+```nginx
+# Configuração do Nginx da imagem Docker (ver Dockerfile).
+#
+# Faz o mesmo papel dos rewrites do vercel.json (produção na Vercel) e do
+# server.proxy do vite.config.js (npm run dev / preview): WakaTime, komarev e
+# views-counter não liberam CORS, então o navegador chama /api/... no próprio
+# domínio e o Nginx repassa. Ao trocar de usuário, troque também aqui.
+server {
+    listen 80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Os destinos são HTTPS e alguns (ex.: *.vercel.app) exigem SNI
+    proxy_ssl_server_name on;
+
+    # Comando "wakatime": /api/wakatime/stats/all_time
+    #   → https://wakatime.com/api/v1/users/aramuni/stats/all_time
+    location /api/wakatime/ {
+        proxy_pass https://wakatime.com/api/v1/users/aramuni/;
+    }
+
+    # Comando "stats": visitas ao perfil do GitHub
+    location = /api/github/profile-views {
+        proxy_pass https://komarev.com/ghpvc/?username=joaopauloaramuni;
+    }
+
+    # Comando "stats --repos": visitas dos repositórios.
+    # A query (?pageId=...&type=total) segue como veio, sem recodificar.
+    location = /api/github/repo-views {
+        proxy_pass https://views-counter.vercel.app/badge;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+</details>
+
+📌 **Pontos de atenção:**  
+- **SNI:** `proxy_ssl_server_name on` envia o nome do site no handshake TLS. Destinos que dividem o mesmo IP, como o `views-counter.vercel.app`, dependem disso para responder;  
+- **Query do `repo-views`:** o `?pageId=...&type=total` é repassado exatamente como veio. O views-counter conta cada forma de codificar o `pageId` como um contador diferente, então ele não pode ser recodificado no caminho;  
+- **`try_files`:** qualquer caminho que não seja um arquivo devolve o `index.html`. Os links diretos usam `/?cmd=`, então isso é só uma garantia;  
+- **DNS na inicialização:** o NGINX resolve o endereço dos destinos quando inicia. Se o container subir sem acesso à internet, o NGINX não sobe;  
+- **Trocar de usuário:** o mapeamento fica em três lugares (`vercel.json`, `vite.config.js` via arquivos de `src/config/` e `nginx.conf`). Ao trocar de usuário, atualize os três.  
 
 -----
 
@@ -1650,22 +1727,22 @@ Neste Dockerfile, ele é usado para **servir a aplicação frontend** gerada pel
 <details>
   <summary>Clique para exibir</summary>
 
-  
-``` dockerfile
+```dockerfile
 # ----------------------------
 # Stage 1: Build da aplicação
 # ----------------------------
-FROM node:18-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
-# Copiar package.json e package-lock.json (ou yarn.lock/pnpm-lock.yaml)
+# Copiar package.json e package-lock.json
 COPY package*.json ./
 
-# Instalar dependências
-RUN npm install
+# Instalar dependências exatamente como estão no package-lock.json
+RUN npm ci
 
-# Copiar todo o código
+# Copiar o código (node_modules e dist ficam de fora pelo .dockerignore)
+# O .env.local é copiado de propósito: o Vite embute as variáveis VITE_ no build
 COPY . .
 
 # Build do Vite (gera arquivos estáticos em /dist)
@@ -1682,6 +1759,9 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copiar build do Vite
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Proxy de /api/* (o mesmo papel dos rewrites do vercel.json)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expor a porta padrão do Nginx
 EXPOSE 80
@@ -1731,6 +1811,14 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 
 4.  Abra no navegador:  
     👉 <http://localhost:8080> (ou a porta que você escolheu, como 5173)  
+
+    Para conferir o proxy de `/api/*`, peça o contador de visitas do perfil. A resposta deve ser o SVG do komarev, e não o `index.html`:
+
+    ``` bash
+    curl http://localhost:8080/api/github/profile-views
+    ```
+
+    > ℹ️ O `docker build` copia o `.env.local` (se existir) e o Vite embute as variáveis `VITE_*` no build. Sem ele, o `guestbook` e o `contato` ficam indisponíveis no container (o mesmo acontece no `npm run dev` sem `.env.local`).  
 
 5.  Para parar o container em execução, descubra o ID ou nome com:
 
