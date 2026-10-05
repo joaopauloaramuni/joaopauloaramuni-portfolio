@@ -28,6 +28,7 @@ import {
   scrollLastCommandToTop,
 } from "../terminal/terminalDom";
 import SkinsFooter from "./SkinsFooter";
+import LattesDocencia from "./LattesDocencia";
 import "./Lattes.css";
 
 // Os quatro tipos de produção. A cor de cada um vem do theme.css
@@ -671,6 +672,7 @@ function Pdf() {
 
 const SECTION_VIEWS = {
   resumo: Resumo,
+  docencia: LattesDocencia,
   tccs: Tccs,
   interdisciplinares: Interdisciplinares,
   aes: Agencia,
@@ -682,7 +684,8 @@ export default function Lattes({ section = DEFAULT_SECTION }) {
   const f = useFormatters();
   const isPdf = section === PDF_SECTION;
   const sections = section === ALL_SECTIONS ? SECTIONS : [section];
-  const languageNote = t("lattes.nota_idioma");
+  // A docência tem os nomes traduzidos: a nota só vale para o que vem do Lattes
+  const languageNote = section === "docencia" ? "" : t("lattes.nota_idioma");
   const panelRef = useRef(null);
 
   // Na primeira vez o código chega depois do comando (App.jsx usa lazy):

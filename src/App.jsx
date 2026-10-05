@@ -216,7 +216,7 @@ function App() {
           response = <Curriculo />;
           break;
         case "lattes": {
-          // "lattes" abre o resumo; "--tccs", "--tis" (interdisciplinares),
+          // "lattes" abre o resumo; "--docencia", "--tccs", "--tis" (interdisciplinares),
           // "--aes", "--bancas" e "--tudo" trocam a seção e "--pdf" mostra o card de
           // download (ver data/lattesSections.js e scripts/lattes.mjs)
           const section = parseLattesSection(args.slice(1));

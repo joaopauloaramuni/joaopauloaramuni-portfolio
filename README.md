@@ -31,7 +31,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
-* 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
+* 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
@@ -418,18 +418,27 @@ const { theme, setTheme, toggleTheme } = useTheme();
 |:--|:--|:--|:--|
 | `--bg-page` | `#1a202c` | `#cfcfcf` | Fundo da página e trilho da scrollbar |
 | `--bg-terminal` | `#252a33` | `#dddddd` | Fundo do boot, igual ao do terminal em cada `ColorMode` |
-| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências, projetos, habilidades e WakaTime |
+| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências, projetos, habilidades, WakaTime, stats e lattes |
 | `--text` | `#e2e8f0` | `#1a1e24` | Texto principal |
 | `--text-muted` | `#a0aec0` | `#4a5568` | Texto secundário e ícones do seletor |
 | `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
-| `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" |
-| `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot e erro do WakaTime |
+| `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" e horários na grade do `cal` |
+| `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot, erros do WakaTime e do `stats` e feriados no `cal` |
 | `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot e recessos no `cal` |
 | `--cal-coreu` | `#f0abfc` | `#94158f` | Aulas no campus Coração Eucarístico (`cal`) |
 | `--cal-lourdes` | `#d9c46a` | `#685a00` | Aulas no campus Lourdes (`cal`) |
 | `--cal-oficinas` | `#67e8f9` | `#0a5f6c` | Oficinas (`cal`) |
 | `--cal-teams` | `#fdba74` | `#93330b` | Reuniões online pelo Teams (`cal`) |
 | `--cal-tinta` | `14%` | `6%` | Intensidade do fundo das aulas na grade do `cal --semana` (no claro é menor para manter o contraste do texto) |
+| `--lattes-tccs` | `#00a866` | `#00663f` | TCCs orientados (`lattes`): gráfico, cards e listas |
+| `--lattes-interdisciplinares` | `#4f8ff7` | `#1d4ed8` | Trabalhos interdisciplinares (`lattes`) |
+| `--lattes-aes` | `#d0609f` | `#9d1d7a` | Projetos da Agência Experimental de Software (`lattes`) |
+| `--lattes-bancas` | `#bf8a12` | `#92400e` | Bancas (`lattes`) |
+| `--docencia-puc` | `#2393f1` | `#0076d3` | PUC Minas no `lattes --docencia` (linha do tempo, barras e tabelas) |
+| `--docencia-newton` | `#be5a55` | `#8c2d2b` | Newton Paiva (`lattes --docencia`) |
+| `--docencia-igti` | `#a59000` | `#a46400` | IGTI (`lattes --docencia`) |
+| `--docencia-trybe` | `#1aa598` | `#00897d` | Trybe (`lattes --docencia`) |
+| `--docencia-fumec` | `#9565b6` | `#5c4285` | Universidade FUMEC (`lattes --docencia`) |
 
 A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
 
@@ -460,7 +469,7 @@ O comando `design` (ou `ds`, `designsystem`) mostra, dentro do próprio terminal
 |:--|:--|
 | 🏷️ Marca | Logo (`aramunilogo.png`), banner ASCII da tela de boas-vindas e a janela do terminal nos dois temas |
 | 🌈 Escala cromática | Todas as cores sólidas dos dois temas, agrupadas por família e ordenadas da mais escura para a mais clara |
-| 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos e ícones calculado pelo WCAG |
+| 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos, ícones e marcas de gráfico calculado pelo WCAG. Inclui as cores dos campi do `cal`, dos tipos de produção do `lattes` e das instituições do `lattes --docencia` |
 | 🔤 Tipografia | Fira Code e JetBrains Mono, pilhas de fontes, regras e a escala de tamanhos |
 | 📏 Espaçamento | Os valores de padding, margin e gap mais usados nos componentes |
 | ⬜ Raios | Os arredondamentos e onde aparece cada um |
@@ -1204,11 +1213,12 @@ src/
 
 ## 🎓 Guia do comando lattes (currículo Lattes)
 
-O comando `lattes` (aliases `cnpq` e `academic`) mostra a parte acadêmica do meu [currículo Lattes](http://lattes.cnpq.br/1208427665892059): os TCCs que orientei, os trabalhos interdisciplinares que orientei na PUC Minas, os projetos da Agência Experimental de Software (AES) e as bancas de que participei. Cada opção abre uma seção:
+O comando `lattes` (aliases `cnpq` e `academic`) mostra a parte acadêmica do meu [currículo Lattes](http://lattes.cnpq.br/1208427665892059): as disciplinas que lecionei, os TCCs que orientei, os trabalhos interdisciplinares que orientei na PUC Minas, os projetos da Agência Experimental de Software (AES) e as bancas de que participei. Cada opção abre uma seção:
 
 | Comando | O que mostra |
 |:--|:--|
 | `lattes` ou `lattes --resumo` (`--summary`) | O total geral, os quatro totais (com período, alunos orientados, disciplinas, cursos e parcerias), um gráfico de barras empilhadas por ano (TCCs, interdisciplinares, AES e bancas, cada um com sua cor), as tabelas por instituição e por curso e as tecnologias mais usadas nos projetos (padrão) |
+| `lattes --docencia` (`--teaching`, `--disciplinas`) | O tempo total lecionando, um card por instituição, a linha do tempo (uma faixa por instituição, de 2016 até hoje), barras de tempo por instituição, por curso e por disciplina (separadas por instituição, com o curso embaixo de cada disciplina) e uma tabela por instituição com disciplina, curso, quantidade de semestres (de turmas, na Trybe), tempo e período. Cada instituição tem sua cor |
 | `lattes --tccs` (`--theses`, `--tcc`) | Os TCCs orientados, agrupados por ano, com alunos, instituição e curso |
 | `lattes --tis` (`--ti`, `--interdisciplinares`, `--interdisciplinary`) | Os trabalhos interdisciplinares, um grupo por disciplina (Trabalho Interdisciplinar I, II, III e V, com o curso de cada uma), em cards com descrição, tecnologias e a equipe |
 | `lattes --aes` (`--agencia`, `--agency`) | Os projetos da Agência Experimental de Software, agrupados por ano, nos mesmos cards dos TIs e com o parceiro de cada projeto |
@@ -1235,6 +1245,8 @@ O script `scripts/lattes.mjs` (sem dependências) lê o `.zip` (ou o `.xml` já 
 | Projetos da AES | `SOFTWARE` com título no formato `Nome (Agência Experimental de Software - PUC Minas)` ou, com parceiro, `Nome (MRV Engenharia e Agência Experimental de Software - PUC Minas)` |
 | Bancas | `PARTICIPACAO-EM-BANCA-TRABALHOS-CONCLUSAO` (graduação, especialização, mestrado, qualificação e doutorado) |
 
+A exceção é a docência: o XML do Lattes não traz os semestres de cada disciplina, então ela fica em `src/data/docenciaData.js`, mantido à mão (veja o 4️⃣).
+
 ### 2️⃣ Privacidade
 
 ⚠️ O XML do Lattes traz **CPF, RG, data de nascimento, nome dos pais e endereço residencial**. Por isso ele nunca é publicado: o script grava em `lattesData.js` só o que o comando mostra, e o `.gitignore` ignora `CV_*.zip` e `*.xml` na raiz do projeto. O PDF gerado pelo Lattes é a versão pública do currículo, sem esses dados.
@@ -1245,16 +1257,26 @@ Atualizou o Lattes? Exporte de novo e rode o mesmo comando. Como o `lattesData.j
 
 O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob demanda (`React.lazy` no `App.jsx`): o código só é baixado na primeira vez que o comando roda.
 
+### 4️⃣ Docência (lattes --docencia)
+
+As disciplinas ficam em `src/data/docenciaData.js`, uma por objeto, com a instituição, os cursos e os semestres em que foram lecionadas (`semestres("2024.2", "2026.1")` gera a lista de semestres). O campo `modalidade` (`ead`, `bootcamp` ou `curso_livre`) entra junto do nome do curso, como em "Arquitetura de Software (Bootcamp)". A Trybe, curso livre, usa `meses` no lugar de semestres, `turmas` (a tabela mostra "Qtd. de Turmas") e `modulo` (o módulo Ciência da Computação com Python, do curso de Desenvolvimento Web). Começou a lecionar uma disciplina nova ou fechou mais um semestre? Edite esse arquivo.
+
+No mesmo arquivo, a lista `cargos` guarda os cargos de cada instituição como no LinkedIn. Hoje só a Trybe tem: depois dos 8 meses lecionando (Especialista em Instrução), vieram cargos de coordenação e liderança até junho de 2023. Eles entram no tempo total da instituição (cards, linha do tempo e "tempo por instituição", onde aparecem vazados, só com o contorno) e numa tabela própria, mas não no tempo lecionando. O resumo mostra os dois: 8 anos e meio lecionando e 11 anos na educação. O nome em inglês fica em `lattes.docencia.disciplinas.<id>` no `i18n.js`.
+
+Os tempos são calculados em meses (um semestre = 6 meses). O tempo de uma instituição ou de um curso é a **união** dos meses das disciplinas, então dois semestres com várias disciplinas ao mesmo tempo contam uma vez só. Dentro de cada instituição, as disciplinas aparecem por curso (primeiro o curso com mais tempo, como Engenharia de Software na PUC) e, dentro dele, da mais longa para a mais curta. As cinco cores das instituições (`--docencia-puc`, `--docencia-newton`, `--docencia-igti`, `--docencia-trybe` e `--docencia-fumec`, no `theme.css`) foram validadas como paleta categórica nos dois temas: separação para daltonismo, separação sem daltonismo e contraste ≥ 3:1 no fundo do terminal.
+
 ### 📂 Arquivos
 
 ```text
 scripts/lattes.mjs          → importa o XML (.zip ou .xml) e o PDF do Lattes (npm run lattes)
 src/
   data/lattesData.js        → dados gerados pelo script (não edite à mão)
+  data/docenciaData.js      → disciplinas lecionadas e seus semestres (mantido à mão)
   data/lattesSections.js    → seções do comando e nomes aceitos (PT e EN)
   components/Lattes.jsx     → resumo, listas, cards e o card de download
-  components/Lattes.css     → gráfico por ano, tabela, listas e cards, com layout para celular
-  theme/theme.css           → cor de cada tipo (--lattes-tccs, --lattes-interdisciplinares, --lattes-aes, --lattes-bancas)
+  components/LattesDocencia.jsx → lattes --docencia: cards, linha do tempo, barras e tabelas
+  components/Lattes.css     → gráficos, tabelas, listas e cards, com layout para celular
+  theme/theme.css           → cor de cada tipo (--lattes-*) e de cada instituição (--docencia-*)
 public/
   lattes.pdf                → PDF do currículo, baixado pelo lattes --pdf
 ```

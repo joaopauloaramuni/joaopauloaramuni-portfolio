@@ -157,7 +157,8 @@
 
 .ds-badge-aaa,
 .ds-badge-aa,
-.ds-badge-ok {
+.ds-badge-ok,
+.ds-badge-grafico {
   color: var(--success);
 }
 
@@ -432,6 +433,18 @@
 .ds-swatch-shadow {
   background: var(--surface);
   border-color: transparent;
+}
+
+/* Marca de gráfico: barra fina com a ponta arredondada (lattes) */
+.ds-swatch-mark {
+  justify-content: flex-start;
+  border-color: transparent;
+}
+
+.ds-swatch-mark > span {
+  width: 85%;
+  height: 10px;
+  border-radius: 0 4px 4px 0;
 }
 
 .ds-swatch-scanline {

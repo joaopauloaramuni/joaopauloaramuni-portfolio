@@ -43,9 +43,11 @@ const readTokens = (element) => {
   );
 };
 
-// Texto pede 4.5:1 (AA) ou 7:1 (AAA); ícones e bordas pedem 3:1
+// Texto pede 4.5:1 (AA) ou 7:1 (AAA); ícones, bordas e marcas de gráfico
+// (barras, faixas) pedem 3:1
 const contrastLevel = (ratio, kind) => {
   if (kind === "icon") return ratio >= 3 ? "ok" : "baixo";
+  if (kind === "mark") return ratio >= 3 ? "grafico" : "baixo";
   if (ratio >= 7) return "aaa";
   if (ratio >= 4.5) return "aa";
   if (ratio >= 3) return "grande";
@@ -108,6 +110,28 @@ function Swatch({ token }) {
       );
     case "scanline":
       return <span className="ds-swatch ds-swatch-scanline" aria-hidden="true" />;
+    // Barra de gráfico, com a ponta arredondada como nos gráficos do lattes
+    case "mark":
+      return (
+        <span className="ds-swatch ds-swatch-mark" aria-hidden="true">
+          <span style={{ background: color }} />
+        </span>
+      );
+    // Porcentagem: o fundo é a cor de `base` nessa intensidade, como as
+    // aulas na grade do cal (texto na cor do campus, fundo tingido)
+    case "tint":
+      return (
+        <span
+          className="ds-swatch ds-swatch-text"
+          style={{
+            color: `var(${token.base})`,
+            background: `color-mix(in srgb, var(${token.base}) var(${token.name}), transparent)`,
+          }}
+          aria-hidden="true"
+        >
+          Aa
+        </span>
+      );
     default:
       return (
         <span className="ds-swatch" style={{ background: color }} aria-hidden="true" />
@@ -123,7 +147,7 @@ function TokenSample({ token, theme, values }) {
   const value = themeValues?.[token.name] ?? "";
 
   let contrast = null;
-  if (themeValues && (token.kind === "text" || token.kind === "icon")) {
+  if (themeValues && ["text", "icon", "mark"].includes(token.kind)) {
     const foreground = toHex(value);
     const background = toHex(themeValues[token.on ?? "--bg-terminal"]);
     if (foreground && background) {

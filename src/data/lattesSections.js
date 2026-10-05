@@ -2,13 +2,14 @@ import { parseSkin } from "../terminal/parseSkin";
 
 // Seções do comando "lattes". Todas estas formas funcionam:
 //   lattes --tccs   lattes tccs   lattes --skin tccs   lattes --theses
+// A seção "docencia" (disciplinas que lecionei) também aceita --teaching.
 // A seção "interdisciplinares" aparece como --tis (nome curto, no i18n),
 // mas --ti, --interdisciplinares e --interdisciplinary também funcionam.
 // Sem opção, abre o resumo. A ordem abaixo é a do rodapé "Seções:" e a
 // do "lattes --tudo", que mostra todas, uma embaixo da outra.
 // "lattes --pdf" não é uma seção do resumo: mostra o card de download.
 
-export const SECTIONS = ["resumo", "tccs", "interdisciplinares", "aes", "bancas"];
+export const SECTIONS = ["resumo", "docencia", "tccs", "interdisciplinares", "aes", "bancas"];
 export const DEFAULT_SECTION = "resumo";
 export const ALL_SECTIONS = "tudo";
 export const PDF_SECTION = "pdf";
@@ -21,6 +22,11 @@ const SECTION_ALIASES = {
   resumo: "resumo",
   summary: "resumo",
   overview: "resumo",
+  docencia: "docencia",
+  "docência": "docencia",
+  teaching: "docencia",
+  disciplinas: "docencia",
+  courses: "docencia",
   tccs: "tccs",
   tcc: "tccs",
   orientacoes: "tccs",

@@ -1,6 +1,8 @@
 /* =====================================================================
    LATTES — comando "lattes", uma seção por opção:
      lattes / lattes --resumo     totais, gráfico por ano e tabela (padrão)
+     lattes --docencia            tempo lecionando por instituição, curso e
+                                  disciplina (gráficos e tabelas)
      lattes --tccs                TCCs orientados, por ano
      lattes --tis                 trabalhos interdisciplinares, por disciplina
      lattes --aes                 projetos da Agência Experimental de Software
@@ -678,6 +680,387 @@
 }
 
 /* ---------------------------------------------------------------------
+   lattes --docencia (LattesDocencia.jsx): cards por instituição, linha do
+   tempo, barras de tempo e uma tabela por instituição. A cor de cada
+   instituição (--docencia-<id>, no theme.css) chega como --serie.
+   --------------------------------------------------------------------- */
+.docencia-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.docencia-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.8rem 0.9rem 0.75rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--serie);
+  animation: lattes-pop 0.45s ease both;
+}
+
+.docencia-card:nth-child(2) { animation-delay: 60ms; }
+.docencia-card:nth-child(3) { animation-delay: 120ms; }
+.docencia-card:nth-child(4) { animation-delay: 180ms; }
+.docencia-card:nth-child(5) { animation-delay: 240ms; }
+
+.docencia-card-valor {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.docencia-card-nome {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.docencia-card-detalhe {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+/* Linha do tempo: uma faixa por instituição, com uma linha fina em cada
+   virada de ano (gradiente repetido a cada 1/--anos da largura) */
+.docencia-faixas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.docencia-faixa,
+.docencia-eixo {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.docencia-faixa-nome {
+  color: var(--text-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docencia-faixa-trilho {
+  position: relative;
+  height: 26px; /* sem espaço entre as faixas: as linhas dos anos ficam contínuas */
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--border) 70%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: calc(100% / var(--anos)) 100%;
+  box-shadow: inset -1px 0 color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.docencia-faixa-seg {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  min-width: 3px;
+  border-radius: 4px;
+  background: var(--serie);
+  transform-origin: left center;
+  animation: lattes-cresce 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.docencia-eixo {
+  margin-top: 0.25rem;
+}
+
+.docencia-eixo-anos {
+  display: flex;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.docencia-eixo-anos > span {
+  flex: 1;
+  text-align: center;
+}
+
+.docencia-ano-curto {
+  display: none;
+}
+
+/* Barras de tempo: nome | barra | valor */
+.docencia-barras {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.docencia-barra {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr) 11.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+}
+
+/* Disciplinas: um bloco por instituição, separados por uma linha */
+.docencia-bloco + .docencia-bloco {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.docencia-bloco-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin: 0 0 0.7rem;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.docencia-bloco-titulo .lattes-grupo-qtd {
+  margin-left: 0.25rem;
+}
+
+/* Nomes longos ("Trabalho Interdisciplinar III: ..."): o nome ganha uma
+   linha só dele, com o curso e o período embaixo, e a barra vem depois */
+.docencia-barras-disciplinas {
+  gap: 0.7rem;
+}
+
+.docencia-barras-disciplinas .docencia-barra {
+  grid-template-columns: minmax(0, 1fr) 11.5rem;
+  gap: 0.15rem 0.75rem;
+}
+
+.docencia-barras-disciplinas .docencia-barra-nome {
+  grid-column: 1 / -1;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.docencia-barras-disciplinas .docencia-barra-texto,
+.docencia-barras-disciplinas .docencia-barra-sub {
+  white-space: normal;
+}
+
+.docencia-barra-nome {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.docencia-barra-texto {
+  min-width: 0;
+  color: var(--text-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docencia-barra-sub {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* Instituições e cursos: o nome quebra linha e o detalhe (tempo lecionando,
+   instituições do curso) vai embaixo dele */
+.docencia-barras-sub .docencia-barra {
+  grid-template-columns: 14rem minmax(0, 1fr) 11.5rem;
+}
+
+.docencia-barras-sub .docencia-barra-nome {
+  flex-direction: column;
+  gap: 0;
+}
+
+.docencia-barras-sub .docencia-barra-texto,
+.docencia-barras-sub .docencia-barra-sub {
+  white-space: normal;
+}
+
+/* Na Trybe a barra é empilhada (lecionando + cargos), com 2px entre as partes */
+.docencia-barra-trilho {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+}
+
+.docencia-barra-fill {
+  position: relative;
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 0;
+  background: var(--serie);
+  transform-origin: left center;
+  animation: lattes-cresce 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.docencia-barra-fill:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+/* Curso junta várias instituições: uma série só, em cor neutra */
+.docencia-barra-fill.neutra {
+  background: var(--text-dim);
+}
+
+/* Cargos de coordenação e liderança (Trybe): vazado, só o contorno na cor
+   da instituição e um fundo bem leve. Cheio = lecionando. */
+.docencia-barra-fill.cargo,
+.docencia-faixa-seg.cargo {
+  background: color-mix(in srgb, var(--serie) 20%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--serie);
+}
+
+/* Amostra das duas formas (legenda e tabela de cargos) */
+.docencia-amostra {
+  --amostra: var(--serie);
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  background: var(--amostra);
+  vertical-align: -1px;
+}
+
+.docencia-amostra.neutra {
+  --amostra: var(--text-muted);
+}
+
+.docencia-amostra.cargo {
+  background: color-mix(in srgb, var(--amostra) 20%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--amostra);
+}
+
+.docencia-cargos-titulo {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.docencia-tabela.docencia-tabela-cargos td:nth-child(2) {
+  min-width: 9rem;
+}
+
+.docencia-barra:hover .docencia-barra-fill {
+  filter: brightness(1.15);
+}
+
+.docencia-barra:hover .docencia-barra-fill.neutra {
+  filter: none;
+  background: var(--text-muted);
+}
+
+.docencia-barra-valor {
+  text-align: right;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+/* Dica ao passar o mouse (mesmo balão do gráfico por ano). Na barra, vale
+   passar o mouse em qualquer ponto da linha, não só no traço. */
+.docencia-faixa-seg::after,
+.docencia-barra-fill[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 2;
+}
+
+.docencia-faixa-seg:hover::after,
+.docencia-barra:hover .docencia-barra-fill[data-tip]::after {
+  opacity: 1;
+}
+
+.docencia-faixa-seg:hover {
+  filter: brightness(1.15);
+}
+
+/* Tabelas por instituição, separadas por uma linha */
+.lattes-grupo.docencia-grupo + .lattes-grupo.docencia-grupo {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.docencia-grupo-nome {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docencia-tabela th,
+.docencia-tabela td {
+  text-align: left;
+}
+
+.docencia-tabela thead th {
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+/* Disciplina e curso quebram linha; os números e os períodos não */
+.docencia-tabela td:nth-child(2) {
+  min-width: 8rem;
+  white-space: normal;
+}
+
+.docencia-tabela .docencia-num {
+  text-align: right;
+}
+
+.docencia-tabela tbody th {
+  min-width: 10rem;
+}
+
+/* O período quebra entre os trechos ("2018/1 e 2019/1"), nunca no meio */
+.docencia-tabela td.docencia-periodo {
+  white-space: normal;
+}
+
+.docencia-trecho {
+  white-space: nowrap;
+}
+
+/* O ícone do repositório vem colado na última palavra (com &nbsp;) */
+.docencia-tabela tbody th .lattes-link {
+  margin-left: 0.15rem;
+  vertical-align: -1px;
+}
+
+/* ---------------------------------------------------------------------
    Animações
    --------------------------------------------------------------------- */
 @keyframes lattes-pop {
@@ -704,7 +1087,10 @@
   .lattes-kpi,
   .lattes-pdf,
   .lattes-ano-seg,
-  .lattes-tech-fill {
+  .lattes-tech-fill,
+  .docencia-card,
+  .docencia-faixa-seg,
+  .docencia-barra-fill {
     animation: none;
   }
 
@@ -745,6 +1131,60 @@
   .lattes-tech {
     grid-template-columns: 7rem minmax(0, 1fr) 2rem;
     gap: 0.5rem;
+  }
+
+  /* Docência: o nome vai para uma linha só dele, em cima da barra */
+  /* Coluna do valor com largura fixa: com "auto", cada linha teria um
+     trilho de tamanho diferente e as barras deixariam de ser comparáveis */
+  .docencia-barra,
+  .docencia-barras-sub .docencia-barra,
+  .docencia-barras-disciplinas .docencia-barra {
+    grid-template-columns: minmax(0, 1fr) 9rem;
+    gap: 0.15rem 0.5rem;
+  }
+
+  .docencia-barra-valor {
+    font-size: 0.72rem;
+  }
+
+  .docencia-barra-nome {
+    grid-column: 1 / -1;
+  }
+
+  .docencia-barras-sub .docencia-barra-nome {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 0.4rem;
+  }
+
+  .docencia-barras {
+    gap: 0.55rem;
+  }
+
+  .docencia-faixa,
+  .docencia-eixo {
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .docencia-ano-longo {
+    display: none;
+  }
+
+  .docencia-ano-curto {
+    display: inline;
+  }
+
+  .docencia-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .docencia-tabela tbody th {
+    min-width: 8rem;
+  }
+
+  .docencia-tabela td:nth-child(2) {
+    min-width: 7rem;
   }
 
 

@@ -34,10 +34,11 @@ export const commandList = {
   lattes: {
     name: 'lattes',
     aliases: ['cnpq', 'academic'],
-    // Seções: lattes --resumo | --tccs | --tis | --aes | --bancas | --tudo | --pdf
+    // Seções: lattes --resumo | --docencia | --tccs | --tis | --aes | --bancas | --tudo | --pdf
     // (ver data/lattesSections.js)
     subcommands: [
       '--resumo',
+      '--docencia',
       '--tccs',
       '--tis',
       '--aes',
@@ -45,6 +46,7 @@ export const commandList = {
       '--tudo',
       '--pdf',
       '--summary',
+      '--teaching',
       '--theses',
       '--interdisciplinary',
       '--committees',

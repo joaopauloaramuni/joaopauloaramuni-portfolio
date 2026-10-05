@@ -22,7 +22,10 @@ import {
 //   "shadow"     caixa com a sombra
 //   "scanline"   linhas do efeito CRT da sequência de boot
 //   "background" caixa com o fundo (aceita gradiente)
+//   "mark"       barra de gráfico pintada na cor (marcas pedem contraste de 3:1)
+//   "tint"       valor em %: fundo tingido com a cor de `base` nessa porcentagem
 // on: token do fundo usado no contraste (padrão: --bg-terminal)
+// base: token da cor tingida (só no "tint")
 
 export const tokenGroups = [
   {
@@ -92,6 +95,38 @@ export const tokenGroups = [
     ],
   },
   {
+    // Comando "cal": cor de cada campus na agenda e na grade de horários
+    id: "calendario",
+    tokens: [
+      { name: "--cal-coreu", kind: "text" },
+      { name: "--cal-lourdes", kind: "text" },
+      { name: "--cal-oficinas", kind: "text" },
+      { name: "--cal-teams", kind: "text" },
+      { name: "--cal-tinta", kind: "tint", base: "--cal-coreu" },
+    ],
+  },
+  {
+    // Comando "lattes": cor de cada tipo de produção (gráfico, cards e listas)
+    id: "lattes",
+    tokens: [
+      { name: "--lattes-tccs", kind: "mark" },
+      { name: "--lattes-interdisciplinares", kind: "mark" },
+      { name: "--lattes-aes", kind: "mark" },
+      { name: "--lattes-bancas", kind: "mark" },
+    ],
+  },
+  {
+    // Comando "lattes --docencia": cor de cada instituição
+    id: "docencia",
+    tokens: [
+      { name: "--docencia-puc", kind: "mark" },
+      { name: "--docencia-newton", kind: "mark" },
+      { name: "--docencia-igti", kind: "mark" },
+      { name: "--docencia-trybe", kind: "mark" },
+      { name: "--docencia-fumec", kind: "mark" },
+    ],
+  },
+  {
     id: "scrollbar",
     tokens: [
       { name: "--scrollbar-thumb", kind: "color" },
@@ -141,6 +176,8 @@ export const spacingScale = ["0.25rem", "0.5rem", "0.75rem", "1rem", "1.5rem", "
 
 export const radii = [
   { id: "r0", value: "0" },
+  { id: "r2", value: "2px" },
+  { id: "r3", value: "3px" },
   { id: "r4", value: "4px" },
   { id: "r6", value: "6px" },
   { id: "r8", value: "8px" },
@@ -156,6 +193,7 @@ export const breakpoints = [
   { id: "bp1280", value: "1280px" },
   { id: "bp900", value: "900px" },
   { id: "bp768", value: "768px", main: true },
+  { id: "bp600", value: "600px" },
   { id: "bp500", value: "500px" },
   { id: "bp480", value: "480px", main: true },
 ];

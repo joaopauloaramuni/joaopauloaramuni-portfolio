@@ -88,6 +88,16 @@
   --lattes-interdisciplinares: #4f8ff7;
   --lattes-aes: #d0609f;
   --lattes-bancas: #bf8a12;
+
+  /* Comando "lattes --docencia": cor de cada instituição (linha do tempo,
+     barras e tabelas). Validadas como paleta categórica de 5 cores, todos
+     os pares: faixa de brilho, ΔE ≥ 9 para daltonismo, ΔE ≥ 15 sem
+     daltonismo e contraste ≥ 3:1 no fundo do terminal. */
+  --docencia-puc: #2393f1;
+  --docencia-newton: #be5a55;
+  --docencia-igti: #a59000;
+  --docencia-trybe: #1aa598;
+  --docencia-fumec: #9565b6;
 }
 
 [data-theme="light"] {
@@ -150,4 +160,10 @@
   --lattes-interdisciplinares: #1d4ed8;
   --lattes-aes: #9d1d7a;
   --lattes-bancas: #92400e;
+
+  --docencia-puc: #0076d3;    /* mesmas checagens, sobre o #ddd e o #f2f2f2 */
+  --docencia-newton: #8c2d2b;
+  --docencia-igti: #a46400;
+  --docencia-trybe: #00897d;
+  --docencia-fumec: #5c4285;
 }
