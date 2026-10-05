@@ -30,6 +30,9 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copiar build do Vite
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Proxy de /api/* (o mesmo papel dos rewrites do vercel.json)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expor a porta padrão do Nginx
 EXPOSE 80
 
