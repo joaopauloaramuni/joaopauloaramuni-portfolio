@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "lattes": "node scripts/lattes.mjs",
+    "turmas": "node scripts/turmas.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,1121 @@
+/* =====================================================================
+   TURMAS — comando "turmas" (acompanhamento de turmas de TI), um
+   gráfico por opção:
+     turmas / --resumo    indicadores e tabela ordenável (padrão)
+     turmas --codigo      linhas de código por grupo, empilhadas por linguagem
+     turmas --linguagens  linguagens da turma e de cada grupo (100%)
+     turmas --ritmo       commits por semana da turma e de cada grupo
+     turmas --equilibrio  fatia de cada integrante nos commits e nas linhas
+     turmas --prs         pull requests e issues
+     turmas --projetos    cards com o resumo do README
+     turmas <grupo>       ficha de um grupo só
+   Mesma moldura do GitHubStats.css e do Lattes.css. Cores:
+     • campus: --cal-coreu e --cal-lourdes (as mesmas da grade do "cal")
+     • linguagem: cor da marca (data/wakaTimeLanguages.js), via --cor
+     • PRs e issues: --turmas-concluido e --turmas-aberto (theme.css)
+     • integrantes: tons do --accent, do mais forte ao mais fraco
+     • alertas: --warn, sempre com ícone e texto
+   Os textos ficam nos tokens de texto; a cor só marca barras e amostras.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Moldura
+   --------------------------------------------------------------------- */
+.tur-painel {
+  width: 60%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: var(--text);
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.tur-titulo {
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.tur-subtitulo,
+.tur-filtro {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tur-filtro {
+  margin-top: -1rem;
+}
+
+/* Aviso do npm run dev: grupos sem dados, rode o npm run turmas */
+.tur-aviso-dev {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: -0.5rem 0 1.5rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--warn) 60%, var(--border));
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+
+.tur-aviso-dev svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--warn);
+}
+
+.tur-resumo {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.tur-resumo strong {
+  color: var(--text);
+}
+
+.tur-nota {
+  margin: 0.9rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.tur-nota-esquerda {
+  text-align: left;
+}
+
+/* Só para leitor de tela */
+.tur-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Um bloco por disciplina */
+.tur-disciplina + .tur-disciplina {
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.tur-disciplina-cabecalho h4 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.tur-disciplina-cabecalho p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.9rem;
+  margin: 0 0 1.1rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.tur-disciplina-cabecalho a,
+.tur-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  text-underline-offset: 3px;
+}
+
+.tur-disciplina-cabecalho a:hover,
+.tur-disciplina-cabecalho a:focus-visible,
+.tur-links a:hover,
+.tur-links a:focus-visible {
+  color: var(--accent);
+}
+
+.tur-secao + .tur-secao {
+  margin-top: 2rem;
+}
+
+/* Título de cada gráfico no "turmas --tudo", estilo comentário de shell */
+.tur-secao-titulo {
+  margin: 0 0 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.tur-secao-titulo::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Nome do grupo: letra do campus na cor dele, como no "cal"
+   --------------------------------------------------------------------- */
+.tur-nome {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-width: 0;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.tur-campus {
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  color: var(--campus);
+  background: color-mix(in srgb, var(--campus) var(--cal-tinta), transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--campus) 45%, transparent);
+}
+
+.tur-g {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.tur-nome-texto {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tur-antigo {
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--warn);
+}
+
+.tur-disciplina-campus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tur-semdados {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Indicadores
+   --------------------------------------------------------------------- */
+.tur-kpis {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.6rem;
+}
+
+.tur-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: tur-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+.tur-kpi-rotulo {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tur-kpi-rotulo svg {
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.tur-kpi-valor {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tur-kpi.alerta {
+  border-color: color-mix(in srgb, var(--warn) 55%, var(--border));
+}
+
+.tur-kpi.alerta .tur-kpi-rotulo svg {
+  color: var(--warn);
+}
+
+/* Alertas: ícone + texto, nunca só a cor */
+.tur-alertas {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
+.tur-alertas li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tur-alertas svg,
+.tur-quando.alerta svg,
+.tur-eq-texto .alerta svg {
+  flex-shrink: 0;
+  color: var(--warn);
+}
+
+.tur-alertas.curto {
+  margin: 0;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.tur-ok {
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   turmas --resumo: tabela ordenável
+   --------------------------------------------------------------------- */
+.tur-tabela-rolagem {
+  overflow-x: auto;
+}
+
+.tur-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.tur-tabela th,
+.tur-tabela td {
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+.tur-tabela thead th {
+  padding: 0 0.5rem 0.35rem;
+  border-bottom-color: var(--border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.tur-tabela thead button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tur-tabela thead button:hover,
+.tur-tabela thead button:focus-visible,
+.tur-tabela thead th[aria-sort="ascending"] button,
+.tur-tabela thead th[aria-sort="descending"] button {
+  color: var(--accent);
+}
+
+.tur-tabela tbody th {
+  font-weight: 400;
+  max-width: 15rem;
+}
+
+.tur-tabela tbody tr:hover {
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+.tur-tabela .num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.tur-tabela thead .num button {
+  flex-direction: row-reverse;
+}
+
+.tur-tabela td small {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.tur-tabela td.alerta {
+  color: var(--warn);
+}
+
+.tur-tabela tr.sem-dados td {
+  text-align: left;
+}
+
+/* ---------------------------------------------------------------------
+   Legenda e barras (código, linguagens, PRs)
+   --------------------------------------------------------------------- */
+.tur-legenda {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  font-size: 0.74rem;
+  color: var(--text-soft);
+}
+
+.tur-legenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tur-legenda-detalhe {
+  color: var(--text-dim);
+}
+
+.tur-amostra {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--cor, var(--text-dim));
+}
+
+.tur-barras,
+.tur-ritmo,
+.tur-equilibrio,
+.tur-prs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tur-barra {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tur-barra.sem-dados,
+.tur-ritmo-linha.sem-dados,
+.tur-eq-linha.sem-dados,
+.tur-prs-linha.sem-dados {
+  grid-template-columns: 13rem minmax(0, 1fr);
+}
+
+.tur-valor {
+  font-size: 0.78rem;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.tur-barra:has(.tur-valor-largo) {
+  grid-template-columns: 13rem minmax(0, 1fr) 9.5rem;
+}
+
+.tur-valor-largo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+/* Trilho em escala comum; a pilha ocupa a fração do maior da turma.
+   2px de fundo entre as partes; pontas arredondadas só no fim. */
+.tur-trilho {
+  display: block;
+  min-width: 0;
+}
+
+.tur-pilha {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  min-width: 3px;
+  transform-origin: left center;
+  animation: tur-cresce 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.tur-seg {
+  position: relative;
+  flex-basis: 0;
+  min-width: 2px;
+  background: var(--cor);
+}
+
+.tur-seg:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+.tur-seg:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.tur-seg:only-child {
+  border-radius: 2px 4px 4px 2px;
+}
+
+.tur-seg:hover {
+  filter: brightness(1.15);
+}
+
+.tur-seg.concluido,
+.tur-legenda .concluido,
+.tur-contagem-num .concluido {
+  --cor: var(--turmas-concluido);
+}
+
+.tur-seg.aberto,
+.tur-legenda .aberto,
+.tur-contagem-num .aberto {
+  --cor: var(--turmas-aberto);
+}
+
+/* Fechado sem merge: vazado, em cor neutra */
+.tur-seg.descartado,
+.tur-legenda .descartado .tur-amostra,
+.tur-contagem-num .descartado .tur-amostra {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--text-dim);
+}
+
+/* Barra única da turma (ou do grupo, na ficha) */
+.tur-turma-pilha {
+  margin: 0 0 0.75rem;
+}
+
+/* Balão ao passar o mouse (mesmo do "lattes") */
+.tur-seg[data-tip]::after,
+.tur-mini-col[data-tip]::after,
+.tur-fatia[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 2;
+}
+
+.tur-seg[data-tip]:hover::after,
+.tur-mini-col[data-tip]:hover::after,
+.tur-fatia[data-tip]:hover::after {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------
+   turmas --ritmo
+   --------------------------------------------------------------------- */
+.tur-semanas {
+  margin: 0 0 1.25rem;
+}
+
+.tur-leitura {
+  min-height: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
+.tur-semanas-plot,
+.tur-semanas-eixo {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: 3px;
+}
+
+.tur-semanas-plot {
+  height: 90px;
+  align-items: end;
+  border-bottom: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.tur-semanas-plot:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 4px;
+}
+
+.tur-semana {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  cursor: default;
+}
+
+.tur-semana-barra {
+  width: 100%;
+  height: max(var(--h), 2px);
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in srgb, var(--accent) 55%, var(--bg-terminal));
+  transform-origin: bottom;
+  animation: tur-sobe 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 25ms);
+}
+
+.tur-semana.zero .tur-semana-barra {
+  background: var(--border);
+}
+
+/* Semana em andamento: vazada, ainda pode crescer */
+.tur-semana.atual .tur-semana-barra {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.tur-semana.ativa .tur-semana-barra {
+  background: var(--accent);
+}
+
+.tur-semana.atual.ativa .tur-semana-barra {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.tur-semanas-eixo span {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tur-ritmo-linha {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 6.5rem 6.5rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tur-mini {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  align-items: end;
+  gap: 2px;
+  height: 22px;
+}
+
+.tur-mini-col {
+  position: relative;
+  height: max(var(--h), 1px);
+  border-radius: 2px 2px 0 0;
+  background: color-mix(in srgb, var(--accent) 60%, var(--bg-terminal));
+}
+
+.tur-mini-col.zero {
+  height: 1px;
+  background: var(--border);
+}
+
+.tur-mini-col:hover {
+  background: var(--accent);
+}
+
+.tur-quando {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.tur-quando.alerta {
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   turmas --equilibrio
+   --------------------------------------------------------------------- */
+.tur-eq-linha {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 4.5rem 11rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.2rem 0;
+}
+
+.tur-eq-barras,
+.tur-ficha-fatias {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tur-fatias {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tur-fatias-rotulo {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.tur-fatias-trilho {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  height: 8px;
+}
+
+.tur-fatia {
+  position: relative;
+  flex-basis: 0;
+  min-width: 2px;
+  background: var(--text-dim);
+}
+
+.tur-fatia.maior {
+  background: var(--accent);
+}
+
+/* A marca da fatia igual vem antes das fatias no HTML */
+.tur-fatia:first-child,
+.tur-igual + .tur-fatia {
+  border-radius: 2px 0 0 2px;
+}
+
+.tur-fatia:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.tur-fatia:only-child,
+.tur-igual + .tur-fatia:last-child {
+  border-radius: 2px 4px 4px 2px;
+}
+
+.tur-fatia:hover {
+  filter: brightness(1.2);
+}
+
+/* Fatia que cada um teria numa divisão igual */
+.tur-igual {
+  position: absolute;
+  z-index: 1;
+  top: -3px;
+  bottom: -3px;
+  width: 0;
+  border-left: 1.5px dashed var(--text);
+  pointer-events: none;
+}
+
+/* Integrante sem commits (pela lista do README) */
+.tur-fantasmas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.tur-fantasma {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1.5px dashed var(--text-muted);
+}
+
+.tur-legenda .maior .tur-amostra {
+  background: var(--accent);
+}
+
+.tur-legenda .demais .tur-amostra {
+  background: var(--text-dim);
+}
+
+.tur-legenda .igual .tur-amostra {
+  width: 0;
+  height: 12px;
+  border-radius: 0;
+  background: none;
+  border-left: 1.5px dashed var(--text);
+}
+
+.tur-legenda .fantasma .tur-amostra {
+  background: none;
+  border: 1.5px dashed var(--text-muted);
+}
+
+.tur-eq-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.tur-eq-texto span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tur-eq-texto .alerta {
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   turmas --prs
+   --------------------------------------------------------------------- */
+.tur-prs-cabecalho,
+.tur-prs-linha {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.tur-prs-cabecalho {
+  margin-bottom: 0.3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tur-contagem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tur-contagem-num {
+  display: inline-flex;
+  gap: 0.55rem;
+  font-size: 0.74rem;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tur-contagem-num > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  min-width: 3.6ch;
+}
+
+.tur-contagem-num .tur-amostra {
+  width: 8px;
+  height: 8px;
+}
+
+/* ---------------------------------------------------------------------
+   turmas --projetos e ficha do grupo
+   --------------------------------------------------------------------- */
+.tur-projetos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.tur-projeto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--campus);
+}
+
+.tur-projeto-cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tur-projeto-cabecalho .tur-nome {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.tur-projeto-titulo,
+.tur-ficha-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.tur-projeto-descricao {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+
+.tur-projeto-descricao.vazia {
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+.tur-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.tur-tags li {
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.68rem;
+}
+
+.tur-projeto-meta {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.tur-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: auto 0 0;
+  font-size: 0.75rem;
+}
+
+.tur-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tur-ficha .tur-secao-titulo {
+  margin: 0.75rem 0 0;
+}
+
+.tur-ficha .tur-kpis {
+  grid-template-columns: repeat(var(--colunas, 3), minmax(0, 1fr));
+}
+
+.tur-ficha .tur-nota-esquerda {
+  margin-top: -0.25rem;
+}
+
+.tur-ficha .tur-kpis,
+.tur-ficha .tur-alertas,
+.tur-ficha .tur-legenda,
+.tur-ficha .tur-turma-pilha,
+.tur-ficha .tur-semanas {
+  margin-bottom: 0;
+}
+
+.tur-ficha-cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tur-ficha-cabecalho .tur-nome {
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.tur-ficha-prs {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes tur-cresce {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes tur-sobe {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes tur-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tur-pilha,
+  .tur-semana-barra,
+  .tur-kpi {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Telas menores: o nome do grupo ganha uma linha só dele
+   --------------------------------------------------------------------- */
+@media (max-width: 1400px) {
+  .tur-painel {
+    width: 75%;
+  }
+}
+
+@media (max-width: 900px) {
+  .tur-painel {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .tur-titulo {
+    font-size: 1.5rem;
+  }
+
+  .tur-ficha .tur-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tur-barra,
+  .tur-barra:has(.tur-valor-largo),
+  .tur-ritmo-linha,
+  .tur-eq-linha,
+  .tur-prs-linha,
+  .tur-barra.sem-dados,
+  .tur-ritmo-linha.sem-dados,
+  .tur-eq-linha.sem-dados,
+  .tur-prs-linha.sem-dados {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem 0.6rem;
+  }
+
+  .tur-barras,
+  .tur-ritmo,
+  .tur-equilibrio,
+  .tur-prs {
+    gap: 0.7rem;
+  }
+
+  .tur-barra > .tur-nome,
+  .tur-ritmo-linha > .tur-nome,
+  .tur-eq-linha > .tur-nome,
+  .tur-prs-linha > .tur-nome {
+    grid-column: 1 / -1;
+  }
+
+  .tur-ritmo-linha .tur-mini {
+    grid-column: 1 / -1;
+  }
+
+  .tur-ritmo-linha .tur-valor {
+    text-align: left;
+  }
+
+  .tur-eq-texto {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.1rem 1rem;
+  }
+
+  .tur-prs-cabecalho {
+    display: none;
+  }
+
+  .tur-prs-linha .tur-contagem {
+    grid-column: 1 / -1;
+  }
+
+  .tur-semanas-eixo span:nth-child(even) {
+    visibility: hidden;
+  }
+
+  /* Tabela rola para o lado; o nome do grupo fica parado à esquerda */
+  .tur-tabela tbody th {
+    max-width: 9.5rem;
+  }
+
+  .tur-tabela tr > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--bg-terminal);
+  }
+}

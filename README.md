@@ -32,6 +32,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
+* 👥 **turmas / acompanhamento / ti:** Acompanhamento de turmas de TI (Trabalhos Interdisciplinares). Compara os grupos que eu oriento em TI:II e TI:V pelos repositórios no GitHub, sem contar os professores: linhas de código, linguagens, commits por semana, equilíbrio entre os integrantes, pull requests, issues e o resumo do README de cada projeto. Tem um gráfico por opção: `turmas --resumo` (padrão), `turmas --codigo`, `turmas --linguagens`, `turmas --ritmo`, `turmas --equilibrio`, `turmas --prs`, `turmas --projetos` e `turmas --tudo`, e filtros por disciplina, campus e grupo (`turmas ti5 coreu --ritmo`, `turmas uaiport`). Os dados vêm do `npm run turmas`.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
@@ -81,6 +82,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
 
 1. **Código & CI/CD (à esquerda)**
    - A máquina do desenvolvedor roda o `npm run dev` e o `npm run lattes`, que lê a exportação XML da Plataforma Lattes e gera o `src/data/lattesData.js`.
+   - O `npm run turmas` também roda só na máquina do desenvolvedor: clona os repositórios privados dos grupos com o token dele e gera o `src/data/turmasData.js` (não aparece no diagrama).
    - Cada `git push` no GitHub dispara o deploy automático na Vercel.
    - O GitHub Actions (`keep-supabase-awake.yml`) faz uma requisição ao Supabase a cada 12 horas para o projeto gratuito não entrar em pausa.
    - Logo abaixo fica a implantação alternativa com Docker: um stage de build com Node e um stage com NGINX, que usa o `nginx.conf` para repassar `/api/*`.
@@ -213,7 +215,8 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 │   ├── 📄 lattes.pdf              → currículo Lattes (lattes --pdf)
 │   └── 🖼️ imagens                 → projetos, prêmios e prévia do link
 ├── 📁 scripts
-│   └── 🛠️ lattes.mjs              → importa o XML do Lattes (npm run lattes)
+│   ├── 🛠️ lattes.mjs              → importa o XML do Lattes (npm run lattes)
+│   └── 🛠️ turmas.mjs              → métricas dos repositórios dos grupos (npm run turmas)
 ├── 📁 src
 │   ├── 📁 assets
 │   │   └── 🔤 fonts               → Fira Code e JetBrains Mono
@@ -1474,6 +1477,96 @@ public/
 
 -----
 
+## 👥 Guia do comando turmas (acompanhamento de turmas de TI)
+
+O comando `turmas` (aliases `acompanhamento` e `ti`) é o acompanhamento de turmas de TI (Trabalhos Interdisciplinares): compara os grupos de TI:II (Front-end) e TI:V (Aplicações Distribuídas) que eu oriento, a partir dos repositórios deles no GitHub. Cada disciplina vira um bloco, com os campi nas mesmas cores do `cal`, e cada opção abre um gráfico:
+
+| Comando | O que mostra |
+|:--|:--|
+| `turmas` ou `turmas --resumo` (`--github`, `--summary`) | Indicadores da disciplina (grupos, commits, linhas de código, PRs mergeados, issues fechadas e grupos parados) e uma tabela com cada grupo: commits, linhas, PRs, issues, último commit e alertas. Clicar no cabeçalho ordena a tabela (padrão) |
+| `turmas --codigo` (`--linhas`, `--code`, `--loc`) | Linhas de código de cada grupo, por campus e do maior para o menor, numa barra empilhada por linguagem e na mesma escala para todos |
+| `turmas --linguagens` (`--languages`) | As linguagens da disciplina numa barra só e a composição de cada grupo (100%), com a linguagem principal ao lado |
+| `turmas --ritmo` (`--commits`, `--pace`) | Commits por semana da disciplina inteira (a semana em andamento fica vazada) e, para cada grupo, as semanas em miniatura, o total e há quantos dias foi o último commit |
+| `turmas --equilibrio` (`--integrantes`, `--balance`) | A fatia de commits e de linhas adicionadas de cada integrante, sem identificação, com a marca da fatia igual e quadradinhos tracejados para quem está no README mas não fez commit |
+| `turmas --prs` (`--issues`, `--pulls`) | Pull requests (mergeados, abertos e fechados sem merge) e issues (fechadas e abertas) de cada grupo |
+| `turmas --projetos` (`--readme`, `--projects`) | Um card por grupo com título e descrição do README, stack, integrantes, commits, linhas e links do repositório e do deploy |
+| `turmas --tudo` (`--all`) | Todos os gráficos, um embaixo do outro |
+
+Os filtros podem ser combinados com qualquer opção: `ti2` ou `ti5`, `lourdes` ou `coreu`, o número do grupo (`g1`, `g2`...) e o nome do grupo, sem acento e sem espaço, ou só o começo dele (`turmas uai` acha o UaiPort). Com um grupo só, o comando abre a **ficha** dele, com tudo junto: [aramuni.dev/?cmd=turmas le-ai](https://aramuni.dev/?cmd=turmas%20le-ai). O Tab completa as opções, os filtros e o nome dos grupos.
+
+Em todos os gráficos, os grupos aparecem separados por campus (na ordem da lista em `turmasRepos.js`) e, dentro de cada campus, do que tem mais linhas de código para o que tem menos (os sem dados vão para o fim). Na tabela do resumo, clicar no cabeçalho de uma coluna ordena por ela, e "Grupo" volta para a ordem da lista (campus e número do grupo).
+
+Os alertas aparecem sempre com ícone e texto: grupo **parado** (mais de 7 dias sem commit), **integrantes sem commits** (comparando com a lista do README) e **trabalho concentrado** (um integrante com metade ou mais dos commits, em grupos de 3 ou mais). Os limites ficam em `LIMITES`, no `src/lib/turmas.js`.
+
+### 1️⃣ De onde vêm os dados
+
+Os repositórios dos grupos são privados e o portfólio é público, então o navegador nunca fala com eles. Quem lê tudo é o `npm run turmas`, na minha máquina, e o que vai para o site é só o `src/data/turmasData.js` que ele gera. Para cada grupo, o script:
+
+1. Clona o repositório (`git clone --bare`) em `node_modules/.cache/turmas`, ou só faz `git fetch` se já clonou antes.
+2. Conta as linhas não vazias de **todas as branches**: cada arquivo conta uma vez, na versão com mais linhas. Ficam de fora dependências e build (`node_modules`, `dist`, `target`...), lockfiles, minificados, código gerado, as pastas de plataforma do Flutter, Markdown e a pasta `docs/` (que vira "linhas de documentação").
+3. Lê o `git log` de todas as branches desde o início do semestre (que vem do `calendarioPuc.js`), sem merges, bots e professores: commits por semana, último commit e a fatia de cada integrante. Commits da mesma pessoa feitos com e-mails ou nomes diferentes são juntados pelo login do GitHub, pelo e-mail e pelo nome.
+4. Pergunta à GitHub API pelos pull requests e issues, sem os abertos por bots ou professores.
+5. Lê o README da branch padrão: título, descrição, quantos integrantes (seção "Integrantes") e link de deploy.
+6. Descobre a stack pelos arquivos de dependências (`package.json`, `pom.xml`, `pubspec.yaml`, `docker-compose.yml`, `application.properties`...).
+
+> 🔒 **Privacidade:** nomes, e-mails e logins dos alunos só existem na memória do script. O arquivo gerado guarda números e o resumo de cada projeto; a fatia de cada integrante vai sem identificação, só ordenada da maior para a menor, e a descrição do README é descartada se tiver o nome de algum integrante.
+
+### 2️⃣ Token do GitHub
+
+O script procura um token, nesta ordem: `GITHUB_TOKEN` (ou `GH_TOKEN`) no ambiente, `GITHUB_TOKEN` no `.env.local`, o `gh auth token` do GitHub CLI e a credencial que o git já usa para o `github.com` (Keychain no macOS, Git Credential Manager no Windows). Basta um token com leitura dos repositórios das organizações das turmas (o login do GitHub CLI já serve; ou um classic com `repo`; ou um fine-grained com *Contents*, *Issues* e *Pull requests* só de leitura, se a organização permitir). **Nunca** coloque `VITE_` na frente: tudo que começa com `VITE_` vai para o build e fica visível no navegador.
+
+```bash
+# com o GitHub CLI já logado, não precisa de mais nada
+npm run turmas
+
+# ou com um token
+GITHUB_TOKEN=ghp_xxx npm run turmas
+```
+
+O `VITE_GITHUB_TOKEN` dos comandos `github` e `stats` **não** é usado: ele vai para o build e deve ler só repositórios públicos. Os dados também não vêm do navegador: enquanto o script não rodar, os grupos aparecem como "ainda sem dados" (no `npm run dev`, um aviso lembra disso).
+
+No começo, o script mostra de quem é o token e, se for classic, os escopos dele. Para cada grupo que falhar, ele diz o motivo: sem token, token sem o escopo `repo`, token fine-grained sem acesso à organização ou organização que exige SSO (nesse caso, autorize o token em *github.com/settings/tokens* → *Configure SSO*). Sem token, só os repositórios públicos respondem. Se a GitHub API esbarrar no limite, o resto dos dados é atualizado e os PRs e issues ficam como estavam.
+
+> ⚠️ **"limite da GitHub API atingido":** sem token, a API aceita só 60 chamadas por hora por IP, e uma rodada completa faz centenas (dados do repositório, PRs, issues e os e-mails dos professores). O `git clone` pode funcionar mesmo assim, porque o git acha sozinho a senha salva no computador, e por isso linhas e commits aparecem, mas PRs e issues não. A primeira linha que o script mostra diz se ele achou um token. Com token, o limite é de 5.000 chamadas por hora e dá para rodar de novo na hora, sem esperar.
+
+### 3️⃣ Atualizar e trocar de semestre
+
+```bash
+npm run turmas                # todos os grupos
+npm run turmas -- ti5         # só uma disciplina
+npm run turmas -- ti2 coreu   # só uma disciplina num campus
+npm run turmas -- uaiport     # só um grupo
+```
+
+Os grupos que ficam de fora, ou que falham, mantêm os dados da última vez (com um relógio ao lado do nome, quando a última atualização falhou). Depois é só fazer commit do `src/data/turmasData.js`. Para um semestre novo, troque `SEMESTRE`, a lista `GRUPOS` e os `PROFESSORES` de cada turma em `src/data/turmasRepos.js`.
+
+### 4️⃣ Professores fora das análises
+
+Os professores de cada turma ficam em `PROFESSORES`, no `src/data/turmasRepos.js`, pelo login do GitHub:
+
+| Disciplina | Lourdes | Coreu |
+|:--|:--|:--|
+| TI:II - Front-end | `rommelcarneiro`, `hayalacurto` | `joaopauloaramuni` |
+| TI:V - Aplicações Distribuídas | `CleitonSilvaT`, `cmnetos` | `lvcardoso`, `arturmol` |
+
+Nenhum deles conta em repositório nenhum: nem nos commits, nas linhas e no equilíbrio do grupo, nem nos PRs e issues que abriram. Para reconhecer commits feitos com um e-mail que não está ligado à conta, o script pergunta à GitHub API quais e-mails cada professor usou no repositório e compara também o nome do perfil. Quem está na seção "Orientadores" do README de cada grupo também fica de fora, e monitores ou convidados podem ir em `IGNORAR_AUTORES`.
+
+### 📂 Arquivos
+
+```text
+scripts/turmas.mjs            → clona os repositórios e gera os dados (npm run turmas)
+src/
+  data/turmasRepos.js         → semestre, disciplinas, repositórios, professores e quem ignorar
+  data/turmasData.js          → dados gerados pelo script (não edite à mão)
+  data/turmasSections.js      → gráficos, filtros e nomes aceitos (PT e EN)
+  lib/turmas.js               → alertas, totais, linguagens, semanas e paleta de cores
+  components/Turmas.jsx       → os gráficos, a tabela e a ficha de um grupo
+  components/Turmas.css       → layout, barras e balões, com layout para celular
+  theme/theme.css             → cores das linguagens (--turmas-ling-*) e de PRs e issues
+```
+
+-----
+
 ## 📝 Guia de configuração do Supabase para o Livro de Visitas
 
 Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
@@ -1772,6 +1865,19 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
    ```
 
 5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
+
+6. **Atualize os dados gerados (opcional):** dois comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
+
+   ```bash
+   # lattes: lê a exportação XML (e o PDF) da Plataforma Lattes → src/data/lattesData.js e public/lattes.pdf
+   npm run lattes -- ~/Downloads/CV_<id>.zip ~/Downloads/curriculo-lattes.pdf
+
+   # turmas: lê os repositórios privados dos grupos de TI → src/data/turmasData.js
+   # (precisa de um token: GITHUB_TOKEN no .env.local ou gh auth login)
+   npm run turmas
+   ```
+
+   O passo a passo de cada um está no [guia do comando lattes](#-guia-do-comando-lattes-currículo-lattes) e no [guia do comando turmas](#-guia-do-comando-turmas-acompanhamento-de-turmas-de-ti). Depois, é só fazer commit dos arquivos gerados.
 
 -----
 

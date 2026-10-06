@@ -98,6 +98,24 @@
   --docencia-igti: #a59000;
   --docencia-trybe: #1aa598;
   --docencia-fumec: #9565b6;
+
+  /* Comando "turmas": estado de PRs e issues. Concluído = PR mergeado ou
+     issue fechada; aberto = ainda em andamento (o "fechado sem merge" é
+     vazado, em cor neutra). Validadas como par categórico: faixa de
+     brilho, ΔE ≥ 13 para daltonismo e contraste ≥ 3:1 no fundo. */
+  --turmas-concluido: #9d7cf2;
+  --turmas-aberto: #bf8a12;
+
+  /* Comando "turmas": as 6 linguagens com mais linhas em cada disciplina
+     (as cores de marca do WakaTime repetem azul em TypeScript, Python, CSS
+     e Dart). Paleta categórica validada nesta ordem: faixa de brilho,
+     ΔE ≥ 8 entre vizinhas para daltonismo e contraste ≥ 3:1 no fundo. */
+  --turmas-ling-1: #3987e5;
+  --turmas-ling-2: #d95926;
+  --turmas-ling-3: #199e70;
+  --turmas-ling-4: #c98500;
+  --turmas-ling-5: #d55181;
+  --turmas-ling-6: #0d950d;
 }
 
 [data-theme="light"] {
@@ -166,4 +184,14 @@
   --docencia-igti: #a46400;
   --docencia-trybe: #00897d;
   --docencia-fumec: #5c4285;
+
+  --turmas-concluido: #6d3fc0; /* mesmas checagens, sobre o #ddd */
+  --turmas-aberto: #92400e;
+
+  --turmas-ling-1: #2a78d6;
+  --turmas-ling-2: #c4501f;
+  --turmas-ling-3: #108c74;
+  --turmas-ling-4: #a36b00;
+  --turmas-ling-5: #c2457a;
+  --turmas-ling-6: #007000;
 }

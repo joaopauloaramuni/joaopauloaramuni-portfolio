@@ -42,10 +42,14 @@ import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 import { parseCalSkin } from "./data/calSkins";
 import { parseLattesSection } from "./data/lattesSections";
+import { parseTurmas } from "./data/turmasSections";
+import { GRUPOS } from "./data/turmasRepos";
 
 // O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas): o código dele
 // só é baixado na primeira vez que o comando roda
 const Lattes = lazy(() => import("./components/Lattes"));
+// O "turmas" traz os dados dos grupos (npm run turmas): idem
+const Turmas = lazy(() => import("./components/Turmas"));
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -231,6 +235,25 @@ function App() {
           );
           // Saída longa: leva o comando para o topo em vez de cair no fim
           if (section !== "pdf") keepLastCommandAtTop();
+          break;
+        }
+        case "turmas": {
+          // "turmas" abre o resumo; "--codigo", "--linguagens", "--ritmo",
+          // "--equilibrio", "--prs", "--projetos" e "--tudo" trocam o gráfico e
+          // "ti2", "ti5", "lourdes", "coreu", "g1"... ou o nome de um grupo
+          // filtram (ver data/turmasSections.js e scripts/turmas.mjs)
+          const parsed = parseTurmas(args.slice(1), GRUPOS);
+          if (!parsed) {
+            response = <TerminalOutput>{t("turmas.uso")}</TerminalOutput>;
+            break;
+          }
+          response = (
+            <Suspense fallback={<TerminalOutput>{t("turmas.carregando")}</TerminalOutput>}>
+              <Turmas {...parsed} />
+            </Suspense>
+          );
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          keepLastCommandAtTop();
           break;
         }
         case "cal": {

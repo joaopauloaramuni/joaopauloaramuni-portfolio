@@ -1,3 +1,6 @@
+import { GRUPOS } from './data/turmasRepos';
+import { turmasSubcommands } from './data/turmasSections';
+
 // Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
 // segunda palavra, ex.: "tema c" + Tab → "tema claro".
 export const commandList = {
@@ -52,6 +55,15 @@ export const commandList = {
       '--committees',
       '--all',
     ],
+  },
+  turmas: {
+    name: 'turmas',
+    aliases: ['acompanhamento', 'ti'],
+    // Acompanhamento de turmas de TI (Trabalhos Interdisciplinares).
+    // Gráficos: turmas --resumo | --codigo | --linguagens | --ritmo | --equilibrio
+    // | --prs | --projetos | --tudo; filtros: ti2, ti5, lourdes, coreu, g1... e o
+    // nome de cada grupo (ver data/turmasSections.js)
+    subcommands: turmasSubcommands(GRUPOS),
   },
   habilidades: {
     name: 'habilidades',
