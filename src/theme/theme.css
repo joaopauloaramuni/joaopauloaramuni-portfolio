@@ -116,6 +116,16 @@
   --turmas-ling-4: #c98500;
   --turmas-ling-5: #d55181;
   --turmas-ling-6: #0d950d;
+
+  /* Comando "canvas": entregas de cada tarefa (no prazo, atrasadas e
+     faltando, depois do prazo) e o prazo que vence em até 24 horas. As três
+     da barra reaproveitam a paleta validada do "turmas" (verde, âmbar e
+     laranja); o urgente é texto, com contraste ≥ 4.5:1 no fundo. Antes do
+     prazo, "ainda não entregaram" é vazado, em cor neutra. */
+  --canvas-entregue: #199e70;
+  --canvas-atrasada: #c98500;
+  --canvas-faltando: #d95926;
+  --canvas-urgente: #f87171;
 }
 
 [data-theme="light"] {
@@ -194,4 +204,9 @@
   --turmas-ling-4: #a36b00;
   --turmas-ling-5: #c2457a;
   --turmas-ling-6: #007000;
+
+  --canvas-entregue: #108c74;  /* mesmas checagens, sobre o #ddd */
+  --canvas-atrasada: #a36b00;
+  --canvas-faltando: #c4501f;
+  --canvas-urgente: #b91c1c;
 }

@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "lattes": "node scripts/lattes.mjs",
     "turmas": "node scripts/turmas.mjs",
+    "canvas": "node scripts/canvas.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

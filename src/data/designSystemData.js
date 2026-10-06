@@ -142,6 +142,16 @@ export const tokenGroups = [
     ],
   },
   {
+    // Comando "canvas": entregas de cada tarefa e prazo urgente
+    id: "canvas",
+    tokens: [
+      { name: "--canvas-entregue", kind: "mark" },
+      { name: "--canvas-atrasada", kind: "mark" },
+      { name: "--canvas-faltando", kind: "mark" },
+      { name: "--canvas-urgente", kind: "text" },
+    ],
+  },
+  {
     id: "scrollbar",
     tokens: [
       { name: "--scrollbar-thumb", kind: "color" },

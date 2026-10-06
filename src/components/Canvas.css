@@ -1,0 +1,1037 @@
+/* =====================================================================
+   CANVAS — comando "canvas" (tarefas, prazos e entregas no Canvas):
+     canvas / --resumo   próxima entrega, indicadores, próximos 7 dias e
+                         tabela por curso (padrão)
+     canvas --tarefas    pela frente, já vencidas e sem prazo
+     canvas --agenda     tarefas, eventos e feriados, dia a dia
+   Mesma moldura do Turmas.css. Cores:
+     • campus: --cal-coreu, --cal-lourdes... (as mesmas do "cal")
+     • entregas: --canvas-entregue, --canvas-atrasada e --canvas-faltando;
+       "ainda não entregaram" é vazado, em cor neutra
+     • prazo: --canvas-urgente (até 24 h) e --warn (até 3 dias), sempre com
+       ícone e texto
+   Os textos ficam nos tokens de texto; a cor só marca barras e amostras.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Moldura
+   --------------------------------------------------------------------- */
+.cnv-painel {
+  width: 60%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: var(--text);
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.cnv-titulo {
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.cnv-subtitulo,
+.cnv-filtro {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.cnv-filtro {
+  margin-top: -1rem;
+}
+
+.cnv-resumo {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.cnv-resumo strong {
+  color: var(--text);
+}
+
+.cnv-centro {
+  text-align: center;
+}
+
+.cnv-nota {
+  margin: 0.9rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Aviso do npm run dev: sem dados, rode o npm run canvas */
+.cnv-aviso-dev {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px dashed color-mix(in srgb, var(--warn) 60%, var(--border));
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+
+.cnv-aviso-dev svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--warn);
+}
+
+/* Só para leitor de tela */
+.cnv-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Uma seção por bloco no "canvas --tudo" */
+.cnv-secao + .cnv-secao {
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.cnv-secao-grande {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Título de cada bloco, estilo comentário de shell */
+.cnv-secao-titulo {
+  margin: 1.75rem 0 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.cnv-secao-titulo::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+.cnv-mais {
+  display: block;
+  margin: 0.75rem auto 0;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.cnv-mais:hover,
+.cnv-mais:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------------
+   Curso: letra do campus na cor dele, como no "cal" e no "turmas"
+   --------------------------------------------------------------------- */
+.cnv-curso {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.cnv-campus {
+  flex-shrink: 0;
+  align-self: center;
+  display: inline-grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  color: var(--campus);
+  background: color-mix(in srgb, var(--campus) var(--cal-tinta), transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--campus) 45%, transparent);
+}
+
+.cnv-curso-nome {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cnv-curso-turma,
+.cnv-curso-sga {
+  flex-shrink: 0;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.cnv-curso-sga {
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-selo {
+  display: inline-block;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   Indicadores
+   --------------------------------------------------------------------- */
+.cnv-kpis {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.6rem;
+}
+
+.cnv-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: cnv-pop 0.5s ease both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+.cnv-kpi-rotulo {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cnv-kpi-rotulo svg {
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.cnv-kpi-valor {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cnv-kpi.alerta {
+  border-color: color-mix(in srgb, var(--warn) 55%, var(--border));
+}
+
+.cnv-kpi.alerta .cnv-kpi-rotulo svg {
+  color: var(--warn);
+}
+
+/* ---------------------------------------------------------------------
+   Próxima entrega
+   --------------------------------------------------------------------- */
+.cnv-proxima {
+  --urgencia: var(--accent);
+  position: relative;
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.25rem 1.1rem 1.4rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: cnv-pop 0.5s ease both;
+}
+
+/* Faixa à esquerda na cor da urgência */
+.cnv-proxima::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--urgencia);
+}
+
+.cnv-proxima.urgente {
+  --urgencia: var(--canvas-urgente);
+  border-color: color-mix(in srgb, var(--canvas-urgente) 55%, var(--border));
+}
+
+.cnv-proxima.perto {
+  --urgencia: var(--warn);
+}
+
+.cnv-proxima.vazia::before {
+  background: var(--border);
+}
+
+.cnv-proxima-rotulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  margin: 0 0 0.45rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cnv-proxima-rotulo > svg {
+  color: var(--urgencia);
+}
+
+.cnv-proxima-rotulo .cnv-curso {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.cnv-proxima-nome {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* O ícone de link vai junto da última palavra quando o nome quebra a linha */
+.cnv-proxima-nome svg,
+.cnv-tarefa-nome svg {
+  margin-left: 0.35em;
+  font-size: 0.75em;
+  vertical-align: baseline;
+  color: var(--text-dim);
+}
+
+.cnv-proxima-nome:hover,
+.cnv-proxima-nome:focus-visible,
+.cnv-tarefa-nome:hover,
+.cnv-tarefa-nome:focus-visible,
+.cnv-item-titulo[href]:hover,
+.cnv-item-titulo[href]:focus-visible,
+.cnv-tabela a:hover,
+.cnv-tabela a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cnv-proxima-nome {
+  display: block;
+}
+
+.cnv-proxima-quando {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
+  margin: 0.3rem 0 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.cnv-proxima-quando::first-letter {
+  text-transform: uppercase;
+}
+
+.cnv-proxima-alerta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+  color: var(--canvas-urgente);
+}
+
+.cnv-proxima-mais {
+  margin: 0.6rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Contagem regressiva: casas de dias, horas, minutos (e segundos no último dia) */
+.cnv-relogio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+}
+
+.cnv-relogio-casa {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.4rem;
+  padding: 0.35rem 0.5rem 0.3rem;
+  border-radius: 8px;
+  background: var(--bg-terminal);
+  border: 1px solid color-mix(in srgb, var(--urgencia) 45%, var(--border));
+}
+
+.cnv-relogio-casa b {
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-relogio-casa small {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Tarefas: folhinha, nome, entregas e quanto falta
+   --------------------------------------------------------------------- */
+.cnv-tarefas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cnv-tarefa {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.85rem;
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+.cnv-tarefa:last-child {
+  border-bottom: 0;
+}
+
+.cnv-folhinha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.25rem 0.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-folhinha.sem-prazo {
+  justify-content: center;
+  min-height: 3.2rem;
+  color: var(--text-dim);
+}
+
+.cnv-folhinha-semana {
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cnv-folhinha-dia {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cnv-folhinha-hora {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.cnv-tarefa.urgente .cnv-folhinha {
+  border-color: var(--canvas-urgente);
+  box-shadow: inset 0 3px 0 var(--canvas-urgente);
+}
+
+.cnv-tarefa.perto .cnv-folhinha {
+  border-color: color-mix(in srgb, var(--warn) 70%, var(--border));
+  box-shadow: inset 0 3px 0 var(--warn);
+}
+
+.cnv-tarefa.vencida .cnv-folhinha {
+  background: transparent;
+}
+
+.cnv-tarefa-corpo {
+  min-width: 0;
+}
+
+.cnv-tarefa-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin: 0 0 0.15rem;
+}
+
+.cnv-tarefa-nome {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.cnv-tarefa.vencida .cnv-tarefa-nome {
+  font-weight: 400;
+  color: var(--text-soft);
+}
+
+.cnv-tarefa-datas {
+  margin: 0.15rem 0 0;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* Quanto falta: pílula com ícone, cor pela urgência */
+.cnv-prazo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+
+.cnv-prazo svg {
+  flex-shrink: 0;
+}
+
+.cnv-prazo.urgente {
+  border-color: var(--canvas-urgente);
+  color: var(--canvas-urgente);
+  font-weight: 600;
+}
+
+.cnv-prazo.perto {
+  border-color: color-mix(in srgb, var(--warn) 70%, var(--border));
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.cnv-prazo.semana {
+  color: var(--text-soft);
+}
+
+.cnv-prazo.vencida,
+.cnv-prazo.sem-prazo {
+  border-style: dashed;
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Entregas: barra empilhada + texto
+   --------------------------------------------------------------------- */
+.cnv-entregas {
+  margin-top: 0.4rem;
+}
+
+.cnv-barra {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  max-width: 22rem;
+  margin: 0 0 0.3rem;
+  transform-origin: left center;
+  animation: cnv-cresce 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.cnv-seg {
+  position: relative;
+  flex-basis: 0;
+  min-width: 2px;
+  background: var(--cor);
+}
+
+.cnv-seg:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.cnv-seg:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.cnv-seg:only-child {
+  border-radius: 4px;
+}
+
+.cnv-seg:hover {
+  filter: brightness(1.15);
+}
+
+.cnv-seg.noPrazo,
+.cnv-legenda .noPrazo {
+  --cor: var(--canvas-entregue);
+}
+
+.cnv-seg.atrasadas,
+.cnv-legenda .atrasadas {
+  --cor: var(--canvas-atrasada);
+}
+
+.cnv-seg.faltando,
+.cnv-legenda .faltando {
+  --cor: var(--canvas-faltando);
+}
+
+/* Antes do prazo, quem ainda não entregou: vazado, em cor neutra */
+.cnv-seg.pendente,
+.cnv-legenda .pendentes .cnv-amostra {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--text-dim);
+}
+
+/* Dispensados: listrado */
+.cnv-seg.dispensados,
+.cnv-legenda .dispensados .cnv-amostra {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--text-dim) 0 2px,
+    transparent 2px 4px
+  );
+}
+
+/* Balão ao passar o mouse (mesmo do "turmas") */
+.cnv-seg[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 2;
+}
+
+.cnv-seg[data-tip]:hover::after {
+  opacity: 1;
+}
+
+.cnv-entregas-texto {
+  margin: 0;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.cnv-entregas-texto strong {
+  color: var(--text);
+}
+
+.cnv-entregas-texto.sem {
+  margin-top: 0.3rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+.cnv-corrigir {
+  white-space: nowrap;
+}
+
+.cnv-corrigir svg {
+  margin-right: 0.2rem;
+  vertical-align: -0.1em;
+  color: var(--accent);
+}
+
+.cnv-legenda {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  font-size: 0.74rem;
+  color: var(--text-soft);
+}
+
+.cnv-legenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cnv-amostra {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--cor, var(--text-dim));
+}
+
+/* ---------------------------------------------------------------------
+   canvas --resumo: tabela por curso
+   --------------------------------------------------------------------- */
+.cnv-tabela-rolagem {
+  overflow-x: auto;
+}
+
+.cnv-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.cnv-tabela th,
+.cnv-tabela td {
+  padding: 0.45rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+.cnv-tabela thead th {
+  padding: 0 0.5rem 0.35rem;
+  border-bottom-color: var(--border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Cabeçalhos clicáveis: ordenam a tabela (mesmo jeito do "turmas") */
+.cnv-tabela thead button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cnv-tabela thead button:hover,
+.cnv-tabela thead button:focus-visible,
+.cnv-tabela thead th[aria-sort="ascending"] button,
+.cnv-tabela thead th[aria-sort="descending"] button {
+  color: var(--accent);
+}
+
+.cnv-tabela thead .num button {
+  flex-direction: row-reverse;
+}
+
+.cnv-tabela tbody th {
+  font-weight: 400;
+  max-width: 16rem;
+}
+
+.cnv-tabela tbody tr:hover {
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+}
+
+.cnv-tabela .num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-tabela td.alerta {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.cnv-tabela a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cnv-tabela-curso {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.cnv-tabela-proxima {
+  min-width: 12rem;
+}
+
+.cnv-tabela-proxima a {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text-soft);
+}
+
+.cnv-nada {
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   canvas --agenda
+   --------------------------------------------------------------------- */
+.cnv-agenda {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cnv-dia-cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+  margin: 0 0 0.35rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.cnv-dia-semana {
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cnv-dia-data {
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-dia-relativo {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.cnv-dia.hoje .cnv-dia-cabecalho {
+  border-bottom-color: var(--accent);
+}
+
+.cnv-dia.hoje .cnv-dia-relativo {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cnv-dia-especial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--highlight);
+}
+
+.cnv-itens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cnv-item {
+  display: grid;
+  grid-template-columns: 3.6rem 1rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.6rem;
+  padding: 0.45rem 0 0.45rem 0.25rem;
+}
+
+.cnv-item + .cnv-item {
+  border-top: 1px dashed color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+.cnv-item-hora {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.cnv-item-hora small {
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.cnv-item-icone {
+  padding-top: 0.15rem;
+  color: var(--accent);
+}
+
+.cnv-item.evento .cnv-item-icone {
+  color: var(--info);
+}
+
+.cnv-item-corpo {
+  min-width: 0;
+}
+
+.cnv-item-titulo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.cnv-item-local {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.cnv-item.passou {
+  opacity: 0.6;
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes cnv-pop {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes cnv-cresce {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cnv-kpi,
+  .cnv-proxima,
+  .cnv-barra {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Telas menores
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .cnv-painel {
+    width: 75%;
+  }
+}
+
+@media (max-width: 900px) {
+  .cnv-painel {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cnv-titulo {
+    font-size: 1.5rem;
+  }
+
+  .cnv-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cnv-proxima {
+    padding: 0.9rem 0.9rem 1rem 1.1rem;
+  }
+
+  .cnv-proxima-nome {
+    font-size: 1.02rem;
+  }
+
+  .cnv-relogio-casa {
+    min-width: 2.9rem;
+  }
+
+  .cnv-relogio-casa b {
+    font-size: 1.2rem;
+  }
+
+  /* O "quanto falta" desce para baixo do nome */
+  .cnv-tarefa {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    gap: 0.3rem 0.7rem;
+  }
+
+  .cnv-tarefa > .cnv-prazo {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .cnv-tarefa > .cnv-folhinha {
+    grid-row: 1 / span 2;
+  }
+
+  .cnv-item {
+    grid-template-columns: 3rem 0.9rem minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+
+  .cnv-dia-especial {
+    margin-left: 0;
+  }
+
+  /* Tabela rola para o lado; o curso fica parado à esquerda */
+  .cnv-tabela tbody th {
+    max-width: 8rem;
+  }
+
+  .cnv-tabela tr > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--bg-terminal);
+  }
+}

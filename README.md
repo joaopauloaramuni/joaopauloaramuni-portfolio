@@ -33,6 +33,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
 * 👥 **turmas / acompanhamento / ti:** Acompanhamento de turmas de TI (Trabalhos Interdisciplinares). Compara os grupos que eu oriento em TI:II e TI:V pelos repositórios no GitHub, sem contar os professores: linhas de código, linguagens, commits por semana, equilíbrio entre os integrantes, pull requests, issues e o resumo do README de cada projeto. Tem um gráfico por opção: `turmas --resumo` (padrão), `turmas --codigo`, `turmas --linguagens`, `turmas --ritmo`, `turmas --equilibrio`, `turmas --prs`, `turmas --projetos` e `turmas --tudo`, e filtros por disciplina, campus e grupo (`turmas ti5 coreu --ritmo`, `turmas uaiport`). Os dados vêm do `npm run turmas`.
+* 📚 **canvas / tarefas / prazos / entregas:** Tarefas das minhas disciplinas no Canvas: a próxima entrega em destaque, com contagem regressiva, os prazos do semestre e quantos alunos já entregaram cada tarefa (no prazo, atrasadas, faltando e a corrigir). Tem uma seção por opção: `canvas --resumo` (padrão), `canvas --tarefas`, `canvas --agenda` (tarefas, eventos do calendário do Canvas e feriados da PUC, dia a dia) e `canvas --tudo`, e filtros por disciplina, campus e turma (`canvas diw --tarefas`, `canvas ti5 coreu`). Os dados vêm do `npm run canvas`: a chave da API do Canvas nunca vai para o site.
 * 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
@@ -83,6 +84,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
 1. **Código & CI/CD (à esquerda)**
    - A máquina do desenvolvedor roda o `npm run dev` e o `npm run lattes`, que lê a exportação XML da Plataforma Lattes e gera o `src/data/lattesData.js`.
    - O `npm run turmas` também roda só na máquina do desenvolvedor: clona os repositórios privados dos grupos com o token dele e gera o `src/data/turmasData.js` (não aparece no diagrama).
+   - O `npm run canvas` idem: lê as tarefas e as entregas no Canvas com a chave da API dele e gera o `src/data/canvasData.js` (não aparece no diagrama).
    - Cada `git push` no GitHub dispara o deploy automático na Vercel.
    - O GitHub Actions (`keep-supabase-awake.yml`) faz uma requisição ao Supabase a cada 12 horas para o projeto gratuito não entrar em pausa.
    - Logo abaixo fica a implantação alternativa com Docker: um stage de build com Node e um stage com NGINX, que usa o `nginx.conf` para repassar `/api/*`.
@@ -221,14 +223,15 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 │   └── 🖼️ imagens                 → projetos, prêmios e prévia do link
 ├── 📁 scripts
 │   ├── 🛠️ lattes.mjs              → importa o XML do Lattes (npm run lattes)
-│   └── 🛠️ turmas.mjs              → métricas dos repositórios dos grupos (npm run turmas)
+│   ├── 🛠️ turmas.mjs              → métricas dos repositórios dos grupos (npm run turmas)
+│   └── 🛠️ canvas.mjs              → tarefas, prazos e entregas do Canvas (npm run canvas)
 ├── 📁 src
 │   ├── 📁 assets
 │   │   └── 🔤 fonts               → Fira Code e JetBrains Mono
 │   ├── 📁 components              → um componente (.jsx + .css) por comando ou recurso
 │   ├── 📁 config                  → EmailJS, GitHub API, GitHub Stats e WakaTime
 │   ├── 📁 data                    → conteúdo estático, skins e seções dos comandos
-│   ├── 📁 lib                     → Supabase, GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência e turmas
+│   ├── 📁 lib                     → Supabase, GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência, turmas e canvas
 │   ├── 📁 terminal                → autocomplete, teclas, leitura de opções e rolagem
 │   ├── 📁 theme                   → tokens de cor, contexto e ThemeProvider
 │   ├── ⚛️ main.jsx                → ponto de entrada (Router, tema e i18n)
@@ -559,6 +562,8 @@ const { theme, setTheme, toggleTheme } = useTheme();
 | `--turmas-concluido` | `#9d7cf2` | `#6d3fc0` | PRs mergeados e issues fechadas (`turmas --prs`) |
 | `--turmas-aberto` | `#bf8a12` | `#92400e` | PRs e issues abertos (`turmas --prs`) |
 | `--turmas-ling-1` … `--turmas-ling-6` | `#3987e5` `#d95926` `#199e70` `#c98500` `#d55181` `#0d950d` | `#2a78d6` `#c4501f` `#108c74` `#a36b00` `#c2457a` `#007000` | As 6 linguagens com mais linhas de código em cada disciplina (`turmas --codigo` e `--linguagens`), nessa ordem; o resto vira "Outras", em `--text-dim` |
+| `--canvas-entregue` · `--canvas-atrasada` · `--canvas-faltando` | `#199e70` `#c98500` `#d95926` | `#108c74` `#a36b00` `#c4501f` | Entregas no prazo, atrasadas e faltando (depois do prazo) na barra de cada tarefa (`canvas`); antes do prazo, quem ainda não entregou fica vazado |
+| `--canvas-urgente` | `#f87171` | `#b91c1c` | Prazo que vence em menos de 24 horas (`canvas`), sempre com ícone |
 
 A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
 
@@ -1599,6 +1604,83 @@ src/
 
 -----
 
+## 📚 Guia do comando canvas (tarefas do Canvas)
+
+O comando `canvas` (aliases `tarefas`, `prazos` e `entregas`) mostra as tarefas das minhas disciplinas no [Canvas](https://pucminas.instructure.com): qual vence primeiro, os prazos do semestre e quantos alunos já entregaram cada uma. Cada opção abre uma seção:
+
+| Comando | O que mostra |
+|:--|:--|
+| `canvas` ou `canvas --resumo` (`--summary`) | A **próxima entrega** em destaque, com a contagem regressiva (dias, horas, minutos e, no último dia, segundos) e quantos já entregaram; os indicadores (cursos, alunos, tarefas pela frente, que vencem em 7 dias, a corrigir e a entrega média); as tarefas dos próximos 7 dias; e uma tabela por curso com alunos, tarefas vencidas/total, próxima entrega, entrega média e o que falta corrigir, ordenada por campus, disciplina e próxima entrega (clicar no cabeçalho ordena por outra coluna) (padrão) |
+| `canvas --tarefas` (`--prazos`, `--entregas`, `--tasks`) | Todas as tarefas do semestre: pela frente (a que vence primeiro no topo), já vencidas (a mais recente no topo, as mais antigas atrás do botão "mostrar") e sem prazo. Cada uma com a folhinha do prazo, quanto falta, os prazos por turma, até quando aceita atrasadas e a barra de entregas |
+| `canvas --agenda` (`--calendario`, `--eventos`) | Dia a dia, dos próximos 21 dias (ou até o fim do semestre, no botão): os prazos das tarefas, os eventos do calendário dos cursos no Canvas (com horário e local) e os feriados e recessos do calendário da PUC |
+| `canvas --tudo` (`--all`) | As três seções, uma embaixo da outra |
+
+Os filtros podem ser combinados com qualquer opção: a disciplina (`diw`, `diaw`, `ti2`, `ti5`...), o campus (`coreu`, `lourdes`), a turma (`g1`, `g2`...) ou um pedaço do nome do curso no Canvas (`canvas noite`). O Tab completa as opções, as disciplinas e os campi. Links diretos: [aramuni.dev/?cmd=canvas](https://aramuni.dev/?cmd=canvas) e [?cmd=canvas --tarefas](https://aramuni.dev/?cmd=canvas%20--tarefas).
+
+A barra de entregas de cada tarefa soma os alunos ativos do curso: **no prazo** (verde), **atrasadas** (âmbar), **faltando** (laranja, depois do prazo), **ainda não entregaram** (vazado, antes do prazo) e **dispensados** (listrado, fora do total). O prazo aparece sempre com ícone e texto: vermelho até 24 horas, amarelo até 3 dias. As contagens regressivas usam a hora de agora, então "em 5 h" está sempre certo; as entregas são as da última vez que o script rodou (a data fica no subtítulo). Os limites ficam em `LIMITES`, no `src/lib/canvas.js`.
+
+### 1️⃣ De onde vêm os dados
+
+A chave da API do Canvas dá acesso a tudo o que eu vejo no Canvas, inclusive notas e entregas dos alunos, e o portfólio é público. Por isso o navegador **nunca** fala com o Canvas: quem lê tudo é o `npm run canvas`, na minha máquina, e o que vai para o site é só o `src/data/canvasData.js` que ele gera (o mesmo esquema do `npm run turmas`). O script:
+
+1. Lista os cursos publicados em que sou professor e fica com os do semestre (que vem do `calendarioPuc.js`) que têm **alguma tarefa publicada**: os que citam o semestre no nome ou no período (`2026/2`, `2026-2`...), os que têm o período dentro do semestre ou, sem nada disso, os que têm alguma tarefa ou evento no semestre. Cursos sem nenhuma tarefa (a sala que o SGA cria ao lado da que eu uso, por exemplo) ficam de fora.
+2. Descobre a disciplina, o campus e a turma de cada curso pelo **código da turma no SGA** (o `codigo` das aulas no `horarioData.js`, como `6162.1.01`) que aparece no nome, no código ou nas seções do curso, para usar as mesmas siglas e cores do `cal`. Sem o código completo, tenta o número da disciplina (`4354`). O campus e o turno também vêm do nome do curso (`... - Campus Lourdes - PLU - Noite - 2026/2`), e um curso sem código herda a disciplina de outro com o mesmo nome de disciplina. O rótulo de cada curso mostra sempre o código do SGA, que diz qual é a turma (`DIAW G1 8148.1.01` e `DIAW G1 8218.1.01`); sem o código da turma, vai o número da disciplina (`TI:II 6288`).
+3. Lê as tarefas publicadas: prazo (e os prazos de cada turma, quando são diferentes), abertura, fechamento, pontos, tipo de entrega e se é em grupo.
+4. Lê as entregas dos alunos ativos e soma por tarefa: no prazo, atrasadas, faltando, dispensados, corrigidas e a corrigir.
+5. Lê os eventos do calendário dos cursos no semestre (aulas, provas, apresentações), sem a descrição.
+
+> 🔒 **Privacidade:** nomes, e-mails, notas e a entrega de cada aluno só existem na memória do script. O arquivo gerado guarda as tarefas (nome, prazo e link) e, de cada uma, **quantos** alunos entregaram, nunca quem. Dos eventos, vão o título, o horário, o local e o link; os horários de atendimento marcados por alunos (agendamentos) ficam de fora. Os links levam ao Canvas, que pede login.
+
+### 2️⃣ Chave da API do Canvas
+
+No Canvas: **Conta → Configurações → Integrações aprovadas → + Novo token de acesso**. Dê um nome (por exemplo, "portfólio"), escolha uma data de validade e copie o token na hora: o Canvas não mostra de novo. Depois, coloque no `.env.local`:
+
+```bash
+CANVAS_TOKEN=1234~abcdef...
+npm run canvas
+```
+
+**Nunca** coloque `VITE_` na frente: tudo que começa com `VITE_` vai para o build e fica visível no navegador (o script se recusa a rodar se achar um `VITE_CANVAS_TOKEN`). O token só é enviado para o endereço do Canvas, em `CANVAS_URL` no `src/data/canvasCursos.js` (`https://pucminas.instructure.com`); as páginas seguintes da API só são lidas se forem do mesmo endereço. O `.env.local` já está no `.gitignore`.
+
+Se o Canvas recusar o token (vencido ou apagado), o script para sem mexer no `canvasData.js`. Se não der para ler as entregas de um curso (um curso em que você é só designer, por exemplo), as tarefas dele entram sem as contagens. Se um curso falhar por inteiro, ficam os dados da última vez.
+
+### 3️⃣ Atualizar e conferir os cursos
+
+```bash
+npm run canvas                        # cursos do semestre atual
+npm run canvas -- --cursos            # só lista os cursos e o que o script descobriu, sem gravar nada
+npm run canvas -- --semestre 2026-1   # outro semestre do calendário da PUC
+```
+
+No terminal, o script mostra cada curso que entrou, com a quantidade de tarefas, alunos, eventos e entregas a corrigir, e no fim a próxima entrega. Depois é só fazer commit do `src/data/canvasData.js`. Rode de novo sempre que quiser atualizar as entregas: os prazos e a contagem regressiva já ficam certos sozinhos.
+
+Se algum curso entrar errado, sair ou vier sem a disciplina, use o `--cursos` para ver o id de cada um e o motivo, e corrija no `src/data/canvasCursos.js`:
+
+```js
+export const CURSOS = {
+  12345: { disciplina: "diw", campus: "coreu", turma: "G1" },
+  67890: { nome: "Monitoria AEDS" },   // troca o nome que aparece no terminal
+};
+export const INCLUIR = [];   // entram mesmo sem tarefa publicada ou fora do semestre
+export const IGNORAR = [];   // nunca entram (sandbox, capacitação...)
+```
+
+### 📂 Arquivos
+
+```text
+scripts/canvas.mjs            → lê o Canvas e gera os dados (npm run canvas)
+src/
+  data/canvasCursos.js        → endereço do Canvas e ajustes de cursos (CURSOS, INCLUIR, IGNORAR)
+  data/canvasData.js          → dados gerados pelo script (não edite à mão)
+  data/canvasSections.js      → seções, filtros e nomes aceitos (PT e EN)
+  lib/canvas.js               → prazos, urgência, entregas, totais e agenda
+  components/Canvas.jsx       → próxima entrega, tarefas, tabela e agenda
+  components/Canvas.css       → layout, barras e folhinhas, com layout para celular
+  theme/theme.css             → cores das entregas (--canvas-*)
+```
+
+-----
+
 ## 📝 Guia de configuração do Supabase para o Livro de Visitas
 
 Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
@@ -1898,7 +1980,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
 
-6. **Atualize os dados gerados (opcional):** dois comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
+6. **Atualize os dados gerados (opcional):** três comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
 
    ```bash
    # lattes: lê a exportação XML (e o PDF) da Plataforma Lattes → src/data/lattesData.js e public/lattes.pdf
@@ -1907,9 +1989,13 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
    # turmas: lê os repositórios privados dos grupos de TI → src/data/turmasData.js
    # (precisa de um token: GITHUB_TOKEN no .env.local ou gh auth login)
    npm run turmas
+
+   # canvas: lê tarefas, entregas e o calendário do Canvas → src/data/canvasData.js
+   # (precisa da chave da API do Canvas: CANVAS_TOKEN no .env.local)
+   npm run canvas
    ```
 
-   O passo a passo de cada um está no [guia do comando lattes](#-guia-do-comando-lattes-currículo-lattes) e no [guia do comando turmas](#-guia-do-comando-turmas-acompanhamento-de-turmas-de-ti). Depois, é só fazer commit dos arquivos gerados.
+   O passo a passo de cada um está no [guia do comando lattes](#-guia-do-comando-lattes-currículo-lattes), no [guia do comando turmas](#-guia-do-comando-turmas-acompanhamento-de-turmas-de-ti) e no [guia do comando canvas](#-guia-do-comando-canvas-tarefas-do-canvas). Depois, é só fazer commit dos arquivos gerados.
 
 -----
 

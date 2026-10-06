@@ -43,6 +43,7 @@ import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 import { parseCalSkin } from "./data/calSkins";
 import { parseLattesSection } from "./data/lattesSections";
 import { parseTurmas } from "./data/turmasSections";
+import { parseCanvas } from "./data/canvasSections";
 import { GRUPOS } from "./data/turmasRepos";
 
 // O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas): o código dele
@@ -50,6 +51,8 @@ import { GRUPOS } from "./data/turmasRepos";
 const Lattes = lazy(() => import("./components/Lattes"));
 // O "turmas" traz os dados dos grupos (npm run turmas): idem
 const Turmas = lazy(() => import("./components/Turmas"));
+// O "canvas" traz as tarefas do semestre (npm run canvas): idem
+const Canvas = lazy(() => import("./components/Canvas"));
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -250,6 +253,25 @@ function App() {
           response = (
             <Suspense fallback={<TerminalOutput>{t("turmas.carregando")}</TerminalOutput>}>
               <Turmas {...parsed} />
+            </Suspense>
+          );
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          keepLastCommandAtTop();
+          break;
+        }
+        case "canvas": {
+          // "canvas" abre o resumo (próxima entrega); "--tarefas", "--agenda"
+          // e "--tudo" trocam a seção e "diw", "ti5", "coreu", "g1"... ou um
+          // pedaço do nome do curso filtram (ver data/canvasSections.js e
+          // scripts/canvas.mjs)
+          const parsed = parseCanvas(args.slice(1));
+          if (!parsed) {
+            response = <TerminalOutput>{t("canvas.uso")}</TerminalOutput>;
+            break;
+          }
+          response = (
+            <Suspense fallback={<TerminalOutput>{t("canvas.carregando")}</TerminalOutput>}>
+              <Canvas {...parsed} />
             </Suspense>
           );
           // Saída longa: leva o comando para o topo em vez de cair no fim

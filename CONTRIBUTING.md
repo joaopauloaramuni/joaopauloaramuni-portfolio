@@ -95,6 +95,7 @@ Se você é aluno(a) e está contribuindo como parte de uma disciplina, seja mui
 | `VITE_EMAILJS_*` | `contato` | o formulário abre, mas o envio não funciona |
 | `GITHUB_SITE_TOKEN` | `github` e `stats` | as chamadas vão direto à API pública do GitHub, no limite do IP de quem acessa (60 por hora), e o `stats --linguagens` conta a linguagem principal de cada repositório em vez dos bytes |
 | `GITHUB_TOKEN` | `npm run turmas` | o script tenta o `gh auth token` do GitHub CLI e a credencial salva do git; sem nenhum deles, só os repositórios públicos dos grupos respondem |
+| `CANVAS_TOKEN` | `npm run canvas` | o script não roda e o `canvas` mostra "Ainda sem dados do Canvas." (ou os dados do último `npm run canvas` que alguém fez commit) |
 
 Para testar esses recursos de verdade, siga os guias do [README](README.md) (EmailJS, GitHub API e Supabase) e use **as suas próprias contas**.
 
@@ -104,6 +105,7 @@ Alguns cuidados com as chaves:
 
 - O `.env.local` já está no `.gitignore`. **Nunca** faça commit de tokens ou chaves; o que vai para o repositório é só o `.env.example`, sem valores.
 - Toda variável `VITE_` é embutida no JavaScript enviado ao navegador. Por isso os tokens do GitHub **não** têm `VITE_` na frente: o `GITHUB_SITE_TOKEN` fica só no servidor (o proxy `/api/github`, na Vercel ou no `npm run dev`), e o `GITHUB_TOKEN` só na sua máquina.
+- O `CANVAS_TOKEN` também fica só na sua máquina e **nunca** vai para a Vercel: ele lê notas e entregas dos alunos. O site só recebe o `src/data/canvasData.js`, com contagens.
 - São dois tokens diferentes de propósito. O `GITHUB_SITE_TOKEN` é **fine-grained e só de leitura** de repositórios públicos, o mesmo valor no `.env.local` e na Vercel. O `GITHUB_TOKEN` é **classic com o escopo `repo`**, porque lê os repositórios privados das turmas em três organizações (um fine-grained lê os de um dono só), e nunca vai para a Vercel: lá ele daria ao proxy público acesso a repositórios privados.
 
 ### 🧪 Dicas para testar

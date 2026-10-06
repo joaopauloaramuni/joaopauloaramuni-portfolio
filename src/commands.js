@@ -1,5 +1,6 @@
 import { GRUPOS } from './data/turmasRepos';
 import { turmasSubcommands } from './data/turmasSections';
+import { canvasSubcommands } from './data/canvasSections';
 
 // Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
 // segunda palavra, ex.: "tema c" + Tab → "tema claro".
@@ -64,6 +65,14 @@ export const commandList = {
     // | --prs | --projetos | --tudo; filtros: ti2, ti5, lourdes, coreu, g1... e o
     // nome de cada grupo (ver data/turmasSections.js)
     subcommands: turmasSubcommands(GRUPOS),
+  },
+  canvas: {
+    name: 'canvas',
+    aliases: ['tarefas', 'prazos', 'entregas'],
+    // Tarefas, prazos e entregas das minhas disciplinas no Canvas.
+    // Seções: canvas --resumo | --tarefas | --agenda | --tudo; filtros: diw,
+    // ti5, coreu, lourdes, g1... (ver data/canvasSections.js)
+    subcommands: canvasSubcommands,
   },
   habilidades: {
     name: 'habilidades',
