@@ -193,6 +193,58 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 
 -----
 
+## 📂 Estrutura do projeto
+
+```text
+📦 joaopauloaramuni-portfolio
+├── 📁 .github
+│   ├── 📁 ISSUE_TEMPLATE          → modelos de issue (bug, feature e dúvida)
+│   ├── 📁 workflows
+│   │   └── ⚙️ keep-supabase-awake.yml → cron a cada 12 h que mantém o Supabase ativo
+│   ├── 💖 FUNDING.yml
+│   └── 📝 PULL_REQUEST_TEMPLATE.md
+├── 📁 docs
+│   └── 🖼️ diagrama-componentes-implantacao-portfolio.png
+├── 📁 public                      → arquivos servidos como estão (entram no build)
+│   ├── 📁 linkedin                → fotos das recomendações
+│   ├── 📁 logos                   → logos de empresas e instituições
+│   ├── 📄 cv-pt.pdf · cv-en.pdf   → currículo (comando curriculo)
+│   ├── 📄 lattes.pdf              → currículo Lattes (lattes --pdf)
+│   └── 🖼️ imagens                 → projetos, prêmios e prévia do link
+├── 📁 scripts
+│   └── 🛠️ lattes.mjs              → importa o XML do Lattes (npm run lattes)
+├── 📁 src
+│   ├── 📁 assets
+│   │   └── 🔤 fonts               → Fira Code e JetBrains Mono
+│   ├── 📁 components              → um componente (.jsx + .css) por comando ou recurso
+│   ├── 📁 config                  → EmailJS, GitHub API, GitHub Stats e WakaTime
+│   ├── 📁 data                    → conteúdo estático, skins e seções dos comandos
+│   ├── 📁 lib                     → Supabase, buscas do GitHub Stats e do WakaTime, horários e docência
+│   ├── 📁 terminal                → autocomplete, teclas, leitura de opções e rolagem
+│   ├── 📁 theme                   → tokens de cor, contexto e ThemeProvider
+│   ├── ⚛️ main.jsx                → ponto de entrada (Router, tema e i18n)
+│   ├── ⚛️ App.jsx                 → terminal e execução dos comandos
+│   ├── 🎨 App.css
+│   ├── ⌨️ commands.js             → comandos e aliases
+│   └── 🌐 i18n.js                 → textos em pt-BR e en
+├── 🔐 .env.example                → modelo das variáveis VITE_*
+├── 🙈 .gitignore
+├── 🐳 .dockerignore
+├── 🐳 Dockerfile                  → build com Node + NGINX
+├── 🔀 nginx.conf                  → proxy de /api/* no container (igual ao vercel.json)
+├── ▲ vercel.json                  → rewrites de /api/* na Vercel
+├── ⚡ vite.config.js              → build do Vite e proxy no npm run dev
+├── 🧹 eslint.config.js
+├── 🌐 index.html                  → HTML base, metatags e prévia do link
+├── 📦 package.json
+├── 🔒 package-lock.json
+├── 🤝 CONTRIBUTING.md
+├── 📜 LICENSE                     → MIT
+└── 📘 README.md
+```
+
+-----
+
 ## 📌 Diferença entre usar `react-calendly` e o embed oficial
 
 Existem duas formas principais de integrar o Calendly em uma aplicação React:
