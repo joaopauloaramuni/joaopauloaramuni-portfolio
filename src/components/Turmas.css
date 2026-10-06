@@ -1030,7 +1030,7 @@
 /* ---------------------------------------------------------------------
    Telas menores: o nome do grupo ganha uma linha só dele
    --------------------------------------------------------------------- */
-@media (max-width: 1400px) {
+@media (max-width: 1280px) {
   .tur-painel {
     width: 75%;
   }
@@ -1042,9 +1042,32 @@
     margin: 1rem 0.5rem;
     padding: 1rem;
   }
+
+  /* O equilíbrio tem quatro colunas e é o primeiro a apertar: a partir daqui,
+     o nome vai para cima, as barras ganham a linha toda e o texto desce */
+  .tur-equilibrio {
+    gap: 0.7rem;
+  }
+
+  .tur-eq-linha,
+  .tur-eq-linha.sem-dados {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem 0.6rem;
+  }
+
+  .tur-eq-linha > .tur-nome {
+    grid-column: 1 / -1;
+  }
+
+  .tur-eq-texto {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.1rem 1rem;
+  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .tur-titulo {
     font-size: 1.5rem;
   }
@@ -1056,11 +1079,9 @@
   .tur-barra,
   .tur-barra:has(.tur-valor-largo),
   .tur-ritmo-linha,
-  .tur-eq-linha,
   .tur-prs-linha,
   .tur-barra.sem-dados,
   .tur-ritmo-linha.sem-dados,
-  .tur-eq-linha.sem-dados,
   .tur-prs-linha.sem-dados {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.2rem 0.6rem;
@@ -1068,14 +1089,12 @@
 
   .tur-barras,
   .tur-ritmo,
-  .tur-equilibrio,
   .tur-prs {
     gap: 0.7rem;
   }
 
   .tur-barra > .tur-nome,
   .tur-ritmo-linha > .tur-nome,
-  .tur-eq-linha > .tur-nome,
   .tur-prs-linha > .tur-nome {
     grid-column: 1 / -1;
   }
@@ -1086,13 +1105,6 @@
 
   .tur-ritmo-linha .tur-valor {
     text-align: left;
-  }
-
-  .tur-eq-texto {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.1rem 1rem;
   }
 
   .tur-prs-cabecalho {

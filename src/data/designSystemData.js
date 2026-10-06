@@ -127,6 +127,21 @@ export const tokenGroups = [
     ],
   },
   {
+    // Comando "turmas": estado de PRs e issues e as 6 linguagens com mais
+    // linhas em cada disciplina (paleta categórica validada nessa ordem)
+    id: "turmas",
+    tokens: [
+      { name: "--turmas-concluido", kind: "mark" },
+      { name: "--turmas-aberto", kind: "mark" },
+      { name: "--turmas-ling-1", kind: "mark" },
+      { name: "--turmas-ling-2", kind: "mark" },
+      { name: "--turmas-ling-3", kind: "mark" },
+      { name: "--turmas-ling-4", kind: "mark" },
+      { name: "--turmas-ling-5", kind: "mark" },
+      { name: "--turmas-ling-6", kind: "mark" },
+    ],
+  },
+  {
     id: "scrollbar",
     tokens: [
       { name: "--scrollbar-thumb", kind: "color" },

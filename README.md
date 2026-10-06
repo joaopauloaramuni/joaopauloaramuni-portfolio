@@ -120,7 +120,7 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 
 ### 💡 O que o diagrama mostra
 
-- **O portfólio não tem back-end próprio.** Tudo roda no navegador; a Vercel só entrega os arquivos estáticos e repassa três rotas.
+- **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda uma única função, a `api/github.js`, que só existe para o token do GitHub não ir para o navegador.
 - **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
 - **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase e a public key do EmailJS. O token do GitHub (`GITHUB_SITE_TOKEN`, sem `VITE_`) fica só no servidor, na Vercel Function `api/github.js`, e nunca chega ao navegador.
 
@@ -175,6 +175,7 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
 * **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas.
+* **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e a Vercel Function `api/github.js`, que acrescenta o token do GitHub no servidor.
 
 -----
 
@@ -227,7 +228,7 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 │   ├── 📁 components              → um componente (.jsx + .css) por comando ou recurso
 │   ├── 📁 config                  → EmailJS, GitHub API, GitHub Stats e WakaTime
 │   ├── 📁 data                    → conteúdo estático, skins e seções dos comandos
-│   ├── 📁 lib                     → Supabase, buscas do GitHub Stats e do WakaTime, horários e docência
+│   ├── 📁 lib                     → Supabase, GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência e turmas
 │   ├── 📁 terminal                → autocomplete, teclas, leitura de opções e rolagem
 │   ├── 📁 theme                   → tokens de cor, contexto e ThemeProvider
 │   ├── ⚛️ main.jsx                → ponto de entrada (Router, tema e i18n)
@@ -534,7 +535,7 @@ const { theme, setTheme, toggleTheme } = useTheme();
 |:--|:--|:--|:--|
 | `--bg-page` | `#1a202c` | `#cfcfcf` | Fundo da página e trilho da scrollbar |
 | `--bg-terminal` | `#252a33` | `#dddddd` | Fundo do boot, igual ao do terminal em cada `ColorMode` |
-| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências, projetos, habilidades, WakaTime, stats e lattes |
+| `--surface` | `#2d3748` | `#f2f2f2` | Cards de experiências, projetos, habilidades, WakaTime, stats, lattes e turmas |
 | `--text` | `#e2e8f0` | `#1a1e24` | Texto principal |
 | `--text-muted` | `#a0aec0` | `#4a5568` | Texto secundário e ícones do seletor |
 | `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
@@ -555,6 +556,9 @@ const { theme, setTheme, toggleTheme } = useTheme();
 | `--docencia-igti` | `#a59000` | `#a46400` | IGTI (`lattes --docencia`) |
 | `--docencia-trybe` | `#1aa598` | `#00897d` | Trybe (`lattes --docencia`) |
 | `--docencia-fumec` | `#9565b6` | `#5c4285` | Universidade FUMEC (`lattes --docencia`) |
+| `--turmas-concluido` | `#9d7cf2` | `#6d3fc0` | PRs mergeados e issues fechadas (`turmas --prs`) |
+| `--turmas-aberto` | `#bf8a12` | `#92400e` | PRs e issues abertos (`turmas --prs`) |
+| `--turmas-ling-1` … `--turmas-ling-6` | `#3987e5` `#d95926` `#199e70` `#c98500` `#d55181` `#0d950d` | `#2a78d6` `#c4501f` `#108c74` `#a36b00` `#c2457a` `#007000` | As 6 linguagens com mais linhas de código em cada disciplina (`turmas --codigo` e `--linguagens`), nessa ordem; o resto vira "Outras", em `--text-dim` |
 
 A lista completa, com bordas, tags, scrollbar, sombras e ícones da tela de boas-vindas, está em `src/theme/theme.css`.
 
@@ -585,7 +589,7 @@ O comando `design` (ou `ds`, `designsystem`) mostra, dentro do próprio terminal
 |:--|:--|
 | 🏷️ Marca | Logo (`aramunilogo.png`), banner ASCII da tela de boas-vindas e a janela do terminal nos dois temas |
 | 🌈 Escala cromática | Todas as cores sólidas dos dois temas, agrupadas por família e ordenadas da mais escura para a mais clara |
-| 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos, ícones e marcas de gráfico calculado pelo WCAG. Inclui as cores dos campi do `cal`, dos tipos de produção do `lattes` e das instituições do `lattes --docencia` |
+| 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos, ícones e marcas de gráfico calculado pelo WCAG. Inclui as cores dos campi do `cal`, dos tipos de produção do `lattes`, das instituições do `lattes --docencia` e das linguagens, PRs e issues do `turmas` |
 | 🔤 Tipografia | Fira Code e JetBrains Mono, pilhas de fontes, regras e a escala de tamanhos |
 | 📏 Espaçamento | Os valores de padding, margin e gap mais usados nos componentes |
 | ⬜ Raios | Os arredondamentos e onde aparece cada um |
@@ -1070,19 +1074,31 @@ const data = await fetchGitHub(
 Depois de buscar os repositórios, você pode mapear para seu `ProjectCard`:
 
 ```javascript
+// Prévia que o GitHub gera para cada repositório. O primeiro trecho do
+// caminho é só uma chave de cache: as alternativas pedem a mesma imagem de novo
+const preview = (repo, chave) =>
+  `https://opengraph.githubassets.com/${chave}/${USERNAME}/${repo.name}`;
+
 const mappedRepos = data
   .filter(repo => !repo.fork)
   .map(repo => ({
     id: repo.id,
     title: repo.name,
-    description: repo.description || "Sem descrição disponível",
-    gif: `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
+    description: repo.description || "",
+    gif: preview(repo, 1),
+    gifFallbacks: [preview(repo, 2), preview(repo, 3)],
     repoLink: repo.html_url,
     technologies: repo.topics || [],
   }));
 ```
 
-> Dessa forma, cada `ProjectCard` recebe todas as informações necessárias: título, descrição, gif, link e tecnologias.
+> Dessa forma, cada `ProjectCard` recebe todas as informações necessárias: título, descrição, imagem, link e tecnologias.
+
+O `opengraph.githubassets.com` gera cada imagem na hora e recusa quando o mesmo visitante pede muitas de uma vez. Por isso o `ProjectCard`:
+
+- carrega cada imagem só quando o card chega perto da tela (`loading="lazy"`);
+- se a imagem falhar, espera 2 segundos e tenta a próxima de `gifFallbacks`, depois mais 6 (`ESPERAS`, em `ProjectCard.jsx`), sem mostrar o ícone de imagem quebrada enquanto isso;
+- se todas falharem, mostra um quadro com o ícone do GitHub e o nome do projeto, nas cores do tema.
 
 ---
 
@@ -1517,16 +1533,16 @@ Os repositórios dos grupos são privados e o portfólio é público, então o n
 
 1. Clona o repositório (`git clone --bare`) em `node_modules/.cache/turmas`, ou só faz `git fetch` se já clonou antes.
 2. Conta as linhas não vazias de **todas as branches**: cada arquivo conta uma vez, na versão com mais linhas. Ficam de fora dependências e build (`node_modules`, `dist`, `target`...), lockfiles, minificados, código gerado, as pastas de plataforma do Flutter, Markdown e a pasta `docs/` (que vira "linhas de documentação").
-3. Lê o `git log` de todas as branches desde o início do semestre (que vem do `calendarioPuc.js`), sem merges, bots e professores: commits por semana, último commit e a fatia de cada integrante. Commits da mesma pessoa feitos com e-mails ou nomes diferentes são juntados pelo login do GitHub, pelo e-mail e pelo nome.
+3. Lê o `git log` de todas as branches desde o início do semestre (que vem do `calendarioPuc.js`), sem merges, bots e professores: commits por semana, último commit e a fatia de cada integrante. Commits da mesma pessoa feitos com e-mails ou nomes diferentes são juntados pela conta do GitHub, pelo e-mail e pelo nome. Para saber de qual conta é cada e-mail, o script pega um commit de cada e-mail e pergunta ao GitHub de quem ele é, numa consulta GraphQL só (100 e-mails por consulta): vale para **todos** os commits do semestre, em todas as branches.
 4. Pergunta à GitHub API pelos pull requests e issues, sem os abertos por bots ou professores.
 5. Lê o README da branch padrão: título, descrição, quantos integrantes (seção "Integrantes") e link de deploy.
 6. Descobre a stack pelos arquivos de dependências (`package.json`, `pom.xml`, `pubspec.yaml`, `docker-compose.yml`, `application.properties`...).
 
-> 🔒 **Privacidade:** nomes, e-mails e logins dos alunos só existem na memória do script. O arquivo gerado guarda números e o resumo de cada projeto; a fatia de cada integrante vai sem identificação, só ordenada da maior para a menor, e a descrição do README é descartada se tiver o nome de algum integrante.
+> 🔒 **Privacidade:** nomes, e-mails e logins dos alunos só existem na memória do script. O arquivo gerado guarda números e o resumo de cada projeto; a fatia de cada integrante vai sem identificação, só ordenada da maior para a menor, e a descrição do README é descartada se tiver o nome de algum integrante. O `--autores` (abaixo) mostra nomes e e-mails, mas só no terminal.
 
 ### 2️⃣ Token do GitHub
 
-O script procura um token, nesta ordem: `GITHUB_TOKEN` (ou `GH_TOKEN`) no ambiente, `GITHUB_TOKEN` no `.env.local`, o `gh auth token` do GitHub CLI e a credencial que o git já usa para o `github.com` (Keychain no macOS, Git Credential Manager no Windows). Basta um token com leitura dos repositórios das organizações das turmas (o login do GitHub CLI já serve; ou um classic com `repo`; ou um fine-grained com *Contents*, *Issues* e *Pull requests* só de leitura, se a organização permitir). **Nunca** coloque `VITE_` na frente: tudo que começa com `VITE_` vai para o build e fica visível no navegador.
+O script procura um token, nesta ordem: `GITHUB_TOKEN` (ou `GH_TOKEN`) no ambiente, `GITHUB_TOKEN` no `.env.local`, o `gh auth token` do GitHub CLI e a credencial que o git já usa para o `github.com` (Keychain no macOS, Git Credential Manager no Windows). Basta um token com leitura dos repositórios das organizações das turmas: o login do GitHub CLI já serve, ou um **classic** com o escopo `repo`. Um **fine-grained** não serve: ele lê os repositórios de um dono só (o *Resource owner* escolhido ao criar o token), e as turmas ficam em três organizações. **Nunca** coloque `VITE_` na frente: tudo que começa com `VITE_` vai para o build e fica visível no navegador.
 
 ```bash
 # com o GitHub CLI já logado, não precisa de mais nada
@@ -1538,9 +1554,9 @@ GITHUB_TOKEN=ghp_xxx npm run turmas
 
 O `GITHUB_SITE_TOKEN` dos comandos `github` e `stats` **não** é usado: ele lê só repositórios públicos. Os dados também não vêm do navegador: enquanto o script não rodar, os grupos aparecem como "ainda sem dados" (no `npm run dev`, um aviso lembra disso).
 
-No começo, o script mostra de quem é o token e, se for classic, os escopos dele. Para cada grupo que falhar, ele diz o motivo: sem token, token sem o escopo `repo`, token fine-grained sem acesso à organização ou organização que exige SSO (nesse caso, autorize o token em *github.com/settings/tokens* → *Configure SSO*). Sem token, só os repositórios públicos respondem. Se a GitHub API esbarrar no limite, o resto dos dados é atualizado e os PRs e issues ficam como estavam.
+No começo, o script mostra de quem é o token e, se for classic, os escopos dele. Para cada grupo que falhar, ele diz o motivo: sem token, token sem o escopo `repo`, token fine-grained (que não enxerga as organizações) ou organização que exige SSO (nesse caso, autorize o token em *github.com/settings/tokens* → *Configure SSO*). Sem token, só os repositórios públicos respondem. Se a GitHub API esbarrar no limite, o resto dos dados é atualizado e os PRs e issues ficam como estavam.
 
-> ⚠️ **"limite da GitHub API atingido":** sem token, a API aceita só 60 chamadas por hora por IP, e uma rodada completa faz centenas (dados do repositório, PRs, issues e os e-mails dos professores). O `git clone` pode funcionar mesmo assim, porque o git acha sozinho a senha salva no computador, e por isso linhas e commits aparecem, mas PRs e issues não. A primeira linha que o script mostra diz se ele achou um token. Com token, o limite é de 5.000 chamadas por hora e dá para rodar de novo na hora, sem esperar.
+> ⚠️ **"limite da GitHub API atingido":** sem token, a API aceita só 60 chamadas por hora por IP, e uma rodada completa faz centenas (dados do repositório, PRs, issues e o perfil dos professores), e a consulta que liga cada e-mail a uma conta do GitHub nem roda, porque a GraphQL exige token. O `git clone` pode funcionar mesmo assim, porque o git acha sozinho a senha salva no computador, e por isso linhas e commits aparecem, mas PRs e issues não. A primeira linha que o script mostra diz se ele achou um token. Com token, o limite é de 5.000 chamadas por hora e dá para rodar de novo na hora, sem esperar.
 
 ### 3️⃣ Atualizar e trocar de semestre
 
@@ -1549,9 +1565,12 @@ npm run turmas                # todos os grupos
 npm run turmas -- ti5         # só uma disciplina
 npm run turmas -- ti2 coreu   # só uma disciplina num campus
 npm run turmas -- uaiport     # só um grupo
+npm run turmas -- uaiport --autores   # e mostra quem fez os commits
 ```
 
 Os grupos que ficam de fora, ou que falham, mantêm os dados da última vez (com um relógio ao lado do nome, quando a última atualização falhou). Depois é só fazer commit do `src/data/turmasData.js`. Para um semestre novo, troque `SEMESTRE`, a lista `GRUPOS` e os `PROFESSORES` de cada turma em `src/data/turmasRepos.js`.
+
+O `--autores` serve para conferir o equilíbrio de um grupo: para cada autor dos commits do semestre, mostra os nomes, os e-mails e a conta do GitHub, com a quantidade de commits e de linhas; embaixo, quem ficou de fora da conta (bots, professores e orientadores) e a lista de integrantes do README. Nada disso vai para o `turmasData.js`. Mais autores que integrantes (o "7 de 6 com commits") quer dizer que alguém fez commit sem estar no README ou que a mesma pessoa usou dois e-mails sem conta do GitHub, com nomes diferentes. No segundo caso, basta o aluno cadastrar o e-mail que falta em *github.com/settings/emails* e rodar o script de novo.
 
 ### 4️⃣ Professores fora das análises
 
@@ -1562,7 +1581,7 @@ Os professores de cada turma ficam em `PROFESSORES`, no `src/data/turmasRepos.js
 | TI:II - Front-end | `rommelcarneiro`, `hayalacurto` | `joaopauloaramuni` |
 | TI:V - Aplicações Distribuídas | `CleitonSilvaT`, `cmnetos` | `lvcardoso`, `arturmol` |
 
-Nenhum deles conta em repositório nenhum: nem nos commits, nas linhas e no equilíbrio do grupo, nem nos PRs e issues que abriram. Para reconhecer commits feitos com um e-mail que não está ligado à conta, o script pergunta à GitHub API quais e-mails cada professor usou no repositório e compara também o nome do perfil. Quem está na seção "Orientadores" do README de cada grupo também fica de fora, e monitores ou convidados podem ir em `IGNORAR_AUTORES`.
+Nenhum deles conta em repositório nenhum: nem nos commits, nas linhas e no equilíbrio do grupo, nem nos PRs e issues que abriram. Os commits deles são reconhecidos pela conta do GitHub de cada e-mail (a mesma consulta que junta os e-mails dos alunos) e, quando o e-mail não está em conta nenhuma, pelo nome do perfil. Quem está na seção "Orientadores" do README de cada grupo também fica de fora, e monitores ou convidados podem ir em `IGNORAR_AUTORES`.
 
 ### 📂 Arquivos
 

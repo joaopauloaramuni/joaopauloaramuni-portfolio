@@ -32,8 +32,9 @@ export const DISCIPLINAS_TI = {
 
 // Professores de cada turma (login no GitHub). Ficam fora de todas as
 // análises, em qualquer repositório: commits, linhas, fatias do equilíbrio,
-// PRs e issues abertos por eles. O script descobre os e-mails de cada um
-// pela GitHub API (commits feitos com esse login) e o nome pelo perfil.
+// PRs e issues abertos por eles. O script reconhece os commits deles pela
+// conta do GitHub de cada e-mail e, se o e-mail não estiver em conta
+// nenhuma, pelo nome do perfil.
 export const PROFESSORES = {
   ti2: {
     lourdes: ["rommelcarneiro", "hayalacurto"],

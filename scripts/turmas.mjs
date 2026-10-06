@@ -7,6 +7,10 @@
 //   npm run turmas -- ti5         só uma disciplina
 //   npm run turmas -- ti2 coreu   só uma disciplina num campus
 //   npm run turmas -- uaiport     só um grupo (pelo nome, sem acento)
+//   npm run turmas -- uaiport --autores
+//                                 e mostra no terminal quem fez cada commit
+//                                 (nomes e e-mails só no terminal, nunca no
+//                                 arquivo gerado)
 // Os grupos que ficam de fora, ou que falham, mantêm os dados da última vez.
 //
 // Para cada grupo, o script:
@@ -16,8 +20,11 @@
 //      arquivo uma vez, na versão com mais linhas).
 //   3. Lê o git log de todas as branches desde o início do semestre: commits
 //      por semana, último commit e a fatia de commits e de linhas de cada
-//      integrante. Bots, os professores (PROFESSORES, em turmasRepos.js) e
-//      os orientadores do README não contam, nem nos PRs e issues.
+//      integrante. Para juntar os commits da mesma pessoa feitos com e-mails
+//      diferentes, pergunta ao GitHub de qual conta é cada e-mail (um commit
+//      de cada e-mail, numa consulta GraphQL só). Bots, os professores
+//      (PROFESSORES, em turmasRepos.js) e os orientadores do README não
+//      contam, nem nos PRs e issues.
 //   4. Pergunta à GitHub API pelos pull requests e issues.
 //   5. Lê o README: título, descrição, quantos integrantes e link de deploy.
 //   6. Descobre a stack pelos arquivos de dependências (package.json,
@@ -28,7 +35,9 @@
 // `gh auth token` do GitHub CLI e a credencial que o git já usa para o
 // github.com (Keychain no macOS, Git Credential Manager no Windows). Nunca com VITE_ na frente: o token não
 // pode ir para o build do site. Basta leitura dos repositórios das
-// organizações da PUC.
+// organizações da PUC: um token classic com o escopo repo, ou o login do
+// GitHub CLI. Fine-grained não serve: ele lê os repositórios de um dono só, e
+// as turmas ficam em três organizações.
 //
 // Privacidade: o portfólio é público. Nomes, e-mails e logins dos alunos só
 // existem na memória deste script, para juntar os commits da mesma pessoa.
@@ -58,7 +67,7 @@ const FUSO_MS = 3 * 3_600_000;
 const SEMANA_MS = 7 * 86_400_000;
 const CONCORRENCIA = 4;
 const PAGINAS_MAX = 10; // até 1000 PRs ou issues por repositório
-const PAGINAS_COMMITS = 3; // commits da API, só para ligar e-mail → login
+const COMMITS_POR_CONSULTA = 100; // commits por consulta GraphQL (e-mail → login)
 const LINHAS_MAX_ARQUIVO = 10_000; // mais que isso é gerado ou biblioteca copiada
 const LINHAS_MAX_COMMIT = 5_000; // idem, num arquivo só, num commit só
 const DESCRICAO_MAX = 320;
@@ -126,6 +135,10 @@ function lerToken() {
 }
 
 const { token: TOKEN, origem: ORIGEM_TOKEN } = lerToken();
+
+// Token fine-grained: lê os repositórios de um dono só (o "Resource owner"
+// escolhido ao criar o token), então não alcança as três organizações
+const FINE_GRAINED = Boolean(TOKEN?.startsWith("github_pat_"));
 
 // O GITHUB_SITE_TOKEN (antes VITE_GITHUB_TOKEN) do .env.local é o dos comandos
 // "github" e "stats": lê só repositórios públicos. O script não usa ele.
@@ -420,9 +433,9 @@ const nomesDosProfessores = [];
 
 const ehLoginExcluido = (login) => Boolean(login) && LOGINS_EXCLUIDOS.has(login.toLowerCase());
 
-// Quem não conta como integrante: professores (login, e-mails dos commits
-// deles e nome do perfil), orientadores do README e IGNORAR_AUTORES
-function criarFiltroDeExcluidos({ nomesDoReadme, emailsDosProfessores }) {
+// Quem não conta como integrante: professores (pelo login de cada e-mail ou
+// pelo nome do perfil), orientadores do README e IGNORAR_AUTORES
+function criarFiltroDeExcluidos({ nomesDoReadme }) {
   const nomes = [
     ...nomesDoReadme,
     ...nomesDosProfessores,
@@ -433,7 +446,6 @@ function criarFiltroDeExcluidos({ nomesDoReadme, emailsDosProfessores }) {
     const n = normalizarNome(nome);
     return (
       ehLoginExcluido(login) ||
-      emailsDosProfessores.has(email) ||
       extras.includes(email) ||
       LOGINS_EXCLUIDOS.has(n.replace(/ /g, "")) ||
       nomes.some((pessoa) => mesmaPessoa(n, pessoa))
@@ -463,7 +475,9 @@ function criarIdentidades() {
    Commits: total, semanas, último commit e fatia de cada integrante
    --------------------------------------------------------------------- */
 
-async function lerCommits(dir, { inicioMs, semanas, classificar, loginPorEmail, ehExcluido }) {
+// Commits de todas as branches desde o início do semestre, sem merges:
+// [{ sha, nome, email, ms, arquivos: [[linhasAdicionadas, caminho], ...] }]
+async function lerLog(dir, inicioMs) {
   const saida = await git(dir, [
     "log",
     "--branches",
@@ -472,19 +486,43 @@ async function lerCommits(dir, { inicioMs, semanas, classificar, loginPorEmail, 
     "--format=%x1e%H%x1f%an%x1f%ae%x1f%ct",
     "--numstat",
   ]);
+  return saida
+    .split("\x1e")
+    .slice(1)
+    .map((registro) => {
+      const [cabecalho, ...resto] = registro.split("\n");
+      const [sha, nome, email, segundos] = cabecalho.split("\x1f");
+      const arquivos = resto
+        .map((linha) => linha.split("\t"))
+        .filter(([mais, , caminho]) => caminho && mais !== "-")
+        .map(([mais, , caminho]) => [Number(mais), caminhoNovo(caminho)]);
+      return { sha, nome, email: email.toLowerCase(), ms: Number(segundos) * 1000, arquivos };
+    });
+}
 
+// Commits por semana, último commit e a fatia de cada integrante. Com
+// { diagnostico: true }, devolve também quem é quem (só para o --autores,
+// nunca para o arquivo gerado).
+function historicoDosCommits(
+  registros,
+  { inicioMs, semanas, classificar, loginPorEmail, ehExcluido, diagnostico = false }
+) {
   const identidades = criarIdentidades();
   const commits = [];
   const nomes = new Set();
   const emails = new Set();
   const logins = new Set();
-  for (const registro of saida.split("\x1e").slice(1)) {
-    const [cabecalho, ...resto] = registro.split("\n");
-    const [, nome, emailBruto, segundos] = cabecalho.split("\x1f");
-    const email = emailBruto.toLowerCase();
+  const excluidos = new Map();
+  for (const { sha, nome, email, ms, arquivos } of registros) {
     const login = loginPorEmail.get(email) ?? loginDoNoreply(email);
     const pessoa = { nome, email, login };
-    if (ehBot(pessoa) || ehExcluido(pessoa)) continue;
+    const motivo = ehBot(pessoa) ? "bot" : ehExcluido(pessoa) ? "professor ou orientador" : null;
+    if (motivo) {
+      const fora = excluidos.get(email) ?? { nome, email, login, motivo, commits: 0 };
+      fora.commits += 1;
+      excluidos.set(email, fora);
+      continue;
+    }
 
     // Mesma pessoa: mesmo login, mesmo e-mail ou mesmo nome completo
     const chave = login ? `@${login}` : `e:${email}`;
@@ -498,18 +536,15 @@ async function lerCommits(dir, { inicioMs, semanas, classificar, loginPorEmail, 
     }
 
     let adicoes = 0;
-    for (const linha of resto) {
-      const [mais, , caminho] = linha.split("\t");
-      if (!caminho || mais === "-") continue;
-      const n = Number(mais);
-      if (n > LINHAS_MAX_COMMIT || classificar(caminhoNovo(caminho))?.tipo !== "codigo") continue;
+    for (const [n, caminho] of arquivos) {
+      if (n > LINHAS_MAX_COMMIT || classificar(caminho)?.tipo !== "codigo") continue;
       adicoes += n;
     }
-    commits.push({ chave, ms: Number(segundos) * 1000, adicoes });
+    commits.push({ sha, chave, nome, email, login, ms, adicoes });
   }
 
-  // Também é a mesma pessoa: "Ana Souza" e "Ana Luiza Souza" (nome contido
-  // no outro) e o e-mail vicenzofms@gmail.com com o login vicenzofms
+  // Também é a mesma pessoa: "Maria Souza" e "Maria Clara Souza" (nome
+  // contido no outro) e o e-mail fulano@gmail.com com o login fulano
   const listaDeNomes = [...nomes];
   for (const a of listaDeNomes) {
     for (const b of listaDeNomes) {
@@ -524,11 +559,20 @@ async function lerCommits(dir, { inicioMs, semanas, classificar, loginPorEmail, 
   const porPessoa = new Map();
   const porSemana = new Array(semanas).fill(0);
   let ultimo = 0;
-  for (const { chave, ms, adicoes } of commits) {
+  for (const { chave, nome, email, login, ms, adicoes } of commits) {
     const id = identidades.achar(chave);
-    const total = porPessoa.get(id) ?? { commits: 0, adicoes: 0 };
+    const total = porPessoa.get(id) ?? {
+      commits: 0,
+      adicoes: 0,
+      nomes: new Set(),
+      emails: new Set(),
+      logins: new Set(),
+    };
     total.commits += 1;
     total.adicoes += adicoes;
+    total.nomes.add(nome);
+    total.emails.add(email);
+    if (login) total.logins.add(login);
     porPessoa.set(id, total);
     const semana = Math.floor((ms - inicioMs) / SEMANA_MS);
     if (semana >= 0 && semana < semanas) porSemana[semana] += 1;
@@ -537,15 +581,19 @@ async function lerCommits(dir, { inicioMs, semanas, classificar, loginPorEmail, 
 
   const totalAdicoes = commits.reduce((soma, c) => soma + c.adicoes, 0);
   const fatia = (parte, todo) => (todo ? Math.round((parte / todo) * 1000) / 1000 : 0);
-  const autores = [...porPessoa.values()]
-    .sort((a, b) => b.commits - a.commits || b.adicoes - a.adicoes)
-    .map((p) => ({ c: fatia(p.commits, commits.length), l: fatia(p.adicoes, totalAdicoes) }));
+  const pessoas = [...porPessoa.values()].sort(
+    (a, b) => b.commits - a.commits || b.adicoes - a.adicoes
+  );
 
   return {
     commits: commits.length,
-    autores,
+    autores: pessoas.map((p) => ({
+      c: fatia(p.commits, commits.length),
+      l: fatia(p.adicoes, totalAdicoes),
+    })),
     semanas: porSemana,
     ultimoCommit: ultimo ? isoBrasilia(ultimo) : null,
+    ...(diagnostico && { _pessoas: pessoas, _excluidos: [...excluidos.values()] }),
   };
 }
 
@@ -662,6 +710,7 @@ function lerReadme(texto) {
     titulo: titulo && !PLACEHOLDER.test(titulo) ? cortar(titulo, 80) : null,
     descricao,
     integrantes,
+    nomesDosIntegrantes,
     orientadores,
     deploy: limpo.match(DOMINIOS_DE_DEPLOY)?.[0] ?? null,
   };
@@ -773,38 +822,55 @@ async function contarPrsEIssues(repo) {
   };
 }
 
-// E-mail do commit → login no GitHub, para juntar commits feitos de
-// máquinas diferentes. Só os últimos commits das branches principais.
-async function loginsPorEmail(repo, branches, desde) {
-  const mapa = new Map();
-  for (const branch of new Set(branches)) {
-    const commits = await apiPaginas(
-      `/repos/${repo}/commits?sha=${encodeURIComponent(branch)}&since=${desde}&per_page=100`,
-      PAGINAS_COMMITS
-    );
-    for (const c of commits) {
-      const email = c.commit?.author?.email?.toLowerCase();
-      if (email && c.author?.login) mapa.set(email, c.author.login.toLowerCase());
-    }
+// GraphQL da GitHub API. Devolve a resposta inteira: um objeto que não
+// existe vira um erro na lista "errors", mas os outros vêm em "data".
+async function graphql(query) {
+  const res = await fetch(`${API_URL}/graphql`, {
+    method: "POST",
+    headers: { ...API_HEADERS, "Content-Type": "application/json" },
+    body: JSON.stringify({ query }),
+  });
+  const semCota = res.headers.get("x-ratelimit-remaining") === "0";
+  if ((res.status === 403 || res.status === 429) && semCota) {
+    throw new LimiteDaApi("limite da GitHub API atingido (GraphQL)");
   }
-  return mapa;
+  if (!res.ok) throw new Error(`GitHub GraphQL respondeu ${res.status}`);
+  const resposta = await res.json();
+  if (resposta.errors?.some((e) => e.type === "RATE_LIMITED")) {
+    throw new LimiteDaApi("limite da GitHub API atingido (GraphQL)");
+  }
+  return resposta;
 }
 
-// E-mails usados nos commits de cada professor neste repositório: pega os
-// commits feitos com um e-mail que não está ligado ao login
-async function emailsDosProfessores(repo, desde) {
-  const emails = new Set();
-  for (const login of LOGINS_EXCLUIDOS) {
-    const commits = await apiPaginas(
-      `/repos/${repo}/commits?author=${encodeURIComponent(login)}&since=${desde}&per_page=100`,
-      PAGINAS_COMMITS
-    );
-    for (const c of commits) {
-      const email = c.commit?.author?.email?.toLowerCase();
-      if (email) emails.add(email);
-    }
+// E-mail do commit → login no GitHub, para juntar os commits da mesma pessoa
+// feitos de máquinas diferentes. Vale para TODOS os commits do semestre, de
+// todas as branches: o git já diz um commit de cada e-mail, e o GitHub diz de
+// qual conta é aquele commit (100 e-mails por consulta GraphQL, em geral uma
+// consulta só por repositório). E-mail que não está em conta nenhuma fica sem
+// login, e aí vale o nome. Sem token não dá: a GraphQL exige login.
+async function loginsPorEmail(repo, registros) {
+  if (!TOKEN) return new Map();
+  const shaPorEmail = new Map();
+  for (const { sha, email } of registros) {
+    if (!shaPorEmail.has(email) && !loginDoNoreply(email)) shaPorEmail.set(email, sha);
   }
-  return emails;
+  const [dono, nome] = repo.split("/");
+  const entradas = [...shaPorEmail];
+  const mapa = new Map();
+  for (let i = 0; i < entradas.length; i += COMMITS_POR_CONSULTA) {
+    const lote = entradas.slice(i, i + COMMITS_POR_CONSULTA);
+    const campos = lote
+      .map(([, sha], j) => `c${j}: object(oid: "${sha}") { ... on Commit { author { user { login } } } }`)
+      .join("\n");
+    const { data } = await graphql(
+      `query { repository(owner: ${JSON.stringify(dono)}, name: ${JSON.stringify(nome)}) { ${campos} } }`
+    );
+    lote.forEach(([email], j) => {
+      const login = data?.repository?.[`c${j}`]?.author?.user?.login;
+      if (login) mapa.set(email, login.toLowerCase());
+    });
+  }
+  return mapa;
 }
 
 let avisoDaApi = null;
@@ -812,12 +878,16 @@ let avisoDaApi = null;
 // Por que o clone falhou (só para o terminal, não vai para o arquivo gerado)
 const motivos = new Map();
 
-function motivoDaFalha(saida) {
+// Outros avisos de cada grupo, também só para o terminal
+const avisos = new Map();
+
+function motivoDaFalha(saida, repo) {
   const texto = String(saida ?? "");
   if (!TOKEN) return "sem token, e o repositório é privado";
   if (/SAML|SSO/i.test(texto)) {
     return "a organização exige SSO: autorize o token para ela em github.com/settings/tokens (Configure SSO)";
   }
+  if (FINE_GRAINED) return `o token fine-grained não enxerga ${repo.split("/")[0]}`;
   if (/not found|404/i.test(texto)) {
     return "o token não enxerga o repositório (classic precisa do escopo repo; fine-grained precisa ter a organização como dona e acesso aos repositórios dela)";
   }
@@ -837,7 +907,7 @@ async function tentarApi(fn, padrao = null) {
   }
 }
 
-async function coletar(grupo, { inicioMs, semanas, agora }) {
+async function coletar(grupo, { inicioMs, semanas, agora, diagnostico }) {
   const base = {
     id: idDoGrupo(grupo),
     disciplina: grupo.disciplina,
@@ -853,7 +923,7 @@ async function coletar(grupo, { inicioMs, semanas, agora }) {
   try {
     dir = await atualizarClone(grupo.repo);
   } catch (error) {
-    motivos.set(base.id, motivoDaFalha(error.stderr ?? error.message));
+    motivos.set(base.id, motivoDaFalha(error.stderr ?? error.message, grupo.repo));
     return { ...base, erro: "sem_acesso" };
   }
 
@@ -878,28 +948,25 @@ async function coletar(grupo, { inicioMs, semanas, agora }) {
   const { refDoCaminho, classificar, codigo, docs } = await contarLinhas(dir, ordem);
   const stack = await descobrirStack(dir, refDoCaminho);
 
-  // E-mail → login: commits da padrão e das 3 branches com commit mais recente
-  const recentes = (
-    await git(dir, ["for-each-ref", "--sort=-committerdate", "--count=3", "--format=%(refname:short)", "refs/heads"])
-  )
-    .split("\n")
-    .filter(Boolean);
-  const loginPorEmail = await tentarApi(
-    () => loginsPorEmail(grupo.repo, [padrao, ...recentes], new Date(inicioMs).toISOString()),
-    new Map()
-  );
-  const desde = new Date(inicioMs).toISOString();
-  const emailsDeProfessores = await tentarApi(() => emailsDosProfessores(grupo.repo, desde), new Set());
-  const historico = await lerCommits(dir, {
+  const registros = await lerLog(dir, inicioMs);
+  let consultouGitHub = false;
+  const loginPorEmail = await tentarApi(async () => {
+    const mapa = await loginsPorEmail(grupo.repo, registros);
+    consultouGitHub = Boolean(TOKEN);
+    return mapa;
+  }, new Map()).catch((error) => {
+    avisos.set(base.id, `e-mails sem login, valeu o nome (${error.message})`);
+    return new Map();
+  });
+  const historico = historicoDosCommits(registros, {
     inicioMs,
     semanas,
     classificar,
     loginPorEmail,
-    ehExcluido: criarFiltroDeExcluidos({
-      nomesDoReadme: readme.orientadores,
-      emailsDosProfessores: emailsDeProfessores,
-    }),
+    ehExcluido: criarFiltroDeExcluidos({ nomesDoReadme: readme.orientadores }),
+    diagnostico,
   });
+  const { _pessoas, _excluidos, ...metricas } = historico;
 
   // Se a API não enxerga o repositório (token sem acesso), PRs e issues ficam
   // sem dados em vez de zerados
@@ -916,9 +983,18 @@ async function coletar(grupo, { inicioMs, semanas, agora }) {
     branches: branches.length,
     codigo,
     docs,
-    ...historico,
+    ...metricas,
     prs: prsEIssues?.prs ?? null,
     issues: prsEIssues?.issues ?? null,
+    // Só para o --autores: sai antes de gravar o arquivo
+    ...(diagnostico && {
+      _diagnostico: {
+        integrantes: readme.nomesDosIntegrantes,
+        pessoas: _pessoas,
+        excluidos: _excluidos,
+        consultouGitHub,
+      },
+    }),
   };
 }
 
@@ -979,7 +1055,57 @@ function linhaDoGrupo(g) {
   if (g.erro === "sem_acesso") return `  ✗ ${nome}: sem acesso (${motivos.get(g.id) ?? "o token lê esse repositório?"})`;
   if (g.erro === "vazio") return `  · ${nome}: repositório vazio`;
   const prs = g.prs ? ` · ${g.prs.mergeados} PRs mergeados` : "";
-  return `  ✓ ${nome}: ${numero(g.commits)} commits · ${numero(g.codigo.linhas)} linhas${prs}`;
+  const aviso = avisos.has(g.id) ? ` ⚠ ${avisos.get(g.id)}` : "";
+  return `  ✓ ${nome}: ${numero(g.commits)} commits · ${numero(g.codigo.linhas)} linhas${prs}${aviso}`;
+}
+
+const porcento = (fatia) => `${Math.round(fatia * 100)}%`;
+const qtdCommits = (n) => `${numero(n)} ${n === 1 ? "commit" : "commits"}`;
+const lista = (conjunto) => [...conjunto].join(", ");
+
+// --autores: quem fez os commits de cada grupo, para conferir a conta do
+// equilíbrio. Só no terminal: nada disso vai para o arquivo gerado.
+function imprimirAutores(g) {
+  const { integrantes, pessoas, excluidos, consultouGitHub } = g._diagnostico;
+  const titulo = `${SIGLAS[g.disciplina] ?? g.disciplina} · ${g.campus} · ${[g.grupo, g.nome].filter(Boolean).join(" ")}`;
+  console.log(`\n── ${titulo} ${"─".repeat(Math.max(3, 72 - titulo.length))}`);
+
+  const doReadme = g.integrantes ?? 0;
+  console.log(`  README: ${doReadme} ${doReadme === 1 ? "integrante" : "integrantes"}`);
+  integrantes.forEach((nome) => console.log(`    · ${nome}`));
+
+  const total = pessoas.reduce((soma, p) => soma + p.commits, 0);
+  const linhas = pessoas.reduce((soma, p) => soma + p.adicoes, 0);
+  console.log(`  Autores dos commits do semestre: ${pessoas.length}`);
+  pessoas.forEach((p, i) => {
+    const fatiaLinhas = linhas ? ` · ${numero(p.adicoes)} linhas (${porcento(p.adicoes / linhas)})` : "";
+    console.log(`    ${i + 1}. ${qtdCommits(p.commits)} (${porcento(p.commits / total)})${fatiaLinhas}`);
+    console.log(`       nomes:   ${lista(p.nomes)}`);
+    console.log(`       e-mails: ${lista(p.emails)}`);
+    const semLogin = consultouGitHub
+      ? "sem conta (o e-mail não está em nenhuma conta do GitHub)"
+      : "não consultado (sem token, sem cota ou erro na GitHub API)";
+    console.log(`       GitHub:  ${p.logins.size ? lista([...p.logins].map((l) => `@${l}`)) : semLogin}`);
+  });
+
+  if (excluidos.length) {
+    console.log("  Fora da conta:");
+    excluidos.forEach((x) =>
+      console.log(
+        `    · ${x.nome} <${x.email}>${x.login ? ` @${x.login}` : ""}: ${x.motivo}, ${qtdCommits(x.commits)}`
+      )
+    );
+  }
+
+  if (doReadme && pessoas.length > doReadme) {
+    console.log(
+      `  ⚠ ${pessoas.length} autores para ${doReadme} integrantes: alguém aparece duas vezes (dois ` +
+        "e-mails sem conta do GitHub, com nomes diferentes) ou fez commit sem estar no README. " +
+        "Quem usa um e-mail sem conta pode cadastrá-lo em github.com/settings/emails; aí é só rodar de novo."
+    );
+  } else if (doReadme && pessoas.length < doReadme) {
+    console.log(`  · ${doReadme - pessoas.length} do README sem commits no semestre.`);
+  }
 }
 
 async function emParalelo(itens, limite, fn) {
@@ -995,8 +1121,17 @@ async function emParalelo(itens, limite, fn) {
   return resultados;
 }
 
+const OPCOES = ["--autores"];
+
 async function main() {
-  const filtros = process.argv.slice(2).map((a) => a.toLowerCase());
+  const args = process.argv.slice(2).map((a) => a.toLowerCase());
+  const desconhecidas = args.filter((a) => a.startsWith("--") && !OPCOES.includes(a));
+  if (desconhecidas.length) {
+    console.error(`Opção desconhecida: ${desconhecidas.join(" ")}. A única opção é --autores.`);
+    process.exit(1);
+  }
+  const diagnostico = args.includes("--autores");
+  const filtros = args.filter((a) => !a.startsWith("--"));
   const escolhidos = GRUPOS.filter((g) =>
     filtros.every(
       (f) => f === g.disciplina || f === g.campus || slugDoGrupo(g.nome).startsWith(slugDoGrupo(f))
@@ -1051,16 +1186,37 @@ async function main() {
     if (nome) nomesDosProfessores.push(nome);
   }
 
-  const contexto = { inicioMs, semanas, agora };
+  const contexto = { inicioMs, semanas, agora, diagnostico };
   const coletados = await emParalelo(escolhidos, CONCORRENCIA, async (grupo) => {
     const g = await coletar(grupo, contexto);
     console.log(linhaDoGrupo(g));
     return g;
   });
+
+  const orgsSemAcesso = [
+    ...new Set(coletados.filter((g) => g.erro === "sem_acesso").map((g) => g.repo.split("/")[0])),
+  ];
+  if (FINE_GRAINED && orgsSemAcesso.length) {
+    const organizacoes = new Set(GRUPOS.map((g) => g.repo.split("/")[0])).size;
+    console.warn(
+      `\n⚠ O token (${ORIGEM_TOKEN}) é fine-grained e não enxerga ${orgsSemAcesso.join(", ")}. ` +
+        `Token fine-grained lê os repositórios de um dono só (o "Resource owner" escolhido ao criar), ` +
+        `e as turmas ficam em ${organizacoes} organizações. Troque o GITHUB_TOKEN do .env.local por um ` +
+        "token classic com o escopo repo (github.com/settings/tokens), ou apague essa linha e faça " +
+        "gh auth login."
+    );
+  }
+
+  if (diagnostico) {
+    coletados.filter((g) => g._diagnostico).forEach(imprimirAutores);
+    // Nomes e e-mails ficam no terminal: nunca no arquivo gerado
+    coletados.forEach((g) => delete g._diagnostico);
+  }
   if (avisoDaApi) {
     console.warn(
       TOKEN
-        ? `\n⚠ ${avisoDaApi}: PRs e issues ficaram como estavam. Rode de novo depois.`
+        ? `\n⚠ ${avisoDaApi}: PRs e issues ficaram como estavam, e nos grupos que faltaram os ` +
+            "e-mails dos commits não foram ligados às contas do GitHub. Rode de novo depois."
         : `\n⚠ ${avisoDaApi}: sem token, a GitHub API aceita só 60 chamadas por hora deste computador, ` +
             "e os PRs, as issues e a exclusão dos professores dependem dela. Com um token (GITHUB_TOKEN " +
             "no .env.local ou gh auth login) o limite é de 5.000 por hora e dá para rodar de novo na hora."
