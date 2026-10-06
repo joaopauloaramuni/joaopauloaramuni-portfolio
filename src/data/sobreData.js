@@ -1,6 +1,7 @@
 import {
   AE,
   AR,
+  BR,
   CH,
   CN,
   DE,
@@ -297,6 +298,7 @@ export const continentes = [
     id: "america_do_sul",
     cor: "--success",
     lugares: [
+      { id: "brasil", sigla: "BR", Bandeira: BR },
       { id: "argentina", sigla: "AR", Bandeira: AR },
       { id: "uruguai", sigla: "UY", Bandeira: UY },
     ],

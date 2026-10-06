@@ -272,6 +272,7 @@ const resources = {
             asia: "Asia",
           },
           lugares: {
+            brasil: "Brazil",
             argentina: "Argentina",
             uruguai: "Uruguay",
             alemanha: "Germany",
@@ -2108,6 +2109,7 @@ const resources = {
             asia: "Ásia",
           },
           lugares: {
+            brasil: "Brasil",
             argentina: "Argentina",
             uruguai: "Uruguai",
             alemanha: "Alemanha",
