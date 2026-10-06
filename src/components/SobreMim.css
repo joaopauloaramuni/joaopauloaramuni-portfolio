@@ -1,137 +1,930 @@
-.sobre-container {
-  padding: 0 1.5rem;
+/* =====================================================================
+   SOBRE — comando "sobre"
+   Mesma moldura do Lattes.css e do GitHubStats.css (borda verde, 50% da
+   largura, títulos de seção em estilo comentário de shell e dicas
+   "$ comando" que levam ao comando com os detalhes).
+   A cor de cada bloco vem de um token do theme.css, passada via style
+   inline como --serie: ela marca o bloco (borda, ícone, ponto); os textos
+   ficam sempre nos tokens de texto.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Moldura
+   --------------------------------------------------------------------- */
+.sobre-painel {
+  width: 50%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  color: var(--text);
+  padding: 1.5rem 1.5rem 1.25rem;
+  line-height: 1.5;
+}
+
+.sobre-painel p {
+  margin: 0;
+}
+
+.sobre-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+   Cabeçalho: foto, nome, cargo, lema e chips
+   --------------------------------------------------------------------- */
+.sobre-cabecalho {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
+  animation: sobre-pop 0.45s ease both;
+}
+
+.sobre-avatar {
+  flex-shrink: 0;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent),
+    0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.sobre-identidade {
+  min-width: 0;
+}
+
+.sobre-nome {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.sobre-cargo {
+  margin-top: 0.25rem !important;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Texto reservado e texto digitado na mesma célula: a altura não pula */
+.sobre-lema {
+  display: grid;
+  margin-top: 0.75rem !important;
+  color: var(--highlight);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sobre-lema > * {
+  grid-area: 1 / 1;
+}
+
+.sobre-lema-reserva {
+  visibility: hidden;
+}
+
+.sobre-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.sobre-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+}
+
+.sobre-chips svg {
+  color: var(--serie);
+  font-size: 1rem;
+}
+
+/* ---------------------------------------------------------------------
+   Bio
+   --------------------------------------------------------------------- */
+.sobre-bio {
+  margin: 1.5rem 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.sobre-bio p + p {
+  margin-top: 0.75rem;
+}
+
+.sobre-bio strong,
+.sobre-intro strong {
   color: var(--text);
 }
 
-.avatar-container {
-  flex-shrink: 0;
+/* ---------------------------------------------------------------------
+   Números (mesmo card do lattes --resumo)
+   --------------------------------------------------------------------- */
+.sobre-kpis {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.avatar-image {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  object-fit: cover;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+.sobre-kpi {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 1rem 0.85rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--serie);
+  animation: sobre-pop 0.45s ease both;
 }
 
-.info-container {
-  flex-grow: 1;
+.sobre-kpi:nth-child(1) { animation-delay: 60ms; }
+.sobre-kpi:nth-child(2) { animation-delay: 120ms; }
+.sobre-kpi:nth-child(3) { animation-delay: 180ms; }
+.sobre-kpi:nth-child(4) { animation-delay: 240ms; }
+
+.sobre-kpi-icone {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.9rem;
+  font-size: 1.15rem;
+  color: var(--serie);
 }
 
-.nome-titulo {
-  margin-top: 1rem;
-  font-size: 2.5rem;
-  font-weight: bold;
+.sobre-kpi-valor {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.sobre-kpi-rotulo {
+  font-weight: 600;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.sobre-kpi-detalhe {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.sobre-kpi .sobre-cmd {
+  margin-top: 0.5rem;
+}
+
+/* "$ comando" */
+.sobre-cmd {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+.sobre-cmd span {
+  white-space: nowrap;
+}
+
+.sobre-cmd::before {
+  content: "$ ";
+}
+
+.sobre-cmd-inline {
+  margin-left: 0.35rem;
+}
+
+/* ---------------------------------------------------------------------
+   Seções
+   --------------------------------------------------------------------- */
+.sobre-secao {
+  margin-top: 2.25rem;
+}
+
+/* Título em estilo comentário de shell; a dica do comando vai à direita */
+.sobre-secao-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.sobre-secao-titulo > span::before {
+  content: "# ";
+  color: var(--text-dim);
+}
+
+.sobre-intro {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Links: discretos no texto, verdes no hover (como no lattes) */
+.sobre-link,
+.sobre-link-forte {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.sobre-link-forte {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sobre-link:hover,
+.sobre-link:focus-visible,
+.sobre-link-forte:hover,
+.sobre-link-forte:focus-visible {
   color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
-.cargo-titulo {
-  margin: 0.25rem 0 1.5rem 0;
-  font-size: 1.2rem;
+/* Ponto verde de "agora" (disciplinas e trajetória) */
+.sobre-ponto-agora {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Quadrado de legenda (instituições e continentes), como no lattes */
+.sobre-quadrado {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  background: var(--serie);
+}
+
+/* ---------------------------------------------------------------------
+   Hoje
+   --------------------------------------------------------------------- */
+.sobre-hoje {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sobre-hoje-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: sobre-pop 0.45s ease both;
+}
+
+.sobre-logo {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--bg-terminal);
+}
+
+.sobre-logo-icone {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  color: var(--serie);
+  font-size: 1.15rem;
+}
+
+.sobre-hoje-texto {
+  min-width: 0;
+}
+
+.sobre-hoje-cargo {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sobre-hoje-em {
   font-weight: 400;
   color: var(--text-muted);
 }
 
-.biografia {
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  max-width: 90ch;
-  text-align: justify;
-}
-
-.skills-titulo {
-  margin-bottom: 1rem;
+.sobre-hoje-detalhe {
+  margin-top: 0.15rem !important;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
-.skills-tags-container {
+.sobre-hoje-extra {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem !important;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+/* ---------------------------------------------------------------------
+   Profissão e vocação: duas linhas do tempo lado a lado
+   --------------------------------------------------------------------- */
+.sobre-trajetoria {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.sobre-coluna-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--serie);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sobre-coluna-titulo svg {
+  color: var(--serie);
+  font-size: 1rem;
+}
+
+.sobre-linha {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cada marco: logo em cima do trilho vertical, texto ao lado */
+.sobre-marco {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+}
+
+.sobre-marco::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 28px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.sobre-marco:last-child {
+  padding-bottom: 0;
+}
+
+.sobre-marco:last-child::before {
+  display: none;
+}
+
+.sobre-marco-logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--bg-terminal);
+}
+
+.sobre-marco-atual .sobre-marco-logo {
+  border-color: var(--serie);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--serie) 25%, transparent);
+}
+
+.sobre-marco-texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sobre-marco-periodo {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.sobre-marco-atual .sobre-marco-periodo {
+  color: var(--accent);
+}
+
+.sobre-marco-cargo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.sobre-marco-detalhe {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------------
+   Formação: um card por curso, com o trabalho final embaixo
+   --------------------------------------------------------------------- */
+.sobre-formacao-intro {
+  margin-bottom: 1rem !important;
+}
+
+.sobre-formacao-intro a {
+  white-space: nowrap;
+}
+
+.sobre-formacao {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sobre-diploma {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  animation: sobre-pop 0.45s ease both;
+}
+
+.sobre-diploma-texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sobre-diploma-nivel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sobre-diploma-curso {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+
+.sobre-diploma-org {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Módulos do curso (PDL), separados por " · " */
+.sobre-diploma-modulos {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+
+.sobre-diploma-modulos > span {
+  white-space: nowrap;
+}
+
+/* Trabalho final (tese, dissertação, monografia) e orientador */
+.sobre-trabalho {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+
+.sobre-trabalho-tipo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.sobre-trabalho-tipo svg {
+  font-size: 0.9rem;
+}
+
+.sobre-trabalho-titulo {
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.sobre-trabalho-orientador {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Tags (disciplinas, vivência, clientes)
+   --------------------------------------------------------------------- */
+.sobre-tags {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  max-width: 90ch;
-  text-align: justify;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
 }
 
-.skill-tag-sobre {
-  background-color: var(--tag-bg);
-  color: var(--tag-text);
-  padding: 0.4rem 1rem;
+.sobre-tags > li {
+  display: flex;
+}
+
+.sobre-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  border: 1px solid transparent;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
-/* Responsividade */
+a.sobre-tag:hover,
+a.sobre-tag:focus-visible {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* Disciplina deste semestre: contorno verde e ponto */
+.sobre-tag-agora {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--text);
+}
+
+.sobre-legenda {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1.25rem !important;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.sobre-disciplinas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sobre-inst-nome,
+.sobre-continente-nome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem !important;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.sobre-inst-conta {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Fora do terminal: chave e valor, como no neofetch
+   --------------------------------------------------------------------- */
+.sobre-kv {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sobre-kv-linha {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.sobre-kv dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.6em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sobre-kv dt::after {
+  content: ":";
+  color: var(--text);
+  margin-left: -0.4rem;
+}
+
+.sobre-kv dt svg {
+  flex-shrink: 0;
+  color: var(--serie);
+  font-size: 1rem;
+}
+
+.sobre-kv dd {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.sobre-hobby {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-right: 1rem;
+}
+
+.sobre-hobby:last-child {
+  margin-right: 0;
+}
+
+.sobre-hobby svg {
+  color: var(--text-muted);
+}
+
+/* Séries separadas por " · " */
+.sobre-lista-ponto > * + *::before {
+  content: " · ";
+  color: var(--text-dim);
+  display: inline-block;
+  white-space: pre;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------------------
+   Passaporte
+   --------------------------------------------------------------------- */
+.sobre-passaporte {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem 1rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.sobre-passaporte-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sobre-passaporte-titulo svg {
+  color: var(--icon-location);
+  font-size: 1.1rem;
+}
+
+.sobre-passaporte-total {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Faixa única dividida por continente (como a barra de disciplinas do lattes) */
+.sobre-faixa {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  margin: 0.75rem 0 1rem;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.sobre-faixa-seg {
+  background: var(--serie);
+  animation: sobre-cresce 0.6s ease both;
+  transform-origin: left;
+}
+
+.sobre-continentes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sobre-carimbos {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* "Carimbo": bandeira (country-flag-icons, SVG 3:2) + nome do lugar */
+.sobre-carimbo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.6rem 0.2rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-terminal);
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+/* Contorno fino: bandeiras claras (Japão, Coreia) não somem no fundo */
+.sobre-bandeira {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+/* ---------------------------------------------------------------------
+   Rodapé "veja também"
+   --------------------------------------------------------------------- */
+.sobre-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.sobre-rodape code {
+  font-family: inherit;
+  color: var(--text-muted);
+}
+
+.sobre-rodape code::before {
+  content: "$ ";
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Animações
+   --------------------------------------------------------------------- */
+@keyframes sobre-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sobre-cresce {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sobre-cabecalho,
+  .sobre-kpi,
+  .sobre-hoje-item,
+  .sobre-diploma,
+  .sobre-faixa-seg {
+    animation: none;
+  }
+
+  .sobre-tag,
+  a.sobre-tag:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Responsivo (mesmos pontos do Lattes.css)
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .sobre-painel {
+    width: 70%;
+  }
+}
+
+/* A foto vai para cima do texto, como nos cards de projetos e prêmios */
 @media (max-width: 900px) {
-  .sobre-container {
+  .sobre-painel {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1.25rem 1rem 1rem;
+  }
+
+  .sobre-cabecalho {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
-    padding: 0 1rem;
   }
 
-  .avatar-container {
-    margin-top: 1rem;
+  .sobre-lema {
+    justify-items: center;
   }
 
-  .avatar-image {
-    width: 150px;
-    height: 150px;
-  }
-
-  .info-container {
-    align-items: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .nome-titulo {
-    font-size: 2rem;
-  }
-
-  .cargo-titulo {
-    font-size: 1rem;
-  }
-
-  .biografia {
-    font-size: 0.95rem;
-    max-width: 100%;
-  }
-
-  .skills-tags-container {
+  .sobre-chips {
     justify-content: center;
   }
 }
 
-@media (max-width: 480px) {
-  .avatar-image {
-    width: 120px;
-    height: 120px;
+@media (max-width: 600px) {
+  .sobre-avatar {
+    width: 112px;
+    height: 112px;
   }
 
-  .nome-titulo {
+  .sobre-nome {
     font-size: 1.5rem;
   }
 
-  .cargo-titulo {
-    font-size: 0.85rem;
+  .sobre-kpis,
+  .sobre-trajetoria {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .biografia {
-    font-size: 0.8rem;
+  .sobre-trajetoria {
+    gap: 2rem;
   }
 
-  .skills-tags-container {
-    gap: 0.5rem;
+  /* Rótulo em cima do valor */
+  .sobre-kv-linha {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
   }
 
-  .skill-tag-sobre {
+  .sobre-passaporte-total {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+
+  .sobre-tag {
     font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .sobre-tags {
+    gap: 0.4rem;
   }
 }

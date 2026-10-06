@@ -14,7 +14,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 🖥️ O portfólio simula um **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
 
-* 👤 **sobre:** Mostra uma breve descrição sobre mim.
+* 👤 **sobre / about:** Mostra quem sou: o que faço hoje, a trajetória em duas colunas (programador por profissão, professor por vocação), a formação com os trabalhos finais, as disciplinas que lecionei, números, clientes e um pouco de mim fora do terminal (time, hobbies, séries e os carimbos no passaporte, com bandeiras).
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
 * 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS.
@@ -188,6 +188,7 @@ O projeto utiliza várias dependências importantes para funcionalidades especí
 * **emailjs-com**: Para enviar e-mails diretamente do frontend sem precisar de um backend próprio.
 **react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
 * **@supabase/supabase-js:** Backend as a Service (BaaS) utilizado para banco de dados, autenticação e APIs REST automáticas, responsável pelo armazenamento e leitura das mensagens do Guestbook.
+* **country-flag-icons:** Bandeiras em SVG, como componentes React, para os carimbos do passaporte no comando `sobre`. Cada bandeira é importada pelo nome, então só as usadas entram no bundle.
 
 Essas dependências possibilitam uma experiência interativa em estilo terminal, com suporte multilíngue, persistência de dados em nuvem e sistema de notificações por e-mail.
 
@@ -1372,7 +1373,7 @@ O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob de
 
 ### 4️⃣ Docência (lattes --docencia)
 
-As disciplinas ficam em `src/data/docenciaData.js`, uma por objeto, com a instituição, os cursos e os semestres em que foram lecionadas (`semestres("2024.2", "2026.1")` gera a lista de semestres). O campo `modalidade` (`ead`, `bootcamp` ou `curso_livre`) entra junto do nome do curso, como em "Arquitetura de Software (Bootcamp)". A Trybe, curso livre, usa `meses` no lugar de semestres, `turmas` (a tabela mostra "Qtd. de Turmas") e `modulo` (o módulo Ciência da Computação com Python, do curso de Desenvolvimento Web). Começou a lecionar uma disciplina nova ou fechou mais um semestre? Edite esse arquivo.
+As disciplinas ficam em `src/data/docenciaData.js`, uma por objeto, com a instituição, os cursos e os semestres em que foram lecionadas (`semestres("2024.2", "2026.1")` gera a lista de semestres). O campo `modalidade` (`ead`, `bootcamp` ou `curso_livre`) entra junto do nome do curso, como em "Arquitetura de Software (Bootcamp)". A Trybe, curso livre, usa `meses` no lugar de semestres, `turmas` (a tabela mostra "Qtd. de Turmas") e `modulo` (o módulo Ciência da Computação com Python, do curso de Desenvolvimento Web). Começou a lecionar uma disciplina nova ou fechou mais um semestre? Edite esse arquivo. O comando `sobre` também lê esse arquivo: a seção de disciplinas e o destaque "neste semestre" vêm daqui.
 
 No mesmo arquivo, a lista `cargos` guarda os cargos de cada instituição como no LinkedIn. Hoje só a Trybe tem: depois dos 8 meses lecionando (Especialista em Instrução), vieram cargos de coordenação e liderança até junho de 2023. Eles entram no tempo total da instituição (cards, linha do tempo e "tempo por instituição", onde aparecem vazados, só com o contorno) e numa tabela própria, mas não no tempo lecionando. O total do `lattes --docencia` mostra os dois: 8 anos e meio lecionando e 11 anos na educação. O nome em inglês fica em `lattes.docencia.disciplinas.<id>` no `i18n.js`.
 
@@ -1386,7 +1387,7 @@ Os tempos são calculados em meses (um semestre = 6 meses). O tempo de uma insti
 scripts/lattes.mjs          → importa o XML (.zip ou .xml) e o PDF do Lattes (npm run lattes)
 src/
   data/lattesData.js        → dados gerados pelo script (não edite à mão)
-  data/docenciaData.js      → disciplinas lecionadas e seus semestres (mantido à mão)
+  data/docenciaData.js      → disciplinas lecionadas e seus semestres (mantido à mão; também usado pelo sobre)
   data/lattesSections.js    → seções do comando e nomes aceitos (PT e EN)
   lib/docencia.js           → cálculos e formatação da docência (lattes --docencia e card do resumo)
   components/Lattes.jsx     → resumo (com o card de docência), listas, cards e o card de download
@@ -1395,6 +1396,80 @@ src/
   theme/theme.css           → cor de cada tipo (--lattes-*) e de cada instituição (--docencia-*)
 public/
   lattes.pdf                → PDF do currículo, baixado pelo lattes --pdf
+```
+
+-----
+
+## 👤 Guia do comando sobre
+
+O comando `sobre` (alias `about`) é a minha apresentação: quem sou, o que faço hoje, a trajetória, a formação e um pouco de mim fora do terminal. Ele usa a mesma moldura do `lattes` e do `stats`, com títulos de seção em estilo comentário de shell (`# hoje`) e dicas `$ comando` que apontam para o comando com os detalhes. Os links diretos funcionam como nos outros comandos: [aramuni.dev/?cmd=sobre](https://aramuni.dev/?cmd=sobre).
+
+| Seção | O que mostra |
+|:--|:--|
+| 🪪 Cabeçalho | Foto, nome, cargo, o lema "programador por profissão, professor por vocação" sendo digitado e os chips de idade, cidade e signo |
+| 📝 Bio | Dois parágrafos curtos, com os anos de mercado e de ensino calculados |
+| 🔢 Números | Anos desenvolvendo sistemas, anos ensinando, TCCs orientados (com as bancas) e times da AES, nos mesmos cards do `lattes --resumo` |
+| 📍 hoje | Professor na PUC Minas (com a quantidade de disciplinas do semestre), CTO da AES e consultor na Jedis |
+| 🧭 profissão e vocação | Duas linhas do tempo lado a lado, com os logos: o mercado e a docência |
+| 🎓 formação | Doutorado, mestrado e bacharelado, com o título do trabalho final (tese, dissertação e monografia) e o orientador, e o PDL da Fundação Dom Cabral |
+| 📚 disciplinas | Todas as disciplinas lecionadas, por instituição, com link para o repositório de cada uma no GitHub; as do semestre ficam em destaque |
+| 🧰 vivência e clientes | Tags com as áreas de atuação e as empresas e instituições para as quais já desenvolvi software |
+| 🐓 fora do terminal | Time, hobbies e séries no formato `chave: valor` do `neofetch`, e os carimbos no passaporte, com bandeiras, agrupados por continente |
+
+### 1️⃣ De onde vêm os dados
+
+O conteúdo fica em `src/data/sobreData.js`: a estrutura, os links, os anos e os logos. Os textos (cargos, descrições, nomes dos países) ficam em `sobre.*` no `i18n.js`, nos dois idiomas. Os títulos dos trabalhos finais e os nomes das séries são os originais e ficam no próprio `sobreData.js`, iguais em português e em inglês.
+
+As disciplinas não são repetidas: elas vêm do `src/data/docenciaData.js`, o mesmo do `lattes --docencia` (veja o 4️⃣ do guia do `lattes`). O "neste semestre" é calculado pela data de hoje; se o arquivo ainda não tiver disciplinas no semestre atual, vale o último semestre cadastrado.
+
+### 2️⃣ Valores calculados
+
+| Valor | Como é calculado |
+|:--|:--|
+| Idade | Pela data em `NASCIMENTO`; muda sozinha no dia do aniversário |
+| Anos desenvolvendo sistemas | Ano atual − `DEV_DESDE` (2012, o Banco do Brasil). A Álamo TI, de 2011, aparece na trajetória, mas fica fora da conta; troque para 2011 para contar a partir dela |
+| Anos ensinando | Ano atual − primeiro ano lecionando no `docenciaData.js` |
+| Empresas | Logos diferentes na coluna "programador por profissão" (a IN8 aparece duas vezes e conta uma) |
+| Disciplinas e instituições | Contadas no `docenciaData.js` |
+| Destinos e continentes | Contados na lista `continentes` |
+
+Os TCCs orientados, as bancas e os times da AES ficam fixos no `sobreData.js` (`TCCS_ORIENTADOS`, `BANCAS` e `AES`). São os mesmos números do `lattes`, mas o `sobre` não importa o `lattesData.js` para não baixar os cerca de 90 kB de dados dele: quando mudarem no Lattes, atualize lá também.
+
+### 3️⃣ Bandeiras
+
+Os carimbos do passaporte usam a [country-flag-icons](https://www.npmjs.com/package/country-flag-icons), porque o `react-icons` só tem as bandeiras do Brasil e dos EUA. Cada bandeira é importada pelo nome no topo do `sobreData.js`, então só as usadas entram no bundle:
+
+```js
+import { AR, UY, DE, FR, IT, VA, CH /* ... */ } from "country-flag-icons/react/3x2";
+
+{ id: "vaticano", sigla: "VA", Bandeira: VA },
+```
+
+Para um país novo, importe a bandeira, adicione o lugar no continente certo (com `sigla` e `Bandeira`) e coloque o nome em `sobre.pessoal.lugares` no `i18n.js`, em pt e em en. Dubai e Abu Dhabi usam a mesma bandeira (`AE`): são dois emirados dos Emirados Árabes Unidos, por isso o total fala em "destinos", e não em países.
+
+### 4️⃣ Atualizando
+
+| Quero... | Onde mexer |
+|:--|:--|
+| Trocar o que faço hoje | `hoje` no `sobreData.js` e `sobre.hoje` no `i18n.js` |
+| Adicionar um cargo na trajetória | `trajetoria.profissao` ou `trajetoria.vocacao` e `sobre.trajetoria.<id>`. `fim: null` vira "hoje", `meses: [3, 10]` mostra "mar – out" e, sem `url`, a organização fica sem link |
+| Adicionar uma formação | `formacao` (com `trabalho` para tese, dissertação ou monografia, e `modulos` para cursos com módulos) e `sobre.formacao.<id>` |
+| Atualizar séries, hobbies ou clientes | `assistindo`, `serieFavorita`, `hobbies` e `clientes` no `sobreData.js` (e o nome em `sobre.*` quando for traduzido) |
+| Adicionar um logo | Imagem quadrada em `public/logos/` e o caminho no campo `logo`; sem logo, o card usa um ícone |
+
+### 📂 Arquivos
+
+```text
+src/
+  data/sobreData.js         → conteúdo do sobre: hoje, trajetória, formação, clientes, hobbies, séries e passaporte
+  data/docenciaData.js      → disciplinas e semestres (compartilhado com o lattes --docencia)
+  lib/docencia.js           → cálculos e nomes traduzidos das disciplinas
+  components/SobreMim.jsx   → saída do comando
+  components/SobreMim.css   → estilos (só usa var(--token)), com layout para celular
+  i18n.js                   → textos em sobre.* (pt/en)
+public/
+  avatar.jpeg               → foto do cabeçalho
+  logos/                    → logos das empresas e instituições (inclui aes.jpg e fdc.jpg)
 ```
 
 -----
