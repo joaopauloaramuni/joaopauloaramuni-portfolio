@@ -62,8 +62,10 @@ import "./Canvas.css";
 //   canvas --tarefas    todas as tarefas: pela frente, já vencidas e sem prazo
 //   canvas --agenda     tarefas, eventos do calendário e feriados, dia a dia
 //   canvas --tudo       as três, uma embaixo da outra
-// Filtros: disciplina (diw, ti5...), campus (coreu, lourdes), turma (g1...)
-// ou um pedaço do nome do curso. Os dados vêm do "npm run canvas"
+// Filtros: disciplina (diw, ti5...), curso (es, cc), campus (coreu,
+// lourdes), turma (g1...) ou um pedaço do nome da disciplina no Canvas. Cada
+// "curso" do Canvas aparece como uma disciplina; o curso é a graduação dela
+// (Engenharia de Software ou Ciência da Computação). Os dados vêm do "npm run canvas"
 // (scripts/canvas.mjs), que roda na minha máquina com a chave do Canvas:
 // aqui só chegam tarefas, prazos e contagens de entregas, sem nomes de alunos.
 // As contagens regressivas usam a hora de agora; as entregas são as da
@@ -132,7 +134,8 @@ const siglaDaDisciplina = (disciplina) => DISCIPLINAS[disciplina]?.sigla ?? disc
    --------------------------------------------------------------------- */
 
 // [C] DIAW G1 8218.1.01: letra e cor do campus (como no "cal" e no
-// "turmas"), sigla, turma e o código do SGA, que diz qual é a turma
+// "turmas"), sigla, turma e o código completo da disciplina no SGA, que diz
+// qual é a turma
 function CursoTag({ curso }) {
   const { t } = useTranslation();
   if (!curso) return null;
@@ -453,11 +456,13 @@ function ProximaEntrega({ abertas, cursoPorId, agora, f }) {
    canvas / canvas --resumo
    --------------------------------------------------------------------- */
 
-// Colunas da tabela de cursos. "valor" ordena; "desc" é o sentido do
+// Colunas da tabela de disciplinas. "valor" ordena; "desc" é o sentido do
 // primeiro clique (os números, do maior para o menor; a próxima entrega, da
-// mais próxima para a mais distante). "Curso" volta para a ordem padrão.
+// mais próxima para a mais distante; o curso, de A a Z). "Disciplina" volta
+// para a ordem padrão.
 const COLUNAS = [
-  { chave: "curso" },
+  { chave: "disciplina" },
+  { chave: "curso", desc: false, valor: (l) => l.curso.curso ?? null },
   { chave: "alunos", num: true, desc: true, valor: (l) => l.curso.alunos },
   { chave: "tarefas", num: true, desc: true, valor: (l) => l.tarefas },
   { chave: "proxima", desc: false, valor: (l, agora) => (l.proxima ? prazoAtual(l.proxima, agora) : null) },
@@ -471,7 +476,7 @@ function useOrdenacao(linhas, agora) {
   const [ordem, setOrdem] = useState({ chave: null, desc: false });
   const padrao = [...linhas].sort(compararCursos({ campi: Object.keys(CAMPI), siglaDe: siglaDaDisciplina, agora }));
   let ordenadas = padrao;
-  if (ordem.chave === "curso") {
+  if (ordem.chave === "disciplina") {
     ordenadas = ordem.desc ? [...padrao].reverse() : padrao;
   } else if (ordem.chave) {
     const { valor } = COLUNAS.find((c) => c.chave === ordem.chave);
@@ -479,7 +484,8 @@ function useOrdenacao(linhas, agora) {
       const va = valor(a, agora) ?? null;
       const vb = valor(b, agora) ?? null;
       if (va === null || vb === null) return (va === null) - (vb === null);
-      return ordem.desc ? vb - va : va - vb;
+      const diferenca = typeof va === "string" ? va.localeCompare(vb) : va - vb;
+      return ordem.desc ? -diferenca : diferenca;
     });
   }
   const ordenar = (chave) =>
@@ -527,6 +533,13 @@ function TabelaDeCursos({ cursos, tarefas, agora, f }) {
                   <CursoTag curso={curso} />
                 </a>
               </th>
+              <td className="cnv-tabela-graduacao">
+                {curso.curso ? (
+                  t(`canvas.cursos.${curso.curso}`, { defaultValue: curso.curso })
+                ) : (
+                  <span className="cnv-nada">—</span>
+                )}
+              </td>
               <td className="num">{curso.alunos === null ? "—" : f.n(curso.alunos)}</td>
               <td className="num">{t("canvas.tabela.vencidas", { vencidas: f.n(vencidas), total: f.n(total) })}</td>
               <td className="cnv-tabela-proxima">
@@ -562,7 +575,7 @@ function SecaoResumo({ cursos, tarefas, cursoPorId, agora, f, filtrado }) {
   const daSemana = abertas.filter((tarefa) => prazoAtual(tarefa, agora) <= limite);
 
   const kpis = [
-    { chave: "cursos", Icone: FiBookOpen, valor: f.n(total.cursos) },
+    { chave: "disciplinas", Icone: FiBookOpen, valor: f.n(total.cursos) },
     { chave: "alunos", Icone: FiUsers, valor: f.n(alunos) },
     { chave: "abertas", Icone: FiClipboard, valor: f.n(total.abertas) },
     { chave: "semana", Icone: FiCalendar, valor: f.n(total.semana), alerta: total.semana > 0 },
@@ -787,10 +800,11 @@ const SECTION_VIEWS = {
   agenda: SecaoAgenda,
 };
 
-// "DIW · Coreu · G1 · noite" para o filtro digitado
+// "DIW · Ciência da Computação · Coreu · G1" para o filtro digitado
 function textoDoFiltro(filtros, t) {
   return [
     ...filtros.disciplinas.map((d) => DISCIPLINAS[d]?.sigla ?? d),
+    ...(filtros.cursos ?? []).map((c) => t(`canvas.cursos.${c}`)),
     ...filtros.campi.map((c) => t(`cal.campi.${c}`)),
     ...filtros.turmas,
     ...filtros.termos,

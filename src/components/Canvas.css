@@ -706,7 +706,7 @@
 }
 
 /* ---------------------------------------------------------------------
-   canvas --resumo: tabela por curso
+   canvas --resumo: tabela por disciplina
    --------------------------------------------------------------------- */
 .cnv-tabela-rolagem {
   overflow-x: auto;
@@ -791,6 +791,13 @@
 .cnv-tabela-curso {
   display: inline-flex;
   max-width: 100%;
+}
+
+/* Curso (Engenharia de Software, Ciência da Computação): quebra em duas
+   linhas antes de apertar a próxima entrega */
+.cnv-tabela-graduacao {
+  min-width: 7rem;
+  color: var(--text-soft);
 }
 
 .cnv-tabela-proxima {
@@ -1023,9 +1030,16 @@
     margin-left: 0;
   }
 
-  /* Tabela rola para o lado; o curso fica parado à esquerda */
+  /* Tabela rola para o lado; a disciplina fica parada à esquerda */
   .cnv-tabela tbody th {
     max-width: 8rem;
+  }
+
+  /* O código completo da disciplina (8218.1.01) desce para a linha de baixo
+     em vez de cortar a sigla */
+  .cnv-tabela .cnv-curso {
+    flex-wrap: wrap;
+    row-gap: 0.1rem;
   }
 
   .cnv-tabela tr > :first-child {

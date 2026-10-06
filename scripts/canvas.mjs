@@ -17,7 +17,10 @@
 //      SGA (o "codigo" das aulas em data/horarioData.js), para usar as siglas
 //      e as cores do "cal". Sem o código, o campus e o turno vêm do nome
 //      ("... - Campus Lourdes - PLU - Noite - 2026/2") e a disciplina, de
-//      outro curso com o mesmo nome de disciplina. CURSOS, em
+//      outro curso com o mesmo nome de disciplina. O código completo da
+//      disciplina ("(8148101)" no Canvas → 8148.1.01) e o curso (Engenharia
+//      de Software ou Ciência da Computação) vêm do código e do nome do curso
+//      no Canvas (Configurações → Detalhes do curso). CURSOS, em
 //      data/canvasCursos.js, corrige ou completa.
 //   3. Lê as tarefas publicadas de cada curso: prazo (e os prazos por turma,
 //      quando mudam), abertura, fechamento, pontos e tipo de entrega.
@@ -327,11 +330,38 @@ const TURNO_NO_NOME = [
 ];
 const achadoNoNome = (pares, nome) => pares.find(([, re]) => re.test(nome ?? ""))?.[0];
 
+// Curso de graduação da disciplina, pelo nome do curso no Canvas (o mesmo de
+// Configurações → Detalhes do curso):
+// "Desenvolvimento de Interfaces Web - Ciência da Computação - Campus ..."
+// A chave é a mesma do "curso" das aulas em data/horarioData.js ("CC"); o
+// nome que aparece no site vem do i18n (canvas.cursos.<chave>).
+const GRADUACOES = {
+  ES: "engenharia de software",
+  CC: "ci[eê]ncia da computa[cç][aã]o",
+};
+const GRADUACAO_NO_NOME = Object.entries(GRADUACOES).map(([chave, nome]) => [chave, palavra(nome)]);
+
+// Código completo da disciplina no SGA, do jeito que o Canvas escreve no
+// código do curso: "(8148101) Desenvolvimento..." → "8148.1.01". O Canvas
+// come o zero da frente ("(492100)" → "0492.1.00").
+function codigoDoCanvas(curso) {
+  for (const texto of textosDoCurso(curso)) {
+    const numero = texto?.match(/\((\d{6,7})\)/)?.[1];
+    if (numero) {
+      const d = numero.padStart(7, "0");
+      return `${d.slice(0, 4)}.${d[4]}.${d.slice(5)}`;
+    }
+  }
+  return null;
+}
+
+const numeroDe = (codigo) => codigo.split(".")[0];
+
 // Os campos que todas as aulas achadas têm em comum: duas turmas da mesma
 // disciplina no mesmo curso do Canvas dão disciplina e campus, sem turma
 function emComum(aulas) {
   const campos = {};
-  for (const campo of ["disciplina", "campus", "turma"]) {
+  for (const campo of ["disciplina", "campus", "turma", "curso"]) {
     const valores = new Set(aulas.map((a) => a[campo]));
     const [valor] = valores;
     if (valores.size === 1 && valor) campos[campo] = valor;
@@ -342,36 +372,50 @@ function emComum(aulas) {
 function descobrirDisciplina(curso) {
   const manual = CURSOS[curso.id];
   const texto = textosDoCurso(curso).filter(Boolean).join(" | ");
+  const codigo = codigoDoCanvas(curso);
   let achado = {};
   let como = null;
 
-  const exatas = TURMAS_DO_SGA.filter((a) => codigoCompleto(a.codigo).test(texto));
+  const exatas = TURMAS_DO_SGA.filter((a) => a.codigo === codigo || codigoCompleto(a.codigo).test(texto));
   const daDisciplina = exatas.length
     ? []
-    : TURMAS_DO_SGA.filter((a) => numeroDaDisciplina(a.codigo).test(texto));
+    : TURMAS_DO_SGA.filter(
+        (a) => (codigo && numeroDe(a.codigo) === numeroDe(codigo)) || numeroDaDisciplina(a.codigo).test(texto)
+      );
   if (exatas.length) {
     achado = emComum(exatas);
     como = `código ${exatas.map((a) => a.codigo).join(", ")}`;
   } else if (daDisciplina.length) {
     achado = emComum(daDisciplina);
-    como = `disciplina ${[...new Set(daDisciplina.map((a) => a.codigo.split(".")[0]))].join(", ")} do SGA`;
+    como = `disciplina ${[...new Set(daDisciplina.map((a) => numeroDe(a.codigo)))].join(", ")} do SGA`;
   }
+  // O curso das aulas (data/horarioData.js) só vale se o nome não disser qual é
+  const { curso: cursoDasAulas, ...doSga } = achado;
 
   // Sem o campus no código do SGA, vale o do nome; o turno vem sempre do nome
-  const campus = achado.campus ?? achadoNoNome(CAMPUS_NO_NOME, curso.name);
+  const campus = doSga.campus ?? achadoNoNome(CAMPUS_NO_NOME, curso.name);
   const turno = achadoNoNome(TURNO_NO_NOME, curso.name);
-  // Código do SGA que aparece no rótulo: o da turma ou, sem ele, o número da disciplina
-  const sga = exatas.length
-    ? exatas.map((a) => a.codigo).join(", ")
-    : [...new Set(daDisciplina.map((a) => a.codigo.split(".")[0]))].join(", ") || undefined;
+  // Código do SGA que aparece no rótulo: o completo, do código do curso no
+  // Canvas ("8148.1.01", "6288.1.00"); sem ele, o das aulas achadas ou, por
+  // último, o número da disciplina
+  const sga =
+    codigo ??
+    (exatas.length
+      ? exatas.map((a) => a.codigo).join(", ")
+      : [...new Set(daDisciplina.map((a) => numeroDe(a.codigo)))].join(", ") || undefined);
+  const graduacao =
+    textosDoCurso(curso)
+      .map((t) => achadoNoNome(GRADUACAO_NO_NOME, t))
+      .find(Boolean) ?? cursoDasAulas;
 
   // "nome" em CURSOS troca só o rótulo do terminal: o nome do Canvas continua
   const { nome: rotulo, ...doManual } = manual ?? {};
   const final = {
-    ...achado,
+    ...doSga,
     ...(campus && { campus }),
     ...(turno && { turno }),
     ...(sga && { sga }),
+    ...(graduacao && { curso: graduacao }),
     ...doManual,
     ...(rotulo && { rotulo }),
   };
@@ -381,6 +425,9 @@ function descobrirDisciplina(curso) {
   }
   if (final.campus && !CAMPI[final.campus]) {
     avisos.push(`campus "${final.campus}" não existe em CAMPI (horarioData.js)`);
+  }
+  if (final.curso && !GRADUACOES[final.curso]) {
+    avisos.push(`curso "${final.curso}" não é ${Object.keys(GRADUACOES).join(" nem ")}`);
   }
   return { campos: final, como: manual ? "CURSOS" : como, avisos };
 }
@@ -658,7 +705,8 @@ async function dadosAnteriores() {
 const SIGLA_CAMPUS = (campus) => (campus ? `${campus[0].toUpperCase()}${campus.slice(1)}` : null);
 const NOME_DO_TURNO = { manha: "manhã", tarde: "tarde", noite: "noite" };
 
-// "DIAW · Coreu · G1 · noite · 8218.1.01": o código do SGA diz qual é a turma
+// "DIAW · Coreu · G1 · noite · 8218.1.01 · ES": o código do SGA diz qual é a
+// turma; ES/CC, o curso
 function rotuloDoCurso({ campos }, curso) {
   if (campos.rotulo) return campos.rotulo;
   if (!campos.disciplina) return curso.name;
@@ -668,6 +716,7 @@ function rotuloDoCurso({ campos }, curso) {
     campos.turma,
     NOME_DO_TURNO[campos.turno],
     campos.sga,
+    campos.curso,
   ]
     .filter(Boolean)
     .join(" · ");

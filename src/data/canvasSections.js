@@ -7,8 +7,10 @@ import { CAMPI, DISCIPLINAS } from "./horarioData";
 //   canvas diw               só os cursos de DIW (vale com qualquer seção)
 //   canvas ti5 coreu --tarefas
 //   canvas g2 --agenda       só as turmas G2
+//   canvas cc                só as disciplinas de Ciência da Computação (es:
+//                            Engenharia de Software)
 // As opções valem com ou sem "--" (canvas tarefas) e em inglês (--tasks).
-// Outras palavras procuram no nome do curso no Canvas (canvas noite).
+// Outras palavras procuram no nome da disciplina no Canvas (canvas noite).
 // A ordem abaixo é a do rodapé "Seções:" e a do "canvas --tudo".
 
 export const SECTIONS = ["resumo", "tarefas", "agenda"];
@@ -40,10 +42,15 @@ const SECTION_ALIASES = {
   all: "tudo",
 };
 
-// Opções do Tab: seções, disciplinas e campi
+// Filtro → curso de graduação: o "curso" de cada disciplina em
+// data/canvasData.js (o nome vem do i18n: canvas.cursos.<chave>)
+const CURSO_ALIASES = { es: "ES", cc: "CC" };
+
+// Opções do Tab: seções, disciplinas, cursos e campi
 export const canvasSubcommands = [
   ...SECTION_OPTIONS.map((s) => `--${s}`),
   ...Object.keys(DISCIPLINAS),
+  ...Object.keys(CURSO_ALIASES),
   ...Object.keys(CAMPI),
 ];
 
@@ -64,7 +71,7 @@ export function parseCanvas(args) {
     .filter((word) => word && word !== "--skin" && word !== "skin");
 
   let section = null;
-  const filtros = { disciplinas: [], campi: [], turmas: [], termos: [] };
+  const filtros = { disciplinas: [], cursos: [], campi: [], turmas: [], termos: [] };
 
   for (const raw of words) {
     const word = raw.replace(/^-+/, "");
@@ -76,6 +83,8 @@ export function parseCanvas(args) {
       return null;
     } else if (Object.hasOwn(DISCIPLINAS, word)) {
       filtros.disciplinas.push(word);
+    } else if (Object.hasOwn(CURSO_ALIASES, word)) {
+      filtros.cursos.push(CURSO_ALIASES[word]);
     } else if (Object.hasOwn(CAMPI, word)) {
       filtros.campi.push(word);
     } else if (/^g\d+$/.test(word)) {
@@ -94,15 +103,16 @@ export const semFiltro = (filtros) =>
   !filtros || Object.values(filtros).every((lista) => lista.length === 0);
 
 // Cada tipo de filtro restringe; dentro do mesmo tipo, qualquer um serve.
-// Os termos procuram no nome e no código do curso no Canvas.
+// Os termos procuram no nome e no código da disciplina no Canvas.
 export function aplicarFiltros(cursos, filtros) {
   if (semFiltro(filtros)) return cursos;
-  const { disciplinas, campi, turmas, termos } = filtros;
+  const { disciplinas, cursos: graduacoes = [], campi, turmas, termos } = filtros;
   const passa = (lista, valor) => lista.length === 0 || lista.includes(valor);
   return cursos.filter((c) => {
     const texto = slug(`${c.nome} ${c.codigo ?? ""}`);
     return (
       passa(disciplinas, c.disciplina) &&
+      passa(graduacoes, c.curso) &&
       passa(campi, c.campus) &&
       passa(turmas, c.turma) &&
       termos.every((termo) => texto.includes(termo))

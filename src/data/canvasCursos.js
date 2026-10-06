@@ -12,9 +12,12 @@
 //   • descobre a disciplina, o campus e a turma pelo código do SGA do curso
 //     (o "codigo" das aulas em data/horarioData.js), para usar as mesmas
 //     siglas e cores do "cal";
-//   • tira o campus e o turno do nome ("... - Campus Lourdes - PLU - Noite -
-//     2026/2") e, num curso sem código, a disciplina de outro curso com o
-//     mesmo nome de disciplina.
+//   • mostra o código completo da disciplina ("(6288100)" no Canvas →
+//     6288.1.00);
+//   • tira o curso (Engenharia de Software ou Ciência da Computação), o campus
+//     e o turno do nome ("... - Engenharia de Software - Campus Lourdes - PLU -
+//     Noite - 2026/2") e, num curso sem código, a disciplina de outro curso
+//     com o mesmo nome de disciplina.
 // O script lista no terminal o id de cada curso e o que descobriu. Se algo
 // vier errado, corrija com CURSOS, INCLUIR e IGNORAR e rode de novo.
 //
@@ -29,9 +32,11 @@ export const CANVAS_URL = "https://pucminas.instructure.com";
 //   campus: chave de CAMPI (data/horarioData.js): letra e cor
 //   turma: opcional (G1, G2...)
 //   turno: opcional, "manha" | "tarde" | "noite"
+//   curso: opcional, "ES" (Engenharia de Software) | "CC" (Ciência da Computação)
+//   sga: opcional, código completo da disciplina no SGA ("8148.1.01")
 //   nome: opcional, troca o nome que aparece no terminal
 // Exemplo:
-//   12345: { disciplina: "diw", campus: "coreu", turma: "G1" },
+//   12345: { disciplina: "diw", campus: "coreu", turma: "G1", curso: "CC" },
 export const CURSOS = {};
 
 // ids de cursos que entram mesmo sem tarefa publicada ou fora do semestre

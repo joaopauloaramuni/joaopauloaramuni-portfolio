@@ -794,7 +794,7 @@ const resources = {
       canvas: {
         titulo: "Canvas assignments",
         carregando: "Loading the Canvas assignments...",
-        uso: "Usage: canvas [diw | ti5 …] [coreu | lourdes] [g1 …] [--summary | --tasks | --agenda | --all]",
+        uso: "Usage: canvas [diw | ti5 …] [es | cc] [coreu | lourdes] [g1 …] [--summary | --tasks | --agenda | --all]",
         subtitulo: "My courses on Canvas · semester {{semestre}} of {{ano}} · submissions as of {{data}}, {{hora}}",
         semDados: "No Canvas data yet.",
         semDadosDev: "The site never talks to Canvas: run npm run canvas in the project terminal (with CANVAS_TOKEN in .env.local) and reload the page. This notice only shows in npm run dev.",
@@ -813,7 +813,7 @@ const resources = {
           agenda: "Agenda",
         },
         kpis: {
-          cursos: "Courses",
+          disciplinas: "Courses",
           alunos: "Students",
           abertas: "Upcoming",
           semana: "Due in {{dias}} days",
@@ -903,8 +903,9 @@ const resources = {
         },
         tabela: {
           titulo: "courses",
-          legenda: "Canvas courses with students, assignments, next due date, submissions and work to grade.",
-          curso: "Course",
+          legenda: "Canvas courses with their degree program, students, assignments, next due date, submissions and work to grade.",
+          disciplina: "Course",
+          curso: "Program",
           alunos: "Students",
           tarefas: "Tasks",
           proxima: "Next due",
@@ -932,6 +933,10 @@ const resources = {
           ateFim: "show until the end of the semester ({{data}})",
           proximos: "show only the next {{dias}} days",
           nota: "Assignments and events from the courses' Canvas calendars, plus the holidays and breaks from the PUC calendar.",
+        },
+        cursos: {
+          ES: "Software Engineering",
+          CC: "Computer Science",
         },
       },
       calendly: {
@@ -2947,12 +2952,12 @@ const resources = {
       canvas: {
         titulo: "Tarefas no Canvas",
         carregando: "Carregando as tarefas do Canvas...",
-        uso: "Uso: canvas [diw | ti5 …] [coreu | lourdes] [g1 …] [--resumo | --tarefas | --agenda | --tudo]",
+        uso: "Uso: canvas [diw | ti5 …] [es | cc] [coreu | lourdes] [g1 …] [--resumo | --tarefas | --agenda | --tudo]",
         subtitulo: "Minhas disciplinas no Canvas · {{semestre}}º semestre de {{ano}} · entregas de {{data}}, às {{hora}}",
         semDados: "Ainda sem dados do Canvas.",
         semDadosDev: "O site nunca fala com o Canvas: rode npm run canvas no terminal do projeto (com CANVAS_TOKEN no .env.local) e recarregue a página. Este aviso só aparece no npm run dev.",
         filtro: "Filtro: {{texto}}",
-        nenhum: "Nenhum curso com esse filtro.",
+        nenhum: "Nenhuma disciplina com esse filtro.",
         estilos: "Seções:",
         skins: {
           resumo: "resumo",
@@ -2966,7 +2971,7 @@ const resources = {
           agenda: "Agenda",
         },
         kpis: {
-          cursos: "Cursos",
+          disciplinas: "Disciplinas",
           alunos: "Alunos",
           abertas: "Pela frente",
           semana: "Vencem em {{dias}} dias",
@@ -2974,7 +2979,7 @@ const resources = {
           taxa: "Entrega média",
         },
         kpiDicas: {
-          alunos: "Alunos ativos (sem filtro, quem está em dois cursos conta uma vez)",
+          alunos: "Alunos ativos (sem filtro, quem está em duas disciplinas conta uma vez)",
           abertas: "Tarefas com prazo pela frente",
           aCorrigir: "Entregas esperando correção",
           taxa: "Alunos que entregaram as tarefas que já venceram (dispensados não contam)",
@@ -3055,8 +3060,9 @@ const resources = {
           nenhuma: "Nada vence nos próximos {{dias}} dias.",
         },
         tabela: {
-          titulo: "cursos",
-          legenda: "Cursos no Canvas com alunos, tarefas, próxima entrega, entregas e o que falta corrigir.",
+          titulo: "disciplinas",
+          legenda: "Disciplinas no Canvas com o curso, alunos, tarefas, próxima entrega, entregas e o que falta corrigir.",
+          disciplina: "Disciplina",
           curso: "Curso",
           alunos: "Alunos",
           tarefas: "Tarefas",
@@ -3074,7 +3080,7 @@ const resources = {
           mostrarTodas_one: "mostrar {{count}} anterior",
           mostrarTodas_other: "mostrar as {{count}} anteriores",
           mostrarMenos: "mostrar menos",
-          nota: "Entregas dos alunos ativos de cada curso, atualizadas em {{data}} às {{hora}}. Dispensados não contam no total.",
+          nota: "Entregas dos alunos ativos de cada disciplina, atualizadas em {{data}} às {{hora}}. Dispensados não contam no total.",
         },
         agenda: {
           resumo: "<b>{{tarefas}}</b> prazos e <b>{{eventos}}</b> eventos até {{ate}}",
@@ -3084,7 +3090,11 @@ const resources = {
           evento: "evento",
           ateFim: "mostrar até o fim do semestre ({{data}})",
           proximos: "mostrar só os próximos {{dias}} dias",
-          nota: "Tarefas e eventos do calendário dos cursos no Canvas, com os feriados e recessos do calendário da PUC.",
+          nota: "Tarefas e eventos do calendário das disciplinas no Canvas, com os feriados e recessos do calendário da PUC.",
+        },
+        cursos: {
+          ES: "Engenharia de Software",
+          CC: "Ciência da Computação",
         },
       },
       calendly: {
