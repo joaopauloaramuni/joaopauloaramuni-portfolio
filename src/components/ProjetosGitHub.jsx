@@ -23,11 +23,18 @@ const ProjetosGitHub = () => {
         );
         const filteredRepos = data.filter((repo) => !repo.fork);
 
+        // Imagem de prévia que o GitHub gera para cada repositório. O
+        // primeiro trecho do caminho é só uma chave de cache: as alternativas
+        // pedem a mesma imagem de novo se a primeira falhar (ver ProjectCard)
+        const preview = (repo, chave) =>
+          `https://opengraph.githubassets.com/${chave}/${USERNAME}/${repo.name}`;
+
         const mappedRepos = filteredRepos.map((repo) => ({
           id: repo.id,
           title: repo.name,
           description: repo.description || "",
-          gif: `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
+          gif: preview(repo, 1),
+          gifFallbacks: [preview(repo, 2), preview(repo, 3)],
           repoLink: repo.html_url,
           technologies: repo.topics || [],
         }));
