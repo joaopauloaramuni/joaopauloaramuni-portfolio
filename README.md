@@ -103,6 +103,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
 4. **Serviços externos (à direita)**
    - Em laranja, as APIs acessadas pelo proxy: WakaTime, komarev e views-counter.
    - Em verde, os serviços chamados direto do navegador: GitHub API, GitHub Contributions, OpenGraph, helio-github-stats, Spotify, Last.fm, Calendly, unpkg, EmailJS e Supabase (com o PostgreSQL por trás).
+   - Fora do diagrama: quando a GitHub API precisa do token (linguagens do `stats`, ou o limite do visitante acabou), o navegador chama `/api/github`, uma Vercel Function (`api/github.js`) que acrescenta o token no servidor.
 
 ### 🎨 Como ler as setas
 
@@ -120,8 +121,8 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 ### 💡 O que o diagrama mostra
 
 - **O portfólio não tem back-end próprio.** Tudo roda no navegador; a Vercel só entrega os arquivos estáticos e repassa três rotas.
-- **O proxy existe só por causa do CORS.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker).
-- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e um token do GitHub só de leitura.
+- **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
+- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase e a public key do EmailJS. O token do GitHub (`GITHUB_SITE_TOKEN`, sem `VITE_`) fica só no servidor, na Vercel Function `api/github.js`, e nunca chega ao navegador.
 
 -----
 
@@ -200,6 +201,9 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 
 ```text
 📦 joaopauloaramuni-portfolio
+├── 📁 api                         → Vercel Functions (rodam no servidor)
+│   ├── ⚙️ github.js               → /api/github: proxy da GitHub API com o token do site
+│   └── ⚙️ _github.js              → regras do proxy (caminhos permitidos, GraphQL, cache)
 ├── 📁 .github
 │   ├── 📁 ISSUE_TEMPLATE          → modelos de issue (bug, feature e dúvida)
 │   ├── 📁 workflows
@@ -231,7 +235,7 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 │   ├── 🎨 App.css
 │   ├── ⌨️ commands.js             → comandos e aliases
 │   └── 🌐 i18n.js                 → textos em pt-BR e en
-├── 🔐 .env.example                → modelo das variáveis VITE_*
+├── 🔐 .env.example                → modelo das variáveis (VITE_* e os tokens que ficam no servidor)
 ├── 🙈 .gitignore
 ├── 🐳 .dockerignore
 ├── 🐳 Dockerfile                  → build com Node + NGINX
@@ -981,77 +985,82 @@ Este guia mostra como configurar o acesso à GitHub API para buscar seus reposit
 
 ### 2️⃣ Configurar o token localmente
 
-Crie um arquivo `.env.local` na raiz do projeto React:
+Crie um arquivo `.env.local` na raiz do projeto:
 
 ```env
-VITE_GITHUB_TOKEN=seu_token_aqui
+GITHUB_SITE_TOKEN=seu_token_aqui
 ```
 
-> Observação: No Vite, todas as variáveis de ambiente expostas ao front-end devem começar com `VITE_`.
+> ⚠️ **Sem `VITE_` na frente.** Tudo que começa com `VITE_` o Vite embute no build, e qualquer visitante consegue ler no JavaScript do site. O `GITHUB_SITE_TOKEN` fica só no servidor: no `npm run dev` e no `npm run preview`, quem lê é o `vite.config.js`, que atende o `/api/github` e acrescenta o token antes de chamar a GitHub API.
 
 ---
 
-### 3️⃣ Criar a configuração da GitHub API
+### 3️⃣ Configuração e proxy
 
-Crie um arquivo `gitHubApiConfig.js` em `src/config/`:
+A configuração não tem mais o token, só o caminho do proxy (`src/config/gitHubApiConfig.js`):
 
 ```javascript
 // gitHubApiConfig.js
 const GITHUB_API_CONFIG = {
   USERNAME: "joaopauloaramuni",
-  TOKEN: import.meta.env.VITE_GITHUB_TOKEN,
   BASE_URL: "https://api.github.com",
+  PROXY_PATH: "/api/github",
   PER_PAGE: 100, // quantidade máxima de repositórios por página
 };
 
 export default GITHUB_API_CONFIG;
 ```
 
+O proxy fica na pasta `api/`, que a Vercel transforma em funções que rodam no servidor:
+
+- `api/github.js`: a Vercel Function. Responde em `/api/github?path=/users/...` (REST) e `/api/github?graphql=languages` (GraphQL) e acrescenta o token.
+- `api/_github.js`: as regras, compartilhadas com o `vite.config.js` (o `_` no nome impede a Vercel de criar uma rota para ele). O proxy só faz leitura, só aceita os caminhos que o `github` e o `stats` usam, todos do mesmo usuário, e o texto da consulta GraphQL fica no servidor (o navegador só manda o nome). Assim ninguém consegue usar o seu token para outra coisa.
+- As respostas ficam 10 minutos no cache da CDN da Vercel (`s-maxage=600`): o token é gasto uma vez para todos os visitantes.
+
 ---
 
-### 4️⃣ Configurar variáveis de ambiente no Vercel
+### 4️⃣ Configurar o token na Vercel
 
-1. Acesse seu projeto no Vercel.
+1. Acesse seu projeto na Vercel.
 2. Vá em **Settings → Environment Variables**.
 3. Adicione a variável:
-   - **Name**: `VITE_GITHUB_TOKEN`
+   - **Name**: `GITHUB_SITE_TOKEN`
    - **Value**: o token que você gerou
-   - **Environment**: Production / Preview / Development conforme necessário.
-4. Salve as alterações.
+   - **Environments**: Production e Preview
+   - Marque **Sensitive**, para o valor não aparecer mais no painel.
+4. Apague a `VITE_GITHUB_TOKEN`, se ela ainda existir.
+5. Faça um novo deploy (**Deployments → Redeploy**). A função lê a variável quando roda; o build não precisa dela.
+
+> 🔑 **Se o token já foi usado com `VITE_`:** ele está no JavaScript de todos os deploys antigos (a Vercel mantém cada deploy acessível pela própria URL). Revogue o token antigo em [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) e crie outro para o `GITHUB_SITE_TOKEN`.
+
+> 🐳 No Docker (NGINX) não existe o `/api/github`: os comandos continuam funcionando no limite de cada visitante, e o `stats --linguagens` conta a linguagem principal de cada repositório.
 
 ---
 
 ### 5️⃣ Buscar os repositórios no React
 
-No seu componente `ProjetosGitHub.jsx`, você pode fazer algo como:
+No componente `ProjetosGitHub.jsx`:
 
 ```javascript
 import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
+import { fetchGitHub } from "../lib/githubApi";
 
-const { USERNAME, TOKEN, BASE_URL, PER_PAGE } = GITHUB_API_CONFIG;
+const { USERNAME, PER_PAGE } = GITHUB_API_CONFIG;
 
-const response = await fetch(
-  `${BASE_URL}/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`,
-  {
-    headers: {
-      Authorization: `token ${TOKEN}`,
-      Accept: "application/vnd.github.mercy-preview+json", // para incluir topics
-    },
-  }
+// Direto na API; se o limite do visitante acabar, repete pelo /api/github
+const data = await fetchGitHub(
+  `/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`
 );
-
-const data = await response.json();
 ```
 
 #### Explicação do fetch:
 
-- **URL**: `${BASE_URL}/users/${USERNAME}/repos` busca todos os repositórios do usuário.
+- **URL**: `/users/${USERNAME}/repos` busca todos os repositórios do usuário.
 - **Query params**:
   - `sort=updated`: ordena pelos mais recentemente atualizados.
   - `per_page=100`: quantidade máxima de repositórios por página.
-- **Headers**:
-  - `Authorization`: envia o token para autenticação.
-  - `Accept`: especifica a versão da API que inclui os topics dos repositórios.
+- **`fetchGitHub`** (`src/lib/githubApi.js`): chama a GitHub API direto do navegador, no limite do IP do visitante (60 chamadas por hora). Se esse limite acabar (vários alunos na mesma rede da faculdade, por exemplo) ou a rede bloquear a `api.github.com`, repete pelo `/api/github`, com o token do site. Com `{ auth: true }`, vai direto pelo proxy.
+- **Topics**: já vêm na resposta padrão da API, sem cabeçalho especial.
 - **data**: retorna um array de objetos com informações dos repositórios.
 
 ---
@@ -1207,15 +1216,15 @@ O `stats --repos` só lê os repositórios listados em `REPO_VIEWS_REPOS` (os qu
 
 ### 3️⃣ Token do GitHub
 
-Com o `VITE_GITHUB_TOKEN` (o mesmo do comando `github`), o `stats --linguagens` soma os **bytes de código** de cada linguagem em todos os repositórios, numa chamada só à GraphQL API (se ela recusar o token, cai para `/repos/:usuario/:repo/languages`, uma chamada por repositório). Sem token, conta a linguagem principal de cada repositório.
+Com o `GITHUB_SITE_TOKEN` (o mesmo do comando `github`, que fica só no servidor, no proxy `/api/github`), o `stats --linguagens` soma os **bytes de código** de cada linguagem em todos os repositórios, numa chamada só à GraphQL API (se ela recusar o token, cai para `/repos/:usuario/:repo/languages`, uma chamada por repositório). Sem token, conta a linguagem principal de cada repositório.
 
-As outras chamadas continuam sem token, no limite por IP de cada visitante, e só repetem com o token quando esse limite acaba (por exemplo, vários alunos na mesma rede da faculdade). O limite do token (5.000 chamadas por hora e 30 buscas por minuto) é um só para todos os visitantes, por isso ele fica de reserva.
+As outras chamadas continuam sem token, no limite por IP de cada visitante, e só repetem pelo proxy, com o token, quando esse limite acaba (por exemplo, vários alunos na mesma rede da faculdade). O limite do token (5.000 chamadas por hora e 30 buscas por minuto) é um só para todos os visitantes, por isso ele fica de reserva.
 
 1. Em [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens), crie um **fine-grained token** com **Repository access → Public repositories (read-only)** e nenhuma outra permissão.
-2. Local: coloque no `.env.local` (`VITE_GITHUB_TOKEN=github_pat_...`) e reinicie o `npm run dev`.
-3. Vercel: em **Settings → Environment Variables**, crie `VITE_GITHUB_TOKEN` e faça um novo deploy (o Vite embute a variável no build).
+2. Local: coloque no `.env.local` (`GITHUB_SITE_TOKEN=github_pat_...`, **sem** `VITE_`) e reinicie o `npm run dev`.
+3. Vercel: em **Settings → Environment Variables**, crie `GITHUB_SITE_TOKEN` (marcado como *Sensitive*) e faça um novo deploy.
 
-> ⚠️ Tudo que começa com `VITE_` vai para o build e fica visível no navegador. Por isso o token não deve ter nenhuma permissão além de ler repositórios públicos; no pior caso, alguém gasta o limite de chamadas dele.
+> 🔒 O token nunca vai para o navegador: o proxy `/api/github` (Vercel Function `api/github.js`) acrescenta o token no servidor, só aceita os caminhos que o `github` e o `stats` usam e guarda as respostas 10 minutos na CDN. Mesmo assim, dê a ele só leitura de repositórios públicos. Detalhes no **Guia de configuração da GitHub API**, mais acima.
 
 ### 4️⃣ Trocar para o seu usuário
 
@@ -1227,11 +1236,15 @@ As outras chamadas continuam sem token, no limite por IP de cada visitante, e s�
 
 ```text
 vercel.json                    → rewrites /api/github/* → komarev e views-counter (produção)
-vite.config.js                 → o mesmo proxy no npm run dev / preview
+vite.config.js                 → o mesmo proxy no npm run dev / preview, e o /api/github com o token
 nginx.conf                     → o mesmo proxy no container Docker (NGINX)
+api/
+  github.js                    → Vercel Function /api/github: acrescenta o GITHUB_SITE_TOKEN no servidor
+  _github.js                   → caminhos permitidos, consulta GraphQL das linguagens e cache
 src/
   config/gitHubStatsConfig.js  → usuário, fuso, repositórios escondidos e repositórios com badge
   lib/githubStats.js           → busca (com cache), sequências, horários e leitura dos badges
+  lib/githubApi.js             → chamadas à GitHub API: direto ou pelo proxy /api/github
   data/gitHubStatsSections.js  → grupos de gráficos e nomes aceitos (PT e EN)
   data/wakaTimeLanguages.js    → ícone e cores de cada linguagem (compartilhado com o wakatime)
   components/GitHubStats.jsx   → os grupos de gráficos (resumo é o padrão)
@@ -1523,7 +1536,7 @@ npm run turmas
 GITHUB_TOKEN=ghp_xxx npm run turmas
 ```
 
-O `VITE_GITHUB_TOKEN` dos comandos `github` e `stats` **não** é usado: ele vai para o build e deve ler só repositórios públicos. Os dados também não vêm do navegador: enquanto o script não rodar, os grupos aparecem como "ainda sem dados" (no `npm run dev`, um aviso lembra disso).
+O `GITHUB_SITE_TOKEN` dos comandos `github` e `stats` **não** é usado: ele lê só repositórios públicos. Os dados também não vêm do navegador: enquanto o script não rodar, os grupos aparecem como "ainda sem dados" (no `npm run dev`, um aviso lembra disso).
 
 No começo, o script mostra de quem é o token e, se for classic, os escopos dele. Para cada grupo que falhar, ele diz o motivo: sem token, token sem o escopo `repo`, token fine-grained sem acesso à organização ou organização que exige SSO (nesse caso, autorize o token em *github.com/settings/tokens* → *Configure SSO*). Sem token, só os repositórios públicos respondem. Se a GitHub API esbarrar no limite, o resto dos dados é atualizado e os PRs e issues ficam como estavam.
 

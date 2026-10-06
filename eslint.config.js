@@ -27,8 +27,9 @@ export default defineConfig([
     },
   },
   {
-    // Scripts de manutenção (ex.: npm run lattes) rodam no Node
-    files: ['scripts/**/*.{js,mjs}'],
+    // Rodam no Node: scripts de manutenção (ex.: npm run lattes), a Vercel
+    // Function do proxy da GitHub API (api/) e a configuração do Vite
+    files: ['scripts/**/*.{js,mjs}', 'api/**/*.js', 'vite.config.js'],
     extends: [js.configs.recommended],
     languageOptions: {
       ecmaVersion: 'latest',

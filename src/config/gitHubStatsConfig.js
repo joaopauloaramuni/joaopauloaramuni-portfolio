@@ -14,9 +14,11 @@
 //   • npm run dev / preview → proxy do vite.config.js (lê este arquivo)
 //   • Vercel                → rewrites do vercel.json (troque o usuário lá também)
 //
-// A URL da GitHub API e o token (VITE_GITHUB_TOKEN) vêm do gitHubApiConfig.js.
-// Com o token, as linguagens são somadas por bytes de código (GraphQL); sem
-// ele, pela linguagem principal de cada repositório.
+// A URL da GitHub API e o caminho do proxy vêm do gitHubApiConfig.js. O token
+// (GITHUB_SITE_TOKEN) fica só no servidor, no proxy /api/github (api/github.js
+// na Vercel, vite.config.js no npm run dev). Com ele, as linguagens são
+// somadas por bytes de código (GraphQL); sem ele, pela linguagem principal de
+// cada repositório.
 // Este arquivo não lê import.meta.env porque o vite.config.js também o importa.
 
 // Mesmo usuário do gitHubApiConfig.js

@@ -127,12 +127,14 @@ function lerToken() {
 
 const { token: TOKEN, origem: ORIGEM_TOKEN } = lerToken();
 
-// O VITE_GITHUB_TOKEN do .env.local é o dos comandos "github" e "stats": vai
-// para o build e deve ler só repositórios públicos. O script não usa ele.
+// O GITHUB_SITE_TOKEN (antes VITE_GITHUB_TOKEN) do .env.local é o dos comandos
+// "github" e "stats": lê só repositórios públicos. O script não usa ele.
 const SO_TEM_VITE_TOKEN =
   !TOKEN &&
   existsSync(resolve(ROOT, ".env.local")) &&
-  /^\s*VITE_GITHUB_TOKEN\s*=\s*\S/m.test(readFileSync(resolve(ROOT, ".env.local"), "utf8"));
+  /^\s*(VITE_GITHUB_TOKEN|GITHUB_SITE_TOKEN)\s*=\s*\S/m.test(
+    readFileSync(resolve(ROOT, ".env.local"), "utf8")
+  );
 
 /* ---------------------------------------------------------------------
    git e GitHub API
@@ -1018,7 +1020,7 @@ async function main() {
   if (!TOKEN) {
     console.log(
       SO_TEM_VITE_TOKEN
-        ? "Sem token para o script: o .env.local só tem o VITE_GITHUB_TOKEN, que é o do site (público). " +
+        ? "Sem token para o script: o .env.local só tem o token do site (GITHUB_SITE_TOKEN), que lê só repositórios públicos. " +
             "Acrescente uma linha GITHUB_TOKEN=... com um token que leia os repositórios das turmas, " +
             "ou faça login no GitHub CLI (gh auth login)."
         : "Sem token do GitHub: só os repositórios públicos vão responder. Use GITHUB_TOKEN no .env.local " +

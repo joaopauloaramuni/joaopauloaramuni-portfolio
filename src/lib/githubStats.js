@@ -1,4 +1,9 @@
-import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
+import {
+  fetchGitHub as github,
+  fetchGitHubGraphQL,
+  GitHubProxyUnavailableError,
+  GitHubRateLimitError,
+} from "./githubApi";
 import GITHUB_STATS_CONFIG, {
   repoViewsPageId,
   hasRepoViewsBadge,
@@ -12,15 +17,13 @@ import GITHUB_STATS_CONFIG, {
 //
 // Limites da GitHub API sem token, por IP do visitante: 60 chamadas por hora e
 // 10 buscas (/search) por minuto. Uma visita que abre todos os gráficos usa
-// 2 chamadas comuns e 7 buscas. Com o token (VITE_GITHUB_TOKEN):
+// 2 chamadas comuns e 7 buscas. Com o token do site (GITHUB_SITE_TOKEN, que
+// fica só no servidor e é usado pelo proxy /api/github, ver lib/githubApi.js):
 //   • as linguagens saem por bytes de código, numa chamada só (GraphQL);
 //   • as outras chamadas continuam sem token (o limite por IP é do visitante)
-//     e só repetem com o token se o limite do IP acabar, como numa rede
+//     e só repetem pelo proxy se o limite do IP acabar, como numa rede
 //     compartilhada de faculdade. O limite do token (5.000/h e 30 buscas/min)
 //     é dividido por todos os visitantes, por isso ele fica de reserva.
-
-const { TOKEN, BASE_URL } = GITHUB_API_CONFIG;
-const GRAPHQL_URL = `${BASE_URL}/graphql`;
 const {
   USERNAME,
   TIME_ZONE,
@@ -32,7 +35,7 @@ const {
 } = GITHUB_STATS_CONFIG;
 
 // Erro específico para o limite da GitHub API (o painel mostra outra mensagem)
-export class GitHubRateLimitError extends Error {}
+export { GitHubRateLimitError };
 
 /* =====================================================================
    Cache por visita
@@ -114,51 +117,6 @@ export function splitDays(from, to, parts) {
 /* =====================================================================
    GitHub REST API
    ===================================================================== */
-
-const headers = (auth) => ({
-  Accept: "application/vnd.github+json",
-  ...(auth && TOKEN && { Authorization: `Bearer ${TOKEN}` }),
-});
-
-// 403/429 numa rota pública é o limite de chamadas (por hora ou por minuto)
-const isRateLimited = (response) =>
-  response.status === 403 || response.status === 429;
-
-// Sem token primeiro; se o limite do IP acabou e existe token, repete com ele.
-// { auth: true } já vai direto com o token.
-async function github(path, { auth = false } = {}) {
-  const url = `${BASE_URL}${path}`;
-  let response = await fetch(url, { headers: headers(auth) });
-  if (!auth && TOKEN && isRateLimited(response)) {
-    response = await fetch(url, { headers: headers(true) });
-  }
-  if (isRateLimited(response)) {
-    throw new GitHubRateLimitError(`GitHub: HTTP ${response.status}`);
-  }
-  if (!response.ok) throw new Error(`GitHub: HTTP ${response.status}`);
-  return response.json();
-}
-
-// A GraphQL API do GitHub só responde com token
-async function githubGraphQL(query, variables) {
-  const response = await fetch(GRAPHQL_URL, {
-    method: "POST",
-    headers: { ...headers(true), "Content-Type": "application/json" },
-    body: JSON.stringify({ query, variables }),
-  });
-  if (isRateLimited(response)) {
-    throw new GitHubRateLimitError(`GitHub GraphQL: HTTP ${response.status}`);
-  }
-  if (!response.ok) throw new Error(`GitHub GraphQL: HTTP ${response.status}`);
-  const { data, errors } = await response.json();
-  if (errors?.some((error) => error.type === "RATE_LIMITED")) {
-    throw new GitHubRateLimitError("GitHub GraphQL: RATE_LIMITED");
-  }
-  if (errors?.length || !data) {
-    throw new Error(`GitHub GraphQL: ${errors?.[0]?.message ?? "sem dados"}`);
-  }
-  return data;
-}
 
 // Lista paginada (100 por página) até a última página
 async function githubList(path) {
@@ -261,36 +219,8 @@ export function sumLanguages(maps, unit) {
 }
 
 // Bytes de cada linguagem em todos os repositórios públicos, numa chamada só
-// (100 repositórios por página). Validada com o schema público do GitHub.
-const LANGUAGES_QUERY = `
-  query ($login: String!, $cursor: String) {
-    user(login: $login) {
-      repositories(
-        first: 100
-        after: $cursor
-        ownerAffiliations: OWNER
-        isFork: false
-        privacy: PUBLIC
-      ) {
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-        nodes {
-          name
-          languages(first: 50, orderBy: { field: SIZE, direction: DESC }) {
-            edges {
-              size
-              node {
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// (100 repositórios por página). A consulta fica no servidor, junto do token
+// (CONSULTAS.languages em api/_github.js).
 
 // Resposta da GraphQL → um mapa { linguagem: bytes } por repositório
 export function languageMapsFromGraphQL(nodes) {
@@ -307,7 +237,7 @@ async function languagesFromGraphQL() {
   const nodes = [];
   let cursor = null;
   do {
-    const data = await githubGraphQL(LANGUAGES_QUERY, { login: USERNAME, cursor });
+    const data = await fetchGitHubGraphQL("languages", { cursor });
     const page = data.user.repositories;
     nodes.push(...page.nodes);
     cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null;
@@ -315,7 +245,7 @@ async function languagesFromGraphQL() {
   return languageMapsFromGraphQL(nodes);
 }
 
-// Plano B, se a GraphQL não aceitar o token: uma chamada REST por repositório
+// Plano B, se a GraphQL falhar: uma chamada REST por repositório, pelo proxy
 async function languagesFromRest(repos, onProgress) {
   let done = 0;
   return mapLimit(repos, REPO_VIEWS_CONCURRENCY, async (repo) => {
@@ -327,25 +257,31 @@ async function languagesFromRest(repos, onProgress) {
   });
 }
 
+// Sem o proxy (ou sem token no servidor), 43 chamadas estourariam o limite de
+// 60/h do visitante: conta a linguagem principal de cada repositório (já veio
+// na lista)
+const languagesByMainLanguage = (repos) =>
+  sumLanguages(
+    repos.map((repo) => (repo.language ? { [repo.language]: 1 } : {})),
+    "repos"
+  );
+
 export const languagesSource = createSource(async (onProgress) => {
   const { repos } = await profileSource.load();
-
-  // Sem token, 43 chamadas estourariam o limite de 60/h do visitante: conta a
-  // linguagem principal de cada repositório (já veio na lista)
-  if (!TOKEN) {
-    return sumLanguages(
-      repos.map((repo) => (repo.language ? { [repo.language]: 1 } : {})),
-      "repos"
-    );
-  }
 
   let maps;
   try {
     maps = await languagesFromGraphQL();
   } catch (error) {
     if (error instanceof GitHubRateLimitError) throw error;
+    if (error instanceof GitHubProxyUnavailableError) return languagesByMainLanguage(repos);
     console.warn("GitHub stats: GraphQL indisponível, usando a REST API", error);
-    maps = await languagesFromRest(repos, onProgress);
+    try {
+      maps = await languagesFromRest(repos, onProgress);
+    } catch (restError) {
+      if (restError instanceof GitHubRateLimitError) throw restError;
+      return languagesByMainLanguage(repos);
+    }
   }
   return sumLanguages(maps, "bytes");
 });

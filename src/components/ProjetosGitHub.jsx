@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 import ProjectCard from "./ProjectCard";
 import "./Projetos.css";
 import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
+import { fetchGitHub } from "../lib/githubApi";
 
 const ProjetosGitHub = () => {
   const { t } = useTranslation();
-  const { USERNAME, TOKEN, BASE_URL, PER_PAGE } = GITHUB_API_CONFIG;
+  const { USERNAME, PER_PAGE } = GITHUB_API_CONFIG;
 
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,18 +15,12 @@ const ProjetosGitHub = () => {
   useEffect(() => {
     async function fetchRepos() {
       try {
-        const response = await fetch(
-          `${BASE_URL}/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`,
-          {
-            headers: {
-              Accept: "application/vnd.github.mercy-preview+json",
-              // Só manda o token se ele existir; sem token, usa a API pública
-              ...(TOKEN && { Authorization: `token ${TOKEN}` }),
-            },
-          }
+        // Direto na API, no limite do visitante; se ele acabar, vai pelo
+        // proxy /api/github, que tem o token do site (ver lib/githubApi.js).
+        // Os topics já vêm na resposta padrão da API.
+        const data = await fetchGitHub(
+          `/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`
         );
-
-        const data = await response.json();
         const filteredRepos = data.filter((repo) => !repo.fork);
 
         const mappedRepos = filteredRepos.map((repo) => ({
@@ -47,7 +42,7 @@ const ProjetosGitHub = () => {
     }
 
     fetchRepos();
-  }, [USERNAME, TOKEN, BASE_URL, PER_PAGE]);
+  }, [USERNAME, PER_PAGE]);
 
   return (
     <div className="projeto-container">
