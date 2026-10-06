@@ -12,6 +12,7 @@ import {
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { ARAMUNI_ASCII } from "../data/brandData";
+import AramuniLogo from "./AramuniLogo";
 import "./BoasVindas.css";
 
 const BoasVindas = () => {
@@ -23,7 +24,11 @@ const BoasVindas = () => {
 
   return (
     <div className="welcome-container">
-      <pre className="aramuni-ascii">{ARAMUNI_ASCII}</pre>
+      {/* Logo à esquerda do banner: as duas crescem juntas (mesma fonte) */}
+      <div className="welcome-brand">
+        <AramuniLogo className="welcome-logo" />
+        <pre className="aramuni-ascii">{ARAMUNI_ASCII}</pre>
+      </div>
       {/* key muda quando o idioma muda, forçando recriação */}
       <TypeAnimation
         key={lang}

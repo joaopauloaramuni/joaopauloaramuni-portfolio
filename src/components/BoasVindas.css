@@ -6,17 +6,36 @@
   overflow-x: clip; /* clip não cria área de rolagem (hidden forçava overflow-y: auto) */
 }
 
-/* ASCII art: diminui com a largura e com a altura da tela, para o prompt
-   caber sem rolar também em notebooks baixos (1366×768, 1280×720) */
+/* Logo + ASCII art lado a lado. A fonte fica aqui: o banner herda e a logo
+   é medida em em, então as duas diminuem juntas com a largura e com a altura
+   da tela, para o prompt caber sem rolar também em notebooks baixos
+   (1366×768, 1280×720). O 1.8vw (era 2.2vw só com o banner) abre espaço
+   para a logo no celular sem cortar o banner; no desktop vale o teto 12px. */
+.welcome-brand {
+  display: flex;
+  align-items: flex-end; /* logo alinhada às 6 linhas do banner, não à linha vazia do topo */
+  gap: 1.5em;
+  font-size: clamp(4px, min(1.8vw, 1.6vh), 12px);
+  margin: 0 0 0.75rem 0;
+  max-width: 100%;
+}
+
+.welcome-logo {
+  flex-shrink: 0;
+  height: 6.9em; /* 6 linhas do banner × line-height 1.15 */
+  width: auto;
+  color: var(--text-muted); /* mesma cor do banner, nos dois temas */
+}
+
 .aramuni-ascii {
   font-family: "FiraCode", "JetBrainsMono", monospace; /* mesmo nome do @font-face */
   color: var(--text-muted);
-  font-size: clamp(4px, min(2.2vw, 1.6vh), 12px);
+  font-size: inherit;
   line-height: 1.15;
   letter-spacing: 0;
   white-space: pre;
-  margin: 0 0 0.75rem 0;
-  max-width: 100%;
+  margin: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -111,8 +130,8 @@
     padding-top: 0;
   }
 
-  .aramuni-ascii {
-    font-size: clamp(4px, min(2.2vw, 1.4vh), 12px);
+  .welcome-brand {
+    font-size: clamp(4px, min(1.8vw, 1.4vh), 12px);
     margin-bottom: 0.5rem;
   }
 
