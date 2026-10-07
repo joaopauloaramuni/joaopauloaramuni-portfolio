@@ -3,7 +3,7 @@ import { turmasSubcommands } from './data/turmasSections';
 import { canvasSubcommands } from './data/canvasSections';
 
 // Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
-// segunda palavra, ex.: "tema c" + Tab → "tema claro".
+// segunda palavra, ex.: "tema --c" + Tab → "tema --claro".
 export const commandList = {
   sobre: {
     name: 'sobre',
@@ -87,7 +87,8 @@ export const commandList = {
   tema: {
     name: 'tema',
     aliases: ['theme'],
-    subcommands: ['claro', 'escuro', 'light', 'dark'],
+    // Sem opção, troca na ordem escuro → claro → galo
+    subcommands: ['--escuro', '--claro', '--galo', '--dark', '--light'],
   },
   recomendacoes: {
     name: 'recomendacoes',

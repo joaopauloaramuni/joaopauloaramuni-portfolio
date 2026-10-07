@@ -1,0 +1,59 @@
+/* Fundo do tema galo. O .react-terminal-wrapper fica transparente nesse
+   tema (App.css) e este bloco aparece por trás dele. */
+.galo-fundo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg-terminal);
+  animation: galo-fundo-entra 0.9s ease-out both;
+}
+
+/* A foto ocupa a altura toda à direita. A máscara apaga a borda esquerda
+   (onde fica o texto) e um pouco do topo e da base, então a foto se funde
+   com o preto do terminal em vez de virar um retângulo. */
+.galo-fundo-galo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+  max-width: 65%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.7) contrast(1.05);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 85%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, #000 45%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 85%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Só um momento de movimento: o galo aparece quando o tema é ativado */
+@keyframes galo-fundo-entra {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galo-fundo {
+    animation: none;
+  }
+}
+
+/* No celular o texto ocupa a tela toda: a foto cobre o fundo, bem mais
+   escura, para o texto continuar legível */
+@media (max-width: 900px) {
+  .galo-fundo-galo {
+    max-width: none;
+    width: 100%;
+    filter: brightness(0.32);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+  }
+}

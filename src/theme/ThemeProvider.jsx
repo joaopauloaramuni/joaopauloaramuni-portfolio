@@ -4,6 +4,7 @@ import {
   THEME_STORAGE_KEY,
   THEMES,
   DEFAULT_THEME,
+  nextTheme,
 } from "./themeContext";
 
 // Lê o tema salvo; sem escolha anterior (ou sem localStorage) abre no dark
@@ -35,8 +36,9 @@ export default function ThemeProvider({ children }) {
     }
   }, []);
 
+  // Ciclo escuro → claro → galo → escuro...
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(nextTheme(theme));
   }, [theme, setTheme]);
 
   const value = useMemo(

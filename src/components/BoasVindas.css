@@ -27,6 +27,13 @@
   color: var(--text-muted); /* mesma cor do banner, nos dois temas */
 }
 
+/* Escudo do tema galo: imagem, então a altura manda e a largura acompanha.
+   É mais alto que o banner (tem a estrela em cima): sobe um pouco além dele. */
+.welcome-escudo {
+  height: 8.6em;
+  margin-top: -1.7em;
+}
+
 .aramuni-ascii {
   font-family: "FiraCode", "JetBrainsMono", monospace; /* mesmo nome do @font-face */
   color: var(--text-muted);

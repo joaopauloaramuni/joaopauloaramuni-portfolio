@@ -13,10 +13,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { ARAMUNI_ASCII } from "../data/brandData";
 import AramuniLogo from "./AramuniLogo";
+import { useTheme } from "../theme/themeContext";
 import "./BoasVindas.css";
 
 const BoasVindas = () => {
   const { t, i18n } = useTranslation();
+  const { theme } = useTheme();
   const lang = i18n.language.startsWith("en") ? "en" : "pt";
   const name = t("boasvindas.nome");
   const title = t("boasvindas.titulo");
@@ -26,7 +28,18 @@ const BoasVindas = () => {
     <div className="welcome-container">
       {/* Logo à esquerda do banner: as duas crescem juntas (mesma fonte) */}
       <div className="welcome-brand">
-        <AramuniLogo className="welcome-logo" />
+        {/* No tema galo, o escudo do Atlético entra no lugar da logo */}
+        {theme === "galo" ? (
+          <img
+            src="/galo/escudo-cam.webp"
+            alt={t("boasvindas.escudo_alt")}
+            className="welcome-logo welcome-escudo"
+            width="480"
+            height="714"
+          />
+        ) : (
+          <AramuniLogo className="welcome-logo" />
+        )}
         <pre className="aramuni-ascii">{ARAMUNI_ASCII}</pre>
       </div>
       {/* key muda quando o idioma muda, forçando recriação */}

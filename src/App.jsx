@@ -35,8 +35,9 @@ import Neofetch from "./components/Neofetch";
 import DesignSystem from "./components/DesignSystem";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
+import GaloFundo from "./components/GaloFundo";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "./theme/themeContext";
+import { useTheme, nextTheme } from "./theme/themeContext";
 import { parseSkillSkin } from "./data/skillSkins";
 import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
@@ -305,25 +306,29 @@ function App() {
           setTerminalLineData([]);
           return;
         case "tema": {
-          // "tema" alterna; "tema claro|light" e "tema escuro|dark" escolhem
+          // "tema" sem opção troca na ordem escuro → claro → galo → escuro...;
+          // "tema --claro|--light", "--escuro|--dark" e "--galo" escolhem.
+          // Sem os traços ("tema claro") também vale, como era antes.
           const themeArgs = {
             claro: "light",
             light: "light",
             escuro: "dark",
             dark: "dark",
+            galo: "galo",
           };
-          if (subCommand && !themeArgs[subCommand]) {
+          const option = subCommand?.replace(/^--?/, "");
+          if (subCommand && !themeArgs[option]) {
             response = <TerminalOutput>{t("tema.uso")}</TerminalOutput>;
             break;
           }
-          const nextTheme =
-            themeArgs[subCommand] ?? (theme === "dark" ? "light" : "dark");
-          setTheme(nextTheme);
-          response = (
-            <TerminalOutput>
-              {t(nextTheme === "light" ? "tema.claro_ativado" : "tema.escuro_ativado")}
-            </TerminalOutput>
-          );
+          const chosen = themeArgs[option] ?? nextTheme(theme);
+          setTheme(chosen);
+          const messages = {
+            light: "tema.claro_ativado",
+            dark: "tema.escuro_ativado",
+            galo: "tema.galo_ativado",
+          };
+          response = <TerminalOutput>{t(messages[chosen])}</TerminalOutput>;
           break;
         }
         case "recomendacoes":
@@ -406,6 +411,7 @@ function App() {
     <>
       {!booted && <BootSequence onFinish={handleBootFinish} />}
       <div className="terminal-container">
+        <GaloFundo />
         <LanguageSwitcher onLanguageChange={focusTerminalInput} />
         <Terminal
           name={terminalTitle}

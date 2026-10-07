@@ -21,7 +21,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🗓️ **cal / horario:** Mostra meus horários de aula no estilo do `cal` do Linux, com os feriados e recessos do calendário acadêmico da PUC Minas. Tem três visões: `cal --mes` (padrão), `cal --semana`, com a grade e a lista de turmas e salas, e `cal --hoje`, com a agenda do dia e a aula em andamento.
 * 🧹 **limpar:** Limpa o histórico do terminal.
-* 🌗 **tema / theme:** Alterna entre o tema escuro e o claro (`tema claro` | `tema escuro`).
+* 🌗 **tema / theme:** Troca o tema na ordem escuro → claro → galo (`tema --escuro` | `tema --claro` | `tema --galo`).
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
@@ -41,19 +41,19 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
-🌗 O portfólio tem **tema escuro e tema claro**: o escuro é o padrão, e o visitante pode trocar pelo botão sol/lua ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
+🌗 O portfólio tem **tema escuro, tema claro e tema Galo** (preto, branco e amarelo do Atlético Mineiro, com o escudo no lugar da logo e a foto de um galo no fundo): o escuro é o padrão, e o visitante pode trocar pelos botões sol, lua e galo ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
 
 ⌨️ O terminal se comporta como um **shell de verdade**:
 
 * **Histórico (↑ / ↓):** navega pelos comandos já digitados. O histórico guarda os últimos 50 comandos, ignora repetições seguidas e continua lá mesmo depois de recarregar a página (como o `~/.bash_history`).
-* **Autocomplete (Tab):** completa comandos, aliases e subcomandos (`tem` → `tema `, `tema c` → `tema claro`, `guestbook l` → `guestbook list`). Quando há mais de uma opção, **Tab duas vezes** lista todas, como no bash. Com a linha vazia, o Tab continua navegando pela página, para quem usa só o teclado.
+* **Autocomplete (Tab):** completa comandos, aliases e subcomandos (`tem` → `tema `, `tema --c` → `tema --claro`, `guestbook l` → `guestbook list`). Quando há mais de uma opção, **Tab duas vezes** lista todas, como no bash. Com a linha vazia, o Tab continua navegando pela página, para quem usa só o teclado.
 
 🔗 **Links diretos:** o portfólio pode ser aberto já executando um comando, com `?cmd=` na URL. Com `?lang=en`, abre em inglês. Ótimo para mandar para recrutadores:
 
 * [aramuni.dev/?cmd=curriculo](https://aramuni.dev/?cmd=curriculo): abre direto no currículo.
 * [aramuni.dev/?cmd=resume&lang=en](https://aramuni.dev/?cmd=resume&lang=en): abre o currículo em inglês.
 * [aramuni.dev/?cmd=cal --hoje](https://aramuni.dev/?cmd=cal%20--hoje): mostra para os alunos onde e quando é a próxima aula.
-* [aramuni.dev/?cmd=projetos](https://aramuni.dev/?cmd=projetos), [?cmd=tema claro](https://aramuni.dev/?cmd=tema%20claro), [?cmd=guestbook list](https://aramuni.dev/?cmd=guestbook%20list)...
+* [aramuni.dev/?cmd=projetos](https://aramuni.dev/?cmd=projetos), [?cmd=tema --galo](https://aramuni.dev/?cmd=tema%20--galo), [?cmd=guestbook list](https://aramuni.dev/?cmd=guestbook%20list)...
 
 O comando roda depois da sequência de boot, aparece no terminal como se tivesse sido digitado e o terminal rola até a saída dele. A leitura da URL usa o `useSearchParams` do **react-router-dom**.
 

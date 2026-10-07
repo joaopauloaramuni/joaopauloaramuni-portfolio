@@ -27,7 +27,13 @@
   transform: scale(1.1);
 }
 
-/* Botão sol/lua do tema */
+/* Botões sol / lua / galo do tema */
+.themeToggleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .themeToggle {
   display: inline-flex;
   align-items: center;
@@ -46,6 +52,10 @@
   transform: rotate(-15deg) scale(1.1);
 }
 
+.themeToggle-active {
+  color: var(--accent);
+}
+
 .themeToggle:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -54,4 +64,18 @@
 
 .switcherDivider {
   opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+  .switcherContainer {
+    gap: 8px;
+  }
+
+  .themeToggleGroup {
+    gap: 6px;
+  }
+
+  .themeToggle {
+    font-size: 19px;
+  }
 }

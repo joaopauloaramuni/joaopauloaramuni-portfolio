@@ -31,6 +31,7 @@ html {
 }
 
 .terminal-container {
+  position: relative; /* referência para o fundo do tema galo */
   height: 100%;
   overflow: hidden;
   display: flex;
@@ -110,6 +111,25 @@ html {
   .react-terminal-active-input
   .cursor {
   background: var(--cursor);
+}
+
+/* ===== Tema galo ===== */
+/* O terminal fica transparente para o galo do fundo (GaloFundo) aparecer;
+   o nome da janela e o prompt ficam no amarelo da estrela. */
+[data-theme="galo"] .react-terminal-wrapper {
+  background: transparent;
+  color: var(--text);
+}
+
+[data-theme="galo"] .terminal-container .react-terminal-wrapper:after,
+[data-theme="galo"] .react-terminal-wrapper .react-terminal-line:before {
+  color: var(--terminal-chrome);
+}
+
+[data-theme="galo"] .react-terminal-wrapper:focus-within
+  .react-terminal-active-input
+  .cursor {
+  background: var(--accent);
 }
 
 /* ===== Responsividade Geral ===== */

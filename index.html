@@ -40,8 +40,9 @@
     <script>
       // Aplica o tema salvo antes do React carregar (evita piscar o dark)
       try {
-        if (localStorage.getItem("aramuni-theme") === "light") {
-          document.documentElement.dataset.theme = "light";
+        var saved = localStorage.getItem("aramuni-theme");
+        if (saved === "light" || saved === "galo") {
+          document.documentElement.dataset.theme = saved;
         }
       } catch (e) {}
     </script>

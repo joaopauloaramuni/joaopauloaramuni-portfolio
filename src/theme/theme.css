@@ -3,6 +3,9 @@
    ---------------------------------------------------------------------
    • Dark é o padrão (:root) e mantém as cores originais do site.
    • Light só sobrescreve os valores, ativado por <html data-theme="light">.
+   • Galo (preto, branco e amarelo do Atlético) parte do dark e sobrescreve
+     só as cores da marca, ativado por <html data-theme="galo">. As paletas
+     dos gráficos (cal, lattes, turmas...) continuam as do dark.
    • Os dois seletores também valem dentro da página: um elemento com
      data-theme="dark" ou "light" usa as cores daquele tema (o comando
      "design" usa isso para mostrar os dois temas lado a lado).
@@ -15,7 +18,8 @@
    ===================================================================== */
 
 :root,
-[data-theme="dark"] {
+[data-theme="dark"],
+[data-theme="galo"] {
   color-scheme: dark;
 
   /* Fundos e superfícies */
@@ -126,6 +130,59 @@
   --canvas-atrasada: #c98500;
   --canvas-faltando: #d95926;
   --canvas-urgente: #f87171;
+}
+
+/* Tema GALO: cores oficiais do Atlético Mineiro.
+     Amarelo #FFD503 (estrela do escudo) · Preto #000000 · Branco #FFFFFF
+   Herda do dark tudo que não está aqui (paletas dos gráficos inclusive).
+   Contrastes sobre o fundo #000000: amarelo 15:1, texto 21:1, muted 10:1. */
+[data-theme="galo"] {
+  color-scheme: dark;
+
+  --bg-page: #000000;
+  --bg-terminal: #000000;
+  --surface: #161616;
+  --surface-input: #050505;
+  --track: #1f1f1f;
+
+  --border: #3a3a3a;
+  --border-input: #4d4d4d;
+
+  --text: #ffffff;
+  --text-soft: #dcdcdc;
+  --text-muted: #b5b5b5;
+  --text-dim: #8c8c8c;
+  --terminal-chrome: #ffd503;
+  --cursor: #ffffff;
+
+  --accent: #ffd503;          /* amarelo oficial (estrela do escudo) */
+  --accent-hover: #e6c000;
+  --accent-focus: #ffe04d;
+  --link-hover: #ffe04d;
+  --on-accent: #000000;
+
+  --tag-bg: #262626;
+  --tag-text: #e6e6e6;
+
+  --highlight: #ffd503;
+  --warn: #ffd503;
+  --info: #e6e6e6;
+
+  --scrollbar-thumb: #3a3a3a;
+  --scrollbar-thumb-hover: #ffd503;
+
+  --shadow-xp-hover: 0 10px 25px -5px rgba(255, 213, 3, 0.15);
+  --shadow-project-hover: 0 20px 25px -5px rgba(255, 213, 3, 0.12),
+    0 10px 10px -5px rgba(255, 213, 3, 0.08);
+  --game-sky: #000;
+
+  --icon-school: #ffd503;
+  --icon-work: #ffd503;
+  --icon-book: #ffd503;
+  --icon-location: #ffd503;
+  --icon-mail-gmail: #ffd503;
+  --icon-mail-puc: #ffd503;
+  --icon-github: #ffffff;
 }
 
 [data-theme="light"] {
