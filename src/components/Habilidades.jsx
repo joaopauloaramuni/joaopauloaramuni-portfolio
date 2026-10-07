@@ -1,11 +1,15 @@
-import React, { useId } from "react";
+import React, { lazy, Suspense, useId } from "react";
 import { skillsData } from "../data/skillsData";
+import { globeSkills } from "../data/globeSkills";
 import { SKINS, DEFAULT_SKIN } from "../data/skillSkins";
 import { useTranslation } from "react-i18next";
 import { FaGithub } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
 import SkinsFooter from "./SkinsFooter";
 import "./Habilidades.css";
+
+// skills --globo traz o three.js: só é baixado quando o estilo é aberto
+const SkillsGlobe = lazy(() => import("./SkillsGlobe"));
 
 // Faixa de nível exibida ao lado da porcentagem
 const levelKey = (level) =>
@@ -153,6 +157,8 @@ const SKIN_LAYOUT = {
   cards: { listClass: "skills-grid", Item: CardSkill },
   lista: { listClass: "skills-list", Item: ListaSkill },
   terminal: { listClass: "skills-term", Item: TerminalSkill },
+  // globo não usa lista: renderiza o <SkillsGlobe /> (carregado sob demanda)
+  globo: { listClass: null, Item: null },
 };
 
 export default function Habilidades({ skin = DEFAULT_SKIN }) {
@@ -163,14 +169,20 @@ export default function Habilidades({ skin = DEFAULT_SKIN }) {
     <div className="habilidades-container">
       <h3 className="habilidades-titulo">{t("habilidades.titulo")}</h3>
 
-      {skillsData.length ? (
+      {skillsData.length === 0 ? (
+        <p className="habilidades-vazio">{t("habilidades.nenhuma")}</p>
+      ) : skin === "globo" ? (
+        <Suspense
+          fallback={<p className="habilidades-vazio">{t("habilidades.carregandoGlobo")}</p>}
+        >
+          <SkillsGlobe skills={globeSkills} />
+        </Suspense>
+      ) : (
         <ul className={listClass}>
           {skillsData.map((skill, idx) => (
             <Item key={skill.name} skill={skill} index={idx} />
           ))}
         </ul>
-      ) : (
-        <p className="habilidades-vazio">{t("habilidades.nenhuma")}</p>
       )}
 
       {/* Mostra os outros estilos, como a ajuda de um comando de terminal */}

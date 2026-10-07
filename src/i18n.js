@@ -391,8 +391,10 @@ const resources = {
         },
         verRepositorio: "View {{name}} repositories on GitHub",
         estilos: "Styles:",
-        skins: { terminal: "terminal", cards: "cards", lista: "list" },
-        uso: "Usage: skills [--terminal | --cards | --list] (no option opens terminal)",
+        skins: { terminal: "terminal", cards: "cards", lista: "list", globo: "globe" },
+        uso: "Usage: skills [--terminal | --cards | --list | --globe] (no option opens terminal)",
+        carregandoGlobo: "Loading the globe...",
+        globoDica: "Drag to spin · click a skill to learn more",
       },
       cal: {
         estilos: "Views:",
@@ -990,7 +992,7 @@ const resources = {
         projetos: { desc: "Displays my developed projects." },
         calendly: { desc: "Schedule a meeting with me via Calendly." },
         cal: { desc: "Shows my class schedule, cal style (cal --week | --today)." },
-        habilidades: { desc: "Show my programming skills (skills --cards | --list changes the style)." },
+        habilidades: { desc: "Show my programming skills (skills --cards | --list | --globe changes the style)." },
         spotify: { desc: "Shows what I'm listening to and recent plays." },
         wakatime: {
           desc: "Shows my coding time (wakatime --grid | --list | --cards).",
@@ -2552,8 +2554,10 @@ const resources = {
         },
         verRepositorio: "Ver repositórios de {{name}} no GitHub",
         estilos: "Estilos:",
-        skins: { terminal: "terminal", cards: "cards", lista: "lista" },
-        uso: "Uso: skills [--terminal | --cards | --lista] (sem opção, abre o terminal)",
+        skins: { terminal: "terminal", cards: "cards", lista: "lista", globo: "globo" },
+        uso: "Uso: skills [--terminal | --cards | --lista | --globo] (sem opção, abre o terminal)",
+        carregandoGlobo: "Carregando o globo...",
+        globoDica: "Arraste para girar · clique numa skill para saber mais",
       },
       cal: {
         estilos: "Visões:",
@@ -3151,7 +3155,7 @@ const resources = {
         projetos: { desc: "Exibe meus projetos desenvolvidos." },
         calendly: { desc: "Agende uma reunião comigo via Calendly." },
         cal: { desc: "Mostra meus horários de aula no estilo cal (cal --semana | --hoje)." },
-        habilidades: { desc: "Exibe minhas habilidades em programação (skills --cards | --lista muda o estilo)." },
+        habilidades: { desc: "Exibe minhas habilidades em programação (skills --cards | --lista | --globo muda o estilo)." },
         spotify: { desc: "Mostra o que estou ouvindo e últimas reproduções." },
         wakatime: {
           desc: "Mostra meu tempo de código (wakatime --grade | --lista | --cards muda o estilo).",

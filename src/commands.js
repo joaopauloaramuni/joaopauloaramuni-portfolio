@@ -77,8 +77,8 @@ export const commandList = {
   habilidades: {
     name: 'habilidades',
     aliases: ['skills'],
-    // Estilos: skills --terminal | --cards | --lista (ver data/skillSkins.js)
-    subcommands: ['--terminal', '--cards', '--lista', '--list'],
+    // Estilos: skills --terminal | --cards | --lista | --globo (ver data/skillSkins.js)
+    subcommands: ['--terminal', '--cards', '--lista', '--list', '--globo', '--globe'],
   },
   limpar: {
     name: 'limpar',

@@ -15,6 +15,8 @@
   "dependencies": {
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
     "@supabase/supabase-js": "^2.97.0",
     "country-flag-icons": "^1.6.20",
     "emailjs-com": "^3.2.0",
@@ -26,7 +28,8 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.8.2",
     "react-terminal-ui": "^1.4.0",
-    "react-type-animation": "^3.2.0"
+    "react-type-animation": "^3.2.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

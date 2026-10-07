@@ -26,7 +26,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
 * 🐙 **github:** Exibe meus repositórios usando a GitHub API.
-* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem três estilos: `skills --terminal` (padrão), `skills --cards` e `skills --lista`.
+* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem quatro estilos: `skills --terminal` (padrão), `skills --cards`, `skills --lista` e `skills --globo` (globo 3D com three.js, carregado só quando o estilo abre).
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.

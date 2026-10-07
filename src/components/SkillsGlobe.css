@@ -1,0 +1,109 @@
+/* =====================================================================
+   skills --globo (SkillsGlobe.jsx)
+   Cada ícone recebe --skill (cor do logo, de skillsData.js). No tema
+   light, --skill-ink escurece a cor para manter o contraste, como nos
+   outros estilos de Habilidades.css.
+   ===================================================================== */
+
+.skills-globe {
+  width: 100%;
+}
+
+/* Palco do globo: canvas + camada de ícones. A dica fica fora dele, então
+   os nomes das skills (que podem passar da borda) não cruzam com ela. */
+.skills-globe__stage {
+  position: relative;
+  width: 100%;
+  height: clamp(340px, 55vw, 540px);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.skills-globe__stage:active {
+  cursor: grabbing;
+}
+
+.skills-globe__layer {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.skills-globe__li {
+  display: contents;
+}
+
+.skills-globe__item {
+  --skill-ink: var(--skill);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform, opacity;
+}
+
+[data-theme="light"] .skills-globe__item {
+  --skill-ink: color-mix(in oklab, var(--skill) 58%, black);
+}
+
+/* 40px = ICON_PX em SkillsGlobe.jsx (o JS escala o item inteiro conforme a
+   profundidade; o nome é maior que o ícone para continuar legível) */
+.skills-globe__icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: var(--skill-ink);
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.skills-globe__label {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text-muted);
+  opacity: 0.85;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.skills-globe__item:hover .skills-globe__icon,
+.skills-globe__item:focus-visible .skills-globe__icon {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 14px var(--accent));
+}
+
+.skills-globe__item:hover .skills-globe__label,
+.skills-globe__item:focus-visible .skills-globe__label {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.skills-globe__item:focus-visible {
+  outline: none;
+}
+
+.skills-globe__hint {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-globe__icon,
+  .skills-globe__label {
+    transition: none;
+  }
+}
