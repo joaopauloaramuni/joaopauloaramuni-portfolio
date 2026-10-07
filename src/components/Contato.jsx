@@ -36,6 +36,8 @@ const Contato = ({ onExit }) => {
 
   // Sem a site key (.env.local vazio), o formulário funciona sem o reCAPTCHA
   const captchaEnabled = Boolean(RECAPTCHA_CONFIG.SITE_KEY);
+  // O bloco só aparece se o script do Google carregou
+  const showCaptcha = captchaEnabled && !captchaFailed;
 
   useEffect(() => {
     // Foca no campo nome quando o componente montar
@@ -192,15 +194,24 @@ const Contato = ({ onExit }) => {
           </label>
         </div>
 
-        {captchaEnabled && (
-          <ReCaptcha
-            ref={captchaRef}
-            siteKey={RECAPTCHA_CONFIG.SITE_KEY}
-            theme={theme === "light" ? "light" : "dark"}
-            language={i18n.language}
-            onChange={handleCaptchaChange}
-            onError={handleCaptchaError}
-          />
+        {/* Verificação anti-spam no estilo de um comando do terminal */}
+        {showCaptcha && (
+          <div className={`contato-verificacao${captchaToken ? " ok" : ""}`}>
+            <div className="contato-verificacao-texto">
+              <span className="contato-verificacao-comando">$ verificar --humano</span>
+              <span className="contato-verificacao-dica" aria-live="polite">
+                {captchaToken ? t("contato.captcha_ok") : t("contato.captcha_dica")}
+              </span>
+            </div>
+            <ReCaptcha
+              ref={captchaRef}
+              siteKey={RECAPTCHA_CONFIG.SITE_KEY}
+              theme={theme === "light" ? "light" : "dark"}
+              language={i18n.language}
+              onChange={handleCaptchaChange}
+              onError={handleCaptchaError}
+            />
+          </div>
         )}
 
         <button

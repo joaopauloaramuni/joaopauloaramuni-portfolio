@@ -329,6 +329,8 @@ const resources = {
         enviando: "⏳ Sending your message...",
         enviando_botao: "Sending...",
         captcha_pendente: "🤖 Please confirm you're not a robot.",
+        captcha_dica: "# confirm you're human to send",
+        captcha_ok: "✔ human verified",
         captcha_indisponivel:
           "⚠️ The anti-spam check couldn't load. Please email me directly.",
       },
@@ -2496,6 +2498,8 @@ const resources = {
         enviando: "⏳ Enviando sua mensagem...",
         enviando_botao: "Enviando...",
         captcha_pendente: "🤖 Confirme que você não é um robô.",
+        captcha_dica: "# confirme que você é humano para enviar",
+        captcha_ok: "✔ humano verificado",
         captcha_indisponivel:
           "⚠️ A verificação anti-spam não carregou. Me mande um email direto.",
       },

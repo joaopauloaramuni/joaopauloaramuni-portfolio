@@ -95,17 +95,82 @@ textarea:focus {
   background: var(--accent);
 }
 
-/* reCAPTCHA v2: centralizado e com a altura reservada (78px no tamanho
-   normal, 144px no compacto) para o formulário não pular quando ele carrega */
-.contato-captcha {
+/* Bloco "terminal" do reCAPTCHA v2: o comando à esquerda e a caixa do
+   Google à direita, num quadro tracejado no estilo dos campos */
+.contato-verificacao {
   display: flex;
-  justify-content: center;
-  min-height: 78px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background: var(--surface-input);
+  transition: border-color 0.3s ease;
 }
 
+/* Desafio resolvido: o quadro fica verde, como um campo em foco */
+.contato-verificacao.ok {
+  border-color: var(--accent);
+}
+
+.contato-verificacao-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  font-size: 0.95rem;
+}
+
+.contato-verificacao-comando {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.contato-verificacao-dica {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.contato-verificacao.ok .contato-verificacao-dica {
+  color: var(--accent);
+}
+
+/* O widget do Google é um iframe (304×78, com borda cinza própria) e não
+   aceita CSS. A caixa recorta 1px de cada lado, escondendo a borda cinza, e
+   arredonda os cantos. */
+.contato-captcha {
+  flex-shrink: 0;
+  width: 302px;
+  height: 76px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* Desloca o widget 1px para cima e para a esquerda: a caixa de 302×76 corta
+   a borda cinza dos quatro lados */
+.contato-captcha > div > div {
+  margin: -1px 0 0 -1px;
+}
+
+/* Telas estreitas: o comando em cima e a caixa embaixo, centralizada */
+@media (max-width: 699px) {
+  .contato-verificacao {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+  }
+
+  .contato-captcha {
+    align-self: center;
+  }
+}
+
+/* Celular: widget compacto (164×144) */
 @media (max-width: 479px) {
   .contato-captcha {
-    min-height: 144px;
+    width: 162px;
+    height: 142px;
   }
 }
 
@@ -151,5 +216,7 @@ textarea:focus {
 @media (max-width: 768px) {
   .box-container {
     padding: 1.5rem;
+    /* Sem isto, padding e borda somam aos 90% e a caixa passa da tela */
+    box-sizing: border-box;
   }
 }
