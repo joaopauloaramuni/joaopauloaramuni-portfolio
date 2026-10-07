@@ -147,8 +147,8 @@ textarea:focus {
   border-radius: 6px;
 }
 
-/* Desloca o widget 1px para cima e para a esquerda: a caixa de 302×76 corta
-   a borda cinza dos quatro lados */
+/* Desloca o widget 1px para cima e para a esquerda: a caixa de 300×74
+   (156×136 no celular) corta a borda cinza dos quatro lados */
 .contato-captcha > div > div {
   margin: -1px 0 0 -1px;
 }
