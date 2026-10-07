@@ -184,7 +184,7 @@ function App() {
       </TerminalInput>
     );
 
-    const args = input.toLowerCase().trim().split(" ");
+    const args = input.toLowerCase().trim().split(/\s+/);
     const userInput = args[0];
     const subCommand = args[1];
     const command = Object.values(commandList).find(
