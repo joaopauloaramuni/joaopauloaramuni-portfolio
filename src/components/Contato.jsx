@@ -8,12 +8,16 @@ import {
   FaDiscord,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import "./Contato.css";
 import EMAILJS_CONFIG from "../config/emailJsConfig";
 import RECAPTCHA_CONFIG from "../config/recaptchaConfig";
 import ReCaptcha from "./ReCaptcha";
 import { useTheme } from "../theme/themeContext";
+
+// blockHeadless: o EmailJS recusa envios de navegadores automatizados
+// (headless), o jeito mais comum de robôs dispararem formulários
+const EMAILJS_OPTIONS = { publicKey: EMAILJS_CONFIG.PUBLIC_KEY, blockHeadless: true };
 
 // Limites dos campos (o EmailJS aceita até 50 kB por envio no plano gratuito)
 const MAX_NOME = 100;
@@ -109,7 +113,7 @@ const Contato = ({ onExit }) => {
           time: time,
           ...(captchaEnabled && { "g-recaptcha-response": captchaToken }),
         },
-        EMAILJS_CONFIG.PUBLIC_KEY
+        EMAILJS_OPTIONS
       );
 
       // 2) Notificação para mim. Sem token: o Google só aceita conferir cada
@@ -124,7 +128,7 @@ const Contato = ({ onExit }) => {
           title: `Nova mensagem do site de: ${nome}`, // assunto do email
           time: time,
         },
-        EMAILJS_CONFIG.PUBLIC_KEY
+        EMAILJS_OPTIONS
       );
 
       setStatus("contato.sucesso");
@@ -198,7 +202,7 @@ const Contato = ({ onExit }) => {
         {showCaptcha && (
           <div className={`contato-verificacao${captchaToken ? " ok" : ""}`}>
             <div className="contato-verificacao-texto">
-              <span className="contato-verificacao-comando">$ verificar --humano</span>
+              <span className="contato-verificacao-comando">{t("contato.captcha_comando")}</span>
               <span className="contato-verificacao-dica" aria-live="polite">
                 {captchaToken ? t("contato.captcha_ok") : t("contato.captcha_dica")}
               </span>

@@ -6,6 +6,8 @@ const resources = {
       comando: {
         nao_reconhecido: "Command not recognized:",
         ver_ajuda: "Type 'help' to see the options.",
+        carregando: "Loading...",
+        falha_carregar: "Couldn't open this command. Reload the page and try again.",
       },
       tema: {
         claro_ativado: "Light theme enabled. Type 'theme --dark' to go back.",
@@ -329,6 +331,7 @@ const resources = {
         enviando: "⏳ Sending your message...",
         enviando_botao: "Sending...",
         captcha_pendente: "🤖 Please confirm you're not a robot.",
+        captcha_comando: "$ verify --human",
         captcha_dica: "# confirm you're human to send",
         captcha_ok: "✔ human verified",
         captcha_indisponivel:
@@ -352,6 +355,7 @@ const resources = {
         uso: "Usage:",
         nome_label: "Your name",
         mensagem_label: "Your message",
+        enviando: "Sending your message...",
         sucesso: "Message sent successfully!",
         erro: "Error sending message.",
         voltar_terminal: "Back to terminal",
@@ -627,6 +631,7 @@ const resources = {
           celulaZero: "No contributions on {{data}}",
           melhorDoPeriodo: "Best day: {{texto}}",
           porAno: "Contributions per year",
+          semAnos: "No contributions recorded yet.",
           porDia: "By day of the week",
           contribuicoes_one: "{{valor}} contribution",
           contribuicoes_other: "{{valor}} contributions",
@@ -955,6 +960,21 @@ const resources = {
       },
       calendly: {
         titulo: "Book a meeting via Calendly",
+        carregando: "Loading the calendar...",
+      },
+      curriculo: {
+        titulo: "Resume",
+        paginas_one: "{{count}} page",
+        paginas_other: "{{count}} pages",
+        zoom: "Zoom",
+        zoom_menos: "Zoom out",
+        zoom_mais: "Zoom in",
+        zoom_ajustar: "Fit to width",
+        baixar: "Download PDF",
+        abrir: "Open in new tab",
+        arquivo: "Resume-Joao-Paulo-Aramuni.pdf",
+        carregando: "Loading the PDF...",
+        erro: "Couldn't display the PDF here. Download it or open it in a new tab using the buttons above.",
       },
       premios: {
         titulo: "Awards",
@@ -2174,6 +2194,8 @@ const resources = {
       comando: {
         nao_reconhecido: "Comando não reconhecido:",
         ver_ajuda: "Digite 'ajuda' para ver as opções.",
+        carregando: "Carregando...",
+        falha_carregar: "Não foi possível abrir este comando. Recarregue a página e tente de novo.",
       },
       tema: {
         claro_ativado: "Tema claro ativado. Digite 'tema --escuro' para voltar.",
@@ -2498,6 +2520,7 @@ const resources = {
         enviando: "⏳ Enviando sua mensagem...",
         enviando_botao: "Enviando...",
         captcha_pendente: "🤖 Confirme que você não é um robô.",
+        captcha_comando: "$ verificar --humano",
         captcha_dica: "# confirme que você é humano para enviar",
         captcha_ok: "✔ humano verificado",
         captcha_indisponivel:
@@ -2521,6 +2544,7 @@ const resources = {
         uso: "Uso:",
         nome_label: "Seu nome",
         mensagem_label: "Sua mensagem",
+        enviando: "Enviando sua mensagem...",
         sucesso: "Mensagem enviada com sucesso!",
         erro: "Erro ao enviar mensagem.",
         voltar_terminal: "Voltar ao terminal",
@@ -2799,6 +2823,7 @@ const resources = {
           celulaZero: "Nenhuma contribuição em {{data}}",
           melhorDoPeriodo: "Melhor dia: {{texto}}",
           porAno: "Contribuições por ano",
+          semAnos: "Nenhuma contribuição registrada ainda.",
           porDia: "Por dia da semana",
           contribuicoes_one: "{{valor}} contribuição",
           contribuicoes_other: "{{valor}} contribuições",
@@ -3127,6 +3152,21 @@ const resources = {
       },
       calendly: {
         titulo: "Agende uma reunião pelo Calendly",
+        carregando: "Carregando a agenda...",
+      },
+      curriculo: {
+        titulo: "Currículo",
+        paginas_one: "{{count}} página",
+        paginas_other: "{{count}} páginas",
+        zoom: "Zoom",
+        zoom_menos: "Diminuir o zoom",
+        zoom_mais: "Aumentar o zoom",
+        zoom_ajustar: "Ajustar à largura",
+        baixar: "Baixar PDF",
+        abrir: "Abrir em nova aba",
+        arquivo: "Curriculo-Joao-Paulo-Aramuni.pdf",
+        carregando: "Carregando o PDF...",
+        erro: "Não foi possível mostrar o PDF aqui. Baixe ou abra em uma nova aba pelos botões acima.",
       },
       premios: {
         titulo: "Prêmios",

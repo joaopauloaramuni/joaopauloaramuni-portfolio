@@ -107,24 +107,7 @@
   font-family: inherit;
 }
 
-.btn-voltar-terminal {
-  background: var(--accent);
-  color: var(--on-accent);
-  border: none;
-  padding: 0.8rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 12px;
-  font-family: inherit; /* botões também não herdam */
-  font-size: inherit;
-  width: fit-content;
-}
-
-.btn-voltar-terminal:hover {
-  background: var(--accent-hover);
-}
+/* .btn-voltar-terminal fica em BotaoVoltar.css (compartilhado com o jogo) */
 
 /* Responsividade */
 
@@ -175,9 +158,5 @@
   /* iOS dá zoom automático em inputs com fonte menor que 16px */
   .cli-input {
     font-size: 16px;
-  }
-
-  .btn-voltar-terminal {
-    width: 100%;
   }
 }

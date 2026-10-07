@@ -13,22 +13,7 @@
   touch-action: manipulation;
 }
 
-.btn-voltar-terminal {
-  width: 99vw;
-  max-width: 600px;
-  background: var(--accent);
-  color: var(--on-accent);
-  border: none;
-  padding: 0.8rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn-voltar-terminal:hover {
-  background: var(--accent-hover);
-}
+/* .btn-voltar-terminal fica em BotaoVoltar.css (compartilhado com o guestbook) */
 
 @media (max-width: 768px) {
   #game {

@@ -51,6 +51,21 @@ export function situacaoDe(tarefa, agora) {
   return prazo >= agora ? "aberta" : "vencida";
 }
 
+// Próximo instante, a partir de agora, em que alguma tarefa vence (ou troca
+// de prazo, nas que têm mais de um): o painel do "canvas" se atualiza nele, e
+// a próxima entrega troca no segundo do prazo, sem esperar o relógio de 30 s
+export function proximoPrazo(tarefas, agora) {
+  let proximo = null;
+  for (const tarefa of tarefas) {
+    const prazos = tarefa.prazos?.length ? tarefa.prazos : tarefa.prazo ? [tarefa.prazo] : [];
+    for (const iso of prazos) {
+      const ms = Date.parse(iso);
+      if (ms >= agora && (proximo === null || ms < proximo)) proximo = ms;
+    }
+  }
+  return proximo;
+}
+
 // Quanto falta: "urgente" (até 24 h), "perto" (até 3 dias), "semana" (até 7)
 // ou "longe". Vencida ou sem prazo: null.
 export function urgenciaDe(tarefa, agora) {

@@ -4,10 +4,11 @@ import ProjectCard from "./ProjectCard";
 import "./Projetos.css";
 import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
 import { fetchGitHub } from "../lib/githubApi";
+import { githubPaths } from "../lib/githubPaths";
 
 const ProjetosGitHub = () => {
   const { t } = useTranslation();
-  const { USERNAME, PER_PAGE } = GITHUB_API_CONFIG;
+  const { USERNAME } = GITHUB_API_CONFIG;
 
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,9 +19,8 @@ const ProjetosGitHub = () => {
         // Direto na API, no limite do visitante; se ele acabar, vai pelo
         // proxy /api/github, que tem o token do site (ver lib/githubApi.js).
         // Os topics já vêm na resposta padrão da API.
-        const data = await fetchGitHub(
-          `/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`
-        );
+        // O caminho vem de lib/githubPaths.js: o proxy só aceita os de lá
+        const data = await fetchGitHub(githubPaths.recentRepos());
         const filteredRepos = data.filter((repo) => !repo.fork);
 
         // Imagem de prévia que o GitHub gera para cada repositório. O
@@ -49,7 +49,7 @@ const ProjetosGitHub = () => {
     }
 
     fetchRepos();
-  }, [USERNAME, PER_PAGE]);
+  }, [USERNAME]);
 
   return (
     <div className="projeto-container">

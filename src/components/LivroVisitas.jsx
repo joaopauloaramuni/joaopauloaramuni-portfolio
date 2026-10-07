@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabase";
 import "./LivroVisitas.css";
-import emailjs from "emailjs-com";
+import "./BotaoVoltar.css";
+import emailjs from "@emailjs/browser";
 import EMAILJS_CONFIG from "../config/emailJsConfig";
 
 const LivroVisitas = ({ mode = "home", onExit }) => {
@@ -15,6 +16,10 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [step, setStep] = useState("name");
+  // Trava de envio: o Enter apertado duas vezes rápido (antes de o Supabase
+  // responder) chamava o handleSubmit duas vezes e gravava a mensagem em dobro.
+  // Ref, e não state, porque o segundo Enter chega antes de o React renderizar.
+  const sending = useRef(false);
 
   useEffect(() => {
     if (mode === "list") {
@@ -49,6 +54,9 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   }
 
   async function handleSubmit() {
+    if (sending.current) return;
+    sending.current = true;
+
     const now = new Date();
     const time = now.toLocaleString();
 
@@ -57,6 +65,9 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
       setStep("error");
       return;
     }
+
+    // Enquanto grava, o campo some e aparece "enviando..."
+    setStep("sending");
 
     // Salva no Supabase
     const { error } = await supabase
@@ -81,7 +92,7 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
           title: `Nova mensagem registrada no guestbook por: ${name}`,
           time: time,
         },
-        EMAILJS_CONFIG.PUBLIC_KEY
+        { publicKey: EMAILJS_CONFIG.PUBLIC_KEY, blockHeadless: true }
       )
       .then(
         () => {
@@ -204,6 +215,10 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
                 />
               </div>
             </>
+          )}
+
+          {step === "sending" && (
+            <p className="cli-hint">{t("guestbook.enviando")}</p>
           )}
 
           {step === "done" && (

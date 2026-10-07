@@ -1,0 +1,31 @@
+/* Botão "Voltar ao terminal" do jogo e do guestbook.
+   Fica num arquivo só, importado pelos dois: com os comandos carregados sob
+   demanda, cada um traz o próprio CSS, e duas definições diferentes da mesma
+   classe deixariam o botão com cara diferente conforme a ordem em que os
+   comandos foram abertos. As regras são as que valiam antes, somando as
+   duas definições antigas (FlappyPlaneGame.css e LivroVisitas.css). */
+.btn-voltar-terminal {
+  width: fit-content;
+  max-width: 600px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: inherit; /* botões não herdam a fonte */
+  font-size: inherit;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 12px;
+}
+
+.btn-voltar-terminal:hover {
+  background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+  .btn-voltar-terminal {
+    width: 100%;
+  }
+}

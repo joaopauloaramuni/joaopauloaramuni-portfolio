@@ -26,11 +26,11 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).
 * 🐙 **github:** Exibe meus repositórios usando a GitHub API.
-* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem quatro estilos: `skills --terminal` (padrão), `skills --cards`, `skills --lista` e `skills --globo` (globo 3D com three.js, carregado só quando o estilo abre).
+* 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem quatro estilos: `skills --terminal` (padrão), `skills --cards`, `skills --lista` e `skills --globo` (globo 3D com three.js, carregado só quando o estilo abre e desmontado quando sai da tela, para liberar o WebGL).
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
 * ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
-* 📄 **curriculo:** Exibe meu currículo com visualização em PDF.
+* 📄 **curriculo:** Exibe meu currículo em PDF, com zoom, download e abertura em nova aba (react-pdf, carregado só quando o comando roda).
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
 * 👥 **turmas / acompanhamento / ti:** Acompanhamento de turmas de TI (Trabalhos Interdisciplinares). Compara os grupos que eu oriento em TI:II e TI:V pelos repositórios no GitHub, sem contar os professores: linhas de código, linguagens, commits por semana, equilíbrio entre os integrantes, pull requests, issues e o resumo do README de cada projeto. Tem um gráfico por opção: `turmas --resumo` (padrão), `turmas --codigo`, `turmas --linguagens`, `turmas --ritmo`, `turmas --equilibrio`, `turmas --prs`, `turmas --projetos` e `turmas --tudo`, e filtros por disciplina, campus e grupo (`turmas ti5 coreu --ritmo`, `turmas uaiport`). Os dados vêm do `npm run turmas`.
 * 📚 **canvas / tarefas / prazos / entregas:** Tarefas das minhas disciplinas no Canvas: a próxima entrega em destaque, com contagem regressiva, os prazos do semestre e quantos alunos já entregaram cada tarefa (no prazo, atrasadas, faltando e a corrigir). Tem uma seção por opção: `canvas --resumo` (padrão), `canvas --tarefas`, `canvas --agenda` (tarefas, eventos do calendário do Canvas e feriados da PUC, dia a dia) e `canvas --tudo`, e filtros por disciplina, curso, campus e turma (`canvas diw --tarefas`, `canvas cc`, `canvas ti5 coreu`). Os dados vêm do `npm run canvas`: a chave da API do Canvas nunca vai para o site.
@@ -104,7 +104,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
 
 4. **Serviços externos (à direita)**
    - Em laranja, as APIs acessadas pelo proxy: WakaTime, komarev e views-counter.
-   - Em verde, os serviços chamados direto do navegador: GitHub API, GitHub Contributions, OpenGraph, helio-github-stats, Spotify, Last.fm, Calendly, unpkg, EmailJS e Supabase (com o PostgreSQL por trás).
+   - Em verde, os serviços chamados direto do navegador: GitHub API, GitHub Contributions, OpenGraph, helio-github-stats, Spotify, Last.fm, Calendly, unpkg, EmailJS e Supabase (com o PostgreSQL por trás). Duas mudanças que o diagrama ainda não mostra: o unpkg saiu (o worker do PDF.js do `curriculo` agora vem do próprio build) e o `contato` passou a carregar o Google reCAPTCHA.
    - Fora do diagrama: quando a GitHub API precisa do token (linguagens do `stats`, ou o limite do visitante acabou), o navegador chama `/api/github`, uma Vercel Function (`api/github.js`) que acrescenta o token no servidor.
 
 ### 🎨 Como ler as setas
@@ -183,20 +183,33 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 
 ## 📦 Dependências
 
-O projeto utiliza várias dependências importantes para funcionalidades específicas:
+As dependências do `package.json` e onde cada uma é usada:
 
-* **i18next & react-i18next:** Para suporte a internacionalização e múltiplos idiomas.
-* **react-icons:** Para adicionar ícones facilmente na interface.
-* **react-router-dom:** Para ler os parâmetros da URL (`?cmd=`) dos links diretos.
-* **react-terminal-ui:** Um componente de terminal React com suporte a temas claros e escuros, baseado em termynal.js.
-* **react-type-animation:** Para animações de digitação de texto.
-* **@react-pdf-viewer/core, @react-pdf-viewer/default-layout & pdfjs-dist:** Para exibir PDFs diretamente na aplicação de forma interativa e estilizada.
-* **emailjs-com**: Para enviar e-mails diretamente do frontend sem precisar de um backend próprio.
-**react-calendly: (Opcional)** Para integrar o Calendly diretamente no React, permitindo agendamento inline ou popup.
-* **@supabase/supabase-js:** Backend as a Service (BaaS) utilizado para banco de dados, autenticação e APIs REST automáticas, responsável pelo armazenamento e leitura das mensagens do Guestbook.
-* **country-flag-icons:** Bandeiras em SVG, como componentes React, para os carimbos do passaporte no comando `sobre`. Cada bandeira é importada pelo nome, então só as usadas entram no bundle.
+| Pacote | Para quê | Onde |
+| :--- | :--- | :--- |
+| **react** e **react-dom** | Biblioteca da interface (React 19) | todo o site |
+| **react-terminal-ui** | O terminal: janela, prompt, campo de digitação e linhas de saída | `App.jsx` |
+| **react-router-dom** | Lê o `?cmd=` dos links diretos (`useSearchParams`) | `main.jsx` e `App.jsx` |
+| **i18next** e **react-i18next** | Textos em português e inglês | `i18n.js` e os componentes |
+| **react-icons** | Ícones (Feather, Font Awesome, Ionicons, Tabler, Simple Icons, Octicons...) | quase todos os comandos |
+| **react-type-animation** | Animação de digitação da tela de boas-vindas | `BoasVindas.jsx` |
+| **@supabase/supabase-js** | Banco de dados do livro de visitas: lê e grava as mensagens | `guestbook` |
+| **@emailjs/browser** | Envia e-mails direto do navegador, sem back-end próprio (é o novo nome do antigo `emailjs-com`) | `contato` e aviso do `guestbook` |
+| **react-pdf** | Mostra o currículo em PDF dentro do terminal, com zoom e links clicáveis. Usa o PDF.js 5 (`pdfjs-dist`), da Mozilla. Substituiu o `@react-pdf-viewer`, que foi abandonado e dependia do PDF.js 3, afetado pela falha [CVE-2024-4367](https://github.com/advisories/GHSA-wgrm-67xf-hhpq) | `curriculo` |
+| **three**, **@react-three/fiber** e **@react-three/drei** | O globo 3D das habilidades (WebGL) | `skills --globo` |
+| **country-flag-icons** | Bandeiras em SVG dos carimbos do passaporte. Cada bandeira é importada pelo nome, então só as usadas entram no bundle | `sobre` |
 
-Essas dependências possibilitam uma experiência interativa em estilo terminal, com suporte multilíngue, persistência de dados em nuvem e sistema de notificações por e-mail.
+Ferramentas de desenvolvimento (`devDependencies`), que não vão para o site:
+
+| Pacote | Para quê |
+| :--- | :--- |
+| **vite** e **@vitejs/plugin-react** | Servidor de desenvolvimento (`npm run dev`), build (`npm run build`) e `npm run preview` |
+| **eslint**, **@eslint/js**, **eslint-plugin-react-hooks**, **eslint-plugin-react-refresh** e **globals** | Verificação do código (`npm run lint`) |
+| **@types/react** e **@types/react-dom** | Tipos do React, para o autocomplete do editor |
+
+Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
+
+> 💡 O `react-calendly` não é usado: o Calendly entra num `<iframe>` (veja [a comparação](#-diferença-entre-usar-react-calendly-e-o-embed-oficial)).
 
 -----
 
@@ -204,62 +217,116 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 
 ```text
 📦 joaopauloaramuni-portfolio
-├── 📁 api                         → Vercel Functions (rodam no servidor)
-│   ├── ⚙️ github.js               → /api/github: proxy da GitHub API com o token do site
-│   └── ⚙️ _github.js              → regras do proxy (caminhos permitidos, GraphQL, cache)
 ├── 📁 .github
-│   ├── 📁 ISSUE_TEMPLATE          → modelos de issue (bug, feature e dúvida)
+│   ├── 📁 ISSUE_TEMPLATE                 → modelos de issue: bug, sugestão e dúvida
 │   ├── 📁 workflows
-│   │   └── ⚙️ keep-supabase-awake.yml → cron a cada 12 h que mantém o Supabase ativo
+│   │   └── ⚙️ keep-supabase-awake.yml    → ping a cada 12 h que mantém o Supabase ativo (badge SupabaseAlive)
 │   ├── 💖 FUNDING.yml
 │   └── 📝 PULL_REQUEST_TEMPLATE.md
+├── 📁 api                                → Vercel Functions (rodam no servidor)
+│   ├── ⚙️ github.js                      → /api/github: proxy da GitHub API com o token do site
+│   └── ⚙️ _github.js                     → regras do proxy: caminhos aceitos, GraphQL e cache
 ├── 📁 docs
 │   └── 🖼️ diagrama-componentes-implantacao-portfolio.png
-├── 📁 public                      → arquivos servidos como estão (entram no build)
-│   ├── 📁 linkedin                → fotos das recomendações
-│   ├── 📁 logos                   → logos de empresas e instituições
-│   ├── 📄 cv-pt.pdf · cv-en.pdf   → currículo (comando curriculo)
-│   ├── 📄 lattes.pdf              → currículo Lattes (lattes --pdf)
-│   └── 🖼️ imagens                 → projetos, prêmios e prévia do link
-├── 📁 scripts
-│   ├── 🛠️ lattes.mjs              → importa o XML do Lattes (npm run lattes)
-│   ├── 🛠️ turmas.mjs              → métricas dos repositórios dos grupos (npm run turmas)
-│   └── 🛠️ canvas.mjs              → tarefas, prazos e entregas do Canvas (npm run canvas)
+├── 📁 public                             → arquivos servidos como estão (entram no build)
+│   ├── 📁 galo                           → escudo e foto de fundo do tema galo
+│   ├── 📁 linkedin                       → fotos das recomendações (recomendacoes)
+│   ├── 📁 logos                          → logos de empresas e instituições (sobre)
+│   ├── 📄 cv-pt.pdf · cv-en.pdf          → currículo (curriculo)
+│   ├── 📄 lattes.pdf                     → currículo Lattes (lattes --pdf)
+│   ├── 🖼️ aramuni-logo*.svg · aramunilogo.png → logo e favicon
+│   └── 🖼️ demais imagens                 → projetos, prêmios, avatar e prévia do link (portfolio1.png)
+├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
+│   ├── 🛠️ lattes.mjs                     → importa o XML do Lattes (npm run lattes)
+│   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
+│   └── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
 ├── 📁 src
-│   ├── 📁 assets
-│   │   └── 🔤 fonts               → Fira Code e JetBrains Mono
-│   ├── 📁 components              → um componente (.jsx + .css) por comando ou recurso
-│   ├── 📁 config                  → EmailJS, reCAPTCHA, GitHub API, GitHub Stats e WakaTime
-│   ├── 📁 data                    → conteúdo estático, skins e seções dos comandos
-│   ├── 📁 lib                     → Supabase, reCAPTCHA (carga do script), GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência, turmas e canvas
-│   ├── 📁 terminal                → autocomplete, teclas, leitura de opções e rolagem
-│   ├── 📁 theme                   → tokens de cor, contexto e ThemeProvider
-│   ├── ⚛️ main.jsx                → ponto de entrada (Router, tema e i18n)
-│   ├── ⚛️ App.jsx                 → terminal e execução dos comandos
+│   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
+│   ├── 📁 components                     → um componente (.jsx + .css) por comando ou recurso
+│   │   ├── ⚛️ BootSequence · BoasVindas  → sequência de boot e tela de boas-vindas
+│   │   ├── ⚛️ Ajuda                      → ajuda
+│   │   ├── ⚛️ SobreMim                   → sobre
+│   │   ├── ⚛️ Experiencias · ExperienceCard → experiencias
+│   │   ├── ⚛️ Projetos · ProjectCard     → projetos
+│   │   ├── ⚛️ ProjetosGitHub             → github (usa o ProjectCard)
+│   │   ├── ⚛️ Habilidades · SkillsGlobe  → skills e o globo 3D (skills --globo)
+│   │   ├── ⚛️ Recomendacoes              → recomendacoes
+│   │   ├── ⚛️ Premios                    → premios
+│   │   ├── ⚛️ Contato · ReCaptcha        → contato, com o reCAPTCHA v2
+│   │   ├── ⚛️ Calendly                   → calendly
+│   │   ├── ⚛️ Calendario                 → cal
+│   │   ├── ⚛️ Curriculo                  → curriculo (react-pdf)
+│   │   ├── ⚛️ Lattes · LattesDocencia    → lattes e lattes --docencia
+│   │   ├── ⚛️ Turmas                     → turmas
+│   │   ├── ⚛️ Canvas                     → canvas
+│   │   ├── ⚛️ GitHubStats                → stats
+│   │   ├── ⚛️ WakaTime                   → wakatime
+│   │   ├── ⚛️ Spotify                    → spotify
+│   │   ├── ⚛️ Neofetch                   → neofetch
+│   │   ├── ⚛️ DesignSystem               → design
+│   │   ├── ⚛️ FlappyPlaneGame            → game
+│   │   ├── ⚛️ LivroVisitas               → guestbook
+│   │   ├── ⚛️ LanguageSwitcher · ThemeToggle → seletor PT | EN e botões de tema (sol, lua e galo)
+│   │   ├── ⚛️ GaloFundo                  → foto de fundo do tema galo
+│   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
+│   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
+│   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (jogo e guestbook)
+│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats e WakaTime
+│   ├── 📁 data                           → conteúdo e opções de cada comando
+│   │   ├── 🗂️ sobre                      → sobreData.js
+│   │   ├── 🗂️ experiencias · projetos · premios · recomendacoes → experiencesData.js, projectsData.js, awardsData.js, recommendationsData.js
+│   │   ├── 🗂️ skills                     → skillsData.js, globeSkills.js, skillSkins.js
+│   │   ├── 🗂️ cal                        → horarioData.js, calendarioPuc.js, feriados.js, calSkins.js
+│   │   ├── 🗂️ lattes                     → lattesData.js (gerado), docenciaData.js, lattesSections.js
+│   │   ├── 🗂️ turmas                     → turmasRepos.js, turmasData.js (gerado), turmasSections.js
+│   │   ├── 🗂️ canvas                     → canvasCursos.js, canvasData.js (gerado), canvasSections.js
+│   │   ├── 🗂️ stats                      → gitHubStatsSections.js
+│   │   ├── 🗂️ wakatime                   → wakaTimeSkins.js, wakaTimeLanguages.js (ícones e cores, também no stats)
+│   │   └── 🗂️ design · boas-vindas       → designSystemData.js, brandData.js
+│   ├── 📁 lib                            → regras e buscas, sem React
+│   │   ├── 📜 githubApi.js · githubPaths.js → GitHub API (direto ou pelo proxy) e os únicos caminhos que o proxy aceita
+│   │   ├── 📜 githubStats.js             → busca e cálculos do stats (com cache, renovado a cada dia)
+│   │   ├── 📜 wakatime.js                → busca do WakaTime pelo proxy
+│   │   ├── 📜 horario.js                 → "agora" em BH, próxima aula e semana do semestre (cal)
+│   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
+│   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas
+│   │   ├── 📜 supabase.js                → cliente do Supabase (guestbook)
+│   │   └── 📜 recaptcha.js               → carrega o script do reCAPTCHA uma vez só
+│   ├── 📁 terminal                       → peças do terminal
+│   │   ├── ⌨️ useTerminalKeys.js · autocomplete.js → histórico (↑ ↓) e autocomplete (Tab)
+│   │   ├── ⌨️ parseSkin.js               → lê as opções (--cards, --tudo...)
+│   │   ├── ⌨️ terminalDom.js             → escreve no campo do terminal e controla a rolagem
+│   │   ├── ⌨️ lazyCommand.jsx · CommandFallback.jsx → comandos carregados sob demanda
+│   │   └── ⌨️ useOnScreen.js             → a saída está na tela? (pausa relógios e o globo)
+│   ├── 📁 theme                          → tokens de cor (theme.css), contexto, ThemeProvider e contraste (colorUtils.js)
+│   ├── ⚛️ main.jsx                       → ponto de entrada (Router, tema e i18n)
+│   ├── ⚛️ App.jsx                        → terminal e execução dos comandos
 │   ├── 🎨 App.css
-│   ├── ⌨️ commands.js             → comandos e aliases
-│   └── 🌐 i18n.js                 → textos em pt-BR e en
-├── 🔐 .env.example                → modelo das variáveis (VITE_* e os tokens que ficam no servidor)
+│   ├── ⌨️ commands.js                    → comandos, aliases e opções do Tab
+│   └── 🌐 i18n.js                        → textos em pt-BR e en
+├── 🔐 .env.example                       → modelo das variáveis (VITE_* e os tokens que ficam no servidor)
 ├── 🙈 .gitignore
 ├── 🐳 .dockerignore
-├── 🐳 Dockerfile                  → build com Node + NGINX
-├── 🔀 nginx.conf                  → proxy de /api/* no container (igual ao vercel.json)
-├── ▲ vercel.json                  → rewrites de /api/* na Vercel
-├── ⚡ vite.config.js              → build do Vite e proxy no npm run dev
+├── 🐳 Dockerfile                         → build com Node + NGINX
+├── 🔀 nginx.conf                         → proxy de /api/* e tipos de arquivo no container (igual ao vercel.json)
+├── ▲ vercel.json                         → rewrites de /api/* na Vercel
+├── ⚡ vite.config.js                     → build do Vite, proxy e /api/github no npm run dev
 ├── 🧹 eslint.config.js
-├── 🌐 index.html                  → HTML base, metatags e prévia do link
+├── 🌐 index.html                         → HTML base, metatags e prévia do link
 ├── 📦 package.json
 ├── 🔒 package-lock.json
 ├── 🤝 CONTRIBUTING.md
-├── 📜 LICENSE                     → MIT
+├── 📜 LICENSE                            → MIT
 └── 📘 README.md
 ```
+
+Os arquivos marcados como **(gerado)** saem dos scripts `npm run lattes`, `npm run turmas` e `npm run canvas`: não edite à mão, rode o script de novo.
 
 -----
 
 ## 📌 Diferença entre usar `react-calendly` e o embed oficial
 
-Existem duas formas principais de integrar o Calendly em uma aplicação React:
+Existem três formas principais de integrar o Calendly em uma aplicação React:
 
 ### 1. Usando `react-calendly`
 
@@ -286,37 +353,45 @@ import { InlineWidget } from "react-calendly";
 
 ---
 
-### 2. Usando o embed oficial via script (o método que estamos usando)
+### 2. Usando o embed oficial via script
 
-* Carregamos o **script oficial do Calendly** diretamente no React.
+* Carrega o **script oficial do Calendly** (`widget.js`), que procura os elementos `.calendly-inline-widget` e cria o iframe dentro deles.
 * Permite usar atributos como `data-resize` para ajuste automático da altura.
-* Mais flexível: possibilita pré-preencher campos, rastrear eventos e personalizar o comportamento do widget.
-* Melhor responsividade em dispositivos móveis, sem espaço extra.
-
-**Exemplo de uso:**
 
 ```jsx
-import React, { useEffect } from "react";
-
 useEffect(() => {
   const script = document.createElement("script");
   script.src = "https://assets.calendly.com/assets/external/widget.js";
   script.async = true;
   document.body.appendChild(script);
 }, []);
-
-<div
-  className="calendly-inline-widget"
-  data-url="https://calendly.com/aramuni"
-  data-resize="true"
-  style={{ minWidth: "320px", height: "700px" }}
-></div>
 ```
+
+⚠️ Era o método usado aqui até a v8, mas num terminal ele tem um problema: cada execução do `calendly` acrescentava **mais um** `<script>` na página, e o script redesenhava todas as agendas já abertas.
+
+### 3. Usando o iframe direto (o método que estamos usando)
+
+O `widget.js` só cria um `<iframe>` com a página de agendamento, então o `Calendly.jsx` faz isso ele mesmo, sem script nenhum:
+
+```jsx
+const url = new URL("https://calendly.com/aramuni");
+// Os mesmos parâmetros que o widget.js põe: avisam o Calendly que a página está embutida
+url.searchParams.set("embed_domain", window.location.hostname);
+url.searchParams.set("embed_type", "Inline");
+
+<div className="calendly-inline-widget">
+  <iframe src={url.toString()} title="Agende uma reunião pelo Calendly" />
+</div>
+```
+
+* Nada de script de terceiros rodando na página: rodar o comando várias vezes só cria um iframe por saída.
+* Um aviso "Carregando a agenda..." fica por cima até o iframe carregar.
 
 **Resumo:**
 
 * `react-calendly`: mais rápido e integrado ao React, porém menos flexível.
-* Embed oficial: mais controle, melhor responsividade e recursos avançados, mas requer incluir o script manualmente.
+* Embed oficial: mais controle e recursos avançados, mas o script precisa ser incluído uma vez só.
+* Iframe direto: o mais simples e leve, sem script; é o que o portfólio usa.
 
 -----
 
@@ -696,6 +771,49 @@ Para testar os links diretos, abra `http://localhost:5173/?cmd=projetos` ou `htt
 
 -----
 
+## ⚡ Comandos sob demanda
+
+O bundle inicial leva só o que aparece logo de cara: o terminal, a sequência de boot, as boas-vindas e a `ajuda`. Cada comando vira um arquivo próprio (JavaScript e CSS), baixado na primeira vez que roda.
+
+| Bundle inicial (build de produção) | Tamanho | Com gzip |
+| :--- | ---: | ---: |
+| Antes (tudo junto, inclusive o visualizador de PDF e o Supabase) | 1,66 MB | 495 kB |
+| Agora | 595 kB | 196 kB |
+
+O que mais pesava era o visualizador de PDF do `curriculo` (quase 550 kB), que agora só chega quando o comando roda.
+
+### Como funciona
+
+```jsx
+// src/App.jsx
+import lazyCommand from "./terminal/lazyCommand";
+
+const SobreMim = lazyCommand(() => import("./components/SobreMim"));
+const Lattes = lazyCommand(() => import("./components/Lattes"), {
+  fallbackKey: "lattes.carregando", // texto enquanto o código chega
+});
+
+response = <SobreMim />; // igual a antes
+```
+
+- **"Carregando..."**: enquanto o código chega, a saída mostra uma linha de aviso no idioma atual.
+- **Pré-carregamento**: depois do boot, com o navegador ocioso, os comandos leves já são baixados em segundo plano (lista `PRELOAD` no `App.jsx`), então o primeiro uso de cada um abre na hora. Ficam de fora o `curriculo`, o `lattes`, o `turmas` e o `canvas`, mais pesados, e quem está com a economia de dados do celular ligada (Save-Data).
+- **Falha no download**: se a rede cair ou um deploy novo apagar os arquivos da versão aberta, a saída mostra "Não foi possível abrir este comando" em vez de derrubar o terminal, e a próxima execução tenta de novo.
+- **Detecção do jogo, contato e guestbook**: o componente devolvido pelo `lazyCommand` é sempre o mesmo, então o App continua sabendo quando pausar o terminal (`line.type === FlappyPlaneGame`).
+
+Para criar um comando novo, importe o componente com `lazyCommand` no `App.jsx` e, se ele for leve, coloque-o na lista `PRELOAD`.
+
+> 🎨 Com o CSS também carregado sob demanda, uma classe definida em dois arquivos ficaria com a cara do último comando aberto. Por isso o botão "Voltar ao terminal", do jogo e do guestbook, fica num arquivo só (`BotaoVoltar.css`).
+
+### Saídas antigas não ficam trabalhando
+
+As saídas continuam montadas no terminal: rodar `canvas` dez vezes deixa dez painéis lá em cima. Quem tem relógio, timer ou animação usa o `useOnScreen` (`src/terminal/useOnScreen.js`) para parar quando sai da tela:
+
+- **`canvas`** e **`cal`**: o relógio para fora da tela e atualiza na hora ao voltar. No `canvas`, o painel também se atualiza no segundo de cada prazo, então a próxima entrega troca na hora, sem ficar até 30 s mostrando `00:00:00`.
+- **`skills --globo`**: fora da tela, o globo para de renderizar e, 1,5 s depois, desmonta o `<Canvas>`, liberando o contexto WebGL (o Chrome aceita só uns 16 ao mesmo tempo; antes, depois de umas 16 execuções o globo mais antigo ficava em branco). Ao rolar de volta, ele remonta no mesmo giro em que estava.
+
+-----
+
 ## 📬 Guia de configuração do EmailJS
 
 Este guia descreve o passo a passo para configurar o envio de e-mails no seu projeto React usando EmailJS. Com o EmailJS, você pode enviar até 500 e-mails por dia gratuitamente.
@@ -716,6 +834,11 @@ Além do reCAPTCHA, o formulário tem um **campo isca (honeypot)** invisível: q
 
 ```javascript
 // Resumo do sendEmail em src/components/Contato.jsx
+import emailjs from "@emailjs/browser";
+
+// blockHeadless: o EmailJS recusa envios de navegadores automatizados (robôs)
+const EMAILJS_OPTIONS = { publicKey: EMAILJS_CONFIG.PUBLIC_KEY, blockHeadless: true };
+
 await emailjs.send(
   EMAILJS_CONFIG.SERVICE_ID,
   EMAILJS_CONFIG.TEMPLATE_ID_FOR_SENDER,
@@ -724,14 +847,14 @@ await emailjs.send(
     title: "Recebemos sua mensagem!",
     "g-recaptcha-response": captchaToken, // conferido pelo EmailJS
   },
-  EMAILJS_CONFIG.PUBLIC_KEY
+  EMAILJS_OPTIONS
 );
 
 await emailjs.send(
   EMAILJS_CONFIG.SERVICE_ID,
   EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
   { name, email, message, time, title: `Nova mensagem do site de: ${name}` },
-  EMAILJS_CONFIG.PUBLIC_KEY
+  EMAILJS_OPTIONS
 );
 ```
 
@@ -1018,8 +1141,11 @@ export default GITHUB_API_CONFIG;
 O proxy fica na pasta `api/`, que a Vercel transforma em funções que rodam no servidor:
 
 - `api/github.js`: a Vercel Function. Responde em `/api/github?path=/users/...` (REST) e `/api/github?graphql=languages` (GraphQL) e acrescenta o token.
-- `api/_github.js`: as regras, compartilhadas com o `vite.config.js` (o `_` no nome impede a Vercel de criar uma rota para ele). O proxy só faz leitura, só aceita os caminhos que o `github` e o `stats` usam, todos do mesmo usuário, e o texto da consulta GraphQL fica no servidor (o navegador só manda o nome). Assim ninguém consegue usar o seu token para outra coisa.
-- As respostas ficam 10 minutos no cache da CDN da Vercel (`s-maxage=600`): o token é gasto uma vez para todos os visitantes.
+- `api/_github.js`: as regras, compartilhadas com o `vite.config.js` (o `_` no nome impede a Vercel de criar uma rota para ele). O texto da consulta GraphQL fica no servidor (o navegador só manda o nome), e é o servidor que percorre as páginas de 100 repositórios.
+- `src/lib/githubPaths.js`: monta **todos** os caminhos que o `github` e o `stats` pedem. O navegador chama a API com essas funções, e o proxy só aceita exatamente esses caminhos: perfil, repositórios (até 10 páginas), as buscas de PRs, issues e commits com as datas de hoje (ontem e amanhã também, pela diferença de relógio perto da meia-noite) e as linguagens dos repositórios do próprio usuário. Assim ninguém consegue usar o seu token para outra coisa.
+- As respostas ficam 10 minutos no cache da CDN da Vercel (`s-maxage=600`) e 10 minutos na memória da função: o token é gasto uma vez por caminho para todos os visitantes.
+
+> 🛡️ **Por que tão fechado?** Até a v8 o proxy aceitava qualquer caminho que *começasse* do jeito certo. Bastava variar a URL (`/users/<usuário>?x=1`, `?x=2`...) para cada pedido escapar do cache da CDN e gastar uma chamada do limite do token (5.000 por hora). Agora parâmetro extra, página fora do limite, data inventada ou cursor da GraphQL voltam `400`, e mesmo variações de escrita da mesma URL (`%2F` no lugar de `/`) caem no cache da memória.
 
 ---
 
@@ -1046,15 +1172,13 @@ O proxy fica na pasta `api/`, que a Vercel transforma em funções que rodam no 
 No componente `ProjetosGitHub.jsx`:
 
 ```javascript
-import GITHUB_API_CONFIG from "../config/gitHubApiConfig";
 import { fetchGitHub } from "../lib/githubApi";
+import { githubPaths } from "../lib/githubPaths";
 
-const { USERNAME, PER_PAGE } = GITHUB_API_CONFIG;
-
-// Direto na API; se o limite do visitante acabar, repete pelo /api/github
-const data = await fetchGitHub(
-  `/users/${USERNAME}/repos?sort=updated&per_page=${PER_PAGE}`
-);
+// Direto na API; se o limite do visitante acabar, repete pelo /api/github.
+// O caminho vem de lib/githubPaths.js: o proxy só aceita os caminhos de lá.
+const data = await fetchGitHub(githubPaths.recentRepos());
+// → /users/joaopauloaramuni/repos?sort=updated&per_page=100
 ```
 
 #### Explicação do fetch:
@@ -1256,11 +1380,12 @@ vite.config.js                 → o mesmo proxy no npm run dev / preview, e o /
 nginx.conf                     → o mesmo proxy no container Docker (NGINX)
 api/
   github.js                    → Vercel Function /api/github: acrescenta o GITHUB_SITE_TOKEN no servidor
-  _github.js                   → caminhos permitidos, consulta GraphQL das linguagens e cache
+  _github.js                   → aceita só os caminhos do githubPaths.js; consulta GraphQL das linguagens e cache
 src/
   config/gitHubStatsConfig.js  → usuário, fuso, repositórios escondidos e repositórios com badge
   lib/githubStats.js           → busca (com cache), sequências, horários e leitura dos badges
   lib/githubApi.js             → chamadas à GitHub API: direto ou pelo proxy /api/github
+  lib/githubPaths.js           → os caminhos da GitHub API que o site usa (os únicos que o proxy aceita)
   data/gitHubStatsSections.js  → grupos de gráficos e nomes aceitos (PT e EN)
   data/wakaTimeLanguages.js    → ícone e cores de cada linguagem (compartilhado com o wakatime)
   components/GitHubStats.jsx   → os grupos de gráficos (resumo é o padrão)
@@ -1401,7 +1526,7 @@ A exceção é a docência: o XML do Lattes não traz os semestres de cada disci
 
 Atualizou o Lattes? Exporte de novo e rode o mesmo comando. Como o `lattesData.js` tem um item por linha, o diff do commit mostra só o que entrou ou mudou. Para um curso ou disciplina nova aparecer traduzida em inglês, acrescente a chave em `lattes.cursos` ou `lattes.disciplinas` no `i18n.js`; sem a chave, o nome aparece como está no Lattes.
 
-O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob demanda (`React.lazy` no `App.jsx`): o código só é baixado na primeira vez que o comando roda.
+O `lattes` traz cerca de 90 kB de dados, então o componente é carregado sob demanda (`lazyCommand` no `App.jsx`, veja [Comandos sob demanda](#-comandos-sob-demanda)): o código só é baixado na primeira vez que o comando roda.
 
 ### 4️⃣ Docência (lattes --docencia)
 
@@ -1832,14 +1957,17 @@ jobs:
     env:
       # Substitua pela URL do seu projeto no Supabase
       SUPABASE_URL: https://qbghyeghcmraernvnxsn.supabase.co
-      
+
       # Esta chave deve ser criada no seu repositório em Settings →  Secrets and Variables → Actions
       SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
 
     steps:
       - name: Ping Supabase
         run: |
-          curl "$SUPABASE_URL/rest/v1/guestbook_messages?apikey=$SUPABASE_API_KEY"
+          curl -fsS --retry 3 --retry-delay 10 --max-time 30 \
+            -H "apikey: $SUPABASE_API_KEY" \
+            "$SUPABASE_URL/rest/v1/guestbook_messages?select=id&limit=1" \
+            -o /dev/null -w "Supabase respondeu HTTP %{http_code}\n"
 ```
 
 ----
@@ -1849,13 +1977,17 @@ jobs:
 - `cron: "0 */12 * * *"` → executa **a cada 12 horas**
 - `workflow_dispatch` → permite rodar manualmente no **GitHub Actions**
 
-Essa requisição acessa a tabela:
+Essa requisição lê uma linha da tabela:
 
 ```texto
-/rest/v1/guestbook_messages
+/rest/v1/guestbook_messages?select=id&limit=1
 ```
 
 Registrando atividade no banco e impedindo que o projeto pause.
+
+- **`-f`**: se o Supabase responder com erro (4xx ou 5xx, como acontece com o projeto pausado ou a chave errada), o `curl` falha, o job fica vermelho e o badge **SupabaseAlive** também. Sem o `-f`, o `curl` terminava "com sucesso" com qualquer resposta, e o badge ficava verde mesmo com o banco fora do ar.
+- **`--retry 3`**: tenta de novo em falhas passageiras (timeout, 5xx, 429) antes de desistir.
+- **`-H "apikey: ..."`**: a chave vai no cabeçalho, e não na URL (que aparece em logs).
 
 ----
 
@@ -2108,6 +2240,13 @@ server {
         proxy_pass https://views-counter.vercel.app/badge;
     }
 
+    # Worker do PDF.js (assets/pdf.worker.min-*.mjs, do comando "curriculo"):
+    # o navegador só aceita um worker em módulo servido como JavaScript, e nem
+    # toda versão do NGINX traz o .mjs no mime.types
+    location ~* \.mjs$ {
+        types { application/javascript mjs; }
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }
@@ -2119,6 +2258,7 @@ server {
 - **SNI:** `proxy_ssl_server_name on` envia o nome do site no handshake TLS. Destinos que dividem o mesmo IP, como o `views-counter.vercel.app`, dependem disso para responder;  
 - **Query do `repo-views`:** o `?pageId=...&type=total` é repassado exatamente como veio. O views-counter conta cada forma de codificar o `pageId` como um contador diferente, então ele não pode ser recodificado no caminho;  
 - **`try_files`:** qualquer caminho que não seja um arquivo devolve o `index.html`. Os links diretos usam `/?cmd=`, então isso é só uma garantia;  
+- **`.mjs`:** o worker do PDF.js (visualizador do `curriculo`) é um módulo `.mjs`. Se o NGINX o servir como `application/octet-stream`, o navegador recusa o worker e o PDF não abre; o `location ~* \.mjs$` garante o tipo JavaScript;  
 - **DNS na inicialização:** o NGINX resolve o endereço dos destinos quando inicia. Se o container subir sem acesso à internet, o NGINX não sobe;  
 - **Trocar de usuário:** o mapeamento fica em três lugares (`vercel.json`, `vite.config.js` via arquivos de `src/config/` e `nginx.conf`). Ao trocar de usuário, atualize os três.  
 
@@ -2245,8 +2385,9 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **react-terminal-ui:** [GitHub](https://github.com/jonmbake/react-terminal-ui) | [Demo](https://jonmbake.github.io/react-terminal-ui/demo/)
 * **termynal.js (estilo do terminal):** [GitHub](https://github.com/ines/termynal)
 * **i18next & react-i18next (internacionalização):** [i18next Docs](https://www.i18next.com/) | [react-i18next Docs](https://react.i18next.com/)
-* **@react-pdf-viewer/core & @react-pdf-viewer/default-layout:** [Documentação oficial](https://react-pdf-viewer.dev/)
-* **pdfjs-dist (renderização de PDFs):** [Mozilla PDF.js GitHub](https://github.com/mozilla/pdfjs-dist)
+* **react-pdf:** [Documentação oficial](https://github.com/wojtekmaj/react-pdf)
+* **pdfjs-dist (renderização de PDFs, usado pelo react-pdf):** [Mozilla PDF.js GitHub](https://github.com/mozilla/pdfjs-dist)
+* **@emailjs/browser:** [Documentação oficial](https://www.emailjs.com/docs/sdk/installation/)
 * **react-calendly**: (Opcional) [NPM](https://www.npmjs.com/package/react-calendly) | [GitHub](https://github.com/tcampb/react-calendly)
 * **EmailJS:** [Documentação oficial](https://www.emailjs.com/docs/) | [Dashboard](https://dashboard.emailjs.com/)
 * **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)

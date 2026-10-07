@@ -6,10 +6,52 @@
   color: var(--text);
 }
 
+/* Nada passa da largura do terminal: sem isso, o card de 875px e as três
+   imagens lado a lado criavam rolagem horizontal no celular */
+.spotify-container img,
+.spotify-container iframe {
+  max-width: 100%;
+}
+
+.spotify-card {
+  height: auto;
+}
+
+.spotify-player {
+  display: block;
+  border: none;
+  border-radius: 12px;
+}
+
+/* As três imagens de "tocadas recentemente" lado a lado (antes numa
+   <table>); em telas estreitas, uma embaixo da outra */
+.spotify-recentes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.spotify-recentes img {
+  display: block;
+  width: auto;
+  height: 400px;
+}
+
 @media (max-width: 768px) {
   .spotify-container {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .spotify-recentes {
+    justify-content: center;
+  }
+
+  /* No celular as imagens encolhem para caber na largura */
+  .spotify-recentes img {
+    height: auto;
   }
 }

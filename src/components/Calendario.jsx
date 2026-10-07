@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SkinsFooter from "./SkinsFooter";
 import { AULAS, CAMPI, DISCIPLINAS } from "../data/horarioData";
@@ -19,6 +19,7 @@ import {
   somarDias,
   statusDaAula,
 } from "../lib/horario";
+import useOnScreen from "../terminal/useOnScreen";
 import "./Calendario.css";
 
 // =====================================================================
@@ -30,13 +31,24 @@ import "./Calendario.css";
 // letivos vêm do calendário da PUC (data/calendarioPuc.js e data/feriados.js).
 // =====================================================================
 
-// Atualiza o "agora" a cada 30 s: a aula em andamento troca sozinha
-function useAgora() {
+// Atualiza o "agora" a cada 30 s: a aula em andamento troca sozinha. Fora
+// da tela (as saídas antigas continuam montadas no terminal), para; ao
+// voltar, atualiza na hora.
+function useAgora(ativo) {
   const [agora, setAgora] = useState(() => agoraEmBH());
+  const parado = useRef(false);
   useEffect(() => {
+    if (!ativo) {
+      parado.current = true;
+      return;
+    }
+    if (parado.current) {
+      parado.current = false;
+      setAgora(agoraEmBH());
+    }
     const id = setInterval(() => setAgora(agoraEmBH()), 30_000);
     return () => clearInterval(id);
-  }, []);
+  }, [ativo]);
   return agora;
 }
 
@@ -564,9 +576,10 @@ function CalHoje({ agora }) {
 }
 
 export default function Calendario({ skin = "mes" }) {
-  const agora = useAgora();
+  const ref = useRef(null);
+  const agora = useAgora(useOnScreen(ref));
   return (
-    <div className="cal">
+    <div className="cal" ref={ref}>
       {skin === "mes" && <CalMes agora={agora} />}
       {skin === "semana" && <CalSemana agora={agora} />}
       {skin === "hoje" && <CalHoje agora={agora} />}

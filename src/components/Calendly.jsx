@@ -1,27 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Calendly.css";
 
+const CALENDLY_URL = "https://calendly.com/aramuni";
+
+// A página de agendamento entra num <iframe>, do mesmo jeito que o script
+// oficial do Calendly (widget.js) faria. Antes, cada "calendly" acrescentava
+// mais um <script> do widget na página e ele redesenhava todas as agendas
+// já abertas; agora não há script nenhum para carregar.
+// embed_domain e embed_type são os parâmetros que o widget.js põe na URL:
+// avisam o Calendly que a página está embutida.
+const embedUrl = () => {
+  const url = new URL(CALENDLY_URL);
+  url.searchParams.set("embed_domain", window.location.hostname);
+  url.searchParams.set("embed_type", "Inline");
+  return url.toString();
+};
+
 export default function Calendly() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
+  const [carregado, setCarregado] = useState(false);
 
   return (
     <div>
       <h3 className="calendly-title">{t("calendly.titulo")}</h3>
-      <div
-        className="calendly-inline-widget"
-        data-url="https://calendly.com/aramuni"
-      ></div>
-
-      {/*import { InlineWidget } from "react-calendly";*/}
-      {/*<InlineWidget url="https://calendly.com/aramuni" styles={{ height: "100vh" }} /> */}
+      <div className="calendly-inline-widget">
+        {!carregado && (
+          <p className="calendly-carregando" role="status">
+            {t("calendly.carregando")}
+          </p>
+        )}
+        <iframe
+          src={embedUrl()}
+          title={t("calendly.titulo")}
+          className="calendly-iframe"
+          onLoad={() => setCarregado(true)}
+        />
+      </div>
     </div>
   );
 }

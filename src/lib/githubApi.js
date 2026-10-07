@@ -65,9 +65,10 @@ export async function fetchGitHub(path, { auth = false } = {}) {
   return response.json();
 }
 
-// Consulta GraphQL pelo nome (o texto dela fica no servidor, em api/_github.js)
-export async function fetchGitHubGraphQL(name, { cursor } = {}) {
-  const response = await viaProxy({ graphql: name, ...(cursor && { cursor }) });
+// Consulta GraphQL pelo nome. O texto dela fica no servidor (api/_github.js),
+// que também percorre as páginas e devolve tudo numa resposta só.
+export async function fetchGitHubGraphQL(name) {
+  const response = await viaProxy({ graphql: name });
   if (!response) throw new GitHubProxyUnavailableError("GitHub GraphQL: proxy indisponível");
   if (isRateLimited(response)) {
     throw new GitHubRateLimitError(`GitHub GraphQL: HTTP ${response.status}`);

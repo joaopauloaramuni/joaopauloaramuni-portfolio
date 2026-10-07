@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import {
   FiAlertTriangle,
@@ -42,6 +42,7 @@ import {
   meioDia,
   partesDoTempo,
   prazoAtual,
+  proximoPrazo,
   resumoDoCurso,
   separarTarefas,
   situacaoDe,
@@ -51,6 +52,7 @@ import {
   urgenciaDe,
 } from "../lib/canvas";
 import { isLastTerminalOutput, scrollLastCommandToTop } from "../terminal/terminalDom";
+import useOnScreen from "../terminal/useOnScreen";
 import SkinsFooter from "./SkinsFooter";
 import "./Canvas.css";
 
@@ -72,13 +74,42 @@ import "./Canvas.css";
 // última vez que o script rodou.
 // =====================================================================
 
-// Hora de agora, renovada de tempos em tempos (contagem regressiva)
-function useAgora(intervalo) {
+// Hora de agora, renovada de tempos em tempos (contagem regressiva).
+//   ativo    false enquanto a saída está fora da tela: as saídas antigas do
+//            terminal continuam montadas, e sem isso cada "canvas" já rodado
+//            seguiria redesenhando o painel a cada 30 s (e o relógio a cada 1 s)
+//   tarefas  renova também no instante do próximo prazo delas, para a tarefa
+//            vencida sair do destaque na hora, e não até 30 s depois
+function useAgora(intervalo, { ativo = true, tarefas = null } = {}) {
   const [agora, setAgora] = useState(() => Date.now());
+  const parado = useRef(false);
+
   useEffect(() => {
-    const id = setInterval(() => setAgora(Date.now()), intervalo);
-    return () => clearInterval(id);
-  }, [intervalo]);
+    if (!ativo) {
+      parado.current = true;
+      return;
+    }
+    // Voltou para a tela: a hora guardada pode estar velha
+    if (parado.current) {
+      parado.current = false;
+      setAgora(Date.now());
+    }
+    let id;
+    const agendar = () => {
+      const agoraMs = Date.now();
+      let espera = intervalo;
+      const proximo = tarefas ? proximoPrazo(tarefas, agoraMs) : null;
+      // +50 ms: renova logo depois do prazo, quando a tarefa já venceu
+      if (proximo !== null) espera = Math.min(espera, proximo - agoraMs + 50);
+      id = setTimeout(() => {
+        setAgora(Date.now());
+        agendar();
+      }, espera);
+    };
+    agendar();
+    return () => clearTimeout(id);
+  }, [intervalo, ativo, tarefas]);
+
   return agora;
 }
 
@@ -379,8 +410,10 @@ function LegendaDasEntregas() {
 
 function Relogio({ prazo }) {
   const { t } = useTranslation();
+  const ref = useRef(null);
   // Este pedaço anda de segundo em segundo; o resto do painel, de 30 em 30
-  const agora = useAgora(1000);
+  // (e no instante de cada prazo). Fora da tela, para.
+  const agora = useAgora(1000, { ativo: useOnScreen(ref) });
   const { dias, horas, minutos } = partesDoTempo(Math.max(0, prazo - agora));
   const segundos = Math.max(0, Math.floor(((prazo - agora) % 60_000) / 1000));
   const casas = [
@@ -390,7 +423,7 @@ function Relogio({ prazo }) {
     dias === 0 && { valor: String(segundos).padStart(2, "0"), unidade: t("canvas.tempo.unidades.segundos") },
   ].filter(Boolean);
   return (
-    <p className="cnv-relogio" aria-label={t("canvas.tempo.em", { tempo: textoDoTempo(t, prazo - agora) })}>
+    <p ref={ref} className="cnv-relogio" aria-label={t("canvas.tempo.em", { tempo: textoDoTempo(t, prazo - agora) })}>
       {casas.map(({ valor, unidade }) => (
         <span key={unidade} className="cnv-relogio-casa" aria-hidden="true">
           <b>{valor}</b>
@@ -403,6 +436,8 @@ function Relogio({ prazo }) {
 
 function ProximaEntrega({ abertas, cursoPorId, agora, f }) {
   const { t } = useTranslation();
+  // id único por saída: rodar "canvas" duas vezes não repete o id no DOM
+  const nomeId = useId();
   const [tarefa] = abertas;
   if (!tarefa) {
     return (
@@ -419,7 +454,7 @@ function ProximaEntrega({ abertas, cursoPorId, agora, f }) {
   const urgencia = urgenciaDe(tarefa, agora);
   const mesmoDia = abertas.slice(1).filter((outra) => diaDe(prazoAtual(outra, agora)) === diaDe(prazo)).length;
   return (
-    <section className={`cnv-proxima ${urgencia}`} aria-labelledby="cnv-proxima-nome">
+    <section className={`cnv-proxima ${urgencia}`} aria-labelledby={nomeId}>
       <p className="cnv-proxima-rotulo">
         <FiFlag aria-hidden="true" />
         {t("canvas.proxima.titulo")}
@@ -427,7 +462,7 @@ function ProximaEntrega({ abertas, cursoPorId, agora, f }) {
         <Selos tarefa={tarefa} />
       </p>
       <a
-        id="cnv-proxima-nome"
+        id={nomeId}
         className="cnv-proxima-nome"
         href={tarefa.url}
         target="_blank"
@@ -814,8 +849,8 @@ function textoDoFiltro(filtros, t) {
 export default function Canvas({ section = DEFAULT_SECTION, filtros }) {
   const { t } = useTranslation();
   const f = useFormatters();
-  const agora = useAgora(30_000);
   const panelRef = useRef(null);
+  const naTela = useOnScreen(panelRef);
 
   // Na primeira vez o código chega depois do comando (App.jsx usa lazy):
   // se a saída ainda é a última do terminal, leva o comando para o topo
@@ -823,10 +858,17 @@ export default function Canvas({ section = DEFAULT_SECTION, filtros }) {
     if (isLastTerminalOutput(panelRef.current)) scrollLastCommandToTop();
   }, []);
 
-  const cursos = aplicarFiltros(TODOS_OS_CURSOS, filtros);
-  const ids = new Set(cursos.map((c) => c.id));
-  const tarefas = TODAS_AS_TAREFAS.filter((tarefa) => ids.has(tarefa.curso));
-  const eventos = TODOS_OS_EVENTOS.filter((evento) => ids.has(evento.curso));
+  // Os filtros não mudam depois que o comando roda: calcula uma vez só
+  const { cursos, tarefas, eventos } = useMemo(() => {
+    const filtrados = aplicarFiltros(TODOS_OS_CURSOS, filtros);
+    const ids = new Set(filtrados.map((c) => c.id));
+    return {
+      cursos: filtrados,
+      tarefas: TODAS_AS_TAREFAS.filter((tarefa) => ids.has(tarefa.curso)),
+      eventos: TODOS_OS_EVENTOS.filter((evento) => ids.has(evento.curso)),
+    };
+  }, [filtros]);
+  const agora = useAgora(30_000, { ativo: naTela, tarefas });
   const cursoPorId = new Map(cursos.map((c) => [c.id, c]));
   const sections = section === ALL_SECTIONS ? SECTIONS : [section];
   const filtro = semFiltro(filtros) ? "" : textoDoFiltro(filtros, t);

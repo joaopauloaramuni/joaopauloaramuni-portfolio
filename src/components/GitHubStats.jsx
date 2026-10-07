@@ -217,6 +217,8 @@ const indexOfMax = (values) =>
 // de leitura; a tabela escondida leva os mesmos valores ao leitor de tela.
 function Columns({ items, value, readout, axis, cap, caption, className = "" }) {
   const [active, setActive] = useState(null);
+  // Sem itens não há coluna para destacar (items[0] seria undefined)
+  if (items.length === 0) return null;
   const values = items.map(value);
   const max = Math.max(...values, 0) || 1;
   const peak = indexOfMax(values);
@@ -780,6 +782,9 @@ function PorAno({ years, today, f }) {
   return (
     <div className="ghs-bloco">
       <h5 className="ghs-bloco-titulo">{t("stats.atividade.porAno")}</h5>
+      {/* A API de contribuições pode responder sem nenhum dia (conta nova,
+          renomeada ou falha parcial): mostra um aviso em vez de quebrar a seção */}
+      {years.length === 0 && <p className="ghs-resumo">{t("stats.atividade.semAnos")}</p>}
       <Columns
         className="anos"
         items={years}

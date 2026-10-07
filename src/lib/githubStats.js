@@ -8,12 +8,23 @@ import GITHUB_STATS_CONFIG, {
   repoViewsPageId,
   hasRepoViewsBadge,
 } from "../config/gitHubStatsConfig";
+import {
+  addDays,
+  dateKey,
+  githubPaths,
+  lastYear,
+  MAX_REPO_PAGES,
+  weekdayOf,
+} from "./githubPaths";
 
 // Busca e calcula as estatísticas do comando "stats" (ver config/gitHubStatsConfig.js).
 //
 // Cada fonte é buscada uma vez por visita, como no lib/wakatime.js: trocar de
 // gráfico (stats --resumo → --atividade) reaproveita os dados. Se der erro, o
-// cache é limpo para tentar de novo no próximo comando.
+// cache é limpo para tentar de novo no próximo comando. As fontes que dependem
+// do "hoje" (contribuições, sequências, buscas dos últimos 12 meses) vencem
+// quando o dia muda em Belo Horizonte: com a aba aberta depois da meia-noite,
+// o próximo "stats" busca de novo, em vez de continuar no dia anterior.
 //
 // Limites da GitHub API sem token, por IP do visitante: 60 chamadas por hora e
 // 10 buscas (/search) por minuto. Uma visita que abre todos os gráficos usa
@@ -25,7 +36,6 @@ import GITHUB_STATS_CONFIG, {
 //     compartilhada de faculdade. O limite do token (5.000/h e 30 buscas/min)
 //     é dividido por todos os visitantes, por isso ele fica de reserva.
 const {
-  USERNAME,
   TIME_ZONE,
   CONTRIBUTIONS_URL,
   PROFILE_VIEWS_PATH,
@@ -43,10 +53,13 @@ export { GitHubRateLimitError };
 
 // Guarda a promessa da busca e o resultado. Buscas demoradas avisam o
 // progresso (ex.: 12 de 43 repositórios) para quem estiver inscrito.
-function createSource(loader) {
+// daily: o resultado vale só no dia (em BH) em que foi buscado.
+function createSource(loader, { daily = false } = {}) {
   let request = null;
   let data = null;
   let progress = null;
+  let day = null; // dia da busca (fontes diárias)
+  let generation = 0; // descarta respostas de uma busca já vencida
   const listeners = new Set();
 
   const setProgress = (value) => {
@@ -54,20 +67,34 @@ function createSource(loader) {
     listeners.forEach((listener) => listener(value));
   };
 
+  const expired = () => daily && day !== null && day !== dateKey(new Date());
+
   return {
-    peek: () => data,
+    peek: () => (expired() ? null : data),
     progress: () => progress,
     subscribe(listener) {
       listeners.add(listener);
       return () => listeners.delete(listener);
     },
     load() {
+      if (expired()) {
+        request = null;
+        data = null;
+        progress = null;
+      }
       if (!request) {
+        const current = ++generation;
+        day = dateKey(new Date());
         request = loader(setProgress)
-          .then((value) => (data = value))
+          .then((value) => {
+            if (current === generation) data = value;
+            return value;
+          })
           .catch((error) => {
-            request = null;
-            progress = null;
+            if (current === generation) {
+              request = null;
+              progress = null;
+            }
             throw error;
           });
       }
@@ -77,59 +104,29 @@ function createSource(loader) {
 }
 
 /* =====================================================================
-   Datas no fuso configurado
+   Datas no fuso configurado (ver lib/githubPaths.js)
    ===================================================================== */
 
-// Date → "2026-10-03" no fuso do config (o "hoje" de Belo Horizonte)
-export const dateKey = (date, timeZone = TIME_ZONE) =>
-  new Intl.DateTimeFormat("en-CA", {
-    timeZone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(date);
-
-// "2026-10-03" + 1 → "2026-10-04". Meio-dia UTC: nenhum fuso muda o dia.
-export function addDays(key, days) {
-  const date = new Date(`${key}T12:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
-}
-
-// 0 = domingo … 6 = sábado
-export const weekdayOf = (key) => new Date(`${key}T12:00:00Z`).getUTCDay();
-
-// Divide o intervalo [from, to] em `parts` pedaços de dias seguidos
-export function splitDays(from, to, parts) {
-  const total =
-    Math.round((Date.parse(`${to}T12:00:00Z`) - Date.parse(`${from}T12:00:00Z`)) / 864e5) + 1;
-  const size = Math.ceil(total / parts);
-  const ranges = [];
-  for (let start = 0; start < total; start += size) {
-    ranges.push({
-      from: addDays(from, start),
-      to: addDays(from, Math.min(start + size, total) - 1),
-    });
-  }
-  return ranges;
-}
+export { addDays, dateKey, weekdayOf };
+export { splitDays } from "./githubPaths";
 
 /* =====================================================================
    GitHub REST API
    ===================================================================== */
 
-// Lista paginada (100 por página) até a última página
-async function githubList(path) {
+// Repositórios do usuário, 100 por página, até a última (no máximo
+// MAX_REPO_PAGES, o mesmo limite que o proxy aceita)
+async function githubRepos() {
   const items = [];
-  for (let page = 1; ; page++) {
-    const batch = await github(`${path}&per_page=100&page=${page}`);
+  for (let page = 1; page <= MAX_REPO_PAGES; page++) {
+    const batch = await github(githubPaths.repos(page));
     items.push(...batch);
-    if (batch.length < 100) return items;
+    if (batch.length < 100) break;
   }
+  return items;
 }
 
-const searchCount = async (query) =>
-  (await github(`/search/${query}&per_page=1`)).total_count;
+const searchCount = async (path) => (await github(path)).total_count;
 
 // Roda fn em todos os itens, no máximo `limit` ao mesmo tempo, mantendo a ordem
 async function mapLimit(items, limit, fn) {
@@ -188,10 +185,7 @@ export function normalizeProfile(user, repos) {
 }
 
 export const profileSource = createSource(async () => {
-  const [user, repos] = await Promise.all([
-    github(`/users/${USERNAME}`),
-    githubList(`/users/${USERNAME}/repos?type=owner&sort=pushed`),
-  ]);
+  const [user, repos] = await Promise.all([github(githubPaths.user()), githubRepos()]);
   return normalizeProfile(user, repos);
 });
 
@@ -218,9 +212,9 @@ export function sumLanguages(maps, unit) {
   return { unit, total, items };
 }
 
-// Bytes de cada linguagem em todos os repositórios públicos, numa chamada só
-// (100 repositórios por página). A consulta fica no servidor, junto do token
-// (CONSULTAS.languages em api/_github.js).
+// Bytes de cada linguagem em todos os repositórios públicos, numa chamada só.
+// A consulta fica no servidor, junto do token (CONSULTAS.languages em
+// api/_github.js), e é o servidor que percorre as páginas de 100 repositórios.
 
 // Resposta da GraphQL → um mapa { linguagem: bytes } por repositório
 export function languageMapsFromGraphQL(nodes) {
@@ -234,24 +228,15 @@ export function languageMapsFromGraphQL(nodes) {
 }
 
 async function languagesFromGraphQL() {
-  const nodes = [];
-  let cursor = null;
-  do {
-    const data = await fetchGitHubGraphQL("languages", { cursor });
-    const page = data.user.repositories;
-    nodes.push(...page.nodes);
-    cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null;
-  } while (cursor);
-  return languageMapsFromGraphQL(nodes);
+  const data = await fetchGitHubGraphQL("languages");
+  return languageMapsFromGraphQL(data.user.repositories.nodes);
 }
 
 // Plano B, se a GraphQL falhar: uma chamada REST por repositório, pelo proxy
 async function languagesFromRest(repos, onProgress) {
   let done = 0;
   return mapLimit(repos, REPO_VIEWS_CONCURRENCY, async (repo) => {
-    const languages = await github(`/repos/${USERNAME}/${repo.name}/languages`, {
-      auth: true,
-    });
+    const languages = await github(githubPaths.languages(repo.name), { auth: true });
     onProgress({ done: ++done, total: repos.length });
     return languages;
   });
@@ -290,16 +275,18 @@ export const languagesSource = createSource(async (onProgress) => {
    PRs, issues e commits dos últimos 12 meses (busca do GitHub)
    ===================================================================== */
 
-export const countsSource = createSource(async () => {
-  const today = dateKey(new Date());
-  const since = addDays(today, -364);
-  const [pullRequests, issues, commits] = await Promise.all([
-    searchCount(`issues?q=author:${USERNAME}+type:pr`),
-    searchCount(`issues?q=author:${USERNAME}+type:issue`),
-    searchCount(`commits?q=author:${USERNAME}+author-date:${since}..${today}`),
-  ]);
-  return { pullRequests, issues, commits, since };
-});
+export const countsSource = createSource(
+  async () => {
+    const today = dateKey(new Date());
+    const [pullRequests, issues, commits] = await Promise.all([
+      searchCount(githubPaths.pullRequests()),
+      searchCount(githubPaths.issues()),
+      searchCount(githubPaths.commitCount(today)),
+    ]);
+    return { pullRequests, issues, commits, since: lastYear(today).from };
+  },
+  { daily: true }
+);
 
 /* =====================================================================
    Horários dos commits
@@ -375,23 +362,19 @@ export function commitClock(samples, timeZone = TIME_ZONE) {
   };
 }
 
-export const commitClockSource = createSource(async () => {
-  const today = dateKey(new Date());
-  const ranges = splitDays(addDays(today, -364), today, 4);
-  const pages = await Promise.all(
-    ranges.map(({ from, to }) =>
-      github(
-        `/search/commits?q=author:${USERNAME}+author-date:${from}..${to}&per_page=100`
-      )
-    )
-  );
-  return commitClock(
-    pages.map((page) => ({
-      total: page.total_count ?? 0,
-      dates: (page.items ?? []).map((item) => item.commit?.author?.date),
-    }))
-  );
-});
+export const commitClockSource = createSource(
+  async () => {
+    const today = dateKey(new Date());
+    const pages = await Promise.all(githubPaths.commitClock(today).map((path) => github(path)));
+    return commitClock(
+      pages.map((page) => ({
+        total: page.total_count ?? 0,
+        dates: (page.items ?? []).map((item) => item.commit?.author?.date),
+      }))
+    );
+  },
+  { daily: true }
+);
 
 /* =====================================================================
    Contribuições: total, por ano, sequências e calendário
@@ -507,15 +490,18 @@ export function summarizeContributions(contributions, today) {
   };
 }
 
-export const contributionsSource = createSource(async () => {
-  const response = await fetch(CONTRIBUTIONS_URL);
-  if (!response.ok) throw new Error(`Contribuições: HTTP ${response.status}`);
-  const { contributions } = await response.json();
-  if (!Array.isArray(contributions)) {
-    throw new Error("Contribuições: formato inesperado");
-  }
-  return summarizeContributions(contributions, dateKey(new Date()));
-});
+export const contributionsSource = createSource(
+  async () => {
+    const response = await fetch(CONTRIBUTIONS_URL);
+    if (!response.ok) throw new Error(`Contribuições: HTTP ${response.status}`);
+    const { contributions } = await response.json();
+    if (!Array.isArray(contributions)) {
+      throw new Error("Contribuições: formato inesperado");
+    }
+    return summarizeContributions(contributions, dateKey(new Date()));
+  },
+  { daily: true }
+);
 
 /* =====================================================================
    Visitas: perfil (komarev) e repositórios (views-counter), via proxy

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import Terminal, {
   ColorMode,
   TerminalInput,
@@ -13,26 +13,9 @@ import {
   scrollLastCommandToTop,
   scrollTerminalToBottom,
 } from "./terminal/terminalDom";
-import Projetos from "./components/Projetos";
-import ProjetosGitHub from "./components/ProjetosGitHub";
-import Experiencias from "./components/Experiencias";
-import SobreMim from "./components/SobreMim";
+import lazyCommand from "./terminal/lazyCommand";
 import Ajuda from "./components/Ajuda";
-import Habilidades from "./components/Habilidades";
-import Spotify from "./components/Spotify";
-import WakaTime from "./components/WakaTime";
-import GitHubStats from "./components/GitHubStats";
-import Contato from "./components/Contato";
-import Curriculo from "./components/Curriculo";
 import BoasVindas from "./components/BoasVindas";
-import Calendly from "./components/Calendly";
-import Calendario from "./components/Calendario";
-import Recomendacoes from "./components/Recomendacoes";
-import Premios from "./components/Premios";
-import FlappyPlaneGame from "./components/FlappyPlaneGame";
-import LivroVisitas from "./components/LivroVisitas";
-import Neofetch from "./components/Neofetch";
-import DesignSystem from "./components/DesignSystem";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import GaloFundo from "./components/GaloFundo";
@@ -47,13 +30,69 @@ import { parseTurmas } from "./data/turmasSections";
 import { parseCanvas } from "./data/canvasSections";
 import { GRUPOS } from "./data/turmasRepos";
 
-// O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas): o código dele
-// só é baixado na primeira vez que o comando roda
-const Lattes = lazy(() => import("./components/Lattes"));
-// O "turmas" traz os dados dos grupos (npm run turmas): idem
-const Turmas = lazy(() => import("./components/Turmas"));
-// O "canvas" traz as tarefas do semestre (npm run canvas): idem
-const Canvas = lazy(() => import("./components/Canvas"));
+// Os comandos são carregados sob demanda (ver terminal/lazyCommand.jsx): o
+// bundle inicial leva só o terminal, a tela de boas-vindas e a ajuda. Antes
+// ele tinha 1,66 MB, um terço só do visualizador de PDF do currículo.
+const SobreMim = lazyCommand(() => import("./components/SobreMim"));
+const Experiencias = lazyCommand(() => import("./components/Experiencias"));
+const Projetos = lazyCommand(() => import("./components/Projetos"));
+const ProjetosGitHub = lazyCommand(() => import("./components/ProjetosGitHub"));
+const Habilidades = lazyCommand(() => import("./components/Habilidades"));
+const Spotify = lazyCommand(() => import("./components/Spotify"));
+const WakaTime = lazyCommand(() => import("./components/WakaTime"));
+const GitHubStats = lazyCommand(() => import("./components/GitHubStats"));
+const Contato = lazyCommand(() => import("./components/Contato"));
+const Calendly = lazyCommand(() => import("./components/Calendly"));
+const Calendario = lazyCommand(() => import("./components/Calendario"));
+const Recomendacoes = lazyCommand(() => import("./components/Recomendacoes"));
+const Premios = lazyCommand(() => import("./components/Premios"));
+const FlappyPlaneGame = lazyCommand(() => import("./components/FlappyPlaneGame"));
+const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
+const Neofetch = lazyCommand(() => import("./components/Neofetch"));
+const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
+// O currículo traz o react-pdf e o PDF.js (~400 kB)
+const Curriculo = lazyCommand(() => import("./components/Curriculo"));
+// O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas)
+const Lattes = lazyCommand(() => import("./components/Lattes"), {
+  fallbackKey: "lattes.carregando",
+});
+// O "turmas" traz os dados dos grupos (npm run turmas)
+const Turmas = lazyCommand(() => import("./components/Turmas"), {
+  fallbackKey: "turmas.carregando",
+});
+// O "canvas" traz as tarefas do semestre (npm run canvas)
+const Canvas = lazyCommand(() => import("./components/Canvas"), {
+  fallbackKey: "canvas.carregando",
+});
+
+// Depois do boot, com o navegador ocioso, já baixa os comandos leves: o
+// primeiro uso de cada um abre na hora, sem "Carregando...". Ficam de fora os
+// pesados e menos usados (currículo, lattes, turmas, canvas) e a economia de
+// dados do celular (Save-Data).
+const PRELOAD = [
+  SobreMim,
+  Experiencias,
+  Projetos,
+  ProjetosGitHub,
+  Habilidades,
+  Spotify,
+  WakaTime,
+  GitHubStats,
+  Contato,
+  Calendly,
+  Calendario,
+  Recomendacoes,
+  Premios,
+  FlappyPlaneGame,
+  LivroVisitas,
+  Neofetch,
+  DesignSystem,
+];
+
+const whenIdle = (fn) =>
+  "requestIdleCallback" in window
+    ? window.requestIdleCallback(fn, { timeout: 5000 })
+    : setTimeout(fn, 2000);
 
 const myPrompt = "visitante@portfolio:~$";
 const terminalTitle = "Portfolio terminal";
@@ -122,6 +161,12 @@ function App() {
     setBooted(true);
     focusTerminalInput();
   }, []);
+
+  // Terminal liberado: baixa os comandos leves em segundo plano (ver PRELOAD)
+  useEffect(() => {
+    if (!booted || navigator.connection?.saveData) return;
+    whenIdle(() => PRELOAD.forEach((command) => command.preload()));
+  }, [booted]);
 
   // Com o terminal liberado, executa o comando do link direto (?cmd=...).
   // Fica aqui, e não no handleBootFinish, porque quando o boot já rodou nesta
@@ -232,11 +277,7 @@ function App() {
             response = <TerminalOutput>{t("lattes.uso")}</TerminalOutput>;
             break;
           }
-          response = (
-            <Suspense fallback={<TerminalOutput>{t("lattes.carregando")}</TerminalOutput>}>
-              <Lattes section={section} />
-            </Suspense>
-          );
+          response = <Lattes section={section} />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
           if (section !== "pdf") keepLastCommandAtTop();
           break;
@@ -251,11 +292,7 @@ function App() {
             response = <TerminalOutput>{t("turmas.uso")}</TerminalOutput>;
             break;
           }
-          response = (
-            <Suspense fallback={<TerminalOutput>{t("turmas.carregando")}</TerminalOutput>}>
-              <Turmas {...parsed} />
-            </Suspense>
-          );
+          response = <Turmas {...parsed} />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
           keepLastCommandAtTop();
           break;
@@ -270,11 +307,7 @@ function App() {
             response = <TerminalOutput>{t("canvas.uso")}</TerminalOutput>;
             break;
           }
-          response = (
-            <Suspense fallback={<TerminalOutput>{t("canvas.carregando")}</TerminalOutput>}>
-              <Canvas {...parsed} />
-            </Suspense>
-          );
+          response = <Canvas {...parsed} />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
           keepLastCommandAtTop();
           break;
