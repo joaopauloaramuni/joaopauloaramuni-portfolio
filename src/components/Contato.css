@@ -16,7 +16,7 @@
 }
 
 .box-status{
-  height: 2rem;
+  min-height: 2rem;
 }
 
 .box-container.loaded {
@@ -84,6 +84,40 @@ textarea:focus {
 
 .botao-contato:hover {
   background: var(--accent-hover);
+}
+
+.botao-contato:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.botao-contato:disabled:hover {
+  background: var(--accent);
+}
+
+/* reCAPTCHA v2: centralizado e com a altura reservada (78px no tamanho
+   normal, 144px no compacto) para o formulário não pular quando ele carrega */
+.contato-captcha {
+  display: flex;
+  justify-content: center;
+  min-height: 78px;
+}
+
+@media (max-width: 479px) {
+  .contato-captcha {
+    min-height: 144px;
+  }
+}
+
+/* Campo isca (honeypot): fora da tela, sem display:none, que alguns robôs
+   reconhecem e pulam */
+.contato-isca {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .status-contato {

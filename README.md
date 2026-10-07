@@ -17,7 +17,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 👤 **sobre / about:** Mostra quem sou: o que faço hoje, a trajetória em duas colunas (programador por profissão, professor por vocação), a formação com os trabalhos finais, as disciplinas que lecionei, números, clientes e um pouco de mim fora do terminal (time, hobbies, séries e os carimbos no passaporte, com bandeiras).
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
-* 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS.
+* 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS, protegido por Google reCAPTCHA v2 e por um campo isca (honeypot) contra spam.
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🗓️ **cal / horario:** Mostra meus horários de aula no estilo do `cal` do Linux, com os feriados e recessos do calendário acadêmico da PUC Minas. Tem três visões: `cal --mes` (padrão), `cal --semana`, com a grade e a lista de turmas e salas, e `cal --hoje`, com a agenda do dia e a aula em andamento.
 * 🧹 **limpar:** Limpa o histórico do terminal.
@@ -124,7 +124,7 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 
 - **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda uma única função, a `api/github.js`, que só existe para o token do GitHub não ir para o navegador.
 - **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
-- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase e a public key do EmailJS. O token do GitHub (`GITHUB_SITE_TOKEN`, sem `VITE_`) fica só no servidor, na Vercel Function `api/github.js`, e nunca chega ao navegador.
+- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e a site key do reCAPTCHA (a secret key do reCAPTCHA fica no painel do EmailJS). O token do GitHub (`GITHUB_SITE_TOKEN`, sem `VITE_`) fica só no servidor, na Vercel Function `api/github.js`, e nunca chega ao navegador.
 
 -----
 
@@ -229,9 +229,9 @@ Essas dependências possibilitam uma experiência interativa em estilo terminal,
 │   ├── 📁 assets
 │   │   └── 🔤 fonts               → Fira Code e JetBrains Mono
 │   ├── 📁 components              → um componente (.jsx + .css) por comando ou recurso
-│   ├── 📁 config                  → EmailJS, GitHub API, GitHub Stats e WakaTime
+│   ├── 📁 config                  → EmailJS, reCAPTCHA, GitHub API, GitHub Stats e WakaTime
 │   ├── 📁 data                    → conteúdo estático, skins e seções dos comandos
-│   ├── 📁 lib                     → Supabase, GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência, turmas e canvas
+│   ├── 📁 lib                     → Supabase, reCAPTCHA (carga do script), GitHub API (direto ou pelo proxy), GitHub Stats, WakaTime, horários, docência, turmas e canvas
 │   ├── 📁 terminal                → autocomplete, teclas, leitura de opções e rolagem
 │   ├── 📁 theme                   → tokens de cor, contexto e ThemeProvider
 │   ├── ⚛️ main.jsx                → ponto de entrada (Router, tema e i18n)
@@ -700,70 +700,39 @@ Para testar os links diretos, abra `http://localhost:5173/?cmd=projetos` ou `htt
 
 Este guia descreve o passo a passo para configurar o envio de e-mails no seu projeto React usando EmailJS. Com o EmailJS, você pode enviar até 500 e-mails por dia gratuitamente.
 
-💡 No projeto, cada envio do formulário gera **dois e-mails distintos**:
+💡 No projeto, cada envio do formulário gera **dois e-mails distintos**, nesta ordem:
 
-1. **Email de notificação para você (FOR ME)**  
-   - Contém as informações do usuário: nome, email, mensagem e horário.  
-   - É enviado para o seu email fixo, configurado no template.  
-   - Permite que você receba todas as mensagens enviadas pelo formulário.
-
-2. **Email de confirmação para o usuário (FOR SENDER)**  
+1. **Email de confirmação para o usuário (FOR SENDER)**  
    - Contém uma mensagem de agradecimento, mostrando que a mensagem foi recebida.  
    - É enviado para o email que o usuário digitou no formulário (`{{email}}` no template).  
-   - Inclui o nome do usuário, a data/hora e pode exibir a própria mensagem como confirmação.
+   - **Leva o token do reCAPTCHA v2.** Como é o único envio que vai para um endereço digitado pelo visitante, é ele que precisa de proteção: sem o reCAPTCHA, um robô poderia usar o formulário para mandar e-mails para qualquer pessoa em seu nome. O EmailJS confere o token com o Google e recusa o envio se ele for inválido; por isso ele vai primeiro e, se falhar, nada mais é enviado.
+
+2. **Email de notificação para você (FOR ME)**  
+   - Contém as informações do usuário: nome, email, mensagem e horário.  
+   - É enviado para o seu email fixo, configurado no template.  
+   - Vai **sem** token: o Google só aceita conferir cada token uma vez, e este template também é usado pelo `guestbook add`.
+
+Além do reCAPTCHA, o formulário tem um **campo isca (honeypot)** invisível: quem o preenche (um robô) recebe "sucesso", mas nada é enviado. O botão fica desativado durante o envio, e os campos têm limite de tamanho.
 
 ```javascript
-import EMAILJS_CONFIG from "../config/emailJsConfig";
+// Resumo do sendEmail em src/components/Contato.jsx
+await emailjs.send(
+  EMAILJS_CONFIG.SERVICE_ID,
+  EMAILJS_CONFIG.TEMPLATE_ID_FOR_SENDER,
+  {
+    name, email, message, time,
+    title: "Recebemos sua mensagem!",
+    "g-recaptcha-response": captchaToken, // conferido pelo EmailJS
+  },
+  EMAILJS_CONFIG.PUBLIC_KEY
+);
 
-// Email para você (notificação)
-emailjs
-  .send(
-    EMAILJS_CONFIG.SERVICE_ID,
-    EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
-    {
-      name: nome,
-      email: email,
-      message: mensagem,
-      title: `Nova mensagem do site de: ${nome}`, // assunto do email
-      time: time,
-    },
-    EMAILJS_CONFIG.PUBLIC_KEY
-  )
-  .then(
-    () => {
-      console.log("Email para você enviado!");
-    },
-    (err) => {
-      console.error("Erro ao enviar para você:", err);
-      setStatus(t("contato.erro"));
-    }
-  );
-
-// Email de confirmação para o remetente
-emailjs
-  .send(
-    EMAILJS_CONFIG.SERVICE_ID,
-    EMAILJS_CONFIG.TEMPLATE_ID_FOR_SENDER,
-    {
-      name: nome,
-      email: email,
-      message: mensagem,
-      title: "Recebemos sua mensagem!", // assunto do email de confirmação
-      time: time,
-    },
-    EMAILJS_CONFIG.PUBLIC_KEY
-  )
-  .then(
-    () => {
-      console.log("Email de confirmação enviado ao remetente!");
-      setStatus(t("contato.sucesso"));
-      e.target.reset();
-    },
-    (err) => {
-      console.error("Erro ao enviar confirmação:", err);
-      setStatus(t("contato.erro"));
-    }
-  );
+await emailjs.send(
+  EMAILJS_CONFIG.SERVICE_ID,
+  EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
+  { name, email, message, time, title: `Nova mensagem do site de: ${name}` },
+  EMAILJS_CONFIG.PUBLIC_KEY
+);
 ```
 
 -----
@@ -968,6 +937,32 @@ export default EMAILJS_CONFIG;
 ```
 
 Agora o projeto está pronto para enviar e-mails diretamente do frontend.
+
+### 6. Proteger o formulário com o Google reCAPTCHA v2
+
+O reCAPTCHA é opcional: sem a site key, o formulário abre sem ele e envia como antes.
+
+1. Acesse o [console do reCAPTCHA](https://www.google.com/recaptcha/admin/create) e crie um site:
+   - **Tipo:** Desafio (v2) → **Caixa de seleção "Não sou um robô"**.
+   - **Domínios:** `aramuni.dev` e `localhost` (para o `npm run dev`). Se usar o domínio `*.vercel.app`, inclua também.
+2. O Google gera duas chaves:
+   - **Site key** (pública): vai para o site, na variável `VITE_RECAPTCHA_SITE_KEY` (Vercel e `.env.local`).
+   - **Secret key** (privada): **nunca** vai para o código nem para o `.env.local`. Ela fica só no EmailJS.
+3. No EmailJS, abra **Email Templates** → template **FOR SENDER** → **Settings**, marque **Enable reCAPTCHA V2 verification** e cole a **secret key**. Não marque no template FOR ME: o token só pode ser conferido uma vez, e o guestbook usa esse template sem reCAPTCHA.
+4. Na Vercel, crie a variável `VITE_RECAPTCHA_SITE_KEY` e faça um novo deploy (as variáveis `VITE_*` entram no build).
+
+```bash
+VITE_RECAPTCHA_SITE_KEY=sua_site_key_aqui
+```
+
+Como funciona no código:
+
+- `src/config/recaptchaConfig.js`: lê a site key.
+- `src/lib/recaptcha.js`: baixa o script do Google uma vez só, na primeira vez que o `contato` abre (`render=explicit`, no idioma do site).
+- `src/components/ReCaptcha.jsx`: desenha a caixa no tema do site (claro ou escuro) e no tamanho compacto no celular; avisa o token resolvido, expirado ou com erro e é limpo depois de cada envio, porque cada token vale uma vez.
+- Se o script do Google não carregar (bloqueador, firewall), o formulário avisa e pede para o visitante mandar email direto.
+
+> 💡 Para diminuir ainda mais o interesse de spammers, tire o `{{message}}` do template FOR SENDER: assim ninguém consegue usar a confirmação para entregar um texto próprio a terceiros.
 
 -----
 

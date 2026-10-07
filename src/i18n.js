@@ -326,6 +326,11 @@ const resources = {
         voltar_terminal: "Back to terminal",
         sucesso: "✅ Message sent successfully!",
         erro: "❌ Failed to send, please try again.",
+        enviando: "⏳ Sending your message...",
+        enviando_botao: "Sending...",
+        captcha_pendente: "🤖 Please confirm you're not a robot.",
+        captcha_indisponivel:
+          "⚠️ The anti-spam check couldn't load. Please email me directly.",
       },
       guestbook: {
         titulo: "📖 Guestbook",
@@ -2488,6 +2493,11 @@ const resources = {
         voltar_terminal: "Voltar ao terminal",
         sucesso: "✅ Mensagem enviada com sucesso!",
         erro: "❌ Erro ao enviar, tente novamente.",
+        enviando: "⏳ Enviando sua mensagem...",
+        enviando_botao: "Enviando...",
+        captcha_pendente: "🤖 Confirme que você não é um robô.",
+        captcha_indisponivel:
+          "⚠️ A verificação anti-spam não carregou. Me mande um email direto.",
       },
       guestbook: {
         titulo: "📖 Livro de Visitas",
