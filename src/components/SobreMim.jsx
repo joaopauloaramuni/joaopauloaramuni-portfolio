@@ -197,7 +197,7 @@ function Cabecalho() {
         <p className="sobre-cargo">{t("sobre.cargo")}</p>
         <Lema />
         <ul className="sobre-chips">
-          <li style={serie("--icon-book")}>
+          <li className="sobre-chip-idade" style={serie("--icon-book")}>
             <TbCake aria-hidden="true" />
             {t("sobre.idade", { count: IDADE })}
           </li>

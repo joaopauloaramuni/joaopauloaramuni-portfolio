@@ -1,8 +1,9 @@
 /* =====================================================================
    SOBRE — comando "sobre"
-   Mesma moldura do Lattes.css e do GitHubStats.css (borda verde, 50% da
-   largura, títulos de seção em estilo comentário de shell e dicas
-   "$ comando" que levam ao comando com os detalhes).
+   Mesma moldura do Lattes.css e do GitHubStats.css (borda verde, títulos
+   de seção em estilo comentário de shell e dicas "$ comando" que levam ao
+   comando com os detalhes), mas mais larga (80%): é o painel com mais
+   texto, e com mais largura quebra menos linha e rola menos.
    A cor de cada bloco vem de um token do theme.css, passada via style
    inline como --serie: ela marca o bloco (borda, ícone, ponto); os textos
    ficam sempre nos tokens de texto.
@@ -12,7 +13,7 @@
    Moldura
    --------------------------------------------------------------------- */
 .sobre-painel {
-  width: 50%;
+  width: 80%;
   border: 2px solid var(--accent);
   border-radius: 10px;
   margin: 1rem auto;
@@ -121,6 +122,13 @@
   transform: translateY(-0.03em);
 }
 
+/* O bolo pesa embaixo: a vela é fina e o corpo ocupa a metade de baixo do
+   ícone, então centralizado pela caixa ele parece afundado em relação ao
+   texto. Sobe mais um pouco, até a base encostar na linha de base. */
+.sobre-chips .sobre-chip-idade svg {
+  transform: translateY(-0.12em);
+}
+
 /* ---------------------------------------------------------------------
    Bio
    --------------------------------------------------------------------- */
@@ -147,7 +155,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Os quatro lado a lado: com o painel largo, em 2×2 sobraria espaço */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
@@ -868,7 +877,7 @@ a.sobre-tag:focus-visible {
    --------------------------------------------------------------------- */
 @media (max-width: 1280px) {
   .sobre-painel {
-    width: 70%;
+    width: 90%;
   }
 }
 
@@ -878,6 +887,10 @@ a.sobre-tag:focus-visible {
     width: auto;
     margin: 1rem 0.5rem;
     padding: 1.25rem 1rem 1rem;
+  }
+
+  .sobre-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sobre-cabecalho {
