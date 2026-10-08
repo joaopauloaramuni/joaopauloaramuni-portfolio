@@ -6,9 +6,9 @@
    • Galo (preto, branco e amarelo do Atlético) parte do dark e sobrescreve
      só as cores da marca, ativado por <html data-theme="galo">. As paletas
      dos gráficos (cal, lattes, turmas...) continuam as do dark.
-   • Os dois seletores também valem dentro da página: um elemento com
-     data-theme="dark" ou "light" usa as cores daquele tema (o comando
-     "design" usa isso para mostrar os dois temas lado a lado).
+   • Os seletores também valem dentro da página: um elemento com
+     data-theme="dark", "light" ou "galo" usa as cores daquele tema (o
+     comando "design" usa isso para mostrar os três temas lado a lado).
    • Os CSS dos componentes usam apenas var(--token); para ajustar uma cor,
      mude aqui e ela muda no site inteiro.
    • Importado em main.jsx antes de App.css.

@@ -7,7 +7,7 @@ export const awardsData = [
   },
   {
     id: "patrono_fumec",
-    image: "/aramunilogo.png",
+    image: "/favicon.svg",
     link: "https://www.fumec.br/servicos/colacao-de-grau/homenagens/",
     year: "2020",
   },

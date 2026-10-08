@@ -2,181 +2,38 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../theme/themeContext";
-import {
-  ARAMUNI_ASCII,
-  LOGO,
-  PROMPT,
-  TERMINAL_TITLE,
-  WINDOW_BUTTONS,
-} from "../data/brandData";
+import { ARAMUNI_ASCII, PROMPT, TERMINAL_TITLE, WINDOW_BUTTONS } from "../data/brandData";
 import {
   allTokenNames,
-  brailleStack,
   breakpoints,
-  colorFamilies,
-  fontFamilies,
+  dataPalettes,
   fontStack,
   radii,
   spacingScale,
+  themeSummary,
   tokenGroups,
   typeScale,
 } from "../data/designSystemData";
-import { colorFamily, contrastRatio, luminance, toHex } from "../theme/colorUtils";
+import { contrastRatio, toHex } from "../theme/colorUtils";
+import AramuniLogo from "./AramuniLogo";
 import "./DesignSystem.css";
 
-const THEMES = ["dark", "light"];
-const SECTIONS = ["marca", "cores", "tipografia", "espacamento", "raios", "breakpoints"];
-const FONT_SAMPLE = "ABCDEFGHIJKLM abcdefghijklm 0123456789";
-const LIGATURE_SAMPLE = "=> -> != === >= <= // {} []";
+const THEMES = ["dark", "light", "galo"];
+const SECTIONS = ["marca", "temas", "cores", "tipografia", "medidas"];
+const LIGATURES = "=> -> != === >= <= // {}";
 
-const toPx = (rem) => `${Number((parseFloat(rem) * 16).toFixed(1))}px`;
-
-// Lê os tokens em um elemento com data-theme="dark" ou "light". Como o
-// theme.css declara as cores nesses seletores, cada sonda enxerga os valores
-// de um tema, seja qual for o tema da página.
+// Lê os tokens em um elemento com data-theme="dark", "light" ou "galo". Como
+// o theme.css declara as cores nesses seletores, cada sonda enxerga os
+// valores de um tema, seja qual for o tema da página.
 const readTokens = (element) => {
   const style = getComputedStyle(element);
   return Object.fromEntries(
-    allTokenNames.map((name) => [
-      name,
-      style.getPropertyValue(name).replace(/\s+/g, " ").trim(),
-    ])
+    allTokenNames.map((name) => [name, style.getPropertyValue(name).trim()])
   );
 };
 
-// Texto pede 4.5:1 (AA) ou 7:1 (AAA); ícones, bordas e marcas de gráfico
-// (barras, faixas) pedem 3:1
-const contrastLevel = (ratio, kind) => {
-  if (kind === "icon") return ratio >= 3 ? "ok" : "baixo";
-  if (kind === "mark") return ratio >= 3 ? "grafico" : "baixo";
-  if (ratio >= 7) return "aaa";
-  if (ratio >= 4.5) return "aa";
-  if (ratio >= 3) return "grande";
-  return "baixo";
-};
-
-// Junta as cores sólidas dos dois temas, agrupa por família e ordena do
-// escuro para o claro. Cores repetidas viram um item só.
-const buildColorScale = (values, themeLabel) => {
-  const colors = new Map();
-  THEMES.forEach((theme) => {
-    Object.entries(values[theme]).forEach(([name, value]) => {
-      const hex = toHex(value);
-      if (!hex) return;
-      const entry = colors.get(hex) ?? { hex, uses: [] };
-      entry.uses.push(`${name} (${themeLabel(theme)})`);
-      colors.set(hex, entry);
-    });
-  });
-
-  return colorFamilies
-    .map((family) => ({
-      family,
-      colors: [...colors.values()]
-        .filter((color) => colorFamily(color.hex) === family)
-        .sort((a, b) => luminance(a.hex) - luminance(b.hex)),
-    }))
-    .filter((group) => group.colors.length > 0);
-};
-
-function Swatch({ token }) {
-  const color = `var(${token.name})`;
-
-  switch (token.kind) {
-    case "text":
-      return (
-        <span
-          className="ds-swatch ds-swatch-text"
-          style={{ color, background: token.on ? `var(${token.on})` : undefined }}
-          aria-hidden="true"
-        >
-          Aa
-        </span>
-      );
-    case "icon": {
-      const Icon = token.icon;
-      return (
-        <span className="ds-swatch ds-swatch-icon" aria-hidden="true">
-          <Icon style={{ color }} />
-        </span>
-      );
-    }
-    case "shadow":
-      return (
-        <span
-          className="ds-swatch ds-swatch-shadow"
-          style={{ boxShadow: color }}
-          aria-hidden="true"
-        />
-      );
-    case "scanline":
-      return <span className="ds-swatch ds-swatch-scanline" aria-hidden="true" />;
-    // Barra de gráfico, com a ponta arredondada como nos gráficos do lattes
-    case "mark":
-      return (
-        <span className="ds-swatch ds-swatch-mark" aria-hidden="true">
-          <span style={{ background: color }} />
-        </span>
-      );
-    // Porcentagem: o fundo é a cor de `base` nessa intensidade, como as
-    // aulas na grade do cal (texto na cor do campus, fundo tingido)
-    case "tint":
-      return (
-        <span
-          className="ds-swatch ds-swatch-text"
-          style={{
-            color: `var(${token.base})`,
-            background: `color-mix(in srgb, var(${token.base}) var(${token.name}), transparent)`,
-          }}
-          aria-hidden="true"
-        >
-          Aa
-        </span>
-      );
-    default:
-      return (
-        <span className="ds-swatch" style={{ background: color }} aria-hidden="true" />
-      );
-  }
-}
-
-// Amostra de um token em um tema: o data-theme faz o var() do CSS resolver
-// para as cores daquele tema, mesmo com a página no outro
-function TokenSample({ token, theme, values }) {
-  const { t } = useTranslation();
-  const themeValues = values?.[theme];
-  const value = themeValues?.[token.name] ?? "";
-
-  let contrast = null;
-  if (themeValues && ["text", "icon", "mark"].includes(token.kind)) {
-    const foreground = toHex(value);
-    const background = toHex(themeValues[token.on ?? "--bg-terminal"]);
-    if (foreground && background) {
-      const ratio = contrastRatio(foreground, background);
-      contrast = { ratio, level: contrastLevel(ratio, token.kind) };
-    }
-  }
-
-  return (
-    <div className="ds-sample" data-theme={theme}>
-      <Swatch token={token} />
-      <div className="ds-sample-info">
-        <span className="ds-sample-theme">{t(`design.temas.${theme}`)}</span>
-        <code className="ds-value">{value || "…"}</code>
-        {contrast && (
-          <span
-            className={`ds-badge ds-badge-${contrast.level}`}
-            title={t("design.cores.contraste_titulo", {
-              fundo: token.on ?? "--bg-terminal",
-            })}
-          >
-            {contrast.ratio.toFixed(1)}:1 · {t(`design.contraste.${contrast.level}`)}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
+// Texto pede 4.5:1 (AA); entre 3 e 4.5 só serve para texto grande
+const contrastLevel = (ratio) => (ratio >= 4.5 ? "ok" : ratio >= 3 ? "grande" : "baixo");
 
 function Section({ id, sectionRefs, children }) {
   const { t } = useTranslation();
@@ -199,9 +56,88 @@ function Section({ id, sectionRefs, children }) {
   );
 }
 
+// Logo + banner, como na tela de boas-vindas. No galo, o escudo entra no
+// lugar da logo.
+function Lockup({ theme }) {
+  const { t } = useTranslation();
+  return (
+    <div className="ds-lockup">
+      {theme === "galo" ? (
+        <img
+          src="/galo/escudo-cam.webp"
+          alt={t("boasvindas.escudo_alt")}
+          className="ds-lockup-logo ds-lockup-escudo"
+          width="480"
+          height="714"
+          loading="lazy"
+        />
+      ) : (
+        <AramuniLogo className="ds-lockup-logo" title="Aramuni" />
+      )}
+      <pre className="ds-ascii" aria-hidden="true">
+        {ARAMUNI_ASCII}
+      </pre>
+    </div>
+  );
+}
+
+// Célula de um token em um tema: amostra, hex e, em texto, o contraste
+function TokenCell({ token, theme, values }) {
+  const { t } = useTranslation();
+  const themeValues = values?.[theme];
+  const value = themeValues?.[token.name] ?? "";
+  const hex = toHex(value);
+
+  let contrast = null;
+  if (token.kind === "text" && themeValues && hex) {
+    const background = toHex(themeValues[token.on ?? "--bg-terminal"]);
+    if (background) {
+      const ratio = contrastRatio(hex, background);
+      contrast = { ratio, level: contrastLevel(ratio) };
+    }
+  }
+
+  return (
+    <div className="ds-cell">
+      {/* Só a amostra leva o data-theme: o hex e o selo ficam nas cores da página */}
+      {token.kind === "text" ? (
+        <span
+          data-theme={theme}
+          className="ds-swatch ds-swatch-text"
+          style={{
+            color: `var(${token.name})`,
+            background: `var(${token.on ?? "--bg-terminal"})`,
+          }}
+          aria-hidden="true"
+        >
+          Aa
+        </span>
+      ) : (
+        <span
+          data-theme={theme}
+          className="ds-swatch"
+          style={{ background: `var(${token.name})` }}
+          aria-hidden="true"
+        />
+      )}
+      <span className="ds-cell-info">
+        <code className="ds-value">{hex ?? (value || "…")}</code>
+        {contrast && (
+          <span
+            className={`ds-badge ds-badge-${contrast.level}`}
+            title={t(`design.contraste.${contrast.level}`)}
+          >
+            {contrast.ratio.toFixed(1)}:1
+          </span>
+        )}
+      </span>
+    </div>
+  );
+}
+
 const DesignSystem = () => {
   const { t } = useTranslation();
-  const { theme: currentTheme } = useTheme();
+  const { theme: currentTheme, setTheme } = useTheme();
   const probes = useRef({});
   const sectionRefs = useRef({});
   const ref = useRef(null);
@@ -210,14 +146,10 @@ const DesignSystem = () => {
 
   // Lê os valores antes da primeira pintura, para não piscar "…"
   useLayoutEffect(() => {
-    setValues({
-      dark: readTokens(probes.current.dark),
-      light: readTokens(probes.current.light),
-    });
+    setValues(Object.fromEntries(THEMES.map((th) => [th, readTokens(probes.current[th])])));
   }, []);
 
   const themeLabel = (theme) => t(`design.temas.${theme}`);
-  const colorScale = values ? buildColorScale(values, themeLabel) : [];
 
   const scrollTo = (id) => {
     sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -254,121 +186,121 @@ const DesignSystem = () => {
 
       {/* ===== Marca ===== */}
       <Section id="marca" sectionRefs={sectionRefs}>
-        <div className="ds-grid-2">
-          <figure className="ds-card ds-logo-card">
-            <img
-              src={LOGO.src}
-              width={LOGO.width}
-              height={LOGO.height}
-              alt={t("design.marca.logo_alt")}
-              className="ds-logo"
-              loading="lazy"
-            />
-            <figcaption className="ds-logo-meta">
-              <span className="ds-label">{t("design.marca.logo")}</span>
-              <code>aramunilogo.png</code>
-              <span className="ds-note">
-                PNG · {LOGO.width}×{LOGO.height} · {t("design.marca.logo_fundo")}
-              </span>
-              <span className="ds-note">{t("design.marca.logo_uso")}</span>
-            </figcaption>
-          </figure>
-
-          <div className="ds-card">
-            <p className="ds-label">{t("design.marca.banner")}</p>
-            <pre className="ds-ascii" aria-label="ARAMUNI">
-              {ARAMUNI_ASCII}
-            </pre>
-            <p className="ds-note">{t("design.marca.banner_uso")}</p>
-          </div>
+        <div className="ds-card ds-brand">
+          <Lockup theme={currentTheme} />
+          <img
+            src="/favicon.svg"
+            alt={t("design.marca.favicon_alt")}
+            className="ds-favicon"
+            width="64"
+            height="64"
+          />
         </div>
-
-        <h5 className="ds-subtitle">{t("design.marca.janela")}</h5>
-        <div className="ds-windows">
-          {THEMES.map((theme) => (
-            <div key={theme} className="ds-window" data-theme={theme}>
-              <div className="ds-window-bar">
-                <span className="ds-window-buttons" aria-hidden="true">
-                  {WINDOW_BUTTONS.map((color) => (
-                    <span key={color} style={{ background: color }} />
-                  ))}
-                </span>
-                <span className="ds-window-title">{TERMINAL_TITLE}</span>
-              </div>
-              <p className="ds-window-line">
-                <span className="ds-prompt">{PROMPT}</span>{" "}
-                <span className="ds-nowrap">
-                  design
-                  <span className="ds-cursor" aria-hidden="true" />
-                </span>
-              </p>
-              <p className="ds-window-caption">
-                {themeLabel(theme)}
-                {theme === currentTheme && ` · ${t("design.atual")}`}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="ds-note">
-          {t("design.marca.janela_nota", { cores: WINDOW_BUTTONS.join(", ") })}
+        <ul className="ds-rules">
+          <li>{t("design.marca.vetor")}</li>
+          <li>{t("design.marca.cor")}</li>
+          <li>{t("design.marca.galo")}</li>
+          <li>{t("design.marca.favicon")}</li>
+        </ul>
+        <p className="ds-files">
+          <code>src/components/AramuniLogo.jsx</code>
+          <code>public/aramuni-logo.svg</code>
+          <code>public/aramuni-logo-full.svg</code>
+          <code>public/favicon.svg</code>
         </p>
+      </Section>
+
+      {/* ===== Temas ===== */}
+      <Section id="temas" sectionRefs={sectionRefs}>
+        <div className="ds-themes">
+          {THEMES.map((theme) => {
+            const active = theme === currentTheme;
+            return (
+              <div key={theme} className="ds-window" data-theme={theme}>
+                <div className="ds-window-bar">
+                  <span className="ds-window-buttons" aria-hidden="true">
+                    {WINDOW_BUTTONS.map((color) => (
+                      <span key={color} style={{ background: color }} />
+                    ))}
+                  </span>
+                  <span className="ds-window-title">{TERMINAL_TITLE}</span>
+                </div>
+                <div className="ds-window-body">
+                  <Lockup theme={theme} />
+                  <p className="ds-window-line">
+                    <span className="ds-prompt">{PROMPT}</span>{" "}
+                    <span className="ds-nowrap">
+                      tema {theme}
+                      <span className="ds-cursor" aria-hidden="true" />
+                    </span>
+                  </p>
+                  <div className="ds-summary" aria-hidden="true">
+                    {themeSummary.map((name) => (
+                      <span key={name} style={{ background: `var(${name})` }} title={name} />
+                    ))}
+                  </div>
+                  <p className="ds-window-desc">{t(`design.temas_desc.${theme}`)}</p>
+                  <button
+                    type="button"
+                    className="ds-theme-btn"
+                    onClick={() => setTheme(theme)}
+                    disabled={active}
+                    aria-pressed={active}
+                  >
+                    {active ? `● ${t("design.atual")}` : t("design.usar", { tema: themeLabel(theme) })}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </Section>
 
       {/* ===== Cores ===== */}
       <Section id="cores" sectionRefs={sectionRefs}>
-        <h5 className="ds-subtitle">{t("design.cores.escala")}</h5>
-        <p className="ds-note ds-spaced">{t("design.cores.escala_intro")}</p>
-        <div className="ds-scale">
-          {colorScale.map(({ family, colors }) => (
-            <div key={family}>
-              <p className="ds-family-name">{t(`design.familias.${family}`)}</p>
-              <div className="ds-ramp">
-                {colors.map((color) => (
-                  <figure
-                    key={color.hex}
-                    className="ds-chip"
-                    title={color.uses.join("\n")}
-                  >
-                    <span
-                      className="ds-chip-color"
-                      style={{ background: color.hex }}
-                      aria-hidden="true"
-                    />
-                    <figcaption className="ds-chip-hex">{color.hex}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <h5 className="ds-subtitle">{t("design.cores.tokens")}</h5>
-        <p className="ds-note ds-spaced">{t("design.cores.tokens_intro")}</p>
-        <div className="ds-tokens">
+        <div className="ds-table" role="table" aria-label={t("design.secoes.cores.titulo")}>
+          <div className="ds-row ds-row-head" role="row">
+            <span role="columnheader">{t("design.colunas.token")}</span>
+            {THEMES.map((theme) => (
+              <span key={theme} role="columnheader">
+                {themeLabel(theme)}
+              </span>
+            ))}
+          </div>
           {tokenGroups.map((group) => (
-            <div key={group.id} className="ds-token-group">
-              <p className="ds-group-title">{t(`design.grupos.${group.id}`)}</p>
-              <div className="ds-token-head" aria-hidden="true">
-                <span>{t("design.colunas.token")}</span>
-                <span>{t("design.colunas.uso")}</span>
-                {THEMES.map((theme) => (
-                  <span key={theme}>
-                    {themeLabel(theme)}
-                    {theme === currentTheme && ` · ${t("design.atual")}`}
-                  </span>
-                ))}
-              </div>
+            <React.Fragment key={group.id}>
+              <p className="ds-group-title" role="row">
+                <span role="cell">{t(`design.grupos.${group.id}`)}</span>
+              </p>
               {group.tokens.map((token) => (
-                <div key={token.name} className="ds-token-row">
-                  <code className="ds-token-name">{token.name}</code>
-                  <span className="ds-token-desc">
-                    {t(`design.tokens.${token.name.slice(2)}`)}
+                <div key={token.name} className="ds-row" role="row">
+                  <span className="ds-token" role="rowheader">
+                    <code>{token.name}</code>
+                    <span className="ds-note">{t(`design.tokens.${token.name.slice(2)}`)}</span>
                   </span>
                   {THEMES.map((theme) => (
-                    <TokenSample key={theme} token={token} theme={theme} values={values} />
+                    <span key={theme} role="cell">
+                      <TokenCell token={token} theme={theme} values={values} />
+                    </span>
                   ))}
                 </div>
               ))}
+            </React.Fragment>
+          ))}
+        </div>
+        <p className="ds-note">{t("design.cores.contraste_nota")}</p>
+
+        <h5 className="ds-subtitle">{t("design.cores.paletas")}</h5>
+        <p className="ds-note ds-spaced">{t("design.cores.paletas_intro")}</p>
+        <div className="ds-palettes">
+          {dataPalettes.map((palette) => (
+            <div key={palette.id} className="ds-palette">
+              <code className="ds-palette-name">{palette.id}</code>
+              <span className="ds-palette-chips">
+                {palette.tokens.map((name) => (
+                  <span key={name} style={{ background: `var(${name})` }} title={name} />
+                ))}
+              </span>
             </div>
           ))}
         </div>
@@ -376,99 +308,64 @@ const DesignSystem = () => {
 
       {/* ===== Tipografia ===== */}
       <Section id="tipografia" sectionRefs={sectionRefs}>
-        <div className="ds-grid-2">
-          {fontFamilies.map((font) => (
-            <article key={font.id} className="ds-card">
-              <p className="ds-label">{t(`design.tipografia.${font.id}.papel`)}</p>
-              <p className="ds-font-name" style={{ fontFamily: `"${font.family}", monospace` }}>
-                {font.family}
-              </p>
-              <p className="ds-note">{font.file}</p>
-              <p className="ds-font-sample" style={{ fontFamily: `"${font.family}", monospace` }}>
-                {FONT_SAMPLE}
-                <br />
-                {LIGATURE_SAMPLE}
-              </p>
-              <p className="ds-text ds-no-liga">{t(`design.tipografia.${font.id}.desc`)}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="ds-card ds-stack-card">
-          <p className="ds-label">{t("design.tipografia.pilha")}</p>
+        <div className="ds-card">
+          <p className="ds-font-name">Fira Code</p>
+          <p className="ds-font-sample">{LIGATURES}</p>
           <code className="ds-code">font-family: {fontStack};</code>
-          <p className="ds-label">{t("design.tipografia.braille")}</p>
-          <code className="ds-code">font-family: {brailleStack};</code>
-          <p className="ds-note">{t("design.tipografia.braille_desc")}</p>
         </div>
-
-        <ul className="ds-rules">
-          {["monoespacada", "peso", "base", "input"].map((rule) => (
-            <li key={rule}>{t(`design.tipografia.regras.${rule}`)}</li>
-          ))}
-        </ul>
-
-        <h5 className="ds-subtitle">{t("design.tipografia.escala")}</h5>
         <div className="ds-type-scale">
           {typeScale.map((item) => (
             <div key={item.id} className="ds-type-row">
-              <div className="ds-type-meta">
-                <code>{item.size}</code>
-                <span className="ds-note">{toPx(item.size)}</span>
-              </div>
-              <div className="ds-type-body">
-                <p className="ds-type-sample" style={{ fontSize: item.size }}>
-                  {t(`design.tipografia.tamanhos.${item.id}.exemplo`)}
-                </p>
-                <p className="ds-note">{t(`design.tipografia.tamanhos.${item.id}.uso`)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ===== Espaçamento ===== */}
-      <Section id="espacamento" sectionRefs={sectionRefs}>
-        <div className="ds-card ds-space-card">
-          {spacingScale.map((value) => (
-            <div key={value} className="ds-space-row">
-              <code>{value}</code>
-              <span className="ds-note">{toPx(value)}</span>
-              <span className="ds-space-bar" style={{ width: value }} aria-hidden="true" />
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ===== Raios ===== */}
-      <Section id="raios" sectionRefs={sectionRefs}>
-        <div className="ds-radii">
-          {radii.map((radius) => (
-            <div key={radius.id} className="ds-radius">
-              <span
-                className={`ds-radius-shape ${radius.id === "circle" ? "ds-radius-circle" : ""}`}
-                style={{ borderRadius: radius.value }}
-                aria-hidden="true"
-              />
-              <code>{radius.value}</code>
-              <span className="ds-note">{t(`design.raios.${radius.id}`)}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ===== Breakpoints ===== */}
-      <Section id="breakpoints" sectionRefs={sectionRefs}>
-        <div className="ds-breakpoints">
-          {breakpoints.map((bp) => (
-            <div key={bp.id} className="ds-bp-row">
-              <span className="ds-bp-value">
-                <code>≤ {bp.value}</code>
-                {bp.main && <span className="ds-badge ds-badge-main">{t("design.principal")}</span>}
+              <code className="ds-type-size">{item.size}</code>
+              <span className="ds-type-sample" style={{ fontSize: item.size }}>
+                {t(`design.tipografia.tamanhos.${item.id}`)}
               </span>
-              <span className="ds-text">{t(`design.breakpoints.${bp.id}`)}</span>
             </div>
           ))}
+        </div>
+        <ul className="ds-rules">
+          {["peso", "base", "input"].map((rule) => (
+            <li key={rule}>{t(`design.tipografia.regras.${rule}`)}</li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* ===== Medidas ===== */}
+      <Section id="medidas" sectionRefs={sectionRefs}>
+        <div className="ds-grid-3">
+          <div className="ds-card">
+            <p className="ds-label">{t("design.medidas.espacamento")}</p>
+            {spacingScale.map((value) => (
+              <div key={value} className="ds-space-row">
+                <code>{value}</code>
+                <span className="ds-space-bar" style={{ width: value }} aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+          <div className="ds-card">
+            <p className="ds-label">{t("design.medidas.raios")}</p>
+            <div className="ds-radii">
+              {radii.map((radius) => (
+                <div key={radius.id} className="ds-radius">
+                  <span
+                    className={`ds-radius-shape${radius.id === "circulo" ? " ds-radius-circle" : ""}`}
+                    style={{ borderRadius: radius.value }}
+                    aria-hidden="true"
+                  />
+                  <code>{radius.value}</code>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="ds-card">
+            <p className="ds-label">{t("design.medidas.breakpoints")}</p>
+            {breakpoints.map((bp) => (
+              <div key={bp.id} className="ds-bp-row">
+                <code>≤ {bp.value}</code>
+                <span className="ds-note">{t(`design.medidas.${bp.id}`)}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 

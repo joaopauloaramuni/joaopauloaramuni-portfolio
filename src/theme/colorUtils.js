@@ -31,24 +31,3 @@ export function contrastRatio(foreground, background) {
   );
   return (lighter + 0.05) / (darker + 0.05);
 }
-
-// Família da cor pela matiz. Cores com pouca saturação (os cinzas azulados
-// do tema, por exemplo) contam como neutras.
-export function colorFamily(hex) {
-  const [r, g, b] = channels(hex);
-  const max = Math.max(r, g, b);
-  const chroma = max - Math.min(r, g, b);
-  if (chroma < 0.2) return "neutros";
-
-  let hue;
-  if (max === r) hue = ((g - b) / chroma) % 6;
-  else if (max === g) hue = (b - r) / chroma + 2;
-  else hue = (r - g) / chroma + 4;
-  hue = (hue * 60 + 360) % 360;
-
-  if (hue < 15 || hue >= 330) return "vermelhos";
-  if (hue < 65) return "amarelos";
-  if (hue < 170) return "verdes";
-  if (hue < 260) return "azuis";
-  return "outros";
-}

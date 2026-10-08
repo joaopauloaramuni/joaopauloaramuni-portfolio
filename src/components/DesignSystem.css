@@ -1,11 +1,14 @@
-/* Saída do comando "design". Só usa var(--token) do theme.css: as amostras
-   com data-theme="dark|light" mostram cada tema, seja qual for o da página. */
+/* Saída do comando "design". Só usa var(--token) do theme.css: elementos
+   com data-theme="dark|light|galo" mostram cada tema, seja qual for o da
+   página. */
 
 .ds {
   margin: 1rem 0;
   padding: 1rem 1.5rem 1.5rem;
   border: 2px solid var(--accent);
   border-radius: 10px;
+  /* Quase opaco: no galo, a foto do fundo não atrapalha a leitura da tabela */
+  background: color-mix(in srgb, var(--bg-terminal) 90%, transparent);
   color: var(--text);
   line-height: 1.5;
   max-width: 100%;
@@ -36,7 +39,7 @@
 .ds-intro {
   color: var(--text-muted);
   text-align: center;
-  max-width: 72ch;
+  max-width: 64ch;
   margin: 0 auto 1.5rem;
 }
 
@@ -46,7 +49,6 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.25rem 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .ds-nav-prompt {
@@ -67,13 +69,13 @@
   text-decoration: underline;
 }
 
-.ds-nav button:focus-visible {
+.ds button:focus-visible {
   outline: 2px solid var(--accent-focus);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* ===== Seções ===== */
+/* ===== Base ===== */
 
 .ds-section {
   margin-top: 2.5rem;
@@ -92,7 +94,7 @@
 
 .ds-section-intro {
   color: var(--text-muted);
-  max-width: 80ch;
+  max-width: 72ch;
   margin: 0 0 1rem;
 }
 
@@ -103,10 +105,9 @@
 }
 
 .ds-label {
-  display: block;
   color: var(--accent);
   font-size: 0.85rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem;
 }
 
 .ds-note {
@@ -119,46 +120,65 @@
   margin-bottom: 1rem;
 }
 
-.ds-text {
-  color: var(--text-soft);
-  margin: 0;
-}
-
-/* Desliga as ligaduras para "=>" e "!=" aparecerem como foram digitados */
-.ds-no-liga {
-  font-variant-ligatures: none;
-}
-
 .ds-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1rem;
   min-width: 0;
-  box-sizing: border-box;
 }
 
-.ds-grid-2 {
+.ds-grid-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 1rem;
+}
+
+.ds-rules {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.ds-rules li + li {
+  margin-top: 0.25rem;
+}
+
+.ds-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.ds-files code,
+.ds-code {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  background: var(--surface-input);
+  border: 1px solid var(--border-input);
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.ds-code {
+  display: block;
+  margin-top: 0.75rem;
 }
 
 .ds-badge {
   display: inline-block;
-  width: fit-content;
   font-size: 0.75rem;
   line-height: 1.4;
-  padding: 0 0.5rem;
+  padding: 0 0.45rem;
   border: 1px solid currentColor;
   border-radius: 9999px;
   white-space: nowrap;
 }
 
-.ds-badge-aaa,
-.ds-badge-aa,
-.ds-badge-ok,
-.ds-badge-grafico {
+.ds-badge-ok {
   color: var(--success);
 }
 
@@ -170,62 +190,75 @@
   color: var(--highlight);
 }
 
-.ds-badge-main {
-  color: var(--accent);
-}
+/* ===== Marca: logo + banner (o mesmo conjunto das boas-vindas) ===== */
 
-/* ===== Marca ===== */
-
-.ds-logo-card {
+.ds-brand {
+  background: var(--bg-terminal);
+  padding: 2rem 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  margin: 0;
+  justify-content: center;
+  gap: 2rem;
 }
 
-.ds-logo {
-  width: 7.5rem;
-  height: auto;
-  border-radius: 8px;
+/* Favicon ao lado: cor fixa (verde da marca), igual em qualquer tema */
+.ds-favicon {
+  width: 4rem;
+  height: 4rem;
   flex-shrink: 0;
 }
 
-.ds-logo-meta {
+.ds-lockup {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  min-width: 0;
+  align-items: flex-end;
+  gap: 1.5em;
+  font-size: clamp(4px, 1.4vw, 14px);
+  max-width: 100%;
+  color: var(--text-muted);
 }
 
-.ds-logo-meta .ds-label {
-  margin: 0;
+.ds-lockup-logo {
+  flex-shrink: 0;
+  height: 6.9em; /* 6 linhas do banner × line-height 1.15 */
+  width: auto;
+}
+
+/* Escudo do galo: mais alto que o banner (tem a estrela em cima) */
+.ds-lockup-escudo {
+  height: 8.6em;
+  margin-top: -1.7em;
 }
 
 .ds-ascii {
   font-family: "FiraCode", "JetBrainsMono", monospace;
-  font-size: clamp(4px, 1.05vw, 12px); /* 12px: mesmo tamanho das boas-vindas */
+  font-size: inherit;
   line-height: 1.15;
   letter-spacing: 0;
   white-space: pre;
-  color: var(--text-muted);
+  color: inherit;
   margin: 0;
-  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
 }
 
-.ds-windows {
+/* ===== Temas: uma janela de terminal por tema ===== */
+
+.ds-themes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 1rem;
-  margin: 0.75rem 0 0.5rem;
 }
 
 .ds-window {
+  display: flex;
+  flex-direction: column;
   background: var(--bg-terminal);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.5rem 0.75rem 0.75rem;
+  min-width: 0;
 }
 
 .ds-window-bar {
@@ -233,7 +266,7 @@
   display: flex;
   align-items: center;
   min-height: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .ds-window-buttons {
@@ -257,8 +290,21 @@
   pointer-events: none;
 }
 
+.ds-window-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.ds-window-body .ds-lockup {
+  font-size: clamp(3px, 0.5vw, 5px);
+  min-height: 8.6em;
+}
+
 .ds-window-line {
   margin: 0;
+  font-size: 0.9rem;
   overflow-wrap: anywhere;
 }
 
@@ -286,338 +332,258 @@
   }
 }
 
-.ds-window-caption {
-  margin: 0.5rem 0 0;
+/* Faixa com as 5 cores que resumem o tema */
+.ds-summary {
+  display: flex;
+  height: 1.25rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.ds-summary span {
+  flex: 1;
+}
+
+.ds-window-desc {
+  margin: 0;
   font-size: 0.85rem;
   color: var(--text-muted);
+  flex: 1;
 }
 
-/* ===== Cores ===== */
-
-.ds-scale {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.ds-family-name {
-  color: var(--text-soft);
+.ds-theme-btn {
+  align-self: flex-start;
+  font: inherit;
   font-size: 0.85rem;
-  margin: 0 0 0.35rem;
-}
-
-.ds-ramp {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.ds-chip {
-  width: 5.5rem;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  cursor: help;
-}
-
-.ds-chip-color {
-  height: 3rem;
-  border: 1px solid var(--border);
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
 }
 
-.ds-chip-hex {
-  color: var(--text-soft);
-  font-size: 0.8rem;
+.ds-theme-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
-.ds-tokens {
+.ds-theme-btn:disabled {
+  color: var(--accent);
+  background: transparent;
+  cursor: default;
+}
+
+/* ===== Cores: tabela token × tema =====
+   Cada amostra tem data-theme: o var() resolve para as cores daquele tema */
+
+.ds-table {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-.ds-group-title {
-  color: var(--text);
-  font-weight: bold;
-  margin: 0 0 0.5rem;
-  padding-bottom: 0.25rem;
+.ds-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1.3fr) repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
   border-bottom: 1px solid var(--border);
 }
 
-.ds-token-head,
-.ds-token-row {
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1.1fr)
-    minmax(0, 1.1fr);
-  gap: 0.5rem 1rem;
-  align-items: center;
-}
-
-.ds-token-head {
+.ds-row-head {
   color: var(--text-muted);
-  font-size: 0.85rem;
-  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom-color: var(--accent);
 }
 
-.ds-token-row {
-  padding: 0.4rem 0;
-}
-
-.ds-token-name {
+.ds-group-title {
   color: var(--accent);
-  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  margin: 1.25rem 0 0;
 }
 
-.ds-token-desc {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.ds-sample {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-width: 0;
-  padding: 0.5rem 0.75rem;
-  background: var(--bg-terminal);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.ds-sample-info {
+.ds-token {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
   min-width: 0;
 }
 
-/* O nome do tema só aparece quando o cabeçalho da tabela some (celular) */
-.ds-sample-theme {
-  display: none;
-  color: var(--text-muted);
-  font-size: 0.75rem;
+.ds-token code {
+  color: var(--text);
+  overflow-wrap: anywhere;
 }
 
-.ds-value {
-  color: var(--text-soft);
+.ds-token .ds-note {
+  margin: 0;
   font-size: 0.8rem;
-  overflow-wrap: anywhere;
+}
+
+.ds-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .ds-swatch {
-  flex: 0 0 2.25rem;
+  flex-shrink: 0;
+  width: 2.25rem;
   height: 2.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border: 1px solid var(--border);
   border-radius: 6px;
+  border: 1px solid var(--border);
 }
 
 .ds-swatch-text {
-  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
   font-weight: bold;
-  border-color: transparent;
 }
 
-.ds-swatch-icon {
-  font-size: 1.4rem;
-  border-color: transparent;
+.ds-cell-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
-.ds-swatch-shadow {
-  background: var(--surface);
-  border-color: transparent;
+.ds-value {
+  font-size: 0.8rem;
+  color: var(--text-soft);
 }
 
-/* Marca de gráfico: barra fina com a ponta arredondada (lattes) */
-.ds-swatch-mark {
-  justify-content: flex-start;
-  border-color: transparent;
+.ds-palettes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.5rem 1.5rem;
 }
 
-.ds-swatch-mark > span {
-  width: 85%;
-  height: 10px;
-  border-radius: 0 4px 4px 0;
+.ds-palette {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.ds-swatch-scanline {
-  background: repeating-linear-gradient(
-      to bottom,
-      var(--scanline) 0 1px,
-      transparent 1px 3px
-    ),
-    var(--bg-terminal);
+.ds-palette-name {
+  width: 5.5rem;
+  flex-shrink: 0;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.ds-palette-chips {
+  display: flex;
+  gap: 4px;
+}
+
+.ds-palette-chips span {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4px;
 }
 
 /* ===== Tipografia ===== */
 
 .ds-font-name {
-  color: var(--text);
+  color: var(--accent);
   font-size: 1.5rem;
   margin: 0;
 }
 
 .ds-font-sample {
-  color: var(--text-soft);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0.75rem 0;
-  overflow-wrap: anywhere;
+  font-size: 1.2rem;
+  margin: 0.25rem 0 0;
+  color: var(--text);
 }
 
-.ds-stack-card {
+.ds-type-scale {
   margin-top: 1rem;
-}
-
-.ds-code {
-  display: block;
-  margin-bottom: 1rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--surface-input);
-  color: var(--text-soft);
-  border: 1px solid var(--border-input);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  overflow-wrap: anywhere;
-}
-
-.ds-stack-card .ds-code:last-of-type {
-  margin-bottom: 0.25rem;
-}
-
-.ds-rules {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-  color: var(--text-soft);
-}
-
-.ds-rules li {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.25rem;
-}
-
-.ds-rules li::before {
-  content: ">";
-  color: var(--accent);
-  flex-shrink: 0;
 }
 
 .ds-type-row {
   display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr);
+  grid-template-columns: 5rem minmax(0, 1fr);
   gap: 1rem;
   align-items: baseline;
-  padding: 0.75rem 0;
+  padding: 0.4rem 0;
   border-bottom: 1px solid var(--border);
 }
 
-.ds-type-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.ds-type-meta code {
-  color: var(--accent);
+.ds-type-size {
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .ds-type-sample {
   color: var(--text);
   line-height: 1.3;
-  margin: 0;
   overflow-wrap: anywhere;
 }
 
-/* ===== Espaçamento ===== */
-
-.ds-space-card {
-  max-width: 36rem;
-}
+/* ===== Medidas ===== */
 
 .ds-space-row {
   display: grid;
-  grid-template-columns: 5rem 3.5rem minmax(0, 1fr);
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.75rem;
   align-items: center;
-  gap: 1rem;
-  padding: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--text-soft);
 }
 
-.ds-space-row code {
-  color: var(--accent);
-}
-
-.ds-space-row .ds-note {
-  margin: 0;
+.ds-space-row + .ds-space-row {
+  margin-top: 0.4rem;
 }
 
 .ds-space-bar {
-  height: 1rem;
+  display: block;
+  height: 0.75rem;
   background: var(--accent);
-  border-radius: 4px;
+  border-radius: 2px;
 }
-
-/* ===== Raios ===== */
 
 .ds-radii {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .ds-radius {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-}
-
-.ds-radius code {
-  color: var(--accent);
-}
-
-.ds-radius .ds-note {
-  margin: 0;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-soft);
 }
 
 .ds-radius-shape {
-  width: 100%;
-  height: 4rem;
-  box-sizing: border-box;
-  background: var(--surface);
+  width: 3rem;
+  height: 2rem;
   border: 2px solid var(--accent);
+  background: var(--bg-terminal);
 }
 
 .ds-radius-circle {
-  width: 4rem;
+  width: 2rem;
 }
-
-/* ===== Breakpoints ===== */
 
 .ds-bp-row {
-  display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: baseline;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.ds-bp-value {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--text);
 }
 
-.ds-bp-value code {
-  color: var(--accent);
+.ds-bp-row + .ds-bp-row {
+  margin-top: 0.75rem;
+}
+
+.ds-bp-row .ds-note {
+  margin: 0;
 }
 
 .ds-footer {
@@ -637,23 +603,18 @@
 
 /* ===== Responsividade ===== */
 
+/* Tabela de cores vira um bloco por token, com os 3 temas embaixo */
 @media (max-width: 900px) {
-  .ds-token-head {
+  .ds-row-head {
     display: none;
   }
 
-  .ds-token-row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    padding: 0.6rem 0;
+  .ds-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .ds-token-name,
-  .ds-token-desc {
+  .ds-token {
     grid-column: 1 / -1;
-  }
-
-  .ds-sample-theme {
-    display: block;
   }
 }
 
@@ -670,15 +631,12 @@
     font-size: 1.2rem;
   }
 
-  .ds-type-row,
-  .ds-bp-row {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.25rem;
+  .ds-lockup {
+    font-size: clamp(3px, 1.6vw, 12px);
   }
 
-  .ds-type-meta {
-    flex-direction: row;
-    gap: 0.75rem;
+  .ds-window-body .ds-lockup {
+    font-size: clamp(3px, 1.4vw, 6px);
   }
 }
 
@@ -688,21 +646,16 @@
     border-width: 1px;
   }
 
-  .ds-token-row {
-    grid-template-columns: minmax(0, 1fr);
+  .ds-brand {
+    padding: 1.25rem 0.75rem;
   }
 
-  .ds-logo-card {
-    flex-direction: column;
-    align-items: flex-start;
+  .ds-swatch {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
-  .ds-chip {
-    width: 4.5rem;
-  }
-
-  .ds-space-row {
-    grid-template-columns: 5.5rem 3rem minmax(0, 1fr);
-    gap: 0.5rem;
+  .ds-row {
+    gap: 0.4rem;
   }
 }
