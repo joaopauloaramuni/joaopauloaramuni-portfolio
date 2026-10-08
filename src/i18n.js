@@ -35,7 +35,7 @@ const resources = {
         carregando: "Fetching Galo's fixtures...",
         erro: "Couldn't fetch the matches right now. Try again in a moment.",
         nenhum: "No matches scheduled yet.",
-        uso: "Usage: campeonato [--all | --table] (galo | atletico also work)",
+        uso: "Usage: campeonato [--all | --table] (championship | galo | atletico also work)",
         proximo_em: "Next match {{tempo}}",
         relogio_alt: "Countdown to the next match",
         placar_alt: "Live score",
@@ -503,7 +503,7 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Back to terminal",
-        uso: "Usage: jogo [--quake | --flappyplane] (no option opens Quake; quake | flappyplane also work)",
+        uso: "Usage: jogo [--quake | --flappyplane] (no option opens Quake; game | quake | flappyplane also work)",
         quake: {
           titulo: "Quake (shareware, episode 1)",
           tela_cheia: "Fullscreen",
@@ -2289,7 +2289,7 @@ const resources = {
         carregando: "Buscando os jogos do Galo...",
         erro: "Não consegui buscar os jogos agora. Tente de novo daqui a pouco.",
         nenhum: "Nenhum jogo marcado por enquanto.",
-        uso: "Uso: campeonato [--todos | --tabela] (galo | atletico também funcionam)",
+        uso: "Uso: campeonato [--todos | --tabela] (championship | galo | atletico também funcionam)",
         proximo_em: "Próximo jogo {{tempo}}",
         relogio_alt: "Contagem regressiva para o próximo jogo",
         placar_alt: "Placar ao vivo",
@@ -2758,7 +2758,7 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Voltar ao terminal",
-        uso: "Uso: jogo [--quake | --flappyplane] (sem opção abre o Quake; quake | flappyplane também funcionam)",
+        uso: "Uso: jogo [--quake | --flappyplane] (sem opção abre o Quake; game | quake | flappyplane também funcionam)",
         quake: {
           titulo: "Quake (shareware, episódio 1)",
           tela_cheia: "Tela cheia",

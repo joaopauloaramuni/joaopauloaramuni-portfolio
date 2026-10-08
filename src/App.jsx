@@ -426,7 +426,7 @@ function App() {
           response = <Contato onExit={exitComponent} />;
           break;
         case "jogo": {
-          // "jogo" e "quake" abrem o Quake shareware e "flappyplane", o
+          // "jogo", "game" e "quake" abrem o Quake shareware e "flappyplane", o
           // Flappy Plane; "--quake" | "--flappyplane" escolhem o jogo
           if (subCommand && !command.subcommands.includes(subCommand)) {
             response = <TerminalOutput>{t("jogo.uso")}</TerminalOutput>;

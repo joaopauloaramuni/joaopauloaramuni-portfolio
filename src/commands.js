@@ -66,7 +66,7 @@ export const commandList = {
   },
   turmas: {
     name: 'turmas',
-    aliases: ['acompanhamento', 'ti'],
+    aliases: ['acompanhamento', 'ti', 'classes'],
     // Acompanhamento de turmas de TI (Trabalhos Interdisciplinares).
     // Gráficos: turmas --resumo | --codigo | --linguagens | --ritmo | --equilibrio
     // | --prs | --projetos | --tudo; filtros: ti2, ti5, lourdes, coreu, g1... e o
@@ -75,7 +75,7 @@ export const commandList = {
   },
   canvas: {
     name: 'canvas',
-    aliases: ['tarefas', 'prazos', 'entregas'],
+    aliases: ['tarefas', 'prazos', 'entregas', 'tasks'],
     // Tarefas, prazos e entregas das minhas disciplinas no Canvas.
     // Seções: canvas --resumo | --tarefas | --agenda | --tudo; filtros: diw,
     // ti5, coreu, lourdes, g1... (ver data/canvasSections.js)
@@ -148,7 +148,7 @@ export const commandList = {
   },
   campeonato: {
     name: 'campeonato',
-    aliases: ['galo', 'atletico'],
+    aliases: ['galo', 'atletico', 'championship'],
     // Próximos jogos do Atlético Mineiro (ver components/Jogos.jsx);
     // --todos | --all mostram todos os jogos já marcados;
     // --tabela | --table mostram a classificação do Brasileirão
@@ -156,8 +156,8 @@ export const commandList = {
   },
   jogo: {
     name: 'jogo',
-    aliases: ['quake', 'flappyplane'],
-    // "jogo" e "quake" abrem o Quake shareware original (ver
+    aliases: ['quake', 'flappyplane', 'game'],
+    // "jogo", "game" e "quake" abrem o Quake shareware original (ver
     // components/QuakeGame.jsx e public/quake); "flappyplane" abre o
     // Flappy Plane. --quake | --flappyplane escolhem o jogo
     subcommands: ['--quake', '--flappyplane'],
