@@ -2,7 +2,8 @@ import GALO_CONFIG from "../config/galoConfig";
 
 // Comando "jogos": busca e organiza os jogos do Galo (ver config/galoConfig.js).
 //
-//   fetchJogosDoGalo()  → { time, proximos, ultimo } da ESPN
+//   fetchJogosDoGalo()         → { time, proximos, ultimo, encerrados } da ESPN
+//   fetchTabelaDoBrasileirao() → { temporada, times: [...] } (classificação)
 //
 // São duas chamadas à ESPN em paralelo: o calendário (?fixture=true) e os
 // resultados. Os resultados servem para o placar agregado: no jogo de volta
@@ -25,6 +26,23 @@ export function fetchJogosDoGalo() {
     });
   }
   return request;
+}
+
+// Mesmo cache para a classificação ("jogos --tabela")
+let tabela = null;
+let tabelaEm = 0;
+
+export function fetchTabelaDoBrasileirao() {
+  if (!tabela || Date.now() - tabelaEm > CACHE_MS) {
+    tabelaEm = Date.now();
+    tabela = getJson(GALO_CONFIG.ESPN_STANDINGS)
+      .then(normalizarTabela)
+      .catch((error) => {
+        tabela = null;
+        throw error;
+      });
+  }
+  return tabela;
 }
 
 async function getJson(url) {
@@ -63,6 +81,7 @@ async function load() {
     time: normalizarTime(calendario.value.team ?? resultados.value?.team),
     proximos,
     ultimo: encerrados.at(-1) ?? null,
+    encerrados,
   };
 }
 
@@ -220,5 +239,72 @@ function placarDoGalo(jogo) {
     adversario: jogo.adversario.gols,
     mandante: jogo.mandante,
     visitante: jogo.visitante,
+  };
+}
+
+/* ---------------------------------------------------------------------
+   Classificação do Brasileirão (jogos --tabela)
+   --------------------------------------------------------------------- */
+
+// A ESPN manda cada número como { name, value } dentro de entry.stats
+function estatistica(stats, nome) {
+  return numero(stats.find((stat) => stat.name === nome)) ?? 0;
+}
+
+// Faixa de cor da tabela: a ESPN manda { color, description } em inglês
+// ("Copa Libertadores", "Copa Libertadores Qualifiers", "Copa Sudamericana",
+// "Relegation"); o componente traduz pela chave
+function zonaDaTabela(note) {
+  if (!note?.description) return null;
+  const descricao = note.description;
+  const chave = /relegat/i.test(descricao)
+    ? "rebaixamento"
+    : /libertadores/i.test(descricao) && /qualif|pre|prelim/i.test(descricao)
+      ? "pre_libertadores"
+      : /libertadores/i.test(descricao)
+        ? "libertadores"
+        : /sudamericana|sul-?americana/i.test(descricao)
+          ? "sulamericana"
+          : null;
+  return { chave, descricao, cor: note.color ? `#${note.color.replace("#", "")}` : null };
+}
+
+function normalizarTabela(resposta) {
+  // A tabela vem em children[0] (o Brasileirão tem um grupo só)
+  const grupo = resposta.children?.[0] ?? resposta;
+  const entradas = grupo.standings?.entries ?? [];
+  const times = entradas
+    .map((entrada, i) => {
+      const team = entrada.team ?? {};
+      const stats = entrada.stats ?? [];
+      const jogos = estatistica(stats, "gamesPlayed");
+      const pontos = estatistica(stats, "points");
+      const golsPro = estatistica(stats, "pointsFor");
+      const golsContra = estatistica(stats, "pointsAgainst");
+      return {
+        id: String(team.id),
+        nome: team.displayName ?? team.name ?? "?",
+        curto: team.shortDisplayName ?? team.displayName ?? "?",
+        sigla: team.abbreviation ?? "",
+        ...escudos(team),
+        posicao: estatistica(stats, "rank") || i + 1,
+        pontos,
+        jogos,
+        vitorias: estatistica(stats, "wins"),
+        empates: estatistica(stats, "ties"),
+        derrotas: estatistica(stats, "losses"),
+        golsPro,
+        golsContra,
+        saldo: golsPro - golsContra,
+        // Pontos ganhos sobre os possíveis, de 0 a 100
+        aproveitamento: jogos ? Math.round((pontos / (jogos * 3)) * 100) : 0,
+        zona: zonaDaTabela(entrada.note),
+      };
+    })
+    .sort((a, b) => a.posicao - b.posicao);
+
+  return {
+    temporada: resposta.seasons?.[0]?.displayName ?? grupo.standings?.seasonDisplayName ?? "",
+    times,
   };
 }

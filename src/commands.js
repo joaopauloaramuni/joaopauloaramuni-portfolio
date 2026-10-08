@@ -150,8 +150,9 @@ export const commandList = {
     name: 'jogos',
     aliases: ['galo', 'atletico'],
     // Próximos jogos do Atlético Mineiro (ver components/Jogos.jsx);
-    // --todos | --all mostram todos os jogos já marcados
-    subcommands: ['--todos', '--all'],
+    // --todos | --all mostram todos os jogos já marcados;
+    // --tabela | --table mostram a classificação do Brasileirão
+    subcommands: ['--todos', '--all', '--tabela', '--table'],
   },
   aragame: {
     name: 'aragame',

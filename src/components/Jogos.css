@@ -169,8 +169,8 @@
 }
 
 .jogos-escudo {
-  width: 60px;
-  height: 60px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
   flex-shrink: 0;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
@@ -378,6 +378,229 @@
   color: var(--accent);
 }
 
+.jogos-fonte code {
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------------
+   jogos --tabela: resumo do Galo e classificação
+   --------------------------------------------------------------------- */
+.jogos-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.jogos-resumo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.9rem 1.5rem;
+  align-items: center;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-project-hover);
+}
+
+/* Posição e pontos grandes, como no placar */
+.jogos-resumo-destaque {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.jogos-resumo-posicao,
+.jogos-resumo-pontos {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 4.6rem;
+  padding: 0.5rem 0.6rem 0.4rem;
+  border-radius: 8px;
+  background: var(--bg-terminal);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.jogos-resumo-posicao b,
+.jogos-resumo-pontos b {
+  font-size: 2rem;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+.jogos-resumo-posicao b {
+  color: var(--accent);
+}
+
+.jogos-resumo-posicao small,
+.jogos-resumo-pontos small {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.jogos-resumo-numeros {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  margin: 0;
+}
+
+.jogos-resumo-numeros div {
+  min-width: 0;
+}
+
+.jogos-resumo-numeros dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.jogos-resumo-numeros dd {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.jogos-resumo-situacao {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.jogos-resumo-situacao li::before {
+  content: "› ";
+  color: var(--accent);
+}
+
+.jogos-resumo-forma {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.jogos-resumo-forma .jogos-ultimo-rotulo {
+  margin-right: 0.3rem;
+}
+
+/* Tabela: rola de lado se não couber, sem empurrar a página */
+.jogos-tabela-rolagem {
+  overflow-x: auto;
+}
+
+.jogos-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.jogos-tabela th,
+.jogos-tabela td {
+  padding: 0.3rem 0.45rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.jogos-tabela thead th {
+  font-size: 0.7rem;
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.jogos-tabela tbody tr {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+.jogos-tabela tbody th {
+  font-weight: normal;
+}
+
+.jogos-tabela .jogos-tabela-time {
+  text-align: left;
+  width: 100%;
+}
+
+.jogos-tabela-time-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.jogos-tabela-escudo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.jogos-tabela-escudo.jogos-escudo-vazio {
+  font-size: 0.5rem;
+}
+
+/* Posição com a faixa de cor da zona (Libertadores, Sul-Americana, Z-4) */
+.jogos-tabela-pos {
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--zona, transparent);
+}
+
+.jogos-tabela-pts {
+  font-weight: 700;
+}
+
+.jogos-tabela-galo {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.jogos-tabela-galo th,
+.jogos-tabela-galo td {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.jogos-tabela-zonas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2rem 1rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.jogos-tabela-zonas li::before {
+  content: "";
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.35rem;
+  border-radius: 2px;
+  vertical-align: -0.05rem;
+  background: var(--zona);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .jogos-pulso {
     animation: none;
@@ -454,8 +677,8 @@
   }
 
   .jogos-escudo {
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
   }
 
   .jogos-relogio-casa {
@@ -464,5 +687,32 @@
 
   .jogos-relogio-casa b {
     font-size: 1.2rem;
+  }
+
+  /* Resumo do Galo em uma coluna; tabela só com #, time, P, J e SG */
+  .jogos-resumo {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.75rem;
+  }
+
+  .jogos-resumo-destaque {
+    justify-content: center;
+  }
+
+  .jogos-resumo-numeros dd {
+    font-size: 1rem;
+  }
+
+  .jogos-tabela {
+    font-size: 0.8rem;
+  }
+
+  .jogos-tabela th,
+  .jogos-tabela td {
+    padding: 0.3rem;
+  }
+
+  .jogos-tabela-extra {
+    display: none;
   }
 }

@@ -39,18 +39,9 @@
 }
 
 .ajuda-dicas {
-  margin-top: 0.75rem;
+  margin: 0.6rem 0 0;
   color: var(--text-muted);
   font-size: 0.9rem;
-}
-
-.ajuda-dicas p {
-  margin: 0.1rem 0;
-  overflow-wrap: anywhere; /* o link de exemplo não estoura no celular */
-}
-
-.ajuda-dicas .ajuda-aliases-symbol {
-  color: var(--accent);
 }
 
 /* Telas estreitas: sem colunas. Comando e descrição seguem na mesma linha

@@ -418,12 +418,14 @@ function App() {
           break;
         case "jogos": {
           // "jogos" (ou "galo", "atletico") mostra os próximos jogos do Galo,
-          // ao vivo da ESPN; "--todos" | "--all" mostram todos os marcados
+          // ao vivo da ESPN; "--todos" | "--all" mostram todos os marcados e
+          // "--tabela" | "--table", a classificação do Brasileirão
           if (subCommand && !command.subcommands.includes(subCommand)) {
             response = <TerminalOutput>{t("jogos.uso")}</TerminalOutput>;
             break;
           }
-          response = <Jogos todos={Boolean(subCommand)} />;
+          const tabela = subCommand === "--tabela" || subCommand === "--table";
+          response = <Jogos todos={Boolean(subCommand) && !tabela} tabela={tabela} />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
           keepLastCommandAtTop();
           break;

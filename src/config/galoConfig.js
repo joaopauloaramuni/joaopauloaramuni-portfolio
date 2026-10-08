@@ -12,6 +12,11 @@ const GALO_CONFIG = {
   // Página "Calendário" do Galo na ESPN, no rodapé do comando
   ESPN_PAGE: "https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg",
 
+  // Classificação do Brasileirão ("jogos --tabela"): mesma API, outro caminho
+  ESPN_STANDINGS: "https://site.api.espn.com/apis/v2/sports/soccer/bra.1/standings",
+  // Página da tabela na ESPN, no rodapé do "jogos --tabela"
+  ESPN_STANDINGS_PAGE: "https://www.espn.com.br/futebol/classificacao/_/liga/bra.1",
+
   // Quantos jogos o "jogos" mostra ("jogos --todos" mostra todos os marcados)
   PROXIMOS: 5,
 

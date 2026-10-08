@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import GALO_CONFIG from "../config/galoConfig";
 import { FUSO_HORARIO } from "../data/horarioData";
-import { fetchJogosDoGalo } from "../lib/galo";
+import { fetchJogosDoGalo, fetchTabelaDoBrasileirao } from "../lib/galo";
 import { useTheme } from "../theme/themeContext";
 import useOnScreen from "../terminal/useOnScreen";
 import { isLastTerminalOutput, scrollLastCommandToTop } from "../terminal/terminalDom";
@@ -13,6 +13,7 @@ import "./Jogos.css";
 // Mineiro, ao vivo da ESPN (ver lib/galo.js e config/galoConfig.js).
 //   jogos          os próximos GALO_CONFIG.PROXIMOS jogos
 //   jogos --todos  todos os jogos já marcados
+//   jogos --tabela a classificação do Brasileirão, com o Galo em destaque
 // Cada jogo mostra o campeonato (com o logo), a fase, os escudos, o
 // dia e a hora (de Brasília), o estádio e quanto falta. O primeiro tem uma
 // contagem regressiva que anda sozinha. No jogo de volta de um mata-mata
@@ -151,8 +152,8 @@ function Escudo({ time, escuro, className = "jogos-escudo" }) {
       src={src}
       alt=""
       loading="lazy"
-      width="60"
-      height="60"
+      width="76"
+      height="76"
       onError={() => setFalhou(true)}
     />
   );
@@ -345,10 +346,293 @@ function UltimoJogo({ jogo }) {
 }
 
 /* ---------------------------------------------------------------------
+   jogos --tabela: classificação do Brasileirão
+   --------------------------------------------------------------------- */
+
+// Distâncias que importam: líder, vaga na Libertadores e Z-4
+function situacaoNaTabela(t, galo, times) {
+  const frases = [];
+  const lider = times[0];
+  if (galo.posicao === 1 && times[1]) {
+    frases.push(t("jogos.tabela.situacao.lider", { count: galo.pontos - times[1].pontos, time: times[1].curto }));
+  } else if (lider) {
+    frases.push(t("jogos.tabela.situacao.do_lider", { count: lider.pontos - galo.pontos, time: lider.curto }));
+  }
+
+  // Última vaga para a Libertadores (direta ou pré): a faixa da ESPN, se vier
+  const vagas = times.filter((time) => ["libertadores", "pre_libertadores"].includes(time.zona?.chave));
+  const ultimaVaga = vagas.at(-1);
+  if (ultimaVaga && galo.posicao > ultimaVaga.posicao) {
+    frases.push(
+      t("jogos.tabela.situacao.do_g", { count: ultimaVaga.pontos - galo.pontos, g: ultimaVaga.posicao })
+    );
+  } else if (ultimaVaga && galo.posicao > 1) {
+    frases.push(t("jogos.tabela.situacao.no_g", { g: ultimaVaga.posicao }));
+  }
+
+  // Primeiro do Z-4: a faixa da ESPN ou, sem ela, o 17º de 20
+  const z4 =
+    times.find((time) => time.zona?.chave === "rebaixamento") ?? (times.length >= 20 ? times[16] : null);
+  if (z4) {
+    if (galo.posicao < z4.posicao) {
+      frases.push(t("jogos.tabela.situacao.acima_z4", { count: galo.pontos - z4.pontos }));
+    } else {
+      const fora = times[z4.posicao - 2];
+      if (fora) frases.push(t("jogos.tabela.situacao.no_z4", { count: fora.pontos - galo.pontos }));
+    }
+  }
+  return frases;
+}
+
+// Últimos 5 jogos do Galo no Brasileirão, do mais antigo ao mais recente
+function formaRecente(encerrados = []) {
+  return encerrados
+    .filter((jogo) => jogo.competicao.slug === "bra.1" && jogo.galo?.gols !== null && jogo.adversario?.gols !== null)
+    .slice(-5)
+    .map((jogo) => {
+      const saldo = jogo.galo.gols - jogo.adversario.gols;
+      return { jogo, resultado: saldo > 0 ? "v" : saldo < 0 ? "d" : "e" };
+    });
+}
+
+function ResumoDoGalo({ galo, times, encerrados }) {
+  const { t } = useTranslation();
+  const f = useFormatters();
+  const forma = formaRecente(encerrados);
+  const saldo = galo.saldo > 0 ? `+${galo.saldo}` : String(galo.saldo);
+  const numeros = [
+    ["jogos", galo.jogos],
+    ["vitorias", galo.vitorias],
+    ["empates", galo.empates],
+    ["derrotas", galo.derrotas],
+    ["gols_pro", galo.golsPro],
+    ["gols_contra", galo.golsContra],
+    ["saldo", saldo],
+    ["aproveitamento", `${galo.aproveitamento}%`],
+  ];
+  return (
+    <div className="jogos-resumo">
+      <div className="jogos-resumo-destaque">
+        <span className="jogos-resumo-posicao">
+          <b>{t("jogos.tabela.posicao", { posicao: galo.posicao })}</b>
+          <small>{t("jogos.tabela.lugar")}</small>
+        </span>
+        <span className="jogos-resumo-pontos">
+          <b>{galo.pontos}</b>
+          <small>{t("jogos.tabela.pontos")}</small>
+        </span>
+      </div>
+
+      <dl className="jogos-resumo-numeros">
+        {numeros.map(([chave, valor]) => (
+          <div key={chave}>
+            <dt>{t(`jogos.tabela.numeros.${chave}`)}</dt>
+            <dd>{valor}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <ul className="jogos-resumo-situacao">
+        {situacaoNaTabela(t, galo, times).map((frase) => (
+          <li key={frase}>{frase}</li>
+        ))}
+      </ul>
+
+      {forma.length > 0 && (
+        <p className="jogos-resumo-forma">
+          <span className="jogos-ultimo-rotulo">{t("jogos.tabela.forma")}</span>
+          {forma.map(({ jogo, resultado }) => (
+            <span
+              key={jogo.id}
+              className={`jogos-resultado jogos-resultado-${resultado}`}
+              title={`${jogo.mandante?.curto} ${jogo.mandante?.gols} × ${jogo.visitante?.gols} ${jogo.visitante?.curto} · ${f.diaMes(jogo.data)}`}
+            >
+              {t(`jogos.resultado.${resultado}`)}
+            </span>
+          ))}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Colunas da tabela; as marcadas como "extra" somem no celular
+const COLUNAS = [
+  ["pontos", "pontos"],
+  ["jogos", "jogos"],
+  ["vitorias", "vitorias", true],
+  ["empates", "empates", true],
+  ["derrotas", "derrotas", true],
+  ["gols_pro", "golsPro", true],
+  ["gols_contra", "golsContra", true],
+  ["saldo", "saldo"],
+  ["aproveitamento", "aproveitamento", true],
+];
+
+function TabelaDoCampeonato({ times, escuro }) {
+  const { t } = useTranslation();
+  // Legenda: uma entrada por faixa de cor, na ordem da tabela
+  const zonas = [];
+  times.forEach((time) => {
+    if (time.zona?.cor && !zonas.some((zona) => zona.cor === time.zona.cor)) zonas.push(time.zona);
+  });
+  const nomeDaZona = (zona) => (zona.chave ? t(`jogos.tabela.zonas.${zona.chave}`) : zona.descricao);
+
+  return (
+    <>
+      <div className="jogos-tabela-rolagem">
+        <table className="jogos-tabela">
+          <caption className="jogos-sr">{t("jogos.tabela.legenda")}</caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" className="jogos-tabela-time">
+                {t("jogos.tabela.colunas.time")}
+              </th>
+              {COLUNAS.map(([chave, , extra]) => (
+                <th
+                  key={chave}
+                  scope="col"
+                  className={extra ? "jogos-tabela-extra" : undefined}
+                  title={t(`jogos.tabela.numeros.${chave}`)}
+                >
+                  {t(`jogos.tabela.colunas.${chave}`)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {times.map((time) => {
+              const galo = time.id === GALO_CONFIG.ESPN_TEAM_ID;
+              return (
+                <tr key={time.id} className={galo ? "jogos-tabela-galo" : undefined}>
+                  <td
+                    className="jogos-tabela-pos"
+                    style={time.zona?.cor ? { "--zona": time.zona.cor } : undefined}
+                    title={time.zona ? nomeDaZona(time.zona) : undefined}
+                  >
+                    {time.posicao}
+                  </td>
+                  <th scope="row" className="jogos-tabela-time">
+                    <span className="jogos-tabela-time-conteudo">
+                      <Escudo time={time} escuro={escuro} className="jogos-tabela-escudo" />
+                      <span className="jogos-nome-longo">{time.nome}</span>
+                      <span className="jogos-nome-curto">{time.curto}</span>
+                    </span>
+                  </th>
+                  {COLUNAS.map(([chave, campo, extra]) => {
+                    let valor = time[campo];
+                    if (campo === "saldo" && valor > 0) valor = `+${valor}`;
+                    if (campo === "aproveitamento") valor = `${valor}%`;
+                    return (
+                      <td
+                        key={chave}
+                        className={[extra && "jogos-tabela-extra", campo === "pontos" && "jogos-tabela-pts"]
+                          .filter(Boolean)
+                          .join(" ") || undefined}
+                      >
+                        {valor}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {zonas.length > 0 && (
+        <ul className="jogos-tabela-zonas">
+          {zonas.map((zona) => (
+            <li key={zona.cor} style={{ "--zona": zona.cor }}>
+              {nomeDaZona(zona)}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
+const Tabela = () => {
+  const { t } = useTranslation();
+  const { theme } = useTheme();
+  const escuro = theme !== "light";
+  const ref = useRef(null);
+
+  const [dados, setDados] = useState(null);
+  const [erro, setErro] = useState(false);
+
+  useEffect(() => {
+    let ativo = true;
+    // Os jogos só servem para a forma recente: se falharem, a tabela sai igual
+    Promise.all([fetchTabelaDoBrasileirao(), fetchJogosDoGalo().catch(() => null)])
+      .then(([tabela, jogos]) => {
+        if (!ativo) return;
+        setDados({ ...tabela, encerrados: jogos?.encerrados ?? [] });
+        if (isLastTerminalOutput(ref.current)) scrollLastCommandToTop();
+      })
+      .catch((error) => {
+        console.error("jogos --tabela: falha ao buscar na ESPN", error);
+        if (ativo) setErro(true);
+      });
+    return () => {
+      ativo = false;
+    };
+  }, []);
+
+  const galo = dados?.times.find((time) => time.id === GALO_CONFIG.ESPN_TEAM_ID);
+
+  return (
+    <section className="jogos" ref={ref} aria-labelledby="jogos-tabela-titulo">
+      <header className="jogos-topo">
+        {galo ? (
+          <Escudo time={galo} escuro={escuro} className="jogos-escudo-galo" />
+        ) : (
+          <img className="jogos-escudo-galo" src="/galo/escudo-cam.webp" alt="" width="56" height="56" />
+        )}
+        <div>
+          <h3 className="jogos-titulo" id="jogos-tabela-titulo">
+            {t("jogos.tabela.titulo")}
+          </h3>
+          <p className="jogos-subtitulo">
+            {[t("jogos.competicoes.brasileirao"), dados?.temporada?.match(/\d{4}/)?.[0], galo && t("jogos.tabela.rodadas", { count: galo.jogos })]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        </div>
+      </header>
+
+      {!dados && !erro && <p className="jogos-aviso">{t("jogos.tabela.carregando")}</p>}
+      {erro && <p className="jogos-aviso jogos-erro">{t("jogos.tabela.erro")}</p>}
+      {dados && dados.times.length === 0 && <p className="jogos-aviso">{t("jogos.tabela.vazia")}</p>}
+
+      {galo && <ResumoDoGalo galo={galo} times={dados.times} encerrados={dados.encerrados} />}
+      {dados?.times.length > 0 && <TabelaDoCampeonato times={dados.times} escuro={escuro} />}
+
+      <p className="jogos-mais">
+        <Trans i18nKey="jogos.tabela.dica" components={{ cmd: <code /> }} />
+      </p>
+      <p className="jogos-fonte">
+        <Trans
+          i18nKey="jogos.tabela.fonte"
+          components={{
+            espn: <a href={GALO_CONFIG.ESPN_STANDINGS_PAGE} target="_blank" rel="noopener noreferrer" />,
+          }}
+        />
+      </p>
+    </section>
+  );
+};
+
+/* ---------------------------------------------------------------------
    Comando
    --------------------------------------------------------------------- */
 
-const Jogos = ({ todos = false }) => {
+const Jogos = ({ todos = false, tabela = false }) => (tabela ? <Tabela /> : <ProximosJogos todos={todos} />);
+
+const ProximosJogos = ({ todos }) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const escuro = theme !== "light";
@@ -435,6 +719,7 @@ const Jogos = ({ todos = false }) => {
           i18nKey="jogos.fonte"
           components={{
             espn: <a href={GALO_CONFIG.ESPN_PAGE} target="_blank" rel="noopener noreferrer" />,
+            cmd: <code />,
           }}
         />
       </p>
