@@ -111,8 +111,14 @@
 }
 
 .sobre-chips svg {
+  display: block;
+  flex-shrink: 0;
   color: var(--serie);
   font-size: 1rem;
+  /* Alinhamento óptico: a Fira Code tem ascendente maior que o
+     descendente, então o miolo das letras fica um pouco acima do centro da
+     linha (~0,5px). Sobe o ícone o mesmo tanto para centralizar com o texto. */
+  transform: translateY(-0.03em);
 }
 
 /* ---------------------------------------------------------------------
