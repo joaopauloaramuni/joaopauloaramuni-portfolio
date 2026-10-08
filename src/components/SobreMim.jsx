@@ -192,11 +192,11 @@ function Cabecalho() {
   return (
     <header className="sobre-cabecalho">
       <img
-        src="/avatar.jpeg"
+        src="/avatar-3.jpeg"
         alt={t("sobre.avatar_alt")}
         className="sobre-avatar"
-        width="132"
-        height="132"
+        width="180"
+        height="180"
       />
       <div className="sobre-identidade">
         <h3 className="sobre-nome">{t("sobre.nome")}</h3>

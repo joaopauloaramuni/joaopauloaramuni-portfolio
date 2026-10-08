@@ -134,7 +134,7 @@ function Balao({ children, estado = "pronto" }) {
   const { t } = useTranslation();
   return (
     <div className={`ask-balao ask-estado-${estado}`}>
-      <img src={AVATAR} alt="" aria-hidden="true" className="ask-avatar" width="40" height="40" />
+      <img src={AVATAR} alt="" aria-hidden="true" className="ask-avatar" width="56" height="56" />
       <div className="ask-corpo">
         <p className="ask-autor">
           <span className="ask-nome">{t("ask.nome")}</span>

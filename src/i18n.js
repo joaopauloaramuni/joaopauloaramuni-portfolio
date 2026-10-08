@@ -227,7 +227,7 @@ const resources = {
             cargo: "Technology consultant",
             org: "Jedis",
             detalhe:
-              "AI for finding and assessing technical profiles, system architecture, observability, AWS and team mentoring",
+              "AI for finding and assessing technical profiles, system architecture, observability and team mentoring",
           },
           disciplinas_agora_one: "{{count}} course in {{semestre}}",
           disciplinas_agora_other: "{{count}} courses in {{semestre}}",
@@ -2593,7 +2593,7 @@ const resources = {
             cargo: "Consultor de tecnologia",
             org: "Jedis",
             detalhe:
-              "IA na identificação e avaliação de perfis técnicos, arquitetura de sistemas, observabilidade, AWS e mentoria de times",
+              "IA na identificação e avaliação de perfis técnicos, arquitetura de sistemas, observabilidade e mentoria de times",
           },
           disciplinas_agora_one: "{{count}} disciplina em {{semestre}}",
           disciplinas_agora_other: "{{count}} disciplinas em {{semestre}}",

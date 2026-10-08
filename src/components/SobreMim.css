@@ -47,8 +47,8 @@
 
 .sobre-avatar {
   flex-shrink: 0;
-  width: 132px;
-  height: 132px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
@@ -1025,8 +1025,8 @@ a.sobre-tag:focus-visible {
 
 @media (max-width: 600px) {
   .sobre-avatar {
-    width: 112px;
-    height: 112px;
+    width: 150px;
+    height: 150px;
   }
 
   .sobre-nome {

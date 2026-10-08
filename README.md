@@ -1639,7 +1639,8 @@ src/
   components/SobreMim.css   → estilos (só usa var(--token)), com layout para celular
   i18n.js                   → textos em sobre.* (pt/en)
 public/
-  avatar.jpeg               → foto do cabeçalho
+  avatar-3.jpeg             → foto do cabeçalho (também usada no ask)
+  avatar-1..4.jpeg          → variações da foto
   logos/                    → logos das empresas e instituições (inclui aes.jpg e fdc.jpg)
 ```
 

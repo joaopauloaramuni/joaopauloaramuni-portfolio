@@ -10,14 +10,14 @@
 /* ---------- Balão: foto + nome + texto ---------- */
 .ask-balao {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-columns: 56px minmax(0, 1fr);
   gap: 0.85rem;
   align-items: start;
 }
 
 .ask-avatar {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
@@ -218,7 +218,7 @@
 
 /* ---------- Apresentação (ask sem pergunta) ---------- */
 .ask-sugestoes {
-  margin: 0.9rem 0 0 calc(40px + 0.85rem);
+  margin: 0.9rem 0 0 calc(56px + 0.85rem);
   font-size: 0.85rem;
 }
 
@@ -242,7 +242,7 @@
 }
 
 .ask-aviso {
-  margin: 0.9rem 0 0 calc(40px + 0.85rem);
+  margin: 0.9rem 0 0 calc(56px + 0.85rem);
   color: var(--text-dim);
   font-size: 0.75rem;
   line-height: 1.5;
@@ -264,13 +264,13 @@
 /* ---------- Celular ---------- */
 @media (max-width: 600px) {
   .ask-balao {
-    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-columns: 44px minmax(0, 1fr);
     gap: 0.6rem;
   }
 
   .ask-avatar {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
   }
 
   .ask-corpo {
