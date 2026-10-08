@@ -585,7 +585,8 @@ function Pessoal() {
             i18nKey="sobre.pessoal.time"
             components={{ galo: <Link href={GALO_URL} className="sobre-link" /> }}
           />{" "}
-          <Cmd className="sobre-cmd-inline">neofetch</Cmd>
+          <Cmd className="sobre-cmd-inline">neofetch</Cmd>{" "}
+          <Cmd className="sobre-cmd-inline">galo</Cmd>
         </>
       ),
     },
@@ -615,7 +616,7 @@ function Pessoal() {
               );
             })}
           </span>
-          <Cmd className="sobre-cmd-inline">game</Cmd>
+          <Cmd className="sobre-cmd-inline">aragame</Cmd>
         </>
       ),
     },

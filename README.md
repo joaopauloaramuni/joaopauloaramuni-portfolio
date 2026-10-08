@@ -35,8 +35,9 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
 * 👥 **turmas / acompanhamento / ti:** Acompanhamento de turmas de TI (Trabalhos Interdisciplinares). Compara os grupos que eu oriento em TI:II e TI:V pelos repositórios no GitHub, sem contar os professores: linhas de código, linguagens, commits por semana, equilíbrio entre os integrantes, pull requests, issues e o resumo do README de cada projeto. Tem um gráfico por opção: `turmas --resumo` (padrão), `turmas --codigo`, `turmas --linguagens`, `turmas --ritmo`, `turmas --equilibrio`, `turmas --prs`, `turmas --projetos` e `turmas --tudo`, e filtros por disciplina, campus e grupo (`turmas ti5 coreu --ritmo`, `turmas uaiport`). Os dados vêm do `npm run turmas`.
 * 📚 **canvas / tarefas / prazos / entregas:** Tarefas das minhas disciplinas no Canvas: a próxima entrega em destaque, com contagem regressiva, os prazos do semestre e quantos alunos já entregaram cada tarefa (no prazo, atrasadas, faltando e a corrigir). Tem uma seção por opção: `canvas --resumo` (padrão), `canvas --tarefas`, `canvas --agenda` (tarefas, eventos do calendário do Canvas e feriados da PUC, dia a dia) e `canvas --tudo`, e filtros por disciplina, curso, campus e turma (`canvas diw --tarefas`, `canvas cc`, `canvas ti5 coreu`). Os dados vêm do `npm run canvas`: a chave da API do Canvas nunca vai para o site.
-* 🐓 **neofetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
-* 🕹️ **game:** Permite jogar o Flappy Plane diretamente no terminal web.
+* 🐓 **neofetch / fetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
+* ⚽ **jogos / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `jogos --todos` mostra todos os marcados.
+* 🕹️ **aragame / araplane:** Permite jogar o Flappy Plane diretamente no terminal web.
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
@@ -272,15 +273,16 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ WakaTime                   → wakatime
 │   │   ├── ⚛️ Spotify                    → spotify
 │   │   ├── ⚛️ Neofetch                   → neofetch
+│   │   ├── ⚛️ Jogos                      → jogos / galo (próximos jogos do Atlético)
 │   │   ├── ⚛️ DesignSystem               → design
-│   │   ├── ⚛️ FlappyPlaneGame            → game
+│   │   ├── ⚛️ FlappyPlaneGame            → aragame
 │   │   ├── ⚛️ LivroVisitas               → guestbook
 │   │   ├── ⚛️ LanguageSwitcher · ThemeToggle → seletor PT | EN e botões de tema (sol, lua e galo)
 │   │   ├── ⚛️ GaloFundo                  → foto de fundo do tema galo
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
 │   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (jogo e guestbook)
-│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime e ask
+│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask e jogos do Galo
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
 │   │   ├── 🗂️ ask                        → askData.js (o que a IA deve saber e não está no site)
@@ -297,6 +299,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── 📜 githubApi.js · githubPaths.js → GitHub API (direto ou pelo proxy) e os únicos caminhos que o proxy aceita
 │   │   ├── 📜 githubStats.js             → busca e cálculos do stats (com cache, renovado a cada dia)
 │   │   ├── 📜 wakatime.js                → busca do WakaTime pelo proxy
+│   │   ├── 📜 galo.js                    → jogos do Galo (ESPN) e placar agregado
 │   │   ├── 📜 horario.js                 → "agora" em BH, próxima aula e semana do semestre (cal)
 │   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
 │   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas

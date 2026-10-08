@@ -49,6 +49,7 @@ const Premios = lazyCommand(() => import("./components/Premios"));
 const FlappyPlaneGame = lazyCommand(() => import("./components/FlappyPlaneGame"));
 const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
 const Neofetch = lazyCommand(() => import("./components/Neofetch"));
+const Jogos = lazyCommand(() => import("./components/Jogos"));
 const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
 // O "pergunta" (ask) chama a IA no servidor (api/ask.js): aqui é só o desenho
 const Ask = lazyCommand(() => import("./components/Ask"));
@@ -88,6 +89,7 @@ const PRELOAD = [
   FlappyPlaneGame,
   LivroVisitas,
   Neofetch,
+  Jogos,
   DesignSystem,
   Ask,
 ];
@@ -414,6 +416,18 @@ function App() {
         case "neofetch":
           response = <Neofetch />;
           break;
+        case "jogos": {
+          // "jogos" (ou "galo", "atletico") mostra os próximos jogos do Galo,
+          // ao vivo da ESPN; "--todos" | "--all" mostram todos os marcados
+          if (subCommand && !command.subcommands.includes(subCommand)) {
+            response = <TerminalOutput>{t("jogos.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <Jogos todos={Boolean(subCommand)} />;
+          // Saída longa: leva o comando para o topo em vez de cair no fim
+          keepLastCommandAtTop();
+          break;
+        }
         case "design":
           response = <DesignSystem />;
           // Saída longa: leva o comando para o topo em vez de cair no fim
@@ -422,7 +436,7 @@ function App() {
         case "contato":
           response = <Contato onExit={exitComponent} />;
           break;
-        case "game":
+        case "aragame":
           response = <FlappyPlaneGame onExit={exitComponent} />;
           break;
         case "guestbook": {

@@ -1,0 +1,468 @@
+/* =====================================================================
+   JOGOS — comando "jogos" / "galo" / "atletico": próximos jogos do Galo.
+   Mesma moldura do Canvas.css (borda na cor de destaque, 60% da largura).
+   Cada jogo é um card: logo do campeonato à esquerda; campeonato, confronto com
+   os escudos, dia, hora e quanto falta à direita. O primeiro ganha a
+   contagem regressiva. Cores só dos tokens do tema (theme.css).
+   ===================================================================== */
+
+.jogos {
+  width: 60%;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  margin: 1rem auto;
+  padding: 1rem 1.5rem 1.25rem;
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   Topo: escudo do Galo e título
+   --------------------------------------------------------------------- */
+.jogos-topo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.jogos-escudo-galo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.jogos-titulo {
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.jogos-subtitulo {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.jogos-aviso {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.jogos-erro {
+  color: var(--warn);
+}
+
+/* ---------------------------------------------------------------------
+   Lista de jogos
+   --------------------------------------------------------------------- */
+.jogos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.jogos-card {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.4rem 1.5rem;
+  align-items: center;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.jogos-card-destaque {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-project-hover);
+}
+
+.jogos-card-vivo {
+  border-color: var(--success);
+}
+
+/* Logo do campeonato (ESPN) */
+.jogos-taca {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+  justify-self: center;
+}
+
+.jogos-taca-vazia {
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+}
+
+.jogos-corpo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.jogos-corpo p {
+  margin: 0;
+}
+
+.jogos-competicao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.jogos-competicao strong {
+  color: var(--text);
+}
+
+/* Confronto: mandante  ×  visitante, com os escudos colados no × */
+.jogos-confronto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0.25rem 0;
+}
+
+.jogos-time {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.jogos-time-casa {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* Nome longo ("Montevideo City Torque") quebra em até duas linhas em vez
+   de ser cortado */
+.jogos-time-nome {
+  min-width: 0;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.jogos-time-galo .jogos-time-nome {
+  color: var(--accent);
+}
+
+.jogos-nome-curto {
+  display: none;
+}
+
+.jogos-escudo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+
+.jogos-escudo-vazio {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.jogos-x {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.jogos-card-vivo .jogos-x {
+  color: var(--text);
+}
+
+.jogos-quando {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.jogos-local {
+  color: var(--text-muted);
+}
+
+.jogos-local::before {
+  content: "📍 ";
+}
+
+/* Chip "em casa" / "fora" */
+.jogos-mando {
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.jogos-mando-casa {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.jogos-falta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--highlight);
+}
+
+.jogos-falta-vivo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--success);
+  text-transform: uppercase;
+}
+
+.jogos-pulso {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--success);
+  animation: jogos-pulso 1.2s ease-in-out infinite;
+}
+
+@keyframes jogos-pulso {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Contagem regressiva do próximo jogo (mesmo desenho do relógio do canvas) */
+.jogos-relogio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.jogos-relogio-casa {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.4rem;
+  padding: 0.35rem 0.5rem 0.3rem;
+  border-radius: 8px;
+  background: var(--bg-terminal);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.jogos-relogio-casa b {
+  font-size: 1.45rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.jogos-relogio-casa small {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Mata-mata: placar agregado e o que o Galo precisa */
+.jogos-agregado {
+  padding: 0.45rem 0.7rem;
+  border-left: 3px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-terminal);
+  font-size: 0.85rem;
+}
+
+.jogos-agregado.jogos-bom {
+  border-left-color: var(--success);
+}
+
+.jogos-agregado.jogos-ruim {
+  border-left-color: var(--icon-location);
+}
+
+.jogos-agregado-rotulo {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.jogos-agregado-ida,
+.jogos-agregado-situacao {
+  color: var(--text-muted);
+}
+
+.jogos-volta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Rodapé: "+ N jogos", último resultado e fonte
+   --------------------------------------------------------------------- */
+.jogos-mais,
+.jogos-ultimo,
+.jogos-fonte {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.jogos-mais code {
+  color: var(--accent);
+}
+
+.jogos-ultimo strong {
+  color: var(--text);
+}
+
+.jogos-ultimo-rotulo {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+/* V / E / D, como na tabela do campeonato */
+.jogos-resultado {
+  display: inline-grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: bold;
+  color: var(--on-accent);
+  background: var(--text-muted);
+}
+
+.jogos-resultado-v {
+  background: var(--success);
+}
+
+.jogos-resultado-d {
+  background: var(--icon-location);
+}
+
+.jogos-fonte {
+  font-size: 0.75rem;
+}
+
+.jogos-fonte a {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jogos-pulso {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Telas menores
+   --------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .jogos {
+    width: 75%;
+  }
+}
+
+@media (max-width: 900px) {
+  .jogos {
+    width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .jogos-titulo {
+    font-size: 1.4rem;
+  }
+
+  /* Uma coluna só: o logo do campeonato vai para o canto do card e cada time fica com o
+     escudo em cima do nome, como num placar de TV */
+  .jogos-card {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.75rem;
+  }
+
+  .jogos-taca {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .jogos-competicao {
+    padding-right: 3.4rem;
+  }
+
+  .jogos-confronto {
+    gap: 0.4rem;
+    margin-top: 0.2rem;
+  }
+
+  .jogos-time,
+  .jogos-time-casa {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .jogos-time-nome {
+    white-space: normal;
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  /* Nomes curtos ("MC Torque") para caber */
+  .jogos-nome-longo {
+    display: none;
+  }
+
+  .jogos-nome-curto {
+    display: inline;
+  }
+
+  .jogos-escudo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .jogos-relogio-casa {
+    min-width: 2.9rem;
+  }
+
+  .jogos-relogio-casa b {
+    font-size: 1.2rem;
+  }
+}

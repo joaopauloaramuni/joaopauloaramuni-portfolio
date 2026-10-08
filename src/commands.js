@@ -144,11 +144,18 @@ export const commandList = {
   },
   neofetch: {
     name: 'neofetch',
-    aliases: ['fetch', 'galo'],
+    aliases: ['fetch'],
   },
-  game: {
-    name: 'game',
-    aliases: ['araplane', 'aragame'],
+  jogos: {
+    name: 'jogos',
+    aliases: ['galo', 'atletico'],
+    // Próximos jogos do Atlético Mineiro (ver components/Jogos.jsx);
+    // --todos | --all mostram todos os jogos já marcados
+    subcommands: ['--todos', '--all'],
+  },
+  aragame: {
+    name: 'aragame',
+    aliases: ['araplane'],
   },
   guestbook: {
     name: 'guestbook',
