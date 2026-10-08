@@ -1199,7 +1199,7 @@ const resources = {
           desc: "Shows my GitHub stats (stats --repos | --all changes the chart).",
         },
         neofetch: { desc: "Shows system info with the Galo crest, neofetch style." },
-        jogos: { desc: "Galo's upcoming matches: countdown, competition, crests and aggregate score (jogos --all | --table)." },
+        jogos: { desc: "Galo's upcoming matches: countdown and competition (jogos --all | --table)." },
         curriculo: {
           desc: "Displays my resume with PDF preview.",
         },
@@ -3563,7 +3563,7 @@ const resources = {
           desc: "Mostra as informações do sistema com o escudo do Galo, no estilo neofetch.",
         },
         jogos: {
-          desc: "Próximos jogos do Galo: contagem regressiva, campeonato, escudos e placar agregado (jogos --todos | --tabela).",
+          desc: "Próximos jogos do Galo: contagem regressiva e campeonato (jogos --todos | --tabela).",
         },
         curriculo: {
           desc: "Exibe meu currículo com visualização em PDF.",
