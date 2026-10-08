@@ -50,6 +50,8 @@ const FlappyPlaneGame = lazyCommand(() => import("./components/FlappyPlaneGame")
 const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
 const Neofetch = lazyCommand(() => import("./components/Neofetch"));
 const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
+// O "pergunta" (ask) chama a IA no servidor (api/ask.js): aqui é só o desenho
+const Ask = lazyCommand(() => import("./components/Ask"));
 // O currículo traz o react-pdf e o PDF.js (~400 kB)
 const Curriculo = lazyCommand(() => import("./components/Curriculo"));
 // O "lattes" traz ~90 kB de dados (TCCs, trabalhos e bancas)
@@ -87,6 +89,7 @@ const PRELOAD = [
   LivroVisitas,
   Neofetch,
   DesignSystem,
+  Ask,
 ];
 
 const whenIdle = (fn) =>
@@ -250,6 +253,16 @@ function App() {
         case "ajuda":
           response = <Ajuda />;
           break;
+        case "pergunta": {
+          // "pergunta <texto>" ou "ask <texto>": a IA responde em primeira
+          // pessoa (ver components/Ask.jsx). O texto vai como foi digitado,
+          // sem o nome do comando (os args acima estão em minúsculas);
+          // "--nova" e "--new" esquecem a conversa
+          const pergunta = input.trim().replace(/^\S+\s*/, "");
+          const nova = ["--nova", "--new"].includes(pergunta.toLowerCase());
+          response = <Ask pergunta={nova ? "" : pergunta} nova={nova} />;
+          break;
+        }
         case "premios":
           response = <Premios />;
           break;

@@ -9,6 +9,13 @@ export const commandList = {
     name: 'sobre',
     aliases: ['about'],
   },
+  pergunta: {
+    name: 'pergunta',
+    aliases: ['ask', 'chat'],
+    // pergunta <texto> (ou ask <texto>): a IA responde em primeira pessoa
+    // (ver components/Ask.jsx); --nova | --new esquecem a conversa
+    subcommands: ['--nova', '--new'],
+  },
   ajuda: {
     name: 'ajuda',
     aliases: ['help'],

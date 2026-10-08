@@ -15,6 +15,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 🖥️ O portfólio simula um **terminal** web, permitindo que visitantes explorem meu conteúdo através de comandos, tornando a navegação divertida e única. Entre os comandos disponíveis estão:
 
 * 👤 **sobre / about:** Mostra quem sou: o que faço hoje, a trajetória em duas colunas (programador por profissão, professor por vocação), a formação com os trabalhos finais, as disciplinas que lecionei, números, clientes e um pouco de mim fora do terminal (time, hobbies, séries e os carimbos no passaporte, com bandeiras).
+* 🤖 **pergunta / ask / chat:** Pergunte o que quiser sobre mim (`pergunta quem é você?`): uma IA (Google Gemini) responde em primeira pessoa, ao lado da minha foto, com base no meu currículo e no conteúdo deste portfólio. A resposta aparece digitada aos poucos, lembra das últimas perguntas da conversa (`pergunta --nova` esquece) e os comandos citados viram botões que escrevem no terminal.
 * 📜 **ajuda:** Exibe a lista de comandos disponíveis.
 * 🏢 **experiencias:** Mostra minha trajetória profissional e experiências.
 * 📧 **contato:** Exibe minhas informações de contato e envia email via EmailJS, protegido por Google reCAPTCHA v2 e por um campo isca (honeypot) contra spam.
@@ -122,9 +123,9 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 
 ### 💡 O que o diagrama mostra
 
-- **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda uma única função, a `api/github.js`, que só existe para o token do GitHub não ir para o navegador.
+- **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda duas funções, a `api/github.js` e a `api/ask.js`, que só existem para o token do GitHub e a chave da IA (comando `pergunta`) não irem para o navegador. A `api/ask.js` ainda não está no diagrama.
 - **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
-- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e a site key do reCAPTCHA (a secret key do reCAPTCHA fica no painel do EmailJS). O token do GitHub (`GITHUB_SITE_TOKEN`, sem `VITE_`) fica só no servidor, na Vercel Function `api/github.js`, e nunca chega ao navegador.
+- **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e a site key do reCAPTCHA (a secret key do reCAPTCHA fica no painel do EmailJS). O token do GitHub (`GITHUB_SITE_TOKEN`) e a chave da IA (`GEMINI_API_KEY`), sem `VITE_`, ficam só no servidor, nas Vercel Functions `api/github.js` e `api/ask.js`, e nunca chegam ao navegador.
 
 -----
 
@@ -177,7 +178,8 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
 * **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas.
-* **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e a Vercel Function `api/github.js`, que acrescenta o token do GitHub no servidor.
+* **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e as Vercel Functions `api/github.js`, que acrescenta o token do GitHub no servidor, e `api/ask.js`, que fala com a IA do comando `pergunta`.
+* **Google Gemini:** IA do comando `pergunta`, no plano gratuito do Google AI Studio, chamada pela API compatível com a da OpenAI (sem pacote: um `fetch` no servidor).
 
 -----
 
@@ -209,7 +211,7 @@ Ferramentas de desenvolvimento (`devDependencies`), que não vão para o site:
 
 > 🔒 **Rollup travado na 4.63.** O `package.json` tem um `overrides` que mantém o Rollup, que o Vite usa no build, em `~4.63.6`. A versão 4.64 (de outubro de 2026) deixou o build deste projeto cerca de 25 vezes mais lento: de ~15 s para ~5 min. A causa provável é a nova análise de `try/catch` da 4.64.0 ([rollup#6541](https://github.com/rollup/rollup/pull/6541)). A 4.63.6 já tem a correção de segurança [GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc), que entrou na 4.59.0, então o `npm audit` fica zerado. Quando sair uma versão nova do Rollup, tire o `overrides`, rode `npm install` e confira o tempo do `npm run build` antes de commitar.
 
-Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
+Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). O `npm run ask` usa dois que já estão no projeto: o **vite**, para carregar os dados dos comandos como o site carrega, e o **pdfjs-dist** (que vem com o react-pdf), para ler o texto do currículo em PDF. Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
 
 > 💡 O `react-calendly` não é usado: o Calendly entra num `<iframe>` (veja [a comparação](#-diferença-entre-usar-react-calendly-e-o-embed-oficial)).
 
@@ -227,7 +229,10 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   └── 📝 PULL_REQUEST_TEMPLATE.md
 ├── 📁 api                                → Vercel Functions (rodam no servidor)
 │   ├── ⚙️ github.js                      → /api/github: proxy da GitHub API com o token do site
-│   └── ⚙️ _github.js                     → regras do proxy: caminhos aceitos, GraphQL e cache
+│   ├── ⚙️ _github.js                     → regras do proxy: caminhos aceitos, GraphQL e cache
+│   ├── ⚙️ ask.js                         → /api/ask: pergunta do comando ask para a IA (Gemini)
+│   ├── ⚙️ _ask.js                        → prompt, limites por visitante e streaming da resposta
+│   └── 🧠 _askPerfil.js                  → o que a IA sabe sobre mim (gerado)
 ├── 📁 docs
 │   └── 🖼️ diagrama-componentes-implantacao-portfolio.png
 ├── 📁 public                             → arquivos servidos como estão (entram no build)
@@ -241,13 +246,15 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 ├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
 │   ├── 🛠️ lattes.mjs                     → importa o XML do Lattes (npm run lattes)
 │   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
-│   └── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
+│   ├── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
+│   └── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
 ├── 📁 src
 │   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
 │   ├── 📁 components                     → um componente (.jsx + .css) por comando ou recurso
 │   │   ├── ⚛️ BootSequence · BoasVindas  → sequência de boot e tela de boas-vindas
 │   │   ├── ⚛️ Ajuda                      → ajuda
 │   │   ├── ⚛️ SobreMim                   → sobre
+│   │   ├── ⚛️ Ask                        → pergunta / ask (resposta da IA com a minha foto)
 │   │   ├── ⚛️ Experiencias · ExperienceCard → experiencias
 │   │   ├── ⚛️ Projetos · ProjectCard     → projetos
 │   │   ├── ⚛️ ProjetosGitHub             → github (usa o ProjectCard)
@@ -273,9 +280,10 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
 │   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (jogo e guestbook)
-│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats e WakaTime
+│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime e ask
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
+│   │   ├── 🗂️ ask                        → askData.js (o que a IA deve saber e não está no site)
 │   │   ├── 🗂️ experiencias · projetos · premios · recomendacoes → experiencesData.js, projectsData.js, awardsData.js, recommendationsData.js
 │   │   ├── 🗂️ skills                     → skillsData.js, globeSkills.js, skillSkins.js
 │   │   ├── 🗂️ cal                        → horarioData.js, calendarioPuc.js, feriados.js, calSkins.js
@@ -293,6 +301,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
 │   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas
 │   │   ├── 📜 supabase.js                → cliente do Supabase (guestbook)
+│   │   ├── 📜 ask.js                     → pergunta para /api/ask, lê o streaming e lembra da conversa
 │   │   └── 📜 recaptcha.js               → carrega o script do reCAPTCHA uma vez só
 │   ├── 📁 terminal                       → peças do terminal
 │   │   ├── ⌨️ useTerminalKeys.js · autocomplete.js → histórico (↑ ↓) e autocomplete (Tab)
@@ -311,8 +320,8 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 ├── 🐳 .dockerignore
 ├── 🐳 Dockerfile                         → build com Node + NGINX
 ├── 🔀 nginx.conf                         → proxy de /api/* e tipos de arquivo no container (igual ao vercel.json)
-├── ▲ vercel.json                         → rewrites de /api/* na Vercel
-├── ⚡ vite.config.js                     → build do Vite, proxy e /api/github no npm run dev
+├── ▲ vercel.json                         → rewrites de /api/* e tempo máximo do /api/ask na Vercel
+├── ⚡ vite.config.js                     → build do Vite, proxy, /api/github e /api/ask no npm run dev
 ├── 🧹 eslint.config.js
 ├── 🌐 index.html                         → HTML base, metatags e prévia do link
 ├── 📦 package.json
@@ -322,7 +331,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 └── 📘 README.md
 ```
 
-Os arquivos marcados como **(gerado)** saem dos scripts `npm run lattes`, `npm run turmas` e `npm run canvas`: não edite à mão, rode o script de novo.
+Os arquivos marcados como **(gerado)** saem dos scripts `npm run lattes`, `npm run turmas`, `npm run canvas` e `npm run ask`: não edite à mão, rode o script de novo.
 
 -----
 
@@ -1799,6 +1808,124 @@ src/
   components/Canvas.jsx       → próxima entrega, tarefas, tabela e agenda
   components/Canvas.css       → layout, barras e folhinhas, com layout para celular
   theme/theme.css             → cores das entregas (--canvas-*)
+```
+
+-----
+
+## 🤖 Guia do comando pergunta (ask, perguntas com IA)
+
+O comando `pergunta` (aliases `ask` e `chat`) deixa o visitante perguntar o que quiser sobre mim. Uma IA responde **em primeira pessoa**, ao lado da minha foto (a mesma do `sobre`), com base no meu currículo e no conteúdo deste portfólio: "Oi! Sou o João Paulo, professor de Engenharia de Software...".
+
+| Comando | O que faz |
+|:--|:--|
+| `pergunta` | Apresentação e sugestões de perguntas (clicar numa sugestão escreve no terminal) |
+| `pergunta <texto>` (ou `ask <texto>`) | A resposta, digitada aos poucos enquanto chega (streaming), com um selo **IA** ao lado do nome |
+| `pergunta --nova` (`--new`) | Esquece a conversa: as próximas perguntas não levam as anteriores |
+
+A pergunta pode ser em português ou inglês (a IA responde no idioma da pergunta). As últimas 3 perguntas e respostas vão junto com a próxima, então dá para perguntar "e antes disso?". Comandos citados na resposta, como `lattes --tccs`, viram botões que escrevem o comando no terminal: é só apertar Enter. Link direto: [aramuni.dev/?cmd=pergunta quem é você?](https://aramuni.dev/?cmd=pergunta%20quem%20%C3%A9%20voc%C3%AA%3F).
+
+### 1️⃣ Como funciona
+
+```text
+navegador (Ask.jsx)                    servidor (api/ask.js → api/_ask.js)            Google Gemini
+pergunta quem é você? ─ POST /api/ask ─► confere origem, tamanho e limite do visitante
+                    { pergunta,         monta o prompt: regras + base (_askPerfil.js) ──► chat/completions
+                      idioma,             + data de hoje, idade e anos de experiência      (stream: true)
+                      historico }
+resposta digitada ◄── texto puro ────── repassa só o texto, pedaço por pedaço ◄──────── SSE
+```
+
+- **A chave não vai para o navegador.** O navegador chama `/api/ask` no próprio domínio; quem fala com o Gemini é a Vercel Function `api/ask.js` (no `npm run dev` e no `npm run preview`, o `vite.config.js`). As regras ficam em `api/_ask.js`, do mesmo jeito que o `api/_github.js`.
+- **A IA só sabe o que está na base.** O prompt manda responder só com o que está em `api/_askPerfil.js`, nunca inventar, dizer quando não sabe (e indicar o `contato`), não prometer nada em meu nome, não escrever código para o visitante e ignorar pedidos para mudar as regras. Se alguém perguntar se sou eu mesmo, a IA diz que é uma IA que responde na minha voz.
+- **Datas sempre certas.** Idade, anos de mercado e de ensino e o semestre atual são calculados no servidor no dia da pergunta (fuso de BH), não na hora em que a base foi gerada.
+
+### 2️⃣ Criar a chave (grátis)
+
+1. Entre em [aistudio.google.com/apikey](https://aistudio.google.com/apikey) com uma conta Google e clique em **Create API key**. O plano gratuito não pede cartão.
+2. Coloque a chave no `.env.local` e reinicie o `npm run dev`:
+
+```bash
+GEMINI_API_KEY=AIza...
+```
+
+3. Na Vercel: **Settings → Environment Variables**, crie `GEMINI_API_KEY` (marcada como *Sensitive*) e faça um novo deploy.
+
+> ⚠️ **Sem `VITE_` na frente.** Tudo que começa com `VITE_` vai para o build e qualquer visitante consegue ler. Sem a chave, o comando `pergunta` avisa que não está configurado; o resto do site funciona normalmente.
+
+> 🔎 **Plano gratuito × pago.** No plano gratuito, o Google pode usar as perguntas e respostas para melhorar os produtos dele. A base só tem informação pública (está no site ou no currículo em PDF), e o aviso do comando `pergunta` diz que as respostas vêm de uma IA do Google. Se quiser que os dados não sejam usados, ou precisar de mais cota, ative o faturamento no projeto do AI Studio: com o Flash-Lite (US$ 0,30 por milhão de tokens de entrada), cada pergunta, com seus ~20 mil tokens de base, sai por menos de 1 centavo de dólar.
+
+### 3️⃣ O que a IA sabe (npm run ask)
+
+```bash
+npm run ask
+# ✔ api/_askPerfil.js: 84.4 kB, ~21 mil tokens por pergunta
+```
+
+O script `scripts/ask.mjs` junta num Markdown só:
+
+1. **O que os comandos mostram**, em português, lido do `i18n.js` e dos arquivos de `src/data` pelo próprio Vite: `sobre` (bio, hoje, trajetória, formação, vivência, clientes e "fora do terminal"), `experiencias`, `projetos`, `premios`, `skills`, as disciplinas do `docenciaData.js`, o resumo do `lattes` (projetos da AES, TCCs e TIs orientados), as recomendações (as 15 mais recentes com um trecho, as outras só com o nome) e a lista de comandos, para a IA poder indicar um.
+2. **O texto do currículo em PDF** (`public/cv-pt.pdf`), lido com o `pdfjs-dist`. O telefone fica de fora.
+3. **O `EXTRAS` do `src/data/askData.js`**: o que você quer que a IA saiba e não aparece no site (como prefere ser procurado, disponibilidade para palestras, opiniões...). Escreva em primeira pessoa.
+
+O resultado vai para `api/_askPerfil.js`, que dá para abrir e ler: é exatamente o que a IA recebe. Rode de novo e faça commit sempre que mudar o currículo, o `i18n.js` ou os dados dos comandos. Quando o portfólio e o PDF discordam (o PDF fica desatualizado mais rápido), a IA segue o portfólio.
+
+### 4️⃣ Limites
+
+| Limite | Valor | Onde muda |
+|:--|:--|:--|
+| Perguntas por visitante (IP) | 6 por minuto e 60 por dia | `LIMITES` em `api/_ask.js` |
+| Tamanho da pergunta | 500 caracteres | `MAX_PERGUNTA` em `src/config/askConfig.js` |
+| Conversa que vai junto | 6 mensagens (3 perguntas e respostas), 1.500 caracteres cada | `MAX_HISTORICO` e `MAX_TEXTO_HISTORICO` em `src/config/askConfig.js` |
+| Tamanho da resposta | 1.200 tokens | `MAX_TOKENS` em `api/_ask.js` |
+
+O limite por visitante fica na memória da função: vale por instância, então segura abusos comuns, não um ataque. Para um limite firme, use o **Firewall da Vercel** (regra de rate limit em `/api/ask`). A rota também só aceita `POST` do próprio site (cabeçalho `Origin`) e cancela a chamada ao Gemini se o visitante fechar a página no meio. Quando a cota gratuita do Gemini acaba, o comando `pergunta` avisa e sugere o `contato`; ela volta sozinha (a diária, à meia-noite do horário do Pacífico). As cotas de cada modelo aparecem no AI Studio, em **Rate limit**.
+
+### 5️⃣ Trocar de modelo ou de provedor
+
+O modelo padrão é o `gemini-3.5-flash-lite`, o mais rápido e com mais cota grátis. A chamada usa o endpoint do Gemini compatível com a API da OpenAI, então dá para trocar de modelo ou de provedor só com variáveis de ambiente, sem mexer no código:
+
+| Provedor | `ASK_API_URL` | `ASK_MODEL` (exemplo) |
+|:--|:--|:--|
+| Google Gemini (padrão) | `https://generativelanguage.googleapis.com/v1beta/openai` | `gemini-3.5-flash-lite`, `gemini-3.8-flash` |
+| Groq | `https://api.groq.com/openai/v1` | `openai/gpt-oss-20b` |
+| OpenRouter | `https://openrouter.ai/api/v1` | o id do modelo no OpenRouter |
+| OpenAI | `https://api.openai.com/v1` | o id do modelo na OpenAI |
+
+A chave do provedor vai no `GEMINI_API_KEY` (ou no `ASK_API_KEY`, que tem o mesmo efeito). O comando `pergunta` pede pouco raciocínio ao modelo (`reasoning_effort: "low"`); se o modelo não aceitar o parâmetro, a função tenta de novo sem ele.
+
+### 🧪 Testando localmente
+
+```bash
+cp .env.example .env.local   # e preencha o GEMINI_API_KEY
+npm run dev
+```
+
+No terminal, digite `pergunta quem é você?` (ou `ask quem é você?`). Para testar a rota sem o navegador:
+
+```bash
+curl -N -X POST http://localhost:5173/api/ask \
+  -H "Content-Type: application/json" \
+  -d '{"pergunta": "quais disciplinas você leciona?"}'
+```
+
+No Docker o comando `pergunta` não funciona: o NGINX só serve os arquivos estáticos e não roda a função, então o comando avisa que não está disponível nesta versão do site (o navegador confere o cabeçalho `X-Ask-Proxy`, como no `/api/github`).
+
+### 📂 Arquivos
+
+```text
+api/
+  ask.js                  → Vercel Function /api/ask (lê a GEMINI_API_KEY do servidor)
+  _ask.js                 → regras: validação, limites, prompt, chamada ao Gemini e streaming
+  _askPerfil.js           → base de conhecimento gerada pelo npm run ask (não edite à mão)
+scripts/ask.mjs           → gera a base: portfólio + currículo em PDF + askData.js (npm run ask)
+src/
+  config/askConfig.js     → rota, foto e limites (valem para o navegador e para o servidor)
+  data/askData.js         → EXTRAS: o que a IA deve saber e não está no site
+  lib/ask.js              → fetch, leitura do streaming e memória da conversa
+  components/Ask.jsx      → apresentação, resposta com a foto, Markdown leve e botões de comando
+  components/Ask.css      → balão, foto, selo IA, cursor e animação de digitação
+vite.config.js            → /api/ask no npm run dev e no npm run preview
+vercel.json               → até 60 s para a função api/ask.js responder
 ```
 
 -----

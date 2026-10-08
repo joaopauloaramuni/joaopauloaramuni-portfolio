@@ -10,7 +10,8 @@
     "lattes": "node scripts/lattes.mjs",
     "turmas": "node scripts/turmas.mjs",
     "canvas": "node scripts/canvas.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ask": "node scripts/ask.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^5.0.2",

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import WAKATIME_CONFIG from './src/config/wakaTimeConfig.js'
 import GITHUB_STATS_CONFIG from './src/config/gitHubStatsConfig.js'
 import { atenderGitHub, PROXY_PATH } from './api/_github.js'
+import { atenderAsk, PROXY_PATH as ASK_PATH } from './api/_ask.js'
 
 // O WakaTime não libera CORS: o navegador chama /api/wakatime/... e o
 // servidor do Vite repassa para a API pública do usuário. Em produção quem
@@ -58,13 +59,33 @@ function githubSiteToken(token) {
   }
 }
 
+// Comando "ask": POST /api/ask manda a pergunta para a IA (Gemini) com a
+// chave do site e devolve a resposta em streaming. Em produção quem faz isso
+// é a Vercel Function api/ask.js; aqui, no npm run dev e no npm run preview,
+// é este middleware. A chave (GEMINI_API_KEY) fica só no servidor do Vite.
+function askIA(env) {
+  const middleware = (req, res, next) => {
+    if (new URL(req.url, 'http://localhost').pathname !== ASK_PATH) return next()
+    atenderAsk(req, res, env).catch(next)
+  }
+  return {
+    name: 'ask-ia',
+    configureServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+    configurePreviewServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Prefixo '' lê todas as variáveis do .env.local, inclusive as sem VITE_
   // (isso não as expõe: o que vai para o navegador continua só VITE_*)
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN)],
+    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN), askIA(env)],
     server: { proxy },
     preview: { proxy },
   }
