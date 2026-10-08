@@ -146,17 +146,21 @@ export const commandList = {
     name: 'neofetch',
     aliases: ['fetch'],
   },
-  jogos: {
-    name: 'jogos',
+  campeonato: {
+    name: 'campeonato',
     aliases: ['galo', 'atletico'],
     // Próximos jogos do Atlético Mineiro (ver components/Jogos.jsx);
     // --todos | --all mostram todos os jogos já marcados;
     // --tabela | --table mostram a classificação do Brasileirão
     subcommands: ['--todos', '--all', '--tabela', '--table'],
   },
-  aragame: {
-    name: 'aragame',
-    aliases: ['araplane'],
+  jogo: {
+    name: 'jogo',
+    aliases: ['quake', 'flappyplane'],
+    // "jogo" e "quake" abrem o Quake shareware original (ver
+    // components/QuakeGame.jsx e public/quake); "flappyplane" abre o
+    // Flappy Plane. --quake | --flappyplane escolhem o jogo
+    subcommands: ['--quake', '--flappyplane'],
   },
   guestbook: {
     name: 'guestbook',

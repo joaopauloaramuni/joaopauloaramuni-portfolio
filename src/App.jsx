@@ -46,6 +46,9 @@ const Calendario = lazyCommand(() => import("./components/Calendario"));
 const Recomendacoes = lazyCommand(() => import("./components/Recomendacoes"));
 const Premios = lazyCommand(() => import("./components/Premios"));
 const FlappyPlaneGame = lazyCommand(() => import("./components/FlappyPlaneGame"));
+// "jogo" / "quake": o componente é leve (um iframe); o motor e os dados só
+// descem quando o comando roda (ver public/quake)
+const QuakeGame = lazyCommand(() => import("./components/QuakeGame"));
 const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
 const Neofetch = lazyCommand(() => import("./components/Neofetch"));
 const Jogos = lazyCommand(() => import("./components/Jogos"));
@@ -86,6 +89,7 @@ const PRELOAD = [
   Recomendacoes,
   Premios,
   FlappyPlaneGame,
+  QuakeGame,
   LivroVisitas,
   Neofetch,
   Jogos,
@@ -183,10 +187,10 @@ function App() {
     runCommandRef.current?.(deepLinkCommand);
   }, [booted, deepLinkCommand]);
 
-  // Detecta se o jogo está aberto
+  // Detecta se um jogo (Flappy Plane ou Quake) está aberto
+  const lastLineType = terminalLineData[terminalLineData.length - 1]?.type;
   const isGameOpen =
-    terminalLineData.length > 0 &&
-    terminalLineData[terminalLineData.length - 1]?.type === FlappyPlaneGame;
+    lastLineType === FlappyPlaneGame || lastLineType === QuakeGame;
 
   // Detecta se o contato está aberto
   const isContatoOpen =
@@ -403,8 +407,8 @@ function App() {
         case "neofetch":
           response = <Neofetch />;
           break;
-        case "jogos": {
-          // "jogos" (ou "galo", "atletico") mostra os próximos jogos do Galo,
+        case "campeonato": {
+          // "campeonato" (ou "galo", "atletico") mostra os próximos jogos do Galo,
           // ao vivo da ESPN; "--todos" | "--all" mostram todos os marcados e
           // "--tabela" | "--table", a classificação do Brasileirão
           if (subCommand && !command.subcommands.includes(subCommand)) {
@@ -421,9 +425,24 @@ function App() {
         case "contato":
           response = <Contato onExit={exitComponent} />;
           break;
-        case "aragame":
-          response = <FlappyPlaneGame onExit={exitComponent} />;
+        case "jogo": {
+          // "jogo" e "quake" abrem o Quake shareware e "flappyplane", o
+          // Flappy Plane; "--quake" | "--flappyplane" escolhem o jogo
+          if (subCommand && !command.subcommands.includes(subCommand)) {
+            response = <TerminalOutput>{t("jogo.uso")}</TerminalOutput>;
+            break;
+          }
+          const flappy = subCommand
+            ? subCommand === "--flappyplane"
+            : userInput === "flappyplane";
+          response =
+            !flappy ? (
+              <QuakeGame onExit={exitComponent} />
+            ) : (
+              <FlappyPlaneGame onExit={exitComponent} />
+            );
           break;
+        }
         case "guestbook": {
           if (!subCommand) {
             // Sem subcomando → mostra home

@@ -435,8 +435,8 @@ Também me recomendaram: Davi Mendes (2025), Nataniel Peixoto (2025), Jonathan S
 - \`stats\` (ou \`githubstats\`, \`ghstats\`): Mostra minhas estatísticas do GitHub (stats --repos | --tudo muda o gráfico).
 - \`wakatime\` (ou \`time\`): Mostra meu tempo de código (wakatime --grade | --lista | --cards muda o estilo).
 - \`neofetch\` (ou \`fetch\`): Mostra as informações do sistema com o escudo do Galo, no estilo neofetch.
-- \`jogos\` (ou \`galo\`, \`atletico\`): Próximos jogos do Galo: contagem regressiva, campeonato, escudos e placar agregado (jogos --todos).
-- \`aragame\` (ou \`araplane\`): Jogue o Flappy Plane diretamente no terminal web.
+- \`campeonato\` (ou \`galo\`, \`atletico\`): Próximos jogos do Galo: contagem regressiva, campeonato, escudos e placar agregado (campeonato --todos).
+- \`jogo\` (ou \`quake\`, \`flappyplane\`): Jogos no terminal: o Quake original ou o Flappy Plane (jogo --quake | --flappyplane).
 - \`guestbook\` (ou \`guest\`, \`book\`): Deixe uma mensagem no meu livro de visitas público.
 - \`design\` (ou \`ds\`, \`designsystem\`): Mostra o design system do portfólio: fontes, cores, espaçamentos e marca.
 

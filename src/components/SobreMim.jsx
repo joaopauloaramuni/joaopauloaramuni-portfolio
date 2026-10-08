@@ -719,7 +719,7 @@ function Pessoal() {
               );
             })}
           </span>
-          <Cmd className="sobre-cmd-inline">aragame</Cmd>
+          <Cmd className="sobre-cmd-inline">jogo</Cmd>
         </>
       ),
     },

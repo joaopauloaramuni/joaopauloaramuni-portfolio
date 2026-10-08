@@ -1,0 +1,50 @@
+/* jogo / quake: moldura 4:3 do tamanho do Flappy Plane, um pouco maior */
+.quake-container {
+  text-align: center;
+}
+
+.quake-titulo {
+  color: var(--accent);
+  font-weight: bold;
+  margin: 4px 0 6px;
+}
+
+.quake-moldura {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 4 / 3;
+  margin: 5px auto;
+  border: 2px solid var(--accent);
+  background: #000;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.quake-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+.quake-ajuda,
+.quake-creditos {
+  max-width: 800px;
+  margin: 8px auto 0;
+  opacity: 0.8;
+  font-size: 0.85em;
+}
+
+.quake-creditos {
+  opacity: 0.6;
+  font-size: 0.75em;
+}
+
+/* .btn-voltar-terminal fica em BotaoVoltar.css (compartilhado) */
+.quake-botoes {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

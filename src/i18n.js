@@ -35,7 +35,7 @@ const resources = {
         carregando: "Fetching Galo's fixtures...",
         erro: "Couldn't fetch the matches right now. Try again in a moment.",
         nenhum: "No matches scheduled yet.",
-        uso: "Usage: jogos [--all | --table] (galo | atletico also work)",
+        uso: "Usage: campeonato [--all | --table] (galo | atletico also work)",
         proximo_em: "Next match {{tempo}}",
         relogio_alt: "Countdown to the next match",
         placar_alt: "Live score",
@@ -46,9 +46,9 @@ const resources = {
         penaltis: "pens",
         ultimo: "Last match:",
         resultado: { v: "W", e: "D", d: "L" },
-        mais_one: "+ {{count}} more match scheduled: type <cmd>jogos --all</cmd>",
-        mais_other: "+ {{count}} more matches scheduled: type <cmd>jogos --all</cmd>",
-        fonte: "Source: <espn>ESPN</espn> (fixtures, crests and competition logos) · times in Brasília time · standings: <cmd>jogos --table</cmd>",
+        mais_one: "+ {{count}} more match scheduled: type <cmd>campeonato --all</cmd>",
+        mais_other: "+ {{count}} more matches scheduled: type <cmd>campeonato --all</cmd>",
+        fonte: "Source: <espn>ESPN</espn> (fixtures, crests and competition logos) · times in Brasília time · standings: <cmd>campeonato --table</cmd>",
         tabela: {
           titulo: "Galo in the Brasileirão",
           rodadas_one: "{{count}} round played",
@@ -103,7 +103,7 @@ const resources = {
             sulamericana: "Sul-Americana",
             rebaixamento: "Relegation",
           },
-          dica: "Upcoming matches: type <cmd>jogos</cmd>",
+          dica: "Upcoming matches: type <cmd>campeonato</cmd>",
           fonte: "Source: <espn>ESPN</espn> (standings and crests)",
         },
         dia: { hoje: "today", amanha: "tomorrow" },
@@ -503,6 +503,13 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Back to terminal",
+        uso: "Usage: jogo [--quake | --flappyplane] (no option opens Quake; quake | flappyplane also work)",
+        quake: {
+          titulo: "Quake (shareware, episode 1)",
+          tela_cheia: "Fullscreen",
+          ajuda: "Click the game to capture the mouse · Esc releases it and opens the menu · type quit in the console (~) to leave",
+          creditos: "Quake © id Software (shareware 1.06, unmodified) · WinQuake engine under the GPL, WebAssembly port by Qwasm",
+        },
         pontuacao: "Score: ",
         gameover: "GAME OVER! Press R to restart",
         achievements: {
@@ -1206,7 +1213,7 @@ const resources = {
           desc: "Shows my GitHub stats (stats --repos | --all changes the chart).",
         },
         neofetch: { desc: "Shows system info with the Galo crest, neofetch style." },
-        jogos: { desc: "Galo's upcoming matches: countdown and competition (jogos --all | --table)." },
+        campeonato: { desc: "Galo's upcoming matches: countdown and competition (campeonato --all | --table)." },
         curriculo: {
           desc: "Displays my resume with PDF preview.",
         },
@@ -1219,7 +1226,7 @@ const resources = {
         canvas: {
           desc: "Canvas assignments: what's due next (canvas --tasks | --agenda).",
         },
-        aragame: { desc: "Play Flappy Plane directly in the web terminal." },
+        jogo: { desc: "Games in the terminal: the original Quake or Flappy Plane (jogo --quake | --flappyplane)." },
         guestbook: { desc: "Leave a message in my public guestbook." },
         design: { desc: "Shows the portfolio design system: fonts, colors, spacing and brand." },
         pergunta: { desc: "An AI answers anything about me (e.g. ask who are you?)." },
@@ -2401,7 +2408,7 @@ const resources = {
         carregando: "Buscando os jogos do Galo...",
         erro: "Não consegui buscar os jogos agora. Tente de novo daqui a pouco.",
         nenhum: "Nenhum jogo marcado por enquanto.",
-        uso: "Uso: jogos [--todos | --tabela] (galo | atletico também funcionam)",
+        uso: "Uso: campeonato [--todos | --tabela] (galo | atletico também funcionam)",
         proximo_em: "Próximo jogo {{tempo}}",
         relogio_alt: "Contagem regressiva para o próximo jogo",
         placar_alt: "Placar ao vivo",
@@ -2412,9 +2419,9 @@ const resources = {
         penaltis: "pên.",
         ultimo: "Último jogo:",
         resultado: { v: "V", e: "E", d: "D" },
-        mais_one: "+ {{count}} jogo marcado: digite <cmd>jogos --todos</cmd>",
-        mais_other: "+ {{count}} jogos marcados: digite <cmd>jogos --todos</cmd>",
-        fonte: "Fonte: <espn>ESPN</espn> (jogos, escudos e logos dos campeonatos) · horários de Brasília · tabela: <cmd>jogos --tabela</cmd>",
+        mais_one: "+ {{count}} jogo marcado: digite <cmd>campeonato --todos</cmd>",
+        mais_other: "+ {{count}} jogos marcados: digite <cmd>campeonato --todos</cmd>",
+        fonte: "Fonte: <espn>ESPN</espn> (jogos, escudos e logos dos campeonatos) · horários de Brasília · tabela: <cmd>campeonato --tabela</cmd>",
         tabela: {
           titulo: "Galo no Brasileirão",
           rodadas_one: "{{count}} rodada jogada",
@@ -2469,7 +2476,7 @@ const resources = {
             sulamericana: "Sul-Americana",
             rebaixamento: "Rebaixamento",
           },
-          dica: "Próximos jogos: digite <cmd>jogos</cmd>",
+          dica: "Próximos jogos: digite <cmd>campeonato</cmd>",
           fonte: "Fonte: <espn>ESPN</espn> (classificação e escudos)",
         },
         dia: { hoje: "hoje", amanha: "amanhã" },
@@ -2870,6 +2877,13 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Voltar ao terminal",
+        uso: "Uso: jogo [--quake | --flappyplane] (sem opção abre o Quake; quake | flappyplane também funcionam)",
+        quake: {
+          titulo: "Quake (shareware, episódio 1)",
+          tela_cheia: "Tela cheia",
+          ajuda: "Clique no jogo para capturar o mouse · Esc solta o mouse e abre o menu · quit no console (~) sai do jogo",
+          creditos: "Quake © id Software (shareware 1.06, sem modificações) · motor WinQuake sob a GPL, port WebAssembly do Qwasm",
+        },
         pontuacao: "Pontuação: ",
         gameover: "GAME OVER! Pressione R para reiniciar",
         achievements: {
@@ -3576,8 +3590,8 @@ const resources = {
         neofetch: {
           desc: "Mostra as informações do sistema com o escudo do Galo, no estilo neofetch.",
         },
-        jogos: {
-          desc: "Próximos jogos do Galo: contagem regressiva e campeonato (jogos --todos | --tabela).",
+        campeonato: {
+          desc: "Próximos jogos do Galo: contagem regressiva e campeonato (campeonato --todos | --tabela).",
         },
         curriculo: {
           desc: "Exibe meu currículo com visualização em PDF.",
@@ -3591,7 +3605,7 @@ const resources = {
         canvas: {
           desc: "Tarefas do Canvas: próxima entrega e prazos (canvas --tarefas | --agenda).",
         },
-        aragame: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
+        jogo: { desc: "Jogos no terminal: o Quake original ou o Flappy Plane (jogo --quake | --flappyplane)." },
         guestbook: { desc: "Deixe uma mensagem no meu livro de visitas público." },
         design: { desc: "Mostra o design system do portfólio: fontes, cores, espaçamentos e marca." },
         pergunta: { desc: "Uma IA responde o que quiser sobre mim (ex.: pergunta quem é você?)." },

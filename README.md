@@ -36,8 +36,8 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 👥 **turmas / acompanhamento / ti:** Acompanhamento de turmas de TI (Trabalhos Interdisciplinares). Compara os grupos que eu oriento em TI:II e TI:V pelos repositórios no GitHub, sem contar os professores: linhas de código, linguagens, commits por semana, equilíbrio entre os integrantes, pull requests, issues e o resumo do README de cada projeto. Tem um gráfico por opção: `turmas --resumo` (padrão), `turmas --codigo`, `turmas --linguagens`, `turmas --ritmo`, `turmas --equilibrio`, `turmas --prs`, `turmas --projetos` e `turmas --tudo`, e filtros por disciplina, campus e grupo (`turmas ti5 coreu --ritmo`, `turmas uaiport`). Os dados vêm do `npm run turmas`.
 * 📚 **canvas / tarefas / prazos / entregas:** Tarefas das minhas disciplinas no Canvas: a próxima entrega em destaque, com contagem regressiva, os prazos do semestre e quantos alunos já entregaram cada tarefa (no prazo, atrasadas, faltando e a corrigir). Tem uma seção por opção: `canvas --resumo` (padrão), `canvas --tarefas`, `canvas --agenda` (tarefas, eventos do calendário do Canvas e feriados da PUC, dia a dia) e `canvas --tudo`, e filtros por disciplina, curso, campus e turma (`canvas diw --tarefas`, `canvas cc`, `canvas ti5 coreu`). Os dados vêm do `npm run canvas`: a chave da API do Canvas nunca vai para o site.
 * 🐓 **neofetch / fetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
-* ⚽ **jogos / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `jogos --todos` mostra todos os marcados e `jogos --tabela`, a classificação do Brasileirão com o Galo em destaque (posição, pontos, V/E/D, gols pró e contra, saldo, aproveitamento, últimos 5 jogos e a distância para o líder, a vaga na Libertadores e o Z-4).
-* 🕹️ **aragame / araplane:** Permite jogar o Flappy Plane diretamente no terminal web.
+* ⚽ **campeonato / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `campeonato --todos` mostra todos os marcados e `campeonato --tabela`, a classificação do Brasileirão com o Galo em destaque (posição, pontos, V/E/D, gols pró e contra, saldo, aproveitamento, últimos 5 jogos e a distância para o líder, a vaga na Libertadores e o Z-4).
+* 🕹️ **jogo / quake / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-e-flappy-plane).
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
@@ -242,13 +242,15 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   ├── 📁 logos                          → logos de empresas e instituições (sobre)
 │   ├── 📄 cv-pt.pdf · cv-en.pdf          → currículo (curriculo)
 │   ├── 📄 lattes.pdf                     → currículo Lattes (lattes --pdf)
+│   ├── 📁 quake                          → Quake em WebAssembly e quake106.zip (jogo / quake)
 │   ├── 🖼️ aramuni-logo*.svg · aramunilogo.png → logo e favicon
 │   └── 🖼️ demais imagens                 → projetos, prêmios, avatar e prévia do link (portfolio1.png)
 ├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
 │   ├── 🛠️ lattes.mjs                     → importa o XML do Lattes (npm run lattes)
 │   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
 │   ├── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
-│   └── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
+│   ├── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
+│   └── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
 ├── 📁 src
 │   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
 │   ├── 📁 components                     → um componente (.jsx + .css) por comando ou recurso
@@ -273,15 +275,16 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ WakaTime                   → wakatime
 │   │   ├── ⚛️ Spotify                    → spotify
 │   │   ├── ⚛️ Neofetch                   → neofetch
-│   │   ├── ⚛️ Jogos                      → jogos / galo (próximos jogos do Atlético)
+│   │   ├── ⚛️ Jogos                      → campeonato / galo (próximos jogos do Atlético)
 │   │   ├── ⚛️ DesignSystem               → design
-│   │   ├── ⚛️ FlappyPlaneGame            → aragame
+│   │   ├── ⚛️ FlappyPlaneGame            → flappyplane (jogo --flappyplane)
+│   │   ├── ⚛️ QuakeGame                  → jogo / quake (iframe de public/quake)
 │   │   ├── ⚛️ LivroVisitas               → guestbook
 │   │   ├── ⚛️ LanguageSwitcher · ThemeToggle → seletor PT | EN e botões de tema (sol, lua e galo)
 │   │   ├── ⚛️ GaloFundo                  → foto de fundo do tema galo
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
-│   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (jogo e guestbook)
+│   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (Flappy Plane, Quake e guestbook)
 │   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask e jogos do Galo
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
@@ -813,7 +816,7 @@ response = <SobreMim />; // igual a antes
 - **"Carregando..."**: enquanto o código chega, a saída mostra uma linha de aviso no idioma atual.
 - **Pré-carregamento**: depois do boot, com o navegador ocioso, os comandos leves já são baixados em segundo plano (lista `PRELOAD` no `App.jsx`), então o primeiro uso de cada um abre na hora. Ficam de fora o `curriculo`, o `lattes`, o `turmas` e o `canvas`, mais pesados, e quem está com a economia de dados do celular ligada (Save-Data).
 - **Falha no download**: se a rede cair ou um deploy novo apagar os arquivos da versão aberta, a saída mostra "Não foi possível abrir este comando" em vez de derrubar o terminal, e a próxima execução tenta de novo.
-- **Detecção do jogo, contato e guestbook**: o componente devolvido pelo `lazyCommand` é sempre o mesmo, então o App continua sabendo quando pausar o terminal (`line.type === FlappyPlaneGame`).
+- **Detecção do jogo, contato e guestbook**: o componente devolvido pelo `lazyCommand` é sempre o mesmo, então o App continua sabendo quando pausar o terminal (`line.type === FlappyPlaneGame`, ou `QuakeGame`).
 
 Para criar um comando novo, importe o componente com `lazyCommand` no `App.jsx` e, se ele for leve, coloque-o na lista `PRELOAD`.
 
@@ -1934,6 +1937,65 @@ vercel.json               → até 60 s para a função api/ask.js responder
 
 -----
 
+## 🕹️ Guia do comando jogo (Quake e Flappy Plane)
+
+O comando `jogo` (aliases `quake` e `flappyplane`) abre um jogo dentro do terminal. Enquanto ele está aberto, o terminal fica em pausa: o teclado é do jogo.
+
+| Comando | O que abre |
+|:--|:--|
+| `jogo`, `quake` ou `jogo --quake` | O Quake original da id Software (1996), episódio 1 do shareware, rodando em WebAssembly: mouse mira, WASD anda, espaço pula, clique atira, Esc abre o menu, `~` abre o console e `quit` volta ao terminal |
+| `flappyplane` ou `jogo --flappyplane` | O Flappy Plane: espaço (ou toque) para subir, R para recomeçar. Cada nuvem passada mostra uma conquista do meu currículo |
+
+O link direto abre o jogo: [aramuni.dev/?cmd=quake](https://aramuni.dev/?cmd=quake).
+
+### 1️⃣ Como o Quake roda no terminal
+
+O motor é o WinQuake (código aberto pela id Software sob a GPL) compilado para WebAssembly pelo [Qwasm](https://github.com/GMH-Code/Quake-WASM), com renderização por software, o visual original. Ele roda numa página própria (`public/quake/index.html`) dentro de um `iframe`: o motor tem variáveis globais, o próprio laço de frames, teclado, som e captura do mouse, e no iframe fica isolado do React. Sair do comando desmonta o iframe e encerra tudo.
+
+Nada disso entra no bundle do site: o `QuakeGame.jsx` é só o iframe, e o motor (~1,2 MB) e os dados (~9 MB) só são baixados quando alguém roda o `jogo` (ou `quake`).
+
+### 2️⃣ Dados do jogo (`quake106.zip`)
+
+O motor não traz mapas, sons nem texturas. Eles vêm do **Quake 1.06 shareware**, no arquivo original `quake106.zip`, colocado sem modificação em `public/quake/quake106.zip` (ele já traz as licenças da id). Confira o arquivo antes de publicar:
+
+```
+Tamanho: 9.094.045 bytes
+SHA256:  ec6c9d34b1ae0252ac0066045b6611a7919c2a0d78a3a66d9387a8f597553239
+```
+
+O `public/quake/loader.js` abre o zip, descompacta o `resource.1` (um arquivo LHA, método `-lh5-`, de 1996) e entrega o `id1/pak0.pak` ao motor, tudo no navegador e em menos de um segundo. Sem o `quake106.zip` no servidor, ele tenta um `pak0.pak` solto na mesma pasta e, se também não houver, pede ao visitante o próprio arquivo.
+
+> ⚖️ **Licença:** a licença do shareware permite jogar e proíbe qualquer uso comercial; a redistribuição é prevista para o pacote original compactado. Por isso o site serve o `quake106.zip` inteiro e intacto, nunca o `pak0.pak` extraído. Quake é marca da id Software / ZeniMax, sem vínculo com este projeto. O episódio completo (`pak1.pak`) **não** pode ser publicado.
+
+### 3️⃣ Recompilando o motor
+
+Os arquivos `quake.js` e `quake.wasm` já estão no repositório. Para gerá-los de novo (por exemplo, numa versão nova do Qwasm), instale o [Emscripten](https://emscripten.org/docs/getting_started/downloads.html) e rode:
+
+```bash
+bash scripts/quake/build.sh
+```
+
+O script clona o Qwasm num commit fixado, troca a entrada (`main` → `qstart`, chamada pelo `loader.js` depois de o `pak0.pak` estar no sistema de arquivos; ver `scripts/quake/wasm_entry.c`) e grava os dois arquivos em `public/quake/`.
+
+### 🧪 Testando localmente
+
+Com o `quake106.zip` em `public/quake/`, rode `npm run dev` e digite `jogo` (ou `quake`). A página do jogo também abre sozinha em `http://localhost:5173/quake/index.html` (`?lang=en` para inglês).
+
+### 📂 Arquivos
+
+```
+src/components/QuakeGame.jsx  → jogo / quake: o iframe, tela cheia e "Voltar ao terminal"
+src/components/FlappyPlaneGame.jsx → flappyplane
+public/quake/index.html       → página do jogo (carregamento e canvas)
+public/quake/loader.js        → baixa o quake106.zip, extrai o pak0.pak (zip → LHA) e inicia o motor
+public/quake/quake.js · .wasm → motor WinQuake em WebAssembly (GPL, ver public/quake/COPYING)
+public/quake/quake106.zip     → shareware original da id Software (você adiciona)
+scripts/quake/build.sh        → recompila o motor com o Emscripten
+scripts/quake/wasm_entry.c    → entrada qstart() chamada pelo loader.js
+```
+
+-----
+
 ## 📝 Guia de configuração do Supabase para o Livro de Visitas
 
 Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
@@ -2380,6 +2442,12 @@ server {
         types { application/javascript mjs; }
     }
 
+    # Motor do Quake (jogo / quake): o navegador só compila o .wasm em
+    # streaming se ele vier como application/wasm
+    location ~* \.wasm$ {
+        types { application/wasm wasm; }
+    }
+
     location / {
         try_files $uri $uri/ /index.html;
     }
@@ -2392,6 +2460,7 @@ server {
 - **Query do `repo-views`:** o `?pageId=...&type=total` é repassado exatamente como veio. O views-counter conta cada forma de codificar o `pageId` como um contador diferente, então ele não pode ser recodificado no caminho;  
 - **`try_files`:** qualquer caminho que não seja um arquivo devolve o `index.html`. Os links diretos usam `/?cmd=`, então isso é só uma garantia;  
 - **`.mjs`:** o worker do PDF.js (visualizador do `curriculo`) é um módulo `.mjs`. Se o NGINX o servir como `application/octet-stream`, o navegador recusa o worker e o PDF não abre; o `location ~* \.mjs$` garante o tipo JavaScript;  
+- **`.wasm`:** o motor do Quake (`jogo` / `quake`) precisa do tipo `application/wasm`; o `location ~* \.wasm$` garante isso em versões antigas do NGINX;  
 - **DNS na inicialização:** o NGINX resolve o endereço dos destinos quando inicia. Se o container subir sem acesso à internet, o NGINX não sobe;  
 - **Trocar de usuário:** o mapeamento fica em três lugares (`vercel.json`, `vite.config.js` via arquivos de `src/config/` e `nginx.conf`). Ao trocar de usuário, atualize os três.  
 
