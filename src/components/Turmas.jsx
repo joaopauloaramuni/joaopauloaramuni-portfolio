@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import {
   FiAlertTriangle,
@@ -38,7 +38,7 @@ import {
   temDados,
   totaisDe,
 } from "../lib/turmas";
-import { isLastTerminalOutput, scrollLastCommandToTop } from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import SkinsFooter from "./SkinsFooter";
 import "./Turmas.css";
 
@@ -1126,11 +1126,8 @@ export default function Turmas({ section = DEFAULT_SECTION, explicit = false, fi
   const filtro = filtros ? textoDoFiltro(filtros, t) : "";
   const semDados = grupos.filter((g) => !temDados(g)).length;
 
-  // Na primeira vez o código chega depois do comando (App.jsx usa lazy):
-  // se a saída ainda é a última do terminal, leva o comando para o topo
-  useEffect(() => {
-    if (isLastTerminalOutput(panelRef.current)) scrollLastCommandToTop();
-  }, []);
+  // Comando no topo, com a saída abaixo (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(panelRef);
 
   return (
     <div className="tur-painel" ref={panelRef}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useTranslation } from "react-i18next";
 import { FiDownload, FiExternalLink, FiMaximize2, FiZoomIn, FiZoomOut } from "react-icons/fi";
@@ -23,6 +24,8 @@ const ZOOM_PASSO = 0.25;
 const Curriculo = () => {
   const { t, i18n } = useTranslation();
   const areaRef = useRef(null);
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const [largura, setLargura] = useState(null);
   const [paginas, setPaginas] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -62,7 +65,7 @@ const Curriculo = () => {
   const carregando = !erro && paginas === 0;
 
   return (
-    <div className="curriculo-container">
+    <div className="curriculo-container" ref={ref}>
       <div className="cv-barra">
         <span className="cv-titulo">
           {t("curriculo.titulo")}

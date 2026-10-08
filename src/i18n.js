@@ -209,6 +209,7 @@ const resources = {
           vivencia: "experience",
           clientes: "built software for",
           pessoal: "outside the terminal",
+          artigos: "published papers",
         },
         hoje: {
           em: "at",
@@ -295,6 +296,12 @@ const resources = {
             org: "FUMEC",
             detalhe: "Computer Science, Information Systems and Networks",
           },
+        },
+        artigos: {
+          intro_one:
+            "<b>{{count}} paper</b> in peer-reviewed journals, from {{de}} to {{ate}}. Titles and journal names translated from Portuguese, the language of publication.",
+          intro_other:
+            "<b>{{count}} papers</b> in peer-reviewed journals, from {{de}} to {{ate}}. Titles and journal names translated from Portuguese, the language of publication.",
         },
         formacao: {
           intro:
@@ -2568,6 +2575,7 @@ const resources = {
           vivencia: "vivência",
           clientes: "já desenvolvi software para",
           pessoal: "fora do terminal",
+          artigos: "artigos publicados",
         },
         hoje: {
           em: "na",
@@ -2654,6 +2662,12 @@ const resources = {
             org: "FUMEC",
             detalhe: "Ciência da Computação, Sistemas de Informação e Redes",
           },
+        },
+        artigos: {
+          intro_one:
+            "<b>{{count}} artigo</b> em periódicos científicos, de {{de}} a {{ate}}.",
+          intro_other:
+            "<b>{{count}} artigos</b> em periódicos científicos, de {{de}} a {{ate}}.",
         },
         formacao: {
           intro:

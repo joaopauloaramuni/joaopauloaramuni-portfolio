@@ -10,7 +10,6 @@ import { commandList } from "./commands";
 import useTerminalKeys from "./terminal/useTerminalKeys";
 import {
   keepLastCommandAtTop,
-  scrollLastCommandToTop,
   scrollTerminalToBottom,
 } from "./terminal/terminalDom";
 import lazyCommand from "./terminal/lazyCommand";
@@ -180,8 +179,8 @@ function App() {
   useEffect(() => {
     if (!booted || !deepLinkCommand || deepLinkDone.current) return;
     deepLinkDone.current = true;
+    // O handleInput já leva o comando para o topo, como em todo comando
     runCommandRef.current?.(deepLinkCommand);
-    scrollLastCommandToTop();
   }, [booted, deepLinkCommand]);
 
   // Detecta se o jogo está aberto
@@ -293,8 +292,6 @@ function App() {
             break;
           }
           response = <Lattes section={section} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          if (section !== "pdf") keepLastCommandAtTop();
           break;
         }
         case "turmas": {
@@ -308,8 +305,6 @@ function App() {
             break;
           }
           response = <Turmas {...parsed} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          keepLastCommandAtTop();
           break;
         }
         case "canvas": {
@@ -323,8 +318,6 @@ function App() {
             break;
           }
           response = <Canvas {...parsed} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          keepLastCommandAtTop();
           break;
         }
         case "cal": {
@@ -336,8 +329,6 @@ function App() {
             break;
           }
           response = <Calendario skin={skin} />;
-          // A grade da semana é longa: leva o comando para o topo
-          if (skin === "semana") keepLastCommandAtTop();
           break;
         }
         case "habilidades": {
@@ -395,8 +386,6 @@ function App() {
             break;
           }
           response = <WakaTime skin={skin} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          if (skin !== "cards") keepLastCommandAtTop();
           break;
         }
         case "stats": {
@@ -409,8 +398,6 @@ function App() {
             break;
           }
           response = <GitHubStats section={section} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          keepLastCommandAtTop();
           break;
         }
         case "neofetch":
@@ -426,14 +413,10 @@ function App() {
           }
           const tabela = subCommand === "--tabela" || subCommand === "--table";
           response = <Jogos todos={Boolean(subCommand) && !tabela} tabela={tabela} />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          keepLastCommandAtTop();
           break;
         }
         case "design":
           response = <DesignSystem />;
-          // Saída longa: leva o comando para o topo em vez de cair no fim
-          keepLastCommandAtTop();
           break;
         case "contato":
           response = <Contato onExit={exitComponent} />;
@@ -457,6 +440,11 @@ function App() {
         default:
           break;
       }
+      // Padrão de todos os comandos: o comando vai para o topo do terminal,
+      // com a saída logo abaixo, em vez de o visitante cair no fim dela. Se a
+      // saída crescer depois (código lazy, dados, imagens), o próprio
+      // componente repete o ajuste (ver terminal/useCommandAtTop.js)
+      keepLastCommandAtTop();
     } else {
       response = getInvalidCommandOutput(userInput);
     }

@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import ASK_CONFIG from "../config/askConfig";
 import { commandList } from "../commands";
 import { ErroAsk, esquecerConversa, perguntar } from "../lib/ask";
-import { isLastTerminalOutput, setTerminalInputValue } from "../terminal/terminalDom";
+import { setTerminalInputValue } from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import "./Ask.css";
 
 // Comando "pergunta" (alias "ask"): o visitante pergunta e a IA responde em primeira pessoa,
@@ -165,9 +166,11 @@ function Digitando() {
 
 function Apresentacao() {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const sugestoes = t("ask.sugestoes", { returnObjects: true });
   return (
-    <div className="ask-container">
+    <div className="ask-container" ref={ref}>
       <Balao>
         <p>{t("ask.ola")}</p>
       </Balao>
@@ -269,15 +272,10 @@ function Resposta({ pergunta }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pergunta]);
 
-  // Acompanha o texto crescendo, se a resposta é a última saída do terminal
-  // e o visitante não rolou para cima para ler outra coisa
-  useEffect(() => {
-    const elemento = ref.current;
-    const corpo = elemento?.closest(".react-terminal");
-    if (!corpo || !isLastTerminalOutput(elemento)) return;
-    const distanciaDoFim = corpo.scrollHeight - corpo.scrollTop - corpo.clientHeight;
-    if (distanciaDoFim < 160) corpo.scrollTop = corpo.scrollHeight;
-  }, [visivel, estado]);
+  // A pergunta fica no topo e a resposta vai sendo escrita logo abaixo: o
+  // hook acompanha o texto crescendo até a pergunta chegar no topo e, dali
+  // em diante, o visitante lê no próprio ritmo (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(ref);
 
   return (
     <div className="ask-container" ref={ref} aria-live="polite" aria-busy={estado !== "pronto" && estado !== "erro"}>

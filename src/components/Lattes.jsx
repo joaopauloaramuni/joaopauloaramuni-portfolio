@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useRef } from "react";
+import React, { useId, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FaChalkboardTeacher,
@@ -24,10 +24,7 @@ import {
   SECTIONS,
   SECTION_OPTIONS,
 } from "../data/lattesSections";
-import {
-  isLastTerminalOutput,
-  scrollLastCommandToTop,
-} from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import {
   CURSOS as CURSOS_LECIONADOS,
   INSTITUICOES as INSTITUICOES_DE_ENSINO,
@@ -877,13 +874,8 @@ export default function Lattes({ section = DEFAULT_SECTION }) {
   const languageNote = section === "docencia" ? "" : t("lattes.nota_idioma");
   const panelRef = useRef(null);
 
-  // Na primeira vez o código chega depois do comando (App.jsx usa lazy):
-  // se a saída ainda é a última do terminal, leva o comando para o topo
-  useEffect(() => {
-    if (section !== PDF_SECTION && isLastTerminalOutput(panelRef.current)) {
-      scrollLastCommandToTop();
-    }
-  }, [section]);
+  // Comando no topo, com a saída abaixo (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(panelRef);
 
   return (
     <div className="lattes-painel" ref={panelRef}>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import { commandList } from "../commands";
 import { useTheme } from "../theme/themeContext";
@@ -55,6 +56,8 @@ const COLOR_BLOCKS = [
 
 const Neofetch = () => {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const { theme } = useTheme();
 
   // Como no neofetch de verdade, a saída é uma "foto" do momento do comando
@@ -86,7 +89,7 @@ const Neofetch = () => {
   ];
 
   return (
-    <div className="neofetch">
+    <div className="neofetch" ref={ref}>
       <pre className="neofetch-logo" aria-label={t("neofetch.logo_alt")} role="img">
         {GALO_LOGO}
       </pre>

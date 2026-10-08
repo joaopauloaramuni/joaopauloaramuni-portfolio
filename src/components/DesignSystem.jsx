@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../theme/themeContext";
 import {
@@ -203,6 +204,8 @@ const DesignSystem = () => {
   const { theme: currentTheme } = useTheme();
   const probes = useRef({});
   const sectionRefs = useRef({});
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const [values, setValues] = useState(null);
 
   // Lê os valores antes da primeira pintura, para não piscar "…"
@@ -221,7 +224,7 @@ const DesignSystem = () => {
   };
 
   return (
-    <div className="ds">
+    <div className="ds" ref={ref}>
       {/* Sondas invisíveis: uma por tema, só para ler os tokens */}
       {THEMES.map((theme) => (
         <span

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import "./FlappyPlaneGame.css";
 import "./BotaoVoltar.css";
@@ -44,6 +45,8 @@ function shuffleArray(array) {
 const FlappyPlaneGame = ({ onExit }) => {
   const { t } = useTranslation();
   const gameRef = useRef(null);
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const planeRef = useRef(null);
   const scoreRef = useRef(null);
   const achievementRef = useRef(null);
@@ -224,7 +227,7 @@ const FlappyPlaneGame = ({ onExit }) => {
   }, []);
 
   return (
-    <div style={{ position: "relative", textAlign: "center" }}>
+    <div style={{ position: "relative", textAlign: "center" }} ref={ref}>
       <div id="game" ref={gameRef}>
         <div id="score" ref={scoreRef}>{t("jogo.pontuacao") + "0"}</div>
         <div id="achievement" ref={achievementRef}></div>

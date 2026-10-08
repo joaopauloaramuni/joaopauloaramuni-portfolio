@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { awardsData } from "../data/awardsData";
 import { useTranslation } from "react-i18next";
@@ -6,10 +7,12 @@ import "./Premios.css";
 
 export default function Premios() {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   if (!awardsData.length) {
     return (
-      <div>
+      <div ref={ref}>
         <h2>{t("premios.titulo")}</h2>
         <p>{t("premios.nenhum")}</p>
       </div>
@@ -17,7 +20,7 @@ export default function Premios() {
   }
 
   return (
-    <div>
+    <div ref={ref}>
       <h3 className="premios-titulo">
         {t("premios.titulo")}
       </h3>

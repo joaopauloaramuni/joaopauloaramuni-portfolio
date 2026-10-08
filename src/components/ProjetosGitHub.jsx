@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import ProjectCard from "./ProjectCard";
 import "./Projetos.css";
@@ -8,6 +9,8 @@ import { githubPaths } from "../lib/githubPaths";
 
 const ProjetosGitHub = () => {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const { USERNAME } = GITHUB_API_CONFIG;
 
   const [repos, setRepos] = useState([]);
@@ -52,7 +55,7 @@ const ProjetosGitHub = () => {
   }, [USERNAME]);
 
   return (
-    <div className="projeto-container">
+    <div className="projeto-container" ref={ref}>
       <h3 className="projeto-title">{t("projetos.titulo")}</h3>
 
       {loading && <div className="spinner">{t("projetos.carregando")}</div>}

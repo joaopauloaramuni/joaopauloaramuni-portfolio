@@ -1,7 +1,4 @@
 import React, {
-  createContext,
-  useCallback,
-  useContext,
   useEffect,
   useId,
   useMemo,
@@ -45,10 +42,7 @@ import {
   GitHubRateLimitError,
 } from "../lib/githubStats";
 import { formatPercent, formatDate } from "../lib/wakatime";
-import {
-  isLastTerminalOutput,
-  scrollLastCommandToTop,
-} from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import SkinsFooter from "./SkinsFooter";
 import "./GitHubStats.css";
 
@@ -58,12 +52,8 @@ const { USERNAME, PROFILE_URL, LIMITS } = GITHUB_STATS_CONFIG;
    Dados, formatação e estados compartilhados pelos grupos
    ===================================================================== */
 
-// Avisa o painel quando uma fonte termina de carregar (ver GitHubStats)
-const LoadedContext = createContext(() => {});
-
 // Busca uma vez por visita; se já veio, o gráfico abre sem "carregando"
 function useSource(source) {
-  const onLoaded = useContext(LoadedContext);
   const [state, setState] = useState(() => {
     const data = source.peek();
     return data ? { status: "ready", data } : { status: "loading" };
@@ -79,7 +69,6 @@ function useSource(source) {
       .then((data) => {
         if (!active) return;
         setState({ status: "ready", data });
-        onLoaded();
       })
       .catch((error) => {
         if (!active) return;
@@ -90,7 +79,7 @@ function useSource(source) {
       active = false;
       unsubscribe();
     };
-  }, [source, onLoaded]);
+  }, [source]);
 
   return { ...state, progress };
 }
@@ -1038,38 +1027,34 @@ export default function GitHubStats({ section = DEFAULT_SECTION }) {
   const panelRef = useRef(null);
   const sections = section === ALL_SECTIONS ? SECTIONS : [section];
 
-  // Os dados chegam depois do comando e a saída cresce: se ela ainda é a
-  // última do terminal, leva o comando de volta para o topo
-  const onLoaded = useCallback(() => {
-    if (isLastTerminalOutput(panelRef.current)) scrollLastCommandToTop();
-  }, []);
+  // Comando no topo, com a saída abaixo. Os dados chegam depois e a saída
+  // cresce: o hook percebe e repete o ajuste (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(panelRef);
 
   return (
-    <LoadedContext.Provider value={onLoaded}>
-      <div className="ghs-painel" ref={panelRef}>
-        <h3 className="ghs-titulo">{t("stats.titulo")}</h3>
-        <p className="ghs-subtitulo">
-          <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer">
-            github.com/{USERNAME}
-          </a>
-        </p>
+    <div className="ghs-painel" ref={panelRef}>
+      <h3 className="ghs-titulo">{t("stats.titulo")}</h3>
+      <p className="ghs-subtitulo">
+        <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer">
+          github.com/{USERNAME}
+        </a>
+      </p>
 
-        {sections.map((key) => {
-          const View = SECTION_VIEWS[key];
-          return (
-            <section key={key} className="ghs-secao">
-              {sections.length > 1 && (
-                <h4 className="ghs-secao-titulo">{t(`stats.secoes.${key}`)}</h4>
-              )}
-              <SectionErrorBoundary>
-                <View f={f} />
-              </SectionErrorBoundary>
-            </section>
-          );
-        })}
+      {sections.map((key) => {
+        const View = SECTION_VIEWS[key];
+        return (
+          <section key={key} className="ghs-secao">
+            {sections.length > 1 && (
+              <h4 className="ghs-secao-titulo">{t(`stats.secoes.${key}`)}</h4>
+            )}
+            <SectionErrorBoundary>
+              <View f={f} />
+            </SectionErrorBoundary>
+          </section>
+        );
+      })}
 
-        <SkinsFooter skins={SECTION_OPTIONS} active={section} namespace="stats" />
-      </div>
-    </LoadedContext.Provider>
+      <SkinsFooter skins={SECTION_OPTIONS} active={section} namespace="stats" />
+    </div>
   );
 }

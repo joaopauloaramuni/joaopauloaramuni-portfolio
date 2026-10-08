@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { FaLinkedin } from "react-icons/fa";
 import { recommendationsData } from "../data/recommendationsData";
 import { useTranslation } from "react-i18next";
@@ -6,10 +7,12 @@ import "./Recomendacoes.css";
 
 export default function Recomendacoes() {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   if (!recommendationsData || !recommendationsData.length) {
     return (
-      <div className="recomendacoes-vazio">
+      <div className="recomendacoes-vazio" ref={ref}>
         <h2 className="recomendacoes-titulo">{t("recomendacoes.titulo")}</h2>
         <p className="recomendacoes-mensagem">{t("recomendacoes.nenhum")}</p>
       </div>
@@ -17,7 +20,7 @@ export default function Recomendacoes() {
   }
 
   return (
-    <div className="recomendacoes-container">
+    <div className="recomendacoes-container" ref={ref}>
       <h3 className="recomendacoes-titulo">{t("recomendacoes.titulo")}</h3>
 
       {recommendationsData.map((rec, index) => {

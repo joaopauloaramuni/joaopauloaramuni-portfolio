@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { TypeAnimation } from "react-type-animation";
 import { FaChalkboardTeacher, FaCode, FaRocket, FaUserGraduate } from "react-icons/fa";
@@ -16,6 +16,7 @@ import {
   IoTvOutline,
 } from "react-icons/io5";
 import { TbCake, TbCertificate, TbZodiacSagittarius } from "react-icons/tb";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { GITHUB } from "../data/docenciaData";
 import { INSTITUICOES, ITENS, PRIMEIRO_ANO, corStyle, useDocencia } from "../lib/docencia";
 import {
@@ -27,6 +28,7 @@ import {
   NASCIMENTO,
   TCCS_ORIENTADOS,
   TRABALHOS_FINAIS,
+  artigos,
   assistindo,
   clientes,
   continentes,
@@ -84,6 +86,10 @@ const DISCIPLINAS = INSTITUICOES.map((instituicao) => ({
 const DISCIPLINAS_AGORA_PUC = DISCIPLINAS.find((inst) => inst.id === "puc").itens.filter(
   (item) => item.agora,
 ).length;
+
+const ARTIGOS_ANOS = artigos.map((artigo) => artigo.ano);
+const ARTIGOS_DE = Math.min(...ARTIGOS_ANOS);
+const ARTIGOS_ATE = Math.max(...ARTIGOS_ANOS);
 
 const LUGARES = continentes.reduce((total, c) => total + c.lugares.length, 0);
 
@@ -406,16 +412,51 @@ function Trajetoria() {
 
 /* ---------- Formação ---------- */
 
+// Título em várias linhas (quebrarApos): quebra depois de cada trecho, na
+// ordem em que aparecem. Trecho não encontrado é ignorado.
+function TituloTrabalho({ titulo, quebrarApos = [] }) {
+  const linhas = [];
+  let resto = titulo;
+  for (const trecho of quebrarApos) {
+    const i = resto.indexOf(trecho);
+    if (i < 0) continue;
+    linhas.push(resto.slice(0, i + trecho.length));
+    resto = resto.slice(i + trecho.length).trimStart();
+  }
+  linhas.push(resto);
+  return (
+    <>
+      “
+      {linhas.map((linha, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <br />}
+          {linha}
+        </React.Fragment>
+      ))}
+      ”
+    </>
+  );
+}
+
 function Trabalho({ trabalho }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  // Na página em inglês, o título traduzido (o original é o em português)
+  const ingles = i18n.language.startsWith("en") && Boolean(trabalho.tituloEn);
   return (
     <div className="sobre-trabalho">
       <span className="sobre-trabalho-tipo">
         <IoDocumentTextOutline aria-hidden="true" />
         {t(`sobre.formacao.tipos.${trabalho.tipo}`)}
       </span>
-      <Link href={trabalho.url} className="sobre-link sobre-trabalho-titulo" lang="pt-BR">
-        “{trabalho.titulo}”
+      <Link
+        href={trabalho.url}
+        className="sobre-link sobre-trabalho-titulo"
+        lang={ingles ? "en" : "pt-BR"}
+      >
+        <TituloTrabalho
+          titulo={ingles ? trabalho.tituloEn : trabalho.titulo}
+          quebrarApos={ingles ? trabalho.quebrarAposEn : trabalho.quebrarApos}
+        />
       </Link>
       <span className="sobre-trabalho-orientador">
         {t("sobre.formacao.orientador")}{" "}
@@ -466,6 +507,68 @@ function Formacao() {
             </div>
           </li>
         ))}
+      </ul>
+    </>
+  );
+}
+
+/* ---------- Artigos ---------- */
+
+// Capa do periódico com ano, título e periódico ao lado. Na página em
+// inglês, título e periódico vêm traduzidos (tituloEn, periodicoEn).
+function Artigos() {
+  const { i18n } = useTranslation();
+  const ingles = i18n.language.startsWith("en");
+  return (
+    <>
+      <p className="sobre-intro sobre-artigos-intro">
+        <Trans
+          i18nKey="sobre.artigos.intro"
+          values={{ count: artigos.length, de: ARTIGOS_DE, ate: ARTIGOS_ATE }}
+          components={{ b: <strong /> }}
+        />
+      </p>
+      <ul className="sobre-artigos">
+        {artigos.map((artigo) => {
+          const traduzido = ingles && Boolean(artigo.tituloEn);
+          const titulo = traduzido ? artigo.tituloEn : artigo.titulo;
+          const periodicoTraduzido = ingles && Boolean(artigo.periodicoEn);
+          const periodico = periodicoTraduzido ? artigo.periodicoEn : artigo.periodico;
+          return (
+            <li key={artigo.id}>
+              <a
+                href={artigo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sobre-artigo"
+                title={`${titulo} · ${periodico}, ${artigo.ano}`}
+              >
+                <span className="sobre-artigo-capa">
+                  <img
+                    src={artigo.capa}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width="84"
+                    height="112"
+                  />
+                </span>
+                <span className="sobre-artigo-texto">
+                  <span className="sobre-artigo-ano">{artigo.ano}</span>
+                  <span className="sobre-artigo-titulo" lang={traduzido ? "en" : "pt-BR"}>
+                    {titulo}
+                  </span>
+                  <span
+                    className="sobre-artigo-periodico"
+                    lang={periodicoTraduzido ? "en" : "pt-BR"}
+                  >
+                    {periodico}
+                  </span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
@@ -725,9 +828,13 @@ const SobreMim = () => {
   const ingles = i18n.language.startsWith("en");
   const comando = (nome) => (ingles ? (COMANDO_EN[nome] ?? nome) : nome);
   const b = { b: <strong /> };
+  const painelRef = useRef(null);
+
+  // Comando no topo, com a saída abaixo (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(painelRef);
 
   return (
-    <article className="sobre-painel">
+    <article className="sobre-painel" ref={painelRef}>
       <Cabecalho />
 
       <div className="sobre-bio">
@@ -755,6 +862,10 @@ const SobreMim = () => {
 
       <Secao titulo={t("sobre.secoes.formacao")} cmd={comando("curriculo")}>
         <Formacao />
+      </Secao>
+
+      <Secao titulo={t("sobre.secoes.artigos")} cmd={`lattes --${t("lattes.skins.pdf")}`}>
+        <Artigos />
       </Secao>
 
       <Secao titulo={t("sobre.secoes.disciplinas")} cmd={`lattes --${t("lattes.skins.docencia")}`}>

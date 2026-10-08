@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabase";
 import "./LivroVisitas.css";
@@ -20,6 +21,8 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   // responder) chamava o handleSubmit duas vezes e gravava a mensagem em dobro.
   // Ref, e não state, porque o segundo Enter chega antes de o React renderizar.
   const sending = useRef(false);
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   useEffect(() => {
     if (mode === "list") {
@@ -109,7 +112,7 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   }
 
   return (
-    <div className="guestbook-container">
+    <div className="guestbook-container" ref={ref}>
       <div className="guestbook-header">
         <h2 className="guestbook-title">{t("guestbook.titulo")}</h2>
         <p className="guestbook-subtitle">

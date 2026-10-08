@@ -5,7 +5,7 @@ import { FUSO_HORARIO } from "../data/horarioData";
 import { fetchJogosDoGalo, fetchTabelaDoBrasileirao } from "../lib/galo";
 import { useTheme } from "../theme/themeContext";
 import useOnScreen from "../terminal/useOnScreen";
-import { isLastTerminalOutput, scrollLastCommandToTop } from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import "./Jogos.css";
 
 // =====================================================================
@@ -560,6 +560,8 @@ const Tabela = () => {
   const { theme } = useTheme();
   const escuro = theme !== "light";
   const ref = useRef(null);
+  // Comando no topo; os dados chegam depois e o hook repete o ajuste
+  useCommandAtTop(ref);
 
   const [dados, setDados] = useState(null);
   const [erro, setErro] = useState(false);
@@ -571,7 +573,6 @@ const Tabela = () => {
       .then(([tabela, jogos]) => {
         if (!ativo) return;
         setDados({ ...tabela, encerrados: jogos?.encerrados ?? [] });
-        if (isLastTerminalOutput(ref.current)) scrollLastCommandToTop();
       })
       .catch((error) => {
         console.error("jogos --tabela: falha ao buscar na ESPN", error);
@@ -638,6 +639,8 @@ const ProximosJogos = ({ todos }) => {
   const escuro = theme !== "light";
   const ref = useRef(null);
   const agora = useAgora(useOnScreen(ref));
+  // Comando no topo; os dados chegam depois e o hook repete o ajuste
+  useCommandAtTop(ref);
 
   const [dados, setDados] = useState(null);
   const [erro, setErro] = useState(false);
@@ -648,9 +651,6 @@ const ProximosJogos = ({ todos }) => {
       .then((resultado) => {
         if (!ativo) return;
         setDados(resultado);
-        // Os dados chegam depois do comando: se ele ainda é a última saída,
-        // leva o comando para o topo (a saída é mais alta que a tela)
-        if (isLastTerminalOutput(ref.current)) scrollLastCommandToTop();
       })
       .catch((error) => {
         console.error("jogos: falha ao buscar na ESPN", error);

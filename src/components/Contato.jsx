@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import {
   FaLinkedin,
   FaInstagram,
@@ -28,6 +29,8 @@ const Contato = ({ onExit }) => {
   const { t, i18n } = useTranslation();
   const { theme } = useTheme();
   const form = useRef();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   const nomeInputRef = useRef(null);
   const captchaRef = useRef(null);
   // Chave do i18n da mensagem de status ("" mostra o subtítulo). Guardar a
@@ -144,7 +147,7 @@ const Contato = ({ onExit }) => {
   };
 
   return (
-    <div className="box-container loaded contato-container">
+    <div className="box-container loaded contato-container" ref={ref}>
       <h3 className="contato-titulo">{t("contato.titulo")}</h3>
       <div className="box-status">
         <p

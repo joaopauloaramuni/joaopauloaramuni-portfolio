@@ -148,9 +148,12 @@ export const trajetoria = {
 
 // Formação, separada da atuação (sobre.formacao.<id>.nivel | curso | org).
 //   trabalho  trabalho final: tipo (sobre.formacao.tipos.<tipo>), título
-//             original (fica em português nos dois idiomas), link e
-//             orientador. Os PDFs e os slides das defesas estão no
+//             original em português, link e orientador; tituloEn é a
+//             tradução mostrada na página em inglês. Os PDFs e os slides das defesas estão no
 //             repositório TRABALHOS_FINAIS.
+//             quebrarApos / quebrarAposEn: trechos do título depois dos
+//             quais a linha quebra, em ordem (o texto continua inteiro,
+//             para o ask.mjs)
 //   modulos   chaves de sobre.formacao.<id>.modulos.<modulo>
 //   logo      imagem em /public; sem logo, usa o ícone na cor `cor`
 const FUMEC_PPG =
@@ -172,10 +175,14 @@ export const formacao = [
     url: FUMEC_PPG,
     trabalho: {
       tipo: "tese",
+      quebrarApos: ["conhecimento:", "exerce na gestão do conhecimento"],
       titulo:
         "Gestão ágil do conhecimento: uma análise da influência que a filosofia ágil exerce na gestão do conhecimento em organizações do segmento de tecnologia da informação",
       url: "https://repositorio.fumec.br/handle/123456789/878",
       orientador: LUIZ_MAIA,
+      tituloEn:
+        "Agile knowledge management: an analysis of the influence that the agile philosophy has on knowledge management in organizations in the information technology sector",
+      quebrarAposEn: ["management:", "has on knowledge management"],
     },
   },
   {
@@ -186,10 +193,14 @@ export const formacao = [
     url: FUMEC_PPG,
     trabalho: {
       tipo: "dissertacao",
+      quebrarApos: ["informação:"],
       titulo:
         "Análise da adoção do Lean Manufacturing na gestão de projetos de tecnologia da informação: estudo de caso em uma multinacional desse segmento",
       url: "https://repositorio.fumec.br/handle/123456789/270",
       orientador: LUIZ_MAIA,
+      tituloEn:
+        "Analysis of the adoption of Lean Manufacturing in information technology project management: a case study in a multinational company in this sector",
+      quebrarAposEn: ["management:"],
     },
   },
   {
@@ -206,6 +217,7 @@ export const formacao = [
         nome: "Prof. Dr. Flávio Velloso Laper",
         url: "http://lattes.cnpq.br/7122929836289475",
       },
+      tituloEn: "Agile development of web applications",
     },
   },
   {
@@ -215,6 +227,133 @@ export const formacao = [
     logo: "/logos/fdc.jpg",
     url: "https://www.fdc.org.br/",
     modulos: ["lideres_de_lideres", "lideres_de_equipes"],
+  },
+];
+
+// Artigos publicados em periódicos (do mais recente para o mais antigo).
+// Título e periódico originais em português; `tituloEn` e `periodicoEn` são
+// as traduções mostradas na página em inglês. Periódico que já tem nome em
+// inglês ou latim (RSD, Acta) não precisa de `periodicoEn`.
+//   capa  imagem em /public/artigos (300px de largura, proporção ~3:4)
+export const artigos = [
+  {
+    id: "conexao",
+    ano: 2022,
+    titulo:
+      "A relevância da inclusão digital para idosos nas publicações científicas: uma revisão a partir do indexador SCOPUS",
+    tituloEn:
+      "The relevance of digital inclusion for older adults in scientific publications: a review based on the SCOPUS index",
+    periodico: "Conexão: Comunicação e Cultura",
+    periodicoEn: "Connection: Communication and Culture",
+    url: "https://sou.ucs.br/etc/revistas/index.php/conexao/article/view/7781",
+    capa: "/artigos/conexao.jpg",
+  },
+  {
+    id: "rsd",
+    ano: 2020,
+    titulo:
+      "Vulnerabilidades em redes Wi-Fi de instituições de ensino superior: um estudo de múltiplos casos",
+    tituloEn:
+      "Vulnerabilities in Wi-Fi networks of higher education institutions: a multiple case study",
+    periodico: "Research, Society and Development",
+    url: "https://rsdjournal.org/index.php/rsd/article/view/1979",
+    capa: "/artigos/rsd.jpg",
+  },
+  {
+    id: "tecnologia_cultura",
+    ano: 2020,
+    titulo:
+      "Gestão ágil da memória organizacional: mudança na cultura da organização para melhor aproveitamento do capital intelectual",
+    tituloEn:
+      "Agile management of organizational memory: changing the organization's culture to make better use of intellectual capital",
+    periodico: "Tecnologia & Cultura (CEFET/RJ)",
+    periodicoEn: "Technology & Culture (CEFET/RJ)",
+    url: "https://www.cefet-rj.br/attachments/article/195/revista36_ago-dez2020_compressed.pdf",
+    capa: "/artigos/tecnologia-cultura.jpg",
+  },
+  {
+    id: "gestao_aprendizagem",
+    ano: 2020,
+    titulo:
+      "Proposta de um framework para a construção de uma arquitetura de dados empresarial: um estudo de caso em uma empresa farmacêutica",
+    tituloEn:
+      "A framework proposal for building an enterprise data architecture: a case study in a pharmaceutical company",
+    periodico: "Gestão & Aprendizagem (UFPB)",
+    periodicoEn: "Management & Learning (UFPB)",
+    url: "https://periodicos.ufpb.br/index.php/mpgoa/article/view/43707/30214",
+    capa: "/artigos/gestao-aprendizagem.jpg",
+  },
+  {
+    id: "atoz",
+    ano: 2020,
+    titulo:
+      "O impacto da engenharia social na segurança da informação: uma abordagem orientada à gestão corporativa",
+    tituloEn:
+      "The impact of social engineering on information security: a corporate management approach",
+    periodico: "AtoZ: Novas Práticas em Informação e Conhecimento",
+    periodicoEn: "AtoZ: New Practices in Information and Knowledge",
+    url: "https://revistas.ufpr.br/atoz/article/view/64640",
+    capa: "/artigos/atoz.jpg",
+  },
+  {
+    id: "ci",
+    ano: 2019,
+    titulo:
+      "Filosofia ágil aplicada à gestão do conhecimento: um mapeamento sistemático da literatura",
+    tituloEn:
+      "Agile philosophy applied to knowledge management: a systematic literature mapping",
+    periodico: "Ciência da Informação (IBICT)",
+    periodicoEn: "Information Science (IBICT)",
+    url: "https://revista.ibict.br/ciinf/article/view/4407",
+    capa: "/artigos/ci.jpg",
+  },
+  {
+    id: "edtech",
+    ano: 2018,
+    titulo:
+      "O impacto da tecnologia da informação no ensino superior: desafios da ubiquidade na aprendizagem estudantil",
+    tituloEn:
+      "The impact of information technology on higher education: challenges of ubiquity in student learning",
+    periodico: "Educação & Tecnologia (CEFET-MG)",
+    periodicoEn: "Education & Technology (CEFET-MG)",
+    url: "https://periodicos.cefetmg.br/index.php/revista-et/article/view/768",
+    capa: "/artigos/edtech.jpg",
+  },
+  {
+    id: "gtp",
+    ano: 2018,
+    titulo:
+      "Análise da adoção do Lean Manufacturing na gestão de projetos de tecnologia da informação: estudo de caso em uma multinacional desse segmento",
+    tituloEn:
+      "Analysis of the adoption of Lean Manufacturing in information technology project management: a case study in a multinational company in this sector",
+    periodico: "Gestão & Tecnologia de Projetos (USP)",
+    periodicoEn: "Design Management and Technology (USP)",
+    url: "https://www.revistas.usp.br/gestaodeprojetos/article/view/105650",
+    capa: "/artigos/gtp.jpg",
+  },
+  {
+    id: "acta",
+    ano: 2018,
+    titulo:
+      "A influência da engenharia semiótica na experiência do usuário de aplicativos mobile: uma reflexão sobre a relação entre semiose e o desenvolvimento de apps",
+    tituloEn:
+      "The influence of semiotic engineering on the user experience of mobile applications: a reflection on the relationship between semiosis and the development of apps",
+    periodico: "Acta Semiotica et Lingvistica",
+    url: "https://periodicos.ufpb.br/ojs2/index.php/actas/article/view/43701",
+    capa: "/artigos/acta.jpg",
+  },
+  {
+    id: "sigc",
+    ano: 2014,
+    titulo:
+      "Impactos da implantação do Lean Manufacturing na gestão de projetos de tecnologia da informação: estudo de caso em uma multinacional do segmento de T.I.",
+    tituloEn:
+      "Impacts of implementing Lean Manufacturing in information technology project management: a case study in a multinational IT company",
+    periodico: "Projetos, Dissertações e Teses em Sistemas de Informação e Gestão do Conhecimento (FUMEC)",
+    periodicoEn:
+      "Projects, Dissertations and Theses in Information Systems and Knowledge Management (FUMEC)",
+    url: "https://repositorio.fumec.br/handle/123456789/2/discover?query=Aramuni",
+    capa: "/artigos/sigc.jpg",
   },
 ];
 

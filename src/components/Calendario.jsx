@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import SkinsFooter from "./SkinsFooter";
 import { AULAS, CAMPI, DISCIPLINAS } from "../data/horarioData";
@@ -577,6 +578,7 @@ function CalHoje({ agora }) {
 
 export default function Calendario({ skin = "mes" }) {
   const ref = useRef(null);
+  useCommandAtTop(ref);
   const agora = useAgora(useOnScreen(ref));
   return (
     <div className="cal" ref={ref}>

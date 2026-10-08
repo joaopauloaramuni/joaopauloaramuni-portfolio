@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTranslation } from "react-i18next";
 import "./Calendly.css";
 
@@ -20,9 +21,11 @@ const embedUrl = () => {
 export default function Calendly() {
   const { t } = useTranslation();
   const [carregado, setCarregado] = useState(false);
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   return (
-    <div>
+    <div ref={ref}>
       <h3 className="calendly-title">{t("calendly.titulo")}</h3>
       <div className="calendly-inline-widget">
         {!carregado && (

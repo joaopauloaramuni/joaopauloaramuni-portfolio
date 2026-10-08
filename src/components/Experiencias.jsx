@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next"; // ou seu hook de i18n
 import { experiencesData } from "../data/experiencesData";
 import ExperienceCard from "./ExperienceCard";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 
 const Experiencias = () => {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   // Transformar dados brutos em objetos traduzidos
   const translatedExperiences = experiencesData.map((exp) => ({
@@ -21,7 +24,7 @@ const Experiencias = () => {
   }));
 
   return (
-    <div style={{ padding: "0 1.5rem" }}>
+    <div style={{ padding: "0 1.5rem" }} ref={ref}>
       <h3
         style={{ color: "var(--accent)", marginBottom: "2rem", fontSize: "1.8rem" }}
       >

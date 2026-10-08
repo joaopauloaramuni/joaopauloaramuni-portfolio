@@ -51,7 +51,7 @@ import {
   totaisDe,
   urgenciaDe,
 } from "../lib/canvas";
-import { isLastTerminalOutput, scrollLastCommandToTop } from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import useOnScreen from "../terminal/useOnScreen";
 import SkinsFooter from "./SkinsFooter";
 import "./Canvas.css";
@@ -852,11 +852,8 @@ export default function Canvas({ section = DEFAULT_SECTION, filtros }) {
   const panelRef = useRef(null);
   const naTela = useOnScreen(panelRef);
 
-  // Na primeira vez o código chega depois do comando (App.jsx usa lazy):
-  // se a saída ainda é a última do terminal, leva o comando para o topo
-  useEffect(() => {
-    if (isLastTerminalOutput(panelRef.current)) scrollLastCommandToTop();
-  }, []);
+  // Comando no topo, com a saída abaixo (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(panelRef);
 
   // Os filtros não mudam depois que o comando roda: calcula uma vez só
   const { cursos, tarefas, eventos } = useMemo(() => {

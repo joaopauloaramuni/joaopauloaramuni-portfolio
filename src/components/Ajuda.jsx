@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { commandList } from "../commands";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import "./Ajuda.css";
 
 const Ajuda = () => {
   const { t } = useTranslation();
+  const ref = useRef(null);
+  useCommandAtTop(ref);
   return (
-    <div className="ajuda-container">
+    <div className="ajuda-container" ref={ref}>
       <p className="ajuda-titulo">{t("ajuda.titulo")}</p>
       {/* Tabela de duas colunas (comando | descrição), como um --help */}
       <div className="ajuda-lista">

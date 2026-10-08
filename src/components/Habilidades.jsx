@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, useId } from "react";
+import React, { lazy, Suspense, useId, useRef } from "react";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { skillsData } from "../data/skillsData";
 import { globeSkills } from "../data/globeSkills";
 import { SKINS, DEFAULT_SKIN } from "../data/skillSkins";
@@ -164,9 +165,11 @@ const SKIN_LAYOUT = {
 export default function Habilidades({ skin = DEFAULT_SKIN }) {
   const { t } = useTranslation();
   const { listClass, Item } = SKIN_LAYOUT[skin] ?? SKIN_LAYOUT[DEFAULT_SKIN];
+  const ref = useRef(null);
+  useCommandAtTop(ref);
 
   return (
-    <div className="habilidades-container">
+    <div className="habilidades-container" ref={ref}>
       <h3 className="habilidades-titulo">{t("habilidades.titulo")}</h3>
 
       {skillsData.length === 0 ? (

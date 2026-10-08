@@ -578,6 +578,114 @@
 }
 
 /* ---------------------------------------------------------------------
+   Artigos: capa pequena à esquerda e ano, título e periódico ao lado,
+   em duas colunas (uma no celular)
+   --------------------------------------------------------------------- */
+.sobre-artigos-intro {
+  margin-bottom: 1rem !important;
+}
+
+.sobre-artigos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sobre-artigos > li {
+  display: flex;
+  min-width: 0;
+}
+
+.sobre-artigo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  animation: sobre-pop 0.45s ease both;
+}
+
+.sobre-artigo:hover,
+.sobre-artigo:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.sobre-artigo-capa {
+  flex-shrink: 0;
+  width: 84px;
+  aspect-ratio: 3 / 4;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-terminal);
+  box-shadow: 0 6px 14px -8px rgba(0, 0, 0, 0.55);
+}
+
+.sobre-artigo-capa img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.sobre-artigo-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.sobre-artigo-ano {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Título e periódico cortados com reticências; o texto inteiro fica no
+   title do link */
+.sobre-artigo-titulo,
+.sobre-artigo-periodico {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sobre-artigo-titulo {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+
+.sobre-artigo:hover .sobre-artigo-titulo,
+.sobre-artigo:focus-visible .sobre-artigo-titulo {
+  color: var(--accent);
+}
+
+.sobre-artigo-periodico {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
    Tags (disciplinas, vivência, clientes)
    --------------------------------------------------------------------- */
 .sobre-tags {
@@ -861,8 +969,15 @@ a.sobre-tag:focus-visible {
   .sobre-kpi,
   .sobre-hoje-item,
   .sobre-diploma,
+  .sobre-artigo,
   .sobre-faixa-seg {
     animation: none;
+  }
+
+  .sobre-artigo,
+  .sobre-artigo:hover {
+    transition: none;
+    transform: none;
   }
 
   .sobre-tag,
@@ -945,5 +1060,10 @@ a.sobre-tag:focus-visible {
 
   .sobre-tags {
     gap: 0.4rem;
+  }
+
+  /* Um artigo por linha no celular */
+  .sobre-artigos {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

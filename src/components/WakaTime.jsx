@@ -24,10 +24,7 @@ import {
   formatPercent,
   formatDate,
 } from "../lib/wakatime";
-import {
-  isLastTerminalOutput,
-  scrollLastCommandToTop,
-} from "../terminal/terminalDom";
+import useCommandAtTop from "../terminal/useCommandAtTop";
 import { useTheme } from "../theme/themeContext";
 import { toHex } from "../theme/colorUtils";
 import SkinsFooter from "./SkinsFooter";
@@ -543,14 +540,9 @@ function WakaTimeStats({ skin }) {
     </p>
   );
 
-  // Se os dados chegaram depois do comando e ele ainda é a última saída,
-  // leva o comando para o topo (a saída cresceu enquanto carregava)
-  const loadedLater = useRef(state.status === "loading");
-  useEffect(() => {
-    if (state.status !== "ready" || !loadedLater.current) return;
-    loadedLater.current = false;
-    if (isLastTerminalOutput(containerRef.current)) scrollLastCommandToTop();
-  }, [state.status]);
+  // Comando no topo, com a saída abaixo. Os dados chegam depois e a saída
+  // cresce: o hook percebe e repete o ajuste (ver terminal/useCommandAtTop.js)
+  useCommandAtTop(containerRef);
 
   return (
     <div className="wakatime-painel" ref={containerRef}>
