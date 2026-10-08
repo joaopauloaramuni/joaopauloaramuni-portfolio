@@ -202,7 +202,19 @@ const BoasVindas = () => {
             </a>
           </li>
         </ul>
-        <p className="navegue-text">{t("boasvindas.ajuda")}</p>
+        <p className="navegue-text">
+          {t("boasvindas.ajuda")
+            .split("`")
+            .map((parte, i) =>
+              i % 2 === 1 ? (
+                <span key={i} className="navegue-cmd">
+                  {parte}
+                </span>
+              ) : (
+                parte
+              )
+            )}
+        </p>
       </div>
     </div>
   );

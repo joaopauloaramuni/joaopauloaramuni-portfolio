@@ -1080,7 +1080,7 @@ const resources = {
         game: { desc: "Play Flappy Plane directly in the web terminal." },
         guestbook: { desc: "Leave a message in my public guestbook." },
         design: { desc: "Shows the portfolio design system: fonts, colors, spacing and brand." },
-        pergunta: { desc: "Ask me anything: an AI answers in first person, based on my resume and this portfolio (e.g. ask who are you?)." },
+        pergunta: { desc: "An AI answers anything about me (e.g. ask who are you?)." },
         dicas: {
           titulo: "Tips:",
           historico: "↑ / ↓ browse the commands you already typed.",
@@ -2542,7 +2542,7 @@ const resources = {
         formacao2: "Bacharel em Ciência da Computação",
         local: "Belo Horizonte, Minas Gerais, Brasil",
         esporte: "Torcedor do Clube Atlético Mineiro",
-        ajuda: "Digite `ajuda` para conhecer os comandos ou `pergunta` seguido do que quiser saber sobre mim.",
+        ajuda: "Digite `ajuda` para conhecer os comandos ou `pergunta` para saber mais sobre mim.",
       },
       contato: {
         titulo: "Entre em Contato",
@@ -3310,7 +3310,7 @@ const resources = {
         game: { desc: "Jogue o Flappy Plane diretamente no terminal web." },
         guestbook: { desc: "Deixe uma mensagem no meu livro de visitas público." },
         design: { desc: "Mostra o design system do portfólio: fontes, cores, espaçamentos e marca." },
-        pergunta: { desc: "Pergunte o que quiser sobre mim: uma IA responde em primeira pessoa, com base no meu currículo e neste portfólio (ex.: pergunta quem é você?)." },
+        pergunta: { desc: "Uma IA responde o que quiser sobre mim (ex.: pergunta quem é você?)." },
         dicas: {
           titulo: "Dicas:",
           historico: "↑ / ↓ navegam pelos comandos já digitados.",

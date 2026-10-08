@@ -97,6 +97,13 @@
   margin: 0;
 }
 
+/* comandos destacados (`ajuda`, `pergunta`) */
+.navegue-cmd {
+  color: var(--cmd-hint);
+  font-style: normal;
+  font-weight: 700;
+}
+
 .icon-link {
   color: var(--text);
   text-decoration: none;

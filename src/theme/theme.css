@@ -56,6 +56,7 @@
   --highlight: #ffbd2e;       /* "$ Boas-vindas ao meu Portfólio" */
   --warn: #f3d956;
   --info: #60a5fa;
+  --cmd-hint: #e2e8f0;        /* comandos `ajuda`/`pergunta` na boas-vindas */
   --success: #22c55e;
 
   /* Scrollbar */
@@ -167,6 +168,7 @@
   --highlight: #ffd503;
   --warn: #ffd503;
   --info: #e6e6e6;
+  --cmd-hint: #ffffff;
 
   --scrollbar-thumb: #3a3a3a;
   --scrollbar-thumb-hover: #ffd503;
@@ -216,6 +218,7 @@
   --highlight: #9a3412;
   --warn: #92400e;
   --info: #1d4ed8;
+  --cmd-hint: #1a1e24;
   --success: #166534;
 
   --scrollbar-thumb: #9aa1ac;
