@@ -44,12 +44,14 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
+🔢 A tela de boas-vindas mostra um **contador de visitas** logo abaixo do `$ Boas-vindas ao meu Portfólio`, guardado no Supabase. Cada visita é uma sessão que termina depois de 30 minutos sem atividade (a regra do Google Analytics): quem entra de manhã, de tarde e de noite conta 3 visitas; F5, `clear` e várias abas abertas ao mesmo tempo não contam de novo. O contador continua das visualizações que o portfólio já tinha no views-counter. Veja o [guia do contador de visitas](#-contador-de-visitas).
+
 🌗 O portfólio tem **tema escuro, tema claro e tema Galo** (preto, branco e amarelo do Atlético Mineiro, com o escudo no lugar da logo e a foto de um galo no fundo): o escuro é o padrão, e o visitante pode trocar pelos botões sol, lua e galo ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
 
 ⌨️ O terminal se comporta como um **shell de verdade**:
 
 * **Histórico (↑ / ↓):** navega pelos comandos já digitados. O histórico guarda os últimos 50 comandos, ignora repetições seguidas e continua lá mesmo depois de recarregar a página (como o `~/.bash_history`).
-* **Autocomplete (Tab):** completa comandos, aliases e subcomandos (`tem` → `tema `, `tema --c` → `tema --claro`, `guestbook l` → `guestbook list`). Quando há mais de uma opção, **Tab duas vezes** lista todas, como no bash. Com a linha vazia, o Tab continua navegando pela página, para quem usa só o teclado.
+* **Autocomplete (Tab):** completa comandos, aliases e subcomandos (`tem` → `tema `, `tema --c` → `tema --claro`, `guestbook l` → `guestbook list`, `nba lak` → `nba lakers`). Quando há mais de uma opção, **Tab duas vezes** lista todas, como no bash. Com a linha vazia, o Tab continua navegando pela página, para quem usa só o teclado.
 
 🔗 **Links diretos:** o portfólio pode ser aberto já executando um comando, com `?cmd=` na URL. Com `?lang=en`, abre em inglês. Ótimo para mandar para recrutadores:
 
@@ -179,7 +181,7 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
-* **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas.
+* **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas e o contador de visitas da tela de boas-vindas.
 * **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e as Vercel Functions `api/github.js`, que acrescenta o token do GitHub no servidor, e `api/ask.js`, que fala com a IA do comando `pergunta`.
 * **Google Gemini:** IA do comando `pergunta`, no plano gratuito do Google AI Studio, chamada pela API compatível com a da OpenAI (sem pacote: um `fetch` no servidor).
 
@@ -197,7 +199,7 @@ As dependências do `package.json` e onde cada uma é usada:
 | **i18next** e **react-i18next** | Textos em português e inglês | `i18n.js` e os componentes |
 | **react-icons** | Ícones (Feather, Font Awesome, Ionicons, Tabler, Simple Icons, Octicons...) | quase todos os comandos |
 | **react-type-animation** | Animação de digitação da tela de boas-vindas | `BoasVindas.jsx` |
-| **@supabase/supabase-js** | Banco de dados do livro de visitas: lê e grava as mensagens | `guestbook` |
+| **@supabase/supabase-js** | Banco de dados: lê e grava as mensagens do livro de visitas e soma o contador de visitas | `guestbook` e tela de boas-vindas |
 | **@emailjs/browser** | Envia e-mails direto do navegador, sem back-end próprio (é o novo nome do antigo `emailjs-com`) | `contato` e aviso do `guestbook` |
 | **react-pdf** | Mostra o currículo em PDF dentro do terminal, com zoom e links clicáveis. Usa o PDF.js 5 (`pdfjs-dist`), da Mozilla. Substituiu o `@react-pdf-viewer`, que foi abandonado e dependia do PDF.js 3, afetado pela falha [CVE-2024-4367](https://github.com/advisories/GHSA-wgrm-67xf-hhpq) | `curriculo` |
 | **three**, **@react-three/fiber** e **@react-three/drei** | O globo 3D das habilidades (WebGL) | `skills --globo` |
@@ -252,6 +254,9 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   ├── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
 │   ├── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
 │   └── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
+├── 📁 supabase                           → scripts SQL do banco (rode no SQL Editor do Supabase)
+│   ├── 🗄️ livro_visitas.sql              → tabela e políticas do guestbook
+│   └── 🗄️ contador_visitas.sql           → contador de visitas da tela de boas-vindas
 ├── 📁 src
 │   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
 │   ├── 📁 components                     → um componente (.jsx + .css) por comando ou recurso
@@ -282,7 +287,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ FlappyPlaneGame            → flappyplane (jogo --flappyplane)
 │   │   ├── ⚛️ QuakeGame                  → jogo / quake (iframe de public/quake)
 │   │   ├── ⚛️ LivroVisitas               → guestbook
-│   │   ├── ⚛️ LanguageSwitcher · ThemeToggle → seletor PT | EN e botões de tema (sol, lua e galo)
+│   │   ├── ⚛️ LanguageSwitcher · LanguageSwitcherFlags · ThemeToggle → seletor PT | EN (com as bandeiras) e botões de tema (sol, lua e galo)
 │   │   ├── ⚛️ GaloFundo                  → foto de fundo do tema galo
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
@@ -309,7 +314,8 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── 📜 horario.js                 → "agora" em BH, próxima aula e semana do semestre (cal)
 │   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
 │   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas
-│   │   ├── 📜 supabase.js                → cliente do Supabase (guestbook)
+│   │   ├── 📜 supabase.js                → cliente do Supabase (guestbook e contador de visitas)
+│   │   ├── 📜 visitas.js                 → contador de visitas: sessão de 30 min e +1 no Supabase
 │   │   ├── 📜 ask.js                     → pergunta para /api/ask, lê o streaming e lembra da conversa
 │   │   └── 📜 recaptcha.js               → carrega o script do reCAPTCHA uma vez só
 │   ├── 📁 terminal                       → peças do terminal
@@ -317,6 +323,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⌨️ parseSkin.js               → lê as opções (--cards, --tudo...)
 │   │   ├── ⌨️ terminalDom.js             → escreve no campo do terminal e controla a rolagem
 │   │   ├── ⌨️ lazyCommand.jsx · CommandFallback.jsx → comandos carregados sob demanda
+│   │   ├── ⌨️ useCommandAtTop.js         → mantém o comando no topo quando a saída cresce depois (código lazy, dados)
 │   │   └── ⌨️ useOnScreen.js             → a saída está na tela? (pausa relógios e o globo)
 │   ├── 📁 theme                          → tokens de cor (theme.css), contexto, ThemeProvider e contraste (colorUtils.js)
 │   ├── ⚛️ main.jsx                       → ponto de entrada (Router, tema e i18n)
@@ -507,6 +514,102 @@ sessionStorage.clear();
 ```
 
 Depois é só recarregar a página. Outra opção é abrir o site numa aba nova.
+
+-----
+
+## 🔢 Contador de visitas
+
+A tela de boas-vindas mostra, logo abaixo do `$ Boas-vindas ao meu Portfólio`, uma linha no estilo do terminal com o total de visitas ao portfólio:
+
+```texto
+> 1.910 visitas ao portfólio
+```
+
+| Situação | Conta? |
+| :--- | :--- |
+| Entrar de manhã, de tarde e de noite | ✅ +3 |
+| Dar F5 várias vezes seguidas | ✅ +1 (só a primeira) |
+| Rodar o `clear` (a tela de boas-vindas aparece de novo) | ❌ |
+| Abrir várias abas ao mesmo tempo | ✅ +1 |
+| Ficar 1 hora navegando, digitando comandos | ✅ +1 |
+| Aba anônima nova | ✅ +1 |
+
+O total fica no **Supabase**, o mesmo projeto do `guestbook`, e começou das visualizações que o repositório do portfólio já tinha no views-counter (badge RepoViews), para não partir do zero.
+
+### 📂 Arquivos
+
+```texto
+supabase/
+  contador_visitas.sql   → tabela (uma linha só), política de leitura e a função registrar_visita()
+src/
+  lib/visitas.js         → regra da sessão de 30 min, chama a função ou só lê o total
+  components/
+    BoasVindas.jsx       → mostra a linha "> N visitas ao portfólio"
+    BoasVindas.css       → .welcome-visitas (o número usa a cor --cmd-hint)
+  App.jsx                → cada comando digitado chama marcarAtividade()
+  i18n.js                → boasvindas.visitas em pt-BR e en
+```
+
+### ⚙️ Como funciona
+
+Uma visita é uma **sessão que termina depois de 30 minutos sem atividade**, a mesma regra do Google Analytics. O `visitas.js` guarda no `localStorage` (chave `portfolio:ultimaAtividade`) a hora da última atividade:
+
+- **Ao abrir a página:** se passaram mais de 30 minutos (ou não há registro), é uma visita nova e o site chama `supabase.rpc("registrar_visita")`, que soma +1 e devolve o novo total. Senão, só lê o total, sem somar.
+- **A cada comando digitado:** o `App.jsx` chama `marcarAtividade()` e renova a janela, então quem navega por muito tempo continua na mesma visita.
+- **Uma vez por carregamento:** o resultado fica numa promessa só. O StrictMode (que roda o efeito duas vezes no `npm run dev`) e o `clear` (que monta o `BoasVindas` de novo) reaproveitam o mesmo número.
+- **Sem Supabase ou com erro:** a linha não aparece, e o erro vai para o console (`Contador de visitas: ...`).
+
+No banco, o visitante (papel `anon`) só tem permissão de **ler** a tabela. Para somar, ele chama a função `registrar_visita()`, que é `security definer` (roda com as permissões do dono) e faz o `update ... set total = total + 1` numa operação só: dois visitantes ao mesmo tempo não se perdem, e ninguém consegue gravar um número qualquer.
+
+<details>
+  <summary>Clique para exibir a função</summary>
+
+```sql
+create or replace function public.registrar_visita()
+returns bigint
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  novo_total bigint;
+begin
+  update public.contador_visitas
+     set total = total + 1
+   where id = 1
+  returning total into novo_total;
+  return novo_total;
+end;
+$$;
+```
+</details>
+
+> 💡 A função é `plpgsql`, e não `sql`, porque o Postgres confere o corpo de uma função `sql` na hora de criá-la: se a tabela ainda não existir, o script falha.
+
+### 🛠️ Configurando
+
+1. No Supabase, abra o **SQL Editor**, cole o `supabase/contador_visitas.sql` inteiro e clique em **Run** sem nada selecionado (com texto selecionado, o Run executa só a seleção). O script pode rodar de novo sem zerar o total.
+2. Para começar de um número, troque o `0` do `insert` antes de rodar, ou some depois:
+
+```sql
+update public.contador_visitas set total = total + 1910 where id = 1;
+```
+
+Não precisa de variável de ambiente nova: o contador usa o mesmo cliente do `guestbook` (`VITE_SUPABASE_URL` e `VITE_SUPABASE_PUBLISHABLE_KEY`).
+
+### 🧪 Testando localmente
+
+Rode `npm run dev` e abra `http://localhost:5173` numa **aba anônima**: é sempre uma visita nova. Para contar de novo na mesma aba, rode no console do navegador e recarregue:
+
+```javascript
+localStorage.removeItem("portfolio:ultimaAtividade");
+```
+
+Para ver o total direto na API, sem somar:
+
+```texto
+https://seu-projeto.supabase.co/rest/v1/contador_visitas?select=total&apikey=sb_publishable_xxxx
+```
 
 -----
 
@@ -753,7 +856,7 @@ src/
     useTerminalKeys.js   → hook do histórico (↑/↓) e do autocomplete (Tab)
     autocomplete.js      → função pura que decide o que completar
     terminalDom.js       → escreve no input da lib e controla o scroll
-  commands.js            → campo "subcommands" (tema, guestbook, skills, wakatime, stats e cal) usado pelo Tab
+  commands.js            → campo "subcommands" de cada comando (tema, guestbook, skills, wakatime, stats, cal, turmas, canvas, campeonato, nba, jogo...) usado pelo Tab
   App.jsx                → liga o hook, executa o ?cmd= e lista as opções do Tab
   main.jsx               → envolve o App com o BrowserRouter
   i18n.js                → lê o ?lang= e traz as dicas do comando "ajuda"
@@ -2003,6 +2106,8 @@ scripts/quake/wasm_entry.c    → entrada qstart() chamada pelo loader.js
 
 Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
 
+> 🗄️ **Atalho:** os scripts SQL estão prontos na pasta `supabase/`. No **SQL Editor**, rode o `supabase/livro_visitas.sql` (passos 2 a 4 deste guia) e o `supabase/contador_visitas.sql` (contador de visitas da tela de boas-vindas). Os dois podem rodar de novo sem apagar dados. No `contador_visitas.sql`, troque o `0` do `insert` pelo número de visualizações atual antes de rodar, para o contador não começar do zero.
+
 -----
 
 ### 1️⃣ Criar o projeto no Supabase
@@ -2231,7 +2336,7 @@ O GitHub executará automaticamente uma requisição ao Supabase a cada 12 horas
 
 ## 🧪 Testar a API do Supabase no navegador
 
-Você pode verificar rapidamente se a tabela do **Livro de Visitas** está funcionando acessando a API diretamente pelo navegador.
+Você pode verificar rapidamente se a tabela do **Livro de Visitas** está funcionando acessando a API diretamente pelo navegador. Para o contador de visitas, veja o [guia do contador de visitas](#-contador-de-visitas).
 
 ### Exemplo de teste
 

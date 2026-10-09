@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
   IoLocationOutline,
@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { ARAMUNI_ASCII } from "../data/brandData";
 import AramuniLogo from "./AramuniLogo";
 import { useTheme } from "../theme/themeContext";
+import { obterVisitas } from "../lib/visitas";
 import "./BoasVindas.css";
 
 const BoasVindas = () => {
@@ -23,6 +24,18 @@ const BoasVindas = () => {
   const name = t("boasvindas.nome");
   const title = t("boasvindas.titulo");
   const sequence = [name, 1000, `${name} ${title}`, 2000];
+
+  // Total de visitas ao portfólio (soma +1 só uma vez por sessão, ver lib/visitas.js)
+  const [visitas, setVisitas] = useState(null);
+  useEffect(() => {
+    let ativo = true;
+    obterVisitas().then((total) => {
+      if (ativo) setVisitas(total);
+    });
+    return () => {
+      ativo = false;
+    };
+  }, []);
 
   return (
     <div className="welcome-container">
@@ -53,6 +66,15 @@ const BoasVindas = () => {
       />
       <div className="static-welcome">
         <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
+        {visitas != null && (
+          <p className="welcome-visitas">
+            {"> "}
+            <span className="welcome-visitas-num">
+              {Number(visitas).toLocaleString(lang === "en" ? "en-US" : "pt-BR")}
+            </span>{" "}
+            {t("boasvindas.visitas")}
+          </p>
+        )}
         <hr className="divider" />
         <p className="welcome-subtitle">{t("boasvindas.subtitulo")}</p>
         <ul className="info-list">

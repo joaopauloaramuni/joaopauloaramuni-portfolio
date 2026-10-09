@@ -60,6 +60,20 @@
   margin: 0 0 0.5rem 0;
 }
 
+/* Contador de visitas, logo abaixo do "$ Boas-vindas", no tom de saída
+   de terminal; o número ganha a cor dos comandos em destaque */
+.welcome-visitas {
+  font-family: "FiraCode", "JetBrainsMono", monospace;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: -0.25rem 0 0.5rem 0;
+}
+
+.welcome-visitas-num {
+  color: var(--cmd-hint);
+  font-weight: 700;
+}
+
 .welcome-subtitle {
   font-size: 1rem;
   margin: 0 0 0.5rem 0;
@@ -172,6 +186,10 @@
   .navegue-text,
   .info-list li {
     font-size: 0.95rem;
+  }
+
+  .welcome-visitas {
+    font-size: 0.9rem;
   }
 
   .info-list .icon {

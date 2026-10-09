@@ -15,6 +15,7 @@ import {
 import lazyCommand from "./terminal/lazyCommand";
 import Ajuda from "./components/Ajuda";
 import BoasVindas from "./components/BoasVindas";
+import { marcarAtividade } from "./lib/visitas";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import GaloFundo from "./components/GaloFundo";
@@ -233,6 +234,9 @@ function App() {
   });
 
   function handleInput(input) {
+    // Comando digitado é atividade: renova a janela de 30 min do contador de
+    // visitas, então quem navega por mais tempo não conta como visita nova
+    marcarAtividade();
     addToHistory(input);
     const inputLine = (
       <TerminalInput key={nextKey("input")}>
