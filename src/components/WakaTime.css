@@ -694,7 +694,7 @@
 }
 
 .waka-agora-estado.ativo {
-  color: var(--accent);
+  color: var(--online);
 }
 
 .waka-agora-dot {
@@ -707,13 +707,13 @@
 
 /* Programando: a bolinha pulsa, como o "em aula" da boas-vindas */
 .waka-agora-estado.ativo .waka-agora-dot {
-  background: var(--accent);
+  background: var(--online);
   animation: waka-agora-pulso 2s ease-in-out infinite;
 }
 
 @keyframes waka-agora-pulso {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
-  50% { box-shadow: 0 0 0 0.35em color-mix(in srgb, var(--accent) 0%, transparent); }
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--online) 55%, transparent); }
+  50% { box-shadow: 0 0 0 0.35em color-mix(in srgb, var(--online) 0%, transparent); }
 }
 
 .waka-agora-lang {

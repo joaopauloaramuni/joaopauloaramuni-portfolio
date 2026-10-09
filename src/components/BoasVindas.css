@@ -225,7 +225,7 @@
 .welcome-status-saindo { color: var(--warn); }
 .welcome-status-livre { color: var(--success); }
 .welcome-status-folga { color: var(--info); }
-.welcome-status-codando { color: var(--accent); }
+.welcome-status-codando { color: var(--online); } /* verde de online, ate no galo */
 
 /* Em aula (e codando), a bolinha pulsa devagar, como um "ao vivo" */
 .welcome-status-ocupado,
