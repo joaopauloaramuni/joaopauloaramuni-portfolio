@@ -285,6 +285,8 @@ const resources = {
           aes_rotulo: "teams at the AES",
           aes_detalhe_one: "~{{count}} person under my management",
           aes_detalhe_other: "~{{count}} people under my management",
+          horas_rotulo: "taught at PUC Minas so far",
+          horas_detalhe: "live, counting today's classes · {{total}} by December 22, 2026",
         },
         secoes: {
           hoje: "today",
@@ -301,7 +303,7 @@ const resources = {
           puc: {
             cargo: "Professor",
             org: "PUC Minas",
-            detalhe: "Software Engineering and Computer Science · capstone project advisor",
+            detalhe: "Software Engineering and Computer Science",
           },
           aes: {
             cargo: "CTO",
@@ -316,8 +318,6 @@ const resources = {
           },
           disciplinas_agora_one: "{{count}} course in {{semestre}}",
           disciplinas_agora_other: "{{count}} courses in {{semestre}}",
-          horas_total: "Total hours taught at PUC Minas through December 22, 2026: <b>{{total}}</b>",
-          horas_agora: "Total hours taught at PUC Minas so far: <b>{{total}}</b>",
         },
         trajetoria: {
           profissao: "programmer by profession",
@@ -2673,6 +2673,8 @@ const resources = {
           aes_rotulo: "times na AES",
           aes_detalhe_one: "~{{count}} pessoa sob minha gestão",
           aes_detalhe_other: "~{{count}} pessoas sob minha gestão",
+          horas_rotulo: "lecionadas na PUC Minas até o momento",
+          horas_detalhe: "ao vivo, contando as aulas de hoje · {{total}} até 22 de dezembro de 2026",
         },
         secoes: {
           hoje: "hoje",
@@ -2689,7 +2691,7 @@ const resources = {
           puc: {
             cargo: "Professor",
             org: "PUC Minas",
-            detalhe: "Engenharia de Software e Ciência da Computação · orientador de TCC II",
+            detalhe: "Engenharia de Software e Ciência da Computação",
           },
           aes: {
             cargo: "CTO",
@@ -2704,8 +2706,6 @@ const resources = {
           },
           disciplinas_agora_one: "{{count}} disciplina em {{semestre}}",
           disciplinas_agora_other: "{{count}} disciplinas em {{semestre}}",
-          horas_total: "Total de horas lecionadas na PUC Minas até 22 de dezembro de 2026: <b>{{total}}</b>",
-          horas_agora: "Total de horas lecionadas na PUC Minas até o momento: <b>{{total}}</b>",
         },
         trajetoria: {
           profissao: "programador por profissão",

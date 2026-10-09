@@ -77,14 +77,14 @@ export function minutosDoSemestre(agora) {
 export const minutosLecionados = (agora = agoraEmBH()) =>
   MINUTOS_ENCERRADOS + minutosDoSemestre(agora);
 
-// Total quando o semestre acabar (2711h40)
+// Total quando o semestre acabar (2711h40min)
 export const MINUTOS_TOTAL_SEMESTRE = minutosLecionados({
   diaMs: Date.parse(`${ULTIMO_DIA}T00:00:00Z`),
   minutos: 1440,
 });
 
-// 162700 → "2.711h40" (pt-BR) ou "2,711h40" (en)
+// 162700 → "2.711h40min" (pt-BR) ou "2,711h40min" (en)
 export function formatarTotal(minutos, idioma = "pt-BR") {
   const horas = new Intl.NumberFormat(idioma).format(Math.floor(minutos / 60));
-  return `${horas}h${String(minutos % 60).padStart(2, "0")}`;
+  return `${horas}h${String(minutos % 60).padStart(2, "0")}min`;
 }
