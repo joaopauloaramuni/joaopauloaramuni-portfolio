@@ -134,6 +134,90 @@
   }
 }
 
+/* Status (em aula, disponível, fim de semana, feriado): uma saída "> " do
+   terminal, logo abaixo do "$ Boas-vindas". A bolinha segue o Slack:
+   ocupado (em aula, --busy), saindo (a aula começa em até 15 min, --warn),
+   livre (--success) e folga (fim de semana, feriado, férias, --info).
+   A linha inteira é um botão que escreve o cal no terminal. */
+.welcome-status {
+  display: flex;
+  align-items: baseline;
+  white-space: pre; /* mantém o espaço depois do "> " */
+  font-family: "FiraCode", "JetBrainsMono", monospace;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: -0.25rem 0 0.5rem 0;
+}
+
+/* Status logo acima do contador: as duas saídas ficam juntas */
+.welcome-status + .welcome-visitas {
+  margin-top: -0.35rem;
+}
+
+.welcome-status-btn {
+  display: inline-flex;
+  align-items: flex-start; /* a bolinha fica na primeira linha quando quebra */
+  gap: 0.5em;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  white-space: normal; /* no celular, o detalhe quebra embaixo do rótulo */
+  cursor: pointer;
+}
+
+.welcome-status-btn:hover .welcome-status-rotulo,
+.welcome-status-btn:focus-visible .welcome-status-rotulo {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+
+.welcome-status-btn:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 3px;
+}
+
+.welcome-status-rotulo {
+  color: var(--cmd-hint);
+  font-weight: 700;
+}
+
+.welcome-status-sep {
+  margin: 0 0.5em;
+  color: var(--text-dim);
+}
+
+.welcome-status-dot {
+  flex-shrink: 0;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: currentColor;
+  margin-top: 0.5em; /* centro da primeira linha (line-height 1.5) */
+}
+
+.welcome-status-ocupado { color: var(--busy); }
+.welcome-status-saindo { color: var(--warn); }
+.welcome-status-livre { color: var(--success); }
+.welcome-status-folga { color: var(--info); }
+
+/* Em aula, a bolinha pulsa devagar, como um "ao vivo" */
+.welcome-status-ocupado {
+  animation: welcome-status-pulso 2s ease-in-out infinite;
+}
+
+@keyframes welcome-status-pulso {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 55%, transparent); }
+  50% { box-shadow: 0 0 0 0.3em color-mix(in srgb, currentColor 0%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-status-ocupado { animation: none; }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -260,7 +344,8 @@
     font-size: 0.95rem;
   }
 
-  .welcome-visitas {
+  .welcome-visitas,
+  .welcome-status {
     font-size: 0.9rem;
   }
 

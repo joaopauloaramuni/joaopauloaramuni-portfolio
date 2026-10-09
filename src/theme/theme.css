@@ -58,6 +58,7 @@
   --info: #60a5fa;
   --cmd-hint: #e2e8f0;        /* comandos `ajuda`/`pergunta` na boas-vindas */
   --success: #22c55e;
+  --busy: #f87171;            /* bolinha "em aula agora" da boas-vindas */
 
   /* Scrollbar */
   --scrollbar-thumb: #4a5568;
@@ -220,6 +221,7 @@
   --info: #1d4ed8;
   --cmd-hint: #1a1e24;
   --success: #166534;
+  --busy: #b91c1c;
 
   --scrollbar-thumb: #9aa1ac;
   --scrollbar-thumb-hover: #6b7280;

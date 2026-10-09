@@ -44,7 +44,9 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
 
-🔢 A tela de boas-vindas mostra um **contador de visitas** logo abaixo do `$ Boas-vindas ao meu Portfólio`, guardado no Supabase. Cada visita é uma sessão que termina depois de 30 minutos sem atividade (a regra do Google Analytics): quem entra de manhã, de tarde e de noite conta 3 visitas; F5, `clear` e várias abas abertas ao mesmo tempo não contam de novo. O contador continua das visualizações que o portfólio já tinha no views-counter. Veja o [guia do contador de visitas](#-contador-de-visitas).
+🟢 Logo abaixo do `$ Boas-vindas ao meu Portfólio` aparece o meu **status agora**, no estilo do Slack: `Em aula agora: DIAW G1 · Prédio 34, sala 210 · até 8h40`, `Indo para a aula`, `Disponível · próxima aula hoje às 19h`, `Aulas encerradas por hoje`, além de mensagens próprias para sábado, domingo, feriados, recessos e férias. Sai dos mesmos dados do `cal`, sem API nenhuma, e se atualiza sozinho a cada 30 segundos. Um clique escreve o `cal --hoje` no terminal. Veja o [guia do status](#-status-na-tela-de-boas-vindas).
+
+🔢 A tela de boas-vindas mostra um **contador de visitas** logo abaixo do status, guardado no Supabase. Cada visita é uma sessão que termina depois de 30 minutos sem atividade (a regra do Google Analytics): quem entra de manhã, de tarde e de noite conta 3 visitas; F5, `clear` e várias abas abertas ao mesmo tempo não contam de novo. O contador continua das visualizações que o portfólio já tinha no views-counter. Veja o [guia do contador de visitas](#-contador-de-visitas).
 
 🌗 O portfólio tem **tema escuro, tema claro e tema Galo** (preto, branco e amarelo do Atlético Mineiro, com o escudo no lugar da logo e a foto de um galo no fundo): o escuro é o padrão, e o visitante pode trocar pelos botões sol, lua e galo ao lado do seletor de idioma ou pelo comando `tema`. A escolha fica salva para as próximas visitas.
 
@@ -261,6 +263,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
 │   ├── 📁 components                     → um componente (.jsx + .css) por comando ou recurso
 │   │   ├── ⚛️ BootSequence · BoasVindas  → sequência de boot e tela de boas-vindas
+│   │   ├── ⚛️ StatusAgora                → status da boas-vindas ("Em aula agora: ... até 21h40")
 │   │   ├── ⚛️ Ajuda                      → ajuda
 │   │   ├── ⚛️ SobreMim                   → sobre
 │   │   ├── ⚛️ Ask                        → pergunta / ask (resposta da IA com a minha foto)
@@ -312,6 +315,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── 📜 galo.js                    → jogos do Galo (ESPN) e placar agregado
 │   │   ├── 📜 nba.js                     → jogos da NBA (ESPN): a liga ou um time
 │   │   ├── 📜 horario.js                 → "agora" em BH, próxima aula e semana do semestre (cal)
+│   │   ├── 📜 status.js                  → status da boas-vindas: em aula, disponível, fim de semana, feriado, férias
 │   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
 │   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas
 │   │   ├── 📜 supabase.js                → cliente do Supabase (guestbook e contador de visitas)
@@ -519,7 +523,7 @@ Depois é só recarregar a página. Outra opção é abrir o site numa aba nova.
 
 ## 🔢 Contador de visitas
 
-A tela de boas-vindas mostra, logo abaixo do `$ Boas-vindas ao meu Portfólio`, uma linha no estilo do terminal com o total de visitas ao portfólio:
+A tela de boas-vindas mostra, logo abaixo do `$ Boas-vindas ao meu Portfólio` e do [status](#-status-na-tela-de-boas-vindas), uma linha no estilo do terminal com o total de visitas ao portfólio:
 
 ```texto
 > 1.910 visitas ao portfólio
@@ -610,6 +614,74 @@ Para ver o total direto na API, sem somar:
 ```texto
 https://seu-projeto.supabase.co/rest/v1/contador_visitas?select=total&apikey=sb_publishable_xxxx
 ```
+
+-----
+
+## 🟢 Status na tela de boas-vindas
+
+Logo abaixo do `$ Boas-vindas ao meu Portfólio`, a tela de boas-vindas mostra o que estou fazendo agora, no estilo do status do Slack: uma bolinha colorida, um rótulo em destaque e os detalhes separados por `·`.
+
+```texto
+> ● Em aula agora · DIAW G1 · Prédio 34, sala 210 · até 8h40
+> 1.910 visitas ao portfólio · 24°C em Belo Horizonte
+```
+
+O status sai dos **mesmos dados do comando `cal`** (as aulas de `horarioData.js` e o calendário da PUC), então não tem API, chave nem espera: aparece junto com a tela, antes do contador e do clima, e não "pula" quando eles chegam. Tudo é calculado no fuso de Belo Horizonte: quem abre o site de fora do Brasil vê o mesmo status.
+
+| Situação | Bolinha | Exemplo (PT) | Exemplo (EN) |
+| :--- | :--- | :--- | :--- |
+| Aula em andamento | 🔴 `--busy` (pulsando) | Em aula agora · DIAW G1 · Prédio 34, sala 210 · até 8h40 | In class now · DIAW G1 · Building 34, room 210 · until 8:40 AM |
+| A próxima aula começa em até 15 min | 🟡 `--warn` | Indo para a aula · TI:V às 19h · Prédio 43, sala 205 | Heading to class · TI:V at 7:00 PM · Building 43, room 205 |
+| Ainda tem aula hoje, mais tarde | 🟢 `--success` | Disponível · próxima aula hoje às 19h | Available · next class today at 7:00 PM |
+| As aulas de hoje já acabaram | 🟢 `--success` | Aulas encerradas por hoje · próxima aula amanhã às 7h | Done with classes for today · next class tomorrow at 7:00 AM |
+| Sábado | 🔵 `--info` | Sábado · modo descanso ativado · próxima aula segunda-feira às 7h | Saturday · rest mode on · next class on Monday at 7:00 AM |
+| Domingo | 🔵 `--info` | Domingo · recarregando as baterias para a semana · próxima aula amanhã às 7h | Sunday · recharging for the week · next class tomorrow at 7:00 AM |
+| Feriado | 🔵 `--info` | Feriado: Finados · sem aulas hoje · aulas voltam amanhã às 8h50 | Holiday: All Souls' Day · no classes today · classes resume tomorrow at 8:50 AM |
+| Recesso escolar | 🔵 `--info` | Recesso: Dia do Professor e do Funcionário · sem aulas hoje · aulas voltam quarta-feira às 7h | School break: Teachers' and PUC Staff Day · no classes today · classes resume on Wednesday at 7:00 AM |
+| Fora do semestre (férias, recesso docente) | 🔵 `--info` | De férias · aulas voltam em 3/8 às 7h | On vacation · classes resume on Aug 3 at 7:00 AM |
+
+Detalhes que valem para todos:
+
+- **Feriado ganha do fim de semana:** um feriado num sábado mostra o nome do feriado.
+- **Sigla e sala na linha, nome completo na dica:** a linha usa a sigla (`DIAW G1`) e o prédio e a sala; passando o mouse, aparece o nome completo da disciplina. Aula sem sala cadastrada mostra o campus (`campus Oficinas`); aula online mostra `online (Teams)`.
+- **Horas no formato de cada idioma:** `21h40` e `7h` em português, `9:40 PM` em inglês.
+- **Atualiza sozinho:** recalcula a cada 30 segundos enquanto está na tela. Quando a tela de boas-vindas sai de vista (depois de vários comandos), o relógio para, e volta na hora quando ela reaparece (o mesmo `useOnScreen` do `cal`).
+- **Clique escreve o `cal`:** num dia letivo, `cal --hoje`; num fim de semana ou feriado, `cal --semana` (que já mostra a próxima semana); nas férias, `cal --mes`. Em inglês, `cal --today`, `cal --week` e `cal --month`. O visitante só aperta Enter.
+- **Sem próxima aula conhecida** (por exemplo, no fim do ano, antes do calendário do ano seguinte ser cadastrado), o detalhe da próxima aula simplesmente não aparece.
+
+### 📂 Arquivos
+
+```texto
+src/
+  lib/status.js              → decide o status (funções puras): statusAgora, corDoStatus, visaoDoCal, formatarHora
+  components/StatusAgora.jsx → monta a linha, atualiza a cada 30 s e escreve o cal no terminal ao clicar
+  components/BoasVindas.jsx  → coloca o <StatusAgora /> logo abaixo do "$ Boas-vindas"
+  components/BoasVindas.css  → .welcome-status, a bolinha e o pulso (desligado com prefers-reduced-motion)
+  theme/theme.css            → --busy, a cor da bolinha "em aula" (#f87171 no escuro, #b91c1c no claro)
+  i18n.js                    → status.* em pt-BR e en (rótulos, mensagens de fim de semana e o "quando")
+```
+
+### ✏️ Personalizando
+
+- **Mensagens:** todas ficam em `status` no `i18n.js`. As de fim de semana são `descanso_sabado` e `descanso_domingo`.
+- **Antecedência do "Indo para a aula":** a constante `MINUTOS_A_CAMINHO` (15) em `src/lib/status.js`.
+- **Aulas, salas, feriados e semestres:** os mesmos do `cal` (`horarioData.js` e `calendarioPuc.js`). Trocou o horário do semestre, o status acompanha.
+
+### 🧪 Testando localmente
+
+As funções são puras e recebem o "agora", então dá para testar qualquer dia e hora:
+
+```javascript
+import { agoraEmBH } from "./src/lib/horario";
+import { statusAgora } from "./src/lib/status";
+
+statusAgora(agoraEmBH(new Date("2026-10-08T11:00:00-03:00"))); // → { tipo: "aula", aula: DIAW G2 }
+statusAgora(agoraEmBH(new Date("2026-10-08T10:30:00-03:00"))); // → { tipo: "a_caminho", ... }
+statusAgora(agoraEmBH(new Date("2026-10-10T12:00:00-03:00"))); // → { tipo: "sabado", ... }
+statusAgora(agoraEmBH(new Date("2026-11-02T12:00:00-03:00"))); // → { tipo: "feriado", chave: "finados", ... }
+```
+
+Para ver na tela, rode `npm run dev` e troque temporariamente, no `useAgoraNaTela` do `StatusAgora.jsx`, o `agoraEmBH()` por `agoraEmBH(new Date("2026-10-10T12:00:00-03:00"))` (ou a data que quiser testar). Lembre de desfazer antes do commit.
 
 -----
 
@@ -742,7 +814,8 @@ const { theme, setTheme, toggleTheme } = useTheme();
 | `--accent` | `#00ff9d` | `#00663f` | Cor de destaque (verde) |
 | `--highlight` | `#ffbd2e` | `#9a3412` | "$ Boas-vindas ao meu Portfólio" e horários na grade do `cal` |
 | `--warn` | `#f3d956` | `#92400e` | `[ WARN ]` do boot, erros do WakaTime e do `stats` e feriados no `cal` |
-| `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot e recessos no `cal` |
+| `--info` | `#60a5fa` | `#1d4ed8` | `[ INFO ]` do boot, recessos no `cal` e bolinha de folga do status (fim de semana, feriado, férias) |
+| `--busy` | `#f87171` | `#b91c1c` | Bolinha "Em aula agora" do status na boas-vindas |
 | `--cal-coreu` | `#f0abfc` | `#94158f` | Aulas no campus Coração Eucarístico (`cal`) |
 | `--cal-lourdes` | `#d9c46a` | `#685a00` | Aulas no campus Lourdes (`cal`) |
 | `--cal-oficinas` | `#67e8f9` | `#0a5f6c` | Oficinas (`cal`) |
@@ -1595,6 +1668,7 @@ src/
   data/feriados.js         → junta o calendário da PUC e calcula os feriados dos anos sem calendário
   data/calSkins.js         → visões do comando e nomes aceitos (PT e EN)
   lib/horario.js           → "agora" em BH, próxima aula, semana do semestre e status de cada aula
+  lib/status.js            → status da tela de boas-vindas, a partir destes mesmos dados
   components/Calendario.jsx → as três visões (mês é o padrão)
   components/Calendario.css → grade, agenda e lista de turmas, com layout para celular
   components/SkinsFooter.jsx → rodapé "Visões:" (compartilhado com skills, wakatime e stats)

@@ -44,6 +44,7 @@ export const tokenGroups = [
       { name: "--warn", kind: "text" },
       { name: "--info", kind: "text" },
       { name: "--success", kind: "text" },
+      { name: "--busy", kind: "text" },
     ],
   },
 ];

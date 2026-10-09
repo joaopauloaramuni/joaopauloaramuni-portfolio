@@ -24,6 +24,7 @@ import AramuniLogo from "./AramuniLogo";
 import { useTheme } from "../theme/themeContext";
 import { obterVisitas } from "../lib/visitas";
 import { obterClima, grupoDoTempo } from "../lib/clima";
+import StatusAgora from "./StatusAgora";
 import "./BoasVindas.css";
 
 // Ícone do tempo (mesma família io5 dos outros ícones da boas-vindas)
@@ -132,6 +133,9 @@ const BoasVindas = () => {
       />
       <div className="static-welcome">
         <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
+        {/* Em aula, disponível, fim de semana ou feriado: sai do horário do
+            cal, sem rede, então vem antes do contador e não "pula" */}
+        <StatusAgora />
         {(visitas != null || clima) && (
           <p className="welcome-visitas">
             {"> "}
