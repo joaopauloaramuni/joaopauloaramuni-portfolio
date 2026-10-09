@@ -5,6 +5,7 @@ import GITHUB_STATS_CONFIG from './src/config/gitHubStatsConfig.js'
 import { atenderGitHub, PROXY_PATH } from './api/_github.js'
 import { atenderAsk, PROXY_PATH as ASK_PATH } from './api/_ask.js'
 import { atenderClima, PROXY_PATH as CLIMA_PATH } from './api/_clima.js'
+import { atenderCodando, PROXY_PATH as CODANDO_PATH } from './api/_codando.js'
 
 // O WakaTime não libera CORS: o navegador chama /api/wakatime/... e o
 // servidor do Vite repassa para a API pública do usuário. Em produção quem
@@ -100,13 +101,33 @@ function clima(env) {
   }
 }
 
+// "Codando agora" (boas-vindas e wakatime --agora): GET /api/codando lê os
+// heartbeats do WakaTime com a WAKATIME_API_KEY. Em produção quem faz isso é
+// a Vercel Function api/codando.js; aqui, no npm run dev e no npm run
+// preview, é este middleware. A chave fica só no servidor do Vite.
+function codando(env) {
+  const middleware = (req, res, next) => {
+    if (new URL(req.url, 'http://localhost').pathname !== CODANDO_PATH) return next()
+    atenderCodando(req, res, env).catch(next)
+  }
+  return {
+    name: 'codando',
+    configureServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+    configurePreviewServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Prefixo '' lê todas as variáveis do .env.local, inclusive as sem VITE_
   // (isso não as expõe: o que vai para o navegador continua só VITE_*)
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN), askIA(env), clima(env)],
+    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN), askIA(env), clima(env), codando(env)],
     server: { proxy },
     preview: { proxy },
   }

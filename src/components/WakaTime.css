@@ -3,6 +3,7 @@
      wakatime / wakatime --terminal   resumo e barras em blocos, estilo CLI (padrão)
      wakatime --grade                 indicadores + cards com anel de progresso
      wakatime --lista                 fatia de cada linguagem + ranking em barras
+     wakatime --agora                 projeto em que estou mexendo agora (heartbeats)
      wakatime --cards                 os dois cards de imagem (helio-github-stats)
    Os três primeiros usam a API pública do WakaTime. Cada item recebe, via
    style inline (data/wakaTimeLanguages.js):
@@ -677,4 +678,58 @@
   .waka-card:hover .waka-ring-icon {
     transform: none;
   }
+}
+
+/* ---------------------------------------------------------------------
+   wakatime --agora: estado ao vivo + chave/valor no estilo do --terminal
+   --------------------------------------------------------------------- */
+.waka-agora-estado {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  padding: 0 0.6rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.waka-agora-estado.ativo {
+  color: var(--accent);
+}
+
+.waka-agora-dot {
+  flex-shrink: 0;
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+/* Programando: a bolinha pulsa, como o "em aula" da boas-vindas */
+.waka-agora-estado.ativo .waka-agora-dot {
+  background: var(--accent);
+  animation: waka-agora-pulso 2s ease-in-out infinite;
+}
+
+@keyframes waka-agora-pulso {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  50% { box-shadow: 0 0 0 0.35em color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+
+.waka-agora-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.waka-agora-nota {
+  margin: 0;
+  padding: 0 0.6rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  white-space: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waka-agora-estado.ativo .waka-agora-dot { animation: none; }
 }

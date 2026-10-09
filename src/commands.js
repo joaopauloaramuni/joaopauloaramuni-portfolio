@@ -140,8 +140,8 @@ export const commandList = {
   wakatime: {
     name: 'wakatime',
     aliases: ['time'],
-    // Estilos: wakatime --terminal | --grade | --lista | --cards (ver data/wakaTimeSkins.js)
-    subcommands: ['--terminal', '--grade', '--grid', '--lista', '--list', '--cards'],
+    // Estilos: wakatime --terminal | --grade | --lista | --agora | --cards (ver data/wakaTimeSkins.js)
+    subcommands: ['--terminal', '--grade', '--grid', '--lista', '--list', '--agora', '--now', '--cards'],
   },
   neofetch: {
     name: 'neofetch',

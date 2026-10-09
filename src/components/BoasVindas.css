@@ -154,6 +154,28 @@
   margin-top: -0.35rem;
 }
 
+/* "Codando agora" (WakaTime), logo abaixo do status de aula. Parado, o <p>
+   continua na página, vazio e sem altura: é ele que o useOnScreen observa
+   (display: none faria o observador achar que saiu da tela). */
+.welcome-codando-vazio {
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.welcome-status + .welcome-codando {
+  margin-top: -0.35rem;
+}
+
+.welcome-codando + .welcome-visitas,
+.welcome-codando-vazio + .welcome-visitas {
+  margin-top: -0.35rem;
+}
+
+.welcome-codando {
+  animation: welcome-clima-in 0.6s ease both;
+}
+
 .welcome-status-btn {
   display: inline-flex;
   align-items: flex-start; /* a bolinha fica na primeira linha quando quebra */
@@ -203,9 +225,11 @@
 .welcome-status-saindo { color: var(--warn); }
 .welcome-status-livre { color: var(--success); }
 .welcome-status-folga { color: var(--info); }
+.welcome-status-codando { color: var(--accent); }
 
-/* Em aula, a bolinha pulsa devagar, como um "ao vivo" */
-.welcome-status-ocupado {
+/* Em aula (e codando), a bolinha pulsa devagar, como um "ao vivo" */
+.welcome-status-ocupado,
+.welcome-status-codando {
   animation: welcome-status-pulso 2s ease-in-out infinite;
 }
 
@@ -215,7 +239,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .welcome-status-ocupado { animation: none; }
+  .welcome-status-ocupado,
+  .welcome-status-codando,
+  .welcome-codando { animation: none; }
 }
 
 .sr-only {

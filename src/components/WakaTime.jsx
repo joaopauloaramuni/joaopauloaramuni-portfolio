@@ -24,7 +24,9 @@ import {
   formatPercent,
   formatDate,
 } from "../lib/wakatime";
+import { useCodando, useRelogio, haQuanto } from "../lib/codando";
 import useCommandAtTop from "../terminal/useCommandAtTop";
+import useOnScreen from "../terminal/useOnScreen";
 import { useTheme } from "../theme/themeContext";
 import { toHex } from "../theme/colorUtils";
 import SkinsFooter from "./SkinsFooter";
@@ -569,6 +571,112 @@ function WakaTimeStats({ skin }) {
   );
 }
 
+/* =====================================================================
+   wakatime --agora: em que projeto estou mexendo no editor agora
+   Heartbeats do WakaTime, lidos no servidor com a chave (api/_codando.js).
+   Atualiza a cada minuto enquanto está na tela.
+   ===================================================================== */
+function WakaTimeAgora() {
+  const { t, i18n } = useTranslation();
+  const containerRef = useRef(null);
+  const naTela = useOnScreen(containerRef);
+  const estado = useCodando(naTela);
+  const agora = useRelogio(naTela);
+  const f = useFormatters();
+
+  useCommandAtTop(containerRef);
+
+  const hora = (ms) =>
+    new Intl.DateTimeFormat(i18n.language, { hour: "2-digit", minute: "2-digit" }).format(ms);
+
+  let corpo;
+  if (estado.status !== "ok") {
+    corpo = (
+      <p
+        className={`wakatime-status ${estado.status === "carregando" ? "loading" : "error"}`}
+        role="status"
+      >
+        {t(`wakatime.agora.status.${estado.status}`)}
+      </p>
+    );
+  } else {
+    const { ativo, ultimo, hojeSegundos } = estado.dados;
+    const linguagem = ultimo?.linguagem && languageStyle(ultimo.linguagem);
+    const IconeLinguagem = linguagem?.icon;
+    const sessaoS = ultimo ? (ultimo.em - ultimo.sessaoDesde) / 1000 : 0;
+
+    const linhas = ultimo
+      ? [
+          ["projeto", ultimo.publico ? ultimo.projeto : t("wakatime.agora.privado")],
+          ultimo.linguagem && [
+            "linguagem",
+            <span className="waka-agora-lang" key="lang">
+              {IconeLinguagem && (
+                <IconeLinguagem
+                  aria-hidden="true"
+                  style={{ color: `var(--lang-ink, ${linguagem.color})` }}
+                />
+              )}
+              {f.name(ultimo.linguagem)}
+            </span>,
+          ],
+          ultimo.editor && ["editor", ultimo.editor],
+          ultimo.branch && ["branch", ultimo.branch],
+          ativo &&
+            sessaoS >= 60 && [
+              "sessao",
+              t("wakatime.agora.desde", {
+                duracao: f.duration(sessaoS),
+                hora: hora(ultimo.sessaoDesde),
+              }),
+            ],
+          [ativo ? "ultimoSinal" : "ultimaAtividade", haQuanto(t, ultimo.em, agora)],
+          ultimo.projetoHojeSegundos >= 60 && [
+            "hojeProjeto",
+            f.duration(ultimo.projetoHojeSegundos),
+          ],
+        ]
+      : [];
+    if (hojeSegundos >= 60) linhas.push(["hojeTotal", f.duration(hojeSegundos)]);
+
+    corpo = (
+      <div className="waka-term">
+        <p className={ativo ? "waka-agora-estado ativo" : "waka-agora-estado"} role="status">
+          <span className="waka-agora-dot" aria-hidden="true" />
+          {t(ativo ? "wakatime.agora.ativo" : "wakatime.agora.parado")}
+        </p>
+        {linhas.filter(Boolean).length > 0 ? (
+          <dl className="waka-term-info">
+            {linhas.filter(Boolean).map(([chave, valor]) => (
+              <div key={chave} className="waka-term-kv">
+                <dt>{t(`wakatime.agora.campos.${chave}`)}</dt>
+                <dd>{valor}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="waka-agora-nota">{t("wakatime.agora.nadaHoje")}</p>
+        )}
+        <p className="waka-agora-nota">{t("wakatime.agora.nota")}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="wakatime-painel" ref={containerRef}>
+      <h3 className="wakatime-titulo">{t("wakatime.agora.titulo")}</h3>
+      <p className="wakatime-subtitulo">
+        <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer">
+          wakatime.com/@{USERNAME}
+        </a>
+      </p>
+      {corpo}
+      <SkinsFooter skins={SKINS} active="agora" namespace="wakatime" />
+    </div>
+  );
+}
+
 export default function WakaTime({ skin = DEFAULT_SKIN }) {
+  if (skin === "agora") return <WakaTimeAgora />;
   return SKIN_VIEWS[skin] ? <WakaTimeStats skin={skin} /> : <WakaTimeCards />;
 }

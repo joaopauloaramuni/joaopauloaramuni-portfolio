@@ -22,6 +22,28 @@ const WAKATIME_CONFIG = {
 
   // Linguagens que não devem aparecer, ex.: ["Text", "Other"]
   HIDDEN_LANGUAGES: [],
+
+  // "Codando agora" (boas-vindas e wakatime --agora). Diferente do resto, usa
+  // os heartbeats do WakaTime, que são privados: precisa da WAKATIME_API_KEY,
+  // que fica só no servidor (api/_codando.js). O navegador chama AGORA.API_PATH.
+  AGORA: {
+    API_PATH: "/api/codando",
+    // Fuso da sua conta no WakaTime: é por ele que a API separa os dias
+    TIMEZONE: "America/Sao_Paulo",
+    // Último heartbeat há até tantos minutos = "codando agora". A extensão
+    // manda um a cada ~2 min enquanto você digita.
+    ATIVO_MINUTOS: 10,
+    // Pausa maior que isso encerra a sessão (mesmo timeout padrão do WakaTime)
+    PAUSA_MINUTOS: 15,
+    // De quanto em quanto tempo o site pergunta de novo
+    ATUALIZAR_SEGUNDOS: 60,
+    // Só estes projetos aparecem pelo nome (com a branch). Os outros viram
+    // "projeto privado", para não expor projeto de cliente. O nome é o que o
+    // WakaTime mostra no dashboard (em geral, o nome da pasta).
+    PROJETOS_PUBLICOS: ["joaopauloaramuni-portfolio"],
+    // false: projeto fora da lista não aparece de jeito nenhum
+    MOSTRAR_PRIVADOS: true,
+  },
 };
 
 export default WAKATIME_CONFIG;

@@ -25,6 +25,7 @@ import { useTheme } from "../theme/themeContext";
 import { obterVisitas } from "../lib/visitas";
 import { obterClima, grupoDoTempo } from "../lib/clima";
 import StatusAgora from "./StatusAgora";
+import CodandoAgora from "./CodandoAgora";
 import "./BoasVindas.css";
 
 // Ícone do tempo (mesma família io5 dos outros ícones da boas-vindas)
@@ -136,6 +137,9 @@ const BoasVindas = () => {
         {/* Em aula, disponível, fim de semana ou feriado: sai do horário do
             cal, sem rede, então vem antes do contador e não "pula" */}
         <StatusAgora />
+        {/* Projeto em que estou mexendo no editor (WakaTime): só aparece
+            enquanto estou programando */}
+        <CodandoAgora />
         {(visitas != null || clima) && (
           <p className="welcome-visitas">
             {"> "}
