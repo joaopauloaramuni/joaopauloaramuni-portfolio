@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-06.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-09.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,8 +12,8 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-10-06T17:41-03:00",
-  alunos: 327,
+  geradoEm: "2026-10-09T08:18-03:00",
+  alunos: 326,
 };
 
 export const cursos = [
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 20,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "291775",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "289123",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 10,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 23,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "287597",
@@ -194,7 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "286958",
@@ -207,7 +207,7 @@ export const cursos = [
     sga: "4354.1.00",
     curso: "CC",
     alunos: 50,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "286959",
@@ -220,7 +220,7 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
   {
     id: "283169",
@@ -232,8 +232,8 @@ export const cursos = [
     turno: "noite",
     sga: "0492.1.00",
     curso: "ES",
-    alunos: 48,
-    atualizadoEm: "2026-10-06T17:41-03:00",
+    alunos: 47,
+    atualizadoEm: "2026-10-09T08:18-03:00",
   },
 ];
 
@@ -247,7 +247,7 @@ export const tarefas = [
     pontos: 5,
     tipo: "online",
     grupo: true,
-    entregas: { alunos: 48, noPrazo: 41, atrasadas: 6, faltando: 1, dispensados: 0, corrigidas: 47, aCorrigir: 0 },
+    entregas: { alunos: 47, noPrazo: 40, atrasadas: 6, faltando: 1, dispensados: 0, corrigidas: 46, aCorrigir: 0 },
   },
   {
     id: "1418066",
@@ -967,17 +967,6 @@ export const tarefas = [
     entregas: { alunos: 50, noPrazo: 49, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 0, aCorrigir: 49 },
   },
   {
-    id: "1418060",
-    curso: "291775",
-    nome: "ATIVIDADE - Entrega Sprint 1 - INDIVIDUAL (ZIP)",
-    url: "https://pucminas.instructure.com/courses/291775/assignments/1418060",
-    prazo: "2026-10-11T23:59-03:00",
-    fecha: "2026-10-11T23:59-03:00",
-    pontos: 15,
-    tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
     id: "1408518",
     curso: "286958",
     nome: "ATIVIDADE - Entrega Sprint 1 - INDIVIDUAL (ZIP)",
@@ -986,7 +975,7 @@ export const tarefas = [
     fecha: "2026-10-11T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 50, noPrazo: 5, atrasadas: 0, faltando: 45, dispensados: 0, corrigidas: 0, aCorrigir: 5 },
   },
   {
     id: "1434348",
@@ -998,7 +987,7 @@ export const tarefas = [
     fecha: "2026-10-12T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 1, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
   },
   {
     id: "1434389",
@@ -1022,7 +1011,7 @@ export const tarefas = [
     fecha: "2026-10-13T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 13, noPrazo: 1, atrasadas: 0, faltando: 12, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
   },
   {
     id: "1434664",
@@ -1034,7 +1023,18 @@ export const tarefas = [
     fecha: "2026-10-13T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 22, noPrazo: 2, atrasadas: 0, faltando: 20, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
+  },
+  {
+    id: "1418060",
+    curso: "291775",
+    nome: "ATIVIDADE - Entrega Sprint 1 - INDIVIDUAL (ZIP)",
+    url: "https://pucminas.instructure.com/courses/291775/assignments/1418060",
+    prazo: "2026-10-13T23:59-03:00",
+    fecha: "2026-10-13T23:59-03:00",
+    pontos: 15,
+    tipo: "online",
+    entregas: { alunos: 14, noPrazo: 1, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
   },
   {
     id: "1434411",

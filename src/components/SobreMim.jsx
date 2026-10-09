@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { TypeAnimation } from "react-type-animation";
 import { FaChalkboardTeacher, FaCode, FaRocket, FaUserGraduate } from "react-icons/fa";
@@ -19,6 +19,7 @@ import { TbCake, TbCertificate, TbZodiacSagittarius } from "react-icons/tb";
 import useCommandAtTop from "../terminal/useCommandAtTop";
 import { GITHUB } from "../data/docenciaData";
 import { INSTITUICOES, ITENS, PRIMEIRO_ANO, corStyle, useDocencia } from "../lib/docencia";
+import { MINUTOS_TOTAL_SEMESTRE, formatarTotal, minutosLecionados } from "../lib/horasPuc";
 import {
   AES,
   BANCAS,
@@ -299,6 +300,39 @@ function Marca({ logo, cor, alt, icone }) {
   );
 }
 
+// Horas lecionadas na PUC: o total até o fim do semestre e o de agora,
+// recalculado a cada 30 s (a aula em andamento entra só na parte já dada)
+function HorasPuc() {
+  const { i18n } = useTranslation();
+  const [minutos, setMinutos] = useState(() => minutosLecionados());
+  useEffect(() => {
+    const id = setInterval(() => setMinutos(minutosLecionados()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+  const idioma = i18n.language.startsWith("en") ? "en-US" : "pt-BR";
+  const b = { b: <strong /> };
+
+  return (
+    <>
+      <p className="sobre-hoje-extra">
+        <Trans
+          i18nKey="sobre.hoje.horas_total"
+          values={{ total: formatarTotal(MINUTOS_TOTAL_SEMESTRE, idioma) }}
+          components={b}
+        />
+      </p>
+      <p className="sobre-hoje-extra">
+        <span className="sobre-ponto-agora" aria-hidden="true" />
+        <Trans
+          i18nKey="sobre.hoje.horas_agora"
+          values={{ total: formatarTotal(minutos, idioma) }}
+          components={b}
+        />
+      </p>
+    </>
+  );
+}
+
 function Hoje() {
   const { t } = useTranslation();
   const semestre = SEMESTRE_REF?.replace(".", "/");
@@ -323,6 +357,7 @@ function Hoje() {
                 {t("sobre.hoje.disciplinas_agora", { count: DISCIPLINAS_AGORA_PUC, semestre })}
               </p>
             )}
+            {item.id === "puc" && <HorasPuc />}
           </div>
         </li>
       ))}

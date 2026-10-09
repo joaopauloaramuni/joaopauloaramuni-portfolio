@@ -316,6 +316,8 @@ const resources = {
           },
           disciplinas_agora_one: "{{count}} course in {{semestre}}",
           disciplinas_agora_other: "{{count}} courses in {{semestre}}",
+          horas_total: "Total hours taught at PUC Minas through December 22, 2026: <b>{{total}}</b>",
+          horas_agora: "Total hours taught at PUC Minas so far: <b>{{total}}</b>",
         },
         trajetoria: {
           profissao: "programmer by profession",
@@ -2702,6 +2704,8 @@ const resources = {
           },
           disciplinas_agora_one: "{{count}} disciplina em {{semestre}}",
           disciplinas_agora_other: "{{count}} disciplinas em {{semestre}}",
+          horas_total: "Total de horas lecionadas na PUC Minas até 22 de dezembro de 2026: <b>{{total}}</b>",
+          horas_agora: "Total de horas lecionadas na PUC Minas até o momento: <b>{{total}}</b>",
         },
         trajetoria: {
           profissao: "programador por profissão",
