@@ -51,6 +51,8 @@ const FlappyPlaneGame = lazyCommand(() => import("./components/FlappyPlaneGame")
 // "jogo" / "quake": o componente é leve (um iframe); o motor e os dados só
 // descem quando o comando roda (ver public/quake)
 const QuakeGame = lazyCommand(() => import("./components/QuakeGame"));
+// "jogo --doom" / "doom": idem, com o motor e os dados em public/doom
+const DoomGame = lazyCommand(() => import("./components/DoomGame"));
 const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
 const Neofetch = lazyCommand(() => import("./components/Neofetch"));
 const Jogos = lazyCommand(() => import("./components/Jogos"));
@@ -93,6 +95,7 @@ const PRELOAD = [
   Premios,
   FlappyPlaneGame,
   QuakeGame,
+  DoomGame,
   LivroVisitas,
   Neofetch,
   Jogos,
@@ -191,10 +194,12 @@ function App() {
     runCommandRef.current?.(deepLinkCommand);
   }, [booted, deepLinkCommand]);
 
-  // Detecta se um jogo (Flappy Plane ou Quake) está aberto
+  // Detecta se um jogo (Flappy Plane, Quake ou Doom) está aberto
   const lastLineType = terminalLineData[terminalLineData.length - 1]?.type;
   const isGameOpen =
-    lastLineType === FlappyPlaneGame || lastLineType === QuakeGame;
+    lastLineType === FlappyPlaneGame ||
+    lastLineType === QuakeGame ||
+    lastLineType === DoomGame;
 
   // Detecta se o contato está aberto
   const isContatoOpen =
@@ -446,21 +451,25 @@ function App() {
           response = <Contato onExit={exitComponent} />;
           break;
         case "jogo": {
-          // "jogo", "game" e "quake" abrem o Quake shareware e "flappyplane", o
-          // Flappy Plane; "--quake" | "--flappyplane" escolhem o jogo
+          // "jogo", "game" e "quake" abrem o Quake shareware, "doom", o Doom
+          // shareware e "flappyplane", o Flappy Plane; "--quake" | "--doom" |
+          // "--flappyplane" escolhem o jogo
           if (subCommand && !command.subcommands.includes(subCommand)) {
             response = <TerminalOutput>{t("jogo.uso")}</TerminalOutput>;
             break;
           }
-          const flappy = subCommand
-            ? subCommand === "--flappyplane"
-            : userInput === "flappyplane";
-          response =
-            !flappy ? (
-              <QuakeGame onExit={exitComponent} />
-            ) : (
-              <FlappyPlaneGame onExit={exitComponent} />
-            );
+          const game = subCommand
+            ? subCommand.slice(2)
+            : ["doom", "flappyplane"].includes(userInput)
+              ? userInput
+              : "quake";
+          if (game === "doom") {
+            response = <DoomGame onExit={exitComponent} />;
+          } else if (game === "flappyplane") {
+            response = <FlappyPlaneGame onExit={exitComponent} />;
+          } else {
+            response = <QuakeGame onExit={exitComponent} />;
+          }
           break;
         }
         case "guestbook": {

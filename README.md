@@ -38,7 +38,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🐓 **neofetch / fetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * ⚽ **campeonato / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `campeonato --todos` mostra todos os marcados e `campeonato --tabela`, a classificação do Brasileirão com o Galo em destaque (posição, pontos, V/E/D, gols pró e contra, saldo, aproveitamento, últimos 5 jogos e a distância para o líder, a vaga na Libertadores e o Z-4).
 * 🏀 **basquete / basketball / nba:** Próximos jogos da NBA, ao vivo da [ESPN](https://www.espn.com/nba/schedule), no mesmo layout do `campeonato`: a fase (pré-temporada, temporada regular, play-in, playoffs), os logos dos dois times com a campanha (vitórias-derrotas), dia, hora (de Brasília), ginásio e TV, quanto falta para cada jogo e uma contagem regressiva para o próximo. Nos playoffs aparece a rodada, o jogo da série e quem lidera. Mostra os 5 próximos da liga; `nba --todos` mostra todos os jogos dos próximos dias e `nba lal` (ou `nba lakers`, `nba gsw`, `nba celtics --todos`...) filtra por time, com o último resultado e a posição na divisão.
-* 🕹️ **jogo / quake / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-e-flappy-plane).
+* 🕹️ **jogo / quake / doom / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), `doom` abre o Doom original (episódio 1 do shareware), ambos rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake`, `jogo --doom` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-doom-e-flappy-plane).
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
@@ -248,6 +248,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   ├── 📄 cv-pt.pdf · cv-en.pdf          → currículo (curriculo)
 │   ├── 📄 lattes.pdf                     → currículo Lattes (lattes --pdf)
 │   ├── 📁 quake                          → Quake em WebAssembly e quake106.zip (jogo / quake)
+│   ├── 📁 doom                           → Doom em WebAssembly e doom1.wad (jogo --doom / doom)
 │   ├── 🖼️ aramuni-logo*.svg · aramunilogo.png → logo e favicon
 │   └── 🖼️ demais imagens                 → projetos, prêmios, avatar e prévia do link (portfolio1.png)
 ├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
@@ -255,7 +256,8 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
 │   ├── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
 │   ├── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
-│   └── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
+│   ├── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
+│   └── 📁 doom                           → recompila o motor do Doom (build.sh, Zig)
 ├── 📁 supabase                           → scripts SQL do banco (rode no SQL Editor do Supabase)
 │   ├── 🗄️ livro_visitas.sql              → tabela e políticas do guestbook
 │   └── 🗄️ contador_visitas.sql           → contador de visitas da tela de boas-vindas
@@ -289,12 +291,13 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ DesignSystem               → design
 │   │   ├── ⚛️ FlappyPlaneGame            → flappyplane (jogo --flappyplane)
 │   │   ├── ⚛️ QuakeGame                  → jogo / quake (iframe de public/quake)
+│   │   ├── ⚛️ DoomGame                   → jogo --doom / doom (iframe de public/doom)
 │   │   ├── ⚛️ LivroVisitas               → guestbook
 │   │   ├── ⚛️ LanguageSwitcher · LanguageSwitcherFlags · ThemeToggle → seletor PT | EN (com as bandeiras) e botões de tema (sol, lua e galo)
 │   │   ├── ⚛️ GaloFundo                  → foto de fundo do tema galo
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
-│   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (Flappy Plane, Quake e guestbook)
+│   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (Flappy Plane, Quake, Doom e guestbook)
 │   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask, jogos do Galo e da NBA
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
@@ -995,7 +998,7 @@ response = <SobreMim />; // igual a antes
 - **"Carregando..."**: enquanto o código chega, a saída mostra uma linha de aviso no idioma atual.
 - **Pré-carregamento**: depois do boot, com o navegador ocioso, os comandos leves já são baixados em segundo plano (lista `PRELOAD` no `App.jsx`), então o primeiro uso de cada um abre na hora. Ficam de fora o `curriculo`, o `lattes`, o `turmas` e o `canvas`, mais pesados, e quem está com a economia de dados do celular ligada (Save-Data).
 - **Falha no download**: se a rede cair ou um deploy novo apagar os arquivos da versão aberta, a saída mostra "Não foi possível abrir este comando" em vez de derrubar o terminal, e a próxima execução tenta de novo.
-- **Detecção do jogo, contato e guestbook**: o componente devolvido pelo `lazyCommand` é sempre o mesmo, então o App continua sabendo quando pausar o terminal (`line.type === FlappyPlaneGame`, ou `QuakeGame`).
+- **Detecção do jogo, contato e guestbook**: o componente devolvido pelo `lazyCommand` é sempre o mesmo, então o App continua sabendo quando pausar o terminal (`line.type === FlappyPlaneGame`, `QuakeGame` ou `DoomGame`).
 
 Para criar um comando novo, importe o componente com `lazyCommand` no `App.jsx` e, se ele for leve, coloque-o na lista `PRELOAD`.
 
@@ -2117,16 +2120,17 @@ vercel.json               → até 60 s para a função api/ask.js responder
 
 -----
 
-## 🕹️ Guia do comando jogo (Quake e Flappy Plane)
+## 🕹️ Guia do comando jogo (Quake, Doom e Flappy Plane)
 
-O comando `jogo` (aliases `quake` e `flappyplane`) abre um jogo dentro do terminal. Enquanto ele está aberto, o terminal fica em pausa: o teclado é do jogo.
+O comando `jogo` (aliases `quake`, `doom` e `flappyplane`) abre um jogo dentro do terminal. Enquanto ele está aberto, o terminal fica em pausa: o teclado é do jogo.
 
 | Comando | O que abre |
 |:--|:--|
 | `jogo`, `quake` ou `jogo --quake` | O Quake original da id Software (1996), episódio 1 do shareware, rodando em WebAssembly: mouse mira, WASD anda, espaço pula, clique atira, Esc abre o menu, `~` abre o console e `quit` volta ao terminal |
+| `doom` ou `jogo --doom` | O Doom original da id Software (1993), episódio 1 do shareware (Knee-Deep in the Dead), rodando em WebAssembly: WASD anda, mouse ou setas viram, clique ou Ctrl atira, espaço (ou clique direito) abre portas, Shift corre, Esc abre o menu e *Quit Game* volta ao terminal. Jogos salvos ficam no navegador |
 | `flappyplane` ou `jogo --flappyplane` | O Flappy Plane: espaço (ou toque) para subir, R para recomeçar. Cada nuvem passada mostra uma conquista do meu currículo |
 
-O link direto abre o jogo: [aramuni.dev/?cmd=quake](https://aramuni.dev/?cmd=quake).
+O link direto abre o jogo: [aramuni.dev/?cmd=quake](https://aramuni.dev/?cmd=quake) ou [aramuni.dev/?cmd=doom](https://aramuni.dev/?cmd=doom).
 
 ### 1️⃣ Como o Quake roda no terminal
 
@@ -2157,9 +2161,47 @@ bash scripts/quake/build.sh
 
 O script clona o Qwasm num commit fixado, troca a entrada (`main` → `qstart`, chamada pelo `loader.js` depois de o `pak0.pak` estar no sistema de arquivos; ver `scripts/quake/wasm_entry.c`) e grava os dois arquivos em `public/quake/`.
 
+### 4️⃣ Como o Doom roda no terminal
+
+O motor é o [doomgeneric](https://github.com/ozkl/doomgeneric) (um Chocolate Doom enxuto, GPL-2.0), no mesmo desenho do Quake: página própria (`public/doom/index.html`) dentro de um `iframe`, isolada do React, e sair do comando desmonta tudo.
+
+A diferença está na compilação: em vez do Emscripten, o motor é compilado para **WebAssembly/WASI** com o Zig, e o `public/doom/loader.js` faz o papel do runtime, com um WASI mínimo (arquivos em memória, `stdout` e `stderr`) e a plataforma do jogo (`scripts/doom/doomgeneric_web.c`):
+
+- **Vídeo:** o quadro original de 320x200 vai para o `<canvas>`, esticado para 4:3 como no monitor da época;
+- **Tempo:** o JavaScript chama `dg_tick()` uma vez por tic (35 por segundo), sem o motor ficar esperando dentro do wasm;
+- **Som:** os efeitos (lumps `DS*` do WAD, PCM de 8 bits) tocam no Web Audio, com volume e posição estéreo;
+- **Música:** as faixas do WAD (lumps `D_*`, em MUS) tocam como na placa AdLib/Sound Blaster de 1993: o `i_oplmusic.c` do [Chocolate Doom](https://github.com/chocolate-doom/chocolate-doom) 2.3.0 lê a partitura com os timbres do lump `GENMIDI` e o Nuked OPL3 emula o chip FM Yamaha OPL2. O driver `scripts/doom/opl_web.c` entrega o áudio em blocos ao `loader.js`, que os agenda no Web Audio (~0,25 s à frente);
+- **Controles:** WASD + mouse com pointer lock, além das teclas do Doom original (setas, Alt, vírgula e ponto);
+- **Jogos salvos e configuração:** gravados no IndexedDB do navegador.
+
+O motor tem ~2,3 MB e os dados ~4 MB, baixados só quando alguém roda o `doom`.
+
+### 5️⃣ Dados do Doom (`doom1.wad`)
+
+Os dados vêm do **Doom shareware 1.9**, o `doom1.wad` original, sem modificação, em `public/doom/doom1.wad`. Confira o arquivo antes de publicar:
+
+```
+Tamanho: 4.196.020 bytes
+MD5:     f0cefca49926d00903cf57551d901abe
+```
+
+Sem o `doom1.wad` no servidor, o `loader.js` pede ao visitante o próprio IWAD: o `doom1.wad`, o `doom.wad` (versão completa) ou o `doom2.wad`, que ficam só no navegador dele.
+
+> ⚖️ **Licença:** o shareware do Doom pode ser distribuído de graça, sem modificação e sem uso comercial. Doom é marca da id Software / ZeniMax, sem vínculo com este projeto. O `doom.wad` (versão registrada) e o `doom2.wad` **não** podem ser publicados.
+
+### 6️⃣ Recompilando o motor do Doom
+
+O `doom.wasm` já está no repositório. Para gerá-lo de novo, instale o [Zig](https://ziglang.org/download/) (ou `pip install ziglang`) e rode:
+
+```bash
+bash scripts/doom/build.sh
+```
+
+O script clona o doomgeneric e o Chocolate Doom 2.3.0 (só a música e o OPL) em commits fixados, compila os fontes com a plataforma web (`scripts/doom/doomgeneric_web.c` e `opl_web.c`; `sdl_web.h` e `choco_compat.h` cobrem o que o código do Chocolate espera do SDL e do `i_sound.h`) e grava o `public/doom/doom.wasm`.
+
 ### 🧪 Testando localmente
 
-Com o `quake106.zip` em `public/quake/`, rode `npm run dev` e digite `jogo` (ou `quake`). A página do jogo também abre sozinha em `http://localhost:5173/quake/index.html` (`?lang=en` para inglês).
+Com o `quake106.zip` em `public/quake/`, rode `npm run dev` e digite `jogo` (ou `quake`); para o Doom, digite `doom`. As páginas dos jogos também abrem sozinhas em `http://localhost:5173/quake/index.html` e `http://localhost:5173/doom/index.html` (`?lang=en` para inglês).
 
 ### 📂 Arquivos
 
@@ -2172,6 +2214,16 @@ public/quake/quake.js · .wasm → motor WinQuake em WebAssembly (GPL, ver publi
 public/quake/quake106.zip     → shareware original da id Software (você adiciona)
 scripts/quake/build.sh        → recompila o motor com o Emscripten
 scripts/quake/wasm_entry.c    → entrada qstart() chamada pelo loader.js
+src/components/DoomGame.jsx   → jogo --doom / doom: o iframe, tela cheia e "Voltar ao terminal"
+public/doom/index.html        → página do Doom (carregamento e canvas)
+public/doom/loader.js         → WASI mínimo, vídeo, efeitos, música, teclado/mouse e jogos salvos (IndexedDB)
+public/doom/doom.wasm         → motor doomgeneric em WebAssembly (GPL, ver public/doom/COPYING)
+public/doom/doom1.wad         → shareware original da id Software (Doom 1.9)
+scripts/doom/build.sh         → recompila o motor com o Zig
+scripts/doom/doomgeneric_web.c → plataforma web do doomgeneric (vídeo, tempo, som e controles)
+scripts/doom/opl_web.c        → driver da música: chip OPL emulado → blocos de áudio para o loader.js
+scripts/doom/sdl_web.h        → SDL.h vazio para os fontes do Chocolate Doom (sem threads no navegador)
+scripts/doom/choco_compat.h   → o que o i_oplmusic.c espera e o doomgeneric não traz
 ```
 
 -----
@@ -2624,8 +2676,8 @@ server {
         types { application/javascript mjs; }
     }
 
-    # Motor do Quake (jogo / quake): o navegador só compila o .wasm em
-    # streaming se ele vier como application/wasm
+    # Motores do Quake e do Doom (jogo / quake / doom): o navegador só
+    # compila o .wasm em streaming se ele vier como application/wasm
     location ~* \.wasm$ {
         types { application/wasm wasm; }
     }
@@ -2642,7 +2694,7 @@ server {
 - **Query do `repo-views`:** o `?pageId=...&type=total` é repassado exatamente como veio. O views-counter conta cada forma de codificar o `pageId` como um contador diferente, então ele não pode ser recodificado no caminho;  
 - **`try_files`:** qualquer caminho que não seja um arquivo devolve o `index.html`. Os links diretos usam `/?cmd=`, então isso é só uma garantia;  
 - **`.mjs`:** o worker do PDF.js (visualizador do `curriculo`) é um módulo `.mjs`. Se o NGINX o servir como `application/octet-stream`, o navegador recusa o worker e o PDF não abre; o `location ~* \.mjs$` garante o tipo JavaScript;  
-- **`.wasm`:** o motor do Quake (`jogo` / `quake`) precisa do tipo `application/wasm`; o `location ~* \.wasm$` garante isso em versões antigas do NGINX;  
+- **`.wasm`:** os motores do Quake e do Doom (`jogo` / `quake` / `doom`) precisam do tipo `application/wasm`; o `location ~* \.wasm$` garante isso em versões antigas do NGINX;  
 - **DNS na inicialização:** o NGINX resolve o endereço dos destinos quando inicia. Se o container subir sem acesso à internet, o NGINX não sobe;  
 - **Trocar de usuário:** o mapeamento fica em três lugares (`vercel.json`, `vite.config.js` via arquivos de `src/config/` e `nginx.conf`). Ao trocar de usuário, atualize os três.  
 

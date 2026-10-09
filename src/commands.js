@@ -165,11 +165,12 @@ export const commandList = {
   },
   jogo: {
     name: 'jogo',
-    aliases: ['quake', 'flappyplane', 'game'],
+    aliases: ['quake', 'doom', 'flappyplane', 'game'],
     // "jogo", "game" e "quake" abrem o Quake shareware original (ver
-    // components/QuakeGame.jsx e public/quake); "flappyplane" abre o
-    // Flappy Plane. --quake | --flappyplane escolhem o jogo
-    subcommands: ['--quake', '--flappyplane'],
+    // components/QuakeGame.jsx e public/quake); "doom" abre o Doom shareware
+    // original (components/DoomGame.jsx e public/doom); "flappyplane" abre o
+    // Flappy Plane. --quake | --doom | --flappyplane escolhem o jogo
+    subcommands: ['--quake', '--doom', '--flappyplane'],
   },
   guestbook: {
     name: 'guestbook',

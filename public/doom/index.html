@@ -1,0 +1,116 @@
+<!doctype html>
+<!--
+  Doom (shareware) dentro do terminal: esta página roda num <iframe> aberto
+  pelo comando "jogo --doom" ou "doom" (src/components/DoomGame.jsx). O motor
+  é o doomgeneric, sob a GPL (ver COPYING e scripts/doom); os dados do jogo
+  são da id Software: o doom1.wad do shareware 1.9, sem modificações.
+-->
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Doom</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+        color: #c8c8c8;
+        font-family: "Courier New", ui-monospace, monospace;
+        font-size: 14px;
+        overflow: hidden;
+      }
+      #canvas {
+        display: block;
+        width: min(100vw, 100vh * 4 / 3);
+        height: min(100vh, 100vw * 3 / 4);
+        margin: calc((100vh - min(100vh, 100vw * 3 / 4)) / 2) auto 0;
+        background: #000;
+        outline: none;
+        image-rendering: pixelated;
+        cursor: crosshair;
+      }
+      #tela {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      #titulo {
+        color: #c0281e;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 6px;
+      }
+      #barra {
+        width: min(320px, 80vw);
+        height: 10px;
+        accent-color: #c0281e;
+      }
+      #escolha {
+        max-width: 460px;
+        line-height: 1.5;
+      }
+      #escolha button {
+        margin-top: 8px;
+        padding: 8px 14px;
+        border: 1px solid #c0281e;
+        border-radius: 6px;
+        background: transparent;
+        color: #e8e8e8;
+        font: inherit;
+        cursor: pointer;
+      }
+      #escolha button:hover {
+        background: #c0281e;
+      }
+      #erro-arquivo {
+        color: #ff6b6b;
+      }
+      #aviso-celular {
+        color: #e0b050;
+      }
+      #dica {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+        padding: 4px 10px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #e8e8e8;
+        font-size: 12px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tela">
+      <div id="titulo">DOOM</div>
+      <div id="status"></div>
+      <progress id="barra" max="100" value="0" hidden></progress>
+      <div id="aviso-celular"></div>
+      <div id="escolha" hidden>
+        <div id="texto-escolha"></div>
+        <button id="botao-arquivo" type="button"></button>
+        <input id="arquivo" type="file" accept=".wad" hidden />
+        <div id="erro-arquivo"></div>
+      </div>
+    </div>
+    <canvas id="canvas" tabindex="-1" hidden></canvas>
+    <div id="dica" hidden></div>
+    <script src="loader.js"></script>
+  </body>
+</html>

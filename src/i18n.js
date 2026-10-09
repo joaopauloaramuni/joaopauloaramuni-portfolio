@@ -636,12 +636,18 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Back to terminal",
-        uso: "Usage: jogo [--quake | --flappyplane] (no option opens Quake; game | quake | flappyplane also work)",
+        uso: "Usage: jogo [--quake | --doom | --flappyplane] (no option opens Quake; game | quake | doom | flappyplane also work)",
         quake: {
           titulo: "Quake (shareware, episode 1)",
           tela_cheia: "Fullscreen",
           ajuda: "Click the game to capture the mouse · Esc releases it and opens the menu · type quit in the console (~) to leave",
           creditos: "Quake © id Software (shareware 1.06, unmodified) · WinQuake engine under the GPL, WebAssembly port by Qwasm",
+        },
+        doom: {
+          titulo: "Doom (shareware, episode 1)",
+          tela_cheia: "Fullscreen",
+          ajuda: "Click the game to capture the mouse · Esc releases it and opens the menu · Quit Game in the menu returns to the terminal",
+          creditos: "Doom © id Software (shareware 1.9, unmodified) · doomgeneric engine and Chocolate Doom OPL music under the GPL, compiled to WebAssembly",
         },
         pontuacao: "Score: ",
         gameover: "GAME OVER! Press R to restart",
@@ -1360,7 +1366,7 @@ const resources = {
         canvas: {
           desc: "Canvas assignments: what's due next (canvas --tasks | --agenda).",
         },
-        jogo: { desc: "Games in the terminal: the original Quake or Flappy Plane (jogo --quake | --flappyplane)." },
+        jogo: { desc: "Games in the terminal: the original Quake or Doom, or Flappy Plane (jogo --quake | --doom | --flappyplane)." },
         guestbook: { desc: "Leave a message in my public guestbook." },
         design: { desc: "Shows the portfolio design system: fonts, colors, spacing and brand." },
         pergunta: { desc: "An AI answers anything about me (e.g. ask who are you?)." },
@@ -3025,12 +3031,18 @@ const resources = {
       },
       jogo: {
         voltar_terminal: "Voltar ao terminal",
-        uso: "Uso: jogo [--quake | --flappyplane] (sem opção abre o Quake; game | quake | flappyplane também funcionam)",
+        uso: "Uso: jogo [--quake | --doom | --flappyplane] (sem opção abre o Quake; game | quake | doom | flappyplane também funcionam)",
         quake: {
           titulo: "Quake (shareware, episódio 1)",
           tela_cheia: "Tela cheia",
           ajuda: "Clique no jogo para capturar o mouse · Esc solta o mouse e abre o menu · quit no console (~) sai do jogo",
           creditos: "Quake © id Software (shareware 1.06, sem modificações) · motor WinQuake sob a GPL, port WebAssembly do Qwasm",
+        },
+        doom: {
+          titulo: "Doom (shareware, episódio 1)",
+          tela_cheia: "Tela cheia",
+          ajuda: "Clique no jogo para capturar o mouse · Esc solta o mouse e abre o menu · Quit Game no menu volta ao terminal",
+          creditos: "Doom © id Software (shareware 1.9, sem modificações) · motor doomgeneric e música OPL do Chocolate Doom sob a GPL, compilados para WebAssembly",
         },
         pontuacao: "Pontuação: ",
         gameover: "GAME OVER! Pressione R para reiniciar",
@@ -3756,7 +3768,7 @@ const resources = {
         canvas: {
           desc: "Tarefas do Canvas: próxima entrega e prazos (canvas --tarefas | --agenda).",
         },
-        jogo: { desc: "Jogos no terminal: o Quake original ou o Flappy Plane (jogo --quake | --flappyplane)." },
+        jogo: { desc: "Jogos no terminal: o Quake ou o Doom originais, ou o Flappy Plane (jogo --quake | --doom | --flappyplane)." },
         guestbook: { desc: "Deixe uma mensagem no meu livro de visitas público." },
         design: { desc: "Mostra o design system do portfólio: fontes, cores, espaçamentos e marca." },
         pergunta: { desc: "Uma IA responde o que quiser sobre mim (ex.: pergunta quem é você?)." },
