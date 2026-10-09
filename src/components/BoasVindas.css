@@ -63,6 +63,11 @@
 /* Contador de visitas, logo abaixo do "$ Boas-vindas", no tom de saída
    de terminal; o número ganha a cor dos comandos em destaque */
 .welcome-visitas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0;
+  white-space: pre; /* mantém o espaço depois do "> " */
   font-family: "FiraCode", "JetBrainsMono", monospace;
   color: var(--text-muted);
   font-size: 0.95rem;
@@ -72,6 +77,73 @@
 .welcome-visitas-num {
   color: var(--cmd-hint);
   font-weight: 700;
+}
+
+/* Clima da cidade do visitante: mesma linha e mesmo tom do contador, só um
+   ícone fino e o separador "·". Entra com um fade para não "pular" na tela.
+   Em telas estreitas a linha quebra e o clima desce inteiro, sem partir. */
+.welcome-clima {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  white-space: nowrap;
+  cursor: help;
+  animation: welcome-clima-in 0.6s ease both;
+}
+
+.welcome-sep {
+  margin: 0 0.5em 0 0.6em;
+  color: var(--text-dim);
+}
+
+.welcome-clima-icon {
+  font-size: 1.05em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+@keyframes welcome-clima-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-clima { animation: none; }
+}
+
+/* Celular: o clima vira uma segunda linha "> ", como outra saída do terminal,
+   em vez de quebrar com o "·" sobrando no começo */
+@media (max-width: 600px) {
+  .welcome-sep {
+    display: none;
+  }
+
+  .welcome-clima {
+    flex-basis: 100%;
+  }
+
+  .welcome-clima::before {
+    content: "> ";
+    white-space: pre;
+    margin-right: -0.35em; /* desconta o gap do flex */
+  }
+
+  /* sem o contador (Supabase fora), o "> " do parágrafo já basta */
+  .welcome-visitas > .welcome-clima:first-child::before {
+    content: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .welcome-subtitle {

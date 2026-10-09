@@ -9,13 +9,67 @@ import {
   IoBookOutline,
   IoMailOutline,
   IoLogoGithub,
+  IoSunnyOutline,
+  IoMoonOutline,
+  IoPartlySunnyOutline,
+  IoCloudyNightOutline,
+  IoCloudyOutline,
+  IoRainyOutline,
+  IoThunderstormOutline,
+  IoSnowOutline,
 } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { ARAMUNI_ASCII } from "../data/brandData";
 import AramuniLogo from "./AramuniLogo";
 import { useTheme } from "../theme/themeContext";
 import { obterVisitas } from "../lib/visitas";
+import { obterClima, grupoDoTempo } from "../lib/clima";
 import "./BoasVindas.css";
+
+// Ícone do tempo (mesma família io5 dos outros ícones da boas-vindas)
+const iconeDoTempo = (grupo, dia) => {
+  switch (grupo) {
+    case "limpo":
+      return dia ? IoSunnyOutline : IoMoonOutline;
+    case "poucas_nuvens":
+      return dia ? IoPartlySunnyOutline : IoCloudyNightOutline;
+    case "garoa":
+    case "chuva":
+      return IoRainyOutline;
+    case "tempestade":
+      return IoThunderstormOutline;
+    case "neve":
+      return IoSnowOutline;
+    default:
+      return IoCloudyOutline;
+  }
+};
+
+// Clima da cidade aproximada do visitante, ao lado do contador de visitas.
+// A cidade vai sempre escrita: se a estimativa pelo IP errar, fica claro que
+// é outra cidade (ver api/_clima.js).
+const Clima = ({ clima, separador }) => {
+  const { t } = useTranslation();
+  const grupo = grupoDoTempo(clima.codigo);
+  const Icone = iconeDoTempo(grupo, clima.dia);
+  const descricao = t(`boasvindas.clima.${grupo}`);
+  const lugar = [clima.cidade, clima.regiao].filter(Boolean).join(", ");
+  const dica = `${descricao}, ${t("boasvindas.clima.agora")} ${t(
+    "boasvindas.clima.em"
+  )} ${lugar}. ${t("boasvindas.clima.aproximado")}`;
+
+  return (
+    <span className="welcome-clima" title={dica}>
+      {separador && <span className="welcome-sep" aria-hidden="true">·</span>}
+      <Icone className="welcome-clima-icon" aria-hidden="true" />
+      <span className="welcome-visitas-num">
+        {clima.temp}°{clima.unidade}
+      </span>{" "}
+      <span className="sr-only">{descricao}, </span>
+      {t("boasvindas.clima.em")} {clima.cidade}
+    </span>
+  );
+};
 
 const BoasVindas = () => {
   const { t, i18n } = useTranslation();
@@ -31,6 +85,18 @@ const BoasVindas = () => {
     let ativo = true;
     obterVisitas().then((total) => {
       if (ativo) setVisitas(total);
+    });
+    return () => {
+      ativo = false;
+    };
+  }, []);
+
+  // Clima da cidade do visitante (some se a cidade não for conhecida)
+  const [clima, setClima] = useState(null);
+  useEffect(() => {
+    let ativo = true;
+    obterClima().then((dados) => {
+      if (ativo) setClima(dados);
     });
     return () => {
       ativo = false;
@@ -66,13 +132,18 @@ const BoasVindas = () => {
       />
       <div className="static-welcome">
         <p className="welcome-title">{t("boasvindas.bemvindo")}</p>
-        {visitas != null && (
+        {(visitas != null || clima) && (
           <p className="welcome-visitas">
             {"> "}
-            <span className="welcome-visitas-num">
-              {Number(visitas).toLocaleString(lang === "en" ? "en-US" : "pt-BR")}
-            </span>{" "}
-            {t("boasvindas.visitas")}
+            {visitas != null && (
+              <span className="welcome-visitas-total">
+                <span className="welcome-visitas-num">
+                  {Number(visitas).toLocaleString(lang === "en" ? "en-US" : "pt-BR")}
+                </span>{" "}
+                {t("boasvindas.visitas")}
+              </span>
+            )}
+            {clima && <Clima clima={clima} separador={visitas != null} />}
           </p>
         )}
         <hr className="divider" />

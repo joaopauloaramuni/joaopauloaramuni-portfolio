@@ -4,6 +4,7 @@ import WAKATIME_CONFIG from './src/config/wakaTimeConfig.js'
 import GITHUB_STATS_CONFIG from './src/config/gitHubStatsConfig.js'
 import { atenderGitHub, PROXY_PATH } from './api/_github.js'
 import { atenderAsk, PROXY_PATH as ASK_PATH } from './api/_ask.js'
+import { atenderClima, PROXY_PATH as CLIMA_PATH } from './api/_clima.js'
 
 // O WakaTime não libera CORS: o navegador chama /api/wakatime/... e o
 // servidor do Vite repassa para a API pública do usuário. Em produção quem
@@ -79,13 +80,33 @@ function askIA(env) {
   }
 }
 
+// Clima da boas-vindas: GET /api/clima. Em produção a Vercel Function
+// api/clima.js lê a cidade dos cabeçalhos x-vercel-ip-*; aqui eles não
+// existem, então vale o CLIMA_LOCAL_DEV do .env.local (sem ele, a linha do
+// clima não aparece no dev).
+function clima(env) {
+  const middleware = (req, res, next) => {
+    if (new URL(req.url, 'http://localhost').pathname !== CLIMA_PATH) return next()
+    atenderClima(req, res, env.CLIMA_LOCAL_DEV).catch(next)
+  }
+  return {
+    name: 'clima',
+    configureServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+    configurePreviewServer: (server) => {
+      server.middlewares.use(middleware)
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Prefixo '' lê todas as variáveis do .env.local, inclusive as sem VITE_
   // (isso não as expõe: o que vai para o navegador continua só VITE_*)
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN), askIA(env)],
+    plugins: [react(), githubSiteToken(env.GITHUB_SITE_TOKEN), askIA(env), clima(env)],
     server: { proxy },
     preview: { proxy },
   }

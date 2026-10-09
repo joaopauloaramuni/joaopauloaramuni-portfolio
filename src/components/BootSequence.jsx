@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import "./BootSequence.css";
@@ -38,7 +38,10 @@ export default function BootSequence({ onFinish }) {
   const [leaving, setLeaving] = useState(false);
   const done = useRef(false);
 
-  const finish = () => {
+  // useCallback: o finish é dependência dos efeitos abaixo. O onFinish do App
+  // também é useCallback, então o finish não muda entre renders e os efeitos
+  // não reiniciam à toa (o listener de tecla/clique é registrado uma vez só)
+  const finish = useCallback(() => {
     if (done.current) return;
     done.current = true;
     try {
@@ -48,7 +51,7 @@ export default function BootSequence({ onFinish }) {
     }
     setLeaving(true);
     setTimeout(onFinish, 350); // espera o fade-out
-  };
+  }, [onFinish]);
 
   // Pula direto se o boot já rodou nesta aba
   useEffect(() => {
@@ -73,7 +76,7 @@ export default function BootSequence({ onFinish }) {
     }
     const id = setTimeout(finish, 300);
     return () => clearTimeout(id);
-  }, [visible, progress]);
+  }, [visible, progress, finish]);
 
   // Qualquer tecla, clique ou toque pula
   useEffect(() => {
@@ -88,7 +91,7 @@ export default function BootSequence({ onFinish }) {
       window.removeEventListener("keydown", skip);
       window.removeEventListener("pointerdown", skip);
     };
-  }, []);
+  }, [finish]);
 
   const bar = Math.round(progress / 5);
 
