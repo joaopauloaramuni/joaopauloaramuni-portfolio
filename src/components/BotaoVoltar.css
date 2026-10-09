@@ -14,7 +14,7 @@
   border-radius: 8px;
   font-weight: bold;
   font-family: inherit; /* botões não herdam a fonte */
-  font-size: inherit;
+  font-size: 0.85rem; /* mesmo tamanho do botão da página de contato */
   cursor: pointer;
   transition: background 0.3s ease;
   margin-top: 12px;
@@ -28,4 +28,21 @@
   .btn-voltar-terminal {
     width: 100%;
   }
+}
+
+/* Nos jogos o botão ocupa a largura da janela do jogo, como os botões do
+   formulário de contato: um embaixo do outro, da largura do quadro */
+.jogo-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 12px auto 0;
+  box-sizing: border-box;
+}
+
+.jogo-botoes .btn-voltar-terminal {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
 }

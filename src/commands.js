@@ -1,6 +1,7 @@
 import { GRUPOS } from './data/turmasRepos';
 import { turmasSubcommands } from './data/turmasSections';
 import { canvasSubcommands } from './data/canvasSections';
+import { nbaSubcommands } from './config/nbaConfig';
 
 // Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
 // segunda palavra, ex.: "tema --c" + Tab → "tema --claro".
@@ -153,6 +154,14 @@ export const commandList = {
     // --todos | --all mostram todos os jogos já marcados;
     // --tabela | --table mostram a classificação do Brasileirão
     subcommands: ['--todos', '--all', '--tabela', '--table'],
+  },
+  basquete: {
+    name: 'basquete',
+    aliases: ['basketball', 'nba'],
+    // Próximos jogos da NBA (ver components/Basquete.jsx); a sigla ou o
+    // apelido de um time filtram ("nba lal", "nba lakers") e --todos | --all
+    // mostram todos os jogos dos próximos dias (ver config/nbaConfig.js)
+    subcommands: nbaSubcommands,
   },
   jogo: {
     name: 'jogo',

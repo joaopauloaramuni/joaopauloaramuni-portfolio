@@ -37,6 +37,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📚 **canvas / tarefas / prazos / entregas:** Tarefas das minhas disciplinas no Canvas: a próxima entrega em destaque, com contagem regressiva, os prazos do semestre e quantos alunos já entregaram cada tarefa (no prazo, atrasadas, faltando e a corrigir). Tem uma seção por opção: `canvas --resumo` (padrão), `canvas --tarefas`, `canvas --agenda` (tarefas, eventos do calendário do Canvas e feriados da PUC, dia a dia) e `canvas --tudo`, e filtros por disciplina, curso, campus e turma (`canvas diw --tarefas`, `canvas cc`, `canvas ti5 coreu`). Os dados vêm do `npm run canvas`: a chave da API do Canvas nunca vai para o site.
 * 🐓 **neofetch / fetch:** Mostra as informações do sistema no estilo neofetch, com o escudo do Galo em braille.
 * ⚽ **campeonato / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `campeonato --todos` mostra todos os marcados e `campeonato --tabela`, a classificação do Brasileirão com o Galo em destaque (posição, pontos, V/E/D, gols pró e contra, saldo, aproveitamento, últimos 5 jogos e a distância para o líder, a vaga na Libertadores e o Z-4).
+* 🏀 **basquete / basketball / nba:** Próximos jogos da NBA, ao vivo da [ESPN](https://www.espn.com/nba/schedule), no mesmo layout do `campeonato`: a fase (pré-temporada, temporada regular, play-in, playoffs), os logos dos dois times com a campanha (vitórias-derrotas), dia, hora (de Brasília), ginásio e TV, quanto falta para cada jogo e uma contagem regressiva para o próximo. Nos playoffs aparece a rodada, o jogo da série e quem lidera. Mostra os 5 próximos da liga; `nba --todos` mostra todos os jogos dos próximos dias e `nba lal` (ou `nba lakers`, `nba gsw`, `nba celtics --todos`...) filtra por time, com o último resultado e a posição na divisão.
 * 🕹️ **jogo / quake / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-e-flappy-plane).
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
@@ -276,6 +277,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ Spotify                    → spotify
 │   │   ├── ⚛️ Neofetch                   → neofetch
 │   │   ├── ⚛️ Jogos                      → campeonato / galo (próximos jogos do Atlético)
+│   │   ├── ⚛️ Basquete                   → basquete / nba (próximos jogos da NBA)
 │   │   ├── ⚛️ DesignSystem               → design
 │   │   ├── ⚛️ FlappyPlaneGame            → flappyplane (jogo --flappyplane)
 │   │   ├── ⚛️ QuakeGame                  → jogo / quake (iframe de public/quake)
@@ -285,7 +287,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
 │   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (Flappy Plane, Quake e guestbook)
-│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask e jogos do Galo
+│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask, jogos do Galo e da NBA
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
 │   │   ├── 🗂️ ask                        → askData.js (o que a IA deve saber e não está no site)
@@ -303,6 +305,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas
 │   │   ├── 📜 githubStats.js             → busca e cálculos do stats (com cache, renovado a cada dia)
 │   │   ├── 📜 wakatime.js                → busca do WakaTime pelo proxy
 │   │   ├── 📜 galo.js                    → jogos do Galo (ESPN) e placar agregado
+│   │   ├── 📜 nba.js                     → jogos da NBA (ESPN): a liga ou um time
 │   │   ├── 📜 horario.js                 → "agora" em BH, próxima aula e semana do semestre (cal)
 │   │   ├── 📜 docencia.js                → tempo lecionado (lattes --docencia e sobre)
 │   │   ├── 📜 turmas.js · canvas.js      → contas do turmas e do canvas

@@ -41,10 +41,8 @@
   font-size: 0.75em;
 }
 
-/* .btn-voltar-terminal fica em BotaoVoltar.css (compartilhado) */
+/* .btn-voltar-terminal e .jogo-botoes ficam em BotaoVoltar.css (compartilhados).
+   Aqui só a largura: a mesma da moldura do jogo */
 .quake-botoes {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+  max-width: 800px;
 }

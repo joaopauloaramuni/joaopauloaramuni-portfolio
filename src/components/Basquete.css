@@ -1,0 +1,49 @@
+/* =====================================================================
+   BASQUETE — comando "basquete" / "basketball" / "nba": próximos jogos da NBA.
+   A moldura, os cards, o confronto e o relógio são os do Jogos.css (mesmo
+   layout do "campeonato"); aqui só o que é do basquete: a campanha de cada
+   time embaixo do nome e o chip da TV. Cores só dos tokens do tema.
+   ===================================================================== */
+
+/* Logo da NBA: é alto e estreito, então ganha um respiro dos lados */
+.basquete .basquete-logo-nba {
+  padding: 0 0.6rem;
+}
+
+.basquete .jogos-escudo-galo.basquete-logo-nba {
+  padding: 0 0.3rem;
+}
+
+/* Nome do time e, embaixo, a campanha (vitórias-derrotas) */
+.basquete-time-texto {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.basquete-campanha {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chip da TV na visão da liga; texto simples na visão de um time */
+.basquete-tv {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.basquete-tv-texto {
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .basquete-time-texto {
+    align-items: center;
+  }
+
+  .basquete .basquete-logo-nba {
+    padding: 0 0.3rem;
+  }
+}

@@ -237,13 +237,11 @@ const FlappyPlaneGame = ({ onExit }) => {
       </div>
 
       {onExit && (
-        <button
-          className="btn-voltar-terminal"
-          onClick={onExit}
-          style={{ marginTop: "12px" }}
-        >
-          {t("jogo.voltar_terminal")}
-        </button>
+        <div className="jogo-botoes flappy-botoes">
+          <button type="button" className="btn-voltar-terminal" onClick={onExit}>
+            {t("jogo.voltar_terminal")}
+          </button>
+        </div>
       )}
     </div>
   );

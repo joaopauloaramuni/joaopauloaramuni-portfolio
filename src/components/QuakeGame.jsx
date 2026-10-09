@@ -64,7 +64,7 @@ const QuakeGame = ({ onExit }) => {
         />
       </div>
       <p className="quake-ajuda">{t("jogo.quake.ajuda")}</p>
-      <div className="quake-botoes">
+      <div className="jogo-botoes quake-botoes">
         <button type="button" className="btn-voltar-terminal" onClick={fullscreen}>
           {t("jogo.quake.tela_cheia")}
         </button>

@@ -13,7 +13,12 @@
   touch-action: manipulation;
 }
 
-/* .btn-voltar-terminal fica em BotaoVoltar.css (compartilhado com o guestbook) */
+/* .btn-voltar-terminal e .jogo-botoes ficam em BotaoVoltar.css (compartilhados).
+   Aqui só a largura: a mesma do quadro do jogo (#game) */
+.flappy-botoes {
+  width: 99vw;
+  max-width: 600px;
+}
 
 @media (max-width: 768px) {
   #game {
@@ -22,6 +27,9 @@
     height: 80vw;
     max-height: 90vw;
     min-height: 220px;
+  }
+  .flappy-botoes {
+    max-width: 99vw;
   }
   .plane {
     font-size: 3.2rem;
@@ -44,6 +52,10 @@
     height: 60vw;
     max-height: 70vw;
     min-height: 180px;
+  }
+  .flappy-botoes {
+    width: 98vw;
+    max-width: 98vw;
   }
   .plane {
     font-size: 2.2rem;

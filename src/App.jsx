@@ -27,6 +27,7 @@ import { parseCalSkin } from "./data/calSkins";
 import { parseLattesSection } from "./data/lattesSections";
 import { parseTurmas } from "./data/turmasSections";
 import { parseCanvas } from "./data/canvasSections";
+import { parseBasquete } from "./config/nbaConfig";
 import { GRUPOS } from "./data/turmasRepos";
 
 // Os comandos são carregados sob demanda (ver terminal/lazyCommand.jsx): o
@@ -52,6 +53,7 @@ const QuakeGame = lazyCommand(() => import("./components/QuakeGame"));
 const LivroVisitas = lazyCommand(() => import("./components/LivroVisitas"));
 const Neofetch = lazyCommand(() => import("./components/Neofetch"));
 const Jogos = lazyCommand(() => import("./components/Jogos"));
+const Basquete = lazyCommand(() => import("./components/Basquete"));
 const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
 // O "pergunta" (ask) chama a IA no servidor (api/ask.js): aqui é só o desenho
 const Ask = lazyCommand(() => import("./components/Ask"));
@@ -93,6 +95,7 @@ const PRELOAD = [
   LivroVisitas,
   Neofetch,
   Jogos,
+  Basquete,
   DesignSystem,
   Ask,
 ];
@@ -417,6 +420,19 @@ function App() {
           }
           const tabela = subCommand === "--tabela" || subCommand === "--table";
           response = <Jogos todos={Boolean(subCommand) && !tabela} tabela={tabela} />;
+          break;
+        }
+        case "basquete": {
+          // "basquete" (ou "basketball", "nba") mostra os próximos jogos da
+          // NBA, ao vivo da ESPN; a sigla ou o apelido de um time filtram
+          // ("nba lal", "nba lakers") e "--todos" | "--all" mostram todos os
+          // jogos dos próximos dias (ver config/nbaConfig.js)
+          const parsed = parseBasquete(args.slice(1));
+          if (!parsed) {
+            response = <TerminalOutput>{t("basquete.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <Basquete {...parsed} />;
           break;
         }
         case "design":
