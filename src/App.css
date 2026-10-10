@@ -21,6 +21,9 @@ body {
   margin: 0;
   height: 100vh; /* fallback para navegadores sem dvh */
   height: 100dvh;
+  /* Área visível de verdade: no celular, desconta o teclado virtual
+     (ver terminal/useMobileKeyboard.js) */
+  height: var(--app-height, 100dvh);
   overflow: hidden;
   background-color: var(--bg-page);
 }
@@ -82,6 +85,10 @@ html {
 /* iOS dá zoom automático em inputs com fonte < 16px */
 .terminal-hidden-input {
   font-size: 16px !important;
+  /* A lib deixa o input escondido sem "top": ele herda a posição do fim do
+     terminal e, ao focar, o celular rola a página atrás dele. Preso no topo,
+     o navegador não tem para onde rolar e quem cuida do scroll é o terminal. */
+  top: 0;
 }
 
 ::-webkit-scrollbar {

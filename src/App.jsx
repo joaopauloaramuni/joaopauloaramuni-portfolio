@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import "./App.css";
 import { commandList } from "./commands";
 import useTerminalKeys from "./terminal/useTerminalKeys";
+import useMobileKeyboard from "./terminal/useMobileKeyboard";
 import {
   keepLastCommandAtTop,
   keepTerminalAtBottom,
@@ -240,6 +241,9 @@ function App() {
     commands: commandList,
     onShowOptions: showCompletions,
   });
+
+  // Celular: o terminal encolhe quando o teclado abre e o input fica visível
+  useMobileKeyboard();
 
   function handleInput(input) {
     // Comando digitado é atividade: renova a janela de 30 min do contador de
@@ -539,7 +543,7 @@ function App() {
           colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
           onInput={isTerminalPaused ? undefined : handleInput}
           prompt={myPrompt}
-          height="calc(100dvh - 80px)" /* 60px + 20px de padding do .react-terminal-wrapper (App.css) */
+          height="calc(var(--app-height, 100dvh) - 80px)" /* 60px + 20px de padding do .react-terminal-wrapper (App.css); --app-height desconta o teclado do celular */
         >
           {terminalLineData}
         </Terminal>
