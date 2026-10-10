@@ -132,6 +132,28 @@ html {
   background: var(--accent);
 }
 
+/* ===== Tema matrix ===== */
+/* Mesmo esquema do galo: terminal transparente para a chuva de código
+   (MatrixFundo) aparecer; nome da janela, prompt e cursor no verde
+   #42C920, com um leve brilho de fósforo. */
+[data-theme="matrix"] .react-terminal-wrapper {
+  background: transparent;
+  color: var(--text);
+}
+
+[data-theme="matrix"] .terminal-container .react-terminal-wrapper:after,
+[data-theme="matrix"] .react-terminal-wrapper .react-terminal-line:before {
+  color: var(--terminal-chrome);
+  text-shadow: var(--matrix-glow);
+}
+
+[data-theme="matrix"] .react-terminal-wrapper:focus-within
+  .react-terminal-active-input
+  .cursor {
+  background: var(--accent);
+  box-shadow: var(--matrix-glow);
+}
+
 /* ===== Responsividade Geral ===== */
 /* Só o tamanho base muda; cada componente ajusta o resto no próprio CSS */
 

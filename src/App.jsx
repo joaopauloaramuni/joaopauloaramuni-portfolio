@@ -20,6 +20,7 @@ import { marcarAtividade } from "./lib/visitas";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BootSequence from "./components/BootSequence";
 import GaloFundo from "./components/GaloFundo";
+import MatrixFundo from "./components/MatrixFundo";
 import { useTranslation } from "react-i18next";
 import { useTheme, nextTheme } from "./theme/themeContext";
 import { parseSkillSkin } from "./data/skillSkins";
@@ -31,6 +32,7 @@ import { parseTurmas } from "./data/turmasSections";
 import { parseCanvas } from "./data/canvasSections";
 import { parseBasquete } from "./config/nbaConfig";
 import { GRUPOS } from "./data/turmasRepos";
+import MATRIX_CONFIG from "./config/matrixConfig";
 
 // Os comandos são carregados sob demanda (ver terminal/lazyCommand.jsx): o
 // bundle inicial leva só o terminal, a tela de boas-vindas e a ajuda. Antes
@@ -125,7 +127,7 @@ const readDeepLinkCommand = (searchParams) => {
 
 function App() {
   const { t } = useTranslation();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, setMatrixLayout } = useTheme();
   const getWelcomeMessage = () => <BoasVindas key="welcome" />;
 
   const [terminalLineData, setTerminalLineData] = useState([
@@ -367,8 +369,9 @@ function App() {
           setTerminalLineData([]);
           return;
         case "tema": {
-          // "tema" sem opção troca na ordem escuro → claro → galo → escuro...;
-          // "tema --claro|--light", "--escuro|--dark" e "--galo" escolhem.
+          // "tema" sem opção troca na ordem escuro → claro → galo → matrix → escuro...;
+          // "tema --claro|--light", "--escuro|--dark", "--galo" e "--matrix" escolhem.
+          // "tema --matrix --neo" também escolhe o layout do fundo (config/matrixConfig.js).
           // Sem os traços ("tema claro") também vale, como era antes.
           const themeArgs = {
             claro: "light",
@@ -376,11 +379,25 @@ function App() {
             escuro: "dark",
             dark: "dark",
             galo: "galo",
+            matrix: "matrix",
           };
           const option = subCommand?.replace(/^--?/, "");
           if (subCommand && !themeArgs[option]) {
             response = <TerminalOutput>{t("tema.uso")}</TerminalOutput>;
             break;
+          }
+          const matrixLayouts = MATRIX_CONFIG.LAYOUTS.map((l) => `--${l}`).join(" | ");
+          const layout = args[2]?.replace(/^--?/, "");
+          if (layout !== undefined) {
+            if (themeArgs[option] !== "matrix" || !MATRIX_CONFIG.LAYOUTS.includes(layout)) {
+              response = (
+                <TerminalOutput>
+                  {t("tema.uso_matrix", { layouts: matrixLayouts })}
+                </TerminalOutput>
+              );
+              break;
+            }
+            setMatrixLayout(layout);
           }
           const chosen = themeArgs[option] ?? nextTheme(theme);
           setTheme(chosen);
@@ -388,8 +405,11 @@ function App() {
             light: "tema.claro_ativado",
             dark: "tema.escuro_ativado",
             galo: "tema.galo_ativado",
+            matrix: "tema.matrix_ativado",
           };
-          response = <TerminalOutput>{t(messages[chosen])}</TerminalOutput>;
+          response = (
+            <TerminalOutput>{t(messages[chosen], { layouts: matrixLayouts })}</TerminalOutput>
+          );
           break;
         }
         case "recomendacoes":
@@ -517,6 +537,7 @@ function App() {
       {!booted && <BootSequence onFinish={handleBootFinish} />}
       <div className="terminal-container">
         <GaloFundo />
+        <MatrixFundo />
         <LanguageSwitcher onLanguageChange={focusTerminalInput} />
         <Terminal
           name={terminalTitle}

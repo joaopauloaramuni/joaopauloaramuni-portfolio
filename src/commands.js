@@ -95,8 +95,8 @@ export const commandList = {
   tema: {
     name: 'tema',
     aliases: ['theme'],
-    // Sem opção, troca na ordem escuro → claro → galo
-    subcommands: ['--escuro', '--claro', '--galo', '--dark', '--light'],
+    // Sem opção, troca na ordem escuro → claro → galo → matrix
+    subcommands: ['--escuro', '--claro', '--galo', '--matrix', '--dark', '--light'],
   },
   recomendacoes: {
     name: 'recomendacoes',

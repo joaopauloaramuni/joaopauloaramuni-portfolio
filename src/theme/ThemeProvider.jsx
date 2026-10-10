@@ -6,6 +6,7 @@ import {
   DEFAULT_THEME,
   nextTheme,
 } from "./themeContext";
+import MATRIX_CONFIG from "../config/matrixConfig";
 
 // Lê o tema salvo; sem escolha anterior (ou sem localStorage) abre no dark
 const readStoredTheme = () => {
@@ -17,8 +18,23 @@ const readStoredTheme = () => {
   }
 };
 
+// Layout do fundo matrix: ?matrix=neo na URL tem prioridade (para testar),
+// depois o salvo, depois o padrão
+const readMatrixLayout = () => {
+  const { LAYOUTS, PADRAO, STORAGE_KEY } = MATRIX_CONFIG;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("matrix");
+    if (LAYOUTS.includes(fromUrl)) return fromUrl;
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return LAYOUTS.includes(saved) ? saved : PADRAO;
+  } catch {
+    return PADRAO;
+  }
+};
+
 export default function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(readStoredTheme);
+  const [matrixLayout, setMatrixLayoutState] = useState(readMatrixLayout);
 
   // <html data-theme="..."> ativa os tokens de theme.css
   useEffect(() => {
@@ -36,14 +52,24 @@ export default function ThemeProvider({ children }) {
     }
   }, []);
 
-  // Ciclo escuro → claro → galo → escuro...
+  const setMatrixLayout = useCallback((next) => {
+    if (!MATRIX_CONFIG.LAYOUTS.includes(next)) return;
+    setMatrixLayoutState(next);
+    try {
+      localStorage.setItem(MATRIX_CONFIG.STORAGE_KEY, next);
+    } catch {
+      /* navegação privada: vale só para esta visita */
+    }
+  }, []);
+
+  // Ciclo escuro → claro → galo → matrix → escuro...
   const toggleTheme = useCallback(() => {
     setTheme(nextTheme(theme));
   }, [theme, setTheme]);
 
   const value = useMemo(
-    () => ({ theme, setTheme, toggleTheme }),
-    [theme, setTheme, toggleTheme]
+    () => ({ theme, setTheme, toggleTheme, matrixLayout, setMatrixLayout }),
+    [theme, setTheme, toggleTheme, matrixLayout, setMatrixLayout]
   );
 
   return (

@@ -18,11 +18,11 @@ import { contrastRatio, toHex } from "../theme/colorUtils";
 import AramuniLogo from "./AramuniLogo";
 import "./DesignSystem.css";
 
-const THEMES = ["dark", "light", "galo"];
+const THEMES = ["dark", "light", "galo", "matrix"];
 const SECTIONS = ["marca", "temas", "cores", "tipografia", "medidas"];
 const LIGATURES = "=> -> != === >= <= // {}";
 
-// Lê os tokens em um elemento com data-theme="dark", "light" ou "galo". Como
+// Lê os tokens em um elemento com data-theme="dark", "light", "galo" ou "matrix". Como
 // o theme.css declara as cores nesses seletores, cada sonda enxerga os
 // valores de um tema, seja qual for o tema da página.
 const readTokens = (element) => {
@@ -200,6 +200,7 @@ const DesignSystem = () => {
           <li>{t("design.marca.vetor")}</li>
           <li>{t("design.marca.cor")}</li>
           <li>{t("design.marca.galo")}</li>
+          <li>{t("design.marca.matrix")}</li>
           <li>{t("design.marca.favicon")}</li>
         </ul>
         <p className="ds-files">
@@ -280,6 +281,10 @@ const DesignSystem = () => {
                   </span>
                   {THEMES.map((theme) => (
                     <span key={theme} role="cell">
+                      {/* No celular o cabeçalho some: cada célula diz o tema */}
+                      <span className="ds-cell-theme" aria-hidden="true">
+                        {themeLabel(theme)}
+                      </span>
                       <TokenCell token={token} theme={theme} values={values} />
                     </span>
                   ))}

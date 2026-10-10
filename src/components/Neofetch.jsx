@@ -42,7 +42,7 @@ const formatUptime = (ms) => {
   return [h && `${h}h`, (h || m) && `${m}m`, `${s}s`].filter(Boolean).join(" ");
 };
 
-// Blocos de cor do rodapé (as cores seguem o tema claro/escuro/galo)
+// Blocos de cor do rodapé (as cores seguem o tema claro/escuro/galo/matrix)
 const COLOR_BLOCKS = [
   "--border",
   "--icon-location",
@@ -83,7 +83,7 @@ const Neofetch = () => {
     ["DE", `React ${React.version}`],
     ["WM", `Vite ${version(devDependencies.vite)}`],
     ["Resolution", snapshot.resolution],
-    ["Theme", t(`neofetch.${{ light: "claro", dark: "escuro", galo: "galo" }[snapshot.theme]}`)],
+    ["Theme", t(`neofetch.${{ light: "claro", dark: "escuro", galo: "galo", matrix: "matrix" }[snapshot.theme]}`)],
     ["CPU", t("neofetch.cpu")],
     [t("neofetch.time_label"), "Clube Atlético Mineiro"],
   ];

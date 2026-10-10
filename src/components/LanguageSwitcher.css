@@ -27,7 +27,7 @@
   transform: scale(1.1);
 }
 
-/* Botões sol / lua / galo do tema */
+/* Botões sol / lua / galo / pílula do tema */
 .themeToggleGroup {
   display: inline-flex;
   align-items: center;
@@ -54,6 +54,11 @@
 
 .themeToggle-active {
   color: var(--accent);
+}
+
+/* A pílula fica vermelha no hover: tomar a pílula vermelha leva ao matrix */
+.themeToggle-matrix:not(.themeToggle-active):hover {
+  color: #ff3b30;
 }
 
 .themeToggle:focus-visible {

@@ -1,7 +1,7 @@
 // Dados do comando "design".
 //
 // Os valores das cores NÃO ficam aqui: o DesignSystem.jsx lê cada token
-// direto do theme.css enquanto a página roda, nos três temas. Este arquivo
+// direto do theme.css enquanto a página roda, nos quatro temas. Este arquivo
 // só diz quais tokens mostrar, em que ordem e como desenhar a amostra.
 //
 // kind:
@@ -52,8 +52,8 @@ export const tokenGroups = [
 // As cinco cores que resumem cada tema no cartão de "Temas"
 export const themeSummary = ["--bg-terminal", "--surface", "--text", "--text-muted", "--accent"];
 
-// Paletas categóricas dos gráficos: só as cores, no tema da página. O galo
-// herda as do escuro; o claro tem versões escurecidas (ver theme.css).
+// Paletas categóricas dos gráficos: só as cores, no tema da página. O galo e
+// o matrix herdam as do escuro; o claro tem versões escurecidas (ver theme.css).
 export const dataPalettes = [
   { id: "cal", tokens: ["--cal-coreu", "--cal-lourdes", "--cal-oficinas", "--cal-teams"] },
   {

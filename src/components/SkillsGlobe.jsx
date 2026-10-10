@@ -12,7 +12,7 @@ import "./SkillsGlobe.css";
 
    - Recebe a lista de data/globeSkills.js (skillsData + ferramentas extras).
    - A grade, o brilho e a névoa leem --accent e --bg-terminal do tema,
-     então acompanham o "tema --claro | --escuro | --galo".
+     então acompanham o "tema --claro | --escuro | --galo | --matrix".
    - Os ícones são uma única camada HTML reposicionada a cada frame (em vez
      de um <Html> do drei por ícone, que no @react-three/fiber 9.8 faz o
      primeiro ícone não aparecer).

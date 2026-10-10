@@ -1,15 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
-import { GiRooster } from "react-icons/gi";
+import { GiPill, GiRooster } from "react-icons/gi";
 import { useTheme } from "../theme/themeContext";
 
-// Um botão por tema: sol (claro), lua (escuro) e galo. O tema ativo fica
+// Um botão por tema: sol (claro), lua (escuro), galo e a pílula vermelha (matrix). O tema ativo fica
 // destacado; clicar nele de novo não muda nada.
 const OPTIONS = [
   { id: "light", Icon: IoSunnyOutline, label: "tema.ativar_claro" },
   { id: "dark", Icon: IoMoonOutline, label: "tema.ativar_escuro" },
   { id: "galo", Icon: GiRooster, label: "tema.ativar_galo" },
+  { id: "matrix", Icon: GiPill, label: "tema.ativar_matrix" },
 ];
 
 const ThemeToggle = ({ onToggle }) => {
@@ -27,7 +28,7 @@ const ThemeToggle = ({ onToggle }) => {
         <button
           key={id}
           type="button"
-          className={`themeToggle${theme === id ? " themeToggle-active" : ""}`}
+          className={`themeToggle themeToggle-${id}${theme === id ? " themeToggle-active" : ""}`}
           // Clique com mouse/toque não rouba o foco: senão o próximo Espaço/Enter
           // (ex.: para pular o boot) apertaria o botão de novo
           onMouseDown={(e) => e.preventDefault()}

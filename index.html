@@ -44,7 +44,7 @@
       // Aplica o tema salvo antes do React carregar (evita piscar o dark)
       try {
         var saved = localStorage.getItem("aramuni-theme");
-        if (saved === "light" || saved === "galo") {
+        if (saved === "light" || saved === "galo" || saved === "matrix") {
           document.documentElement.dataset.theme = saved;
         }
       } catch (e) {}

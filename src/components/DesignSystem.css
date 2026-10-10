@@ -1,5 +1,5 @@
 /* Saída do comando "design". Só usa var(--token) do theme.css: elementos
-   com data-theme="dark|light|galo" mostram cada tema, seja qual for o da
+   com data-theme="dark|light|galo|matrix" mostram cada tema, seja qual for o da
    página. */
 
 .ds {
@@ -7,7 +7,7 @@
   padding: 1rem 1.5rem 1.5rem;
   border: 2px solid var(--accent);
   border-radius: 10px;
-  /* Quase opaco: no galo, a foto do fundo não atrapalha a leitura da tabela */
+  /* Quase opaco: no galo e no matrix, o fundo não atrapalha a leitura da tabela */
   background: color-mix(in srgb, var(--bg-terminal) 90%, transparent);
   color: var(--text);
   line-height: 1.5;
@@ -218,6 +218,11 @@
   color: var(--text-muted);
 }
 
+/* Matrix: logo e banner no verde da marca (como na boas-vindas) */
+[data-theme="matrix"] .ds-lockup {
+  color: var(--matrix-marca);
+}
+
 .ds-lockup-logo {
   flex-shrink: 0;
   height: 6.9em; /* 6 linhas do banner × line-height 1.15 */
@@ -385,7 +390,7 @@
 
 .ds-row {
   display: grid;
-  grid-template-columns: minmax(10rem, 1.3fr) repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(10rem, 1.3fr) repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
   align-items: center;
   padding: 0.5rem 0;
@@ -420,6 +425,11 @@
 .ds-token .ds-note {
   margin: 0;
   font-size: 0.8rem;
+}
+
+/* Nome do tema em cima de cada cor: só no celular, onde o cabeçalho some */
+.ds-cell-theme {
+  display: none;
 }
 
 .ds-cell {
@@ -603,18 +613,27 @@
 
 /* ===== Responsividade ===== */
 
-/* Tabela de cores vira um bloco por token, com os 3 temas embaixo */
+/* Tabela de cores vira um bloco por token, com os 4 temas embaixo (2 × 2) */
 @media (max-width: 900px) {
   .ds-row-head {
     display: none;
   }
 
   .ds-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ds-token {
     grid-column: 1 / -1;
+  }
+
+  .ds-cell-theme {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 }
 

@@ -34,6 +34,11 @@
   margin-top: -1.7em;
 }
 
+/* Tema matrix: logo e banner no verde da marca, mais suave que o --accent */
+[data-theme="matrix"] :is(.welcome-logo, .aramuni-ascii) {
+  color: var(--matrix-marca);
+}
+
 .aramuni-ascii {
   font-family: "FiraCode", "JetBrainsMono", monospace; /* mesmo nome do @font-face */
   color: var(--text-muted);

@@ -1,0 +1,76 @@
+/* Fundo do tema matrix. O .react-terminal-wrapper fica transparente nesse
+   tema (App.css) e este bloco aparece por trás dele, em camadas:
+   chuva (canvas) ou a imagem do wake → véu escuro (legibilidade) → terminal. */
+.matrix-fundo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #000;
+  animation: matrix-fundo-entra 1.2s ease-out both;
+}
+
+.matrix-chuva {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Véu: mais escuro à esquerda, onde fica quase todo o texto, e mais leve à
+   direita, onde a chuva aparece de verdade */
+.matrix-fundo-veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.86) 0%,
+    rgba(0, 0, 0, 0.74) 45%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+/* wake: a imagem inteira, sem corte nem zoom. As bordas dela já são
+   pretas, então as sobras se misturam com o fundo preto */
+.matrix-fundo-capa {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* A mesa já é quase toda preta no meio: o véu pode ser mais leve */
+.matrix-fundo-wake + .matrix-fundo-veu {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.62) 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+@keyframes matrix-fundo-entra {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matrix-fundo {
+    animation: none;
+  }
+}
+
+/* No celular o texto ocupa a tela toda: véu uniforme e mais forte */
+@media (max-width: 900px) {
+  .matrix-fundo-veu,
+  .matrix-fundo-wake + .matrix-fundo-veu {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}

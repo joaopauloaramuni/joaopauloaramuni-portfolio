@@ -6,9 +6,12 @@
    • Galo (preto, branco e amarelo do Atlético) parte do dark e sobrescreve
      só as cores da marca, ativado por <html data-theme="galo">. As paletas
      dos gráficos (cal, lattes, turmas...) continuam as do dark.
+   • Matrix (verde-fósforo #42C920 sobre preto) também parte do dark, com
+     a chuva de código atrás do terminal (MatrixFundo), ativado por
+     <html data-theme="matrix">.
    • Os seletores também valem dentro da página: um elemento com
-     data-theme="dark", "light" ou "galo" usa as cores daquele tema (o
-     comando "design" usa isso para mostrar os três temas lado a lado).
+     data-theme="dark", "light", "galo" ou "matrix" usa as cores daquele
+     tema (o comando "design" usa isso para mostrar os temas lado a lado).
    • Os CSS dos componentes usam apenas var(--token); para ajustar uma cor,
      mude aqui e ela muda no site inteiro.
    • Importado em main.jsx antes de App.css.
@@ -19,7 +22,8 @@
 
 :root,
 [data-theme="dark"],
-[data-theme="galo"] {
+[data-theme="galo"],
+[data-theme="matrix"] {
   color-scheme: dark;
 
   /* Fundos e superfícies */
@@ -187,6 +191,71 @@
   --icon-mail-gmail: #ffd503;
   --icon-mail-puc: #ffd503;
   --icon-github: #ffffff;
+}
+
+/* Tema MATRIX: o verde-fósforo dos monitores antigos, #42C920 (66, 201, 32),
+   sobre preto. Herda do dark tudo que não está aqui (paletas dos gráficos).
+   Contrastes sobre o fundo #000000: verde 9.6:1, texto 18:1, muted 10:1,
+   dim 6:1. O vermelho do --busy fica: é a pílula vermelha. */
+[data-theme="matrix"] {
+  color-scheme: dark;
+
+  --bg-page: #000000;
+  --bg-terminal: #000000;
+  --surface: #061a08;
+  --surface-input: #020a03;
+  --track: #0c240f;
+
+  --border: #1f5c1b;
+  --border-input: #2a7a22;
+
+  --text: #d2fbc6;
+  --text-soft: #aeeba0;
+  --text-muted: #7dcb6b;
+  --text-dim: #4f9a40;
+  --terminal-chrome: #42c920;
+  --cursor: #42c920;
+
+  --accent: #42c920;          /* verde Matrix */
+  --accent-hover: #36a51a;
+  --accent-focus: #6fe34f;
+  --link-hover: #8dff6e;
+  --on-accent: #000000;
+
+  --tag-bg: #0f2d10;
+  --tag-text: #b4f0a6;
+
+  --highlight: #42c920;
+  --warn: #d4f26b;
+  --info: #7fe7c4;
+  --cmd-hint: #e6ffe0;
+  --success: #42c920;
+  --busy: #ff5f56;
+  --online: #42c920;
+
+  --scrollbar-thumb: #1f5c1b;
+  --scrollbar-thumb-hover: #42c920;
+
+  --scanline: rgba(66, 201, 32, 0.035);
+  --shadow-xp-hover: 0 10px 25px -5px rgba(66, 201, 32, 0.18);
+  --shadow-project-hover: 0 20px 25px -5px rgba(66, 201, 32, 0.15),
+    0 10px 10px -5px rgba(66, 201, 32, 0.1);
+  --game-sky: #000;
+
+  --icon-school: #42c920;
+  --icon-work: #42c920;
+  --icon-book: #42c920;
+  --icon-location: #42c920;
+  --icon-mail-gmail: #42c920;
+  --icon-mail-puc: #42c920;
+  --icon-github: #d2fbc6;
+
+  /* Logo e banner ARAMUNI: um verde mais fechado que o --accent, para a
+     marca não ficar neon demais em tamanho grande (6.3:1 no preto) */
+  --matrix-marca: #1ca152;
+
+  /* Brilho de fósforo nos títulos e no prompt */
+  --matrix-glow: 0 0 6px rgba(66, 201, 32, 0.55);
 }
 
 [data-theme="light"] {
