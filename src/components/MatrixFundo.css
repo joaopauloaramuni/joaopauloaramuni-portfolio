@@ -1,6 +1,6 @@
 /* Fundo do tema matrix. O .react-terminal-wrapper fica transparente nesse
    tema (App.css) e este bloco aparece por trás dele, em camadas:
-   chuva (canvas) ou a imagem do wake → véu escuro (legibilidade) → terminal. */
+   chuva (canvas) ou a imagem do neo → véu escuro (legibilidade) → terminal. */
 .matrix-fundo {
   position: absolute;
   inset: 0;
@@ -31,7 +31,7 @@
   );
 }
 
-/* wake: a imagem inteira, sem corte nem zoom. As bordas dela já são
+/* neo: a imagem inteira, sem corte nem zoom. As bordas dela já são
    pretas, então as sobras se misturam com o fundo preto */
 .matrix-fundo-capa {
   position: absolute;
@@ -43,7 +43,7 @@
 }
 
 /* A mesa já é quase toda preta no meio: o véu pode ser mais leve */
-.matrix-fundo-wake + .matrix-fundo-veu {
+.matrix-fundo-neo + .matrix-fundo-veu {
   background: linear-gradient(
     to right,
     rgba(0, 0, 0, 0.8) 0%,
@@ -70,7 +70,7 @@
 /* No celular o texto ocupa a tela toda: véu uniforme e mais forte */
 @media (max-width: 900px) {
   .matrix-fundo-veu,
-  .matrix-fundo-wake + .matrix-fundo-veu {
+  .matrix-fundo-neo + .matrix-fundo-veu {
     background: rgba(0, 0, 0, 0.8);
   }
 }

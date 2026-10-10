@@ -22,7 +22,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 📅 **calendly:** Agende uma reunião comigo via Calendly.
 * 🗓️ **cal / horario:** Mostra meus horários de aula no estilo do `cal` do Linux, com os feriados e recessos do calendário acadêmico da PUC Minas. Tem três visões: `cal --mes` (padrão), `cal --semana`, com a grade e a lista de turmas e salas, e `cal --hoje`, com a agenda do dia e a aula em andamento.
 * 🧹 **limpar:** Limpa o histórico do terminal.
-* 🌗 **tema / theme:** Troca o tema na ordem escuro → claro → galo → matrix (`tema --escuro` | `tema --claro` | `tema --galo` | `tema --matrix`). No matrix, o fundo pode ser a chuva de código (padrão) ou a mesa do "Wake up, Neo": `tema --matrix --chuva | --wake` (ou `?matrix=wake` na URL).
+* 🌗 **tema / theme:** Troca o tema na ordem escuro → claro → galo → matrix (`tema --escuro` | `tema --claro` | `tema --galo` | `tema --matrix`). No matrix, o fundo pode ser a chuva de código (padrão) ou a mesa do "Wake up, Neo": `tema --matrix --chuva | --neo` (ou `?matrix=neo` na URL).
 * 👍 **recomendacoes:** Exibe minhas recomendações do LinkedIn.
 * 🏆 **premios:** Mostra prêmios e reconhecimentos.
 * 📂 **projetos:** Lista meus projetos desenvolvidos (estáticos).

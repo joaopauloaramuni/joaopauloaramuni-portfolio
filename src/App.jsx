@@ -375,7 +375,7 @@ function App() {
         case "tema": {
           // "tema" sem opção troca na ordem escuro → claro → galo → matrix → escuro...;
           // "tema --claro|--light", "--escuro|--dark", "--galo" e "--matrix" escolhem.
-          // "tema --matrix --wake" também escolhe o fundo; "--chuva" ou "--rain"
+          // "tema --matrix --neo" também escolhe o fundo; "--chuva" ou "--rain"
           // volta para a chuva (config/matrixConfig.js).
           // Sem os traços ("tema claro") também vale, como era antes.
           const themeArgs = {

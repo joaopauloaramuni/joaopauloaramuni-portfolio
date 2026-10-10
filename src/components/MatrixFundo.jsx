@@ -119,7 +119,7 @@ function ChuvaDeCodigo() {
 
 // Fundo do tema "matrix". Fica atrás do terminal (que fica transparente
 // nesse tema, ver App.css) e não recebe cliques. O layout vem do contexto
-// do tema: "tema --matrix --wake" ou ?matrix=wake (ver config/matrixConfig.js).
+// do tema: "tema --matrix --neo" ou ?matrix=neo (ver config/matrixConfig.js).
 const MatrixFundo = () => {
   const { theme, matrixLayout } = useTheme();
   if (theme !== "matrix") return null;
@@ -128,8 +128,8 @@ const MatrixFundo = () => {
     <div className={`matrix-fundo matrix-fundo-${matrixLayout}`} aria-hidden="true">
       {matrixLayout === "chuva" && <ChuvaDeCodigo />}
 
-      {matrixLayout === "wake" && (
-        <img className="matrix-fundo-capa matrix-fundo-wake" src="/matrix/wake-up.webp" alt="" />
+      {matrixLayout === "neo" && (
+        <img className="matrix-fundo-capa matrix-fundo-neo" src="/matrix/wake-up.webp" alt="" />
       )}
 
       <div className="matrix-fundo-veu" />
