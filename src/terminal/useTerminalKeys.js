@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef } from "react";
 import { autocomplete } from "./autocomplete";
-import { isTerminalInput, setTerminalInputValue } from "./terminalDom";
+import {
+  isTerminalInput,
+  scrollActiveInputIntoView,
+  setTerminalInputValue,
+} from "./terminalDom";
 
 // Histórico (↑/↓) e autocomplete (Tab) para o input do terminal.
 //
@@ -138,8 +142,18 @@ export default function useTerminalKeys({ enabled, commands, onShowOptions }) {
       }
     };
 
+    // Qualquer coisa digitada (tecla, colar, histórico, autocomplete) leva o
+    // scroll até a linha do input, para o visitante ver o que está escrevendo
+    const onInput = (event) => {
+      if (isTerminalInput(event.target)) scrollActiveInputIntoView();
+    };
+
     document.addEventListener("keydown", onKeyDown, true);
-    return () => document.removeEventListener("keydown", onKeyDown, true);
+    document.addEventListener("input", onInput, true);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown, true);
+      document.removeEventListener("input", onInput, true);
+    };
   }, [enabled, commands]);
 
   return { addToHistory };

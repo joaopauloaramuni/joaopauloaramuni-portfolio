@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { commandList } from "../commands";
-import useCommandAtTop from "../terminal/useCommandAtTop";
 import "./Ajuda.css";
 
 const Ajuda = () => {
   const { t } = useTranslation();
-  const ref = useRef(null);
-  useCommandAtTop(ref);
+  // Diferente dos outros comandos, a ajuda não usa o useCommandAtTop: ela
+  // termina na base do terminal (ver keepTerminalAtBottom no App.jsx), para
+  // o input continuar visível logo abaixo da lista
   return (
-    <div className="ajuda-container" ref={ref}>
+    <div className="ajuda-container">
       <p className="ajuda-titulo">{t("ajuda.titulo")}</p>
       {/* Tabela de duas colunas (comando | descrição), como um --help */}
       <div className="ajuda-lista">

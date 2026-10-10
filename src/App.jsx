@@ -10,6 +10,7 @@ import { commandList } from "./commands";
 import useTerminalKeys from "./terminal/useTerminalKeys";
 import {
   keepLastCommandAtTop,
+  keepTerminalAtBottom,
   scrollTerminalToBottom,
 } from "./terminal/terminalDom";
 import lazyCommand from "./terminal/lazyCommand";
@@ -261,6 +262,8 @@ function App() {
       </TerminalOutput>
     );
     let response;
+    // Comandos que terminam na base do terminal, e não no topo (ver abaixo)
+    let endAtBottom = false;
 
     if (command) {
       switch (command.name) {
@@ -269,6 +272,9 @@ function App() {
           break;
         case "ajuda":
           response = <Ajuda />;
+          // Exceção: a ajuda fica na base do terminal, com o input logo
+          // abaixo, para o visitante ver o que digita enquanto consulta a lista
+          endAtBottom = true;
           break;
         case "pergunta": {
           // "pergunta <texto>" ou "ask <texto>": a IA responde em primeira
@@ -492,7 +498,8 @@ function App() {
       // com a saída logo abaixo, em vez de o visitante cair no fim dela. Se a
       // saída crescer depois (código lazy, dados, imagens), o próprio
       // componente repete o ajuste (ver terminal/useCommandAtTop.js)
-      keepLastCommandAtTop();
+      if (endAtBottom) keepTerminalAtBottom();
+      else keepLastCommandAtTop();
     } else {
       response = getInvalidCommandOutput(userInput);
     }

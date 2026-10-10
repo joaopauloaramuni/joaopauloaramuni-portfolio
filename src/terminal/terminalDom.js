@@ -87,6 +87,42 @@ export function keepLastCommandAtTop() {
   setTimeout(scrollLastCommandToTopNow, LIB_ENTER_SCROLL_MS + 1);
 }
 
+// Exceção ao padrão acima: comandos cuja saída termina na base do terminal,
+// como num terminal de verdade (ex.: "ajuda"). Assim o input continua
+// visível logo abaixo da saída e dá para ver o que está sendo digitado.
+// Repete depois do scroll que a lib faz 500ms após o Enter.
+export function keepTerminalAtBottom() {
+  scrollTerminalToBottom();
+  setTimeout(() => {
+    const body = document.querySelector(TERMINAL_BODY);
+    if (body) body.scrollTop = body.scrollHeight;
+  }, LIB_ENTER_SCROLL_MS + 1);
+}
+
+// Garante que a linha do input (onde as letras digitadas aparecem) esteja
+// visível. Chamado a cada tecla: se o visitante rolou para cima para ler uma
+// saída longa e volta a digitar, o terminal desce até o input, como no bash.
+export function scrollActiveInputIntoView() {
+  afterPaint(() => {
+    const body = document.querySelector(TERMINAL_BODY);
+    const line = body?.querySelector(".react-terminal-active-input");
+    if (!line) return;
+    const style = getComputedStyle(body);
+    const bodyRect = body.getBoundingClientRect();
+    const lineRect = line.getBoundingClientRect();
+    const visibleTop = bodyRect.top + (parseFloat(style.paddingTop) || 0);
+    const visibleBottom =
+      bodyRect.bottom - (parseFloat(style.paddingBottom) || 0);
+
+    if (lineRect.bottom > visibleBottom) {
+      // O input é a última linha: descer até o fim deixa ele inteiro na tela
+      body.scrollTop = body.scrollHeight;
+    } else if (lineRect.top < visibleTop) {
+      body.scrollTop -= visibleTop - lineRect.top;
+    }
+  });
+}
+
 // Saída que cresceu depois do comando (código lazy que chegou, dados de uma
 // API, imagens, PDF): se ela ainda é a última do terminal, leva o comando de
 // volta para o topo. Só desce, e só com o comando na tela: se o visitante já
