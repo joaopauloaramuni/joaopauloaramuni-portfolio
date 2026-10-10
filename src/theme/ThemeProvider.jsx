@@ -21,9 +21,10 @@ const readStoredTheme = () => {
 // Layout do fundo matrix: ?matrix=neo na URL tem prioridade (para testar),
 // depois o salvo, depois o padrão
 const readMatrixLayout = () => {
-  const { LAYOUTS, PADRAO, STORAGE_KEY } = MATRIX_CONFIG;
+  const { LAYOUTS, PADRAO, STORAGE_KEY, ALIASES } = MATRIX_CONFIG;
   try {
-    const fromUrl = new URLSearchParams(window.location.search).get("matrix");
+    const param = new URLSearchParams(window.location.search).get("matrix");
+    const fromUrl = ALIASES[param] ?? param;
     if (LAYOUTS.includes(fromUrl)) return fromUrl;
     const saved = localStorage.getItem(STORAGE_KEY);
     return LAYOUTS.includes(saved) ? saved : PADRAO;

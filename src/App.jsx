@@ -371,7 +371,8 @@ function App() {
         case "tema": {
           // "tema" sem opção troca na ordem escuro → claro → galo → matrix → escuro...;
           // "tema --claro|--light", "--escuro|--dark", "--galo" e "--matrix" escolhem.
-          // "tema --matrix --neo" também escolhe o layout do fundo (config/matrixConfig.js).
+          // "tema --matrix --wake" também escolhe o fundo; "--chuva" ou "--rain"
+          // volta para a chuva (config/matrixConfig.js).
           // Sem os traços ("tema claro") também vale, como era antes.
           const themeArgs = {
             claro: "light",
@@ -386,15 +387,11 @@ function App() {
             response = <TerminalOutput>{t("tema.uso")}</TerminalOutput>;
             break;
           }
-          const matrixLayouts = MATRIX_CONFIG.LAYOUTS.map((l) => `--${l}`).join(" | ");
-          const layout = args[2]?.replace(/^--?/, "");
+          const layoutArg = args[2]?.replace(/^--?/, "");
+          const layout = MATRIX_CONFIG.ALIASES[layoutArg] ?? layoutArg;
           if (layout !== undefined) {
             if (themeArgs[option] !== "matrix" || !MATRIX_CONFIG.LAYOUTS.includes(layout)) {
-              response = (
-                <TerminalOutput>
-                  {t("tema.uso_matrix", { layouts: matrixLayouts })}
-                </TerminalOutput>
-              );
+              response = <TerminalOutput>{t("tema.uso_matrix")}</TerminalOutput>;
               break;
             }
             setMatrixLayout(layout);
@@ -407,9 +404,7 @@ function App() {
             galo: "tema.galo_ativado",
             matrix: "tema.matrix_ativado",
           };
-          response = (
-            <TerminalOutput>{t(messages[chosen], { layouts: matrixLayouts })}</TerminalOutput>
-          );
+          response = <TerminalOutput>{t(messages[chosen])}</TerminalOutput>;
           break;
         }
         case "recomendacoes":
