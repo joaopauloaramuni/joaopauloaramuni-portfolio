@@ -1,0 +1,349 @@
+/* Comando "viagens": mapa de pontos, números, legenda e lista.
+   As cores vêm dos tokens do tema (theme.css): o mapa acompanha os temas
+   escuro, claro, galo e matrix sem nenhuma regra extra. */
+
+.viagens {
+  padding: 0.5rem 1rem 1rem;
+  color: var(--text);
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.viagens p {
+  margin: 0;
+}
+
+.viagens-titulo {
+  color: var(--highlight);
+  font-weight: bold;
+}
+
+.viagens-titulo-visao {
+  color: var(--text-soft);
+  font-weight: normal;
+}
+
+.viagens-sub {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  margin: 0.15rem 0 0.75rem !important;
+}
+
+/* ---------- Mapa ---------- */
+
+/* A moldura sempre ocupa toda a largura; a área interna (onde ficam o SVG e
+   a dica) é limitada pela altura da janela e centralizada. No mapa-múndi,
+   largo, isso quase nunca limita; nos recortes quadrados evita um mapa mais
+   alto que a tela */
+.viagens-mapa {
+  width: 100%;
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--bg-page) 35%, var(--bg-terminal));
+}
+
+.viagens-mapa-area {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.viagens-mapa.recorte .viagens-mapa-area {
+  max-width: calc(70vh * var(--proporcao));
+}
+
+.viagens-mapa-area > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Cada ponto é um traço de tamanho zero com ponta redonda */
+.viagens-terra,
+.viagens-visitado {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.viagens-terra {
+  stroke: var(--border);
+  stroke-width: 0.5;
+  opacity: 0.6;
+}
+
+.viagens-visitado {
+  stroke-width: 0.72;
+  opacity: 0.85;
+}
+
+.viagens-rota {
+  fill: none;
+  stroke: var(--accent);
+  stroke-dasharray: 0.4 0.6;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Com um pino escolhido pelo ímã, o mapa todo vira "clicável" */
+.viagens-mapa-area > svg.com-ativo {
+  cursor: pointer;
+}
+
+.viagens-pino-anel {
+  fill: none;
+  stroke: var(--text);
+  pointer-events: none;
+}
+
+.viagens-pino {
+  fill: var(--bg-terminal);
+  cursor: pointer;
+  outline: none;
+  transition: r 0.15s ease;
+}
+
+.viagens-pino:hover,
+.viagens-pino:focus-visible,
+.viagens-pino.ativo {
+  fill: currentColor;
+  color: var(--text);
+}
+
+.viagens-casa {
+  outline: none;
+  cursor: default;
+}
+
+.viagens-casa-ponto {
+  fill: var(--accent);
+  stroke: var(--bg-terminal);
+}
+
+.viagens-casa-onda {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 0.15;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: viagens-onda 2s ease-out infinite;
+}
+
+@keyframes viagens-onda {
+  from {
+    transform: scale(0.4);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viagens-casa-onda {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+.viagens-rotulo {
+  fill: var(--text);
+  stroke: var(--bg-terminal);
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+  font-family: inherit;
+}
+
+.viagens-rotulo.casa {
+  fill: var(--accent);
+}
+
+/* Nos recortes o país visitado ocupa quase tudo: pontos menores e mais
+   apagados, para os pinos das cidades aparecerem */
+.viagens-mapa.recorte .viagens-terra {
+  stroke-width: 0.4;
+  opacity: 0.5;
+}
+
+.viagens-mapa.recorte .viagens-visitado {
+  stroke-width: 0.5;
+  opacity: 0.4;
+}
+
+/* Dica do pino: bandeira, cidade, país e distância de BH */
+.viagens-dica {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, calc(-100% - 12px));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8em;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Perto das bordas, a dica abre para dentro do mapa */
+.viagens-dica.esquerda {
+  transform: translate(calc(-100% + 16px), calc(-100% - 12px));
+}
+
+.viagens-dica.direita {
+  transform: translate(-16px, calc(-100% - 12px));
+}
+
+.viagens-dica.abaixo {
+  transform: translate(-50%, 12px);
+}
+
+.viagens-dica.abaixo.esquerda {
+  transform: translate(calc(-100% + 16px), 12px);
+}
+
+.viagens-dica.abaixo.direita {
+  transform: translate(-16px, 12px);
+}
+
+.viagens-dica > span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.viagens-dica-detalhe {
+  color: var(--text-muted);
+}
+
+.viagens-dica-acao {
+  color: var(--accent);
+  font-size: 0.9em;
+}
+
+.viagens-bandeira {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+/* ---------- Números ---------- */
+
+.viagens-numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.viagens-numeros p {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.viagens-numero {
+  font-size: 1.6em;
+  color: var(--text);
+}
+
+.viagens-numero.accent {
+  color: var(--accent);
+}
+
+.viagens-numero.highlight {
+  color: var(--highlight);
+}
+
+/* ---------- Legenda (cada continente abre o próprio mapa) ---------- */
+
+.viagens-legenda {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
+
+.viagens-legenda button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.15rem 0.4rem;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.viagens-legenda button:hover,
+.viagens-legenda button:focus-visible {
+  border-color: var(--serie);
+  outline: none;
+}
+
+.viagens-legenda-ponto {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--serie);
+}
+
+.viagens-legenda-total {
+  color: var(--text-dim);
+}
+
+/* ---------- Lista ---------- */
+
+.viagens-lista {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.viagens-lista-continente {
+  border-left: 3px solid var(--serie);
+  padding-left: 0.75rem;
+}
+
+.viagens-lista-titulo {
+  color: var(--serie);
+  font-weight: bold;
+  margin-bottom: 0.3rem !important;
+}
+
+.viagens-lista-pais {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.5rem;
+  line-height: 1.6;
+}
+
+.viagens-lista-cidades {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+/* O ".viagens p { margin: 0 }" lá de cima zerava a margem do rodapé
+   "Mapas:", que ficava colado na legenda dos continentes */
+.viagens .skins-footer {
+  margin-top: 1.75rem;
+}

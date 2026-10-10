@@ -52,6 +52,7 @@ export const COMANDO_EN = {
   projetos: "projects",
   curriculo: "resume",
   contato: "contact",
+  viagens: "travel",
 };
 
 // O que faço hoje (sobre.hoje.<id>.cargo | org | detalhe)
@@ -475,6 +476,7 @@ export const continentes = [
 // Links do rodapé "veja também"
 export const vejaTambem = [
   "experiencias",
+  "viagens",
   "lattes",
   "premios",
   "recomendacoes",

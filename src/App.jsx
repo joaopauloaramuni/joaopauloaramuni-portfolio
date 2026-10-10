@@ -28,6 +28,7 @@ import { parseSkillSkin } from "./data/skillSkins";
 import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 import { parseCalSkin } from "./data/calSkins";
+import { parseViagensSkin } from "./data/viagensSkins";
 import { parseLattesSection } from "./data/lattesSections";
 import { parseTurmas } from "./data/turmasSections";
 import { parseCanvas } from "./data/canvasSections";
@@ -62,6 +63,8 @@ const Neofetch = lazyCommand(() => import("./components/Neofetch"));
 const Jogos = lazyCommand(() => import("./components/Jogos"));
 const Basquete = lazyCommand(() => import("./components/Basquete"));
 const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
+// O "viagens" traz a grade de pontos dos mapas (~28 kB, npm run viagens)
+const Viagens = lazyCommand(() => import("./components/Viagens"));
 // O "pergunta" (ask) chama a IA no servidor (api/ask.js): aqui é só o desenho
 const Ask = lazyCommand(() => import("./components/Ask"));
 // O currículo traz o react-pdf e o PDF.js (~400 kB)
@@ -105,6 +108,7 @@ const PRELOAD = [
   Jogos,
   Basquete,
   DesignSystem,
+  Viagens,
   Ask,
 ];
 
@@ -409,6 +413,18 @@ function App() {
             matrix: "tema.matrix_ativado",
           };
           response = <TerminalOutput>{t(messages[chosen])}</TerminalOutput>;
+          break;
+        }
+        case "viagens": {
+          // "viagens" abre o mapa-múndi; "--america", "--minas", "--europa" e "--asia"
+          // aproximam e "--lista" mostra as cidades por país
+          // (ver data/viagensSkins.js e scripts/viagens.mjs)
+          const skin = parseViagensSkin(args.slice(1));
+          if (!skin) {
+            response = <TerminalOutput>{t("viagens.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <Viagens skin={skin} />;
           break;
         }
         case "recomendacoes":
