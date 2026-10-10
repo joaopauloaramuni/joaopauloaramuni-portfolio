@@ -71,9 +71,23 @@
   opacity: 0.6;
 }
 
+/* Celular: barra de título mais baixa (App.css), ícones e PT/EN menores.
+   Tamanhos em px para o "Tamanho do texto" do Android não aumentar a barra. */
 @media (max-width: 480px) {
   .switcherContainer {
-    gap: 8px;
+    top: 19px; /* abaixo do nome da janela, que fica centralizado em cima */
+    right: 12px;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .boot-screen .switcherContainer {
+    font-size: 13px;
+  }
+
+  .switcherContainer .icon {
+    font-size: 16px;
   }
 
   .themeToggleGroup {
@@ -81,6 +95,6 @@
   }
 
   .themeToggle {
-    font-size: 19px;
+    font-size: 15px;
   }
 }

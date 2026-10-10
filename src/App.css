@@ -176,15 +176,40 @@ html {
   }
 }
 
+/* Celular em pé: a tela de boas-vindas inteira (e o prompt) tem que caber
+   sem rolar. A fonte acompanha a largura e a altura da tela e tem teto em
+   px: o "Tamanho do texto" do Android (que aumenta o rem) não faz as
+   boas-vindas passarem da tela. Os componentes usam em, então tudo encolhe
+   junto a partir daqui. */
 @media (max-width: 480px) {
-  .react-terminal-wrapper {
-    font-size: 0.85rem;
+  :root {
+    --terminal-padding-y: 58px; /* 46px + 12px: altura do <Terminal> no App.jsx */
+  }
+
+  /* .terminal-container na frente: a lib injeta o CSS dela (font-size: 18px)
+     depois do nosso, e com a mesma especificidade ela ganharia */
+  .terminal-container .react-terminal-wrapper {
+    font-size: clamp(11px, min(3.3vw, 1.85vh), 14px);
+    padding-top: 46px !important; /* barra de título mais baixa (abaixo) */
+    padding-bottom: 12px !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
 
   .react-terminal-wrapper::after {
-    font-size: 0.65rem;
+    font-size: 10px;
+    top: 3px;
+  }
+
+  .react-terminal-window-buttons {
+    top: 12px !important;
+    left: 12px !important;
+    gap: 7px !important;
+  }
+
+  .react-terminal-window-buttons button {
+    width: 11px !important;
+    height: 11px !important;
   }
 }
 

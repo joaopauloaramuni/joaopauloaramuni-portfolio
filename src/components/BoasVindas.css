@@ -385,38 +385,69 @@
   }
 }
 
+/* Celular em pé: tudo em em, a partir da fonte do terminal (App.css), que
+   acompanha largura e altura da tela. Assim as boas-vindas e o prompt cabem
+   inteiros sem rolar, mesmo com o texto do Android aumentado. */
 @media (max-width: 480px) {
   .welcome-container {
-    padding: 0.5rem 0.25rem;
+    padding: 0.25em 0.25em 0;
+  }
+
+  .welcome-brand {
+    margin-bottom: 0.5em;
   }
 
   .name-animation {
-    font-size: 1.2rem;
+    font-size: 1.3em;
+    margin-bottom: 0.6em;
   }
 
   .welcome-title {
-    font-size: 1rem;
+    font-size: 1.1em;
+    margin-bottom: 0.35em;
+  }
+
+  .welcome-visitas,
+  .welcome-status {
+    font-size: 1em;
+    margin: -0.2em 0 0.35em 0;
+  }
+
+  .welcome-status + .welcome-visitas,
+  .welcome-status + .welcome-codando,
+  .welcome-codando + .welcome-visitas,
+  .welcome-codando-vazio + .welcome-visitas {
+    margin-top: -0.3em;
   }
 
   .welcome-subtitle,
   .navegue-text {
-    font-size: 0.85rem;
+    font-size: 1em;
+  }
+
+  .welcome-subtitle,
+  .divider {
+    margin-bottom: 0.35em;
+  }
+
+  .info-list {
+    margin-bottom: 0.35em;
   }
 
   /* linhas quebradas ficam juntas; itens ficam separados */
   .info-list li {
-    font-size: 0.8rem;
+    font-size: 0.95em;
     line-height: 1.35;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.3em;
   }
 
   .icon-link {
-    gap: 0.5rem;
+    gap: 0.5em;
     align-items: flex-start;
   }
 
   .info-list .icon {
-    font-size: 1rem;
-    margin-top: 0.05rem; /* alinha o ícone com a primeira linha do texto */
+    font-size: 1.15em;
+    margin-top: 0.05em; /* alinha o ícone com a primeira linha do texto */
   }
 }

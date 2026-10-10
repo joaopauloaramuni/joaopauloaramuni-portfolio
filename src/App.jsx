@@ -543,7 +543,7 @@ function App() {
           colorMode={theme === "light" ? ColorMode.Light : ColorMode.Dark}
           onInput={isTerminalPaused ? undefined : handleInput}
           prompt={myPrompt}
-          height="calc(var(--app-height, 100dvh) - 80px)" /* 60px + 20px de padding do .react-terminal-wrapper (App.css); --app-height desconta o teclado do celular */
+          height="calc(var(--app-height, 100dvh) - var(--terminal-padding-y, 80px))" /* padding vertical do .react-terminal-wrapper (App.css: 60px + 20px; menor no celular); --app-height desconta o teclado do celular */
         >
           {terminalLineData}
         </Terminal>
