@@ -29,7 +29,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🐙 **github:** Exibe meus repositórios usando a GitHub API.
 * 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem quatro estilos: `skills --terminal` (padrão), `skills --cards`, `skills --lista` e `skills --globo` (globo 3D com three.js, carregado só quando o estilo abre e desmontado quando sai da tela, para liberar o WebGL).
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
-* ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem. O `wakatime --agora` mostra em que projeto estou mexendo no editor neste momento (heartbeats do WakaTime, com a `WAKATIME_API_KEY` só no servidor), e a mesma informação aparece na tela de boas-vindas, logo abaixo do status, enquanto estou programando.
+* ⏱️ **wakatime:** Mostra quanto tempo passei programando e em quais linguagens. Tem quatro estilos: `wakatime --terminal` (padrão), `wakatime --grade` e `wakatime --lista`, desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem. O `wakatime --agora` mostra em que projeto estou mexendo no editor neste momento (heartbeats do WakaTime, com o token OAuth `WAKATIME_ACCESS_TOKEN` só no servidor), e a mesma informação aparece na tela de boas-vindas, logo abaixo do status, enquanto estou programando.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo em PDF, com zoom, download e abertura em nova aba (react-pdf, carregado só quando o comando roda).
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
@@ -218,7 +218,7 @@ Ferramentas de desenvolvimento (`devDependencies`), que não vão para o site:
 
 > 🔒 **Rollup travado na 4.63.** O `package.json` tem um `overrides` que mantém o Rollup, que o Vite usa no build, em `~4.63.6`. A versão 4.64 (de outubro de 2026) deixou o build deste projeto cerca de 25 vezes mais lento: de ~15 s para ~5 min. A causa provável é a nova análise de `try/catch` da 4.64.0 ([rollup#6541](https://github.com/rollup/rollup/pull/6541)). A 4.63.6 já tem a correção de segurança [GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc), que entrou na 4.59.0, então o `npm audit` fica zerado. Quando sair uma versão nova do Rollup, tire o `overrides`, rode `npm install` e confira o tempo do `npm run build` antes de commitar.
 
-Os scripts de manutenção (`npm run lattes`, `npm run turmas` e `npm run canvas`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). O `npm run ask` usa dois que já estão no projeto: o **vite**, para carregar os dados dos comandos como o site carrega, e o **pdfjs-dist** (que vem com o react-pdf), para ler o texto do currículo em PDF. Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
+Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas` e `npm run wakatime:oauth`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). O `npm run ask` usa dois que já estão no projeto: o **vite**, para carregar os dados dos comandos como o site carrega, e o **pdfjs-dist** (que vem com o react-pdf), para ler o texto do currículo em PDF. Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
 
 > 💡 O `react-calendly` não é usado: o Calendly entra num `<iframe>` (veja [a comparação](#-diferença-entre-usar-react-calendly-e-o-embed-oficial)).
 
@@ -1484,14 +1484,31 @@ O destino já fixa o usuário, então o proxy só serve para os seus dados públ
 
 No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo mostra (`LIMITS`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
 
+### 4️⃣ "Codando agora" (OAuth)
+
+O `wakatime --agora` e a linha da tela de boas-vindas leem os heartbeats do dia (`GET /api/v1/users/current/heartbeats`) e os editores (`/user_agents`). Esses dados são privados, então a rota `/api/codando` (Vercel Function `api/codando.js`; no `npm run dev`, o `vite.config.js`) chama o WakaTime com um **token OAuth** que fica só no servidor.
+
+> ⚠️ A partir de 1º de novembro de 2026, a API key do WakaTime só serve para os plugins enviarem dados e deixa de funcionar para leitura. Por isso o projeto usa OAuth.
+
+1. Em [wakatime.com/apps](https://wakatime.com/apps), crie um app com o Redirect URI `http://localhost:8787/callback`.
+2. No `.env.local`, preencha `WAKATIME_APP_ID` e `WAKATIME_APP_SECRET`.
+3. Rode `npm run wakatime:oauth`, autorize no navegador e cole no `.env.local` as duas linhas que o terminal imprime: `WAKATIME_ACCESS_TOKEN` e `WAKATIME_REFRESH_TOKEN`.
+4. Na Vercel, crie as mesmas quatro variáveis (marque como *Sensitive* o access token, o refresh token e o app secret) e faça o redeploy.
+5. Para conferir, abra `/api/codando`: a resposta tem que ser um JSON com `ativo`, `hojeSegundos` e `ultimo`.
+
+O token gerado vale por muitos anos. Se um dia a API responder `401`, a função usa o refresh token para pedir outro (ele fica só na memória da função; para valer de vez, rode o script de novo e atualize as variáveis). Sem `WAKATIME_ACCESS_TOKEN`, a linha não aparece e o `wakatime --agora` avisa que não está configurado. Em `AGORA` (`src/config/wakaTimeConfig.js`) você escolhe quais projetos aparecem pelo nome; os outros viram "projeto privado".
+
 ### 📂 Arquivos
 
 ```text
 vercel.json                    → rewrite /api/wakatime → API do WakaTime (produção)
 vite.config.js                 → o mesmo proxy no npm run dev / preview
 nginx.conf                     → o mesmo proxy no container Docker (NGINX)
+api/codando.js                 → Vercel Function do "Codando agora" (/api/codando)
+api/_codando.js                → heartbeats com o token OAuth, renovação e privacidade
+scripts/wakatime-oauth.mjs     → gera o access token e o refresh token (npm run wakatime:oauth)
 src/
-  config/wakaTimeConfig.js     → usuário, período, limites de cada estilo
+  config/wakaTimeConfig.js     → usuário, período, limites de cada estilo e o AGORA
   lib/wakatime.js              → busca (com cache), normaliza e formata os dados
   data/wakaTimeSkins.js        → estilos e nomes aceitos (PT e EN)
   data/wakaTimeLanguages.js    → ícone e cores de cada linguagem
@@ -2830,7 +2847,7 @@ Mac/Windows) ou o **serviço Docker** (em Linux) está em execução.
 * **React Icons:** [React Icons](https://react-icons.github.io/react-icons/)
 * **Vercel:** [Documentação](https://vercel.com/docs) | [Environment Variables](https://vercel.com/docs/projects/environment-variables)  
 * **Spotify e Last.fm:** [Spotify GitHub Profile - Kittinan](https://github.com/kittinan/spotify-github-profile) | [Spotify Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/spotify-recently-played-readme) | [Data Card for Spotify](https://data-card-for-spotify.herokuapp.com/) | [Last.fm Recently Played Readme - JeffreyCA](https://github.com/JeffreyCA/lastfm-recently-played-readme)
-* **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key)
+* **WakaTime:** [WakaTime Readme Stats - Anmol098](https://github.com/anmol098/waka-readme-stats) | [WakaTime Stats API](https://github-readme-stats.vercel.app/api/wakatime?username=aramuni) | [WakaTime API Key Settings](https://wakatime.com/settings/api-key) | [WakaTime OAuth Apps](https://wakatime.com/apps)
 * **GitHubAPI:** [Documentação](https://docs.github.com/pt/rest) | [Token](https://github.com/settings/tokens)
 * **Calendly (agendamento online):** [Embed options overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [How to add Calendly to your website](https://help.calendly.com/hc/en-us/articles/4409838727703-How-to-add-Calendly-to-your-website) | [Embed Inline](https://www.calendly-embed.com/embed-inline) | [Embed Options Overview](https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview) | [Advanced Calendly Embed for Developers](https://help.calendly.com/hc/en-us/articles/31618265722775-Advanced-Calendly-embed-for-developers)
 * **Docker (containerização de aplicações):** [Documentação oficial](https://docs.docker.com/)  
