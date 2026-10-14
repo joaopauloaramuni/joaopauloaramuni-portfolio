@@ -102,9 +102,9 @@ function clima(env) {
 }
 
 // "Codando agora" (boas-vindas e wakatime --agora): GET /api/codando lê os
-// heartbeats do WakaTime com a WAKATIME_API_KEY. Em produção quem faz isso é
+// heartbeats do WakaTime com o WAKATIME_ACCESS_TOKEN. Em produção quem faz isso é
 // a Vercel Function api/codando.js; aqui, no npm run dev e no npm run
-// preview, é este middleware. A chave fica só no servidor do Vite.
+// preview, é este middleware. O token fica só no servidor do Vite.
 function codando(env) {
   const middleware = (req, res, next) => {
     if (new URL(req.url, 'http://localhost').pathname !== CODANDO_PATH) return next()

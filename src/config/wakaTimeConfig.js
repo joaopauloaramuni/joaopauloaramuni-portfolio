@@ -24,8 +24,8 @@ const WAKATIME_CONFIG = {
   HIDDEN_LANGUAGES: [],
 
   // "Codando agora" (boas-vindas e wakatime --agora). Diferente do resto, usa
-  // os heartbeats do WakaTime, que são privados: precisa da WAKATIME_API_KEY,
-  // que fica só no servidor (api/_codando.js). O navegador chama AGORA.API_PATH.
+  // os heartbeats do WakaTime, que são privados: precisa do token OAuth
+  // WAKATIME_ACCESS_TOKEN, que fica só no servidor (api/_codando.js). O navegador chama AGORA.API_PATH.
   AGORA: {
     API_PATH: "/api/codando",
     // Fuso da sua conta no WakaTime: é por ele que a API separa os dias

@@ -12,7 +12,8 @@
     "canvas": "node scripts/canvas.mjs",
     "preview": "vite preview",
     "ask": "node scripts/ask.mjs",
-    "viagens": "node scripts/viagens.mjs"
+    "viagens": "node scripts/viagens.mjs",
+    "wakatime:oauth": "node scripts/wakatime-oauth.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^5.0.2",

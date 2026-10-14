@@ -973,7 +973,7 @@ const resources = {
           },
           status: {
             carregando: "Asking WakaTime what I'm working on",
-            indisponivel: "The live status isn't set up here (it needs the WAKATIME_API_KEY on the server). The other styles still work: wakatime --terminal",
+            indisponivel: "The live status isn't set up here (it needs the WAKATIME_ACCESS_TOKEN on the server). The other styles still work: wakatime --terminal",
             erro: "Couldn't reach WakaTime right now. Try again in a moment.",
           },
         },
@@ -3558,7 +3558,7 @@ const resources = {
           },
           status: {
             carregando: "Perguntando ao WakaTime em que estou mexendo",
-            indisponivel: "O status ao vivo não está configurado aqui (falta a WAKATIME_API_KEY no servidor). Os outros estilos continuam funcionando: wakatime --terminal",
+            indisponivel: "O status ao vivo não está configurado aqui (falta o WAKATIME_ACCESS_TOKEN no servidor). Os outros estilos continuam funcionando: wakatime --terminal",
             erro: "Não consegui falar com o WakaTime agora. Tente de novo em instantes.",
           },
         },
