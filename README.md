@@ -1486,17 +1486,97 @@ No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo m
 
 ### 4️⃣ "Codando agora" (OAuth)
 
-O `wakatime --agora` e a linha da tela de boas-vindas leem os heartbeats do dia (`GET /api/v1/users/current/heartbeats`) e os editores (`/user_agents`). Esses dados são privados, então a rota `/api/codando` (Vercel Function `api/codando.js`; no `npm run dev`, o `vite.config.js`) chama o WakaTime com um **token OAuth** que fica só no servidor.
+O `wakatime --agora` e a linha da tela de boas-vindas leem os heartbeats do dia (`GET /api/v1/users/current/heartbeats`) e os editores (`/user_agents`). Diferente do `stats/all_time`, esses dados são **privados**, então precisam de autenticação. Quem chama o WakaTime é a rota `/api/codando` (Vercel Function `api/codando.js`; no `npm run dev`, o `vite.config.js`), com um token que fica só no servidor.
 
-> ⚠️ A partir de 1º de novembro de 2026, a API key do WakaTime só serve para os plugins enviarem dados e deixa de funcionar para leitura. Por isso o projeto usa OAuth.
+#### 🤔 Por que OAuth e não a API key?
 
-1. Em [wakatime.com/apps](https://wakatime.com/apps), crie um app com o Redirect URI `http://localhost:8787/callback`.
-2. No `.env.local`, preencha `WAKATIME_APP_ID` e `WAKATIME_APP_SECRET`.
-3. Rode `npm run wakatime:oauth`, autorize no navegador e cole no `.env.local` as duas linhas que o terminal imprime: `WAKATIME_ACCESS_TOKEN` e `WAKATIME_REFRESH_TOKEN`.
-4. Na Vercel, crie as mesmas quatro variáveis (marque como *Sensitive* o access token, o refresh token e o app secret) e faça o redeploy.
-5. Para conferir, abra `/api/codando`: a resposta tem que ser um JSON com `ativo`, `hojeSegundos` e `ultimo`.
+O jeito mais simples de ler dados privados era mandar a API key no cabeçalho da requisição (`Authorization: Basic <api key em base64>`). Isso vai acabar. O WakaTime avisou por e-mail:
 
-O token gerado vale por muitos anos. Se um dia a API responder `401`, a função usa o refresh token para pedir outro (ele fica só na memória da função; para valer de vez, rode o script de novo e atualize as variáveis). Sem `WAKATIME_ACCESS_TOKEN`, a linha não aparece e o `wakatime --agora` avisa que não está configurado. Em `AGORA` (`src/config/wakaTimeConfig.js`) você escolhe quais projetos aparecem pelo nome; os outros viram "projeto privado".
+> 📧 *"Starting November 1, 2026, WakaTime API keys will become write-only. They will only work in the WakaTime plugins for sending data and will no longer work for other API endpoints. Please transition your app, script, or integration to using OAuth tokens instead of API keys before November 1."*
+
+Ou seja: **a partir de 1º de novembro de 2026**, a API key só serve para os plugins (VS Code, JetBrains etc.) enviarem a atividade de código. Qualquer leitura feita com ela responde erro, e o "Codando agora" sumiria. A saída indicada na [documentação de autenticação](https://wakatime.com/developers#authentication) é o **OAuth**.
+
+E a troca também é mais segura. Pense assim:
+
+- 🔑 **API key** é a chave da sua casa: abre todas as portas (lê e escreve tudo na conta) e, se vazar, a única saída é trocar a fechadura.
+- 🪪 **Token OAuth** é um crachá de visitante que você mesmo emite: só abre as portas que você autorizou (os **escopos**; aqui, só `read_heartbeats`, leitura) e pode ser revogado sem mexer na sua chave.
+
+#### 🔄 Como o OAuth funciona aqui
+
+O projeto usa o fluxo *authorization code*, e o `scripts/wakatime-oauth.mjs` faz tudo sozinho:
+
+1. Abre no navegador `wakatime.com/oauth/authorize` com o **App ID** e o escopo `read_heartbeats`.
+2. Você faz login e clica em **Authorize**.
+3. O WakaTime redireciona para `http://localhost:8787/callback?code=...`, onde o script está escutando.
+4. O script troca esse `code` (junto com o **App Secret**) em `wakatime.com/oauth/token` por dois tokens: o **access token** e o **refresh token**.
+5. Daí em diante, o `api/_codando.js` manda `Authorization: Bearer <access token>` em cada chamada.
+
+#### 🛠️ Passo a passo (uma vez só)
+
+1. **Crie o app no WakaTime.** Em [wakatime.com/apps](https://wakatime.com/apps), crie um novo app e preencha:
+
+   | Campo | O que colocar | Exemplo |
+   |:--|:--|:--|
+   | **Name** | Um nome para o app | `portfolio` |
+   | **Redirect URI** | Exatamente este endereço, onde o script recebe a autorização | `http://localhost:8787/callback` |
+   | **Install URL** | O endereço do seu portfólio. Se ainda não tiver domínio, use o da Vercel | `https://aramuni.dev` ou `https://seu-projeto.vercel.app` |
+   | **Publisher Website** | O seu site | `https://aramuni.dev` ou `https://seu-projeto.vercel.app` |
+
+   Ao salvar, a página do app mostra o **App ID** e o **App Secret**.
+
+2. **Preencha o `.env.local`.** Se ainda não tiver, rode `cp .env.example .env.local` e cole os valores:
+
+   ```env
+   WAKATIME_APP_ID=seu-app-id
+   WAKATIME_APP_SECRET=seu-app-secret
+   ```
+
+3. **Gere os tokens.** Na raiz do projeto, rode:
+
+   ```bash
+   npm run wakatime:oauth
+   ```
+
+   O navegador abre a tela de autorização. Depois de clicar em **Authorize**, a aba mostra "Pronto!" e o terminal imprime as duas linhas:
+
+   ```text
+   Cole no .env.local (e nas variáveis da Vercel):
+
+   WAKATIME_ACCESS_TOKEN=...
+   WAKATIME_REFRESH_TOKEN=...
+
+   Escopo: read_heartbeats  |  expira em: ...
+   ```
+
+4. **Cole as duas linhas no `.env.local`**, rode `npm run dev` e teste `wakatime --agora`.
+
+5. **Configure a Vercel.** Em *Settings → Environment Variables*, crie as variáveis da tabela abaixo e faça o redeploy.
+
+6. **Confira.** Abra `https://<seu-dominio>/api/codando`: a resposta tem que ser um JSON com `ativo`, `hojeSegundos` e `ultimo`.
+
+> 💡 Se o navegador não abrir sozinho, o terminal imprime o link da autorização para você abrir na mão. Se aparecer erro de `redirect_uri`, confira se a URI do app é **exatamente** `http://localhost:8787/callback` (sem barra no final, `http` e não `https`).
+
+#### ☁️ Variáveis de ambiente na Vercel
+
+Nenhuma delas tem o prefixo `VITE_`, de propósito: ficam só no servidor e nunca vão para o build.
+
+| Variável | Obrigatória? | Para que serve | *Sensitive* |
+|:--|:--:|:--|:--:|
+| `WAKATIME_ACCESS_TOKEN` | ✅ | Token que a função manda no `Authorization: Bearer` | ✅ |
+| `WAKATIME_REFRESH_TOKEN` | Opcional | Pede um novo access token se o atual expirar ou for revogado | ✅ |
+| `WAKATIME_APP_ID` | Opcional | Usado na renovação, junto com o secret e o refresh token | — |
+| `WAKATIME_APP_SECRET` | Opcional | Usado na renovação | ✅ |
+| `WAKATIME_PROJETOS_PUBLICOS` | Opcional | Projetos que aparecem pelo nome, separados por vírgula | — |
+
+A renovação automática só funciona com as três opcionais juntas (`APP_ID`, `APP_SECRET` e `REFRESH_TOKEN`).
+
+#### ⏳ Validade
+
+O access token gerado vale **100 anos** (a data aparece em "expira em", no terminal), então na prática o passo a passo é feito uma vez só. Se um dia a API responder `401` (por exemplo, se você revogar o acesso do app), a função usa o refresh token para pedir outro. Esse token novo fica só na memória da função: para valer de vez, rode `npm run wakatime:oauth` de novo e atualize as variáveis no `.env.local` e na Vercel.
+
+Sem `WAKATIME_ACCESS_TOKEN`, a linha não aparece e o `wakatime --agora` avisa que não está configurado. Em `AGORA` (`src/config/wakaTimeConfig.js`) você escolhe quais projetos aparecem pelo nome; os outros viram "projeto privado".
+
+> ⚠️ Nunca faça commit do `.env.local`, do App Secret nem dos tokens.
 
 ### 📂 Arquivos
 
