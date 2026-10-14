@@ -7,10 +7,6 @@
   },
   "rewrites": [
     {
-      "source": "/api/wakatime/:path*",
-      "destination": "https://wakatime.com/api/v1/users/aramuni/:path*"
-    },
-    {
       "source": "/api/github/profile-views",
       "destination": "https://komarev.com/ghpvc/?username=joaopauloaramuni"
     },

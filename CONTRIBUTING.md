@@ -133,7 +133,7 @@ Alguns cuidados com as chaves:
 │   └── theme/             → tokens de cor, contexto e ThemeProvider
 ├── scripts/               → script que importa o currículo Lattes (npm run lattes)
 ├── .github/workflows/     → workflow que mantém o Supabase ativo
-├── vercel.json            → rewrites que repassam /api/wakatime e /api/github/* (contadores de visitas)
+├── vercel.json            → rewrites que repassam /api/github/* (contadores de visitas)
 ├── .env.example           → modelo das variáveis de ambiente
 ├── Dockerfile             → build com Node + NGINX (opcional)
 └── README.md              → documentação completa e guias de configuração

@@ -1,4 +1,5 @@
-// Gera o WAKATIME_ACCESS_TOKEN e o WAKATIME_REFRESH_TOKEN do "Codando agora".
+// Gera o WAKATIME_ACCESS_TOKEN e o WAKATIME_REFRESH_TOKEN do comando wakatime
+// (estatísticas) e do "Codando agora".
 // Uso: npm run wakatime:oauth
 //
 // Precisa de WAKATIME_APP_ID e WAKATIME_APP_SECRET no .env.local e do
@@ -32,9 +33,12 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 
 const PORTA = 8787;
 const REDIRECT_URI = `http://localhost:${PORTA}/callback`;
-// Escopos separados por vírgula. Se /user_agents der 403, acrescente o que
-// a documentação de OAuth do WakaTime pedir e rode de novo.
-const SCOPE = "read_heartbeats";
+// Escopos separados por vírgula (só leitura):
+//   read_stats      → GET /users/current/stats/all_time  (wakatime, api/_wakatime.js)
+//   read_heartbeats → GET /users/current/heartbeats e /user_agents  (Codando agora)
+// Se alguma rota der 403, acrescente o que a documentação de OAuth do
+// WakaTime pedir e rode de novo.
+const SCOPE = "read_stats,read_heartbeats";
 const state = randomBytes(16).toString("hex");
 
 const url = new URL("https://wakatime.com/oauth/authorize");

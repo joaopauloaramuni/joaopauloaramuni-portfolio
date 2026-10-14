@@ -1,7 +1,9 @@
 import WAKATIME_CONFIG from "../config/wakaTimeConfig";
 
-// Busca as estatísticas públicas do WakaTime (GET /users/:user/stats/:range)
-// pelo proxy do próprio site (ver config/wakaTimeConfig.js).
+// Busca as estatísticas do WakaTime em /api/wakatime, no próprio site. Quem
+// chama o WakaTime é o servidor (api/_wakatime.js): com o token OAuth, mesmo
+// com o perfil privado; sem ele, pelo perfil público. A resposta vem no
+// formato da API ({ data }), só com os campos usados aqui.
 //
 // A promessa fica guardada: trocar de estilo (wakatime --lista → --terminal)
 // não repete a chamada. Se der erro, o cache é limpo para tentar de novo.
@@ -27,11 +29,11 @@ export function fetchWakaTimeStats() {
 }
 
 async function load() {
-  const { API_PATH, RANGE } = WAKATIME_CONFIG;
-  const response = await fetch(`${API_PATH}/stats/${RANGE}`);
+  // O período (RANGE) é escolhido no servidor
+  const response = await fetch(WAKATIME_CONFIG.API_PATH);
   if (!response.ok) throw new Error(`WakaTime: HTTP ${response.status}`);
 
-  // Sem o proxy (ex.: outro host), a rota devolve o index.html e o json() falha
+  // Sem a função/proxy (ex.: outro host), a rota devolve o index.html e o json() falha
   const { data } = await response.json();
   if (data?.status === "pending_update" || !Array.isArray(data?.languages)) {
     throw new WakaTimePendingError("WakaTime ainda está calculando");
@@ -51,8 +53,9 @@ const toItems = (list = []) =>
       percent,
     }));
 
-// "since Sep 6 2022" → "2022-09-06". Para visitantes (sem login), a API não
-// manda "start", "end", "timezone" nem "best_day": só este texto, em inglês.
+// "since Sep 6 2022" → "2022-09-06". Com o token vem o "start"; pela rota
+// pública (sem token ou no Docker) a API não manda "start", "end",
+// "timezone" nem "best_day": só este texto, em inglês.
 const MONTHS = "jan feb mar apr may jun jul aug sep oct nov dec".split(" ");
 function parseSince(text = "") {
   const match = /(\w{3})\w*\.? (\d{1,2}),? (\d{4})/.exec(text);

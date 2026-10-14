@@ -5,9 +5,8 @@
 // e arquivo. Aqui lemos os heartbeats do dia (GET /users/current/heartbeats)
 // e olhamos o último: se chegou há até AGORA.ATIVO_MINUTOS, estou codando.
 //
-// Diferente do comando wakatime (API pública, sem chave), heartbeats são
-// privados: precisam de um token OAuth (WAKATIME_ACCESS_TOKEN), sem o prefixo
-// VITE_, que fica só no servidor. Desde 01/11/2026 a API key do WakaTime só
+// Heartbeats são privados: precisam de um token OAuth (WAKATIME_ACCESS_TOKEN,
+// escopo read_heartbeats), sem o prefixo VITE_, que fica só no servidor. Desde 01/11/2026 a API key do WakaTime só
 // serve para os plugins mandarem dados. O token sai do
 // scripts/wakatime-oauth.mjs (npm run wakatime:oauth). Quem atende:
 //   • a Vercel Function api/codando.js, em produção;
@@ -27,18 +26,18 @@
 // CDN e 60 s na memória da função. O token é usado no máximo uma vez por
 // minuto, por mais visitantes que estejam com a tela aberta.
 //
-// Token expirado (401): se WAKATIME_APP_ID, WAKATIME_APP_SECRET e
-// WAKATIME_REFRESH_TOKEN existirem, pede um novo e tenta de novo. O novo
-// fica só na memória da função; para valer de vez, rode o script de novo.
+// Token expirado (401): a renovação automática fica em api/_wakatimeOAuth.js,
+// compartilhada com as estatísticas (api/_wakatime.js).
 //
 // O nome começa com "_" para a Vercel não transformar este arquivo em rota.
 
 import WAKATIME_CONFIG from "../src/config/wakaTimeConfig.js";
+import { chamarWakaTime, temToken } from "./_wakatimeOAuth.js";
 
 const { AGORA } = WAKATIME_CONFIG;
 export const PROXY_PATH = AGORA.API_PATH;
 
-const API = "https://wakatime.com/api/v1/users/current";
+const USUARIO = "/users/current";
 const TIMEOUT_MS = 6000;
 const CACHE_MS = 60 * 1000;
 const CACHE_EDITORES_MS = 60 * 60 * 1000;
@@ -98,66 +97,9 @@ function projetosPublicos(env) {
   return new Set([...AGORA.PROJETOS_PUBLICOS, ...extras].map((n) => n.toLowerCase()));
 }
 
-const OAUTH_TOKEN_URL = "https://wakatime.com/oauth/token";
-
-// Token renovado nesta instância da função (null = usar o do env)
-let tokenRenovado = null;
-let renovando = null;
-
-const tokenAtual = (env) => tokenRenovado ?? env.WAKATIME_ACCESS_TOKEN;
-
-const podeRenovar = (env) =>
-  Boolean(env.WAKATIME_APP_ID && env.WAKATIME_APP_SECRET && env.WAKATIME_REFRESH_TOKEN);
-
-// Vários pedidos com 401 ao mesmo tempo: uma renovação só
-function renovarToken(env) {
-  if (!renovando) {
-    renovando = (async () => {
-      const resp = await fetch(OAUTH_TOKEN_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Accept: "application/json",
-        },
-        body: new URLSearchParams({
-          client_id: env.WAKATIME_APP_ID,
-          client_secret: env.WAKATIME_APP_SECRET,
-          grant_type: "refresh_token",
-          refresh_token: env.WAKATIME_REFRESH_TOKEN,
-        }),
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
-      const texto = await resp.text();
-      if (!resp.ok) throw new Error(`WakaTime OAuth ${resp.status} ao renovar o token`);
-      // O WakaTime pode responder em JSON ou em form-urlencoded
-      let dados;
-      try {
-        dados = JSON.parse(texto);
-      } catch {
-        dados = Object.fromEntries(new URLSearchParams(texto));
-      }
-      if (!dados.access_token) throw new Error("WakaTime OAuth: resposta sem access_token");
-      tokenRenovado = dados.access_token;
-      console.warn("Codando: token do WakaTime renovado. Rode npm run wakatime:oauth para atualizar o env.");
-    })().finally(() => {
-      renovando = null;
-    });
-  }
-  return renovando;
-}
-
-async function chamar(caminho, env, jaRenovou = false) {
-  const resp = await fetch(`${API}${caminho}`, {
-    headers: {
-      Authorization: `Bearer ${tokenAtual(env)}`,
-      Accept: "application/json",
-    },
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-  });
-  if (resp.status === 401 && !jaRenovou && podeRenovar(env)) {
-    await renovarToken(env);
-    return chamar(caminho, env, true);
-  }
+// Token OAuth no Authorization: Bearer (ver api/_wakatimeOAuth.js)
+async function chamar(caminho, env) {
+  const resp = await chamarWakaTime(`${USUARIO}${caminho}`, env, { timeout: TIMEOUT_MS });
   if (!resp.ok) throw new Error(`WakaTime ${resp.status} em ${caminho.split("?")[0]}`);
   const json = await resp.json();
   return Array.isArray(json?.data) ? json.data : [];
@@ -279,7 +221,7 @@ export async function responderCodando(env) {
     corpo: JSON.stringify(corpo),
   });
 
-  if (!env.WAKATIME_ACCESS_TOKEN) {
+  if (!temToken(env)) {
     return json(503, { erro: "nao_configurado" }, "no-store");
   }
   try {

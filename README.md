@@ -101,7 +101,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
    - O visitante acessa `aramuni.dev` pelo navegador, no computador ou no celular.
    - O build roda `npm ci` e `vite build`, com as variáveis `VITE_*` embutidas, e gera a pasta `dist/`.
    - A Edge Network (CDN) entrega o `dist/` ao navegador.
-   - Os rewrites do `vercel.json` funcionam como proxy para as três APIs que não liberam CORS.
+   - Os rewrites do `vercel.json` funcionam como proxy para as três APIs que não liberam CORS. Mudança que o diagrama ainda não mostra: o WakaTime saiu dos rewrites e agora passa pelas Vercel Functions `api/wakatime.js` e `api/codando.js`, com o token OAuth no servidor.
 
 3. **Navegador do visitante (no centro, embaixo)**
    - É onde a aplicação roda de fato: uma SPA em React 19, empacotada pelo Vite.
@@ -130,7 +130,7 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 
 ### 💡 O que o diagrama mostra
 
-- **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda duas funções, a `api/github.js` e a `api/ask.js`, que só existem para o token do GitHub e a chave da IA (comando `pergunta`) não irem para o navegador. A `api/ask.js` ainda não está no diagrama.
+- **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda duas funções, a `api/github.js` e a `api/ask.js`, que só existem para o token do GitHub e a chave da IA (comando `pergunta`) não irem para o navegador. A `api/ask.js` ainda não está no diagrama, nem as funções do WakaTime (`api/wakatime.js` e `api/codando.js`, com o token OAuth), que substituíram o rewrite do WakaTime: hoje são duas rotas repassadas.
 - **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
 - **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e a site key do reCAPTCHA (a secret key do reCAPTCHA fica no painel do EmailJS). O token do GitHub (`GITHUB_SITE_TOKEN`) e a chave da IA (`GEMINI_API_KEY`), sem `VITE_`, ficam só no servidor, nas Vercel Functions `api/github.js` e `api/ask.js`, e nunca chegam ao navegador.
 
@@ -185,7 +185,7 @@ A versão online deste projeto está hospedada e pode ser acessada através do l
 * **React:** Biblioteca principal para a construção da interface.
 * **Vite:** Ferramenta de build para um desenvolvimento rápido e otimizado.
 * **Supabase:** Backend como serviço, utilizado para armazenar e gerenciar o Livro de Visitas e o contador de visitas da tela de boas-vindas.
-* **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e as Vercel Functions `api/github.js`, que acrescenta o token do GitHub no servidor, e `api/ask.js`, que fala com a IA do comando `pergunta`.
+* **Vercel:** Hospedagem e CDN do site, os rewrites de `/api/*` e as Vercel Functions `api/github.js`, que acrescenta o token do GitHub no servidor, `api/ask.js`, que fala com a IA do comando `pergunta`, e `api/wakatime.js` e `api/codando.js`, que leem o WakaTime com o token OAuth.
 * **Google Gemini:** IA do comando `pergunta`, no plano gratuito do Google AI Studio, chamada pela API compatível com a da OpenAI (sem pacote: um `fetch` no servidor).
 
 -----
@@ -239,7 +239,12 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   ├── ⚙️ _github.js                     → regras do proxy: caminhos aceitos, GraphQL e cache
 │   ├── ⚙️ ask.js                         → /api/ask: pergunta do comando ask para a IA (Gemini)
 │   ├── ⚙️ _ask.js                        → prompt, limites por visitante e streaming da resposta
-│   └── 🧠 _askPerfil.js                  → o que a IA sabe sobre mim (gerado)
+│   ├── 🧠 _askPerfil.js                  → o que a IA sabe sobre mim (gerado)
+│   ├── ⚙️ wakatime.js                    → /api/wakatime: estatísticas do WakaTime com o token OAuth
+│   ├── ⚙️ _wakatime.js                   → stats autenticadas (ou perfil público), campos enxutos e cache
+│   ├── ⚙️ codando.js                     → /api/codando: "Codando agora" (heartbeats)
+│   ├── ⚙️ _codando.js                    → heartbeats, sessão e privacidade dos projetos
+│   └── ⚙️ _wakatimeOAuth.js              → token OAuth (Bearer) e renovação automática
 ├── 📁 docs
 │   └── 🖼️ diagrama-componentes-implantacao-portfolio.png
 ├── 📁 public                             → arquivos servidos como estão (entram no build)
@@ -1441,52 +1446,59 @@ O comando `wakatime` tem quatro estilos, no mesmo formato do `skills`:
 | `wakatime --lista` (`--list`) | Barra com a fatia de cada linguagem e ranking com o logo e o tempo de cada uma |
 | `wakatime --cards` | Os dois cards de imagem do [helio-github-stats](https://helio-github-stats.vercel.app), nas cores do tema do portfólio (`--surface`, `--accent`, `--text` e `--border`): trocam junto com `tema claro` / `tema escuro` |
 
-Os três primeiros leem a rota pública `GET /api/v1/users/:usuario/stats/all_time` da [API do WakaTime](https://wakatime.com/developers). Ela **não precisa de chave** (basta o perfil estar público) e traz o total, a média diária, os dias ativos e o tempo por linguagem, editor, categoria e sistema operacional.
+Os três primeiros leem as estatísticas de `all_time` da [API do WakaTime](https://wakatime.com/developers) (total, média diária, dias ativos e o tempo por linguagem, editor, categoria e sistema operacional) pela rota `/api/wakatime` do próprio site. A regra é **autenticar sempre que der**, para que tudo funcione mesmo com o perfil **privado**:
 
-> ⚠️ Para quem não está logado, essa rota é mais enxuta que a `users/current`: não vem `start`, `end`, `timezone` nem `best_day` (a data de início sai do texto `human_readable_range`, ex.: `"since Sep 6 2022"`). Outros períodos (`last_7_days`, `last_year`) e os `insights` respondem `400`/`401` para visitantes, então os estilos usam só o `all_time`. Para conferir o que um visitante recebe, teste numa janela anônima.
+| Situação | Rota do WakaTime | O perfil precisa ser público? |
+|:--|:--|:--:|
+| Com o `WAKATIME_ACCESS_TOKEN` (escopo `read_stats`) | `GET /api/v1/users/current/stats/all_time` com `Authorization: Bearer` | Não |
+| Sem o token, ou se ele falhar (`401` sem renovação, `403` sem o escopo `read_stats`) | `GET /api/v1/users/<WAKATIME_USERNAME ou USERNAME>/stats/all_time`, sem autenticação | Sim |
+| Docker (NGINX, sem função) | a mesma rota pública, repassada pelo `nginx.conf` | Sim |
 
-### 1️⃣ Deixar o perfil público
+O token é o mesmo do "Codando agora": o passo a passo para gerá-lo está em [4️⃣ Token OAuth](#4️⃣-token-oauth-estatísticas-e-codando-agora). Para saber de onde vieram os números, abra `https://<seu-dominio>/api/wakatime`: o campo `fonte` diz `"oauth"` ou `"publico"`.
 
-Em [wakatime.com/settings/profile](https://wakatime.com/settings/profile), marque as opções para mostrar o tempo de código e as linguagens, editores, categorias e sistemas operacionais. Para conferir, abra no navegador:
+> ⚠️ Pela rota pública (sem token ou no Docker), a resposta é mais enxuta: não vem `start`, `end`, `timezone` nem `best_day`, e a data de início sai do texto `human_readable_range` (ex.: `"since Sep 6 2022"`). Com o token, o `start` vem pronto. Outros períodos (`last_7_days`, `last_year`) e os `insights` respondem `400`/`401` para visitantes, então os estilos usam só o `all_time`, que funciona nos dois casos.
+
+### 1️⃣ Perfil público (só sem o token)
+
+Com o token, este passo é opcional: as estatísticas aparecem mesmo com o perfil privado. Ele serve de reserva (se o token falhar) e é obrigatório no Docker. Em [wakatime.com/settings/profile](https://wakatime.com/settings/profile), marque as opções para mostrar o tempo de código e as linguagens, editores, categorias e sistemas operacionais. Para conferir, abra numa janela anônima:
 
 ```
 https://wakatime.com/api/v1/users/<seu-usuario>/stats/all_time
 ```
 
-> ⚠️ Não use a rota `users/current?api_key=...` no front-end: a chave do WakaTime dá acesso de escrita à sua conta, e tudo que o Vite embute no build fica visível para qualquer visitante.
+> ⚠️ Nunca chame o WakaTime com a API key ou com o token direto do front-end: tudo que o Vite embute no build fica visível para qualquer visitante. O token fica só no servidor, na rota `/api/wakatime`.
 
-### 2️⃣ Por que existe um proxy
+### 2️⃣ A rota `/api/wakatime`
 
-A API do WakaTime não envia o cabeçalho `Access-Control-Allow-Origin`, então o navegador bloqueia (CORS) qualquer `fetch` feito direto do portfólio. Por isso o front chama um caminho do próprio site, `/api/wakatime/...`, e quem repassa para o WakaTime é:
+A API do WakaTime não envia o cabeçalho `Access-Control-Allow-Origin`, então o navegador bloqueia (CORS) qualquer `fetch` feito direto do portfólio. Além disso, o token não pode ir para o navegador. Por isso o front chama `/api/wakatime`, no próprio site, e quem fala com o WakaTime é:
 
-- **`npm run dev` e `npm run preview`:** o `server.proxy` do `vite.config.js`;
-- **Vercel:** o `rewrite` do `vercel.json`;
-- **Docker:** o `location /api/wakatime/` do `nginx.conf` (veja [Proxy de `/api/*` no NGINX](#-proxy-de-api-no-nginx)).
+- **Vercel:** a Vercel Function `api/wakatime.js` (as regras ficam em `api/_wakatime.js`);
+- **`npm run dev` e `npm run preview`:** o `vite.config.js`, com as mesmas regras;
+- **Docker:** o `location = /api/wakatime` do `nginx.conf`, que só repassa para a rota pública (veja [Proxy de `/api/*` no NGINX](#-proxy-de-api-no-nginx)).
 
-```json
-{
-  "rewrites": [
-    {
-      "source": "/api/wakatime/:path*",
-      "destination": "https://wakatime.com/api/v1/users/aramuni/:path*"
-    }
-  ]
-}
-```
+O que a função faz:
 
-O destino já fixa o usuário, então o proxy só serve para os seus dados públicos.
+- **Privacidade:** com o token, o WakaTime devolve também os **projetos**, as **máquinas** e as **dependências**. Nada disso sai do servidor: a resposta leva só os campos que os estilos usam (`src/lib/wakatime.js`).
+- **Custo:** a resposta é a mesma para todo mundo, então fica **10 min** no cache da CDN da Vercel e 10 min na memória da função. O token é usado no máximo uma vez a cada 10 minutos, por mais visitantes que abram o `wakatime`.
+- **"Ainda calculando":** se o WakaTime responder `202`, a função repassa e o terminal mostra o aviso de que as estatísticas estão sendo calculadas.
 
 ### 3️⃣ Trocar para o seu usuário
 
-1. Em `src/config/wakaTimeConfig.js`, troque `USERNAME` e `PROFILE_URL` (o `vite.config.js` lê esse arquivo).
-2. No `vercel.json`, troque `aramuni` no `destination`.
-3. No `nginx.conf`, troque `aramuni` no `proxy_pass` do `/api/wakatime/` (usado só no Docker).
+1. Em `src/config/wakaTimeConfig.js`, troque `USERNAME` e `PROFILE_URL`. O `USERNAME` é usado pela rota pública (reserva sem o token) e pelos cards do `--cards`; com o token, a função lê a conta dona do token (`users/current`), seja qual for o `USERNAME`. Para a rota pública, a variável `WAKATIME_USERNAME` (opcional, no `.env.local` ou na Vercel) vence o `USERNAME` do config, sem mexer no código.
+2. No `nginx.conf`, troque `aramuni` no `proxy_pass` do `/api/wakatime` (usado só no Docker).
 
 No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo mostra (`LIMITS`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
 
-### 4️⃣ "Codando agora" (OAuth)
+### 4️⃣ Token OAuth (estatísticas e "Codando agora")
 
-O `wakatime --agora` e a linha da tela de boas-vindas leem os heartbeats do dia (`GET /api/v1/users/current/heartbeats`) e os editores (`/user_agents`). Diferente do `stats/all_time`, esses dados são **privados**, então precisam de autenticação. Quem chama o WakaTime é a rota `/api/codando` (Vercel Function `api/codando.js`; no `npm run dev`, o `vite.config.js`), com um token que fica só no servidor.
+Um token só, gerado uma vez, serve para as duas partes do `wakatime`:
+
+| Escopo | Endpoint | Rota do site | Onde aparece |
+|:--|:--|:--|:--|
+| `read_stats` | `GET /users/current/stats/all_time` | `/api/wakatime` | `wakatime --terminal`, `--grade` e `--lista`, mesmo com o perfil privado |
+| `read_heartbeats` | `GET /users/current/heartbeats` e `/user_agents` | `/api/codando` | `wakatime --agora` e a linha "Codando agora" da boas-vindas |
+
+Os heartbeats não têm versão pública: sem o token, o "Codando agora" não existe. As estatísticas até têm (o perfil público), mas com o token elas funcionam mesmo com o perfil privado. Quem chama o WakaTime são as rotas `/api/wakatime` e `/api/codando` (Vercel Functions `api/wakatime.js` e `api/codando.js`; no `npm run dev`, o `vite.config.js`), com um token que fica só no servidor.
 
 #### 🤔 Por que OAuth e não a API key?
 
@@ -1499,17 +1511,17 @@ Ou seja: **a partir de 1º de novembro de 2026**, a API key só serve para os pl
 E a troca também é mais segura. Pense assim:
 
 - 🔑 **API key** é a chave da sua casa: abre todas as portas (lê e escreve tudo na conta) e, se vazar, a única saída é trocar a fechadura.
-- 🪪 **Token OAuth** é um crachá de visitante que você mesmo emite: só abre as portas que você autorizou (os **escopos**; aqui, só `read_heartbeats`, leitura) e pode ser revogado sem mexer na sua chave.
+- 🪪 **Token OAuth** é um crachá de visitante que você mesmo emite: só abre as portas que você autorizou (os **escopos**; aqui, só leitura: `read_stats` e `read_heartbeats`) e pode ser revogado sem mexer na sua chave.
 
 #### 🔄 Como o OAuth funciona aqui
 
 O projeto usa o fluxo *authorization code*, e o `scripts/wakatime-oauth.mjs` faz tudo sozinho:
 
-1. Abre no navegador `wakatime.com/oauth/authorize` com o **App ID** e o escopo `read_heartbeats`.
+1. Abre no navegador `wakatime.com/oauth/authorize` com o **App ID** e os escopos `read_stats` e `read_heartbeats`.
 2. Você faz login e clica em **Authorize**.
 3. O WakaTime redireciona para `http://localhost:8787/callback?code=...`, onde o script está escutando.
 4. O script troca esse `code` (junto com o **App Secret**) em `wakatime.com/oauth/token` por dois tokens: o **access token** e o **refresh token**.
-5. Daí em diante, o `api/_codando.js` manda `Authorization: Bearer <access token>` em cada chamada.
+5. Daí em diante, o `api/_wakatimeOAuth.js` manda `Authorization: Bearer <access token>` em cada chamada (usado pelo `api/_wakatime.js` e pelo `api/_codando.js`).
 
 #### 🛠️ Passo a passo (uma vez só)
 
@@ -1545,14 +1557,16 @@ O projeto usa o fluxo *authorization code*, e o `scripts/wakatime-oauth.mjs` faz
    WAKATIME_ACCESS_TOKEN=...
    WAKATIME_REFRESH_TOKEN=...
 
-   Escopo: read_heartbeats  |  expira em: ...
+   Escopo: read_stats,read_heartbeats  |  expira em: ...
    ```
 
-4. **Cole as duas linhas no `.env.local`**, rode `npm run dev` e teste `wakatime --agora`.
+4. **Cole as duas linhas no `.env.local`**, rode `npm run dev` e teste `wakatime` e `wakatime --agora`.
 
 5. **Configure a Vercel.** Em *Settings → Environment Variables*, crie as variáveis da tabela abaixo e faça o redeploy.
 
-6. **Confira.** Abra `https://<seu-dominio>/api/codando`: a resposta tem que ser um JSON com `ativo`, `hojeSegundos` e `ultimo`.
+6. **Confira.** Abra `https://<seu-dominio>/api/wakatime`: a resposta tem que ter `"fonte": "oauth"` (se vier `"publico"`, o token está faltando, inválido ou sem o `read_stats`). Depois abra `https://<seu-dominio>/api/codando`: um JSON com `ativo`, `hojeSegundos` e `ultimo`.
+
+> 🔁 **Já tinha gerado o token só para o "Codando agora"?** Ele tem só o `read_heartbeats`. As estatísticas continuam funcionando pelo perfil público, mas, para ler da conta (e funcionar com o perfil privado), rode `npm run wakatime:oauth` de novo, autorize os dois escopos e troque o `WAKATIME_ACCESS_TOKEN` e o `WAKATIME_REFRESH_TOKEN` no `.env.local` e na Vercel.
 
 > 💡 Se o navegador não abrir sozinho, o terminal imprime o link da autorização para você abrir na mão. Se aparecer erro de `redirect_uri`, confira se a URI do app é **exatamente** `http://localhost:8787/callback` (sem barra no final, `http` e não `https`).
 
@@ -1562,11 +1576,12 @@ Nenhuma delas tem o prefixo `VITE_`, de propósito: ficam só no servidor e nunc
 
 | Variável | Obrigatória? | Para que serve | *Sensitive* |
 |:--|:--:|:--|:--:|
-| `WAKATIME_ACCESS_TOKEN` | ✅ | Token que a função manda no `Authorization: Bearer` | ✅ |
+| `WAKATIME_ACCESS_TOKEN` | ✅ | Token que as funções `/api/wakatime` e `/api/codando` mandam no `Authorization: Bearer` | ✅ |
 | `WAKATIME_REFRESH_TOKEN` | Opcional | Pede um novo access token se o atual expirar ou for revogado | ✅ |
 | `WAKATIME_APP_ID` | Opcional | Usado na renovação, junto com o secret e o refresh token | — |
 | `WAKATIME_APP_SECRET` | Opcional | Usado na renovação | ✅ |
-| `WAKATIME_PROJETOS_PUBLICOS` | Opcional | Projetos que aparecem pelo nome, separados por vírgula | — |
+| `WAKATIME_PROJETOS_PUBLICOS` | Opcional | Projetos que aparecem pelo nome no "Codando agora", separados por vírgula | — |
+| `WAKATIME_USERNAME` | Opcional | Usuário do perfil público, usado só sem o token (ou se ele falhar). Sem ela, vale o `USERNAME` do `src/config/wakaTimeConfig.js` | — |
 
 A renovação automática só funciona com as três opcionais juntas (`APP_ID`, `APP_SECRET` e `REFRESH_TOKEN`).
 
@@ -1574,18 +1589,20 @@ A renovação automática só funciona com as três opcionais juntas (`APP_ID`, 
 
 O access token gerado vale **100 anos** (a data aparece em "expira em", no terminal), então na prática o passo a passo é feito uma vez só. Se um dia a API responder `401` (por exemplo, se você revogar o acesso do app), a função usa o refresh token para pedir outro. Esse token novo fica só na memória da função: para valer de vez, rode `npm run wakatime:oauth` de novo e atualize as variáveis no `.env.local` e na Vercel.
 
-Sem `WAKATIME_ACCESS_TOKEN`, a linha não aparece e o `wakatime --agora` avisa que não está configurado. Em `AGORA` (`src/config/wakaTimeConfig.js`) você escolhe quais projetos aparecem pelo nome; os outros viram "projeto privado".
+Sem `WAKATIME_ACCESS_TOKEN`, as estatísticas vêm do perfil público, a linha do "Codando agora" não aparece e o `wakatime --agora` avisa que não está configurado. Em `AGORA` (`src/config/wakaTimeConfig.js`) você escolhe quais projetos aparecem pelo nome; os outros viram "projeto privado".
 
 > ⚠️ Nunca faça commit do `.env.local`, do App Secret nem dos tokens.
 
 ### 📂 Arquivos
 
 ```text
-vercel.json                    → rewrite /api/wakatime → API do WakaTime (produção)
-vite.config.js                 → o mesmo proxy no npm run dev / preview
-nginx.conf                     → o mesmo proxy no container Docker (NGINX)
+api/wakatime.js                → Vercel Function das estatísticas (/api/wakatime)
+api/_wakatime.js               → stats com o token (ou perfil público), campos enxutos e cache
 api/codando.js                 → Vercel Function do "Codando agora" (/api/codando)
-api/_codando.js                → heartbeats com o token OAuth, renovação e privacidade
+api/_codando.js                → heartbeats com o token OAuth e privacidade
+api/_wakatimeOAuth.js          → Authorization: Bearer e renovação com o refresh token
+vite.config.js                 → /api/wakatime e /api/codando no npm run dev / preview
+nginx.conf                     → /api/wakatime pela rota pública no container Docker (NGINX)
 scripts/wakatime-oauth.mjs     → gera o access token e o refresh token (npm run wakatime:oauth)
 src/
   config/wakaTimeConfig.js     → usuário, período, limites de cada estilo e o AGORA
@@ -1597,7 +1614,7 @@ src/
   components/SkinsFooter.jsx   → rodapé "Estilos:" (compartilhado com o skills)
 ```
 
-> 🐳 No container do `Dockerfile`, quem repassa `/api/wakatime/*` é o `nginx.conf`, então os quatro estilos funcionam também no Docker. Sem ele (com a configuração padrão do NGINX), o caminho não existe: `--terminal`, `--grade` e `--lista` mostram uma mensagem de erro e só o `--cards` funciona.
+> 🐳 No container do `Dockerfile` não há função nem token: quem repassa `/api/wakatime` é o `nginx.conf`, direto para a rota **pública** (o perfil precisa estar público), e o "Codando agora" não aparece. Assim os quatro estilos funcionam também no Docker. Sem ele (com a configuração padrão do NGINX), o caminho não existe: `--terminal`, `--grade` e `--lista` mostram uma mensagem de erro e só o `--cards` funciona.
 
 ✅ Pronto! A busca acontece uma vez por visita: trocar de estilo reaproveita os dados.
 
@@ -2722,11 +2739,11 @@ WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, ent
 | Vercel | `rewrites` do `vercel.json` |
 | Docker | `nginx.conf` |
 
-As rotas são as mesmas nos três:
+As rotas são as mesmas nos três, com uma exceção: na Vercel e no `npm run dev`, o `/api/wakatime` é uma função que lê as estatísticas com o token OAuth (veja o [Guia de configuração da WakaTime API](#️-guia-de-configuração-da-wakatime-api)). No Docker não há função, então o NGINX repassa para a rota pública:
 
 | Caminho do site | Destino | Comando |
 |:--|:--|:--|
-| `/api/wakatime/*` | `https://wakatime.com/api/v1/users/aramuni/*` | `wakatime` (`--terminal`, `--grade` e `--lista`) |
+| `/api/wakatime` | `https://wakatime.com/api/v1/users/aramuni/stats/all_time` (só no Docker) | `wakatime` (`--terminal`, `--grade` e `--lista`) |
 | `/api/github/profile-views` | `https://komarev.com/ghpvc/?username=joaopauloaramuni` | `stats` (visitas ao perfil) |
 | `/api/github/repo-views` | `https://views-counter.vercel.app/badge` | `stats --repos` |
 
@@ -2750,10 +2767,12 @@ server {
     # Os destinos são HTTPS e alguns (ex.: *.vercel.app) exigem SNI
     proxy_ssl_server_name on;
 
-    # Comando "wakatime": /api/wakatime/stats/all_time
+    # Comando "wakatime": /api/wakatime
     #   → https://wakatime.com/api/v1/users/aramuni/stats/all_time
-    location /api/wakatime/ {
-        proxy_pass https://wakatime.com/api/v1/users/aramuni/;
+    # Na Vercel é uma função com o token OAuth (api/_wakatime.js); aqui, sem
+    # função nem token, vai para a rota pública (o perfil precisa ser público)
+    location = /api/wakatime {
+        proxy_pass https://wakatime.com/api/v1/users/aramuni/stats/all_time;
     }
 
     # Comando "stats": visitas ao perfil do GitHub

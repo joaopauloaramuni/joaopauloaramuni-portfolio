@@ -573,7 +573,7 @@ function WakaTimeStats({ skin }) {
 
 /* =====================================================================
    wakatime --agora: em que projeto estou mexendo no editor agora
-   Heartbeats do WakaTime, lidos no servidor com a chave (api/_codando.js).
+   Heartbeats do WakaTime, lidos no servidor com o token OAuth (api/_codando.js).
    Atualiza a cada minuto enquanto está na tela.
    ===================================================================== */
 function WakaTimeAgora() {

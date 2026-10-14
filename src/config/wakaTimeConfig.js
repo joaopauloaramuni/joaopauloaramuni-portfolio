@@ -1,12 +1,13 @@
 // wakaTimeConfig.js
-// Os estilos --terminal (padrão), --grade e --lista leem a API pública do WakaTime
-// (https://wakatime.com/developers). O perfil precisa estar público em
-// https://wakatime.com/settings/profile; assim nenhuma chave é necessária.
-//
-// O WakaTime não libera CORS, então o navegador chama um caminho do próprio
-// site (API_PATH) e quem repassa para wakatime.com/api/v1/users/<USERNAME> é:
-//   • npm run dev / preview → proxy do vite.config.js (lê este arquivo)
-//   • Vercel                → rewrite do vercel.json (troque o usuário lá também)
+// Os estilos --terminal (padrão), --grade e --lista leem as estatísticas do
+// WakaTime (https://wakatime.com/developers) em API_PATH, no próprio site
+// (o WakaTime não libera CORS). Quem chama o WakaTime é o servidor:
+//   • Vercel                → Vercel Function api/wakatime.js
+//   • npm run dev / preview → vite.config.js (mesma regra, api/_wakatime.js)
+//   • Docker                → nginx.conf (só a rota pública; troque o usuário lá)
+// Com o token OAuth WAKATIME_ACCESS_TOKEN (escopo read_stats) os dados vêm da
+// própria conta e funcionam mesmo com o perfil privado. Sem ele, o servidor
+// usa o perfil público de USERNAME (https://wakatime.com/settings/profile).
 const WAKATIME_CONFIG = {
   USERNAME: "aramuni",
   API_PATH: "/api/wakatime",
@@ -23,9 +24,10 @@ const WAKATIME_CONFIG = {
   // Linguagens que não devem aparecer, ex.: ["Text", "Other"]
   HIDDEN_LANGUAGES: [],
 
-  // "Codando agora" (boas-vindas e wakatime --agora). Diferente do resto, usa
-  // os heartbeats do WakaTime, que são privados: precisa do token OAuth
-  // WAKATIME_ACCESS_TOKEN, que fica só no servidor (api/_codando.js). O navegador chama AGORA.API_PATH.
+  // "Codando agora" (boas-vindas e wakatime --agora). Usa os heartbeats do
+  // WakaTime, que são privados e não têm versão pública: só funciona com o
+  // token OAuth WAKATIME_ACCESS_TOKEN (escopo read_heartbeats), que fica só no
+  // servidor (api/_codando.js). O navegador chama AGORA.API_PATH.
   AGORA: {
     API_PATH: "/api/codando",
     // Fuso da sua conta no WakaTime: é por ele que a API separa os dias
