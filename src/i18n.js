@@ -763,6 +763,10 @@ const resources = {
         captcha_ok: "✔ human verified",
         captcha_indisponivel:
           "⚠️ The anti-spam check couldn't load. Please email me directly.",
+        mapa_comando: "$ whereis aramuni",
+        mapa_titulo: "Map: ICEI, PUC Minas – Coração Eucarístico campus",
+        mapa_local: "ICEI · PUC Minas – Coração Eucarístico campus",
+        mapa_endereco: "Building 34, 2nd floor · Software Engineering Dept. · Belo Horizonte, MG – Brazil · ZIP 30535-901",
       },
       guestbook: {
         titulo: "📖 Guestbook",
@@ -3347,6 +3351,10 @@ const resources = {
         captcha_ok: "✔ humano verificado",
         captcha_indisponivel:
           "⚠️ A verificação anti-spam não carregou. Me mande um email direto.",
+        mapa_comando: "$ whereis aramuni",
+        mapa_titulo: "Mapa: ICEI, PUC Minas – Campus Coração Eucarístico",
+        mapa_local: "ICEI · PUC Minas – Campus Coração Eucarístico",
+        mapa_endereco: "Prédio 34, 2º andar · Depto. de Engenharia de Software · Belo Horizonte, MG · CEP 30.535-901",
       },
       guestbook: {
         titulo: "📖 Livro de Visitas",

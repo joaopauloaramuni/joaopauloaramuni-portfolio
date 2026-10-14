@@ -7,7 +7,9 @@ import {
   FaEnvelope,
   FaWhatsapp,
   FaDiscord,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
+import { SiGooglescholar } from "react-icons/si";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import "./Contato.css";
@@ -70,6 +72,19 @@ const Contato = ({ onExit }) => {
   const seuWhatsapp = "https://wa.me/5531980402103";
   const seuDiscord = "https://discordapp.com/users/959151773728251914";
   const seuInstagram = "https://www.instagram.com/joaopauloaramuni";
+  const seuScholar = "https://scholar.google.com.br/citations?user=OARYxSYAAAAJ&hl=pt-BR";
+
+  // Mapa do ICEI - Prédio 34 (Campus Coração Eucarístico). É o embed do
+  // "Compartilhar > Incorporar mapa" do Google Maps: interativo (arrasta e dá
+  // zoom), sem chave de API, e o cartão do local mostra o nome e o botão
+  // "Abrir no Maps" (com fotos), em vez de uma ficha só com coordenadas.
+  // !1s = id do local, !2s = nome, !1s depois de !3m2 = idioma.
+  const idiomaMapa = i18n.language?.startsWith("en") ? "en" : "pt-BR";
+  const mapaEmbed =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1875.6!2d-43.9943597!3d-19.9231284" +
+    "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6973a0086bad5%3A0xf2904b854c10b6aa" +
+    `!2sICEI%20-%20Pr%C3%A9dio%2034%2FPucMinas!5e0!3m2!1s${idiomaMapa}!2sbr!4v1760000000000`;
+  const mapaLink = "https://maps.app.goo.gl/gBs15zX3QDhBsSYXA";
 
   const sendEmail = async (e) => {
     e.preventDefault();
@@ -244,6 +259,9 @@ const Contato = ({ onExit }) => {
         <a href={seuGitHub} target="_blank" rel="noopener noreferrer">
           <FaGithub className="contato-icone" />
         </a>
+        <a href={seuScholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+          <SiGooglescholar className="contato-icone" />
+        </a>
         <a href={seuInstagram} target="_blank" rel="noopener noreferrer">
           <FaInstagram className="contato-icone" />
         </a>
@@ -257,6 +275,26 @@ const Contato = ({ onExit }) => {
           <FaEnvelope className="contato-icone" />
         </a>
       </div>
+
+      {/* Mapa: onde fico na PUC Minas */}
+      <figure className="contato-mapa">
+        <span className="contato-mapa-comando">{t("contato.mapa_comando")}</span>
+        <div className="contato-mapa-quadro">
+          <iframe
+            src={mapaEmbed}
+            title={t("contato.mapa_titulo")}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <figcaption className="contato-mapa-legenda">
+          <a href={mapaLink} target="_blank" rel="noopener noreferrer">
+            <FaMapMarkerAlt aria-hidden="true" /> {t("contato.mapa_local")}
+          </a>
+          <span>{t("contato.mapa_endereco")}</span>
+        </figcaption>
+      </figure>
     </div>
   );
 };
