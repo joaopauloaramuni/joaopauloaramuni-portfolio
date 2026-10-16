@@ -41,6 +41,7 @@ export const CIDADES = [
 
   // Europa
   { id: "paris", pais: "FR", lat: 48.8566, lon: 2.3522 },
+  { id: "estrasburgo", pais: "FR", lat: 48.5734, lon: 7.7521 },
   { id: "berlim", pais: "DE", lat: 52.52, lon: 13.405 },
   { id: "roma", pais: "IT", lat: 41.9028, lon: 12.4964 },
   { id: "milao", pais: "IT", lat: 45.4642, lon: 9.19 },

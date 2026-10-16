@@ -496,7 +496,9 @@
 }
 
 /* ---------------------------------------------------------------------
-   Formação: um card por curso, com o trabalho final embaixo
+   Formação: cards compactos em duas colunas (uma em telas estreitas).
+   Nível e período na mesma linha, curso e instituição na seguinte e o
+   trabalho final (título, tipo e orientador) embaixo.
    --------------------------------------------------------------------- */
 .sobre-formacao-intro {
   margin-bottom: 1rem !important;
@@ -510,52 +512,66 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
 .sobre-diploma {
   display: flex;
   align-items: flex-start;
-  gap: 0.9rem;
-  padding: 0.85rem 1rem;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
   border-radius: 10px;
   background: var(--surface);
   border: 1px solid var(--border);
   animation: sobre-pop 0.45s ease both;
 }
 
+.sobre-diploma .sobre-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
 .sobre-diploma-texto {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.1rem;
   min-width: 0;
 }
 
+.sobre-painel .sobre-diploma-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 0.75rem;
+}
+
 .sobre-diploma-nivel {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text);
 }
 
 .sobre-diploma-curso {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-soft);
   line-height: 1.4;
 }
 
 .sobre-diploma-org {
-  margin-top: 0.15rem;
-  font-size: 0.75rem;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* Módulos do curso (PDL), separados por " · " */
 .sobre-diploma-modulos {
-  margin-top: 0.35rem;
-  font-size: 0.75rem;
-  color: var(--text-soft);
+  font-size: 0.72rem;
+  color: var(--text-muted);
   line-height: 1.4;
 }
 
@@ -568,32 +584,32 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
   border-top: 1px dashed var(--border);
 }
 
+.sobre-trabalho-titulo {
+  font-size: 0.75rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.sobre-trabalho-meta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 .sobre-trabalho-tipo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.72rem;
+  gap: 0.3rem;
   color: var(--text-dim);
 }
 
 .sobre-trabalho-tipo svg {
-  font-size: 0.9rem;
-}
-
-.sobre-trabalho-titulo {
-  font-size: 0.8rem;
-  color: var(--text);
-  line-height: 1.45;
-}
-
-.sobre-trabalho-orientador {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 /* ---------------------------------------------------------------------
@@ -702,6 +718,215 @@
   font-size: 0.72rem;
   line-height: 1.35;
   color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Podcast e workshop: dois cards compactos lado a lado, com o vídeo em
+   16:9 à esquerda e o texto à direita. Em telas médias, um card por
+   linha (ainda na horizontal); no celular, o vídeo volta para cima do
+   texto. Os botões ficam sempre no rodapé do texto.
+   --------------------------------------------------------------------- */
+.sobre-videos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.sobre-video {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--serie);
+  animation: sobre-pop 0.45s ease both;
+}
+
+.sobre-video-quadro {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 50%;
+  max-width: 420px;
+  /* O card fica com a altura do maior entre o vídeo em 16:9 e o texto, e o
+     quadro estica até ela: não sobra espaço vazio embaixo da imagem. Com o
+     vídeo na metade do card, o texto quase sempre cabe na altura do 16:9 */
+  align-self: stretch;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  container-type: size;
+  background: #000;
+}
+
+.sobre-video-quadro iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.sobre-video-capa {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* A capa nunca é cortada nas laterais: a moldura tem 16:9 e o maior tamanho
+   que cabe no quadro (cqw/cqh = largura e altura do quadro). Se o texto ao
+   lado deixar o quadro mais alto que 16:9, a sobra é preenchida pela mesma
+   capa, desfocada e escurecida, como no player do YouTube. */
+.sobre-video-fundo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(14px) brightness(0.5);
+  transform: scale(1.2);
+}
+
+.sobre-video-moldura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100cqw, calc(100cqh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+}
+
+/* A hqdefault vem em 4:3, com o vídeo em 16:9 no meio e faixas pretas em
+   cima e embaixo: a moldura 16:9 deixa as faixas de fora */
+.sobre-video-moldura img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  transform: translateY(-50%);
+  opacity: 0.85;
+  transition: opacity 0.15s ease, transform 0.3s ease;
+}
+
+.sobre-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.65);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.8rem;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.sobre-video-play svg {
+  margin-left: 2px; /* o triângulo parece descentralizado sem isso */
+}
+
+.sobre-video-capa:hover .sobre-video-moldura img,
+.sobre-video-capa:focus-visible .sobre-video-moldura img {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.03);
+}
+
+.sobre-video-capa:hover .sobre-video-play,
+.sobre-video-capa:focus-visible .sobre-video-play {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.sobre-video-capa:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.sobre-video-texto {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-self: stretch;
+  min-width: 0;
+  gap: 0.1rem;
+  padding: 0.65rem 0.8rem 0.7rem;
+}
+
+.sobre-video-tipo {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--serie);
+  font-weight: 600;
+}
+
+.sobre-video-titulo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sobre-video-onde {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.sobre-painel .sobre-video-desc {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Botões no rodapé do card (margin-top: auto), alinhados entre os dois */
+.sobre-video-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.sobre-video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.sobre-video-link:hover,
+.sobre-video-link:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sobre-video-link-youtube svg {
+  color: #ff0033;
+}
+
+.sobre-video-link-spotify svg {
+  color: #1ed760;
 }
 
 /* ---------------------------------------------------------------------
@@ -989,8 +1214,20 @@ a.sobre-tag:focus-visible {
   .sobre-hoje-item,
   .sobre-diploma,
   .sobre-artigo,
+  .sobre-video,
   .sobre-faixa-seg {
     animation: none;
+  }
+
+  .sobre-video-moldura img,
+  .sobre-video-play,
+  .sobre-video-capa:hover .sobre-video-moldura img,
+  .sobre-video-capa:hover .sobre-video-play {
+    transition: none;
+  }
+
+  .sobre-video-capa:hover .sobre-video-moldura img {
+    transform: translateY(-50%);
   }
 
   .sobre-artigo,
@@ -1009,10 +1246,19 @@ a.sobre-tag:focus-visible {
 /* ---------------------------------------------------------------------
    Responsivo (mesmos pontos do Lattes.css)
    --------------------------------------------------------------------- */
+/* Abaixo disso, dois cards lado a lado deixariam o texto alto e o vídeo
+   estreito (cortado nas laterais): um card por linha, ainda na horizontal */
+@media (max-width: 1500px) {
+  .sobre-videos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 1280px) {
   .sobre-painel {
     width: 90%;
   }
+
 }
 
 /* A foto vai para cima do texto, como nos cards de projetos e prêmios */
@@ -1025,6 +1271,10 @@ a.sobre-tag:focus-visible {
 
   .sobre-kpis {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sobre-formacao {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sobre-cabecalho {
@@ -1084,5 +1334,15 @@ a.sobre-tag:focus-visible {
   /* Um artigo por linha no celular */
   .sobre-artigos {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Vídeo em cima do texto no celular */
+  .sobre-video {
+    flex-direction: column;
+  }
+
+  .sobre-video-quadro {
+    width: 100%;
+    max-width: none;
   }
 }

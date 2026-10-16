@@ -116,6 +116,7 @@ const resources = {
           dubai: "Dubai",
           abu_dhabi: "Abu Dhabi",
           paris: "Paris",
+          estrasburgo: "Strasbourg",
           berlim: "Berlin",
           roma: "Rome",
           milao: "Milan",
@@ -445,6 +446,7 @@ const resources = {
           clientes: "built software for",
           pessoal: "outside the terminal",
           artigos: "published papers",
+          videos: "podcast and workshop",
         },
         hoje: {
           em: "at",
@@ -537,6 +539,26 @@ const resources = {
             "<b>{{count}} paper</b> in peer-reviewed journals, from {{de}} to {{ate}}. Titles and journal names translated from Portuguese, the language of publication.",
           intro_other:
             "<b>{{count}} papers</b> in peer-reviewed journals, from {{de}} to {{ate}}. Titles and journal names translated from Portuguese, the language of publication.",
+        },
+        videos: {
+          assistir: "Watch “{{titulo}}” on YouTube",
+          links: {
+            youtube: "YouTube",
+            spotify: "Listen on Spotify",
+            repo: "Repository",
+          },
+          papinho: {
+            tipo: "podcast",
+            titulo: "Papinho Tech #155",
+            onde: "with Gustavo Caetano",
+            desc: "A talk with an old friend from my edtech startup days about technology and education: experiences, lessons and the future of a fast-moving field (in Portuguese).",
+          },
+          workshop: {
+            tipo: "workshop",
+            titulo: "A champion GitHub profile",
+            onde: "Newton Paiva · May 14, 2024 and May 14, 2025",
+            desc: "Workshop at Newton Paiva University Center on building a champion GitHub profile, from scratch to the README.md, with all the material in the workshop repository (in Portuguese).",
+          },
         },
         formacao: {
           intro:
@@ -2703,6 +2725,7 @@ const resources = {
           dubai: "Dubai",
           abu_dhabi: "Abu Dhabi",
           paris: "Paris",
+          estrasburgo: "Estrasburgo",
           berlim: "Berlim",
           roma: "Roma",
           milao: "Milão",
@@ -3032,6 +3055,7 @@ const resources = {
           clientes: "já desenvolvi software para",
           pessoal: "fora do terminal",
           artigos: "artigos publicados",
+          videos: "podcast e workshop",
         },
         hoje: {
           em: "na",
@@ -3124,6 +3148,26 @@ const resources = {
             "<b>{{count}} artigo</b> em periódicos científicos, de {{de}} a {{ate}}.",
           intro_other:
             "<b>{{count}} artigos</b> em periódicos científicos, de {{de}} a {{ate}}.",
+        },
+        videos: {
+          assistir: "Assistir “{{titulo}}” no YouTube",
+          links: {
+            youtube: "YouTube",
+            spotify: "Ouvir no Spotify",
+            repo: "Repositório",
+          },
+          papinho: {
+            tipo: "podcast",
+            titulo: "Papinho Tech #155",
+            onde: "com Gustavo Caetano",
+            desc: "Conversa com um antigo amigo da época de startup edtech sobre tecnologia e educação: experiências, aprendizados e o futuro de um espaço que evolui rápido.",
+          },
+          workshop: {
+            tipo: "workshop",
+            titulo: "Um perfil campeão no GitHub",
+            onde: "Newton Paiva · 14/05/2024 e 14/05/2025",
+            desc: "Workshop no Centro Universitário Newton Paiva sobre como construir um perfil campeão no GitHub, do zero ao README.md, com todo o material no repositório do workshop.",
+          },
         },
         formacao: {
           intro:

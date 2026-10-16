@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { TypeAnimation } from "react-type-animation";
-import { FaChalkboardTeacher, FaCode, FaRocket, FaUserGraduate } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaCode,
+  FaGithub,
+  FaPlay,
+  FaRocket,
+  FaSpotify,
+  FaUserGraduate,
+  FaYoutube,
+} from "react-icons/fa";
 import { GiCrossedSwords, GiDragonHead, GiGuitar } from "react-icons/gi";
 import {
   IoAirplaneOutline,
@@ -40,6 +49,7 @@ import {
   serieFavorita,
   trajetoria,
   vejaTambem,
+  videos,
   vivencia,
 } from "../data/sobreData";
 import "./SobreMim.css";
@@ -441,62 +451,40 @@ function Trajetoria() {
 
 /* ---------- Formação ---------- */
 
-// Título em várias linhas (quebrarApos): quebra depois de cada trecho, na
-// ordem em que aparecem. Trecho não encontrado é ignorado.
-function TituloTrabalho({ titulo, quebrarApos = [] }) {
-  const linhas = [];
-  let resto = titulo;
-  for (const trecho of quebrarApos) {
-    const i = resto.indexOf(trecho);
-    if (i < 0) continue;
-    linhas.push(resto.slice(0, i + trecho.length));
-    resto = resto.slice(i + trecho.length).trimStart();
-  }
-  linhas.push(resto);
-  return (
-    <>
-      “
-      {linhas.map((linha, i) => (
-        <React.Fragment key={i}>
-          {i > 0 && <br />}
-          {linha}
-        </React.Fragment>
-      ))}
-      ”
-    </>
-  );
-}
-
+// Trabalho final: o título (link para o PDF) e, numa linha só embaixo, o
+// tipo e o orientador. O título corre livre, sem quebras forçadas, para se
+// ajustar à largura do card.
 function Trabalho({ trabalho }) {
   const { t, i18n } = useTranslation();
   // Na página em inglês, o título traduzido (o original é o em português)
   const ingles = i18n.language.startsWith("en") && Boolean(trabalho.tituloEn);
   return (
     <div className="sobre-trabalho">
-      <span className="sobre-trabalho-tipo">
-        <IoDocumentTextOutline aria-hidden="true" />
-        {t(`sobre.formacao.tipos.${trabalho.tipo}`)}
-      </span>
       <Link
         href={trabalho.url}
         className="sobre-link sobre-trabalho-titulo"
         lang={ingles ? "en" : "pt-BR"}
       >
-        <TituloTrabalho
-          titulo={ingles ? trabalho.tituloEn : trabalho.titulo}
-          quebrarApos={ingles ? trabalho.quebrarAposEn : trabalho.quebrarApos}
-        />
+        “{ingles ? trabalho.tituloEn : trabalho.titulo}”
       </Link>
-      <span className="sobre-trabalho-orientador">
-        {t("sobre.formacao.orientador")}{" "}
-        <Link href={trabalho.orientador.url} className="sobre-link">
-          {trabalho.orientador.nome}
-        </Link>
+      <span className="sobre-lista-ponto sobre-trabalho-meta">
+        <span className="sobre-trabalho-tipo">
+          <IoDocumentTextOutline aria-hidden="true" />
+          {t(`sobre.formacao.tipos.${trabalho.tipo}`)}
+        </span>
+        <span>
+          {t("sobre.formacao.orientador")}{" "}
+          <Link href={trabalho.orientador.url} className="sobre-link">
+            {trabalho.orientador.nome}
+          </Link>
+        </span>
       </span>
     </div>
   );
 }
 
+// Cards compactos em duas colunas: nível e período na primeira linha,
+// curso e instituição na segunda, e o trabalho final embaixo
 function Formacao() {
   const { t } = useTranslation();
   return (
@@ -517,14 +505,18 @@ function Formacao() {
               icone={TbCertificate}
             />
             <div className="sobre-diploma-texto">
-              <span className="sobre-marco-periodo">
-                <Periodo inicio={item.inicio} fim={item.fim} />
+              <p className="sobre-diploma-topo">
+                <span className="sobre-diploma-nivel">{t(`sobre.formacao.${item.id}.nivel`)}</span>
+                <span className="sobre-marco-periodo">
+                  <Periodo inicio={item.inicio} fim={item.fim} />
+                </span>
+              </p>
+              <span className="sobre-lista-ponto sobre-diploma-curso">
+                <span>{t(`sobre.formacao.${item.id}.curso`)}</span>
+                <Link href={item.url} className="sobre-link sobre-diploma-org">
+                  {t(`sobre.formacao.${item.id}.org`)}
+                </Link>
               </span>
-              <span className="sobre-diploma-nivel">{t(`sobre.formacao.${item.id}.nivel`)}</span>
-              <span className="sobre-diploma-curso">{t(`sobre.formacao.${item.id}.curso`)}</span>
-              <Link href={item.url} className="sobre-link sobre-diploma-org">
-                {t(`sobre.formacao.${item.id}.org`)}
-              </Link>
               {item.modulos && (
                 <span className="sobre-lista-ponto sobre-diploma-modulos">
                   {item.modulos.map((modulo) => (
@@ -600,6 +592,92 @@ function Artigos() {
         })}
       </ul>
     </>
+  );
+}
+
+/* ---------- Podcast e workshop ---------- */
+
+const LINK_ICONES = { youtube: FaYoutube, spotify: FaSpotify, repo: FaGithub };
+
+// Player "leve": até o clique, só a capa do YouTube (uma imagem); o iframe,
+// com o player e os scripts dele, só carrega quando a pessoa pede o vídeo
+function Video({ id, titulo, capaVersao }) {
+  const { t } = useTranslation();
+  const [tocando, setTocando] = useState(false);
+  const capa = `https://i.ytimg.com/vi/${id}/hqdefault.jpg${capaVersao ? `?v=${capaVersao}` : ""}`;
+
+  if (tocando) {
+    return (
+      <div className="sobre-video-quadro">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
+          title={titulo}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className="sobre-video-quadro sobre-video-capa"
+      onClick={() => setTocando(true)}
+      aria-label={t("sobre.videos.assistir", { titulo })}
+    >
+      {/* Fundo desfocado (só aparece se o quadro ficar mais alto que 16:9) e,
+          por cima, a capa inteira, sem corte */}
+      <img src={capa} alt="" className="sobre-video-fundo" loading="lazy" decoding="async" />
+      <span className="sobre-video-moldura">
+        <img src={capa} alt="" loading="lazy" decoding="async" width="480" height="360" />
+      </span>
+      <span className="sobre-video-play" aria-hidden="true">
+        <FaPlay />
+      </span>
+    </button>
+  );
+}
+
+function Videos() {
+  const { t } = useTranslation();
+  return (
+    <ul className="sobre-videos">
+      {videos.map((video) => {
+        const titulo = t(`sobre.videos.${video.id}.titulo`);
+        const links = {
+          youtube: `https://www.youtube.com/watch?v=${video.youtube}`,
+          ...video.links,
+        };
+        return (
+          <li key={video.id} className="sobre-video" style={serie(video.cor)}>
+            <Video id={video.youtube} titulo={titulo} capaVersao={video.capaVersao} />
+            <div className="sobre-video-texto">
+              <span className="sobre-video-tipo">{t(`sobre.videos.${video.id}.tipo`)}</span>
+              <span className="sobre-video-titulo">{titulo}</span>
+              <span className="sobre-video-onde">{t(`sobre.videos.${video.id}.onde`)}</span>
+              <p className="sobre-video-desc">{t(`sobre.videos.${video.id}.desc`)}</p>
+              <span className="sobre-video-links">
+                {Object.entries(links).map(([tipo, url]) => {
+                  const Icon = LINK_ICONES[tipo];
+                  return (
+                    <Link
+                      key={tipo}
+                      href={url}
+                      className={`sobre-video-link sobre-video-link-${tipo}`}
+                    >
+                      <Icon aria-hidden="true" />
+                      {t(`sobre.videos.links.${tipo}`)}
+                    </Link>
+                  );
+                })}
+              </span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -895,6 +973,10 @@ const SobreMim = () => {
 
       <Secao titulo={t("sobre.secoes.artigos")} cmd={`lattes --${t("lattes.skins.pdf")}`}>
         <Artigos />
+      </Secao>
+
+      <Secao titulo={t("sobre.secoes.videos")}>
+        <Videos />
       </Secao>
 
       <Secao titulo={t("sobre.secoes.disciplinas")} cmd={`lattes --${t("lattes.skins.docencia")}`}>

@@ -1883,7 +1883,8 @@ O comando `sobre` (alias `about`) é a minha apresentação: quem sou, o que fa�
 | 🔢 Números | Anos desenvolvendo sistemas, anos ensinando, TCCs orientados (com as bancas) e times da AES, nos mesmos cards do `lattes --resumo` |
 | 📍 hoje | Professor na PUC Minas (com a quantidade de disciplinas do semestre), CTO da AES e consultor na Jedis |
 | 🧭 profissão e vocação | Duas linhas do tempo lado a lado, com os logos: o mercado e a docência |
-| 🎓 formação | Doutorado, mestrado e bacharelado, com o título do trabalho final (tese, dissertação e monografia) e o orientador, e o PDL da Fundação Dom Cabral |
+| 🎓 formação | Cards compactos em duas colunas (uma no celular): doutorado, mestrado e bacharelado, com o título do trabalho final (tese, dissertação e monografia), o tipo e o orientador, e o PDL da Fundação Dom Cabral com os módulos |
+| 🎙️ podcast e workshop | Dois cards lado a lado com vídeo do YouTube: o episódio #155 do Papinho Tech, com Gustavo Caetano (com botão para ouvir no Spotify), e o workshop de perfil no GitHub na Newton Paiva (14/05/2024 e 14/05/2025), com link para o [repositório do workshop](https://github.com/joaopauloaramuni/github) |
 | 📚 disciplinas | Todas as disciplinas lecionadas, por instituição, com link para o repositório de cada uma no GitHub; as do semestre ficam em destaque |
 | 🧰 vivência e clientes | Tags com as áreas de atuação e as empresas e instituições para as quais já desenvolvi software |
 | 🐓 fora do terminal | Time, hobbies e séries no formato `chave: valor` do `neofetch`, e os carimbos no passaporte, com bandeiras, agrupados por continente |
@@ -1893,6 +1894,10 @@ O comando `sobre` (alias `about`) é a minha apresentação: quem sou, o que fa�
 O conteúdo fica em `src/data/sobreData.js`: a estrutura, os links, os anos e os logos. Os textos (cargos, descrições, nomes dos países) ficam em `sobre.*` no `i18n.js`, nos dois idiomas. Os títulos dos trabalhos finais e os nomes das séries são os originais e ficam no próprio `sobreData.js`, iguais em português e em inglês.
 
 As disciplinas não são repetidas: elas vêm do `src/data/docenciaData.js`, o mesmo do `lattes --docencia` (veja o 4️⃣ do guia do `lattes`). O "neste semestre" é calculado pela data de hoje; se o arquivo ainda não tiver disciplinas no semestre atual, vale o último semestre cadastrado.
+
+Os vídeos da seção "podcast e workshop" usam um player leve: até o clique, o card mostra só a capa do YouTube (`i.ytimg.com/vi/<id>/hqdefault.jpg`) com um botão de play; o iframe do `youtube-nocookie.com` só é carregado quando a pessoa clica, então abrir o `sobre` não baixa o player nem os scripts do YouTube.
+
+Trocou a capa de um vídeo no YouTube e o portfólio continua mostrando a antiga? O YouTube pode manter a imagem antiga em cache por bastante tempo no endereço `hqdefault.jpg`. Aumente o `capaVersao` do vídeo no `sobreData.js` (ou crie o campo com `2`): o número vai no fim do endereço da capa (`hqdefault.jpg?v=2`) e a imagem nova aparece na hora.
 
 ### 2️⃣ Valores calculados
 
@@ -1927,13 +1932,14 @@ Para um país novo, importe a bandeira, adicione o lugar no continente certo (co
 | Adicionar um cargo na trajetória | `trajetoria.profissao` ou `trajetoria.vocacao` e `sobre.trajetoria.<id>`. `fim: null` vira "hoje", `meses: [3, 10]` mostra "mar – out" e, sem `url`, a organização fica sem link |
 | Adicionar uma formação | `formacao` (com `trabalho` para tese, dissertação ou monografia, e `modulos` para cursos com módulos) e `sobre.formacao.<id>` |
 | Atualizar séries, hobbies ou clientes | `assistindo`, `serieFavorita`, `hobbies` e `clientes` no `sobreData.js` (e o nome em `sobre.*` quando for traduzido) |
+| Adicionar um vídeo (podcast, palestra, workshop) | `videos` no `sobreData.js` (`youtube` com o id do vídeo, `cor` e `links` com `spotify` e/ou `repo`; o botão do YouTube é gerado do id) e `sobre.videos.<id>` no `i18n.js` (`tipo`, `titulo`, `onde`, `desc`), em pt e em en. Mantenha as descrições com tamanhos parecidos para os cards ficarem proporcionais |
 | Adicionar um logo | Imagem quadrada em `public/logos/` e o caminho no campo `logo`; sem logo, o card usa um ícone |
 
 ### 📂 Arquivos
 
 ```text
 src/
-  data/sobreData.js         → conteúdo do sobre: hoje, trajetória, formação, clientes, hobbies, séries e passaporte
+  data/sobreData.js         → conteúdo do sobre: hoje, trajetória, formação, vídeos, clientes, hobbies, séries e passaporte
   data/docenciaData.js      → disciplinas e semestres (compartilhado com o lattes --docencia)
   lib/docencia.js           → cálculos e nomes traduzidos das disciplinas
   components/SobreMim.jsx   → saída do comando

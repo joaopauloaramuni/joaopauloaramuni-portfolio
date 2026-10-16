@@ -152,9 +152,7 @@ export const trajetoria = {
 //             original em português, link e orientador; tituloEn é a
 //             tradução mostrada na página em inglês. Os PDFs e os slides das defesas estão no
 //             repositório TRABALHOS_FINAIS.
-//             quebrarApos / quebrarAposEn: trechos do título depois dos
-//             quais a linha quebra, em ordem (o texto continua inteiro,
-//             para o ask.mjs)
+//             O título corre livre no card, sem quebras de linha forçadas.
 //   modulos   chaves de sobre.formacao.<id>.modulos.<modulo>
 //   logo      imagem em /public; sem logo, usa o ícone na cor `cor`
 const FUMEC_PPG =
@@ -176,14 +174,12 @@ export const formacao = [
     url: FUMEC_PPG,
     trabalho: {
       tipo: "tese",
-      quebrarApos: ["conhecimento:", "exerce na gestão do conhecimento"],
       titulo:
         "Gestão ágil do conhecimento: uma análise da influência que a filosofia ágil exerce na gestão do conhecimento em organizações do segmento de tecnologia da informação",
       url: "https://repositorio.fumec.br/handle/123456789/878",
       orientador: LUIZ_MAIA,
       tituloEn:
         "Agile knowledge management: an analysis of the influence that the agile philosophy has on knowledge management in organizations in the information technology sector",
-      quebrarAposEn: ["management:", "has on knowledge management"],
     },
   },
   {
@@ -194,14 +190,12 @@ export const formacao = [
     url: FUMEC_PPG,
     trabalho: {
       tipo: "dissertacao",
-      quebrarApos: ["informação:"],
       titulo:
         "Análise da adoção do Lean Manufacturing na gestão de projetos de tecnologia da informação: estudo de caso em uma multinacional desse segmento",
       url: "https://repositorio.fumec.br/handle/123456789/270",
       orientador: LUIZ_MAIA,
       tituloEn:
         "Analysis of the adoption of Lean Manufacturing in information technology project management: a case study in a multinational company in this sector",
-      quebrarAposEn: ["management:"],
     },
   },
   {
@@ -355,6 +349,33 @@ export const artigos = [
       "Projects, Dissertations and Theses in Information Systems and Knowledge Management (FUMEC)",
     url: "https://repositorio.fumec.br/handle/123456789/2/discover?query=Aramuni",
     capa: "/artigos/sigc.jpg",
+  },
+];
+
+// Vídeos: podcast e workshop (sobre.videos.<id>.tipo | titulo | onde | desc)
+//   youtube  id do vídeo; a capa vem do YouTube e o player só carrega no clique
+//   capaVersao  (opcional) trocou a capa no YouTube e o portfólio ainda mostra
+//            a antiga? Aumente este número: ele vai no fim do endereço da
+//            capa (?v=2) e fura o cache do YouTube e do navegador
+//   links    botões abaixo do texto: youtube (gerado do id), spotify, repo
+//   cor      token do theme.css que marca o card
+export const videos = [
+  {
+    id: "papinho",
+    youtube: "SWa8o5RNzRA",
+    cor: "--lattes-tccs",
+    links: {
+      spotify: "https://open.spotify.com/episode/3TskGEp5hqVzoJk6RE5Dst",
+    },
+  },
+  {
+    id: "workshop",
+    youtube: "xOSsJEXmtts",
+    capaVersao: 2,
+    cor: "--icon-mail-puc",
+    links: {
+      repo: "https://github.com/joaopauloaramuni/github",
+    },
   },
 ];
 
