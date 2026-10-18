@@ -1960,6 +1960,14 @@ const resources = {
         springboot_proj_desc:
           "Collection of Java projects with Spring Boot, including REST APIs, integration with SQL and NoSQL databases, JWT authentication, data processing, and web functionalities. They showcase architecture, services with user interfaces, integration with APIs like Huggingface and MercadoPago, file compression, messaging, and secure login, offering a concise backend solutions portfolio.",
 
+        react_proj_title: "React/Vite Projects",
+        react_proj_desc:
+          "Collection of React projects with Vite, including REST API consumption, Supabase persistence, internationalization with i18n, animations with React Bits and Canvas API, and PDF résumé and subtitle generation. They showcase integration with services like GitHub, Spotify, WakaTime, Stripe, Gemini, MapBox, and ESPN, plus secure login with captcha, a URL shortener, and interactive visualizations, offering a complete frontend solutions portfolio.",
+
+        fullstack_proj_title: "FullStack Projects",
+        fullstack_proj_desc:
+          "Collection of full stack projects that integrate a React and Vite frontend with a Spring Boot backend and a cloud MongoDB Atlas database. They showcase communication via HTTP and JSON, full CRUD, CORS, validations and global error handling, layered architecture, and deployment with Docker, Render, and Vercel, including the AraCoffee coffee shop website, offering a practical portfolio of integrated web applications.",
+
         c_proj_title: "C Language Projects",
         c_proj_desc:
           "Collection of projects in C and C++, including algorithms, data structures, recursion, pointers, structs, files, and control flow. Compiled with MinGW/GCC, they range from simple calculators and games to matrix multiplication, file handling, simulations, and sorting algorithms, providing a portfolio of programming fundamentals, logic, efficiency, and best practices.",
@@ -4540,6 +4548,14 @@ const resources = {
         springboot_proj_title: "Projetos Spring Boot",
         springboot_proj_desc:
           "Coleção de projetos em Java com Spring Boot, incluindo APIs REST, integração com bancos SQL e NoSQL, autenticação JWT, processamento de dados e funcionalidades web. Mostram arquitetura, serviços com interface de usuário, integração com APIs como Huggingface e MercadoPago, compressão de arquivos, mensageria e login seguro, oferecendo portfólio conciso de soluções backend.",
+
+        react_proj_title: "Projetos React/Vite",
+        react_proj_desc:
+          "Coleção de projetos em React com Vite, incluindo consumo de APIs REST, persistência com Supabase, internacionalização com i18n, animações com React Bits e Canvas API, e geração de currículos em PDF e legendas. Mostram integração com serviços como GitHub, Spotify, WakaTime, Stripe, Gemini, MapBox e ESPN, além de login seguro com captcha, encurtador de URLs e visualizações interativas, oferecendo portfólio completo de soluções frontend.",
+
+        fullstack_proj_title: "Projetos FullStack",
+        fullstack_proj_desc:
+          "Coleção de projetos full stack que integram front-end em React e Vite com back-end em Spring Boot e banco MongoDB Atlas na nuvem. Mostram comunicação via HTTP e JSON, CRUD completo, CORS, validações e tratamento global de erros, arquitetura em camadas e deploy com Docker, Render e Vercel, incluindo o site da cafeteria AraCoffee, oferecendo portfólio prático de aplicações web integradas.",
 
         c_proj_title: "Projetos Linguagem C",
         c_proj_desc:

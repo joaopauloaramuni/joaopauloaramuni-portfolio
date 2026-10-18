@@ -7,7 +7,7 @@
 
 // Para o servidor calcular idade e anos de experiência no dia da pergunta
 export const PERFIL_FATOS = {
-  "geradoEm": "2026-10-08",
+  "geradoEm": "2026-10-18",
   "nascimento": {
     "ano": 1990,
     "mes": 12,
@@ -19,7 +19,7 @@ export const PERFIL_FATOS = {
 
 export const PERFIL = `# Base de conhecimento sobre João Paulo Aramuni
 
-Gerada por npm run ask em 2026-10-08. A parte "Portfólio" é a mais atualizada; o "Currículo em PDF" traz mais detalhes de cada experiência. Se os dois discordarem, vale o portfólio.
+Gerada por npm run ask em 2026-10-18. A parte "Portfólio" é a mais atualizada; o "Currículo em PDF" traz mais detalhes de cada experiência. Se os dois discordarem, vale o portfólio.
 
 # Portfólio (aramuni.dev)
 
@@ -51,9 +51,9 @@ São {{anos_dev}} anos desenvolvendo sistemas e {{anos_ensino}} anos ensinando t
 
 ## O que faço hoje
 
-- Professor na PUC Minas: Engenharia de Software e Ciência da Computação · orientador de TCC II (https://www.pucminas.br/)
+- Professor na PUC Minas: Engenharia de Software e Ciência da Computação (https://www.pucminas.br/)
 - CTO na Agência Experimental de Software: 7 times de desenvolvimento, em média 35 pessoas, no ICEI da PUC Minas (https://icei.pucminas.br/aes/)
-- Consultor de tecnologia na Jedis: IA na identificação e avaliação de perfis técnicos, arquitetura de sistemas, observabilidade, AWS e mentoria de times (https://www.jedis.com.br/)
+- Consultor de tecnologia na Jedis: IA na identificação e avaliação de perfis técnicos, arquitetura de sistemas, observabilidade e mentoria de times (https://www.jedis.com.br/)
 
 
 ## Trajetória
@@ -168,7 +168,9 @@ Semestre "AAAA.1" = jan–jun, "AAAA.2" = jul–dez. Disciplinas com o semestre 
 ## Projetos em destaque (comando projetos)
 
 - Projetos Python (Python, Tkinter, Pandas, Seaborn): Coleção de projetos em Python, incluindo automação, análise de dados, desenvolvimento web e aprendizado de máquina. Mostram aplicação prática de algoritmos, integração com APIs, manipulação de dados e criação de interfaces interativas, oferecendo soluções de ferramentas utilitárias, compressores, geradores de arte, simuladores e analisadores de métricas de código. https://github.com/joaopauloaramuni/python
-- Projetos Spring Boot (Java, SpringBoot, REST): Coleção de projetos em Java com Spring Boot, incluindo APIs REST, integração com bancos SQL e NoSQL, autenticação JWT, processamento de dados e funcionalidades web. Mostram arquitetura, serviços com interface de usuário, integração com APIs como Huggingface e MercadoPago, compressão de arquivos, mensageria e login seguro, oferecendo portfólio conciso de soluções backend. https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software
+- Projetos Spring Boot (Java, SpringBoot, REST): Coleção de projetos em Java com Spring Boot, incluindo APIs REST, integração com bancos SQL e NoSQL, autenticação JWT, processamento de dados e funcionalidades web. Mostram arquitetura, serviços com interface de usuário, integração com APIs como Huggingface e MercadoPago, compressão de arquivos, mensageria e login seguro, oferecendo portfólio conciso de soluções backend. https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/SpringBoot
+- Projetos React/Vite (React, Vite, JavaScript, Supabase): Coleção de projetos em React com Vite, incluindo consumo de APIs REST, persistência com Supabase, internacionalização com i18n, animações com React Bits e Canvas API, e geração de currículos em PDF e legendas. Mostram integração com serviços como GitHub, Spotify, WakaTime, Stripe, Gemini, MapBox e ESPN, além de login seguro com captcha, encurtador de URLs e visualizações interativas, oferecendo portfólio completo de soluções frontend. https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/React
+- Projetos FullStack (React, Vite, SpringBoot, MongoDB Atlas): Coleção de projetos full stack que integram front-end em React e Vite com back-end em Spring Boot e banco MongoDB Atlas na nuvem. Mostram comunicação via HTTP e JSON, CRUD completo, CORS, validações e tratamento global de erros, arquitetura em camadas e deploy com Docker, Render e Vercel, incluindo o site da cafeteria AraCoffee, oferecendo portfólio prático de aplicações web integradas. https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/FullStack
 - Projetos Linguagem C (C, C++, MinGW, GCC): Coleção de projetos em C e C++, incluindo algoritmos, estruturas de dados, recursão, ponteiros, structs, arquivos e controle de fluxo. Compilados com MinGW/GCC, vão de calculadoras e jogos simples até multiplicação de matrizes, manipulação de arquivos, simulações e algoritmos de ordenação, oferecendo portfólio de fundamentos da programação, lógica, eficiência e boas práticas. https://github.com/joaopauloaramuni/algoritmos-e-estruturas-de-dados-i
 - Portfólio Pessoal (React, Vite, Node): Portfólio em React e Vite que simula um terminal para navegar entre projetos, experiências e premiações. Inclui componentes como ProjectCard e ExperienceCard, exibindo informações de forma dinâmica. Suporta múltiplos idiomas e integra mini-jogo, oferecendo experiência divertida. Combina design moderno, navegação intuitiva e funcionalidades interativas. https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio
 - GitHub Readme Profile (Markdown, HTML): Projeto para construção de perfis no GitHub, com READMEs personalizados, estatísticas, badges, gráficos de atividade e contribuições. Inclui integração com WakaTime e Spotify, exemplos de perfis interativos, guias de boas práticas, elementos visuais dinâmicos e geração automática de conteúdo. Objetivo é fornecer portfólio completo e atraente, destacando habilidades e projetos. https://github.com/joaopauloaramuni
@@ -426,17 +428,19 @@ Também me recomendaram: Davi Mendes (2025), Nataniel Peixoto (2025), Jonathan S
 - \`curriculo\` (ou \`resume\`): Exibe meu currículo com visualização em PDF.
 - \`lattes\` (ou \`cnpq\`, \`academic\`): Mostra meu Lattes: docência, TCCs, TIs, projetos da AES e bancas (lattes --pdf baixa o PDF).
 - \`habilidades\` (ou \`skills\`): Exibe minhas habilidades em programação (skills --cards | --lista | --globo muda o estilo).
-- \`tema\` (ou \`theme\`): Troca o tema na ordem escuro → claro → galo (tema --escuro | tema --claro | tema --galo).
+- \`tema\` (ou \`theme\`): Troca o tema na ordem escuro → claro → galo → matrix (tema --escuro | --claro | --galo | --matrix).
+- \`viagens\` (ou \`travel\`, \`mapa\`, \`map\`): Mostra os lugares por onde já passei num mapa de pontos (viagens --asia | --lista).
 - \`recomendacoes\` (ou \`recommendations\`, \`recs\`): Exibe minhas recomendações do LinkedIn.
 - \`premios\` (ou \`awards\`): Exibe prêmios e reconhecimentos.
 - \`projetos\` (ou \`projects\`): Exibe meus projetos desenvolvidos.
 - \`github\` (ou \`git\`, \`api\`): Exibe meus repositórios usando a GitHub API.
 - \`spotify\` (ou \`music\`): Mostra o que estou ouvindo e últimas reproduções.
 - \`stats\` (ou \`githubstats\`, \`ghstats\`): Mostra minhas estatísticas do GitHub (stats --repos | --tudo muda o gráfico).
-- \`wakatime\` (ou \`time\`): Mostra meu tempo de código (wakatime --grade | --lista | --cards muda o estilo).
+- \`wakatime\` (ou \`time\`): Mostra meu tempo de código e no que estou mexendo (wakatime --agora | --lista | --cards).
 - \`neofetch\` (ou \`fetch\`): Mostra as informações do sistema com o escudo do Galo, no estilo neofetch.
-- \`campeonato\` (ou \`galo\`, \`atletico\`, \`championship\`): Próximos jogos do Galo: contagem regressiva, campeonato, escudos e placar agregado (campeonato --todos).
-- \`jogo\` (ou \`quake\`, \`flappyplane\`): Jogos no terminal: o Quake original ou o Flappy Plane (jogo --quake | --flappyplane).
+- \`campeonato\` (ou \`galo\`, \`atletico\`, \`championship\`): Próximos jogos do Galo: contagem regressiva e campeonato (campeonato --todos | --tabela).
+- \`basquete\` (ou \`basketball\`, \`nba\`): Próximos jogos da NBA: contagem regressiva, logos dos times e TV (nba lal | nba --todos).
+- \`jogo\` (ou \`quake\`, \`doom\`, \`flappyplane\`, \`game\`): Jogos no terminal: o Quake ou o Doom originais, ou o Flappy Plane (jogo --quake | --doom | --flappyplane).
 - \`guestbook\` (ou \`guest\`, \`book\`): Deixe uma mensagem no meu livro de visitas público.
 - \`design\` (ou \`ds\`, \`designsystem\`): Mostra o design system do portfólio: fontes, cores, espaçamentos e marca.
 

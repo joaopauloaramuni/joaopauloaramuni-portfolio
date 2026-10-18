@@ -13,11 +13,29 @@ export const projectsData = [
     descriptionId: "springboot_proj_desc",
     gif: "/springboot.png",
     repoLink:
-      "https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software",
+      "https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/SpringBoot",
     technologies: ["Java", "SpringBoot", "REST"],
   },
   {
     id: 3,
+    titleId: "react_proj_title",
+    descriptionId: "react_proj_desc",
+    gif: "/react-vite.png",
+    repoLink:
+      "https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/React",
+    technologies: ["React", "Vite", "JavaScript", "Supabase"],
+  },
+  {
+    id: 4,
+    titleId: "fullstack_proj_title",
+    descriptionId: "fullstack_proj_desc",
+    gif: "/fullstack.png",
+    repoLink:
+      "https://github.com/joaopauloaramuni/desenvolvimento-e-integracao-de-aplicacoes-web/tree/main/PROJETOS/FullStack",
+    technologies: ["React", "Vite", "SpringBoot", "MongoDB Atlas"],
+  },
+  {
+    id: 5,
     titleId: "c_proj_title",
     descriptionId: "c_proj_desc",
     gif: "/c.png",
@@ -26,15 +44,15 @@ export const projectsData = [
     technologies: ["C", "C++", "MinGW", "GCC"],
   },
   {
-    id: 4,
+    id: 6,
     titleId: "portfolio_proj_title",
     descriptionId: "portfolio_proj_desc",
-    gif: "/terminal.png",
+    gif: "/portfolio-terminal.gif",
     repoLink: "https://github.com/joaopauloaramuni/joaopauloaramuni-portfolio",
     technologies: ["React", "Vite", "Node"],
   },
   {
-    id: 5,
+    id: 7,
     titleId: "github_proj_title",
     descriptionId: "github_proj_desc",
     gif: "/github.png",
@@ -42,7 +60,7 @@ export const projectsData = [
     technologies: ["Markdown", "HTML"],
   },
   {
-    id: 6,
+    id: 8,
     titleId: "stor_proj_title",
     descriptionId: "stor_proj_desc",
     gif: "/stor.gif",
@@ -50,7 +68,7 @@ export const projectsData = [
     technologies: ["C#", "ASP", ".Net"],
   },
   {
-    id: 7,
+    id: 9,
     titleId: "anp_proj_title",
     descriptionId: "anp_proj_desc",
     gif: "/anp.png",
@@ -58,7 +76,7 @@ export const projectsData = [
     technologies: ["Java", "VB6", "ASP Clássico"],
   },
   {
-    id: 8,
+    id: 10,
     titleId: "prosegur_proj_title",
     descriptionId: "prosegur_proj_desc",
     gif: "/prosegur.png",
@@ -66,7 +84,7 @@ export const projectsData = [
     technologies: ["Java", "JavaFX", "Primefaces"],
   },
   {
-    id: 9,
+    id: 11,
     titleId: "hotmilhas_proj_title",
     descriptionId: "hotmilhas_proj_desc",
     gif: "/hotmilhas.png",
@@ -74,7 +92,7 @@ export const projectsData = [
     technologies: ["Python", "Node", "Crawlers", "NewRelic", "Grafana"],
   },
   {
-    id: 10,
+    id: 12,
     titleId: "aes_proj1_title",
     descriptionId: "aes_proj1_desc",
     gif: "/aes.png",
@@ -82,7 +100,7 @@ export const projectsData = [
     technologies: ["JavaScript", "HTML", "CSS", "Docker"],
   },
   {
-    id: 11,
+    id: 13,
     titleId: "aes_proj2_title",
     descriptionId: "aes_proj2_desc",
     gif: "/grade.png",
@@ -90,7 +108,7 @@ export const projectsData = [
     technologies: ["Java", "JavaScript", "HTML", "CSS", "Docker"],
   },
   {
-    id: 12,
+    id: 14,
     titleId: "aes_proj3_title",
     descriptionId: "aes_proj3_desc",
     gif: "/cuidobem.png",
@@ -98,7 +116,7 @@ export const projectsData = [
     technologies: ["Dart", "Java", "Flutter"],
   },
   {
-    id: 13,
+    id: 15,
     titleId: "aes_proj4_title",
     descriptionId: "aes_proj4_desc",
     gif: "/cartaoprograma.jpeg",
@@ -106,7 +124,7 @@ export const projectsData = [
     technologies: ["Java", "Spring Boot", "Angular"],
   },
   {
-    id: 14,
+    id: 16,
     titleId: "aes_proj5_title",
     descriptionId: "aes_proj5_desc",
     gif: "/concurso.png",
@@ -114,7 +132,7 @@ export const projectsData = [
     technologies: ["Java", "Spring Boot", "React"],
   },
   {
-    id: 15,
+    id: 17,
     titleId: "aes_proj6_title",
     descriptionId: "aes_proj6_desc",
     gif: "/bhtec.gif",
@@ -122,7 +140,7 @@ export const projectsData = [
     technologies: ["React", "Vite", "Java", "SpringBoot"],
   },
   {
-    id: 16,
+    id: 18,
     titleId: "aes_proj7_title",
     descriptionId: "aes_proj7_desc",
     gif: "/ajudaai.jpeg",
@@ -130,7 +148,7 @@ export const projectsData = [
     technologies: ["Dart", "Java", "Flutter"],
   },
   {
-    id: 17,
+    id: 19,
     titleId: "aes_proj8_title",
     descriptionId: "aes_proj8_desc",
     gif: "/mrv.png",
@@ -138,7 +156,7 @@ export const projectsData = [
     technologies: ["Javascript", "React", "Python"],
   },
   {
-    id: 18,
+    id: 20,
     titleId: "aes_proj9_title",
     descriptionId: "aes_proj9_desc",
     gif: "/apac.jpg",
@@ -146,7 +164,7 @@ export const projectsData = [
     technologies: ["Javascript", "React", "Spring Boot"],
   },
   {
-    id: 19,
+    id: 21,
     titleId: "jedis_proj_title",
     descriptionId: "jedis_proj_desc",
     gif: "/jedis.jpg",
