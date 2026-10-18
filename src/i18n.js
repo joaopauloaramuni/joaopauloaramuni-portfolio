@@ -2040,6 +2040,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec73_relationship:
+          "On October 18, 2026, Pedro Flausino was João Paulo's client",
+
+        rec73_recommendation:
+          "I took Professor Aramuni's class during my second semester of Computer Science at PUC Minas. He is a professor who genuinely enjoys and masters what he teaches, and who dedicates himself to his students far beyond the classroom. His teaching skills are excellent, and it is hard to leave his class without understanding the material. I am very grateful for the support and knowledge he shared with me, which had a significant impact on my journey. He is undoubtedly one of the best professors I have ever had.",
+        
         rec72_relationship:
           "On September 29, 2026, João Gabriel was a client of João Paulo",
 
@@ -4635,6 +4641,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec73_relationship:
+          "Em 18 de outubro de 2026, Pedro Flausino foi cliente de João Paulo",
+
+        rec73_recommendation:
+          "Tive aula com o professor Aramuni no meu segundo semestre de Ciência da Computação na PUC Minas. É um professor que realmente gosta e domina o que ensina, e que se dedica aos alunos muito além da sala de aula. Sua didática é muito boa, é difícil sair da aula sem ter entendido o conteúdo. Sou muito grato pelo apoio e pelos ensinamentos que recebi, que influenciaram muito a minha trajetória. Com certeza é um dos melhores professores que já tive.",
+
         rec72_relationship:
           "Em 29 de setembro de 2026, João Gabriel foi cliente de João Paulo",
 
