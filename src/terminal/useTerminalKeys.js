@@ -4,17 +4,32 @@ import {
   isTerminalInput,
   scrollActiveInputIntoView,
   setTerminalInputValue,
+  syncTerminalCursor,
 } from "./terminalDom";
 
 // Histórico (↑/↓) e autocomplete (Tab) para o input do terminal.
 //
 // O listener fica no document, na fase de captura: ele roda antes do React e,
 // quando trata a tecla, chama stopPropagation para a lib não reagir também
-// (por padrão ela usa ↑ para mover o cursor para o início da linha).
+// (por padrão ela usa ↑ para mover o cursor para o início da linha). As
+// teclas de cursor (←/→, Home/End...) também não chegam na lib: quem
+// posiciona o cursor piscante é o syncTerminalCursor do terminalDom.
 
 const HISTORY_KEY = "aramuni-history";
 const HISTORY_MAX = 50;
 const MODIFIER_KEYS = ["Shift", "Control", "Alt", "Meta"];
+// Teclas que mexem no caret: o input nativo move o caret e o
+// syncTerminalCursor reposiciona o cursor. A lib não recebe essas teclas,
+// porque a conta dela deixava o cursor no lugar errado (ver terminalDom).
+const CURSOR_KEYS = [
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "Home",
+  "End",
+  "Delete",
+];
 
 // O histórico sobrevive a recarregamentos, como o ~/.bash_history
 const loadHistory = () => {
@@ -126,8 +141,14 @@ export default function useTerminalKeys({ enabled, commands, onShowOptions }) {
     };
 
     const onKeyDown = (event) => {
-      // Ignora eventos sintéticos (inclusive o ArrowRight do terminalDom)
+      // Ignora eventos sintéticos
       if (!event.isTrusted || !isTerminalInput(event.target)) return;
+
+      // Qualquer tecla pode mover o caret (setas, Home/End, Ctrl+seta,
+      // Backspace, Enter): o cursor é reposicionado depois dela
+      syncTerminalCursor(event.target);
+      if (CURSOR_KEYS.includes(event.key)) event.stopPropagation();
+
       if (event.isComposing || event.altKey || event.ctrlKey || event.metaKey)
         return;
 
@@ -145,14 +166,25 @@ export default function useTerminalKeys({ enabled, commands, onShowOptions }) {
     // Qualquer coisa digitada (tecla, colar, histórico, autocomplete) leva o
     // scroll até a linha do input, para o visitante ver o que está escrevendo
     const onInput = (event) => {
-      if (isTerminalInput(event.target)) scrollActiveInputIntoView();
+      if (!isTerminalInput(event.target)) return;
+      scrollActiveInputIntoView();
+      syncTerminalCursor(event.target);
+    };
+
+    // Caret movido sem tecla (toque, colar, teclado do celular, IME)
+    const onSelectionChange = () => {
+      const active = document.activeElement;
+      if (isTerminalInput(active)) syncTerminalCursor(active);
     };
 
     document.addEventListener("keydown", onKeyDown, true);
     document.addEventListener("input", onInput, true);
+    document.addEventListener("selectionchange", onSelectionChange);
+    syncTerminalCursor();
     return () => {
       document.removeEventListener("keydown", onKeyDown, true);
       document.removeEventListener("input", onInput, true);
+      document.removeEventListener("selectionchange", onSelectionChange);
     };
   }, [enabled, commands]);
 

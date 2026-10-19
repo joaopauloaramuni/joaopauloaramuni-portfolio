@@ -21,15 +21,60 @@ export function setTerminalInputValue(input, value) {
   nativeValueSetter.call(input, value);
   input.dispatchEvent(new Event("input", { bubbles: true }));
   input.setSelectionRange(value.length, value.length);
+  // Depois que o React renderizar o novo texto, leva o cursor para o final
+  syncTerminalCursor(input);
+}
 
-  // A lib desenha o cursor piscante com um deslocamento próprio, que só é
-  // recalculado nas setas. Depois que o React renderizar o novo texto, um
-  // ArrowRight sintético (com o caret no fim) devolve o cursor para o final.
-  requestAnimationFrame(() => {
-    input.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true })
-    );
-  });
+// Cursor piscante (o bloco desenhado pela lib).
+//
+// A lib calcula a posição dele medindo o texto num <span> com a fonte do
+// <input> escondido. Só que esse input não herda a fonte do terminal (aqui
+// ele tem 16px fixos e a fonte padrão do navegador, que não é monoespaçada):
+// a largura medida sai menor que a real e, com a seta para a esquerda, o
+// cursor parava no meio da linha. A conta dela também erra por um caractere
+// e ignora Home/End.
+//
+// Aqui a posição vem do próprio texto desenhado na linha ativa (um Range
+// sobre o nó de texto), então a medida é sempre a da fonte e do tamanho que
+// o visitante está vendo, em qualquer tema ou tela. As teclas de cursor não
+// chegam na lib (ver useTerminalKeys), então o estado dela fica parado e o
+// React não sobrescreve o "left" que escrevemos.
+function caretIndex(input) {
+  const { selectionStart, selectionEnd, selectionDirection } = input;
+  const index =
+    selectionDirection === "backward" ? selectionStart : selectionEnd;
+  return index ?? input.value.length;
+}
+
+function positionCursorNow(input) {
+  const line = document.querySelector(".react-terminal-active-input");
+  const cursor = line?.querySelector(".cursor");
+  if (!cursor) return;
+
+  // A lib renderiza o texto digitado como o primeiro filho da linha
+  const text = line.firstChild;
+  let width = 0;
+  if (text && text.nodeType === Node.TEXT_NODE && text.length > 0) {
+    const index = Math.min(Math.max(caretIndex(input), 0), text.length);
+    if (index < text.length) {
+      const range = document.createRange();
+      range.setStart(text, index);
+      range.setEnd(text, text.length);
+      width = range.getBoundingClientRect().width;
+    }
+  }
+  // Mesmo deslocamento de 1px que a lib usa com o cursor no fim da linha
+  cursor.style.left = `${1 - width}px`;
+}
+
+let cursorFrame = 0;
+export function syncTerminalCursor(
+  input = document.querySelector(HIDDEN_INPUT)
+) {
+  if (!input) return;
+  // Espera o caret andar (ação padrão da tecla) e o React pintar o texto
+  cancelAnimationFrame(cursorFrame);
+  cursorFrame = requestAnimationFrame(() => positionCursorNow(input));
 }
 
 // Espera o React pintar as linhas novas antes de mexer no scroll
