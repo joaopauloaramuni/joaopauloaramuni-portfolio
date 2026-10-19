@@ -167,6 +167,17 @@ Grupo vencedor:
     - :octocat: https://github.com/arthies2323/portfolioLab001
     - ☁️ https://meu-portfolio-arthur-pedra.vercel.app/
 
+### 🤝 Outros Devs que se inspiraram no projeto:
+
+- Arthur Bicalho Angelo
+    - :octocat: https://github.com/Arthur-Bicalho/bicalho-portfolio
+    - ☁️ https://www.bicalho.dev/
+    - ☁️ https://bicalho-portfolio.vercel.app/
+
+- Pedro Henrique Silva
+    - :octocat: https://github.com/pedrohqesilva/phas.dev
+    - ☁️ https://phas.dev/
+
 -----
 
 ## 🚀 Demonstração ao vivo
