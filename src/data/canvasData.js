@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-15.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-19.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,7 +12,7 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-10-15T15:37-03:00",
+  geradoEm: "2026-10-19T17:48-03:00",
   alunos: 325,
 };
 
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 19,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "289123",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "291775",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 10,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 23,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "287597",
@@ -194,7 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "286958",
@@ -207,7 +207,7 @@ export const cursos = [
     sga: "4354.1.00",
     curso: "CC",
     alunos: 50,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "286959",
@@ -220,7 +220,7 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
   {
     id: "283169",
@@ -233,7 +233,7 @@ export const cursos = [
     sga: "0492.1.00",
     curso: "ES",
     alunos: 47,
-    atualizadoEm: "2026-10-15T15:37-03:00",
+    atualizadoEm: "2026-10-19T17:48-03:00",
   },
 ];
 
@@ -885,7 +885,7 @@ export const tarefas = [
     fecha: "2026-09-24T23:59-03:00",
     pontos: 1,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 45, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 0, aCorrigir: 45 },
+    entregas: { alunos: 50, noPrazo: 45, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 45, aCorrigir: 0 },
   },
   {
     id: "1434656",
@@ -986,7 +986,7 @@ export const tarefas = [
     fecha: "2026-10-12T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 5, atrasadas: 0, faltando: 9, dispensados: 0, corrigidas: 0, aCorrigir: 5 },
+    entregas: { alunos: 14, noPrazo: 5, atrasadas: 4, faltando: 5, dispensados: 0, corrigidas: 0, aCorrigir: 9 },
   },
   {
     id: "1434389",
@@ -1030,7 +1030,7 @@ export const tarefas = [
     fecha: "2026-10-13T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 12, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 12 },
+    entregas: { alunos: 14, noPrazo: 12, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 12, aCorrigir: 0 },
   },
   {
     id: "1434433",
@@ -1071,11 +1071,10 @@ export const tarefas = [
     nome: "LABORATÓRIO 1",
     url: "https://pucminas.instructure.com/courses/290578/assignments/1434356",
     prazo: "2026-10-15T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-15T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 24, noPrazo: 7, atrasadas: 0, faltando: 17, dispensados: 0, corrigidas: 0, aCorrigir: 7 },
+    entregas: { alunos: 24, noPrazo: 24, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 0, aCorrigir: 24 },
   },
   {
     id: "1434400",
@@ -1083,11 +1082,10 @@ export const tarefas = [
     nome: "LABORATÓRIO 1",
     url: "https://pucminas.instructure.com/courses/292797/assignments/1434400",
     prazo: "2026-10-15T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-15T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 21, noPrazo: 5, atrasadas: 0, faltando: 16, dispensados: 0, corrigidas: 0, aCorrigir: 5 },
+    entregas: { alunos: 21, noPrazo: 19, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 19 },
   },
   {
     id: "1434669",
@@ -1095,11 +1093,10 @@ export const tarefas = [
     nome: "LABORATÓRIO 1",
     url: "https://pucminas.instructure.com/courses/287597/assignments/1434669",
     prazo: "2026-10-16T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-16T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 11, noPrazo: 8, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 8 },
   },
   {
     id: "1418070",
@@ -1110,7 +1107,7 @@ export const tarefas = [
     fecha: "2026-10-18T23:59-03:00",
     pontos: 1,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 12, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 12 },
   },
   {
     id: "1418071",
@@ -1122,7 +1119,7 @@ export const tarefas = [
     pontos: 1,
     tipo: "online",
     grupo: true,
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 12, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 12 },
   },
   {
     id: "1418064",
@@ -1134,7 +1131,7 @@ export const tarefas = [
     pontos: 2,
     tipo: "online",
     grupo: true,
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 12, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 12 },
   },
   {
     id: "1408528",
@@ -1145,7 +1142,7 @@ export const tarefas = [
     fecha: "2026-10-18T23:59-03:00",
     pontos: 1,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 50, noPrazo: 42, atrasadas: 0, faltando: 8, dispensados: 0, corrigidas: 0, aCorrigir: 42 },
   },
   {
     id: "1408529",
@@ -1157,7 +1154,7 @@ export const tarefas = [
     pontos: 1,
     tipo: "online",
     grupo: true,
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 50, noPrazo: 49, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 0, aCorrigir: 49 },
   },
   {
     id: "1434431",
@@ -1334,7 +1331,7 @@ export const tarefas = [
     fecha: "2026-11-01T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 50, noPrazo: 2, atrasadas: 0, faltando: 48, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
   },
   {
     id: "1434349",
