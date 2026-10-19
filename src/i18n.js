@@ -435,7 +435,7 @@ const resources = {
           aes_detalhe_one: "~{{count}} person under my management",
           aes_detalhe_other: "~{{count}} people under my management",
           horas_rotulo: "taught at PUC Minas so far",
-          horas_detalhe: "live, counting today's classes · {{total}} by December 22, 2026",
+          horas_detalhe: "live, updated with every class · {{total}} by December 22, 2026",
         },
         secoes: {
           hoje: "today",
@@ -3062,7 +3062,7 @@ const resources = {
           aes_detalhe_one: "~{{count}} pessoa sob minha gestão",
           aes_detalhe_other: "~{{count}} pessoas sob minha gestão",
           horas_rotulo: "lecionadas na PUC Minas até o momento",
-          horas_detalhe: "ao vivo, contando as aulas de hoje · {{total}} até 22 de dezembro de 2026",
+          horas_detalhe: "ao vivo, atualizado a cada aula · {{total}} até 22 de dezembro de 2026",
         },
         secoes: {
           hoje: "hoje",
