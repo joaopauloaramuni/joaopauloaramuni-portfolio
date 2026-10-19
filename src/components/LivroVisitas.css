@@ -101,6 +101,18 @@
   border-bottom: 1px solid var(--accent);
 }
 
+/* contador de caracteres abaixo do campo (limites em guestbookConfig.js) */
+.cli-contador {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cli-contador-limite {
+  color: var(--accent);
+}
+
 .cli-success {
   color: var(--success);
   margin-top: 1rem;

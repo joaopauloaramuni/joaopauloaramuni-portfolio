@@ -811,6 +811,10 @@ const resources = {
         enviando: "Sending your message...",
         sucesso: "Message sent successfully!",
         erro: "Error sending message.",
+        erro_tamanho: "Name must be up to {{nome}} characters and the message up to {{mensagem}}.",
+        erro_limite: "You've sent too many messages. Please wait 10 minutes and try again.",
+        erro_limite_global: "The guestbook got a lot of messages in the last hour. Please try again later.",
+        erro_cheio: "The guestbook has reached its message limit.",
         voltar_terminal: "Back to terminal",
       },
       jogo: {
@@ -3435,6 +3439,10 @@ const resources = {
         enviando: "Enviando sua mensagem...",
         sucesso: "Mensagem enviada com sucesso!",
         erro: "Erro ao enviar mensagem.",
+        erro_tamanho: "O nome pode ter até {{nome}} caracteres e a mensagem, até {{mensagem}}.",
+        erro_limite: "Você enviou mensagens demais. Espere 10 minutos e tente de novo.",
+        erro_limite_global: "O livro de visitas recebeu muitas mensagens na última hora. Tente de novo mais tarde.",
+        erro_cheio: "O livro de visitas atingiu o limite de mensagens.",
         voltar_terminal: "Voltar ao terminal",
       },
       jogo: {

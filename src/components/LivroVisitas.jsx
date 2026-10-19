@@ -6,6 +6,24 @@ import "./LivroVisitas.css";
 import "./BotaoVoltar.css";
 import emailjs from "@emailjs/browser";
 import EMAILJS_CONFIG from "../config/emailJsConfig";
+import GUESTBOOK_CONFIG from "../config/guestbookConfig";
+
+const { MAX_NOME, MAX_MENSAGEM } = GUESTBOOK_CONFIG;
+
+// Tira os caracteres de controle (quebra de linha, tab...) que chegam ao colar
+// um texto: o banco recusa a mensagem com eles (supabase/livro_visitas.sql).
+const limpar = (texto) => texto.replace(/\p{Cc}/gu, " ");
+
+// Traduz o erro do Supabase. As regras do trigger guestbook_antispam e as
+// constraints de tamanho vêm com o nome na mensagem ou com o código 23514.
+function chaveDoErro(error) {
+  const texto = `${error?.message ?? ""} ${error?.details ?? ""}`;
+  if (texto.includes("guestbook_rate_limit")) return "guestbook.erro_limite";
+  if (texto.includes("guestbook_limite_global")) return "guestbook.erro_limite_global";
+  if (texto.includes("guestbook_cheio")) return "guestbook.erro_cheio";
+  if (error?.code === "23514") return "guestbook.erro_tamanho";
+  return "guestbook.erro";
+}
 
 const LivroVisitas = ({ mode = "home", onExit }) => {
   const { t } = useTranslation();
@@ -17,6 +35,8 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [step, setStep] = useState("name");
+  // Chave i18n do erro mostrado no passo "error"
+  const [erro, setErro] = useState("guestbook.erro");
   // Trava de envio: o Enter apertado duas vezes rápido (antes de o Supabase
   // responder) chamava o handleSubmit duas vezes e gravava a mensagem em dobro.
   // Ref, e não state, porque o segundo Enter chega antes de o React renderizar.
@@ -33,6 +53,8 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
       setName("");
       setMessage("");
       setStep("name");
+      setErro("guestbook.erro");
+      sending.current = false;
     }
   }, [mode]);
 
@@ -65,6 +87,23 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
 
     // Sem Supabase configurado, avisa o visitante em vez de não fazer nada
     if (!supabase) {
+      setErro("guestbook.erro");
+      setStep("error");
+      return;
+    }
+
+    // Mesmas regras do banco: sem espaços nas pontas e dentro do limite.
+    // O maxLength do input já segura, isso é só uma garantia a mais.
+    const nome = name.trim();
+    const texto = message.trim();
+    if (
+      !nome ||
+      !texto ||
+      nome.length > MAX_NOME ||
+      texto.length > MAX_MENSAGEM
+    ) {
+      sending.current = false;
+      setErro("guestbook.erro_tamanho");
       setStep("error");
       return;
     }
@@ -75,10 +114,11 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
     // Salva no Supabase
     const { error } = await supabase
       .from("guestbook_messages")
-      .insert([{ name, message }]);
+      .insert([{ name: nome, message: texto }]);
 
     if (error) {
       console.error(error);
+      setErro(chaveDoErro(error));
       setStep("error");
       return;
     }
@@ -89,10 +129,10 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID_FOR_ME,
         {
-          name: name,
+          name: nome,
           email: "",
-          message: `[guestbook add] ${message}`,
-          title: `Nova mensagem registrada no guestbook por: ${name}`,
+          message: `[guestbook add] ${texto}`,
+          title: `Nova mensagem registrada no guestbook por: ${nome}`,
           time: time,
         },
         { publicKey: EMAILJS_CONFIG.PUBLIC_KEY, blockHeadless: true }
@@ -187,8 +227,11 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
                   className="cli-input"
                   type="text"
                   value={name}
+                  maxLength={MAX_NOME}
                   autoFocus
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) =>
+                    setName(limpar(e.target.value).slice(0, MAX_NOME))
+                  }
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && name.trim()) {
                       setStep("message");
@@ -196,6 +239,13 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
                   }}
                 />
               </div>
+              <p
+                className={`cli-contador${
+                  name.length >= MAX_NOME ? " cli-contador-limite" : ""
+                }`}
+                aria-live="polite">
+                {name.length}/{MAX_NOME}
+              </p>
             </>
           )}
 
@@ -208,8 +258,11 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
                   className="cli-input"
                   type="text"
                   value={message}
+                  maxLength={MAX_MENSAGEM}
                   autoFocus
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) =>
+                    setMessage(limpar(e.target.value).slice(0, MAX_MENSAGEM))
+                  }
                   onKeyDown={async (e) => {
                     if (e.key === "Enter" && message.trim()) {
                       await handleSubmit();
@@ -217,6 +270,13 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
                   }}
                 />
               </div>
+              <p
+                className={`cli-contador${
+                  message.length >= MAX_MENSAGEM ? " cli-contador-limite" : ""
+                }`}
+                aria-live="polite">
+                {message.length}/{MAX_MENSAGEM}
+              </p>
             </>
           )}
 
@@ -229,7 +289,9 @@ const LivroVisitas = ({ mode = "home", onExit }) => {
           )}
 
           {step === "error" && (
-            <p className="cli-hint">{t("guestbook.erro")}</p>
+            <p className="cli-hint">
+              {t(erro, { nome: MAX_NOME, mensagem: MAX_MENSAGEM })}
+            </p>
           )}
 
           <br />

@@ -39,7 +39,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * ⚽ **campeonato / galo / atletico:** Próximos jogos do Atlético Mineiro, ao vivo da [ESPN](https://www.espn.com.br/futebol/time/calendario/_/id/7632/atletico-mg): o campeonato com o logo, a fase, os escudos dos dois times, dia, hora (de Brasília) e estádio, quanto falta para cada jogo e uma contagem regressiva para o próximo. No jogo de volta de um mata-mata aparece o placar agregado e o que o Galo precisa para se classificar. Mostra os 5 próximos; `campeonato --todos` mostra todos os marcados e `campeonato --tabela`, a classificação do Brasileirão com o Galo em destaque (posição, pontos, V/E/D, gols pró e contra, saldo, aproveitamento, últimos 5 jogos e a distância para o líder, a vaga na Libertadores e o Z-4).
 * 🏀 **basquete / basketball / nba:** Próximos jogos da NBA, ao vivo da [ESPN](https://www.espn.com/nba/schedule), no mesmo layout do `campeonato`: a fase (pré-temporada, temporada regular, play-in, playoffs), os logos dos dois times com a campanha (vitórias-derrotas), dia, hora (de Brasília), ginásio e TV, quanto falta para cada jogo e uma contagem regressiva para o próximo. Nos playoffs aparece a rodada, o jogo da série e quem lidera. Mostra os 5 próximos da liga; `nba --todos` mostra todos os jogos dos próximos dias e `nba lal` (ou `nba lakers`, `nba gsw`, `nba celtics --todos`...) filtra por time, com o último resultado e a posição na divisão.
 * 🕹️ **jogo / quake / doom / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), `doom` abre o Doom original (episódio 1 do shareware), ambos rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake`, `jogo --doom` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-doom-e-flappy-plane).
-* 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro.
+* 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro. Nome e mensagem têm limite de tamanho e o banco tem proteção contra spam (veja [Proteção contra spam no Livro de Visitas](#️-proteção-contra-spam-no-livro-de-visitas)).
 * ✈️ **viagens / travel / mapa:** Os lugares por onde já passei num mapa-múndi de pontos, no clima do terminal: os países visitados ficam coloridos pela cor do continente (as mesmas do "Carimbos no passaporte" do `sobre`), cada cidade tem um pino com bandeira, país e distância de BH, e Belo Horizonte pulsa em verde. `viagens --america`, `viagens --minas`, `viagens --europa` e `viagens --asia` aproximam o mapa, e `viagens --lista` mostra as cidades por país. As cidades ficam em `src/data/viagensData.js`; a grade de pontos é gerada uma vez pelo `npm run viagens` (Natural Earth via world-atlas e d3-geo, só em devDependencies) e vai para o site como texto, sem nenhuma API.
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
@@ -133,6 +133,7 @@ O símbolo `(●` perto do fim das setas é a notação UML de interface: a boli
 - **O portfólio quase não tem back-end.** Tudo roda no navegador; a Vercel entrega os arquivos estáticos, repassa três rotas e roda duas funções, a `api/github.js` e a `api/ask.js`, que só existem para o token do GitHub e a chave da IA (comando `pergunta`) não irem para o navegador. A `api/ask.js` ainda não está no diagrama, nem as funções do WakaTime (`api/wakatime.js` e `api/codando.js`, com o token OAuth), que substituíram o rewrite do WakaTime: hoje são duas rotas repassadas.
 - **O proxy existe por causa do CORS e do token.** WakaTime, komarev e views-counter não enviam `Access-Control-Allow-Origin`, então o navegador chama `/api/...` no próprio domínio e quem repassa é o `vite.config.js` (desenvolvimento), o `vercel.json` (Vercel) ou o `nginx.conf` (Docker). O `/api/github` é diferente: é uma Vercel Function que acrescenta o token do GitHub no servidor (no `npm run dev`, quem faz isso é o `vite.config.js`).
 - **As variáveis `VITE_*` ficam visíveis no navegador.** O Vite as embute no build, por isso o projeto só usa chaves públicas: a publishable key do Supabase, a public key do EmailJS e a site key do reCAPTCHA (a secret key do reCAPTCHA fica no painel do EmailJS). O token do GitHub (`GITHUB_SITE_TOKEN`) e a chave da IA (`GEMINI_API_KEY`), sem `VITE_`, ficam só no servidor, nas Vercel Functions `api/github.js` e `api/ask.js`, e nunca chegam ao navegador.
+- **Chave pública não quer dizer banco aberto.** Com a publishable key, qualquer pessoa consegue chamar a API do Supabase direto, sem passar pelo site. Por isso as regras do `guestbook` (tamanho máximo, limite de envios e teto de mensagens) ficam no próprio banco, em `supabase/livro_visitas.sql`; veja [Proteção contra spam no Livro de Visitas](#️-proteção-contra-spam-no-livro-de-visitas).
 
 -----
 
@@ -265,7 +266,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   ├── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
 │   └── 📁 doom                           → recompila o motor do Doom (build.sh, Zig)
 ├── 📁 supabase                           → scripts SQL do banco (rode no SQL Editor do Supabase)
-│   ├── 🗄️ livro_visitas.sql              → tabela e políticas do guestbook
+│   ├── 🗄️ livro_visitas.sql              → tabela, políticas, limites de tamanho e anti-spam do guestbook
 │   └── 🗄️ contador_visitas.sql           → contador de visitas da tela de boas-vindas
 ├── 📁 src
 │   ├── 📁 assets/fonts                   → Fira Code e JetBrains Mono
@@ -304,7 +305,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   │   ├── ⚛️ AramuniLogo                → logo em vetor (segue a cor do tema)
 │   │   ├── ⚛️ SkinsFooter                → rodapé "Estilos:", "Seções:"... das opções de cada comando
 │   │   └── 🎨 BotaoVoltar.css            → botão "Voltar ao terminal" (Flappy Plane, Quake, Doom e guestbook)
-│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask, jogos do Galo e da NBA
+│   ├── 📁 config                         → EmailJS, reCAPTCHA, GitHub API, GitHub Stats, WakaTime, ask, guestbook (limites), jogos do Galo e da NBA
 │   ├── 📁 data                           → conteúdo e opções de cada comando
 │   │   ├── 🗂️ sobre                      → sobreData.js
 │   │   ├── 🗂️ ask                        → askData.js (o que a IA deve saber e não está no site)
@@ -2353,7 +2354,7 @@ scripts/doom/choco_compat.h   → o que o i_oplmusic.c espera e o doomgeneric n�
 
 Este guia mostra como configurar o **Supabase** para armazenar e gerenciar mensagens do seu **Livro de Visitas** em um projeto React.
 
-> 🗄️ **Atalho:** os scripts SQL estão prontos na pasta `supabase/`. No **SQL Editor**, rode o `supabase/livro_visitas.sql` (passos 2 a 4 deste guia) e o `supabase/contador_visitas.sql` (contador de visitas da tela de boas-vindas). Os dois podem rodar de novo sem apagar dados. No `contador_visitas.sql`, troque o `0` do `insert` pelo número de visualizações atual antes de rodar, para o contador não começar do zero.
+> 🗄️ **Atalho:** os scripts SQL estão prontos na pasta `supabase/`. No **SQL Editor**, rode o `supabase/livro_visitas.sql` (passos 2 a 4 deste guia e a [proteção contra spam](#️-proteção-contra-spam-no-livro-de-visitas)) e o `supabase/contador_visitas.sql` (contador de visitas da tela de boas-vindas). Os dois podem rodar de novo sem apagar dados. No `contador_visitas.sql`, troque o `0` do `insert` pelo número de visualizações atual antes de rodar, para o contador não começar do zero.
 
 -----
 
@@ -2424,6 +2425,8 @@ with check (true);
 
 > Essas políticas permitem que qualquer usuário leia e adicione mensagens sem precisar de autenticação.
 
+> ⚠️ Sozinhas, elas deixam qualquer pessoa gravar textos de qualquer tamanho, quantas vezes quiser, direto pela API. O `supabase/livro_visitas.sql` já vem com os limites; o que cada um faz está em [Proteção contra spam no Livro de Visitas](#️-proteção-contra-spam-no-livro-de-visitas).
+
 ----
 
 ### 5️⃣ Configurar variáveis de ambiente no React
@@ -2469,13 +2472,75 @@ const { data, error } = await supabase
   .select("*")
   .order("created_at", { ascending: false });
 
-// Inserir nova mensagem
+// Inserir nova mensagem (sem espaços nas pontas; o banco confere o tamanho)
 const { error: insertError } = await supabase
   .from("guestbook_messages")
-  .insert([{ name, message }]);
+  .insert([{ name: name.trim(), message: message.trim() }]);
 ```
 
 > Agora seu portfólio consegue armazenar e exibir mensagens do **Livro de Visitas** diretamente do Supabase.
+
+----
+
+## 🛡️ Proteção contra spam no Livro de Visitas
+
+A publishable key do Supabase vai no JavaScript do site (todas as variáveis `VITE_*` vão), então qualquer pessoa pode copiá-la e chamar a API REST direto, sem passar pelo `guestbook add`:
+
+```bash
+curl -X POST "https://seu-projeto.supabase.co/rest/v1/guestbook_messages" \
+  -H "apikey: sb_publishable_xxxx" -H "Content-Type: application/json" \
+  -d '{"name":"spam","message":"... 1 MB de texto ..."}'
+```
+
+Com as políticas abertas do passo 4, isso gravava qualquer tamanho, quantas vezes a pessoa quisesse, até encher o banco do plano gratuito. Limitar o campo no React não resolve: o `curl` nem passa pelo React. Por isso as regras ficam **no banco**, no `supabase/livro_visitas.sql`, e valem para qualquer cliente.
+
+### O que o banco barra
+
+| Regra | Limite | Onde fica no SQL | Erro que o site mostra |
+|-------|--------|------------------|------------------------|
+| Tamanho do nome | 1 a 50 caracteres (sem os espaços das pontas) | constraint `guestbook_name_tamanho` | "O nome pode ter até 50 caracteres e a mensagem, até 500." |
+| Tamanho da mensagem | 1 a 500 caracteres | constraint `guestbook_message_tamanho` | (a mesma) |
+| Caracteres de controle | nenhum (quebra de linha, tab, `\0`...), que serviriam para esticar a lista com linhas em branco | as duas constraints | (a mesma) |
+| Envios por visitante | 3 mensagens a cada 10 minutos, por IP | trigger `guestbook_antispam` | "Você enviou mensagens demais. Espere 10 minutos..." |
+| Envios no site todo | 30 mensagens por hora, somando todo mundo | trigger `guestbook_antispam` | "O livro de visitas recebeu muitas mensagens na última hora..." |
+| Total de mensagens | 5.000 | trigger `guestbook_antispam` | "O livro de visitas atingiu o limite de mensagens." |
+| Colunas gravadas | só `name` e `message` (nada de `created_at` no futuro para fixar a mensagem no topo, nem `id` escolhido) | `grant insert (name, message) ... to anon` | — |
+
+Com 500 caracteres por mensagem e no máximo 5.000 mensagens, o pior caso fica perto de **2,5 MB**, longe dos 500 MB do plano gratuito. O limite global de 30 por hora é o que segura quem troca de IP a cada envio (VPN, proxies): o limite por IP sozinho não daria conta disso.
+
+### Como o limite por visitante funciona
+
+- O trigger `guestbook_antispam` roda **antes de cada insert** vindo da API. Ele tira os espaços das pontas, põe a data do servidor no `created_at` e lê o IP dos cabeçalhos que o proxy do Supabase repassa ao Postgres (`request.headers`: `cf-connecting-ip`, `x-real-ip` ou o primeiro endereço do `x-forwarded-for`).
+- O IP **não é guardado**: vai para a tabela `guestbook_rate_limit` só o hash MD5 dele, com a hora. Essa tabela tem RLS ligado, nenhuma política e nenhuma permissão para o `anon`: o site não lê nem grava nela. As linhas com mais de 1 dia são apagadas pelo próprio trigger.
+- Um `pg_advisory_xact_lock` faz as verificações uma por vez, então várias requisições simultâneas não passam juntas pela mesma contagem.
+- Uma tentativa recusada (mensagem grande demais, por exemplo) não conta como envio: o insert inteiro é desfeito, inclusive o registro no `guestbook_rate_limit`.
+- Inserts feitos pelo **SQL Editor** ou pelo **Table Editor** do Supabase (sem cabeçalhos de requisição) e com a `service_role` não passam pelos limites, para você moderar e importar mensagens à vontade.
+
+### O que o site faz
+
+O site repete os limites só para o visitante não ser surpreendido pelo erro:
+
+- `src/config/guestbookConfig.js` guarda os números (`MAX_NOME: 50`, `MAX_MENSAGEM: 500`). **Mudou um número, mude também no `supabase/livro_visitas.sql`** (nas duas constraints) e rode o script de novo.
+- No `guestbook add`, os campos têm `maxLength`, um contador `12/500` logo abaixo (que muda de cor no limite) e trocam por espaço as quebras de linha que chegam ao colar um texto.
+- O nome e a mensagem vão sem os espaços das pontas, e o erro do Supabase é traduzido (PT e EN, chaves `guestbook.erro_*` do `src/i18n.js`) a partir do nome da regra que o trigger devolve (`guestbook_rate_limit`, `guestbook_limite_global`, `guestbook_cheio`) ou do código `23514` das constraints.
+
+### Aplicar no banco que já existe
+
+1. No Supabase, abra o **SQL Editor**, cole o `supabase/livro_visitas.sql` inteiro e clique em **Run** sem nada selecionado.
+2. Pode rodar de novo quantas vezes quiser: nenhuma mensagem é apagada. As constraints são criadas com `not valid`, ou seja, valem só para mensagens novas; as antigas ficam como estão, mesmo que passem dos 500 caracteres.
+3. Para mudar os limites, edite os números no SQL (constraints e trigger) e no `guestbookConfig.js`, e rode o script de novo.
+
+Para conferir, tente gravar uma mensagem grande direto pela API (troque o projeto e a chave):
+
+```bash
+curl -i -X POST "https://seu-projeto.supabase.co/rest/v1/guestbook_messages" \
+  -H "apikey: sb_publishable_xxxx" -H "Content-Type: application/json" \
+  -d "{\"name\":\"teste\",\"message\":\"$(printf 'a%.0s' {1..600})\"}"
+```
+
+A resposta deve ser `HTTP 400` com `violates check constraint "guestbook_message_tamanho"`. Mandando uma mensagem curta quatro vezes seguidas, a quarta volta com `guestbook_rate_limit` (apague as de teste depois, no Table Editor).
+
+> 💡 O contador de visitas da tela de boas-vindas não ocupa espaço: o `registrar_visita()` só soma +1 numa linha só, e o visitante não tem permissão de gravar na tabela. Quem chamar a função em loop consegue, no máximo, inflar o número.
 
 ----
 
