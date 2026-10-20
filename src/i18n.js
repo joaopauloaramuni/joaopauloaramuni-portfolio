@@ -2044,14 +2044,20 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec75_relationship: 
+          "On October 20, 2026, Bernardo was responding directly to João Paulo", 
+        
+        rec75_recommendation: 
+          "I have the privilege of having João Paulo Aramuni as my professor for Web Application Development and Integration, as well as the Spring Boot and Python workshops, at PUC Minas. Without a doubt, his classes have been among the most valuable learning experiences I have had in the field. In every project and initiative he leads, his dedication to providing students with the best possible learning experience is evident. His classes combine real-world, up-to-date examples with best practices, principles, and design patterns, genuinely preparing us for the job market. Thanks to his thoughtful approach, my interest in technology and my technical skills have grown tremendously. Aramuni is always willing to help, and the encouragement he gives students to build personal projects makes a significant difference in our growth. In addition to being highly qualified, he is easygoing and has a great sense of humor. I recommend him without hesitation!",
+
         rec74_relationship:
-          "On October 20, 2026, Gabriel Silva was a client of João Paulo",
+          "On October 20, 2026, Gabriel was a client of João Paulo",
 
         rec74_recommendation:
           "João Paulo Aramuni is dedicated not only to developing hard skills but also to developing soft skills. This makes him a sought-after professional in the job market, as he strives to better understand human behavior in the corporate environment.",
         
         rec73_relationship:
-          "On October 18, 2026, Pedro Flausino was João Paulo's client",
+          "On October 18, 2026, Pedro was João Paulo's client",
 
         rec73_recommendation:
           "I took Professor Aramuni's class during my second semester of Computer Science at PUC Minas. He is a professor who genuinely enjoys and masters what he teaches, and who dedicates himself to his students far beyond the classroom. His teaching skills are excellent, and it is hard to leave his class without understanding the material. I am very grateful for the support and knowledge he shared with me, which had a significant impact on my journey. He is undoubtedly one of the best professors I have ever had.",
@@ -4654,15 +4660,21 @@ const resources = {
       recomendacoes: {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
-      
+        
+        rec75_relationship:
+          "Em 20 de outubro de 2026, Bernardo respondia diretamente a João Paulo",
+
+        rec75_recommendation:
+          "Tenho o privilégio de ter o João Paulo Aramuni como professor de Desenvolvimento e Integração de Aplicações Web e das oficinas de Spring Boot e Python, na PUC Minas. Sem dúvida, suas aulas estão entre as experiências mais valiosas que tive na área. Em todos os projetos e iniciativas que conduz, fica evidente sua dedicação em oferecer o melhor aos alunos. Suas aulas combinam exemplos reais e atualizados com boas práticas, princípios e padrões de projeto, e isso nos prepara de verdade para o mercado. Graças a esse cuidado, meu interesse e meu desenvolvimento em tecnologia evoluíram muito. O Aramuni está sempre disposto a ajudar, e o incentivo que dá aos alunos para criarem projetos pessoais faz grande diferença na nossa evolução. Além de muito bem qualificado, é uma pessoa descontraída, com ótimo senso de humor. Recomendo de olhos fechados!",
+
         rec74_relationship:
-          "Em 20 de outubro de 2026, Gabriel Silva foi cliente de João Paulo",
+          "Em 20 de outubro de 2026, Gabriel foi cliente de João Paulo",
 
         rec74_recommendation:
           "João Paulo Aramuni se dedica não apenas ao desenvolvimento de hard skills, mas também ao desenvolvimento de soft skills. Isso o faz ser um profissional requisitado no mercado de trabalho, pois se preocupa em compreender melhor o comportamento humano no universo corporativo.",
 
         rec73_relationship:
-          "Em 18 de outubro de 2026, Pedro Flausino foi cliente de João Paulo",
+          "Em 18 de outubro de 2026, Pedro foi cliente de João Paulo",
 
         rec73_recommendation:
           "Tive aula com o professor Aramuni no meu segundo semestre de Ciência da Computação na PUC Minas. É um professor que realmente gosta e domina o que ensina, e que se dedica aos alunos muito além da sala de aula. Sua didática é muito boa, é difícil sair da aula sem ter entendido o conteúdo. Sou muito grato pelo apoio e pelos ensinamentos que recebi, que influenciaram muito a minha trajetória. Com certeza é um dos melhores professores que já tive.",
