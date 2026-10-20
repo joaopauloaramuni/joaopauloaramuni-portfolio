@@ -178,6 +178,14 @@ Grupo vencedor:
     - :octocat: https://github.com/pedrohqesilva/phas.dev
     - ☁️ https://phas.dev/
 
+- Leonardo Federici Pettersen
+    - :octocat: https://github.com/leopettersen/portfolio
+    - ☁️ https://leopettersen.dev/
+
+- Francisco Filipe
+    - :octocat: https://github.com/franciscofilipeee/portfolio
+    - ☁️ https://franciscofilipeee.dev/
+
 -----
 
 ## 🚀 Demonstração ao vivo
