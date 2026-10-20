@@ -186,6 +186,10 @@ Grupo vencedor:
     - :octocat: https://github.com/franciscofilipeee/portfolio
     - ☁️ https://franciscofilipeee.dev/
 
+- Evelyn Costa
+    - :octocat: https://github.com/Evycostzocn/PortfolioProfissional
+    - ☁️ https://evelyncosta.dev/
+
 -----
 
 ## 🚀 Demonstração ao vivo
