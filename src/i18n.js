@@ -2044,6 +2044,12 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec74_relationship:
+          "On October 20, 2026, Gabriel Silva was a client of João Paulo",
+
+        rec74_recommendation:
+          "João Paulo Aramuni is dedicated not only to developing hard skills but also to developing soft skills. This makes him a sought-after professional in the job market, as he strives to better understand human behavior in the corporate environment.",
+        
         rec73_relationship:
           "On October 18, 2026, Pedro Flausino was João Paulo's client",
 
@@ -4649,6 +4655,12 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
       
+        rec74_relationship:
+          "Em 20 de outubro de 2026, Gabriel Silva foi cliente de João Paulo",
+
+        rec74_recommendation:
+          "João Paulo Aramuni se dedica não apenas ao desenvolvimento de hard skills, mas também ao desenvolvimento de soft skills. Isso o faz ser um profissional requisitado no mercado de trabalho, pois se preocupa em compreender melhor o comportamento humano no universo corporativo.",
+
         rec73_relationship:
           "Em 18 de outubro de 2026, Pedro Flausino foi cliente de João Paulo",
 
