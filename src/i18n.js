@@ -2044,11 +2044,17 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec75_local:
+          "Software Engineering - PUC Minas",
+
         rec75_relationship: 
-          "On October 20, 2026, Bernardo was responding directly to João Paulo", 
+          "On October 20, 2026, Bernardo was a client of João Paulo", 
         
         rec75_recommendation: 
           "I have the privilege of having João Paulo Aramuni as my professor for Web Application Development and Integration, as well as the Spring Boot and Python workshops, at PUC Minas. Without a doubt, his classes have been among the most valuable learning experiences I have had in the field. In every project and initiative he leads, his dedication to providing students with the best possible learning experience is evident. His classes combine real-world, up-to-date examples with best practices, principles, and design patterns, genuinely preparing us for the job market. Thanks to his thoughtful approach, my interest in technology and my technical skills have grown tremendously. Aramuni is always willing to help, and the encouragement he gives students to build personal projects makes a significant difference in our growth. In addition to being highly qualified, he is easygoing and has a great sense of humor. I recommend him without hesitation!",
+
+        rec74_local:
+          "Technology in Management Processes - PUC Minas",
 
         rec74_relationship:
           "On October 20, 2026, Gabriel was a client of João Paulo",
@@ -2056,23 +2062,35 @@ const resources = {
         rec74_recommendation:
           "João Paulo Aramuni is dedicated not only to developing hard skills but also to developing soft skills. This makes him a sought-after professional in the job market, as he strives to better understand human behavior in the corporate environment.",
         
+        rec73_local:
+          "Computer Science - PUC Minas",
+
         rec73_relationship:
           "On October 18, 2026, Pedro was João Paulo's client",
 
         rec73_recommendation:
           "I took Professor Aramuni's class during my second semester of Computer Science at PUC Minas. He is a professor who genuinely enjoys and masters what he teaches, and who dedicates himself to his students far beyond the classroom. His teaching skills are excellent, and it is hard to leave his class without understanding the material. I am very grateful for the support and knowledge he shared with me, which had a significant impact on my journey. He is undoubtedly one of the best professors I have ever had.",
         
+        rec72_local:
+          "Software Engineering - PUC Minas",
+
         rec72_relationship:
           "On September 29, 2026, João Gabriel was a client of João Paulo",
 
         rec72_recommendation:
           "I had the opportunity to learn a lot from Aramuni, in both theory and practice. His support and guidance were key to my growth and, above all, helped me see Software Engineering in a broader and more professional way. I am grateful for everything I learned and for the reflections he sparked along the way. They have made a real difference in how I see the field and my own career path.",
         
+        rec71_local:
+          "Computer Science - PUC Minas",
+
         rec71_relationship:
           "On September 25, 2026, Fernando was a client of João Paulo.",
 
         rec71_recommendation:
           "One of the best professors I have ever had. He is truly someone who not only understands the tools he uses and teaches, but also genuinely enjoys them. His teaching style and understanding of the topics are always impressive and consistently help students put things into context and learn.",
+
+        rec70_local:
+          "Software Engineering - PUC Minas",
 
         rec70_relationship:
           "On June 26, 2026, Eric reported directly to João Paulo",
@@ -2080,17 +2098,26 @@ const resources = {
         rec70_recommendation:
           "I had the pleasure of working with João Paulo as my advisor for my undergraduate thesis (TCC). Throughout the project, he provided valuable guidance not only on the technical aspects of the development but also on the documentation and structuring of UML and architectural diagrams. His feedback consistently improved the quality and clarity of our work. What I appreciated most was his advising style: he gave us the autonomy to make decisions and explore solutions on our own while always being available to answer questions, discuss ideas, and provide insightful feedback whenever needed. This balance between independence and support made the learning experience both challenging and rewarding. I highly recommend him to anyone looking for a knowledgeable, approachable, and supportive advisor.",
 
+        rec69_local:
+          "Software Engineering - PUC Minas",
+
         rec69_relationship:
           "On May 4, 2026, Pedro was a client of João Paulo",
 
         rec69_recommendation:
           "Professor João Paulo, better known as Aramuni, stands out for his excellence in conducting Information Technology courses in the Software Engineering program. His performance is marked by a high level of technical competence, professionalism, and deep mastery of the subjects taught. He has a clear and well-structured teaching style, making complex topics understandable while consistently connecting theory and practice in an effective way. Additionally, he presents an important differentiator by incorporating content aligned with current market demands, addressing modern technologies and encouraging the use of cutting-edge tools and approaches. His methodology promotes continuous learning, student autonomy, and the development of critical thinking, thereby providing solid preparation for real-world challenges in the field. Another relevant point is his ability to motivate students to keep up with the rapid evolution of technology, fostering a dynamic and innovation-oriented environment. He is a professional committed to the quality of education and to the strong development of future software engineers, and is highly recommended.",
         
+        rec68_local:
+          "Software Engineering - PUC Minas",
+
         rec68_relationship:
           "On April 27, 2026, Felipe was a client of João Paulo",
 
         rec68_recommendation:
           "I had João Paulo as a professor at PUC Minas, and I can say he is an excellent professional. Always very available, he helped me several times with questions related to personal projects, demonstrating a genuine interest in students' learning. He played an important role in my deepening understanding of software architecture, bringing a practical and well-structured perspective to a topic I consider essential in the field. In addition, he also shares great career advice, which adds even more value to his role as a professor.",
+
+        rec67_local:
+          "Software Engineering - PUC Minas",
 
         rec67_relationship:
           "On April 25, 2026, Artur was a client of João Paulo",
@@ -2098,11 +2125,17 @@ const resources = {
         rec67_recommendation:
           "I have the opportunity to be a student of Professor João Paulo Aramuni and I can affirm that his teaching stands out for the dynamic and engaging way in which he conducts his classes. One of his great differentiators is the focus on practical activities, always encouraging the development of projects using technologies relevant to the market. This makes the learning process much more applied and closer to professional reality. Additionally, his high level of knowledge is evident, both in the academic context, as a professor of Software Design, structuring and modeling solutions, and through his industry experience, always bringing a practical and up-to-date perspective to the classes. Professor Aramuni is also always available to support students, clarifying doubts and contributing proactively to the development of assignments and projects, which makes a significant difference in the progress of those who are learning. Without a doubt, he is a professor who positively impacts students' education and prepares them solidly for the challenges of the technology field.",
         
+        rec66_local:
+          "Software Engineering - PUC Minas",
+
         rec66_relationship:
           "On December 18, 2025, Tito was a client of João Paulo",
 
         rec66_recommendation:
           "It is with great pleasure that I recommend Professor João Paulo Aramuni. As my undergraduate thesis advisor, his availability and technical expertise were crucial to the development of the software 'Keep', an innovative solution for managing a fleet of machines. His ability to guide and stimulate critical thinking was fundamental to the success of the project and to my professional development, in addition to all the supplementary materials he introduced to me, which were crucial to my improved learning.",
+
+        rec65_local:
+          "Software Engineering - PUC Minas",
 
         rec65_relationship:
           "On December 16, 2025, Guilherme was a client of João Paulo",
@@ -2110,41 +2143,62 @@ const resources = {
         rec65_recommendation:
           "I was fortunate to have João Paulo Aramuni as my professor in the Software Design course. He is the kind of professor who not only masters the subject but also has a way of explaining things that makes everything seem simpler. What I value most about him is the partnership: always approachable, ready to chat about the job market and offer those career tips you don’t find in books. He is a professional who genuinely roots for his students’ success. I highly recommend him!",
 
+        rec64_local:
+          "Software Engineering - PUC Minas",
+
         rec64_relationship:
           "On December 12, 2025, Lucas was a client of João Paulo",
 
         rec64_recommendation:
           "I had the privilege this semester of being a student of professor João Paulo Aramuni in FPAA in Software Engineering. In addition to mastering the content and explaining the subject clearly, he was always available to answer questions, provide career guidance, and recommend studies and extracurricular activities that truly add value and contribute to the academic and professional development of his students. A competent, accessible, and committed professor to the development of the students.",           
         
+        rec63_local:
+          "Software Engineering - PUC Minas",
+
         rec63_relationship:
           "On November 25, 2025, Leonardo reported to João Paulo",
 
         rec63_recommendation:
           "Learning from João Paulo Aramuni was one of the best experiences I’ve ever had. He explains everything in a clear, direct way without beating around the bush, even when the subject is complicated. You can tell he really understands what he’s talking about and, more importantly, truly knows how to teach. What I like most about him is that he doesn’t stick only to the class content: he brings real-world examples, gives career tips, shows different paths, and genuinely cares about our development. He has already helped me with technical questions, project decisions, and even how to think better as a professional. He is a teacher who motivates, who adds value, and who makes a difference. Anyone who has the chance to learn from him should take it — it’s really worth it.",
         
+        rec62_local:
+          "Software Engineering - PUC Minas",
+
         rec62_relationship:
           "On November 19, 2025, Bruna was a client of João Paulo",
 
         rec62_recommendation:
           "João Paulo demonstrates clarity in communication, technical mastery, and a genuine concern for generating positive impact through his projects and initiatives. His trajectory shows commitment, leadership ability, and a continuous pursuit of learning — characteristics that make him a standout in his field. It is evident that he is a professional who adds value wherever he works, not only because of the knowledge he possesses, but also because of the way he shares insights and inspires other professionals around him. I recommend his connection and his work to everyone who is looking for someone with vision, competence, and exemplary conduct.",
         
+        rec61_local:
+          "Software Engineering - PUC Minas",
+
         rec61_relationship:
           "On November 18, 2025, Otávio was a client of João Paulo",
 
         rec61_recommendation:
           "I strongly recommend João Paulo Aramuni as a professional and as a professor. I had the opportunity to be his student in technology projects, and I can say that he manages to combine, in a rare way, technical depth with very clear teaching. João Paulo has a very solid strategic vision, brings real market examples, and always seeks to connect theory with practice, which generates a direct impact on the quality of the work. In addition to his technical competence as a CTO and Tech Lead, what stands out the most to me is his willingness to help and his genuine concern for the development of those around him. On several occasions, he went beyond the “basic” expectations of a consultant/professor to provide career guidance, review technical decisions, and suggest more sustainable paths for the project. He is an ethical, up-to-date professional who truly adds value to any team or initiative he is involved in.",
         
+        rec60_local:
+          "Software Engineering - PUC Minas",
+
         rec60_relationship:
           "On October 28, 2025, Fernanda reported to João Paulo",
 
         rec60_recommendation:
           "I had the opportunity to be a student of Professor João Paulo Aramuni, and I can say that he is one of the most accessible and dedicated professors I have ever had. He is always willing to help and genuinely cares about his students' learning, being present for whatever is needed: answering questions, guiding projects, or giving career advice. He is a complete professional and an incredible person, who makes all the difference in the academic journey of those who are lucky enough to learn from him.",
         
+        rec59_local:
+          "Software Engineering - PUC Minas",
+
         rec59_relationship:
           "On October 20, 2025, Paulo reported to João Paulo",
 
         rec59_recommendation:
           "João Paulo Aramuni was my professor in two very important courses during my college years, Algorithms and Data Structures 1 and Software Project. He is a teacher with excellent teaching skills and outstanding materials, especially on his GitHub, which contains various slides, projects, Figma designs, and other resources that are essential for a student’s development. I highly recommend him as both a professor and a developer.",
+
+        rec58_local:
+          "Software Engineering - PUC Minas",
 
         rec58_relationship:
           "On September 27, 2025, Gabriel was a client of João Paulo",
@@ -2152,11 +2206,17 @@ const resources = {
         rec58_recommendation:
           "I have the privilege of being Professor Aramuni’s student, and I can say with absolute certainty that his classes go far beyond theoretical content. He has an approach that is strongly connected to the market, always bringing real-world examples, relevant case studies, and inviting experienced professionals from the field to share their insights and everyday challenges. This practical connection with the industry makes his classes much richer, more up-to-date, and truly inspiring. Professor Aramuni has a clear, objective, and at the same time thought-provoking teaching style, always encouraging critical thinking and the professional development of his students.",
 
+        rec57_local:
+          "Software Engineering - PUC Minas",
+
         rec57_relationship:
           "On September 16, 2025, Davi reported to João Paulo",
 
         rec57_recommendation:
           "I had the opportunity to spend time with João Paulo during the course, and I can say he is a really great guy, a true partner. Always open to chatting, joking around, having conversations, and at the same time showing that he really knows what he’s talking about. What stands out the most to me is his willingness to help at any time, always with patience and a genuine desire to see others grow. That makes a huge difference in the learning environment and shows how collaborative he is. On top of that, his technical knowledge is remarkable, both in development and in best practices, which gives confidence when he’s explaining or guiding an activity. I highly recommend João Paulo, both for the professional he is and for the incredible person he shows himself to be every day.",
+
+        rec56_local:
+          "Software Engineering - PUC Minas",
 
         rec56_relationship:
           "On September 15, 2025, Nataniel was a client of João Paulo",
@@ -2164,11 +2224,17 @@ const resources = {
         rec56_recommendation:
           "Excellent professor. Has complete mastery of the content taught and conveys knowledge in a light, didactic manner, demystifying more dense and complex subjects. Always available, willing to help, and contributing to the personal and professional growth of students.",
 
+        rec55_local:
+          "Software Engineering - PUC Minas",
+
         rec55_relationship:
           "On September 13, 2025, Jonathan was a client of João Paulo",
 
         rec55_recommendation:
           "I had the opportunity to be a student of Professor João Paulo Aramuni and I can say that his way of teaching goes far beyond technical content. He is a mentor who inspires, always willing to help and make learning lighter, more human, and motivating. The exercises and projects proposed in class not only enrich the portfolio but also contribute significantly to our development as students and to our preparation for the professional market. Without a doubt, he is a professor who leaves a positive mark on the academic journey and makes a real difference in students’ education.",
+
+        rec0_local:
+          "Software Engineering - PUC Minas",
 
         rec0_relationship:
           "On September 9, 2025, Raphael reported to João Paulo",
@@ -2176,26 +2242,44 @@ const resources = {
         rec0_recommendation:
           "João Aramuni is, by far, the best professor I could have at the University. His lectures are clear, and the content presented is aligned with the realities of the market. Beyond being an excellent tutor, he gave me a golden opportunity by trusting my work to lead one of the largest projects of the Experimental Software Agency, impacting the entire State and proving that students have real chances and are more than just numbers in academia. I wholeheartedly recommend this professional and will carry with me for life all the lessons I’ve learned.",
 
+        rec1_local:
+          "Newton Paiva Wyden University Center and PUC Minas",
+
         rec1_relationship:
           "On August 31, 2025, Michelle Hanne worked with João Paulo on the same team",
 
         rec1_recommendation:
           "Aramuni is an excellent educator, committed to the technical and human development of students. He takes care to develop teaching materials as well as workshops that support students. Courses such as Fundamentals of Design, Algorithm Analysis, Software Project, Software Development Labs, among others, are of utmost importance for academic training and for training in Software Engineering. In short, an excellent technical leader and competent teaching professional.",
 
-        rec2_relationship: "On August 5, 2025, Pedro reported to João Paulo",
+        rec2_local:
+          "Software Engineering - PUC Minas",
+
+        rec2_relationship: 
+          "On August 5, 2025, Pedro reported to João Paulo",
 
         rec2_recommendation:
           "I had the honor of working with Aramuni as my undergraduate thesis advisor, and I can confidently say that his mentorship extended far beyond academic guidance. From day one, he fostered an environment of trust, curiosity, and autonomy, encouraging independent thinking while always being available when needed. What impressed me most was his commitment. No matter how busy his schedule was, he consistently made time to meet, provide thoughtful feedback, and check in on my progress. Beyond his role as a thesis advisor, Aramuni is a truly passionate educator. He brings not only deep technical expertise to the table, but also a genuine sense of purpose in teaching and mentoring others.",
 
-        rec3_relationship: "On July 30, 2025, Bernardo reported to João Paulo",
+        rec3_local:
+          "Software Engineering - PUC Minas",
+
+        rec3_relationship: 
+          "On July 30, 2025, Bernardo reported to João Paulo",
 
         rec3_recommendation:
           "During the first semester of 2025, I had the privilege of working with Professor Aramuni as my thesis advisor. His guidance was instrumental throughout the process. He gave us the freedom to explore different technologies and encouraged independent thinking, while also providing clear and constructive feedback at every stage. What stood out most was his consistent availability — he always made time for me and my partner, setting up regular meetings and ensuring we felt supported. His calm demeanor and genuine care created a welcoming environment that made it easy for us to grow and develop. Professor Aramuni is an excellent mentor and a remarkable educator.",
 
-        rec4_relationship: "On July 25, 2025, Luca reported to João Paulo",
+        rec4_local:
+          "Software Engineering - PUC Minas",
+
+        rec4_relationship: 
+          "On July 25, 2025, Luca reported to João Paulo",
 
         rec4_recommendation:
           "Professor Aramuni is one of the most dedicated and inspiring educators I’ve ever had the privilege to learn from. Creative and constantly innovating, he brings not only a deep theoretical foundation to his classes but also a strong focus on real-world application through hands-on exercises, interactive quizzes, and practical projects — many of which are available for free on his GitHub. What truly sets him apart, however, is his availability and genuine care for each student. He consistently makes time for one-on-one meetings, offering mentorship on both academic and career paths. His extensive professional background enriches every class with real-world examples and valuable insights. In my case, the conversations I had with him over the past few months played a key role in shaping important career decisions. Being his student was not just a great academic experience — it was a transformative one.",
+
+        rec5_local:
+          "Software Engineering - PUC Minas",
 
         rec5_relationship:
           "On September 19, 2024, Flavio reported to João Paulo",
@@ -2203,10 +2287,17 @@ const resources = {
         rec5_recommendation:
           "For approximately a year, I had the privilege of being a student of Professor João Paulo Aramuni. He stands out not only for his vast technical knowledge but also for the evident passion he has for technology, which shows in each of his classes. His distinctive approach combines engaging and dynamic teaching, making learning more accessible and interesting. Furthermore, his ability to offer individualized attention to each student demonstrates his commitment to the personal and academic development of all, creating an environment where everyone feels valued and encouraged to grow.",
 
-        rec6_relationship: "On August 22, 2024, Pedro reported to João Paulo",
+        rec6_local:
+          "Systems Analysis and Development - Newton Paiva Wyden University Center",
+
+        rec6_relationship: 
+          "On August 22, 2024, Pedro reported to João Paulo",
 
         rec6_recommendation:
           "I had the privilege of being João's student, from whom I learned a lot about databases and Java. He is an excellent teacher, very competent and always willing to help! He demonstrates full mastery of the subjects, transforming complex content into something easy to understand and learn. I strongly recommend him to anyone wishing to deepen their knowledge in these areas. Anyone who has the opportunity to learn from him will be in good hands!",
+
+        rec7_local:
+          "Newton Paiva Wyden University Center and PUC Minas",
 
         rec7_relationship:
           "On August 22, 2024, Angélica and João Paulo studied at the same institution",
@@ -2214,11 +2305,17 @@ const resources = {
         rec7_recommendation:
           "I often say that João was 'bitten by the mosquito' that made us fall in love with teaching. We both loved our careers, which had established us, but even so, teaching called us, and today we are fully fulfilled in this field. Moreover, João is a true partner, always attentive to supporting people he considers talented. I have the privilege of being one of those people. Thanks to João, I realized my dream of teaching at the undergraduate level, and he was so generous that he even gave me his classes. What can I say about such an extraordinary person? João, the world is yours, my friend! Count on me for us to leave our mark on the new 'generation' of IT talent.",
 
+        rec8_local:
+          "Newton Paiva Wyden University Center",
+
         rec8_relationship:
           "On August 20, 2024, Max and João Paulo studied at the same institution",
 
         rec8_recommendation:
           "Talking about João Aramuni is easy, I had the privilege of counting on his help on several occasions, and I can confidently say he is an extraordinarily intelligent and collaborative person. His team spirit is simply remarkable, always willing to contribute to collective success. In addition to his professional skills, he has excellent interpersonal relations, being extremely pleasant and respectful. His ability to work well with others and his willingness to share knowledge make him a remarkable person for any team.",
+
+        rec9_local:
+          "Computer Science - FUMEC University",
 
         rec9_relationship:
           "On August 19, 2024, Rubens Gabriel was a client of João Paulo",
@@ -2226,21 +2323,35 @@ const resources = {
         rec9_recommendation:
           "I was fortunate to have Professor João Aramuni as my teacher and thesis advisor. He stands out for making complex concepts more accessible and for his commitment to the development of his students. He was always available to provide guidance and support, which was fundamental for my academic growth. I recommend him to anyone who has the opportunity to work or learn with him.",
 
+        rec10_local:
+          "Software Engineering - PUC Minas",
+
         rec10_relationship:
           "On June 19, 2024, João Paulo was senior to Pedro, but did not directly supervise him",
 
         rec10_recommendation:
           "João Paulo Aramuni is a very good professor. During my time in his class, I was impressed with his deep technical knowledge and his ability to convey complex concepts in a clear and accessible way. His didactic approach encourages active student participation, promoting a collaborative and enriching learning environment. Moreover, his passion for the subject is evident in every class, inspiring his students to strive for academic excellence.",
 
-        rec11_relationship: "On March 1, 2024, Tulio reported to João Paulo",
+        rec11_local:
+          "Trybe - Coding School",
+
+        rec11_relationship: 
+          "On March 1, 2024, Tulio reported to João Paulo",
 
         rec11_recommendation:
           "I had the pleasure of being led by Aramuni during most of my time at Trybe, and I can affirm that it was an exemplary leadership and an inspiration as a professional. He always cared about the development of his team members, pointing out opportunities within the company for growth and encouraging taking courses and reading books. Whenever I brought observations for improvement in operations, João encouraged me to gather data and document facts to support discussions with higher-level leadership to improve team-wide processes, which led to changes in some tasks carried out by all other instructors and specialists. I strongly recommend him both as a leader and as a technical computing reference.",
 
-        rec12_relationship: "On February 8, 2024, Luíza reported to João Paulo",
+        rec12_local:
+          "Systems Analysis and Development - Newton Paiva Wyden University Center",
+
+        rec12_relationship: 
+          "On February 8, 2024, Luíza reported to João Paulo",
 
         rec12_recommendation:
           "Professor Aramuni is an exceptional educator in the field of Databases. During the time I was his student, I experienced a truly didactic teaching approach, which made all the difference in my academic journey. He not only has deep mastery of the content but also possesses the unique ability to convey complex concepts in a clear and accessible way. His light and fun approach makes the classes engaging, providing a conducive learning environment. Furthermore, his patience and willingness to help students were essential for my academic development. I am certain he will continue to positively impact the lives of his students, just as he did with me.",
+
+        rec13_local:
+          "Systems Analysis and Development - Newton Paiva Wyden University Center",
 
         rec13_relationship:
           "On January 30, 2024, Thiago reported to João Paulo",
@@ -2248,11 +2359,17 @@ const resources = {
         rec13_recommendation:
           "Professor João Paulo Aramuni is an excellent teacher! When I started college, I had a lot of difficulty with Java and was developing a dislike/trauma towards the subject, but after his classes, I learned to enjoy it and, with his help, I began to improve and get better constantly. His teaching style is amazing and engaging, demystifying what seems complex and making it simple! He addresses the details and teaches us not only how to do things but also to understand what we are doing. He always gave me tremendous support, even outside of college, and I could always count on him! I am very grateful.",
 
+        rec14_local:
+          "Trybe - Coding School",
+
         rec14_relationship:
           "On December 18, 2023, Carlos reported to João Paulo",
 
         rec14_recommendation:
           "Working under Aramuni's leadership for 18 months was an incredible experience, both for my professional and personal development. Aramuni proved to be an exceptional leader, providing continuous support and the creative freedom the entire team needed, whether to teach or create high-quality content. With his knowledge of Python, algorithms, and web scraping, Aramuni was a cornerstone in the construction and operation of the computer science module. I learned a lot from him, not only technically but also in becoming a more complete and adaptable professional. I am grateful for all his guidance and consider him a mentor, leader, and friend.",
+
+        rec15_local:
+          "Trybe - Coding School",
 
         rec15_relationship:
           "On November 6, 2023, João Vitor reported to João Paulo",
@@ -2260,26 +2377,44 @@ const resources = {
         rec15_recommendation:
           "As my leader, Aramuni helped me evolve greatly. He brought excellent PDIs, technical discussions, and also outstanding study recommendations. Furthermore, he created opportunities for both less experienced and more experienced team members, fostering confidence in all his direct reports. He has excellent people management skills, and the whole team admired him. I also emphasize that, besides the benefits for the growth and delivery of his team, he maintained a focus on generating value for the business, which led to excellent outcomes. I recommend Aramuni as a leader who can add value both to the company and to his team.",
 
-        rec16_relationship: "On October 25, 2023, Tiago reported to João Paulo",
+        rec16_local:
+          "Trybe - Coding School",
+
+        rec16_relationship: 
+          "On October 25, 2023, Tiago reported to João Paulo",
 
         rec16_recommendation:
           "Aramuni demonstrates very human leadership, paying great attention to areas of improvement and what is needed to achieve goals. I am very grateful to have been led by him and can say that I grew a lot as a professional and person because he is an excellent listener and highly empathetic. His recommendation is well-deserved because he is an extremely committed and responsible professional, who is not afraid to step up when needed.",
 
-        rec17_relationship: "On June 8, 2023, Eli reported to João Paulo",
+        rec17_local:
+          "Trybe - Coding School",
+
+        rec17_relationship: 
+          "On June 8, 2023, Eli reported to João Paulo",
 
         rec17_recommendation:
           "It is a pleasure to recommend Aramuni; he was my leader at Trybe and I also followed his work as Technical Leader of the Computer Science Curriculum. During this period, I witnessed his exceptional skills and his commitment to the success of the team. His unique combination of academic knowledge, practical experience, and leadership skills makes him a remarkable professional. Moreover, he is an incredible person, always willing to help and contribute to others. His guidance and support were essential for my professional growth, both technically and personally. I am extremely grateful for everything I learned from him and proudly recommend him.",
 
-        rec18_relationship: "On May 9, 2023, Cristiano reported to João Paulo",
+        rec18_local:
+          "Trybe - Coding School",
+
+        rec18_relationship: 
+          "On May 9, 2023, Cristiano reported to João Paulo",
 
         rec18_recommendation:
           "Aramuni is a person who demonstrates extreme responsibility in his professional duties and has a gift for relating to people, making the workplace light and pleasant. Personally, he learns processes quickly, is extremely focused on his activities, demonstrates very high technical potential, and is always concerned with his constant evolution, all while maintaining care and attention towards people. I greatly enjoy working with him because I learn a lot and become a better professional through his examples and advice. I am grateful for this daily opportunity for collaboration and sincerely hope to maintain this productive relationship for a long time.",
         
+        rec19_local:
+          "Trybe - Coding School",
+
         rec19_relationship:
           "On March 12, 2023, Will and João Paulo studied at the same institution",
 
         rec19_recommendation:
           "An excellent opportunity I had to work with Aramuni; I learned a lot from him. After all, it was my first experience teaching Programming, and he taught me so much. Great Professor and Leader, always providing the team with assertive feedback! Thank you, Aramuni!",
+
+        rec20_local:
+          "Trybe - Coding School",
 
         rec20_relationship:
           "On February 7, 2022, João Paulo was senior to André but did not directly supervise him",
@@ -2287,11 +2422,17 @@ const resources = {
         rec20_recommendation:
           "Aramuni is able to organize agendas and bring focus to meetings, keeping the team organized and guided. Additionally, he is super calm and easygoing, and always plays soft music for relaxed moments. A really great person to work with =D",
 
+        rec21_local:
+          "Full Stack Web Development - Trybe - Coding School",
+
         rec21_relationship:
           "On August 10, 2021, Douglas reported to João Paulo",
 
         rec21_recommendation:
           "Having Aramuni as an instructor was one of the best experiences of my life. His advice and guidance made me realize exactly my technological strengths and weaknesses. Today I know where I am headed because I know which path to follow. Patience, calmness, clarity, and teaching strategy gave me the confidence to overcome any challenge that came my way. He is brilliant as an instructor, lead, influencer, and a lifelong friend.",
+
+        rec22_local:
+          "Computer Science - FUMEC University",
 
         rec22_relationship:
           "On October 2, 2020, João Paulo was senior to Bruno but did not directly supervise him",
@@ -2299,11 +2440,17 @@ const resources = {
         rec22_recommendation:
           "I had the pleasure of being João's student and TCC advisee. He is a person who has always made a difference in academia and helped me greatly to become the professional I am today. As I say, brilliant teachers teach for a profession. Fascinating teachers like João teach for life.",
 
+        rec23_local:
+          "FUMEC University and Álamo TI",
+
         rec23_relationship:
           "On September 11, 2020, Klelvin worked with João Paulo on the same team",
 
         rec23_recommendation:
           "I have known João for about 10 years and have shared many life moments with him throughout our careers. He was a college colleague, a work colleague, and became a lifelong friend. Dedicated academic, exemplary educator, and professional with unmatched abilities. I wish every place I worked had a João Paulo.",
+
+        rec24_local:
+          "IN8 Holding - Software Development",
 
         rec24_relationship:
           "On April 25, 2020, Rafael worked with João Paulo on the same team",
@@ -2311,11 +2458,17 @@ const resources = {
         rec24_recommendation:
           "João is an exemplary professional and, given his academic background, is always open to learning new technologies and methods. At the same time, he consistently shares knowledge with everyone.",
         
+        rec25_local:
+          "Computer Science - FUMEC University",
+
         rec25_relationship:
           "On November 17, 2018, Eduardo and João Paulo studied at the same institution",
 
         rec25_recommendation:
           "I had the pleasure of being João Paulo's student at FUMEC, and he is surely one of the most competent teachers/professionals I have ever met. He always seeks to offer the best to his students, preparing differentiated classes and projects. He is a professional with extensive experience and knowledge.",
+
+        rec26_local:
+          "Computer Science - FUMEC University",
 
         rec26_relationship:
           "On March 27, 2018, Bruno was a client of João Paulo",
@@ -2323,11 +2476,17 @@ const resources = {
         rec26_recommendation:
           "The talents displayed by Professor João are ineffable. Even from the little I know him as a student, his professional and interpersonal qualities are evident. Always available, he shows complete interest in doing excellent work, in this case, transmitting knowledge. If there is anyone I would like as a teammate, it would be João Paulo.",
 
+        rec27_local:
+          "Computer Science - FUMEC University",
+
         rec27_relationship:
           "On March 23, 2018, Leonardo was a client of João Paulo",
 
         rec27_recommendation:
           "João Paulo is an exceptional teacher, showing that programming goes far beyond syntax. He guides students in their entire quest for knowledge, being not only a teacher but also a companion. Extremely open to answer any questions and help us evolve.",
+
+        rec28_local:
+          "Computer Science - FUMEC University",
 
         rec28_relationship:
           "On March 20, 2018, Rafaela was a client of João Paulo",
@@ -2335,22 +2494,35 @@ const resources = {
         rec28_recommendation:
           "I know João Paulo as 'Professor Aramuni', which was the first time I had contact with him. I can say he is one of the best teachers I have ever had: super dedicated, explains the subject well, and demonstrates complete knowledge of what he teaches. I asked for his help a lot during the course and always received a quick response, which was great! He does everything possible to encourage us to study, talks about job and internship opportunities for those in need, and encourages people to deepen their studies in courses, books, scientific initiation, and even pursue master's and Ph.D. degrees. It was a pleasure to attend his classes, and I hope to work with him in the future!",
 
+        rec29_local:
+          "Computer Science - FUMEC University",
+
         rec29_relationship:
           "On March 19, 2018, Pedro Henrique was a client of João Paulo",
 
         rec29_recommendation:
           "Excellent teacher! A distinguished master who stays updated with new teaching methodologies! Intrigues and challenges his students to think differently. Always available and attentive!",
 
+        rec30_local:
+          "Computer Science - FUMEC University",
+
         rec30_relationship:
           "On March 19, 2018, Henrique was a client of João Paulo",
 
-        rec30_recommendation: "Excellent teacher, with energy and patience!",
-        
+        rec30_recommendation: 
+          "Excellent teacher, with energy and patience!",
+
+        rec31_local:
+          "Computer Science - FUMEC University",
+
         rec31_relationship:
           "On March 19, 2018, Rubens was a client of João Paulo",
 
         rec31_recommendation:
           "João Paulo is the type of teacher who ensures that students truly understand the subject, both through his teaching methods and his demeanor in the classroom. He demonstrates great knowledge in his field and is willing to understand and assist each student individually, breaking away from the stereotype of a university professor who merely 'points you to the path of learning'.",
+
+        rec32_local:
+          "Computer Science - FUMEC University",
 
         rec32_relationship:
           "On March 19, 2018, Vicente was a client of João Paulo",
@@ -2358,35 +2530,53 @@ const resources = {
         rec32_recommendation:
           "As a teacher, João Paulo became fundamental in my education, since I learned programming in depth. He stands out by not teaching just the basics, but what is actually required in practice and in the job market! His concern and care for each student's learning is a strong point, and he spares no effort to ensure students are well-prepared and able to stand out professionally. His experience in the job market gives us confidence in what he teaches and makes learning easier when he shares real problems he has faced throughout his career. I am grateful to have a teacher of this caliber in my academic formation.",
 
+        rec33_local:
+          "Computer Science - FUMEC University",
+
         rec33_relationship:
           "On March 19, 2018, Igor was a client of João Paulo",
 
         rec33_recommendation:
           "João Paulo is a great teacher. Dedicated, he always attends to us in the best possible way. He has a modern teaching methodology that is compatible with the requirements of the job market.",
 
+        rec34_local:
+          "Computer Science - FUMEC University",
+
         rec34_relationship:
-          "On February 15, 2018, Felipe Ferreira reported to João Paulo",
+          "On February 15, 2018, Felipe was a client of João Paulo",
 
         rec34_recommendation:
           "João Paulo is a highly motivated and enthusiastic teacher. He shows exceptional care in preparing teaching materials, always clear and up-to-date. His classes are participatory, charismatic, and dynamic. Outside of class, he is attentive and motivating, sharing market experience and valuable advice. One of the best teachers I have ever had and a great friend.",
 
+        rec35_local:
+          "Computer Science - FUMEC University",
+
         rec35_relationship:
-          "On December 28, 2017, Gabriel reported to João Paulo",
+          "On December 28, 2017, Gabriel was a client of João Paulo",
 
         rec35_recommendation:
           "João is an excellent teacher, making every class interesting. He is also able to convey information simply and consistently challenges his students to learn more.",
 
+        rec36_local:
+          "Computer Science - FUMEC University",
+
         rec36_relationship:
-          "On December 19, 2017, Thiago Brito and João Paulo studied at the same institution",
+          "On December 19, 2017, Thiago was a client of João Paulo",
 
         rec36_recommendation:
           "Excellent teacher, always concerned with students' learning, while providing good materials and study tips. Also an outstanding person, remembering names and staying close to students. I am grateful for the opportunity to have him as my teacher.",
         
+        rec37_local:
+          "Computer Science - FUMEC University",
+
         rec37_relationship:
-          "On December 17, 2017, Gabriel and João Paulo studied at the same institution",
+          "On December 17, 2017, Gabriel was a client of João Paulo",
 
         rec37_recommendation:
           "He is among the best teachers I have ever had. While he challenges you a lot, he also makes you genuinely interested in the subject, clears any doubts, and is someone you want to carry as a friend for life. Simply sensational. I greatly appreciate all the knowledge he has already shared and continues to share.",
+
+        rec38_local:
+          "Computer Science - FUMEC University",
 
         rec38_relationship:
           "On December 15, 2017, Amanda was a client of João Paulo",
@@ -2394,11 +2584,17 @@ const resources = {
         rec38_recommendation:
           "Excellent teacher, attentive, highly knowledgeable, and has good teaching skills.",
 
+        rec39_local:
+          "Computer Science - FUMEC University",
+
         rec39_relationship:
-          "On December 14, 2017, Nilson Junio Paulino was a client of João Paulo",
+          "On December 14, 2017, Nilson was a client of João Paulo",
 
         rec39_recommendation:
           "Excellent teacher, dedicated to every subject he teaches, always seeks knowledge beyond the books, and has excellent teaching skills. I hope to be his student in another subject, as I know it will be well taught.",
+
+        rec40_local:
+          "Computer Science - FUMEC University",
 
         rec40_relationship:
           "On December 13, 2017, Lucas was a client of João Paulo",
@@ -2406,11 +2602,17 @@ const resources = {
         rec40_recommendation:
           "Despite the difficulties during the semester and the numerous bugs we had to fix, it was possible to deliver a project that applied all the theory and concepts taught in an excellent way. I can confidently say that Professor João Paulo will be a key part of my education, playing a fundamental role in my knowledge journey.",
 
+        rec41_local:
+          "Computer Science - FUMEC University",
+
         rec41_relationship:
           "On December 13, 2017, Luiz Guilherme was a client of João Paulo",
 
         rec41_recommendation:
           "I was fortunate to participate in two courses taught by Professor João Paulo Aramuni, Theoretical Foundations of Computing and Compilers. In both, he showed complete dedication to answering questions, helping students with difficulties, and always had patience and understanding. His classes have dynamics that facilitate understanding and learning, with full mastery of the subjects and practical examples.",
+
+        rec42_local:
+          "Computer Science - FUMEC University",
 
         rec42_relationship:
           "On December 13, 2017, David was a client of João Paulo",
@@ -2418,11 +2620,17 @@ const resources = {
         rec42_recommendation:
           "Excellent teacher, great teaching skills, and a strong desire to teach. The classes were very well conducted!",
         
+        rec43_local:
+          "Computer Science - FUMEC University",
+
         rec43_relationship:
           "On December 11, 2017, João Paulo was senior to Samuel, but did not directly supervise him",
 
         rec43_recommendation:
           "Professor Aramuni is one of the best teachers I have ever had. His teaching style can explain even the most complex abstractions clearly, enabling everyone to absorb knowledge and solve complex problems. There is no better person for guidance than João Paulo.",
+
+        rec44_local:
+          "Computer Science - FUMEC University",
 
         rec44_relationship:
           "On June 19, 2017, João Lucas Veloso was a client of João Paulo",
@@ -2430,11 +2638,17 @@ const resources = {
         rec44_recommendation:
           "João is a teacher who seeks and develops methods to help his students learn. He has always shown commitment to assisting, providing well-prepared materials and patience to respect each student's pace.",
 
+        rec45_local:
+          "Computer Networks Technology - FUMEC University",
+
         rec45_relationship:
-          "On February 9, 2017, Fábio and João Paulo studied at the same institution",
+          "On February 9, 2017, Fábio was a client of João Paul",
 
         rec45_recommendation:
           "Great teacher, attentive, and highly knowledgeable in what he teaches. His classes were extremely valuable, and his teaching went beyond expectations. I am glad to have shared learning experiences with him.",
+
+        rec46_local:
+          "Prosegur Brazil",
 
         rec46_relationship:
           "On January 9, 2017, Márcio worked with João Paulo on the same team",
@@ -2442,22 +2656,35 @@ const resources = {
         rec46_recommendation:
           "I have worked with João Paulo for about a year and can say he is a very dedicated, responsible, and studious professional. He always seeks knowledge and shares solutions with the team, promoting everyone's growth.",
 
+        rec47_local:
+          "Computer Networks Technology - FUMEC University",
+
         rec47_relationship:
-          "On October 17, 2016, Felipe and João Paulo studied at the same institution",
+          "On October 17, 2016, Felipe was a client of João Paul",
 
         rec47_recommendation:
           "I had the great pleasure of being a student of João Paulo at FUMEC University. Top-notch professor, competent, attentive, relaxed, able to explain complex subjects clearly and simply. All of this thanks to his love for what he does. Wishing you great success, João!",
+
+        rec48_local:
+          "Computer Networks Technology - FUMEC University",
 
         rec48_relationship:
           "On October 10, 2016, Bruno was a client of João Paulo",
 
         rec48_recommendation:
           "I had the pleasure of being a student of João Aramuni at FUMEC University. A serious and dedicated professional, he can convey programming knowledge in a structured and clear way. Excellent teacher, and I hope he stands out greatly in his academic career.",
+        
+        rec49_local:
+          "Computer Science - FUMEC University",
+
         rec49_relationship:
           "On August 23, 2015, Rafael and João Paulo studied at the same institution",
 
         rec49_recommendation:
           "I had the opportunity to study with João Paulo at FUMEC. A distinguished professional: organized, persistent, self-taught, and passionate about agile methodologies. He stood out for his communication skills and knowledge sharing.",
+
+        rec50_local:
+          "Computer Science - FUMEC University",
 
         rec50_relationship:
           "On March 4, 2015, Gabriela and João Paulo studied at the same institution",
@@ -2465,11 +2692,17 @@ const resources = {
         rec50_recommendation:
           "I recommend João for his competence, passion for his field, determination, strong will, and easy-going personality. An excellent professional.",
 
+        rec51_local:
+          "Capgemini Brazil",
+
         rec51_relationship:
           "On November 10, 2014, João Paulo was senior to Glaydson, but did not directly supervise him",
 
         rec51_recommendation:
           "I have worked with João Paulo for almost a year, and during this period he proved to be a competent and dedicated professional, performing exceptionally on projects for clients such as OI and ANP.",
+
+        rec52_local:
+          "Computer Science - FUMEC University",
 
         rec52_relationship:
           "On November 9, 2014, Lucas and João Paulo studied at the same institution",
@@ -2477,11 +2710,17 @@ const resources = {
         rec52_recommendation:
           "João is a dedicated and proactive student. He stood out in class with excellent assignments and presentations. As a speaker, he addresses agile methodologies in a way that increasingly captivates students.",
 
+        rec53_local:
+          "Capgemini Brazil",
+
         rec53_relationship:
           "On October 29, 2014, Andre worked with João Paulo but on different teams",
 
         rec53_recommendation:
           "I had the opportunity to work with João Paulo at Capgemini for one year. A professional focused on sharing information and always willing to help.",
+
+        rec54_local:
+          "Master's in Information Systems and Knowledge Management - FUMEC University",
 
         rec54_relationship:
           "On October 14, 2014, Amadeu and João Paulo studied at the same institution",
@@ -4661,65 +4900,98 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec75_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec75_relationship:
-          "Em 20 de outubro de 2026, Bernardo respondia diretamente a João Paulo",
+          "Em 20 de outubro de 2026, Bernardo foi cliente de João Paulo",
 
         rec75_recommendation:
           "Tenho o privilégio de ter o João Paulo Aramuni como professor de Desenvolvimento e Integração de Aplicações Web e das oficinas de Spring Boot e Python, na PUC Minas. Sem dúvida, suas aulas estão entre as experiências mais valiosas que tive na área. Em todos os projetos e iniciativas que conduz, fica evidente sua dedicação em oferecer o melhor aos alunos. Suas aulas combinam exemplos reais e atualizados com boas práticas, princípios e padrões de projeto, e isso nos prepara de verdade para o mercado. Graças a esse cuidado, meu interesse e meu desenvolvimento em tecnologia evoluíram muito. O Aramuni está sempre disposto a ajudar, e o incentivo que dá aos alunos para criarem projetos pessoais faz grande diferença na nossa evolução. Além de muito bem qualificado, é uma pessoa descontraída, com ótimo senso de humor. Recomendo de olhos fechados!",
 
+        rec74_local:
+          "Tecnologia em Processos Gerenciais - PUC Minas",
+        
         rec74_relationship:
           "Em 20 de outubro de 2026, Gabriel foi cliente de João Paulo",
 
         rec74_recommendation:
           "João Paulo Aramuni se dedica não apenas ao desenvolvimento de hard skills, mas também ao desenvolvimento de soft skills. Isso o faz ser um profissional requisitado no mercado de trabalho, pois se preocupa em compreender melhor o comportamento humano no universo corporativo.",
 
+        rec73_local:
+          "Ciência da Computação - PUC Minas",
+        
         rec73_relationship:
           "Em 18 de outubro de 2026, Pedro foi cliente de João Paulo",
 
         rec73_recommendation:
           "Tive aula com o professor Aramuni no meu segundo semestre de Ciência da Computação na PUC Minas. É um professor que realmente gosta e domina o que ensina, e que se dedica aos alunos muito além da sala de aula. Sua didática é muito boa, é difícil sair da aula sem ter entendido o conteúdo. Sou muito grato pelo apoio e pelos ensinamentos que recebi, que influenciaram muito a minha trajetória. Com certeza é um dos melhores professores que já tive.",
 
+        rec72_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec72_relationship:
           "Em 29 de setembro de 2026, João Gabriel foi cliente de João Paulo",
 
         rec72_recommendation:
           "Tive a oportunidade de aprender muito com Aramuni, tanto na parte teórica quanto na prática. Seu suporte e seus direcionamentos foram importantes para minha evolução e, principalmente, para que eu passasse a enxergar a Engenharia de Software com uma visão mais ampla e profissional. Sou grato por todos os aprendizados e pelas reflexões que ele proporcionou ao longo desse processo, que certamente fizeram diferença na forma como vejo a área e minha própria trajetória profissional.",
 
+        rec71_local:
+          "Ciência da Computação - PUC Minas",
+        
         rec71_relationship:
           "Em 25 de setembro de 2026, Fernando foi cliente de João Paulo",
 
         rec71_recommendation:
           "Um dos melhores professores que tive. Realmente alguém que não só entende como gosta das ferramentas que usa e ensina. Sua didática e compreensão dos tópicos são sempre surpreendentes e sempre ajudam a situar e ensinar os alunos.",
 
+        rec70_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec70_relationship:
           "Em 26 de junho de 2026, Eric respondia diretamente a João Paulo",
 
         rec70_recommendation:
           "Tive o prazer de trabalhar com João Paulo como meu orientador durante o Trabalho de Conclusão de Curso (TCC). Ao longo de todo o projeto, ele forneceu orientações valiosas não apenas sobre os aspectos técnicos do desenvolvimento, mas também sobre a documentação e a estruturação dos diagramas UML e de arquitetura. Seus feedbacks contribuíram de forma consistente para melhorar a qualidade e a clareza do nosso trabalho. O que mais admirei foi seu estilo de orientação: ele nos deu autonomia para tomar decisões e explorar soluções por conta própria, ao mesmo tempo em que sempre esteve disponível para esclarecer dúvidas, discutir ideias e oferecer feedbacks valiosos sempre que necessário. Esse equilíbrio entre independência e apoio tornou a experiência de aprendizado desafiadora e, ao mesmo tempo, extremamente enriquecedora. Recomendo fortemente o João Paulo a qualquer pessoa que esteja em busca de um orientador experiente, acessível e verdadeiramente comprometido com o desenvolvimento de seus alunos.",
 
+        rec69_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec69_relationship:
           "Em 04 de maio de 2026, Pedro foi cliente de João Paulo",
 
         rec69_recommendation:
           "O professor João Paulo, mais conhecido como Aramuni tem bastante destaque pela excelência na condução das disciplinas de Tecnologia da Informação no curso de Engenharia de Software. Sua atuação é marcada por alto nível de competência técnica, profissionalismo e domínio aprofundado dos conteúdos ministrados. Possui uma didática clara e estruturada, consegue tornar compreensíveis temas complexos, sempre conectando teoria e prática de forma eficiente. Além disso, apresenta um diferencial importante ao incorporar conteúdos alinhados às demandas atuais do mercado, abordando tecnologias modernas e incentivando o uso de ferramentas e abordagens de ponta. Sua metodologia estimula o aprendizado contínuo, a autonomia dos alunos e o desenvolvimento de pensamento crítico, gerando assim uma preparação de forma consistente para os desafios reais da área. Outro ponto relevante é sua capacidade de motivar os estudantes a acompanharem a rápida evolução tecnológica, promovendo um ambiente dinâmico e orientado à inovação. Trata-se de um profissional comprometido com a qualidade do ensino e com a formação sólida de futuros engenheiros de software, sendo altamente recomendável.",
 
+        rec68_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec68_relationship:
           "Em 27 de abril de 2026, Felipe foi cliente de João Paulo",
 
         rec68_recommendation:
           "Tive o João Paulo como professor na PUC Minas e posso dizer que é um excelente profissional. Sempre muito disponível, me ajudou diversas vezes com dúvidas relacionadas a projetos pessoais, demonstrando um real interesse no aprendizado dos alunos. Ele teve um papel importante no meu aprofundamento em arquitetura de software, trazendo uma visão prática e bem estruturada de um tema que considero essencial na área. Além disso, também compartilha ótimas dicas sobre carreira, o que agrega ainda mais valor à sua atuação como professor.",
 
+        rec67_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec67_relationship:
           "Em 25 de abril de 2026, Artur foi cliente de João Paulo",
 
         rec67_recommendation:
           "Tenho a oportunidade de ser aluno do professor João Paulo Aramuni e posso afirmar que sua didática se destaca pela forma dinâmica e envolvente com que conduz as aulas. Um dos seus grandes diferenciais é o foco em atividades práticas, sempre incentivando o desenvolvimento de projetos com tecnologias relevantes para o mercado. Isso torna o aprendizado muito mais aplicado e próximo da realidade profissional. Além disso, é nítido o alto nível de conhecimento que ele possui, tanto no contexto acadêmico, como professor de Projeto de Software, estruturando e modelando soluções, quanto pela sua vivência de mercado, trazendo sempre uma visão prática e atualizada para as aulas. O professor Aramuni também está sempre disponível para apoiar os alunos, esclarecendo dúvidas e contribuindo de forma proativa no desenvolvimento de trabalhos e projetos, o que faz toda a diferença na evolução de quem está aprendendo. Sem dúvida, é um professor que impacta positivamente a formação dos alunos e os prepara de forma sólida para os desafios da área de tecnologia.",
 
+        rec66_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec66_relationship:
           "Em 18 de dezembro de 2025, Tito era cliente de João Paulo",
 
         rec66_recommendation:
           "É com grande satisfação que recomendo o Professor João Paulo Aramuni. Como meu orientador de TCC, sua disponibilidade e conhecimento técnico foram cruciais para o desenvolvimento do software 'Keep', uma solução inovadora para o gerenciamento de parque de máquinas. Sua capacidade de guiar e estimular o pensamento crítico foi fundamental para o êxito do projeto e para meu desenvolvimento profissional, além de todo material complementar que ele me apresentou foram cruciais para meu melhor aprendizado.",
+
+        rec65_local:
+          "Engenharia de Software - PUC Minas",
 
         rec65_relationship:
           "Em 16 de dezembro de 2025, Guilherme era cliente de João Paulo",
@@ -4727,29 +4999,44 @@ const resources = {
         rec65_recommendation:
           "Tive a sorte de ter o João Paulo Aramuni como professor na disciplina de Projeto de Software. Ele é aquele tipo de professor que não só domina o assunto, mas tem um jeito de explicar que faz tudo parecer mais simples. O que mais valorizo nele é a parceria: sempre acessível, pronto para trocar uma ideia sobre o mercado e dar aquelas dicas de carreira que a gente não encontra nos livros. É um profissional que torce de verdade pelo sucesso dos alunos. Recomendo demais!",
 
+        rec64_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec64_relationship:
           "Em 12 de dezembro de 2025, Lucas era cliente de João Paulo",
 
         rec64_recommendation:
           "Tive o privilégio nesse semestre de ser aluno do professor João Paulo Aramuni em FPAA na Engenharia de Software. Além de dominar o conteúdo e explicar a matéria de forma clara, sempre esteve presente para tirar dúvidas, orientar sobre carreira e indicar estudos, e atividades extracurriculares que realmente agregam e contribuem para a formação acadêmica e profissional dos seus alunos. Um professor competente, acessível e comprometido com o desenvolvimento dos alunos.",
 
+        rec63_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec63_relationship:
           "Em 25 de novembro de 2025, Leonardo respondia a João Paulo",
 
         rec63_recommendation:
           "Aprender com o João Paulo Aramuni foi uma das melhores experiências que tive. Ele explica tudo de um jeito claro, direto e sem enrolação, mesmo quando o assunto é complicado. Dá pra ver que ele realmente entende do que fala e, mais importante, sabe ensinar de verdade. O que mais gosto nele é que ele não fica só no conteúdo da aula: ele puxa exemplos do mercado, dá dicas de carreira, mostra caminhos e realmente se preocupa com o nosso desenvolvimento. Já me ajudou em dúvidas técnicas, decisões de projeto e até em como pensar melhor como profissional. É um professor que motiva, que soma e que faz a diferença. Quem tiver a chance de aprender com ele, aproveite, vale muito a pena.",
 
+        rec62_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec62_relationship:
           "Em 19 de novembro de 2025, Bruna era cliente de João Paulo",
 
         rec62_recommendation:
           "O João Paulo demonstra clareza na comunicação, domínio técnico e uma preocupação genuína em gerar impacto positivo por meio de seus projetos e iniciativas. Sua trajetória revela comprometimento, capacidade de liderança e uma busca contínua por aprendizado — características que fazem dele um destaque em sua área. É evidente que ele é um profissional que agrega valor onde atua, não apenas pelo conhecimento que possui, mas também pela forma como compartilha insights e inspira outros profissionais ao seu redor. Recomendo sua conexão e seu trabalho a todos que procuram alguém com visão, competência e postura exemplar.",
 
+        rec61_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec61_relationship:
           "Em 18 de novembro de 2025, Otávio era cliente de João Paulo",
 
         rec61_recommendation:
           "Recomendo fortemente o João Paulo Aramuni como profissional e como professor. Tive a oportunidade de ser seu aluno em projetos de tecnologia e posso dizer que ele consegue unir, de forma rara, profundidade técnica com uma didática muito clara. João Paulo tem uma visão estratégica muito sólida, traz exemplos reais do mercado e sempre busca conectar teoria com prática, o que gera um impacto direto no resultado do trabalho. Além da competência técnica como CTO e Tech Lead, o que mais me chama atenção é a disponibilidade em ajudar e a preocupação genuína com o desenvolvimento das pessoas ao redor. Em diversos momentos ele saiu do “básico” esperado de um consultor/professor para orientar carreira, revisar decisões técnicas e sugerir caminhos mais sustentáveis para o projeto. É um profissional ético, atualizado e que realmente soma a qualquer equipe ou iniciativa em que esteja envolvido.",
+
+        rec60_local:
+          "Engenharia de Software - PUC Minas",
 
         rec60_relationship:
           "Em 28 de outubro de 2025, Fernanda respondia a João Paulo",
@@ -4757,11 +5044,17 @@ const resources = {
         rec60_recommendation:
           "Tive a oportunidade de ser aluna do professor João Paulo Aramuni, e posso dizer que ele é um dos professores mais acessíveis e dedicados que já tive. Está sempre disposto a ajudar e realmente se preocupa com o aprendizado dos alunos, estando presente para o que for preciso: tirando dúvidas, orientando projetos ou dando conselhos sobre a carreira. É um profissional completo e uma pessoa incrível, que faz toda a diferença na trajetória acadêmica de quem tem a sorte de aprender com ele.",
 
+        rec59_local:
+          "Engenharia de Software - PUC Minas",
+
         rec59_relationship:
           "Em 20 de outubro de 2025, Paulo respondia a João Paulo",
 
         rec59_recommendation:
           "João Paulo Aramuni foi meu professor em duas matérias muito importante na minha faculdade, Algoritmos e Estrutura de Dados 1 e Projeto de Software, sendo um professor que possui uma ótima didática e materiais espetaculares, principalmente no seu GitHub, tendo diversos slides, projetos, figmas e outros materiais que são essenciais para um bom desenvolvimento como aluno. Super indico como professor e desenvolvedor.",
+
+        rec58_local:
+          "Engenharia de Software - PUC Minas",
 
         rec58_relationship:
           "Em 27 de setembro de 2025, Gabriel era cliente de João Paulo",
@@ -4769,53 +5062,80 @@ const resources = {
         rec58_recommendation:
           "Tenho o privilégio de ser aluno do professor Aramuni, e posso dizer com toda certeza que suas aulas vão muito além do conteúdo teórico. Ele tem uma abordagem extremamente conectada com o mercado, sempre trazendo exemplos reais, cases relevantes e convidando profissionais experientes da área para compartilhar vivências e desafios do dia a dia. Essa conexão prática com o mercado torna suas aulas muito mais ricas, atualizadas e inspiradoras. O professor Aramuni tem uma didática clara, objetiva e, ao mesmo tempo, instigante, sempre incentivando a reflexão crítica e o desenvolvimento profissional dos alunos.",
 
+        rec57_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec57_relationship:
           "Em 16 de setembro de 2025, Davi respondia a João Paulo",
 
         rec57_recommendation:
           "Tive a oportunidade de conviver com o João Paulo durante o curso e posso dizer que ele é um cara muito gente boa, parceiro de verdade. Sempre aberto para trocar ideia, brincar, conversar e ao mesmo tempo mostrar que sabe muito do que fala. O que mais me chama atenção é a disposição em ajudar independente da hora, sempre com paciência e vontade de ver o outro crescer. Isso faz toda diferença no ambiente de aprendizado e mostra o quanto ele é colaborativo. Além disso, é notável o conhecimento técnico que ele tem, tanto em desenvolvimento quanto em boas práticas, o que dá segurança quando está explicando ou guiando alguma atividade. Recomendo muito o João Paulo, tanto pelo profissional que é quanto pela pessoa incrível que se mostra no dia a dia.",
 
+        rec56_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec56_relationship:
           "Em 15 de setembro de 2025, Nataniel era cliente de João Paulo",
 
         rec56_recommendation:
           "Excelente Professor. Tem completo domínio do conteúdo lecionado, e transmite o conhecimento de maneira leve, didática, desmistificando conteúdos mais densos e complexos. Está sempre disponível, disposto a ajudar e contribuir para o crescimento pessoal e profissional dos alunos.",
 
+        rec55_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec55_relationship:
           "Em 13 de setembro de 2025, Jonathan era cliente de João Paulo",
 
         rec55_recommendation:
           "Tive a oportunidade de ser aluno do professor João Paulo Aramuni e posso afirmar que sua forma de ensinar vai muito além do conteúdo técnico. Ele é um orientador que inspira, sempre disposto a auxiliar e tornar o aprendizado mais leve, humano e motivador. Os exercícios e projetos propostos em aula não apenas enriquecem o portfólio, mas também contribuem de forma significativa para o nosso desenvolvimento como estudantes e para a preparação para o mercado profissional. Sem dúvida, é um professor que deixa uma marca positiva na trajetória acadêmica e faz a diferença na formação dos alunos.",
 
+        rec0_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec0_relationship:
           "Em 9 de setembro de 2025, Raphael respondia a João Paulo",
 
         rec0_recommendation:
           "O João Aramuni é, de longe, o melhor Professor que eu poderia ter na Universidade. As aulas são claras e o conteúdo apresentado é condizente com a realidade do mercado. Além de ótimo tutor, ele me deu uma oportunidade de ouro ao confiar em meu trabalho para liderar um dos maiores projetos da Agência Experimental de Software, impactando todo o Estado e mostrando que os alunos têm chances e que são mais que números na academia. Recomendo de olhos vendados este profissional e levo para a vida todos os aprendizados.",
 
+        rec1_local:
+          "Centro Universitário Newton Paiva Wyden e PUC Minas",
+        
         rec1_relationship:
           "Em 31 de agosto de 2025, Michelle Hanne trabalhava com João Paulo na mesma equipe",
 
         rec1_recommendation:
           "Aramuni é um excelente docente, comprometido com o desenvolvimento técnico e humano dos alunos. Se preocupa em desenvolver material didático, bem como oficinas que dão suporte aos alunos. Disciplinas como Fundamentos de Projeto, Análise de Algoritmos, Projeto de Software, Laboratórios de Desenvolvimento de Software entre outras, são de suma importância para a formação acadêmica e para formação em Engenharia de Software. Enfim, excelente líder técnico e competente profissional docente.",
 
+        rec2_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec2_relationship:
           "Em 5 de agosto de 2025, Pedro respondia a João Paulo",
 
         rec2_recommendation:
           "I had the honor of working with Aramuni as my undergraduate thesis advisor, and I can confidently say that his mentorship extended far beyond academic guidance. From day one, he fostered an environment of trust, curiosity, and autonomy, encouraging independent thinking while always being available when needed. What impressed me most was his commitment. No matter how busy his schedule was, he consistently made time to meet, provide thoughtful feedback, and check in on my progress. Beyond his role as a thesis advisor, Aramuni is a truly passionate educator. He brings not only deep technical expertise to the table, but also a genuine sense of purpose in teaching and mentoring others.",
 
+        rec3_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec3_relationship:
           "Em 30 de julho de 2025, Bernardo respondia a João Paulo",
 
         rec3_recommendation:
           "During the first semester of 2025, I had the privilege of working with Professor Aramuni as my thesis advisor. His guidance was instrumental throughout the process. He gave us the freedom to explore different technologies and encouraged independent thinking, while also providing clear and constructive feedback at every stage. What stood out most was his consistent availability — he always made time for me and my partner, setting up regular meetings and ensuring we felt supported. His calm demeanor and genuine care created a welcoming environment that made it easy for us to grow and develop. Professor Aramuni is an excellent mentor and a remarkable educator.",
 
+        rec4_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec4_relationship:
           "Em 25 de julho de 2025, Luca respondia a João Paulo",
 
         rec4_recommendation:
           "Professor Aramuni is one of the most dedicated and inspiring educators I’ve ever had the privilege to learn from. Creative and constantly innovating, he brings not only a deep theoretical foundation to his classes but also a strong focus on real-world application through hands-on exercises, interactive quizzes, and practical projects — many of which are available for free on his GitHub. What truly sets him apart, however, is his availability and genuine care for each student. He consistently makes time for one-on-one meetings, offering mentorship on both academic and career paths. His extensive professional background enriches every class with real-world examples and valuable insights. In my case, the conversations I had with him over the past few months played a key role in shaping important career decisions. Being his student was not just a great academic experience — it was a transformative one.",
+
+        rec5_local:
+          "Engenharia de Software - PUC Minas",
 
         rec5_relationship:
           "Em 19 de setembro de 2024, Flavio respondia a João Paulo",
@@ -4823,23 +5143,35 @@ const resources = {
         rec5_recommendation:
           "Durante aproximadamente um ano, tive o privilégio de ser aluno do professor João Paulo Aramuni. Ele se destaca não apenas pelo vasto conhecimento técnico, mas pela evidente paixão que nutre pela tecnologia, a qual transparece em cada uma de suas aulas. Sua abordagem diferenciada combina uma didática envolvente e dinâmica, que torna o aprendizado mais acessível e interessante. Além disso, sua capacidade de oferecer uma atenção individualizada a cada aluno demonstra seu compromisso com o desenvolvimento pessoal e acadêmico de todos, criando um ambiente onde cada um se sente valorizado e estimulado a crescer.",
 
+        rec6_local:
+          "Análise e Desenvolvimento de Sistemas - Centro Universitário Newton Paiva Wyden",
+        
         rec6_relationship:
           "Em 22 de agosto de 2024, Pedro respondia a João Paulo",
 
         rec6_recommendation:
           "Tive o privilégio de ser aluno do João, com quem aprendi muito sobre banco de dados e Java. Ele é um excelente mestre, muito competente e sempre disposto a ajudar! Ele demonstra total domínio das matérias, transformando conteúdos complexos em algo fácil de entender e aprender. Recomendo-o fortemente a qualquer um que deseje se aprofundar nessas áreas. Qualquer um que tenha a oportunidade de aprender com ele estará em boas mãos!",
 
+        rec7_local:
+          "Centro Universitário Newton Paiva Wyden e PUC Minas",
+        
         rec7_relationship:
           "Em 22 de agosto de 2024, Angélica e João Paulo estudavam na mesma instituição",
 
         rec7_recommendation:
           "Costumo dizer que o João foi 'picado pelo mosquito' que nos fez apaixonar pela docência. Ambos amávamos nossas carreiras, que nos consolidaram, mas, mesmo assim, a docência nos chamou, e hoje somos plenamente realizados nessa área. Além disso, o João é um verdadeiro parceiro, sempre atento a apoiar as pessoas que ele considera talentosas. Tenho o privilégio de ser uma dessas pessoas. Graças ao João, realizei o sonho de lecionar na graduação, e ele foi tão generoso que até me cedeu suas turmas. O que posso dizer de uma pessoa tão extraordinária? João, o mundo é seu, meu amigo! Conte comigo para deixarmos nossa marca na nova 'safra' de talentos em TI.",
 
+        rec8_local:
+          "Centro Universitário Newton Paiva Wyden",
+        
         rec8_relationship:
           "Em 20 de agosto de 2024, Max e João Paulo estudavam na mesma instituição",
 
         rec8_recommendation:
           "Falar do João Aramuni é tarefa fácil, tive o privilégio de contar com sua ajuda em diversas ocasiões, e posso afirmar com segurança que ele é uma pessoa extraordinariamente inteligente e colaborativa. Seu espírito de equipe é simplesmente notável, sempre disposto a contribuir para o sucesso coletivo. Além de suas habilidades profissionais, ele possui um excelente convívio, sendo uma pessoa extremamente agradável e respeitosa. Sua capacidade de trabalhar bem com os outros e sua disposição em compartilhar conhecimentos fazem dele uma pessoa notável para qualquer equipe.",
+
+        rec9_local:
+          "Ciência da Computação - Universidade FUMEC",
 
         rec9_relationship:
           "Em 19 de agosto de 2024, Rubens Gabriel era cliente de João Paulo",
@@ -4847,17 +5179,26 @@ const resources = {
         rec9_recommendation:
           "Tive a sorte de ter o Professor João Aramuni como meu professor e orientador de TCC. Ele se destaca por tornar conceitos complexos mais acessíveis e por seu compromisso com o desenvolvimento dos seus alunos. Ele sempre esteve disponível para oferecer orientação e apoio, o que foi fundamental para o meu crescimento acadêmico. Recomendo para qualquer pessoa que tenha a oportunidade de trabalhar ou aprender com ele.",
 
+        rec10_local:
+          "Engenharia de Software - PUC Minas",
+        
         rec10_relationship:
           "Em 19 de junho de 2024, João Paulo era sênior em relação a Pedro, mas não supervisionava Pedro diretamente",
 
         rec10_recommendation:
           "João Paulo Aramuni é um professor muito bom, durante meu tempo em sua classe, fiquei impressionado com seu profundo conhecimento técnico e sua habilidade em transmitir conceitos complexos de forma clara e acessível. Sua abordagem didática incentiva a participação ativa dos alunos, promovendo um ambiente de aprendizagem colaborativo e enriquecedor. Além disso, sua paixão pela disciplina é evidente em cada aula, inspirando seus alunos a se esforçarem para alcançar excelência acadêmica.",
 
+        rec11_local:
+          "Trybe - Escola de Programação",
+        
         rec11_relationship:
           "Em 1 de março de 2024, Tulio respondia a João Paulo",
 
         rec11_recommendation:
           "Tive o prazer de ser liderado pelo Aramuni durante a maior parte do tempo em que trabalhei na Trybe, e posso afirmar que foi uma liderança exemplar e inspiração como profissional. Sempre se preocupou com o desenvolvimento de seus liderados, apontando oportunidades dentro da empresa para evolução e incentivando a realização de cursos e leitura de livros. Sempre que levava observações de pontos de melhora na operação era incentivado pelo João a reunir dados e documentar fatos para que pudesse embasar discussões com lideranças de níveis superiores a fim de melhorar processos do time com um todo, o que rendeu mudanças em algumas tarefas que eram realizadas por todos os demais instrutores e especialistas da empresa. Recomendo fortemente tanto como liderança como referência técnica de computação.",
+
+        rec12_local:
+          "Análise e Desenvolvimento de Sistemas - Centro Universitário Newton Paiva Wyden",
 
         rec12_relationship:
           "Em 8 de fevereiro de 2024, Luíza respondia a João Paulo",
@@ -4865,11 +5206,17 @@ const resources = {
         rec12_recommendation:
           "O professor Aramuni é um educador excepcional na área de Banco de Dados. Durante o período em que fui sua aluna, pude experimentar uma abordagem de ensino verdadeiramente didática, que fez toda a diferença em minha jornada acadêmica, não apenas domina profundamente o conteúdo, mas também possui a habilidade única de transmitir conceitos complexos de uma maneira clara e acessível. Sua abordagem leve e divertida torna as aulas envolventes, proporcionando um ambiente propício para o aprendizado. Além disso, sua paciência e disposição em ajudar os alunos foram essenciais para o meu desenvolvimento acadêmico. Tenho certeza de que ele continuará impactando positivamente a vida de seus alunos, assim como fez comigo.",
 
+        rec13_local:
+          "Análise e Desenvolvimento de Sistemas - Centro Universitário Newton Paiva Wyden",
+        
         rec13_relationship:
           "Em 30 de janeiro de 2024, Thiago respondia a João Paulo",
 
         rec13_recommendation:
           "O Professor João Paulo Aramuni, é um excelente professor! Quando iniciei na faculdade tive muita dificuldade com Java e estava tomando raiva/trauma da matéria, porém após as aulas, eu aprendi a gostar e com a ajuda dele comecei a me aperfeiçoar e melhorar cada vez mais. Sua forma de ensino é incrível e cativante, desmistificando aquilo que parece ser complexo, tornando para algo simples! Ele consegue abordar os detalhes e nos ensina não somente a fazer, mas entender o que estamos fazendo, sempre me deu muito apoio, mesmo fora da faculdade, sempre pude e posso contar com ele! Sou muito grato!",
+
+        rec14_local:
+          "Trybe - Escola de Programação",
 
         rec14_relationship:
           "Em 18 de dezembro de 2023, Carlos respondia a João Paulo",
@@ -4877,22 +5224,35 @@ const resources = {
         rec14_recommendation:
           "Trabalhar sob a liderança de Aramuni por 18 meses foi uma baita de uma experiência tanto para o meu desenvolvimento profissional quanto para o pessoal. Aramuni demonstrou ser um líder excepcional, fornecendo suporte contínuo, e a liberdade criativa que todo o time precisava seja para lecionar ou para criar um conteúdo de alta qualidade. Com seus conhecimentos sobre Python, algoritmos e raspagem de dados, Aramuni foi pedra angular na construção e operação do módulo de ciência da computação. Aprendi muito com ele, não só em termos técnicos, mas também em como ser um profissional mais completo e adaptável. Sou grato por toda a sua orientação e o considero um mentor, líder e amigo.",
 
+        rec15_local:
+          "Trybe - Escola de Programação",
+        
         rec15_relationship:
           "Em 6 de novembro de 2023, João Vitor respondia a João Paulo",
 
         rec15_recommendation:
           "Atuando como minha liderança, o Aramuni me fez evoluir muito. Trouxe ótimos PDIs, discussões técnicas e, também, recomendações excelentes de estudo. Além disso, foi uma liderança que gerava oportunidades tanto para os menos experientes quanto para os mais experientes, favorecendo a confiança de todos os seus diretos. Possui uma ótima gestão de pessoas, todo o time o admirava. Ressalto, também, que além dos benefícios para crescimento e entrega dos liderados, ele mantinha o foco em gerar valor para o negócio, e com isso, fez entregas excelentes. Recomendo o Aramuni como uma liderança que pode agregar tanto para a empresa tanto para seus diretos.",
 
+        rec16_local:
+          "Trybe - Escola de Programação",
+        
         rec16_relationship:
           "Em 25 de outubro de 2023, Tiago respondia a João Paulo",
 
         rec16_recommendation:
           "O Aramuni realiza uma liderança muito humana, com bastante atenção aos pontos de melhoria e o que é necessário fazer para atingir as metas. Sou muito grato por ter sido liderado por ele, e dizer que cresci muito como profissional e pessoa porque ele é um excelente ouvinte e super empático. A sua recomendação é muito merecida porque é um profissional extremamente comprometido e responsável, que não tem medo de dar a cara quando é preciso.",
 
-        rec17_relationship: "Em 8 de junho de 2023, Eli respondia a João Paulo",
+        rec17_local:
+          "Trybe - Escola de Programação",
+        
+        rec17_relationship: 
+          "Em 8 de junho de 2023, Eli respondia a João Paulo",
 
         rec17_recommendation:
           "É um prazer recomendar o Aramuni, ele foi minha liderança na Trybe e também acompanhei seu trabalho como Líder Técnico de Currículo de Ciência da Computação. Durante esse período, pude testemunhar suas habilidades excepcionais e seu comprometimento com o sucesso da equipe. Sua combinação única de conhecimento acadêmico, experiência prática e habilidades de liderança o tornam um profissional notável. Além disso, ele é uma pessoa incrível, sempre disposta a ajudar e contribuir com os outros. Sua orientação e apoio foram essenciais para minha evolução profissional, tanto em termos técnicos quanto em desenvolvimento pessoal. Sou extremamente grato por tudo o que aprendi com ele e recomendo-o com muito orgulho.",
+
+        rec18_local:
+          "Trybe - Escola de Programação",
 
         rec18_relationship:
           "Em 9 de maio de 2023, Cristiano respondia a João Paulo",
@@ -4900,17 +5260,26 @@ const resources = {
         rec18_recommendation:
           "Aramuni é uma pessoa que demonstra extrema responsabilidade com suas atribuições profissionais e é uma pessoa que tem o dom de saber se relacionar com as pessoas tornando o ambiente de trabalho local leve e agradável. Pessoalmente aprende rápido os processos, é extremamente focado em suas atividades, demonstra potencial técnico altíssimo, está sempre preocupado com sua constante evolução, isso tudo sem abandonar o carinho e cuidado com as pessoas. Gosto muito de trabalhar com ele pois aprendo muito e me torno um profissional melhor com seus exemplos e conselhos. Sou grato por essa oportunidade diária de parceria em atividades e desejo de coração manter essa relação produtiva por muito tempo.",
 
+        rec19_local:
+          "Trybe - Escola de Programação",
+        
         rec19_relationship:
           "Em 12 de março de 2023, Will e João Paulo estudavam na mesma instituição",
 
         rec19_recommendation:
           "Excelente oportunidade que tive em trabalhar com o Aramuni, aprendi muito com ele. Afinal foi minha primeira experiência lecionando Programação, e ele me ensinou e muito. Ótimo Professor e Líder, sempre pontuando o time com feedbacks assertivos! Obrigado Aramuni!",
 
+        rec20_local:
+          "Trybe - Escola de Programação",
+        
         rec20_relationship:
           "Em 7 de fevereiro de 2022, João Paulo era sênior em relação a André, mas não supervisionava André diretamente",
 
         rec20_recommendation:
           "O Aramuni consegue organizar pautas e trazer objetividade às reuniões, mantendo o time organizado e orientado. Além disso, é super calmo e gente boa, e sempre traz umas músicas suaves pros momentos descontraídos. Um cara muito legal para se trabalhar com =D",
+
+        rec21_local:
+          "Desenvolvimento Web FullStack - Trybe - Escola de Programação",
 
         rec21_relationship:
           "Em 10 de agosto de 2021, Douglas respondia a João Paulo",
@@ -4918,17 +5287,26 @@ const resources = {
         rec21_recommendation:
           "Ter o Aramuni como instrutor foi uma das melhores experiências que eu tive na minha vida. Seus conselhos e direcionamento me fez perceber exatamente minhas qualidades e fraquezas tecnológicas. Hoje eu sei para onde eu vou, pois sei qual caminho percorrer. Paciência, calma, lucidez e estratégia para ensinar, me dava confiança que eu ia vencer qualquer etapa que por ventura surgia. Ele é brilhante como instrutor, lead, influênciador e um amigo para a vida toda.",
 
+        rec22_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec22_relationship:
           "Em 2 de outubro de 2020, João Paulo era sênior em relação a Bruno, mas não supervisionava Bruno diretamente",
 
         rec22_recommendation:
           "Tive o prazer de ser Aluno e Orientado do TCC pelo João. Uma pessoa que sempre fez a diferença, no meio acadêmico, e que me ajudou e muito a me tornar o profissional que eu sou hoje. E como eu digo, professores brilhantes ensinam para uma profissão. Professores fascinantes como o João ensinam para a vida.",
 
+        rec23_local:
+          "Universidade FUMEC e Álamo TI",
+        
         rec23_relationship:
           "Em 11 de setembro de 2020, Klelvin trabalhava com João Paulo na mesma equipe",
 
         rec23_recommendation:
           "Conheço o João tem bem uns 10 anos e compartilhei com ele vários momentos da vida durante a carreira. Foi colega de faculdade, colega de trabalho e se tornou um amigo de vida. Acadêmico dedicado, educador exemplar e profissional de atribuições ímpares. Quem dera todo lugar que eu trabalhasse tivesse um João Paulo.",
+
+        rec24_local:
+          "IN8 Holding - Desenvolvimento de Software",
 
         rec24_relationship:
           "Em 25 de abril de 2020, Rafael trabalhava com João Paulo na mesma equipe",
@@ -4936,11 +5314,17 @@ const resources = {
         rec24_recommendation:
           "João é um profissional exemplar e por ter background acadêmico, está sempre aberto a aprender novas tecnologias e métodos. Ao mesmo tempo sempre está compartilhando conhecimento com todo mundo.",
 
+        rec25_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec25_relationship:
           "Em 17 de novembro de 2018, Eduardo e João Paulo estudavam na mesma instituição",
 
         rec25_recommendation:
           "Tive o prazer de ser aluno do João Paulo na FUMEC e seguramente é um dos professores/profissionais mais competentes com o qual convivi. Sempre busca oferecer o melhor aos seus alunos, preparando aulas e projetos diferenciados. Trata-se de um profissional com bastante experiência e conhecimento.",
+
+        rec26_local:
+          "Ciência da Computação - Universidade FUMEC",
 
         rec26_relationship:
           "Em 27 de março de 2018, Bruno era cliente de João Paulo",
@@ -4948,40 +5332,62 @@ const resources = {
         rec26_recommendation:
           "É inefável os talentos exibidos pelo prof. João, o pouco que o conheço, como seu aluno, fica evidente suas qualidades profissionais e interpessoais. Sempre disponível mostra total interesse em fazer um excelente trabalho, no caso transmitir conhecimento. Se existe alguém o qual gostaria de ter como colega de equipe seria o João Paulo.",
 
+        rec27_local:
+          "Ciência da Computação - Universidade FUMEC",
+
         rec27_relationship:
           "Em 23 de março de 2018, Leonardo era cliente de João Paulo",
 
         rec27_recommendation:
           "João Paulo é um professor excepcional, mostra que a programação vai muito além da sintaxe. Guia o aluno em toda a busca pelo conhecimento, sendo não apenas professor, mas também companheiro. Extremamente aberto para responder quaisquer dúvidas e nos ajudar a evoluir.",
 
+        rec28_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec28_relationship:
           "Em 20 de março de 2018, Rafaela era cliente de João Paulo",
 
         rec28_recommendation:
           "Eu conheço o João Paulo como 'Professor Aramuni', onde foi a primeira vez que tive contato com ele. Posso dizer que ele é um dois melhores professores que eu tive: super dedicado, explica bem a matéria e mostra ter conhecimento total do que ele está ensinando. Eu pedi bastante a sua ajuda no decorrer do curso e sempre recebi uma resposta rápida, foi ótimo! Ele faz o possível para nos incentivar a estudar, fala de vagas de emprego e estágio para os que estão precisando, e incentiva as pessoas a aprofundar seus estudos em cursos, livros, iniciação científica e até seguir para o mestrado e doutorado. Foi um prazer ter aula com ele, e espero trabalhar com ele no futuro!",
 
+        rec29_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec29_relationship:
           "Em 19 de março de 2018, Pedro Henrique era cliente de João Paulo",
 
         rec29_recommendation:
           "Excelente professor! Mestre diferenciado em que está atualizado a novas metodologias de ensino! Intriga e desafia seus alunos a pensar diferente. Sempre disponível e atencioso!",
 
+        rec30_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec30_relationship:
           "Em 19 de março de 2018, Henrique era cliente de João Paulo",
 
-        rec30_recommendation: "Excelente professor, com dinâmica e paciência!",
+        rec30_recommendation: 
+          "Excelente professor, com dinâmica e paciência!",
 
+        rec31_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec31_relationship:
           "Em 19 de março de 2018, Rubens era cliente de João Paulo",
 
         rec31_recommendation:
           "João Paulo é o tipo de professor que se propõe a garantir que o aluno assimile a matéria, tanto em sua didática quanto em sua postura perante a classe. Demonstra um grande conhecimento na área que leciona e se dispõe a entender e atender individualmente aos alunos. Fugindo do estereótipo de professor universitário que apenas 'te indica o caminho da aprendizagem'.",
 
+        rec32_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec32_relationship:
           "Em 19 de março de 2018, Vicente era cliente de João Paulo",
 
         rec32_recommendation:
           "Como professor, Joāo Paulo tornou-se fundamental na minha formaçāo, tendo em vista que tive/tenho aprendido muito a fundo a programaçāo, se destaca em nāo ensinar o básico e sim o que é cobrado na pratica e no mercado de trabalho! A preocupaçāo e cuidado com o aprendizado de cada um, é ponto forte tambḿ, de modo que nāo mede esforços para que o aluno se capacite e consiga se destacar no mercado de trabalho. Sua experiencia no mercado de trabalho, faz com que tenhamos confiança no que está sendo passado e facilita o aprendizado quando explicita problemas reais que enfrentou em toda sua trajetória. Sou grato de ter um professor deste nivel em minha formaçāo academica.",
+
+        rec33_local:
+          "Ciência da Computação - Universidade FUMEC",
 
         rec33_relationship:
           "Em 19 de março de 2018, Igor era cliente de João Paulo",
@@ -4989,101 +5395,152 @@ const resources = {
         rec33_recommendation:
           "João Paulo é ótimo professor. Dedicado, sempre nos atende da melhor maneira. Tem uma metodologia de ensino atual que é compatível com as exigências do mercado de trabalho.",
 
+        rec34_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec34_relationship:
-          "Em 15 de fevereiro de 2018, Felipe Ferreira respondia a João Paulo",
+          "Em 15 de fevereiro de 2018, Felipe era cliente de João Paulo",
 
         rec34_recommendation:
           "João Paulo é um professor totalmente motivado e interessado em ensinar. Possui um cuidado ímpar na preparação do material de ensino, sempre claro e atualizado. Sua aula é participativa, carismática e dinâmica. Fora das aulas é interessado e motivador, compartilhando vivência de mercado e bons conselhos. Um dos melhores professores que já tive e grande amigo.",
 
+        rec35_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec35_relationship:
-          "Em 28 de dezembro de 2017, Gabriel respondia a João Paulo",
+          "Em 28 de dezembro de 2017, Gabriel era cliente de João Paulo",
 
         rec35_recommendation:
           "O João é um excelente professor, conseguiu deixar todas as aulas interessantes. Também consegue passar a informação de forma simples, está sempre desafiando seus alunos para aprender mais.",
 
+        rec36_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec36_relationship:
-          "Em 19 de dezembro de 2017, Thiago Brito e João Paulo estudavam na mesma instituição",
+          "Em 19 de dezembro de 2017, Thiago era cliente de João Paulo",
 
         rec36_recommendation:
           "Excelente professor, sempre preocupado com o aprendizado, além de proporcionar bons materiais e dicas de estudo. Também excelente como pessoa, procurando guardar nomes e ficar próximo dos alunos. Agradeço a oportunidade de tê-lo como meu professor.",
 
+        rec37_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec37_relationship:
-          "Em 17 de dezembro de 2017, Gabriel e João Paulo estudavam na mesma instituição",
+          "Em 17 de dezembro de 2017, Gabriel era cliente de João Paulo",
 
         rec37_recommendation:
           "Está na lista dos melhores professores que já tive na vida. Ao mesmo tempo que te cobra bastante, faz você ter interesse no que está cobrando, tira qualquer dúvida, e é alguém que você quer levar como amigo pro resto da vida. Simplesmente sensacional. Valeu demais pelos conhecimentos que já passou e está me passando.",
 
+        rec38_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec38_relationship:
           "Em 15 de dezembro de 2017, Amanda era cliente de João Paulo",
 
         rec38_recommendation:
           "Ótimo professor, atencioso, possui muito conhecimento e didática boa.",
 
+        rec39_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec39_relationship:
-          "Em 14 de dezembro de 2017, Nilson Junio Paulino era cliente de João Paulo",
+          "Em 14 de dezembro de 2017, Nilson era cliente de João Paulo",
 
         rec39_recommendation:
           "Ótimo professor, se empenha em cada matéria que leciona, sempre busca conhecimento além dos livros e tem uma didática excelente. Espero ser aluno dele em outra matéria, pois sei que será bem lecionada.",
 
+        rec40_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec40_relationship:
           "Em 13 de dezembro de 2017, Lucas era cliente de João Paulo",
 
         rec40_recommendation:
           "Apesar das dificuldades durante o semestre e dos inúmeros bugs corrigidos, foi possível entregar um projeto que aplicava toda a teoria e conceito que foi ensinado de forma primorosa. Posso dizer com propriedade que o professor João Paulo fará parte da minha formação, sendo peça fundamental na minha trajetória do conhecimento.",
 
+        rec41_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec41_relationship:
           "Em 13 de dezembro de 2017, Luiz Guilherme era cliente de João Paulo",
 
         rec41_recommendation:
           "Tive a sorte de participar de duas matérias lecionadas pelo professor João Paulo Aramuni, Fundamentos Teóricos da Computação e Compiladores. Em ambas mostrou completo interesse para tirar dúvidas, ajudar alunos com dificuldades, e sempre teve paciência e compreensão. Suas aulas possuem dinâmicas que facilitam o entendimento e aprendizagem, com total domínio das matérias e exemplos práticos.",
 
+        rec42_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec42_relationship:
           "Em 13 de dezembro de 2017, David era cliente de João Paulo",
 
         rec42_recommendation:
           "Excelente professor, ótima didática e uma grande vontade de ensinar. As aulas foram muito bem ministradas!",
 
+        rec43_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec43_relationship:
           "Em 11 de dezembro de 2017, João Paulo era sênior em relação a Samuel, mas não supervisionava Samuel diretamente",
 
         rec43_recommendation:
           "O Professor Aramuni é um dos melhores professores que já tive. Seu estilo de lecionar consegue explicar até a maior e mais complexa abstração de forma clara, possibilitando que todos absorvam o conhecimento e solucionem problemas complexos. Não há melhor pessoa para orientação do que o João Paulo.",
 
+        rec44_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec44_relationship:
           "Em 19 de junho de 2017, João Lucas Veloso era cliente de João Paulo",
 
         rec44_recommendation:
           "João é um professor que busca e desenvolve métodos para que seus alunos aprendam. Sempre se mostrou comprometido a ajudar, oferecendo material bem preparado e paciência para respeitar o ritmo de cada aluno.",
 
+        rec45_local:
+          "Tecnologia em Redes de Computadores - Universidade FUMEC",
+        
         rec45_relationship:
-          "Em 9 de fevereiro de 2017, Fábio e João Paulo estudavam na mesma instituição",
+          "Em 9 de fevereiro de 2017, Fábio respondia a João Paulo",
 
         rec45_recommendation:
           "Grande professor, atencioso, conhece muito bem o que ensina. Suas aulas foram de grande valia e sua didática foi além das expectativas. Feliz de ter compartilhado aprendizados com ele.",
 
+        rec46_local:
+          "Prosegur Brasil",
+        
         rec46_relationship:
           "Em 9 de janeiro de 2017, Márcio trabalhava com João Paulo na mesma equipe",
 
         rec46_recommendation:
           "Trabalho com o João Paulo a cerca de um ano e afirmo ser um profissional muito dedicado, responsável e estudioso. Sempre busca conhecimento e compartilha soluções com a equipe, favorecendo o crescimento de todos.",
+        
+        rec47_local:
+          "Tecnologia em Redes de Computadores - Universidade FUMEC",
 
         rec47_relationship:
-          "Em 17 de outubro de 2016, Felipe e João Paulo estudavam na mesma instituição",
+          "Em 17 de outubro de 2016, Felipe era cliente de João Paulo",
 
         rec47_recommendation:
           "Tive o grande prazer de ter sido aluno do João Paulo na Universidade FUMEC. Professor TOP, competente, atencioso, descontraído, que consegue explicar matérias complexas de forma clara e simples. Tudo isso graças ao seu amor pelo que faz. Sucesso João!",
 
+        rec48_local:
+          "Tecnologia em Redes de Computadores - Universidade FUMEC",
+        
         rec48_relationship:
           "Em 10 de outubro de 2016, Bruno era cliente de João Paulo",
 
         rec48_recommendation:
           "Tive o prazer de ser aluno do João Aramuni na universidade FUMEC. Profissional sério e dedicado, consegue passar o conhecimento da linguagem de programação de forma estruturada e clara. Excelente professor e desejo que se destaque bastante em sua carreira acadêmica.",
 
+        rec49_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec49_relationship:
           "Em 23 de agosto de 2015, Rafael e João Paulo estudavam na mesma instituição",
 
         rec49_recommendation:
           "Tive a oportunidade de estudar com o João Paulo na FUMEC. Profissional diferenciado, organizado, persistente, autodidata e apaixonado por metodologias ágeis. Se destacava pela comunicação e pelo compartilhamento de conhecimento.",
+
+        rec50_local:
+          "Ciência da Computação - Universidade FUMEC",
 
         rec50_relationship:
           "Em 4 de março de 2015, Gabriela e João Paulo estudavam na mesma instituição",
@@ -5091,23 +5548,35 @@ const resources = {
         rec50_recommendation:
           "Recomendo João pela sua competência, por gostar da área em que atua e ser determinado, com força de vontade e fácil convivência. Ótimo profissional.",
 
+        rec51_local:
+          "Capgemini Brasil",
+        
         rec51_relationship:
           "Em 10 de novembro de 2014, João Paulo era sênior em relação a Glaydson, mas não supervisionava Glaydson diretamente",
 
         rec51_recommendation:
           "Trabalho com o João Paulo há quase 1 ano e neste período ele se mostrou um profissional competente e dedicado, atuando de forma excepcional em projetos de clientes como a OI e a ANP.",
 
+        rec52_local:
+          "Ciência da Computação - Universidade FUMEC",
+        
         rec52_relationship:
           "Em 9 de novembro de 2014, Lucas e João Paulo estudavam na mesma instituição",
 
         rec52_recommendation:
           "João é um aluno dedicado e proativo. Destacou-se em sala de aula com excelentes trabalhos e apresentações. Como palestrante aborda metodologias ágeis que cativam cada vez mais alunos.",
 
+        rec53_local:
+          "Capgemini Brasil",
+
         rec53_relationship:
           "Em 29 de outubro de 2014, Andre trabalhava com João Paulo mas em equipes diferentes",
 
         rec53_recommendation:
           "Tive a oportunidade de trabalhar com João Paulo na Capgemini durante 1 ano. Profissional que visa o compartilhamento de informação e está sempre à disposição para ajudar.",
+
+        rec54_local:
+          "Mestrado em Sistemas de Informação e Gestão do Conhecimento - Universidade FUMEC",
 
         rec54_relationship:
           "Em 14 de outubro de 2014, Amadeu e João Paulo estudavam na mesma instituição",

@@ -54,11 +54,12 @@ export default function Recomendacoes() {
               )}
 
               <div className="recomendacao-info-container">
-                <div className="recomendacao-name">
-                  {t(`recomendacoes.nome_${rec.id}`, rec.name)}
+                <div className="recomendacao-name">{rec.name}</div>
+                <div className="recomendacao-local">
+                  {t(`recomendacoes.${rec.localId}`)}
                 </div>
                 <div className="recomendacao-relationship">
-                  {t(`recomendacoes.${rec.relationshipId}`, rec.relationship)}
+                  {t(`recomendacoes.${rec.relationshipId}`)}
                 </div>
                 <div className="recomendacao-text">
                   {t(
