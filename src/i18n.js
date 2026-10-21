@@ -2044,6 +2044,15 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec76_local:
+          "Computer Science - PUC Minas",
+        
+        rec76_relationship:
+          "On October 21, 2026, Arthur was a client of João Paulo",
+
+        rec76_recommendation:
+          "Some professors teach a subject, while others teach a profession. Professor João Paulo Aramuni undoubtedly belongs to the latter group. Before being a great educator, he is a wonderful person, and perhaps this is precisely where his ability to bridge the gap between the classroom and the real world comes from. In his Web Interface Development course, he understands the importance of bringing professional industry standards into the academic environment. He is not satisfied with assignments that end with a grade. He encourages students to develop their own projects, meaningful both inside and outside the university, and thus makes a tangible contribution to each student's development. His dedication extends beyond regular class hours. The workshops he conducts, additional sessions on course content open to anyone interested, attract students from other classes as well and consistently receive positive feedback. It is no small feat to convince someone to return to the classroom of their own free will. His closeness to students and easygoing communication style complete the picture. Students feel comfortable asking questions and finding answers, and they themselves feel encouraged to put in greater effort. He is an approachable, attentive person who is genuinely committed to what he does. For all these reasons, I recommend him without reservation. There is, in fact, just one caveat, and it only makes him more human: like any normal person, he does not function particularly well in the early hours of the morning. But let's be honest, who does?",
+        
         rec75_local:
           "Software Engineering - PUC Minas",
 
@@ -4900,6 +4909,15 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec76_local:
+          "Ciência da Computação - PUC Minas",
+        
+        rec76_relationship:
+          "Em 21 de outubro de 2026, Arthur foi cliente de João Paulo",
+
+        rec76_recommendation:
+          "Há professores que ensinam uma disciplina e há aqueles que ensinam um ofício. O professor João Paulo Aramuni pertence, sem dúvida, ao segundo grupo. Antes de ser um grande educador, é uma ótima pessoa, e talvez venha justamente daí sua capacidade de aproximar a sala de aula do mundo real. Na disciplina de Desenvolvimento de Interfaces Web, ele compreende a importância de levar ao ambiente acadêmico as exigências do meio profissional. Não se contenta com exercícios que se encerram na nota. Incentiva os alunos a desenvolverem seus próprios projetos, relevantes dentro e fora da universidade, e contribui assim, de forma concreta, para a formação de cada um. Sua dedicação ultrapassa o horário regular das aulas. As oficinas que ministra, encontros extras sobre o conteúdo abertos a quem tiver interesse, atraem inclusive estudantes de outras turmas e recebem, invariavelmente, retornos positivos. Não é pouca coisa convencer alguém a voltar à sala de aula por vontade própria. A proximidade com os alunos e a leveza na comunicação completam o retrato. As dúvidas encontram espaço para serem resolvidas, e o próprio aluno se sente estimulado a se dedicar mais. Trata-se de uma pessoa leve, atenciosa e verdadeiramente comprometida com o que faz. Por todas essas razões, recomendo-o sem reservas. Há, em verdade, uma única ressalva, e ela só o torna mais humano: como toda pessoa normal, ele não funciona muito bem nas primeiras horas da manhã. Mas, convenhamos, quem funciona?",
+
         rec75_local:
           "Engenharia de Software - PUC Minas",
         
