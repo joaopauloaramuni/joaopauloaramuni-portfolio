@@ -62,10 +62,7 @@ export default function Recomendacoes() {
                   {t(`recomendacoes.${rec.relationshipId}`)}
                 </div>
                 <div className="recomendacao-text">
-                  {t(
-                    `recomendacoes.${rec.recommendationId}`,
-                    rec.recommendation
-                  )}
+                  {t(`recomendacoes.${rec.recommendationId}`)}
                 </div>
                 {rec.link && (
                   <a
@@ -75,7 +72,7 @@ export default function Recomendacoes() {
                     className="recomendacao-link"
                   >
                     <FaLinkedin className="recomendacoes-icone" />
-                    {t("recomendacoes.link", "LinkedIn")}
+                    LinkedIn
                   </a>
                 )}
                 <div className="recomendacao-separador" />
