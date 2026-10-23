@@ -190,6 +190,10 @@ Grupo vencedor:
     - :octocat: https://github.com/Evycostzocn/PortfolioProfissional
     - ☁️ https://evelyncosta.dev/
 
+- Pedro Flausino
+    - :octocat: https://github.com/PedroFlau/pedroflausino-portifolio
+    - ☁️ https://flausino.dev/
+
 -----
 
 ## 🚀 Demonstração ao vivo
