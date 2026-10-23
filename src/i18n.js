@@ -2044,6 +2044,15 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec77_local:
+          "JDSDEV - Jedis Technology and Recruitment",
+        
+        rec77_relationship:
+          "On October 23, 2026, Fabrício directly supervised João Paulo",
+
+        rec77_recommendation:
+          "I have the privilege of working with João at JDSDEV, where he leads the technology department, and I can confidently say that he is one of the most important people behind our growth. João is responsible for our internal systems and the products we develop for clients, combining a very strong technical foundation with something rare: the ability to turn technology into tangible business results. Under his leadership, technology has evolved from being merely a support function into a competitive advantage for the company, both in the way we operate internally and in the value we deliver to our clients. Beyond his technical expertise, he is a leader who brings structure, develops people, and cares deeply about the quality of every deliverable. He is the kind of professional you can trust with the most complex challenges.",
+        
         rec76_local:
           "Computer Science - PUC Minas",
         
@@ -4909,6 +4918,15 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec77_local:
+          "JDSDEV - Jedis Tecnologia e Recrutamento",
+        
+        rec77_relationship:
+          "Em 23 de outubro de 2026, Fabrício supervisionava João Paulo diretamente",
+
+        rec77_recommendation:
+          "Tenho o privilégio de trabalhar com o João na Jdsdev, onde ele lidera a área de tecnologia, e posso dizer com tranquilidade que ele é uma das pessoas mais importantes do nosso crescimento. O João é o responsável pelos nossos sistemas internos e pelos produtos que desenvolvemos para clientes, e une uma base técnica muito sólida a algo que é raro: a capacidade de transformar tecnologia em resultado real para o negócio. Sob a liderança dele, a tecnologia deixou de ser apenas suporte e passou a ser um diferencial da empresa, tanto na forma como trabalhamos internamente quanto no valor que entregamos aos nossos clientes. Além da competência técnica, é um líder que organiza, forma pessoas e cuida da qualidade de cada entrega. É o tipo de profissional em quem se pode confiar os desafios mais complexos.",
+
         rec76_local:
           "Ciência da Computação - PUC Minas",
         
