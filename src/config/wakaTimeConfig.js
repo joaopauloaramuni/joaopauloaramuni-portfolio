@@ -19,10 +19,19 @@ const WAKATIME_CONFIG = {
     grade: 12,
     lista: 10,
     terminal: { languages: 8, editors: 4, categories: 5, operatingSystems: 3 },
+    // wakatime --projetos (todos com nome, menos os de HIDDEN_PROJECTS)
+    projetos: 10,
   },
 
   // Linguagens que não devem aparecer, ex.: ["Text", "Other"]
   HIDDEN_LANGUAGES: [],
+
+  // Projetos que não devem aparecer pelo nome, ex.: ["cliente-x"]. No
+  // wakatime --projetos eles saem da lista; no "codando agora" viram "projeto
+  // privado". É tudo no servidor (api/_wakatime.js e api/_codando.js), então o
+  // nome não vaza. O nome é o que o WakaTime mostra no dashboard (em geral, o
+  // nome da pasta).
+  HIDDEN_PROJECTS: [],
 
   // "Codando agora" (boas-vindas e wakatime --agora). Usa os heartbeats do
   // WakaTime, que são privados e não têm versão pública: só funciona com o
@@ -39,12 +48,8 @@ const WAKATIME_CONFIG = {
     PAUSA_MINUTOS: 15,
     // De quanto em quanto tempo o site pergunta de novo
     ATUALIZAR_SEGUNDOS: 60,
-    // Só estes projetos aparecem pelo nome (com a branch). Os outros viram
-    // "projeto privado", para não expor projeto de cliente. O nome é o que o
-    // WakaTime mostra no dashboard (em geral, o nome da pasta).
-    PROJETOS_PUBLICOS: ["joaopauloaramuni-portfolio"],
-    // false: projeto fora da lista não aparece de jeito nenhum
-    MOSTRAR_PRIVADOS: true,
+    // Todo projeto aparece pelo nome (com a branch), menos os de
+    // HIDDEN_PROJECTS, que viram "projeto privado"
   },
 };
 

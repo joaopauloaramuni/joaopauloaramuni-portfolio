@@ -81,6 +81,8 @@ function normalize(data) {
     editors: toItems(data.editors),
     categories: toItems(data.categories),
     operatingSystems: toItems(data.operating_systems),
+    // Pela rota pública (Docker), pode não vir: depende do perfil no WakaTime
+    projects: toItems(data.projects),
   };
 }
 

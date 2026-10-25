@@ -17,8 +17,9 @@
 //     direto para a rota pública (o perfil precisa estar público).
 //
 // Privacidade: com o token, a API devolve também projetos, máquinas e
-// dependências. Nada disso sai daqui: a resposta leva só os campos que os
-// estilos usam (ver src/lib/wakatime.js).
+// dependências. Máquinas e dependências não saem daqui. Os projetos saem
+// (top N, com nome, para o wakatime --projetos), menos os de HIDDEN_PROJECTS.
+// O "codando agora" (api/_codando.js) segue com a regra dele de projetos públicos.
 //
 // Custo: a resposta é a mesma para todo mundo, então fica 10 min no cache da
 // CDN e 10 min na memória da função.
@@ -30,7 +31,7 @@ import { chamarWakaTime, temToken } from "./_wakatimeOAuth.js";
 
 export const PROXY_PATH = WAKATIME_CONFIG.API_PATH;
 
-const { USERNAME, RANGE } = WAKATIME_CONFIG;
+const { USERNAME, RANGE, LIMITS, HIDDEN_PROJECTS } = WAKATIME_CONFIG;
 
 // Usuário do perfil público: a variável, se existir, vence o config
 const usuarioPublico = (env) => String(env.WAKATIME_USERNAME ?? "").trim() || USERNAME;
@@ -51,6 +52,18 @@ const CAMPOS = [
 ];
 const LISTAS = ["languages", "editors", "categories", "operating_systems"];
 
+// Top N projetos do período, com nome. Os de HIDDEN_PROJECTS saem AQUI, no
+// servidor (no navegador, o nome apareceria na aba Rede), e antes do corte:
+// o top 10 continua com 10 projetos.
+function enxugarProjetos(projects) {
+  if (!Array.isArray(projects)) return undefined;
+  const ocultos = new Set(HIDDEN_PROJECTS.map((nome) => nome.toLowerCase()));
+  return projects
+    .filter(({ name }) => !ocultos.has(String(name).toLowerCase()))
+    .slice(0, LIMITS.projetos)
+    .map(({ name, total_seconds, percent }) => ({ name, total_seconds, percent }));
+}
+
 function enxugar(data = {}) {
   const saida = {};
   for (const campo of CAMPOS) if (data[campo] !== undefined) saida[campo] = data[campo];
@@ -62,6 +75,8 @@ function enxugar(data = {}) {
       percent,
     }));
   }
+  const projetos = enxugarProjetos(data.projects);
+  if (projetos) saida.projects = projetos;
   return saida;
 }
 

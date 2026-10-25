@@ -16,9 +16,9 @@
 //
 // Privacidade:
 //   • o arquivo (entity) nunca sai daqui: ele traz o caminho completo;
-//   • projeto fora de AGORA.PROJETOS_PUBLICOS (ou da variável
-//     WAKATIME_PROJETOS_PUBLICOS) vira "projeto privado", sem nome e sem
-//     branch, ou some de vez com MOSTRAR_PRIVADOS: false;
+//   • todo projeto aparece com nome e branch, menos os de HIDDEN_PROJECTS
+//     (src/config/wakaTimeConfig.js, a mesma lista do wakatime --projetos),
+//     que viram "projeto privado", sem nome e sem branch;
 //   • só heartbeats de arquivo (type "file") contam: os de navegador
 //     (domínios visitados) são descartados.
 //
@@ -34,7 +34,7 @@
 import WAKATIME_CONFIG from "../src/config/wakaTimeConfig.js";
 import { chamarWakaTime, temToken } from "./_wakatimeOAuth.js";
 
-const { AGORA } = WAKATIME_CONFIG;
+const { AGORA, HIDDEN_PROJECTS } = WAKATIME_CONFIG;
 export const PROXY_PATH = AGORA.API_PATH;
 
 const USUARIO = "/users/current";
@@ -89,13 +89,8 @@ function minutosDoDia(ms) {
   return valor("hour") * 60 + valor("minute");
 }
 
-function projetosPublicos(env) {
-  const extras = String(env.WAKATIME_PROJETOS_PUBLICOS ?? "")
-    .split(",")
-    .map((nome) => nome.trim())
-    .filter(Boolean);
-  return new Set([...AGORA.PROJETOS_PUBLICOS, ...extras].map((n) => n.toLowerCase()));
-}
+// Projetos que não aparecem pelo nome (o resto aparece)
+const OCULTOS = new Set(HIDDEN_PROJECTS.map((nome) => nome.toLowerCase()));
 
 // Token OAuth no Authorization: Bearer (ver api/_wakatimeOAuth.js)
 async function chamar(caminho, env) {
@@ -160,16 +155,12 @@ async function montar(env) {
     heartbeats = [...(await heartbeatsDoDia(ontem, env)), ...deHoje];
   }
 
-  const publicos = projetosPublicos(env);
   const ultimo = heartbeats.at(-1);
   const hojeS = somarSegundos(deHoje);
 
   if (!ultimo) return { ativo: false, ultimo: null, hojeSegundos: hojeS };
 
-  const publico = Boolean(ultimo.project) && publicos.has(ultimo.project.toLowerCase());
-  if (!publico && !AGORA.MOSTRAR_PRIVADOS) {
-    return { ativo: false, ultimo: null, hojeSegundos: hojeS };
-  }
+  const publico = Boolean(ultimo.project) && !OCULTOS.has(ultimo.project.toLowerCase());
 
   const ativo = agora / 1000 - ultimo.time <= ATIVO_S;
 

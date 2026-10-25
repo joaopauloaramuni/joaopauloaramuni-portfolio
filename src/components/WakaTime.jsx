@@ -503,11 +503,61 @@ function TerminalSkin({ data, f }) {
 }
 
 /* =====================================================================
+   wakatime --projetos: top projetos do período (all_time = desde que
+   instalei o WakaTime), com o mesmo visual de barras do --terminal
+   ===================================================================== */
+function ProjetosSkin({ data, f }) {
+  const { t } = useTranslation();
+  const projetos = data.projects ?? [];
+
+  if (projetos.length === 0) {
+    return <p className="wakatime-status">{t("wakatime.projetos.vazio")}</p>;
+  }
+
+  const somaTop = projetos.reduce((soma, p) => soma + p.seconds, 0);
+  // Se o servidor mandar um projeto sem nome (ex.: versão antiga da função
+  // ainda no cache), a linha mostra um rótulo em vez de ficar em branco
+  const semNome = t("wakatime.agora.privado");
+
+  return (
+    <div className="waka-term">
+      <dl className="waka-term-info">
+        <div className="waka-term-kv">
+          <dt>{t("wakatime.projetos.top", { count: projetos.length })}</dt>
+          <dd>
+            {f.duration(somaTop)} ({f.percent((somaTop / data.totalSeconds) * 100)})
+          </dd>
+        </div>
+      </dl>
+      <div className="waka-term-table">
+        <section className="waka-term-section">
+          <h4 className="waka-term-heading">{t("wakatime.secoes.projetos")}</h4>
+          <ul className="waka-term-list">
+            {projetos.map((projeto, index) => (
+              <TerminalRow
+                key={`${index}-${projeto.name ?? ""}`}
+                item={projeto.name ? projeto : { ...projeto, name: semNome, isRest: true }}
+                style={{ ...ACCENT_STYLE, icon: null }}
+                index={index}
+                showIcon={false}
+                f={f}
+              />
+            ))}
+          </ul>
+        </section>
+      </div>
+      <p className="waka-agora-nota">{t("wakatime.projetos.nota")}</p>
+    </div>
+  );
+}
+
+/* =====================================================================
    Moldura dos estilos com dados: título, carregando/erro e rodapé
    ===================================================================== */
 const SKIN_VIEWS = {
   grade: GradeSkin,
   lista: ListaSkin,
+  projetos: ProjetosSkin,
   terminal: TerminalSkin,
 };
 

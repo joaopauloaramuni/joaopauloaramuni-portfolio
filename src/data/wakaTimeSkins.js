@@ -9,7 +9,7 @@ import { parseSkin } from "../terminal/parseSkin";
 // helio-github-stats.
 // A ordem abaixo é a do rodapé "Estilos:" (o padrão vem primeiro).
 
-export const SKINS = ["terminal", "grade", "lista", "agora", "cards"];
+export const SKINS = ["terminal", "grade", "lista", "projetos", "agora", "cards"];
 export const DEFAULT_SKIN = "terminal";
 
 // Nomes aceitos (PT e EN) → estilo
@@ -23,6 +23,9 @@ const SKIN_ALIASES = {
   grid: "grade",
   lista: "lista",
   list: "lista",
+  projetos: "projetos",
+  projects: "projetos",
+  proj: "projetos",
   terminal: "terminal",
   term: "terminal",
 };
