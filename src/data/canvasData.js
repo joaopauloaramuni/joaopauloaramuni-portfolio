@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-27.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-29.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,7 +12,7 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-10-27T19:45-03:00",
+  geradoEm: "2026-10-29T15:58-03:00",
   alunos: 325,
 };
 
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 19,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "291775",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "289123",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 10,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 23,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "287597",
@@ -194,7 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "286958",
@@ -207,7 +207,7 @@ export const cursos = [
     sga: "4354.1.00",
     curso: "CC",
     alunos: 50,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "286959",
@@ -220,7 +220,7 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
   {
     id: "283169",
@@ -233,7 +233,7 @@ export const cursos = [
     sga: "0492.1.00",
     curso: "ES",
     alunos: 47,
-    atualizadoEm: "2026-10-27T19:45-03:00",
+    atualizadoEm: "2026-10-29T15:58-03:00",
   },
 ];
 
@@ -1217,23 +1217,10 @@ export const tarefas = [
     nome: "ATIVIDADE 03",
     url: "https://pucminas.instructure.com/courses/292796/assignments/1434387",
     prazo: "2026-10-27T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-27T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 19, noPrazo: 11, atrasadas: 0, faltando: 8, dispensados: 0, corrigidas: 0, aCorrigir: 11 },
-  },
-  {
-    id: "1434420",
-    curso: "290646",
-    nome: "ATIVIDADE 03",
-    url: "https://pucminas.instructure.com/courses/290646/assignments/1434420",
-    prazo: "2026-10-27T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
-    fecha: "2026-10-27T23:59-03:00",
-    pontos: 2.5,
-    tipo: "online",
-    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 19, noPrazo: 19, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 0, aCorrigir: 19 },
   },
   {
     id: "1434441",
@@ -1241,23 +1228,21 @@ export const tarefas = [
     nome: "AV2 - 25 pts",
     url: "https://pucminas.instructure.com/courses/292394/assignments/1434441",
     prazo: "2026-10-28T12:30-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-28T12:30-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 10, noPrazo: 0, atrasadas: 0, faltando: 10, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 10, noPrazo: 7, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 7 },
   },
   {
     id: "1434455",
     curso: "290129",
     nome: "AV2 - 25 pts",
     url: "https://pucminas.instructure.com/courses/290129/assignments/1434455",
-    prazo: "2026-10-28T19:00-03:00",
-    abre: "2026-09-01T00:00-03:00",
-    fecha: "2026-10-28T19:00-03:00",
+    prazo: "2026-10-28T18:52-03:00",
+    fecha: "2026-10-28T18:52-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 23, noPrazo: 0, atrasadas: 0, faltando: 23, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 23, noPrazo: 22, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 0, aCorrigir: 22 },
   },
   {
     id: "1434384",
@@ -1265,11 +1250,10 @@ export const tarefas = [
     nome: "AV2 - 25 pts",
     url: "https://pucminas.instructure.com/courses/290578/assignments/1434384",
     prazo: "2026-10-29T12:30-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-10-29T12:30-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 24, noPrazo: 1, atrasadas: 0, faltando: 23, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
+    entregas: { alunos: 24, noPrazo: 24, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 0, aCorrigir: 24 },
   },
   {
     id: "1434405",
@@ -1284,6 +1268,18 @@ export const tarefas = [
     entregas: { alunos: 21, noPrazo: 0, atrasadas: 0, faltando: 21, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
+    id: "1434420",
+    curso: "290646",
+    nome: "ATIVIDADE 03",
+    url: "https://pucminas.instructure.com/courses/290646/assignments/1434420",
+    prazo: "2026-10-29T23:59-03:00",
+    abre: "2026-09-01T00:00-03:00",
+    fecha: "2026-10-29T23:59-03:00",
+    pontos: 2.5,
+    tipo: "online",
+    entregas: { alunos: 13, noPrazo: 8, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 0, aCorrigir: 8 },
+  },
+  {
     id: "1418061",
     curso: "291775",
     nome: "ATIVIDADE - Entrega Sprint 2 - INDIVIDUAL (ZIP)",
@@ -1292,7 +1288,7 @@ export const tarefas = [
     fecha: "2026-11-01T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 2, atrasadas: 0, faltando: 12, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
   },
   {
     id: "1408519",
@@ -1303,7 +1299,7 @@ export const tarefas = [
     fecha: "2026-11-01T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 4, atrasadas: 0, faltando: 46, dispensados: 0, corrigidas: 0, aCorrigir: 4 },
+    entregas: { alunos: 50, noPrazo: 6, atrasadas: 0, faltando: 44, dispensados: 0, corrigidas: 0, aCorrigir: 6 },
   },
   {
     id: "1434349",
@@ -1315,7 +1311,7 @@ export const tarefas = [
     fecha: "2026-11-02T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 14, noPrazo: 1, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
   },
   {
     id: "1434393",
@@ -1352,18 +1348,6 @@ export const tarefas = [
     pontos: 15,
     tipo: "online",
     entregas: { alunos: 19, noPrazo: 0, atrasadas: 0, faltando: 19, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1434424",
-    curso: "290646",
-    nome: "LABORATÓRIO 2",
-    url: "https://pucminas.instructure.com/courses/290646/assignments/1434424",
-    prazo: "2026-11-03T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
-    fecha: "2026-11-03T23:59-03:00",
-    pontos: 15,
-    tipo: "online",
-    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1434666",
@@ -1447,6 +1431,18 @@ export const tarefas = [
     pontos: 15,
     tipo: "online",
     entregas: { alunos: 21, noPrazo: 0, atrasadas: 0, faltando: 21, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1434424",
+    curso: "290646",
+    nome: "LABORATÓRIO 2",
+    url: "https://pucminas.instructure.com/courses/290646/assignments/1434424",
+    prazo: "2026-11-05T23:59-03:00",
+    abre: "2026-09-01T00:00-03:00",
+    fecha: "2026-11-05T23:59-03:00",
+    pontos: 15,
+    tipo: "online",
+    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1434670",
@@ -1888,7 +1884,7 @@ export const tarefas = [
     fecha: "2026-12-08T23:59-03:00",
     pontos: 5,
     tipo: "online",
-    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 13, noPrazo: 1, atrasadas: 0, faltando: 12, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
   },
   {
     id: "1434667",
