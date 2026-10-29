@@ -29,7 +29,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🐙 **github:** Exibe meus repositórios usando a GitHub API.
 * 👨‍💻 **habilidades:** Exibe minhas habilidades em programação. Tem quatro estilos: `skills --terminal` (padrão), `skills --cards`, `skills --lista` e `skills --globo` (globo 3D com three.js, carregado só quando o estilo abre e desmontado quando sai da tela, para liberar o WebGL).
 * 🎵 **spotify:** Mostra o que estou ouvindo e últimas reproduções.
-* ⏱️ **wakatime** (aliases `waka` e `time`)**:** Mostra quanto tempo passei programando, em quais linguagens e em quais projetos. Tem cinco estilos: `wakatime --terminal` (padrão), `wakatime --grade`, `wakatime --lista` e `wakatime --projetos` (os 10 projetos em que passei mais tempo), desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem. O `wakatime --agora` mostra em que projeto estou mexendo no editor neste momento (heartbeats do WakaTime, com o token OAuth `WAKATIME_ACCESS_TOKEN` só no servidor), e a mesma informação aparece na tela de boas-vindas, logo abaixo do status, enquanto estou programando.
+* ⏱️ **wakatime** (aliases `waka` e `time`)**:** Mostra quanto tempo passei programando, em quais linguagens, em quais projetos e com quais bibliotecas. Tem seis estilos: `wakatime --terminal` (padrão, com o meu melhor dia), `wakatime --grade`, `wakatime --lista`, `wakatime --projetos` (os 10 projetos em que passei mais tempo) e `wakatime --libs` (as bibliotecas que mais importei nos arquivos que editei), desenhados com a API do WakaTime, e `wakatime --cards`, com os cards de imagem. O `wakatime --agora` mostra em que projeto estou mexendo no editor neste momento (heartbeats do WakaTime, com o token OAuth `WAKATIME_ACCESS_TOKEN` só no servidor), e a mesma informação aparece na tela de boas-vindas, logo abaixo do status, enquanto estou programando.
 * 📊 **stats / githubstats:** Mostra minhas estatísticas do GitHub, buscadas ao vivo. Tem um grupo de gráficos por opção: `stats --resumo` (padrão), `stats --linguagens`, `stats --atividade`, `stats --horarios`, `stats --repos` e `stats --tudo`.
 * 📄 **curriculo:** Exibe meu currículo em PDF, com zoom, download e abertura em nova aba (react-pdf, carregado só quando o comando roda).
 * 🎓 **lattes / cnpq:** Mostra meu currículo Lattes, importado do XML da Plataforma Lattes: TCCs orientados, trabalhos interdisciplinares orientados, projetos da Agência Experimental de Software e bancas de que participei. Tem uma seção por opção: `lattes --resumo` (padrão), `lattes --docencia` (o tempo que lecionei em cada instituição, curso e disciplina), `lattes --tccs`, `lattes --tis` (trabalhos interdisciplinares), `lattes --aes`, `lattes --bancas` e `lattes --tudo`. O `lattes --pdf` disponibiliza o PDF completo do Lattes para download.
@@ -1465,17 +1465,18 @@ O `opengraph.githubassets.com` gera cada imagem na hora e recusa quando o mesmo 
 
 ## ⏱️ Guia de configuração da WakaTime API
 
-O comando `wakatime` (aliases `waka` e `time`: `waka --projetos` funciona igual) tem cinco estilos, no mesmo formato do `skills`:
+O comando `wakatime` (aliases `waka` e `time`: `waka --projetos` funciona igual) tem seis estilos (fora o `--agora`), no mesmo formato do `skills`:
 
 | Comando | O que mostra |
 |:--|:--|
-| `wakatime` ou `wakatime --terminal` | Saída estilo CLI com barras em blocos para linguagens, editores, categorias e sistemas operacionais (padrão) |
+| `wakatime` ou `wakatime --terminal` | Saída estilo CLI com total, média diária, dias ativos e o **melhor dia** (ex.: `Melhor dia: 11 h 42 min em 14 de mar. de 2025`), e barras em blocos para linguagens, editores, categorias e sistemas operacionais (padrão) |
 | `wakatime --grade` (`--grid`) | Indicadores (total, média diária, dias ativos e editor principal) e um card com anel de progresso por linguagem |
 | `wakatime --lista` (`--list`) | Barra com a fatia de cada linguagem e ranking com o logo e o tempo de cada uma |
 | `wakatime --projetos` (`--projects`, `--proj`) | Os 10 projetos com mais tempo desde que instalei o WakaTime, com o nome, o tempo e a fatia do total de cada um |
+| `wakatime --libs` (`--bibliotecas`, `--libraries`, `--deps`, `--pacotes`) | As 12 bibliotecas mais importadas nos arquivos que editei desde que instalei o WakaTime, com o tempo e a fatia de cada uma entre as bibliotecas |
 | `wakatime --cards` | Os dois cards de imagem do [helio-github-stats](https://helio-github-stats.vercel.app), nas cores do tema do portfólio (`--surface`, `--accent`, `--text` e `--border`): trocam junto com `tema claro` / `tema escuro` |
 
-Os quatro primeiros leem as estatísticas de `all_time` da [API do WakaTime](https://wakatime.com/developers) (total, média diária, dias ativos e o tempo por linguagem, editor, categoria, sistema operacional e projeto) pela rota `/api/wakatime` do próprio site. A regra é **autenticar sempre que der**, para que tudo funcione mesmo com o perfil **privado**:
+Os cinco primeiros leem as estatísticas de `all_time` da [API do WakaTime](https://wakatime.com/developers) (total, média diária, dias ativos, melhor dia e o tempo por linguagem, editor, categoria, sistema operacional, projeto e biblioteca) pela rota `/api/wakatime` do próprio site. A regra é **autenticar sempre que der**, para que tudo funcione mesmo com o perfil **privado**:
 
 | Situação | Rota do WakaTime | O perfil precisa ser público? |
 |:--|:--|:--:|
@@ -1485,7 +1486,7 @@ Os quatro primeiros leem as estatísticas de `all_time` da [API do WakaTime](htt
 
 O token é o mesmo do "Codando agora": o passo a passo para gerá-lo está em [4️⃣ Token OAuth](#4️⃣-token-oauth-estatísticas-e-codando-agora). Para saber de onde vieram os números, abra `https://<seu-dominio>/api/wakatime`: o campo `fonte` diz `"oauth"` ou `"publico"`.
 
-> ⚠️ Pela rota pública (sem token ou no Docker), a resposta é mais enxuta: não vem `start`, `end`, `timezone` nem `best_day`, e a data de início sai do texto `human_readable_range` (ex.: `"since Sep 6 2022"`). Com o token, o `start` vem pronto. Outros períodos (`last_7_days`, `last_year`) e os `insights` respondem `400`/`401` para visitantes, então os estilos usam só o `all_time`, que funciona nos dois casos.
+> ⚠️ Pela rota pública (sem token ou no Docker), a resposta é mais enxuta: não vem `start`, `end`, `timezone`, `best_day` nem `dependencies`, e a data de início sai do texto `human_readable_range` (ex.: `"since Sep 6 2022"`). Com o token, o `start` vem pronto. Sem o `best_day`, a linha "Melhor dia" some do `--terminal`; sem as `dependencies`, o `--libs` avisa que as bibliotecas só vêm com o token. Outros períodos (`last_7_days`, `last_year`) e os `insights` respondem `400`/`401` para visitantes, então os estilos usam só o `all_time`, que funciona nos dois casos.
 
 ### 1️⃣ Perfil público (só sem o token)
 
@@ -1507,7 +1508,9 @@ A API do WakaTime não envia o cabeçalho `Access-Control-Allow-Origin`, então 
 
 O que a função faz:
 
-- **Privacidade:** com o token, o WakaTime devolve também os **projetos**, as **máquinas** e as **dependências**. Máquinas e dependências não saem do servidor: a resposta leva só os campos que os estilos usam (`src/lib/wakatime.js`). Dos projetos, sai o **top 10 com o nome** (para o `--projetos`). Para esconder algum (um projeto de cliente, por exemplo), coloque o nome em `HIDDEN_PROJECTS`, no `src/config/wakaTimeConfig.js`: ele sai da lista no servidor, antes do corte, então o nome não aparece nem na aba Rede e o top 10 continua com 10.
+- **Privacidade:** com o token, o WakaTime devolve também os **projetos**, as **máquinas** e as **dependências**. As máquinas não saem do servidor: a resposta leva só os campos que os estilos usam (`src/lib/wakatime.js`). Dos projetos, sai o **top 10 com o nome** (para o `--projetos`). Para esconder algum (um projeto de cliente, por exemplo), coloque o nome em `HIDDEN_PROJECTS`, no `src/config/wakaTimeConfig.js`: ele sai da lista no servidor, antes do corte, então o nome não aparece nem na aba Rede e o top 10 continua com 10.
+- **Bibliotecas (`--libs`):** as dependências são os pacotes que aparecem nos `import` dos arquivos que você edita, com o tempo que você passou nesses arquivos. Sai o **top 12** (`LIMITS.libs`). Como entram também pacotes internos de clientes (ex.: `@cliente-x/auth`) e a biblioteca padrão das linguagens (ex.: `os`, `sys`, `java.util`), use `HIDDEN_DEPENDENCIES` no mesmo arquivo: nome exato ou, terminando com `*`, tudo que começa assim (`["os", "sys", "@cliente-x/*", "java.*"]`), sem diferenciar maiúsculas. Elas saem no servidor, antes do corte. Um arquivo importa várias bibliotecas ao mesmo tempo, então o tempo delas se sobrepõe: a porcentagem de cada uma é recalculada sobre a soma das que sobraram (é a fatia entre as bibliotecas, não do tempo total). Para ver a lista crua antes de decidir o que esconder, chame `GET https://wakatime.com/api/v1/users/current/stats/all_time` com o seu token e olhe o campo `dependencies`.
+- **Melhor dia:** do `best_day`, sai só a data e o total de segundos (o `--terminal` mostra `Melhor dia: 11 h 42 min em 14 de mar. de 2025`).
 - **Custo:** a resposta é a mesma para todo mundo, então fica **10 min** no cache da CDN da Vercel e 10 min na memória da função. O token é usado no máximo uma vez a cada 10 minutos, por mais visitantes que abram o `wakatime`.
 - **"Ainda calculando":** se o WakaTime responder `202`, a função repassa e o terminal mostra o aviso de que as estatísticas estão sendo calculadas.
 
@@ -1516,7 +1519,7 @@ O que a função faz:
 1. Em `src/config/wakaTimeConfig.js`, troque `USERNAME` e `PROFILE_URL`. O `USERNAME` é usado pela rota pública (reserva sem o token) e pelos cards do `--cards`; com o token, a função lê a conta dona do token (`users/current`), seja qual for o `USERNAME`. Para a rota pública, a variável `WAKATIME_USERNAME` (opcional, no `.env.local` ou na Vercel) vence o `USERNAME` do config, sem mexer no código.
 2. No `nginx.conf`, troque `aramuni` no `proxy_pass` do `/api/wakatime` (usado só no Docker).
 
-No mesmo arquivo de configuração você ajusta quantas linguagens cada estilo mostra (`LIMITS`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
+No mesmo arquivo de configuração você ajusta quantos itens cada estilo mostra (`LIMITS`, inclusive `LIMITS.libs`), esconde bibliotecas (`HIDDEN_DEPENDENCIES`) e pode esconder linguagens como `"Text"` ou `"Other"` (`HIDDEN_LANGUAGES`).
 
 ### 4️⃣ Token OAuth (estatísticas e "Codando agora")
 
@@ -1524,7 +1527,7 @@ Um token só, gerado uma vez, serve para as duas partes do `wakatime`:
 
 | Escopo | Endpoint | Rota do site | Onde aparece |
 |:--|:--|:--|:--|
-| `read_stats` | `GET /users/current/stats/all_time` | `/api/wakatime` | `wakatime --terminal`, `--grade`, `--lista` e `--projetos`, mesmo com o perfil privado |
+| `read_stats` | `GET /users/current/stats/all_time` | `/api/wakatime` | `wakatime --terminal` (com o melhor dia), `--grade`, `--lista`, `--projetos` e `--libs`, mesmo com o perfil privado |
 | `read_heartbeats` | `GET /users/current/heartbeats` e `/user_agents` | `/api/codando` | `wakatime --agora` e a linha "Codando agora" da boas-vindas |
 
 Os heartbeats não têm versão pública: sem o token, o "Codando agora" não existe. As estatísticas até têm (o perfil público), mas com o token elas funcionam mesmo com o perfil privado. Quem chama o WakaTime são as rotas `/api/wakatime` e `/api/codando` (Vercel Functions `api/wakatime.js` e `api/codando.js`; no `npm run dev`, o `vite.config.js`), com um token que fica só no servidor.
@@ -1625,7 +1628,7 @@ Sem `WAKATIME_ACCESS_TOKEN`, as estatísticas vêm do perfil público, a linha d
 
 ```text
 api/wakatime.js                → Vercel Function das estatísticas (/api/wakatime)
-api/_wakatime.js               → stats com o token (ou perfil público), campos enxutos e cache
+api/_wakatime.js               → stats com o token (ou perfil público), campos enxutos, best_day, HIDDEN_DEPENDENCIES e cache
 api/codando.js                 → Vercel Function do "Codando agora" (/api/codando)
 api/_codando.js                → heartbeats com o token OAuth e HIDDEN_PROJECTS
 api/_wakatimeOAuth.js          → Authorization: Bearer e renovação com o refresh token
@@ -1633,16 +1636,16 @@ vite.config.js                 → /api/wakatime e /api/codando no npm run dev /
 nginx.conf                     → /api/wakatime pela rota pública no container Docker (NGINX)
 scripts/wakatime-oauth.mjs     → gera o access token e o refresh token (npm run wakatime:oauth)
 src/
-  config/wakaTimeConfig.js     → usuário, período, limites de cada estilo, HIDDEN_PROJECTS e o AGORA
+  config/wakaTimeConfig.js     → usuário, período, limites de cada estilo, HIDDEN_PROJECTS, HIDDEN_DEPENDENCIES e o AGORA
   lib/wakatime.js              → busca (com cache), normaliza e formata os dados
   data/wakaTimeSkins.js        → estilos e nomes aceitos (PT e EN)
   data/wakaTimeLanguages.js    → ícone e cores de cada linguagem
   terminal/parseSkin.js        → lê "--estilo" (compartilhado com o skills)
-  components/WakaTime.jsx      → os estilos (terminal é o padrão), o --projetos e o --agora
+  components/WakaTime.jsx      → os estilos (terminal é o padrão), o --projetos, o --libs e o --agora
   components/SkinsFooter.jsx   → rodapé "Estilos:" (compartilhado com o skills)
 ```
 
-> 🐳 No container do `Dockerfile` não há função nem token: quem repassa `/api/wakatime` é o `nginx.conf`, direto para a rota **pública** (o perfil precisa estar público), e o "Codando agora" não aparece. Assim os estilos funcionam também no Docker. Como o NGINX repassa a resposta crua, o `HIDDEN_PROJECTS` não vale ali: o `--projetos` mostra o que o perfil público do WakaTime mostrar (e nada, se a visibilidade de projetos estiver desligada). Sem o `nginx.conf` (com a configuração padrão do NGINX), o caminho não existe: `--terminal`, `--grade`, `--lista` e `--projetos` mostram uma mensagem de erro e só o `--cards` funciona.
+> 🐳 No container do `Dockerfile` não há função nem token: quem repassa `/api/wakatime` é o `nginx.conf`, direto para a rota **pública** (o perfil precisa estar público), e o "Codando agora" não aparece. Assim os estilos funcionam também no Docker. Como o NGINX repassa a resposta crua, o `HIDDEN_PROJECTS` não vale ali: o `--projetos` mostra o que o perfil público do WakaTime mostrar (e nada, se a visibilidade de projetos estiver desligada). O "Melhor dia" e o `--libs` também não aparecem, porque a rota pública não manda `best_day` nem `dependencies`. Sem o `nginx.conf` (com a configuração padrão do NGINX), o caminho não existe: `--terminal`, `--grade`, `--lista`, `--projetos` e `--libs` mostram uma mensagem de erro e só o `--cards` funciona.
 
 ✅ Pronto! A busca acontece uma vez por visita: trocar de estilo reaproveita os dados.
 

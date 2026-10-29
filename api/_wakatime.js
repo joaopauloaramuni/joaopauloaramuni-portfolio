@@ -17,8 +17,9 @@
 //     direto para a rota pública (o perfil precisa estar público).
 //
 // Privacidade: com o token, a API devolve também projetos, máquinas e
-// dependências. Máquinas e dependências não saem daqui. Os projetos saem
-// (top N, com nome, para o wakatime --projetos), menos os de HIDDEN_PROJECTS.
+// dependências. Máquinas não saem daqui. Os projetos saem (top N, com nome,
+// para o wakatime --projetos), menos os de HIDDEN_PROJECTS, e as dependências
+// (top N, para o wakatime --libs), menos as de HIDDEN_DEPENDENCIES.
 // O "codando agora" (api/_codando.js) segue com a regra dele de projetos públicos.
 //
 // Custo: a resposta é a mesma para todo mundo, então fica 10 min no cache da
@@ -31,7 +32,7 @@ import { chamarWakaTime, temToken } from "./_wakatimeOAuth.js";
 
 export const PROXY_PATH = WAKATIME_CONFIG.API_PATH;
 
-const { USERNAME, RANGE, LIMITS, HIDDEN_PROJECTS } = WAKATIME_CONFIG;
+const { USERNAME, RANGE, LIMITS, HIDDEN_PROJECTS, HIDDEN_DEPENDENCIES } = WAKATIME_CONFIG;
 
 // Usuário do perfil público: a variável, se existir, vence o config
 const usuarioPublico = (env) => String(env.WAKATIME_USERNAME ?? "").trim() || USERNAME;
@@ -50,6 +51,7 @@ const CAMPOS = [
   "start",
   "human_readable_range",
 ];
+// best_day vai à parte (enxugarMelhorDia): só a data e os segundos
 const LISTAS = ["languages", "editors", "categories", "operating_systems"];
 
 // Top N projetos do período, com nome. Os de HIDDEN_PROJECTS saem AQUI, no
@@ -62,6 +64,41 @@ function enxugarProjetos(projects) {
     .filter(({ name }) => !ocultos.has(String(name).toLowerCase()))
     .slice(0, LIMITS.projetos)
     .map(({ name, total_seconds, percent }) => ({ name, total_seconds, percent }));
+}
+
+// Melhor dia do período: { date: "2025-03-14", total_seconds }. Só vem com o
+// token (a rota pública não manda best_day).
+function enxugarMelhorDia(bestDay) {
+  if (!bestDay?.date || !(bestDay.total_seconds > 0)) return undefined;
+  return { date: String(bestDay.date).slice(0, 10), total_seconds: bestDay.total_seconds };
+}
+
+// HIDDEN_DEPENDENCIES: nome exato ou, terminando com "*", o começo do nome
+const dependenciaOculta = (() => {
+  const regras = (HIDDEN_DEPENDENCIES ?? []).map((nome) => String(nome).toLowerCase());
+  const exatos = new Set(regras.filter((regra) => !regra.endsWith("*")));
+  const prefixos = regras.filter((regra) => regra.endsWith("*")).map((regra) => regra.slice(0, -1));
+  return (nome) => {
+    const minusculo = String(nome ?? "").toLowerCase();
+    return exatos.has(minusculo) || prefixos.some((prefixo) => minusculo.startsWith(prefixo));
+  };
+})();
+
+// Top N bibliotecas (wakatime --libs). As de HIDDEN_DEPENDENCIES saem AQUI,
+// no servidor, e antes do corte. Um arquivo importa várias bibliotecas, então
+// o tempo delas se sobrepõe: a fatia de cada uma é recalculada sobre a soma
+// das que sobraram (as escondidas não deixam buraco nas porcentagens).
+function enxugarDependencias(dependencies) {
+  if (!Array.isArray(dependencies)) return undefined;
+  const visiveis = dependencies
+    .filter(({ name, total_seconds }) => name && total_seconds > 0 && !dependenciaOculta(name))
+    .sort((a, b) => b.total_seconds - a.total_seconds);
+  const soma = visiveis.reduce((total, { total_seconds }) => total + total_seconds, 0);
+  return visiveis.slice(0, LIMITS.libs).map(({ name, total_seconds }) => ({
+    name,
+    total_seconds,
+    percent: soma ? (total_seconds / soma) * 100 : 0,
+  }));
 }
 
 function enxugar(data = {}) {
@@ -77,6 +114,10 @@ function enxugar(data = {}) {
   }
   const projetos = enxugarProjetos(data.projects);
   if (projetos) saida.projects = projetos;
+  const melhorDia = enxugarMelhorDia(data.best_day);
+  if (melhorDia) saida.best_day = melhorDia;
+  const dependencias = enxugarDependencias(data.dependencies);
+  if (dependencias) saida.dependencies = dependencias;
   return saida;
 }
 

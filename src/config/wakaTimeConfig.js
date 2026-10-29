@@ -21,6 +21,8 @@ const WAKATIME_CONFIG = {
     terminal: { languages: 8, editors: 4, categories: 5, operatingSystems: 3 },
     // wakatime --projetos (todos com nome, menos os de HIDDEN_PROJECTS)
     projetos: 10,
+    // wakatime --libs (as bibliotecas mais usadas, menos as de HIDDEN_DEPENDENCIES)
+    libs: 12,
   },
 
   // Linguagens que não devem aparecer, ex.: ["Text", "Other"]
@@ -32,6 +34,15 @@ const WAKATIME_CONFIG = {
   // nome não vaza. O nome é o que o WakaTime mostra no dashboard (em geral, o
   // nome da pasta).
   HIDDEN_PROJECTS: [],
+
+  // Bibliotecas que não devem aparecer no wakatime --libs. O WakaTime anota
+  // os imports dos arquivos que você edita, então entram também pacotes
+  // internos de clientes (ex.: "@cliente-x/auth") e a biblioteca padrão das
+  // linguagens (ex.: "os", "sys", "java.util"), que só fazem barulho.
+  // Comparação sem diferenciar maiúsculas; termine com "*" para esconder
+  // tudo que começa assim, ex.: ["os", "sys", "@cliente-x/*", "java.*"].
+  // É tudo no servidor (api/_wakatime.js), então o nome não vaza.
+  HIDDEN_DEPENDENCIES: [],
 
   // "Codando agora" (boas-vindas e wakatime --agora). Usa os heartbeats do
   // WakaTime, que são privados e não têm versão pública: só funciona com o

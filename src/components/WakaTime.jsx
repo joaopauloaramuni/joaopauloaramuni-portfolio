@@ -443,6 +443,14 @@ function TerminalSkin({ data, f }) {
         ? `${f.number(data.activeDays)} / ${f.number(data.totalDays)}`
         : f.number(data.activeDays),
     ],
+    // Só com o token (a rota pública não manda o best_day)
+    data.bestDay && [
+      "melhorDia",
+      t("wakatime.melhorDiaValor", {
+        tempo: f.duration(data.bestDay.seconds),
+        data: f.date(data.bestDay.date),
+      }),
+    ],
   ].filter(Boolean);
 
   const sections = [
@@ -552,12 +560,57 @@ function ProjetosSkin({ data, f }) {
 }
 
 /* =====================================================================
+   wakatime --libs: bibliotecas mais importadas nos arquivos que editei
+   (dependencies do WakaTime), com o mesmo visual de barras do --terminal.
+   O tempo de uma biblioteca se sobrepõe ao das outras (um arquivo importa
+   várias), então a fatia é entre as bibliotecas, não do tempo total.
+   ===================================================================== */
+function LibsSkin({ data, f }) {
+  const { t } = useTranslation();
+  const libs = data.libs ?? [];
+
+  if (libs.length === 0) {
+    return <p className="wakatime-status">{t("wakatime.libs.vazio")}</p>;
+  }
+
+  return (
+    <div className="waka-term">
+      <dl className="waka-term-info">
+        <div className="waka-term-kv">
+          <dt>{t("wakatime.libs.top", { count: libs.length })}</dt>
+          <dd>{t("wakatime.libs.principal", { nome: libs[0].name })}</dd>
+        </div>
+      </dl>
+      <div className="waka-term-table">
+        <section className="waka-term-section">
+          <h4 className="waka-term-heading">{t("wakatime.secoes.libs")}</h4>
+          <ul className="waka-term-list">
+            {libs.map((lib, index) => (
+              <TerminalRow
+                key={lib.name}
+                item={lib}
+                style={{ ...ACCENT_STYLE, icon: null }}
+                index={index}
+                showIcon={false}
+                f={f}
+              />
+            ))}
+          </ul>
+        </section>
+      </div>
+      <p className="waka-agora-nota">{t("wakatime.libs.nota")}</p>
+    </div>
+  );
+}
+
+/* =====================================================================
    Moldura dos estilos com dados: título, carregando/erro e rodapé
    ===================================================================== */
 const SKIN_VIEWS = {
   grade: GradeSkin,
   lista: ListaSkin,
   projetos: ProjetosSkin,
+  libs: LibsSkin,
   terminal: TerminalSkin,
 };
 

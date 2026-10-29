@@ -148,8 +148,8 @@ export const commandList = {
   wakatime: {
     name: 'wakatime',
     aliases: ['waka', 'time'],
-    // Estilos: wakatime --terminal | --grade | --lista | --projetos | --agora | --cards (ver data/wakaTimeSkins.js)
-    subcommands: ['--terminal', '--grade', '--grid', '--lista', '--list', '--projetos', '--projects', '--agora', '--now', '--cards'],
+    // Estilos: wakatime --terminal | --grade | --lista | --projetos | --libs | --agora | --cards (ver data/wakaTimeSkins.js)
+    subcommands: ['--terminal', '--grade', '--grid', '--lista', '--list', '--projetos', '--projects', '--libs', '--bibliotecas', '--libraries', '--agora', '--now', '--cards'],
   },
   neofetch: {
     name: 'neofetch',

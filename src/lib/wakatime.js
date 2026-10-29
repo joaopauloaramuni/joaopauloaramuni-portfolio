@@ -83,6 +83,12 @@ function normalize(data) {
     operatingSystems: toItems(data.operating_systems),
     // Pela rota pública (Docker), pode não vir: depende do perfil no WakaTime
     projects: toItems(data.projects),
+    // Só com o token: a rota pública não manda best_day nem dependencies
+    bestDay:
+      data.best_day?.date && data.best_day.total_seconds > 0
+        ? { date: data.best_day.date.slice(0, 10), seconds: data.best_day.total_seconds }
+        : null,
+    libs: toItems(data.dependencies),
   };
 }
 
