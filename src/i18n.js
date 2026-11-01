@@ -2061,6 +2061,15 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec78_local:
+          "Software Engineering - PUC Minas",
+        
+        rec78_relationship:
+          "On November 1, 2026, Pedro was João Paulo's client",
+
+        rec78_recommendation:
+          "I had the privilege of being a student and mentee of Professor João Paulo Aramuni in the courses Software Design, Software Development Lab, and Interdisciplinary Project V (Distributed Applications) in the Software Engineering program at PUC Minas. Aramuni is an exceptional professional and educator. Because he works directly in the industry as a CTO and Tech Consultant, he brings an extremely practical and up-to-date perspective to the classroom. He doesn't stop at theory: he challenges students to think about scalable architecture, security, engineering best practices, and delivering real value. During the development of our distributed systems project, his guidance was essential for us to make solid architectural decisions and run our sprints with professional maturity. He has a unique ability to quickly identify areas for improvement, guide the team without handing out ready-made answers, and bring out the full potential of each student. I highly recommend João Paulo, both as an outstanding academic reference and as a brilliant technology leader and strategist for any organization.",
+        
         rec77_local:
           "JDSDEV - Jedis Technology and Recruitment",
         
@@ -4952,6 +4961,15 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec78_local:
+          "Engenharia de Software - PUC Minas",
+        
+        rec78_relationship:
+          "Em 1 de novembro de 2026, Pedro foi cliente de João Paulo",
+
+        rec78_recommendation:
+          "Tive o privilégio de ser aluno e orientando do professor João Paulo Aramuni nas disciplinas de Projeto de Software, Laboratório de Desenvolvimento de Software e Trabalho Interdisciplinar V (Aplicações Distribuídas) no curso de Engenharia de Software da PUC Minas. O Aramuni é um profissional e docente fora da curva. Por atuar diretamente no mercado como CTO e Tech Consultant, ele traz para a sala de aula uma visão extremamente prática e atualizada. Ele não se limita à teoria: desafia os alunos a pensarem em arquitetura escalável, segurança, boas práticas de engenharia e entrega de valor real. Durante o desenvolvimento do nosso projeto de sistemas distribuídos, as suas orientações foram fundamentais para tomarmos decisões arquiteturais sólidas e conduzirmos as sprints com maturidade profissional. Ele tem uma capacidade ímpar de identificar pontos de melhoria rapidamente, guiar a equipe sem dar respostas prontas e extrair o máximo potencial de cada aluno. Recomendo fortemente o João Paulo, tanto como uma referência acadêmica de excelência quanto como um líder tecnológico e estrategista brilhante para qualquer organização.",
+
         rec77_local:
           "JDSDEV - Jedis Tecnologia e Recrutamento",
         
