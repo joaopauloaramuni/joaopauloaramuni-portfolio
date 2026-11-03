@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-10-30.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-11-03.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,7 +12,7 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-10-30T07:48-03:00",
+  geradoEm: "2026-11-03T16:48-03:00",
   alunos: 325,
 };
 
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 19,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "291775",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "289123",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 10,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 23,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "287597",
@@ -194,7 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "286958",
@@ -207,7 +207,7 @@ export const cursos = [
     sga: "4354.1.00",
     curso: "CC",
     alunos: 50,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "286959",
@@ -220,7 +220,7 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
   {
     id: "283169",
@@ -233,7 +233,7 @@ export const cursos = [
     sga: "0492.1.00",
     curso: "ES",
     alunos: 47,
-    atualizadoEm: "2026-10-30T07:48-03:00",
+    atualizadoEm: "2026-11-03T16:48-03:00",
   },
 ];
 
@@ -1220,7 +1220,7 @@ export const tarefas = [
     fecha: "2026-10-27T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 19, noPrazo: 19, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 0, aCorrigir: 19 },
+    entregas: { alunos: 19, noPrazo: 19, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 19, aCorrigir: 0 },
   },
   {
     id: "1434441",
@@ -1231,7 +1231,7 @@ export const tarefas = [
     fecha: "2026-10-28T12:30-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 10, noPrazo: 7, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 7 },
+    entregas: { alunos: 10, noPrazo: 7, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 7, aCorrigir: 0 },
   },
   {
     id: "1434455",
@@ -1242,7 +1242,7 @@ export const tarefas = [
     fecha: "2026-10-28T18:52-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 23, noPrazo: 22, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 0, aCorrigir: 22 },
+    entregas: { alunos: 23, noPrazo: 22, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 22, aCorrigir: 0 },
   },
   {
     id: "1434384",
@@ -1253,7 +1253,7 @@ export const tarefas = [
     fecha: "2026-10-29T12:30-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 24, noPrazo: 24, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 0, aCorrigir: 24 },
+    entregas: { alunos: 24, noPrazo: 24, atrasadas: 0, faltando: 0, dispensados: 0, corrigidas: 24, aCorrigir: 0 },
   },
   {
     id: "1434405",
@@ -1264,7 +1264,7 @@ export const tarefas = [
     fecha: "2026-10-29T18:50-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 21, noPrazo: 20, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 0, aCorrigir: 20 },
+    entregas: { alunos: 21, noPrazo: 20, atrasadas: 0, faltando: 1, dispensados: 0, corrigidas: 19, aCorrigir: 1 },
   },
   {
     id: "1434420",
@@ -1275,7 +1275,7 @@ export const tarefas = [
     fecha: "2026-10-29T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 13, noPrazo: 8, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 0, aCorrigir: 8 },
+    entregas: { alunos: 13, noPrazo: 8, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 8, aCorrigir: 0 },
   },
   {
     id: "1418061",
@@ -1286,7 +1286,7 @@ export const tarefas = [
     fecha: "2026-11-01T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 2, atrasadas: 0, faltando: 12, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
+    entregas: { alunos: 14, noPrazo: 11, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 11 },
   },
   {
     id: "1408519",
@@ -1297,7 +1297,7 @@ export const tarefas = [
     fecha: "2026-11-01T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 50, noPrazo: 6, atrasadas: 0, faltando: 44, dispensados: 0, corrigidas: 0, aCorrigir: 6 },
+    entregas: { alunos: 50, noPrazo: 47, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 47 },
   },
   {
     id: "1434349",
@@ -1305,11 +1305,10 @@ export const tarefas = [
     nome: "LABORATÓRIO 2",
     url: "https://pucminas.instructure.com/courses/292753/assignments/1434349",
     prazo: "2026-11-02T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-11-02T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 1, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
+    entregas: { alunos: 14, noPrazo: 11, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 11 },
   },
   {
     id: "1434393",
@@ -1345,7 +1344,7 @@ export const tarefas = [
     fecha: "2026-11-03T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 19, noPrazo: 0, atrasadas: 0, faltando: 19, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 19, noPrazo: 14, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 0, aCorrigir: 14 },
   },
   {
     id: "1434666",
@@ -1357,7 +1356,7 @@ export const tarefas = [
     fecha: "2026-11-03T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 22, noPrazo: 12, atrasadas: 0, faltando: 10, dispensados: 0, corrigidas: 0, aCorrigir: 12 },
   },
   {
     id: "1415353",
@@ -1392,7 +1391,7 @@ export const tarefas = [
     fecha: "2026-11-04T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 22, noPrazo: 3, atrasadas: 0, faltando: 19, dispensados: 0, corrigidas: 0, aCorrigir: 3 },
   },
   {
     id: "1434450",
@@ -1440,7 +1439,7 @@ export const tarefas = [
     fecha: "2026-11-05T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 13, noPrazo: 2, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
   },
   {
     id: "1434670",
@@ -1754,54 +1753,6 @@ export const tarefas = [
     entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
-    id: "1408514",
-    curso: "286958",
-    nome: "ATIVIDADE - Entrega Final - Aplicação e Repositório GitHub (ZIP)",
-    url: "https://pucminas.instructure.com/courses/286958/assignments/1408514",
-    prazo: "2026-11-29T23:59-03:00",
-    fecha: "2026-11-29T23:59-03:00",
-    pontos: 10,
-    tipo: "online",
-    grupo: true,
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1408515",
-    curso: "286958",
-    nome: "ATIVIDADE - Entrega Final - Apresentação (PDF/PPT)",
-    url: "https://pucminas.instructure.com/courses/286958/assignments/1408515",
-    prazo: "2026-11-29T23:59-03:00",
-    fecha: "2026-11-29T23:59-03:00",
-    pontos: 5,
-    tipo: "online",
-    grupo: true,
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1408516",
-    curso: "286958",
-    nome: "ATIVIDADE - Entrega Final - Documentação do Projeto (PDF)",
-    url: "https://pucminas.instructure.com/courses/286958/assignments/1408516",
-    prazo: "2026-11-29T23:59-03:00",
-    fecha: "2026-11-29T23:59-03:00",
-    pontos: 10,
-    tipo: "online",
-    grupo: true,
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1408517",
-    curso: "286958",
-    nome: "ATIVIDADE - Entrega Final - Vídeo",
-    url: "https://pucminas.instructure.com/courses/286958/assignments/1408517",
-    prazo: "2026-11-29T23:59-03:00",
-    fecha: "2026-11-29T23:59-03:00",
-    pontos: 5,
-    tipo: "online",
-    grupo: true,
-    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
     id: "1434388",
     curso: "292796",
     nome: "ATIVIDADE 04",
@@ -1835,6 +1786,54 @@ export const tarefas = [
     tipo: "sem_entrega",
     grupo: true,
     entregas: null,
+  },
+  {
+    id: "1408514",
+    curso: "286958",
+    nome: "ATIVIDADE - Entrega Final - Aplicação e Repositório GitHub (ZIP)",
+    url: "https://pucminas.instructure.com/courses/286958/assignments/1408514",
+    prazo: "2026-12-03T23:59-03:00",
+    fecha: "2026-12-03T23:59-03:00",
+    pontos: 10,
+    tipo: "online",
+    grupo: true,
+    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1408515",
+    curso: "286958",
+    nome: "ATIVIDADE - Entrega Final - Apresentação (PDF/PPT)",
+    url: "https://pucminas.instructure.com/courses/286958/assignments/1408515",
+    prazo: "2026-12-03T23:59-03:00",
+    fecha: "2026-12-03T23:59-03:00",
+    pontos: 5,
+    tipo: "online",
+    grupo: true,
+    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1408516",
+    curso: "286958",
+    nome: "ATIVIDADE - Entrega Final - Documentação do Projeto (PDF)",
+    url: "https://pucminas.instructure.com/courses/286958/assignments/1408516",
+    prazo: "2026-12-03T23:59-03:00",
+    fecha: "2026-12-03T23:59-03:00",
+    pontos: 10,
+    tipo: "online",
+    grupo: true,
+    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1408517",
+    curso: "286958",
+    nome: "ATIVIDADE - Entrega Final - Vídeo",
+    url: "https://pucminas.instructure.com/courses/286958/assignments/1408517",
+    prazo: "2026-12-03T23:59-03:00",
+    fecha: "2026-12-03T23:59-03:00",
+    pontos: 5,
+    tipo: "online",
+    grupo: true,
+    entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1434351",
