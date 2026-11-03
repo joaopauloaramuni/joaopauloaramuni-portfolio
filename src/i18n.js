@@ -2061,6 +2061,15 @@ const resources = {
         titulo: "Recommendations",
         nenhum: "No recommendations yet",
 
+        rec79_local:
+          "Software Engineering - PUC Minas",
+        
+        rec79_relationship:
+          "November 2, 2026, Gabriel was João Paulo's client",
+
+        rec79_recommendation:
+          "Recommending João Paulo Aramuni is an easy task for anyone familiar with his career, because we are talking about a truly exceptional professional and educator. Having worked both as an academic advisor at PUC Minas and as a technical leader in the industry, Aramuni has a rare ability to inspire the people around him to become their best selves, shaping top-tier professionals. What stands out most in his work is his strong market and practical vision, as he doesn't limit himself to theory and brings real-world demands of scalable architecture, security, and design patterns into everyday work. In addition, he offers unparalleled teaching and mentorship, with the clarity to explain complex concepts while always encouraging autonomy, critical thinking, and the continuous development of students and teams.",
+        
         rec78_local:
           "Software Engineering - PUC Minas",
         
@@ -4961,6 +4970,15 @@ const resources = {
         titulo: "Recomendações",
         nenhum: "Nenhuma recomendação cadastrada ainda.",
         
+        rec79_local:
+          "Engenharia de Software - PUC Minas",
+        
+        rec79_relationship:
+          "Em 2 de novembro de 2026, Gabriel foi cliente de João Paulo",
+
+        rec79_recommendation:
+          "Recomendar o João Paulo Aramuni é uma tarefa fácil para quem conhece sua trajetória, pois estamos falando de um profissional e educador absolutamente fora da curva. Tendo atuado tanto como orientador acadêmico na PUC Minas quanto como liderança técnica no mercado, o Aramuni possui uma capacidade rara, inspirar as pessoas ao seu redor a buscarem sua melhor versão, formando profissionais de alto nível. O que mais se destaca em sua atuação é sua forte visão de mercado e prática, já que ele não se limita à teoria e traz para o dia a dia exigências reais de arquitetura escalável, segurança e padrões de projeto. Além disso, ele possui uma didática e uma mentoria ímpares, com clareza para explicar conceitos complexos, incentivando sempre a autonomia, o pensamento crítico e o desenvolvimento contínuo dos alunos e equipes.",
+
         rec78_local:
           "Engenharia de Software - PUC Minas",
         
