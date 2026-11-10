@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-11-09.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-11-10.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,7 +12,7 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-11-09T16:51-03:00",
+  geradoEm: "2026-11-10T18:05-03:00",
   alunos: 323,
 };
 
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 19,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "289123",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "291775",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 9,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "287597",
@@ -194,20 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-11-09T16:51-03:00",
-  },
-  {
-    id: "286958",
-    nome: "Trabalho Interdisciplinar II: Front-End - Ciência da Computação - Campus Lourdes - PLU - Manhã - 2026/2",
-    codigo: "(4354100) Trabalho Interdisciplinar II: Front-End",
-    url: "https://pucminas.instructure.com/courses/286958",
-    disciplina: "ti2",
-    campus: "lourdes",
-    turno: "manha",
-    sga: "4354.1.00",
-    curso: "CC",
-    alunos: 50,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "286959",
@@ -220,7 +207,20 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
+  },
+  {
+    id: "286958",
+    nome: "Trabalho Interdisciplinar II: Front-End - Ciência da Computação - Campus Lourdes - PLU - Manhã - 2026/2",
+    codigo: "(4354100) Trabalho Interdisciplinar II: Front-End",
+    url: "https://pucminas.instructure.com/courses/286958",
+    disciplina: "ti2",
+    campus: "lourdes",
+    turno: "manha",
+    sga: "4354.1.00",
+    curso: "CC",
+    alunos: 50,
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
   {
     id: "283169",
@@ -233,7 +233,7 @@ export const cursos = [
     sga: "0492.1.00",
     curso: "ES",
     alunos: 47,
-    atualizadoEm: "2026-11-09T16:51-03:00",
+    atualizadoEm: "2026-11-10T18:05-03:00",
   },
 ];
 
@@ -1352,7 +1352,7 @@ export const tarefas = [
     fecha: "2026-11-03T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 19, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 19 },
+    entregas: { alunos: 22, noPrazo: 19, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 19, aCorrigir: 0 },
   },
   {
     id: "1415353",
@@ -1440,7 +1440,7 @@ export const tarefas = [
     fecha: "2026-11-06T23:59-03:00",
     pontos: 15,
     tipo: "online",
-    entregas: { alunos: 11, noPrazo: 8, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 0, aCorrigir: 8 },
+    entregas: { alunos: 11, noPrazo: 8, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 8, aCorrigir: 0 },
   },
   {
     id: "1434346",
@@ -1448,11 +1448,10 @@ export const tarefas = [
     nome: "ATIVIDADE 03",
     url: "https://pucminas.instructure.com/courses/292753/assignments/1434346",
     prazo: "2026-11-09T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-11-09T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 14, noPrazo: 2, atrasadas: 0, faltando: 12, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
+    entregas: { alunos: 14, noPrazo: 9, atrasadas: 0, faltando: 5, dispensados: 0, corrigidas: 9, aCorrigir: 0 },
   },
   {
     id: "1434409",
@@ -1460,11 +1459,10 @@ export const tarefas = [
     nome: "ATIVIDADE 03",
     url: "https://pucminas.instructure.com/courses/292406/assignments/1434409",
     prazo: "2026-11-09T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-11-09T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 3, atrasadas: 0, faltando: 19, dispensados: 0, corrigidas: 0, aCorrigir: 3 },
+    entregas: { alunos: 22, noPrazo: 19, atrasadas: 0, faltando: 3, dispensados: 0, corrigidas: 19, aCorrigir: 0 },
   },
   {
     id: "1434646",
@@ -1472,11 +1470,10 @@ export const tarefas = [
     nome: "AV2 - 25 pts",
     url: "https://pucminas.instructure.com/courses/291440/assignments/1434646",
     prazo: "2026-11-10T10:40-03:00",
-    abre: "2026-09-01T00:00-03:00",
     fecha: "2026-11-10T10:40-03:00",
     pontos: 25,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+    entregas: { alunos: 22, noPrazo: 20, atrasadas: 0, faltando: 2, dispensados: 0, corrigidas: 0, aCorrigir: 20 },
   },
   {
     id: "1434657",
@@ -1825,6 +1822,18 @@ export const tarefas = [
     entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
+    id: "1434347",
+    curso: "292753",
+    nome: "ATIVIDADE 04",
+    url: "https://pucminas.instructure.com/courses/292753/assignments/1434347",
+    prazo: "2026-12-07T23:59-03:00",
+    abre: "2026-09-01T00:00-03:00",
+    fecha: "2026-12-07T23:59-03:00",
+    pontos: 2.5,
+    tipo: "online",
+    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
     id: "1434351",
     curso: "292753",
     nome: "LABORATÓRIO 3",
@@ -1835,6 +1844,18 @@ export const tarefas = [
     pontos: 5,
     tipo: "online",
     entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1434410",
+    curso: "292406",
+    nome: "ATIVIDADE 04",
+    url: "https://pucminas.instructure.com/courses/292406/assignments/1434410",
+    prazo: "2026-12-07T23:59-03:00",
+    abre: "2026-09-01T00:00-03:00",
+    fecha: "2026-12-07T23:59-03:00",
+    pontos: 2.5,
+    tipo: "online",
+    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1434413",
@@ -1943,30 +1964,6 @@ export const tarefas = [
     pontos: 15,
     tipo: "online",
     entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1434347",
-    curso: "292753",
-    nome: "ATIVIDADE 04",
-    url: "https://pucminas.instructure.com/courses/292753/assignments/1434347",
-    prazo: "2026-12-14T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
-    fecha: "2026-12-14T23:59-03:00",
-    pontos: 2.5,
-    tipo: "online",
-    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1434410",
-    curso: "292406",
-    nome: "ATIVIDADE 04",
-    url: "https://pucminas.instructure.com/courses/292406/assignments/1434410",
-    prazo: "2026-12-14T23:59-03:00",
-    abre: "2026-09-01T00:00-03:00",
-    fecha: "2026-12-14T23:59-03:00",
-    pontos: 2.5,
-    tipo: "online",
-    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1458331",
@@ -2259,6 +2256,26 @@ export const tarefas = [
     entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
+    id: "1449388",
+    curso: "286959",
+    nome: "Planejamento, organização e estratégias de estudo [Avaliação]",
+    url: "https://pucminas.instructure.com/courses/286959/assignments/1449388",
+    prazo: null,
+    pontos: 0,
+    tipo: "quiz",
+    entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1449374",
+    curso: "286959",
+    nome: "Programação em Python [Avaliação]",
+    url: "https://pucminas.instructure.com/courses/286959/assignments/1449374",
+    prazo: null,
+    pontos: 0,
+    tipo: "quiz",
+    entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
     id: "1408533",
     curso: "286958",
     nome: "Avaliação de Desempenho Acadêmico (ADA)",
@@ -2287,26 +2304,6 @@ export const tarefas = [
     pontos: 0,
     tipo: "quiz",
     entregas: { alunos: 50, noPrazo: 0, atrasadas: 0, faltando: 50, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1449388",
-    curso: "286959",
-    nome: "Planejamento, organização e estratégias de estudo [Avaliação]",
-    url: "https://pucminas.instructure.com/courses/286959/assignments/1449388",
-    prazo: null,
-    pontos: 0,
-    tipo: "quiz",
-    entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
-  },
-  {
-    id: "1449374",
-    curso: "286959",
-    nome: "Programação em Python [Avaliação]",
-    url: "https://pucminas.instructure.com/courses/286959/assignments/1449374",
-    prazo: null,
-    pontos: 0,
-    tipo: "quiz",
-    entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
 ];
 
