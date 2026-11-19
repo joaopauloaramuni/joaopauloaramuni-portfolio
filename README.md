@@ -41,6 +41,7 @@ Este é o repositório do meu **portfólio pessoal**, um projeto desenvolvido co
 * 🕹️ **jogo / quake / doom / flappyplane:** Jogos no terminal web: `jogo` (ou `quake`) abre o Quake original (episódio 1 do shareware), `doom` abre o Doom original (episódio 1 do shareware), ambos rodando em WebAssembly, e `flappyplane` abre o Flappy Plane. `jogo --quake`, `jogo --doom` e `jogo --flappyplane` também escolhem o jogo. Veja o [guia do jogo](#️-guia-do-comando-jogo-quake-doom-e-flappy-plane).
 * 📖 **guestbook / livro de visitas:** Permite que visitantes deixem mensagens no meu portfólio via terminal web, com armazenamento no Supabase e envio automático de e-mail ao adicionar um registro. Nome e mensagem têm limite de tamanho e o banco tem proteção contra spam (veja [Proteção contra spam no Livro de Visitas](#️-proteção-contra-spam-no-livro-de-visitas)).
 * ✈️ **viagens / travel / mapa:** Os lugares por onde já passei num mapa-múndi de pontos, no clima do terminal: os países visitados ficam coloridos pela cor do continente (as mesmas do "Carimbos no passaporte" do `sobre`), cada cidade tem um pino com bandeira, país e distância de BH, e Belo Horizonte pulsa em verde. `viagens --america`, `viagens --minas`, `viagens --europa` e `viagens --asia` aproximam o mapa, e `viagens --lista` mostra as cidades por país. As cidades ficam em `src/data/viagensData.js`; a grade de pontos é gerada uma vez pelo `npm run viagens` (Natural Earth via world-atlas e d3-geo, só em devDependencies) e vai para o site como texto, sem nenhuma API.
+* 📺 **series / seriados / tv / shows:** As séries que estou assistindo agora, as que já vi e os desenhos da infância, em cartazes e em ordem alfabética (pelo nome original, sem o artigo: *The Walking Dead* fica no W). Cada cartaz abre a série no IMDb. Tem uma lista por opção: `series --tudo` (padrão), `series --assistindo`, `series --vistas` e `series --desenhos`. A lista fica em `src/data/seriesData.js` (a mesma que alimenta o "Assistindo" do `sobre`); os cartazes vêm do [TVmaze](https://www.tvmaze.com/api) (grátis e sem chave) pelo `npm run series`, que baixa as imagens para `public/series/` e grava `src/data/seriesPosters.js`, então o site não chama API nenhuma. Série nova: acrescente no `seriesData.js` (com o `imdb` quando der) e rode `npm run series`, que só busca as que ainda não têm cartaz e avisa com ⚠ quando o TVmaze achou algo com ano ou nome diferente (aí é só fixar o `tvmaze` certo). Sem cartaz, a série aparece com a inicial na cor da lista. Veja o [guia do comando series](#-guia-do-comando-series-séries-e-desenhos).
 * 🎨 **design / ds:** Mostra o design system do portfólio: logo, escala cromática, tokens de cor nos dois temas (com contraste), fontes, tamanhos, espaçamentos, raios e breakpoints.
 
 🚀 Ao abrir o portfólio, o visitante é recebido por uma **sequência de boot** no estilo kernel Linux, com linhas `[ OK ]`, `[ WARN ]` e `[ INFO ]` e uma barra de progresso, antes da tela de boas-vindas. A animação dura cerca de 3 segundos e pode ser pulada com qualquer tecla, clique ou toque.
@@ -93,6 +94,7 @@ O diagrama junta duas visões da arquitetura: **componentes** (que partes o cód
    - A máquina do desenvolvedor roda o `npm run dev` e o `npm run lattes`, que lê a exportação XML da Plataforma Lattes e gera o `src/data/lattesData.js`.
    - O `npm run turmas` também roda só na máquina do desenvolvedor: clona os repositórios privados dos grupos com o token dele e gera o `src/data/turmasData.js` (não aparece no diagrama).
    - O `npm run canvas` idem: lê as tarefas e as entregas no Canvas com a chave da API dele e gera o `src/data/canvasData.js` (não aparece no diagrama).
+   - O `npm run series` também: busca os cartazes das séries no TVmaze, baixa as imagens para `public/series/` e gera o `src/data/seriesPosters.js` (não aparece no diagrama).
    - Cada `git push` no GitHub dispara o deploy automático na Vercel.
    - O GitHub Actions (`keep-supabase-awake.yml`) faz uma requisição ao Supabase a cada 12 horas para o projeto gratuito não entrar em pausa.
    - Logo abaixo fica a implantação alternativa com Docker: um stage de build com Node e um stage com NGINX, que usa o `nginx.conf` para repassar `/api/*`.
@@ -246,7 +248,7 @@ Ferramentas de desenvolvimento (`devDependencies`), que não vão para o site:
 
 > 🔒 **Rollup travado na 4.63.** O `package.json` tem um `overrides` que mantém o Rollup, que o Vite usa no build, em `~4.63.6`. A versão 4.64 (de outubro de 2026) deixou o build deste projeto cerca de 25 vezes mais lento: de ~15 s para ~5 min. A causa provável é a nova análise de `try/catch` da 4.64.0 ([rollup#6541](https://github.com/rollup/rollup/pull/6541)). A 4.63.6 já tem a correção de segurança [GHSA-mw96-cpmx-2vgc](https://github.com/advisories/GHSA-mw96-cpmx-2vgc), que entrou na 4.59.0, então o `npm audit` fica zerado. Quando sair uma versão nova do Rollup, tire o `overrides`, rode `npm install` e confira o tempo do `npm run build` antes de commitar.
 
-Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas` e `npm run wakatime:oauth`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). O `npm run ask` usa dois que já estão no projeto: o **vite**, para carregar os dados dos comandos como o site carrega, e o **pdfjs-dist** (que vem com o react-pdf), para ler o texto do currículo em PDF. Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
+Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`, `npm run series` e `npm run wakatime:oauth`) não usam nenhum pacote, só o próprio Node (o `turmas` também chama o `git` e, para pegar o token, o `gh`). O `npm run ask` usa dois que já estão no projeto: o **vite**, para carregar os dados dos comandos como o site carrega, e o **pdfjs-dist** (que vem com o react-pdf), para ler o texto do currículo em PDF. Os serviços externos sem pacote, como o Google reCAPTCHA (`contato`), o Calendly (`calendly`), a API do WakaTime e a GitHub API, são chamados pela URL; eles aparecem no [diagrama](#-diagrama-de-componentes-e-implantação).
 
 > 💡 O `react-calendly` não é usado: o Calendly entra num `<iframe>` (veja [a comparação](#-diferença-entre-usar-react-calendly-e-o-embed-oficial)).
 
@@ -283,6 +285,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   ├── 📄 lattes.pdf                     → currículo Lattes (lattes --pdf)
 │   ├── 📁 quake                          → Quake em WebAssembly e quake106.zip (jogo / quake)
 │   ├── 📁 doom                           → Doom em WebAssembly e doom1.wad (jogo --doom / doom)
+│   ├── 📁 series                         → cartazes das séries, baixados do TVmaze (npm run series)
 │   ├── 🖼️ aramuni-logo*.svg · aramunilogo.png → logo e favicon
 │   └── 🖼️ demais imagens                 → projetos, prêmios, avatar e prévia do link (portfolio1.png)
 ├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
@@ -290,6 +293,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
 │   ├── 🛠️ canvas.mjs                     → tarefas, prazos e entregas do Canvas (npm run canvas)
 │   ├── 🛠️ ask.mjs                        → base de conhecimento do ask: currículo + portfólio (npm run ask)
+│   ├── 🛠️ series.mjs                     → cartazes e links das séries no TVmaze (npm run series)
 │   ├── 📁 quake                          → recompila o motor do Quake (build.sh, Emscripten)
 │   └── 📁 doom                           → recompila o motor do Doom (build.sh, Zig)
 ├── 📁 supabase                           → scripts SQL do banco (rode no SQL Editor do Supabase)
@@ -319,6 +323,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   │   ├── ⚛️ GitHubStats                → stats
 │   │   ├── ⚛️ WakaTime                   → wakatime
 │   │   ├── ⚛️ Spotify                    → spotify
+│   │   ├── ⚛️ Series                     → series (cartazes das séries e desenhos)
 │   │   ├── ⚛️ Neofetch                   → neofetch
 │   │   ├── ⚛️ Jogos                      → campeonato / galo (próximos jogos do Atlético)
 │   │   ├── ⚛️ Basquete                   → basquete / nba (próximos jogos da NBA)
@@ -344,6 +349,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   │   ├── 🗂️ canvas                     → canvasCursos.js, canvasData.js (gerado), canvasSections.js
 │   │   ├── 🗂️ stats                      → gitHubStatsSections.js
 │   │   ├── 🗂️ wakatime                   → wakaTimeSkins.js, wakaTimeLanguages.js (ícones e cores, também no stats)
+│   │   ├── 🗂️ series                     → seriesData.js, seriesPosters.js (gerado), seriesSkins.js
 │   │   └── 🗂️ design · boas-vindas       → designSystemData.js, brandData.js
 │   ├── 📁 lib                            → regras e buscas, sem React
 │   │   ├── 📜 githubApi.js · githubPaths.js → GitHub API (direto ou pelo proxy) e os únicos caminhos que o proxy aceita
@@ -388,7 +394,7 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 └── 📘 README.md
 ```
 
-Os arquivos marcados como **(gerado)** saem dos scripts `npm run lattes`, `npm run turmas`, `npm run canvas` e `npm run ask`: não edite à mão, rode o script de novo.
+Os arquivos marcados como **(gerado)** saem dos scripts `npm run lattes`, `npm run turmas`, `npm run canvas`, `npm run series` e `npm run ask`: não edite à mão, rode o script de novo.
 
 -----
 
@@ -2154,6 +2160,80 @@ src/
 
 -----
 
+## 📺 Guia do comando series (séries e desenhos)
+
+O comando `series` (aliases `seriados`, `tv` e `shows`) mostra as séries que estou assistindo agora, as que já vi e os desenhos da infância, em cartazes. Cada lista fica em ordem alfabética pelo nome original, sem o artigo do começo, como numa estante: *The Walking Dead* fica no W, *La Casa de Papel* no C e *O Mecanismo* no M. Clicar num cartaz abre a série no IMDb (ou no TVmaze, quando ela não tem IMDb).
+
+| Comando | O que mostra |
+|:--|:--|
+| `series` ou `series --tudo` (`--all`) | As três listas, uma embaixo da outra, com o total de cada uma (padrão) |
+| `series --assistindo` (`--agora`, `--watching`) | Só o que estou assistindo agora |
+| `series --vistas` (`--vi`, `--watched`) | Só as séries que já vi |
+| `series --desenhos` (`--cartoons`) | Só os desenhos e animes |
+
+Os nomes ficam no original, como no `sobre`. Quando a série passou no Brasil com outro título, ele aparece embaixo do cartaz, só em português (*The Fresh Prince of Bel-Air* · Um Maluco no Pedaço). A lista do "Assistindo" do `sobre` sai da mesma lista, então basta mudar num lugar. Links diretos: [aramuni.dev/?cmd=series](https://aramuni.dev/?cmd=series) e [?cmd=series --assistindo](https://aramuni.dev/?cmd=series%20--assistindo).
+
+### 1️⃣ De onde vêm os cartazes
+
+Do [TVmaze](https://www.tvmaze.com/api), que é grátis e não pede chave. Mas o navegador **nunca** fala com ele: quem busca é o `npm run series`, na sua máquina, que baixa os cartazes (210×295, uns 20 kB cada) para `public/series/<id>.jpg` e grava o link de cada série em `src/data/seriesPosters.js`. Assim o site não depende do TVmaze estar no ar nem do limite de chamadas dele (20 a cada 10 segundos). O rodapé do comando dá o crédito ao TVmaze, como a licença dos dados pede.
+
+```bash
+npm run series                 # só as séries que ainda não têm cartaz
+npm run series -- --tudo       # busca e baixa tudo de novo
+npm run series -- --remoto     # não baixa: usa a imagem do CDN do TVmaze
+```
+
+Série sem cartaz (ou cuja imagem não carrega) aparece com a inicial grande, na cor da lista: verde para "assistindo", azul para "já vi" e amarelo para "desenhos".
+
+### 2️⃣ Acrescentando uma série
+
+Acrescente uma linha no `src/data/seriesData.js` e rode `npm run series`. A ordem no arquivo não importa: o comando ordena sozinho.
+
+```javascript
+{ id: "the-office", nome: "The Office", ano: 2005, lista: "vistas", imdb: "tt0386676" },
+```
+
+| Campo | Para quê |
+|:--|:--|
+| `id` | Chave única e nome do arquivo do cartaz em `public/series/` |
+| `nome` | Título original |
+| `br` | Título no Brasil, quando é outro (aparece só em português) |
+| `ano` | Ano de estreia: desempata a busca no TVmaze |
+| `lista` | `"assistindo"`, `"vistas"` ou `"desenhos"` |
+| `imdb` | Id no IMDb (`tt...`): o jeito mais certeiro de achar a série |
+| `busca` | Texto da busca no TVmaze, quando não há `imdb` e o nome não acha (padrão: o `nome`) |
+| `tvmaze` | Id no TVmaze: fixa a série quando a busca erra (o número na URL da série em tvmaze.com) |
+| `temporada` | Usa o cartaz desta temporada do show do TVmaze. É assim com Power Rangers, que lá é um show só, com cada fase numa temporada |
+| `poster` | Caminho de um cartaz próprio em `public/` (o TVmaze nem é consultado) |
+
+Terminou uma série? Troque a `lista` de `"assistindo"` para `"vistas"`: o cartaz continua o mesmo.
+
+### 3️⃣ Conferindo o relatório
+
+No fim, o script lista o que encontrou para cada série (nome, ano e canal no TVmaze):
+
+- ✓ achou, e o ano e o nome batem;
+- ⚠ achou algo com ano ou nome diferente, ou duas séries caíram no mesmo cartaz. Confira: se estiver errado, ponha o `tvmaze` certo (o número na URL da série em tvmaze.com) e rode de novo. Séries com `tvmaze` fixo não geram aviso, porque já foram conferidas;
+- ✗ não achou, ou a série não tem cartaz no TVmaze. Ponha uma imagem em `public/series/` e o campo `poster`.
+
+Depois, é só fazer commit do `seriesPosters.js` e das imagens.
+
+### 📂 Arquivos
+
+```text
+scripts/series.mjs            → busca no TVmaze, baixa os cartazes e gera os links (npm run series)
+public/series/                → cartazes baixados pelo script
+src/
+  data/seriesData.js          → a lista: nome, título no Brasil, ano, lista e ids
+  data/seriesPosters.js       → cartazes e links gerados pelo script (não edite à mão)
+  data/seriesSkins.js         → listas e nomes aceitos (PT e EN)
+  data/sobreData.js           → o "Assistindo" do sobre, tirado do seriesData.js
+  components/Series.jsx       → seções e cartazes
+  components/Series.css       → grade de cartazes, com layout para celular
+```
+
+-----
+
 ## 🤖 Guia do comando pergunta (ask, perguntas com IA)
 
 O comando `pergunta` (aliases `ask` e `chat`) deixa o visitante perguntar o que quiser sobre mim. Uma IA responde **em primeira pessoa**, ao lado da minha foto (a mesma do `sobre`), com base no meu currículo e no conteúdo deste portfólio: "Oi! Sou o João Paulo, professor de Engenharia de Software...".
@@ -2752,7 +2832,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 
 5. Abra o endereço local exibido no terminal (geralmente `http://localhost:5173`) no seu navegador para ver o projeto em execução.
 
-6. **Atualize os dados gerados (opcional):** três comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
+6. **Atualize os dados gerados (opcional):** quatro comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
 
    ```bash
    # lattes: lê a exportação XML (e o PDF) da Plataforma Lattes → src/data/lattesData.js e public/lattes.pdf
@@ -2765,9 +2845,13 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
    # canvas: lê tarefas, entregas e o calendário do Canvas → src/data/canvasData.js
    # (precisa da chave da API do Canvas: CANVAS_TOKEN no .env.local)
    npm run canvas
+
+   # series: busca os cartazes das séries no TVmaze → src/data/seriesPosters.js e public/series/
+   # (não precisa de chave)
+   npm run series
    ```
 
-   O passo a passo de cada um está no [guia do comando lattes](#-guia-do-comando-lattes-currículo-lattes), no [guia do comando turmas](#-guia-do-comando-turmas-acompanhamento-de-turmas-de-ti) e no [guia do comando canvas](#-guia-do-comando-canvas-tarefas-do-canvas). Depois, é só fazer commit dos arquivos gerados.
+   O passo a passo de cada um está no [guia do comando lattes](#-guia-do-comando-lattes-currículo-lattes), no [guia do comando turmas](#-guia-do-comando-turmas-acompanhamento-de-turmas-de-ti), no [guia do comando canvas](#-guia-do-comando-canvas-tarefas-do-canvas) e no [guia do comando series](#-guia-do-comando-series-séries-e-desenhos). Depois, é só fazer commit dos arquivos gerados.
 
 -----
 

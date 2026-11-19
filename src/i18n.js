@@ -177,6 +177,35 @@ const resources = {
           pains: "Pains"
         }
       },
+      series: {
+        comando: "shows",
+        titulo: "TV shows",
+        sub_tudo: "{{total}}, in alphabetical order: {{assistindo}} I'm watching now, the ones I've finished and the cartoons I grew up with. Click a poster to open it.",
+        sub: {
+          assistindo: "What's on my screen these days.",
+          vistas: "Shows I've already watched, in alphabetical order.",
+          desenhos: "The cartoons and anime I grew up with."
+        },
+        listas: {
+          tudo: "all",
+          assistindo: "Watching now",
+          vistas: "Watched",
+          desenhos: "Cartoons"
+        },
+        estilos: "Lists:",
+        skins: {
+          tudo: "all",
+          assistindo: "watching",
+          vistas: "watched",
+          desenhos: "cartoons"
+        },
+        uso: "Usage: shows [--all | --watching | --watched | --cartoons] (no option shows all three lists)",
+        series_count_one: "{{count}} show",
+        series_count_other: "{{count}} shows",
+        abrir: "{{nome}} (opens in a new tab)",
+        preencher: "Write the command in the terminal",
+        fonte: "Posters and data:"
+      },
       basquete: {
         nba: "NBA",
         titulo: "NBA upcoming games",
@@ -1603,6 +1632,7 @@ const resources = {
         guestbook: { desc: "Leave a message in my public guestbook." },
         design: { desc: "Shows the portfolio design system: fonts, colors, spacing and brand." },
         viagens: { desc: "Shows the places I've been to on a dot map (travel --asia | --list)." },
+        series: { desc: "TV shows I'm watching, the ones I've watched and cartoons, with posters (shows --watching | --cartoons)." },
         pergunta: { desc: "An AI answers anything about me (e.g. ask who are you?)." },
         dicas: {
           titulo: "Tips:",
@@ -3108,6 +3138,35 @@ const resources = {
           pains: "Pains"
         }
       },
+      series: {
+        comando: "series",
+        titulo: "Séries",
+        sub_tudo: "{{total}}, em ordem alfabética: {{assistindo}} que estou assistindo agora, as que já vi e os desenhos da infância. Clique num cartaz para abrir.",
+        sub: {
+          assistindo: "O que está passando na minha tela nestes dias.",
+          vistas: "Séries que já vi, em ordem alfabética.",
+          desenhos: "Os desenhos e animes da minha infância."
+        },
+        listas: {
+          tudo: "tudo",
+          assistindo: "Assistindo agora",
+          vistas: "Já vi",
+          desenhos: "Desenhos"
+        },
+        estilos: "Listas:",
+        skins: {
+          tudo: "tudo",
+          assistindo: "assistindo",
+          vistas: "vistas",
+          desenhos: "desenhos"
+        },
+        uso: "Uso: series [--tudo | --assistindo | --vistas | --desenhos] (sem opção, mostra as três listas)",
+        series_count_one: "{{count}} série",
+        series_count_other: "{{count}} séries",
+        abrir: "{{nome}} (abre em nova aba)",
+        preencher: "Escrever o comando no terminal",
+        fonte: "Cartazes e dados:"
+      },
       basquete: {
         nba: "NBA",
         titulo: "Próximos jogos da NBA",
@@ -4542,6 +4601,7 @@ const resources = {
         guestbook: { desc: "Deixe uma mensagem no meu livro de visitas público." },
         design: { desc: "Mostra o design system do portfólio: fontes, cores, espaçamentos e marca." },
         viagens: { desc: "Mostra os lugares por onde já passei num mapa de pontos (viagens --asia | --lista)." },
+        series: { desc: "Séries que estou assistindo, as que já vi e desenhos, com cartaz (series --assistindo | --desenhos)." },
         pergunta: { desc: "Uma IA responde o que quiser sobre mim (ex.: pergunta quem é você?)." },
         dicas: {
           titulo: "Dicas:",

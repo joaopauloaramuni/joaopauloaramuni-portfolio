@@ -845,13 +845,16 @@ function Pessoal() {
       Icon: IoTvOutline,
       cor: "--icon-book",
       valor: (
-        <span className="sobre-lista-ponto">
-          {assistindo.map(({ nome, url }) => (
-            <Link key={nome} href={url} className="sobre-link">
-              {nome}
-            </Link>
-          ))}
-        </span>
+        <>
+          <span className="sobre-lista-ponto">
+            {assistindo.map(({ nome, url }) => (
+              <Link key={nome} href={url} className="sobre-link">
+                {nome}
+              </Link>
+            ))}
+          </span>
+          <Cmd className="sobre-cmd-inline">series</Cmd>
+        </>
       ),
     },
   ];

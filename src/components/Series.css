@@ -1,0 +1,229 @@
+/* Comando "series": cartazes em grade, por lista (assistindo, vistas,
+   desenhos). Cores só dos tokens do tema (theme.css): acompanha os temas
+   escuro, claro, galo e matrix sem regra extra. Cada lista tem a sua cor
+   em --serie (título, borda do foco e cartaz sem imagem). */
+
+.series {
+  padding: 0.5rem 1rem 1rem;
+  color: var(--text);
+  max-width: 100%;
+}
+
+.series p {
+  margin: 0;
+}
+
+.series-titulo {
+  color: var(--highlight);
+  font-weight: bold;
+}
+
+.series-titulo-visao {
+  color: var(--text-soft);
+  font-weight: normal;
+}
+
+.series-sub {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  margin: 0.15rem 0 1rem !important;
+}
+
+/* ---------- Seções ---------- */
+
+/* Todas as listas com cartazes do mesmo tamanho */
+.series-grade {
+  --cartaz-min: 9.5rem;
+}
+
+.series-assistindo {
+  --serie: var(--accent);
+}
+
+.series-vistas {
+  --serie: var(--info);
+}
+
+.series-desenhos {
+  --serie: var(--warn);
+}
+
+.series-secao + .series-secao {
+  margin-top: 1.75rem;
+}
+
+.series-secao-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--serie) 45%, transparent);
+  color: var(--serie);
+  font-size: 1rem;
+}
+
+.series-secao-total {
+  color: var(--text-muted);
+  font-weight: normal;
+  font-size: 0.85em;
+}
+
+.series-secao-cmd {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.series-secao-cmd::before {
+  content: "$ ";
+}
+
+.series-secao-cmd:hover,
+.series-secao-cmd:focus-visible {
+  color: var(--accent);
+}
+
+/* ---------- Grade de cartazes ---------- */
+
+.series-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--cartaz-min), 1fr));
+  gap: 1.1rem 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.series-item {
+  min-width: 0;
+}
+
+.series-cartaz {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.series-cartaz:focus-visible {
+  outline: 2px solid var(--serie);
+  outline-offset: 3px;
+}
+
+.series-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* A proporção dos cartazes do TVmaze (210×295): com 2 / 3 o object-fit
+     cortava um pouco das laterais de todos */
+  aspect-ratio: 210 / 295;
+  box-sizing: border-box;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border-input);
+  background: var(--surface);
+  margin-bottom: 0.35rem;
+}
+
+a.series-cartaz:hover .series-poster {
+  border-color: var(--serie);
+}
+
+a.series-cartaz:hover .series-nome {
+  color: var(--serie);
+}
+
+/* Sem cartaz: só a inicial, grande, na cor da lista (o nome já vem embaixo) */
+.series-poster-vazio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--serie) 10%, var(--surface));
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: color-mix(in srgb, var(--serie) 70%, var(--text));
+}
+
+.series-nome {
+  color: var(--serie);
+}
+
+/* Sem cartaz: a inicial grande e o nome, na cor da lista */
+.series-poster-vazio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--serie) 10%, var(--surface));
+  overflow: hidden;
+}
+
+.series-poster-inicial {
+  font-size: 3.2rem;
+  line-height: 1;
+  font-weight: bold;
+  color: color-mix(in srgb, var(--serie) 70%, var(--text));
+}
+
+.series-poster-nome {
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: var(--text-soft);
+  overflow-wrap: anywhere;
+}
+
+.series-nome {
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: bold;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.series-detalhe {
+  font-size: 0.72rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+/* ---------- Rodapé ---------- */
+
+.series-fonte {
+  margin-top: 1.25rem !important;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.series-fonte a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .series {
+    padding: 0.5rem 0.25rem 1rem;
+  }
+
+  .series-grade {
+    --cartaz-min: 7.5rem;
+  }
+
+  .series-secao-cmd {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}

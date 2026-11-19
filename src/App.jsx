@@ -29,6 +29,7 @@ import { parseWakaTimeSkin } from "./data/wakaTimeSkins";
 import { parseGitHubStatsSection } from "./data/gitHubStatsSections";
 import { parseCalSkin } from "./data/calSkins";
 import { parseViagensSkin } from "./data/viagensSkins";
+import { parseSeriesSkin } from "./data/seriesSkins";
 import { parseLattesSection } from "./data/lattesSections";
 import { parseTurmas } from "./data/turmasSections";
 import { parseCanvas } from "./data/canvasSections";
@@ -65,6 +66,8 @@ const Basquete = lazyCommand(() => import("./components/Basquete"));
 const DesignSystem = lazyCommand(() => import("./components/DesignSystem"));
 // O "viagens" traz a grade de pontos dos mapas (~28 kB, npm run viagens)
 const Viagens = lazyCommand(() => import("./components/Viagens"));
+// O "series" só desenha a lista; os cartazes estão em public/series (npm run series)
+const Series = lazyCommand(() => import("./components/Series"));
 // O "pergunta" (ask) chama a IA no servidor (api/ask.js): aqui é só o desenho
 const Ask = lazyCommand(() => import("./components/Ask"));
 // O currículo traz o react-pdf e o PDF.js (~400 kB)
@@ -109,6 +112,7 @@ const PRELOAD = [
   Basquete,
   DesignSystem,
   Viagens,
+  Series,
   Ask,
 ];
 
@@ -425,6 +429,17 @@ function App() {
             break;
           }
           response = <Viagens skin={skin} />;
+          break;
+        }
+        case "series": {
+          // "series" mostra as três listas; "--assistindo", "--vistas" e
+          // "--desenhos" mostram uma só (ver data/seriesSkins.js)
+          const skin = parseSeriesSkin(args.slice(1));
+          if (!skin) {
+            response = <TerminalOutput>{t("series.uso")}</TerminalOutput>;
+            break;
+          }
+          response = <Series skin={skin} />;
           break;
         }
         case "recomendacoes":

@@ -3,6 +3,7 @@ import { turmasSubcommands } from './data/turmasSections';
 import { canvasSubcommands } from './data/canvasSections';
 import { nbaSubcommands } from './config/nbaConfig';
 import { viagensSubcommands } from './data/viagensSkins';
+import { seriesSubcommands } from './data/seriesSkins';
 
 // Comandos do terminal. "subcommands" alimenta o autocomplete (Tab) da
 // segunda palavra, ex.: "tema --c" + Tab → "tema --claro".
@@ -105,6 +106,13 @@ export const commandList = {
     // Mapas: viagens --mundo | --america | --minas | --europa | --asia | --lista
     // (ver data/viagensSkins.js e data/viagensData.js)
     subcommands: viagensSubcommands,
+  },
+  series: {
+    name: 'series',
+    aliases: ['seriados', 'tv', 'shows'],
+    // Listas: series --tudo | --assistindo | --vistas | --desenhos
+    // (ver data/seriesSkins.js e data/seriesData.js)
+    subcommands: seriesSubcommands,
   },
   recomendacoes: {
     name: 'recomendacoes',

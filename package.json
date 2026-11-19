@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "ask": "node scripts/ask.mjs",
     "viagens": "node scripts/viagens.mjs",
+    "series": "node scripts/series.mjs",
     "wakatime:oauth": "node scripts/wakatime-oauth.mjs"
   },
   "dependencies": {

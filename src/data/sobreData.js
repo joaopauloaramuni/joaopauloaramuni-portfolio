@@ -18,6 +18,7 @@ import {
   UY,
   VA,
 } from "country-flag-icons/react/3x2";
+import { SERIES, ordenar } from "./seriesData";
 
 // Dados do comando "sobre".
 //
@@ -438,14 +439,15 @@ export const hobbies = [
 // Séries: nomes originais, não traduzidos
 export const serieFavorita = { nome: "The IT Crowd", url: "https://www.imdb.com/title/tt0487831/" };
 
-export const assistindo = [
-  { nome: "Foundation", url: "https://www.imdb.com/title/tt0804484/" },
-  { nome: "Dune: Prophecy", url: "https://www.imdb.com/title/tt10466872/" },
-  { nome: "Silo", url: "https://www.imdb.com/title/tt14688458/" },
-  { nome: "From", url: "https://www.imdb.com/title/tt9813792/" },
-  { nome: "The Penguin", url: "https://www.imdb.com/title/tt15435876/" },
-  { nome: "Dope Thief", url: "https://www.imdb.com/title/tt21638826/" },
-];
+// "Assistindo" vem da mesma lista do comando "series" (seriesData.js)
+export const assistindo = ordenar(SERIES.filter((s) => s.lista === "assistindo")).map(
+  ({ nome, imdb }) => ({
+    nome,
+    url: imdb
+      ? `https://www.imdb.com/title/${imdb}/`
+      : `https://www.imdb.com/find/?q=${encodeURIComponent(nome)}`,
+  }),
+);
 
 // Lugares que já visitei, por continente, na ordem em que aparecem.
 //   id        chave do nome (sobre.pessoal.lugares.<id>)
