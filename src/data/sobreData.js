@@ -495,6 +495,11 @@ export const basquete = {
     { nome: "Fernando" },
     { nome: "Wilson Augusto", url: `${IG}/wilson_guto13/` },
   ],
+  // Vídeos dos meus treinos no Instagram (a conta é privada)
+  videos: [
+    { id: "stories", url: `${IG}/stories/highlights/18096866578407454/` },
+    { id: "reels", url: `${IG}/reels/DI7gYk8Swf2OZipIBgpLp272OD50j2bVcz0mEg0/` },
+  ],
 };
 
 // Séries: nomes originais, não traduzidos

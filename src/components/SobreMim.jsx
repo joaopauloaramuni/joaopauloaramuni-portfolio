@@ -20,6 +20,7 @@ import {
   IoFootballOutline,
   IoGameControllerOutline,
   IoLocationOutline,
+  IoLockClosedOutline,
   IoSchoolOutline,
   IoStarOutline,
   IoTimeOutline,
@@ -951,6 +952,25 @@ function Quadra() {
               {nome}
             </Link>
           ))}
+        </span>
+      </p>
+
+      {/* Vídeos dos treinos no Instagram (conta privada: o cadeado avisa) */}
+      <p className="sobre-quadra-tecnicos sobre-quadra-videos">
+        <span className="sobre-quadra-rotulo">{t("sobre.pessoal.quadra.videos")}</span>
+        <span className="sobre-lista-ponto">
+          {basquete.videos.map(({ id, url }) => (
+            <Link key={id} href={url} className="sobre-link">
+              {t(`sobre.pessoal.quadra.videos_tipos.${id}`)}
+            </Link>
+          ))}
+        </span>
+        <span
+          className="sobre-quadra-privado"
+          title={t("sobre.pessoal.quadra.privado")}
+          aria-label={t("sobre.pessoal.quadra.privado")}
+        >
+          <IoLockClosedOutline aria-hidden="true" />
         </span>
       </p>
     </div>

@@ -1287,6 +1287,20 @@ a.sobre-tag:focus-visible {
   color: var(--text-soft);
 }
 
+/* Logo abaixo dos técnicos: sem a linha tracejada de novo */
+.sobre-quadra-videos {
+  margin-top: 0.4rem !important;
+  padding-top: 0;
+  border-top: none;
+}
+
+.sobre-quadra-privado {
+  display: inline-flex;
+  align-self: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
 .sobre-quadra-rotulo {
   color: var(--accent);
   font-weight: 600;
