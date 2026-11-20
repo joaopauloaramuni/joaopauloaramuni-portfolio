@@ -7,7 +7,7 @@
 //   • o que os comandos do portfólio mostram, em português: sobre,
 //     experiências, projetos, prêmios, recomendações, habilidades,
 //     disciplinas (docenciaData.js) e o resumo do lattes (lattesData.js);
-//   • o texto do currículo em PDF (public/cv-pt.pdf);
+//   • o texto do currículo em PDF (public/curriculos/cv-pt.pdf);
 //   • o que estiver em src/data/askData.js (EXTRAS), para o que não aparece
 //     no site.
 // O resultado vai para api/_askPerfil.js, que a função /api/ask manda para a
@@ -29,7 +29,7 @@ import { createServer } from "vite";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT = resolve(ROOT, "api/_askPerfil.js");
-const CV_PDF = resolve(ROOT, "public/cv-pt.pdf");
+const CV_PDF = resolve(ROOT, "public/curriculos/cv-pt.pdf");
 
 // Comandos que não fazem sentido sugerir numa resposta
 const COMANDOS_FORA = new Set(["limpar", "turmas", "canvas", "pergunta"]);
@@ -422,7 +422,7 @@ const perfil = [
   secao("Outras informações", modulos.ask.EXTRAS),
   secao("Links", links()),
   secao("Comandos deste portfólio (para indicar ao visitante)", comandos()),
-  "# Currículo em PDF (public/cv-pt.pdf, comando curriculo)",
+  "# Currículo em PDF (public/curriculos/cv-pt.pdf, comando curriculo)",
   curriculo,
 ]
   .filter(Boolean)
@@ -433,7 +433,7 @@ const literal = perfil.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{
 
 const { NASCIMENTO, DEV_DESDE } = modulos.sobre;
 const conteudo = `// Gerado por scripts/ask.mjs (npm run ask). Não edite à mão: para mudar o
-// que a IA do comando "pergunta" sabe, edite o currículo (public/cv-pt.pdf), os
+// que a IA do comando "pergunta" sabe, edite o currículo (public/curriculos/cv-pt.pdf), os
 // dados dos comandos ou o src/data/askData.js e rode de novo.
 //
 // Base de conhecimento que a função /api/ask manda para a IA junto com cada

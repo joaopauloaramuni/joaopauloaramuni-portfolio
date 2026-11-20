@@ -10,7 +10,7 @@ export const lattesInfo = {
   "orcid": "https://orcid.org/0000-0001-7538-5927",
   "atualizadoEm": "2026-09-29",
   "pdf": {
-    "arquivo": "/lattes.pdf",
+    "arquivo": "/curriculos/lattes.pdf",
     "bytes": 2424939,
     "paginas": 86
   }

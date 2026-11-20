@@ -342,7 +342,7 @@ O que trocar para deixar o portfólio com a sua cara:
 |:--|:--|
 | `src/i18n.js` | Biografia, cargos, descrições e todos os textos |
 | `src/data/*.js` | Projetos, experiências, habilidades, prêmios e recomendações |
-| `public/` | Avatar, logos, imagens dos projetos, favicon e os currículos `cv-pt.pdf` / `cv-en.pdf` |
+| `public/` | Avatar (`avatar/`), logos (`logos/` e `marca/`), imagens dos projetos (`projetos/`) e dos prêmios (`premios/`), favicon (`icons/`) e os currículos (`curriculos/cv-pt.pdf` / `curriculos/cv-en.pdf`) |
 | `scripts/lattes.mjs` | Rode `npm run lattes -- <CV_xxx.zip> [curriculo.pdf]` com a exportação do **seu** Lattes (veja o guia do comando lattes no README) |
 | `src/config/gitHubApiConfig.js` | `USERNAME` do GitHub |
 | `src/components/Contato.jsx` | Links de LinkedIn, GitHub, e-mail, WhatsApp, Discord e Instagram |

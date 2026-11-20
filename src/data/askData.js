@@ -1,6 +1,6 @@
 // Dados do comando "ask" que não estão em nenhum outro lugar do site.
 //
-// O "npm run ask" junta numa base só o currículo (public/cv-pt.pdf), o que os
+// O "npm run ask" junta numa base só o currículo (public/curriculos/cv-pt.pdf), o que os
 // comandos do portfólio mostram (sobre, experiências, projetos, prêmios,
 // recomendações, disciplinas, lattes...) e o texto abaixo, e grava tudo em
 // api/_askPerfil.js. É só isso que a IA sabe sobre mim.

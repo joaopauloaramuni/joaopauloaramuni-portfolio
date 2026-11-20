@@ -189,7 +189,7 @@ const DesignSystem = () => {
         <div className="ds-card ds-brand">
           <Lockup theme={currentTheme} />
           <img
-            src="/favicon.svg"
+            src="/icons/favicon.svg"
             alt={t("design.marca.favicon_alt")}
             className="ds-favicon"
             width="64"
@@ -205,9 +205,9 @@ const DesignSystem = () => {
         </ul>
         <p className="ds-files">
           <code>src/components/AramuniLogo.jsx</code>
-          <code>public/aramuni-logo.svg</code>
-          <code>public/aramuni-logo-full.svg</code>
-          <code>public/favicon.svg</code>
+          <code>public/marca/aramuni-logo.svg</code>
+          <code>public/marca/aramuni-logo-full.svg</code>
+          <code>public/icons/favicon.svg</code>
         </p>
       </Section>
 

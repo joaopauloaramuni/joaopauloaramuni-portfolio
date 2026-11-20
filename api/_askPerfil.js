@@ -1,5 +1,5 @@
 // Gerado por scripts/ask.mjs (npm run ask). Não edite à mão: para mudar o
-// que a IA do comando "pergunta" sabe, edite o currículo (public/cv-pt.pdf), os
+// que a IA do comando "pergunta" sabe, edite o currículo (public/curriculos/cv-pt.pdf), os
 // dados dos comandos ou o src/data/askData.js e rode de novo.
 //
 // Base de conhecimento que a função /api/ask manda para a IA junto com cada
@@ -445,7 +445,7 @@ Também me recomendaram: Davi Mendes (2025), Nataniel Peixoto (2025), Jonathan S
 - \`design\` (ou \`ds\`, \`designsystem\`): Mostra o design system do portfólio: fontes, cores, espaçamentos e marca.
 
 
-# Currículo em PDF (public/cv-pt.pdf, comando curriculo)
+# Currículo em PDF (public/curriculos/cv-pt.pdf, comando curriculo)
 
 Objetivo
 Professor e CTO com experiência em desenvolvimento de software, gestão de equipes e ensino de tecnologia, buscando

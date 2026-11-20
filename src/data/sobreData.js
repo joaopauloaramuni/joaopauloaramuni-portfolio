@@ -459,8 +459,8 @@ export const basquete = {
       cor: "--icon-mail-puc",
       times: [
         { id: "newton", nome: "Gorilas Newton", titulo: "Atlética Engenharia Newton", url: `${IG}/atleticaengnewton/` },
-        { id: "fumec", nome: "FUMEC", titulo: "Atlética FUMEC", url: `${IG}/atleticafumecoficial/` },
-        { id: "aaae-puc", nome: "AAAE PUC", titulo: "AAAE PUC Minas", url: `${IG}/aaaepucminas/` },
+        { id: "fumec", nome: "Rapina FUMEC", titulo: "Atlética FUMEC", url: `${IG}/atleticafumecoficial/` },
+        { id: "aaae-puc", nome: "Capetas PUC", titulo: "AAAE PUC Minas", url: `${IG}/aaaepucminas/` },
         { id: "basquete-puc", nome: "Basquete PUC", titulo: "Basquete PUC Minas", url: `${IG}/basq_puc/` },
       ],
     },

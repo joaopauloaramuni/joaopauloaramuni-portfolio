@@ -281,13 +281,17 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   ├── 📁 galo                           → escudo e foto de fundo do tema galo
 │   ├── 📁 linkedin                       → fotos das recomendações (recomendacoes)
 │   ├── 📁 logos                          → logos de empresas e instituições (sobre)
-│   ├── 📄 cv-pt.pdf · cv-en.pdf          → currículo (curriculo)
-│   ├── 📄 lattes.pdf                     → currículo Lattes (lattes --pdf)
+│   ├── 📁 curriculos                     → cv-pt.pdf · cv-en.pdf (curriculo) e lattes.pdf (lattes --pdf)
 │   ├── 📁 quake                          → Quake em WebAssembly e quake106.zip (jogo / quake)
 │   ├── 📁 doom                           → Doom em WebAssembly e doom1.wad (jogo --doom / doom)
 │   ├── 📁 series                         → cartazes das séries, baixados do TVmaze (npm run series)
-│   ├── 🖼️ aramuni-logo*.svg · aramunilogo.png → logo e favicon
-│   └── 🖼️ demais imagens                 → projetos, prêmios, avatar e prévia do link (portfolio1.png)
+│   ├── 📁 avatar                         → foto do cabeçalho do sobre e do ask (avatar-3.jpeg)
+│   ├── 📁 marca                          → logo (aramuni-logo*.svg · aramunilogo.png)
+│   ├── 📁 projetos                       → imagens e GIFs dos projetos (projetos)
+│   ├── 📁 premios                        → imagens dos prêmios (premios)
+│   ├── 📁 capturas                       → prévia do link (portfolio1.png)
+│   ├── 📁 outros                         → imagens guardadas que o site não usa
+│   └── 📁 icons                          → favicon.svg · favicon.ico · apple-touch-icon.png
 ├── 📁 scripts                            → rodam só na sua máquina (Node), nunca no site
 │   ├── 🛠️ lattes.mjs                     → importa o XML do Lattes (npm run lattes)
 │   ├── 🛠️ turmas.mjs                     → métricas dos repositórios dos grupos (npm run turmas)
@@ -906,7 +910,7 @@ O comando `design` (ou `ds`, `designsystem`) mostra, dentro do próprio terminal
 
 | Seção | O que mostra |
 |:--|:--|
-| 🏷️ Marca | Logo (`aramunilogo.png`), banner ASCII da tela de boas-vindas e a janela do terminal nos dois temas |
+| 🏷️ Marca | Logo (`marca/aramunilogo.png`), banner ASCII da tela de boas-vindas e a janela do terminal nos dois temas |
 | 🌈 Escala cromática | Todas as cores sólidas dos dois temas, agrupadas por família e ordenadas da mais escura para a mais clara |
 | 🎨 Tokens | Cada token do `theme.css` no tema escuro e no claro, lado a lado, com o contraste de textos, ícones e marcas de gráfico calculado pelo WCAG. Inclui as cores dos campi do `cal`, dos tipos de produção do `lattes`, das instituições do `lattes --docencia` e das linguagens, PRs e issues do `turmas` |
 | 🔤 Tipografia | Fira Code e JetBrains Mono, pilhas de fontes, regras e a escala de tamanhos |
@@ -1859,7 +1863,7 @@ Tudo sai da exportação XML do Lattes. Na Plataforma Lattes, em **Atualizar cur
 npm run lattes -- ~/Downloads/CV_1208427665892059.zip ~/Downloads/curriculo-lattes.pdf
 ```
 
-O script `scripts/lattes.mjs` (sem dependências) lê o `.zip` (ou o `.xml` já descompactado), converte do ISO-8859-1 e grava `src/data/lattesData.js`. Como o ISO-8859-1 não tem aspas curvas nem travessão, o Lattes exporta esses caracteres como `?` (`O “Partiu!”` vira `O ?Partiu!?`); o script devolve as aspas e o travessão. Ele também junta grafias diferentes da mesma tecnologia (`NextJs`, `Next.Js` e `NextJS` viram `Next.js`) e, quando a descrição de um projeto termina com um link, usa esse link no card. O PDF é opcional: se for passado, é copiado para `public/lattes.pdf` e o número de páginas e o tamanho entram no card do `lattes --pdf`.
+O script `scripts/lattes.mjs` (sem dependências) lê o `.zip` (ou o `.xml` já descompactado), converte do ISO-8859-1 e grava `src/data/lattesData.js`. Como o ISO-8859-1 não tem aspas curvas nem travessão, o Lattes exporta esses caracteres como `?` (`O “Partiu!”` vira `O ?Partiu!?`); o script devolve as aspas e o travessão. Ele também junta grafias diferentes da mesma tecnologia (`NextJs`, `Next.Js` e `NextJS` viram `Next.js`) e, quando a descrição de um projeto termina com um link, usa esse link no card. O PDF é opcional: se for passado, é copiado para `public/curriculos/lattes.pdf` e o número de páginas e o tamanho entram no card do `lattes --pdf`.
 
 | Seção | No XML do Lattes |
 |:--|:--|
@@ -1904,7 +1908,7 @@ src/
   components/Lattes.css     → gráficos, tabelas, listas e cards, com layout para celular
   theme/theme.css           → cor de cada tipo (--lattes-*) e de cada instituição (--docencia-*)
 public/
-  lattes.pdf                → PDF do currículo, baixado pelo lattes --pdf
+  curriculos/lattes.pdf     → PDF do currículo, baixado pelo lattes --pdf
 ```
 
 -----
@@ -1983,8 +1987,8 @@ src/
   components/SobreMim.css   → estilos (só usa var(--token)), com layout para celular
   i18n.js                   → textos em sobre.* (pt/en)
 public/
-  avatar-3.jpeg             → foto do cabeçalho (também usada no ask)
-  avatar-1..4.jpeg          → variações da foto
+  avatar/avatar-3.jpeg      → foto do cabeçalho (também usada no ask)
+  outros/avatar*.jpeg       → variações da foto (guardadas, não usadas no site)
   logos/                    → logos das empresas e instituições (inclui aes.jpg e fdc.jpg)
 ```
 
@@ -2286,7 +2290,7 @@ npm run ask
 O script `scripts/ask.mjs` junta num Markdown só:
 
 1. **O que os comandos mostram**, em português, lido do `i18n.js` e dos arquivos de `src/data` pelo próprio Vite: `sobre` (bio, hoje, trajetória, formação, vivência, clientes e "fora do terminal"), `experiencias`, `projetos`, `premios`, `skills`, as disciplinas do `docenciaData.js`, o resumo do `lattes` (projetos da AES, TCCs e TIs orientados), as recomendações (as 15 mais recentes com um trecho, as outras só com o nome) e a lista de comandos, para a IA poder indicar um.
-2. **O texto do currículo em PDF** (`public/cv-pt.pdf`), lido com o `pdfjs-dist`. O telefone fica de fora.
+2. **O texto do currículo em PDF** (`public/curriculos/cv-pt.pdf`), lido com o `pdfjs-dist`. O telefone fica de fora.
 3. **O `EXTRAS` do `src/data/askData.js`**: o que você quer que a IA saiba e não aparece no site (como prefere ser procurado, disponibilidade para palestras, opiniões...). Escreva em primeira pessoa.
 
 O resultado vai para `api/_askPerfil.js`, que dá para abrir e ler: é exatamente o que a IA recebe. Rode de novo e faça commit sempre que mudar o currículo, o `i18n.js` ou os dados dos comandos. Quando o portfólio e o PDF discordam (o PDF fica desatualizado mais rápido), a IA segue o portfólio.
@@ -2835,7 +2839,7 @@ Antes de começar, certifique-se de ter o **[Node.js](https://nodejs.org/en/)** 
 6. **Atualize os dados gerados (opcional):** quatro comandos não buscam nada no navegador. Os dados deles vêm de scripts que rodam na sua máquina e gravam arquivos em `src/data/`. Rode-os em outro terminal, com o `npm run dev` aberto, e a página recarrega sozinha:
 
    ```bash
-   # lattes: lê a exportação XML (e o PDF) da Plataforma Lattes → src/data/lattesData.js e public/lattes.pdf
+   # lattes: lê a exportação XML (e o PDF) da Plataforma Lattes → src/data/lattesData.js e public/curriculos/lattes.pdf
    npm run lattes -- ~/Downloads/CV_<id>.zip ~/Downloads/curriculo-lattes.pdf
 
    # turmas: lê os repositórios privados dos grupos de TI → src/data/turmasData.js

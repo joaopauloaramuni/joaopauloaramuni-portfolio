@@ -32,7 +32,7 @@ const Curriculo = () => {
   const [erro, setErro] = useState(false);
 
   const lang = i18n.language.startsWith("en") ? "en" : "pt";
-  const fileUrl = `/cv-${lang}.pdf`;
+  const fileUrl = `/curriculos/cv-${lang}.pdf`;
 
   // Trocou o idioma: outro PDF, que ainda não carregou nem deu erro
   const [arquivoAtual, setArquivoAtual] = useState(fileUrl);

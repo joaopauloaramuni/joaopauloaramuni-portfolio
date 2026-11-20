@@ -5,6 +5,38 @@
       "maxDuration": 60
     }
   },
+  "redirects": [
+    {
+      "source": "/cv-pt.pdf",
+      "destination": "/curriculos/cv-pt.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/cv-en.pdf",
+      "destination": "/curriculos/cv-en.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/lattes.pdf",
+      "destination": "/curriculos/lattes.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "/icons/favicon.ico",
+      "permanent": true
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/icons/apple-touch-icon.png",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio1.png",
+      "destination": "/capturas/portfolio1.png",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/github/profile-views",

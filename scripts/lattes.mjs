@@ -5,7 +5,7 @@
 //
 // O primeiro arquivo é a exportação XML do Lattes (o .zip que a Plataforma
 // Lattes baixa, ou o .xml já descompactado). O segundo, opcional, é o PDF do
-// currículo: ele é copiado para public/lattes.pdf, que o "lattes --pdf"
+// currículo: ele é copiado para public/curriculos/lattes.pdf, que o "lattes --pdf"
 // oferece para download.
 //
 // O XML do Lattes traz CPF, RG, data de nascimento, nome dos pais e endereço
@@ -24,7 +24,7 @@ import { inflateRawSync } from "node:zlib";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT_DATA = resolve(ROOT, "src/data/lattesData.js");
-const OUTPUT_PDF = resolve(ROOT, "public/lattes.pdf");
+const OUTPUT_PDF = resolve(ROOT, "public/curriculos/lattes.pdf");
 
 // Nomes longos das instituições → sigla mostrada no terminal
 const INSTITUICOES = {
@@ -367,7 +367,7 @@ function pdfInfo(path) {
   if (!existsSync(path)) return null;
   const bytes = readFileSync(path);
   const pages = bytes.toString("latin1").match(/\/Type\s*\/Page(?![\w])/g)?.length ?? 0;
-  return { arquivo: "/lattes.pdf", bytes: statSync(path).size, paginas: pages || null };
+  return { arquivo: "/curriculos/lattes.pdf", bytes: statSync(path).size, paginas: pages || null };
 }
 
 /* ---------------------------------------------------------------------
@@ -432,7 +432,7 @@ export const bancas = ${list(bancas)};
   console.log(`  ${interdisciplinares.length} trabalhos interdisciplinares`);
   console.log(`  ${agencia.length} projetos da Agência Experimental de Software`);
   console.log(`  ${bancas.length} bancas`);
-  console.log(info.pdf ? `  PDF: public/lattes.pdf (${info.pdf.paginas ?? "?"} páginas)` : "  PDF: nenhum em public/lattes.pdf");
+  console.log(info.pdf ? `  PDF: public/curriculos/lattes.pdf (${info.pdf.paginas ?? "?"} páginas)` : "  PDF: nenhum em public/curriculos/lattes.pdf");
   console.log("→ src/data/lattesData.js");
 }
 

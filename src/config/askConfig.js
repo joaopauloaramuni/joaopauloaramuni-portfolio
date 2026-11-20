@@ -11,7 +11,7 @@ const ASK_CONFIG = {
   PROXY_PATH: "/api/ask",
 
   // Foto que aparece ao lado de cada resposta (a mesma do comando "sobre")
-  AVATAR: "/avatar-3.jpeg",
+  AVATAR: "/avatar/avatar-3.jpeg",
 
   // Tamanho máximo da pergunta, em caracteres
   MAX_PERGUNTA: 500,

@@ -3,8 +3,8 @@ import React from "react";
 // Logo Aramuni (notebook + capelo) em vetor. Usa currentColor: a cor vem do
 // CSS de quem usa (ex.: color: var(--text-muted)), então segue o tema.
 // Decorativa por padrão (aria-hidden): passe "title" para ela ser lida.
-// O mesmo desenho está em public/aramuni-logo.svg (só o ícone) e
-// public/aramuni-logo-full.svg (adesivo com o nome).
+// O mesmo desenho está em public/marca/aramuni-logo.svg (só o ícone) e
+// public/marca/aramuni-logo-full.svg (adesivo com o nome).
 const VIEWBOX = "0 0 194.9 215.9";
 const PATH =
   "M189.9 39.8L188.4 38.6 186.9 37.7 102.9 2.5 101.3 2 99.9 2 98.7 2.4 97.7 " +
