@@ -279,6 +279,9 @@ Os scripts de manutenção (`npm run lattes`, `npm run turmas`, `npm run canvas`
 │   └── 🖼️ diagrama-componentes-implantacao-portfolio.png
 ├── 📁 public                             → arquivos servidos como estão (entram no build)
 │   ├── 📁 galo                           → escudo e foto de fundo do tema galo
+│   ├── 📁 matrix                         → mesa do "Wake up, Neo" do tema matrix (wake-up.webp)
+│   ├── 📁 artigos                        → capas dos artigos publicados (sobre)
+│   ├── 📁 basquete                       → escudos dos times de basquete (sobre)
 │   ├── 📁 linkedin                       → fotos das recomendações (recomendacoes)
 │   ├── 📁 logos                          → logos de empresas e instituições (sobre)
 │   ├── 📁 curriculos                     → cv-pt.pdf · cv-en.pdf (curriculo) e lattes.pdf (lattes --pdf)
