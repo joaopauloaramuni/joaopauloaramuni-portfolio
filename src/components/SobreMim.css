@@ -1160,6 +1160,144 @@ a.sobre-tag:focus-visible {
 }
 
 /* ---------------------------------------------------------------------
+   Basquete: mesmo cartão do passaporte. Os quatro grupos (clubes,
+   atléticas, peladas, apoio) ficam lado a lado numa faixa só, cada um com
+   a largura proporcional ao número de logos (--colunas vem do JSX), para
+   ocupar a largura do painel e não a altura. Todos os logos são quadrados.
+   --------------------------------------------------------------------- */
+.sobre-quadra {
+  margin-top: 1.5rem;
+}
+
+.sobre-quadra .sobre-quadra-icone {
+  color: var(--icon-work);
+}
+
+.sobre-quadra-grupos {
+  display: grid;
+  grid-template-columns: var(--colunas);
+  gap: 1rem 1.5rem;
+  margin-top: 0.85rem;
+}
+
+.sobre-quadra-grupo {
+  min-width: 0;
+}
+
+.sobre-quadra-grupo .sobre-continente-nome {
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--serie);
+  white-space: nowrap;
+}
+
+.sobre-quadra-times {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sobre-quadra-times > li {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.sobre-quadra-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  max-width: 5.5rem;
+  color: inherit;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sobre-quadra-time img {
+  display: block;
+  width: 100%;
+  max-width: 64px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--bg-terminal);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.sobre-quadra-time:hover img,
+.sobre-quadra-time:focus-visible img {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.sobre-quadra-time:focus-visible {
+  outline: none;
+}
+
+.sobre-quadra-time:focus-visible img {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Nome e papel em até duas linhas cada (cortados com reticências se
+   passarem disso); o nome completo fica no title do link */
+.sobre-quadra-nome,
+.sobre-quadra-papel {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  line-height: 1.25;
+}
+
+.sobre-quadra-nome {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  transition: color 0.15s ease;
+}
+
+.sobre-quadra-time:hover .sobre-quadra-nome,
+.sobre-quadra-time:focus-visible .sobre-quadra-nome {
+  color: var(--accent);
+}
+
+.sobre-quadra-papel {
+  margin-top: -0.2rem;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.sobre-quadra-tecnicos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  margin-top: 0.9rem !important;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.sobre-quadra-rotulo {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sobre-quadra-rotulo::after {
+  content: ":";
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------
    Rodapé "veja também"
    --------------------------------------------------------------------- */
 .sobre-rodape {
@@ -1241,6 +1379,12 @@ a.sobre-tag:focus-visible {
     transition: none;
     transform: none;
   }
+
+  .sobre-quadra-time img,
+  .sobre-quadra-time:hover img {
+    transition: none;
+    transform: none;
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -1257,6 +1401,11 @@ a.sobre-tag:focus-visible {
 @media (max-width: 1280px) {
   .sobre-painel {
     width: 90%;
+  }
+
+  /* Duas faixas: clubes e atléticas em cima, peladas e apoio embaixo */
+  .sobre-quadra-grupos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
 }
@@ -1320,6 +1469,19 @@ a.sobre-tag:focus-visible {
   .sobre-passaporte-total {
     margin-left: 0;
     flex-basis: 100%;
+  }
+
+  /* Um grupo por linha, com os logos do mesmo tamanho em todos */
+  .sobre-quadra-grupos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sobre-quadra-times > li {
+    flex: 0 0 calc((100% - 1.5rem) / 4);
+  }
+
+  .sobre-quadra-nome {
+    font-size: 0.65rem;
   }
 
   .sobre-tag {

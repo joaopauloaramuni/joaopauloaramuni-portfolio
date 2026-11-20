@@ -697,6 +697,22 @@ const resources = {
             basquete: "basketball",
             violao: "guitar",
           },
+          quadra: {
+            titulo: "Basketball",
+            total: "{{times}} teams and causes · {{tecnicos}} coaches",
+            grupos: {
+              clubes: "Clubs",
+              atleticas: "College teams",
+              peladas: "Pickup games",
+              apoio: "Causes I support",
+            },
+            papeis: {
+              escolinha: "youth academy",
+              escolinha_federado: "academy · federated",
+              federacao: "federation",
+            },
+            tecnicos: "Coaches",
+          },
           passaporte: "Passport stamps",
           passaporte_total: "{{lugares}} destinations · {{continentes}} continents",
           continentes: {
@@ -3657,6 +3673,22 @@ const resources = {
             tibia: "Tibia",
             basquete: "basquete",
             violao: "violão",
+          },
+          quadra: {
+            titulo: "Basquete",
+            total: "{{times}} times e projetos · {{tecnicos}} técnicos",
+            grupos: {
+              clubes: "Clubes",
+              atleticas: "Atléticas",
+              peladas: "Peladas com os amigos",
+              apoio: "Projetos que apoio",
+            },
+            papeis: {
+              escolinha: "escolinha",
+              escolinha_federado: "escolinha · federado",
+              federacao: "federação",
+            },
+            tecnicos: "Técnicos",
           },
           passaporte: "Carimbos no passaporte",
           passaporte_total: "{{lugares}} destinos · {{continentes}} continentes",

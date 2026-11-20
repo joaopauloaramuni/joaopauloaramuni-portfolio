@@ -41,6 +41,7 @@ import {
   TRABALHOS_FINAIS,
   artigos,
   assistindo,
+  basquete,
   clientes,
   continentes,
   formacao,
@@ -878,6 +879,84 @@ function Pessoal() {
   );
 }
 
+/* ---------- Basquete ---------- */
+
+const TIMES = basquete.grupos.reduce((total, g) => total + g.times.length, 0);
+
+// Um bloco no mesmo desenho do passaporte: os grupos lado a lado, cada um
+// com a largura proporcional ao número de logos, e os técnicos numa linha só
+function Quadra() {
+  const { t, i18n } = useTranslation();
+  // O comando dos jogos da NBA ("basketball" é o apelido em inglês)
+  const cmd = i18n.language.startsWith("en") ? "basketball" : "basquete";
+  return (
+    <div className="sobre-passaporte sobre-quadra">
+      <p className="sobre-passaporte-titulo">
+        <IoBasketballOutline aria-hidden="true" className="sobre-quadra-icone" />
+        <span>{t("sobre.pessoal.quadra.titulo")}</span>
+        <Cmd className="sobre-cmd-inline">{cmd}</Cmd>
+        <span className="sobre-passaporte-total">
+          {t("sobre.pessoal.quadra.total", { times: TIMES, tecnicos: basquete.tecnicos.length })}
+        </span>
+      </p>
+
+      <div
+        className="sobre-quadra-grupos"
+        style={{
+          "--colunas": basquete.grupos.map((g) => `${g.times.length}fr`).join(" "),
+        }}
+      >
+        {basquete.grupos.map((grupo) => (
+          <div key={grupo.id} className="sobre-quadra-grupo" style={serie(grupo.cor)}>
+            <p className="sobre-continente-nome">
+              <span className="sobre-quadrado" aria-hidden="true" />
+              {t(`sobre.pessoal.quadra.grupos.${grupo.id}`)}
+            </p>
+            <ul className="sobre-quadra-times">
+              {grupo.times.map((time) => {
+                const papel = time.papel && t(`sobre.pessoal.quadra.papeis.${time.papel}`);
+                return (
+                  <li key={time.id}>
+                    <a
+                      href={time.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="sobre-quadra-time"
+                      title={papel ? `${time.titulo} · ${papel}` : time.titulo}
+                    >
+                      <img
+                        src={`/basquete/${time.id}.webp`}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="64"
+                        height="64"
+                      />
+                      <span className="sobre-quadra-nome">{time.nome}</span>
+                      {papel && <span className="sobre-quadra-papel">{papel}</span>}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <p className="sobre-quadra-tecnicos">
+        <span className="sobre-quadra-rotulo">{t("sobre.pessoal.quadra.tecnicos")}</span>
+        <span className="sobre-lista-ponto">
+          {basquete.tecnicos.map(({ nome, url }) => (
+            <Link key={nome} href={url} className="sobre-link">
+              {nome}
+            </Link>
+          ))}
+        </span>
+      </p>
+    </div>
+  );
+}
+
 function Passaporte() {
   const { t } = useTranslation();
   return (
@@ -996,6 +1075,7 @@ const SobreMim = () => {
 
       <Secao titulo={t("sobre.secoes.pessoal")}>
         <Pessoal />
+        <Quadra />
         <Passaporte />
       </Secao>
 

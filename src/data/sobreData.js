@@ -436,6 +436,67 @@ export const hobbies = [
   { id: "violao" },
 ];
 
+// Basquete (sobre.pessoal.quadra): onde joguei, com quem treinei e o que
+// apoio. Os nomes ficam aqui (são nomes próprios); o papel (escolinha,
+// federado) e os títulos dos grupos ficam no i18n. Os logos estão em
+// /public/basquete, todos quadrados (192×192), para ficarem do mesmo tamanho.
+//   cor   token do theme.css que marca o grupo (como nos continentes)
+//   papel sobre.pessoal.quadra.papeis.<papel>, opcional
+const IG = "https://www.instagram.com";
+export const basquete = {
+  grupos: [
+    {
+      id: "clubes",
+      cor: "--icon-work",
+      times: [
+        { id: "cruzeiro", nome: "Cruzeiro", titulo: "Cruzeiro Esporte Clube", papel: "escolinha", url: `${IG}/cruzeirobasquete/` },
+        { id: "olympico", nome: "Olympico", titulo: "Olympico Club", papel: "escolinha_federado", url: `${IG}/olympicobasquete/` },
+        { id: "fmb", nome: "FMB", titulo: "Federação Mineira de Basketball", papel: "federacao", url: `${IG}/federacaomineiradebasketball/` },
+      ],
+    },
+    {
+      id: "atleticas",
+      cor: "--icon-mail-puc",
+      times: [
+        { id: "newton", nome: "Gorilas Newton", titulo: "Atlética Engenharia Newton", url: `${IG}/atleticaengnewton/` },
+        { id: "fumec", nome: "FUMEC", titulo: "Atlética FUMEC", url: `${IG}/atleticafumecoficial/` },
+        { id: "aaae-puc", nome: "AAAE PUC", titulo: "AAAE PUC Minas", url: `${IG}/aaaepucminas/` },
+        { id: "basquete-puc", nome: "Basquete PUC", titulo: "Basquete PUC Minas", url: `${IG}/basq_puc/` },
+      ],
+    },
+    {
+      id: "peladas",
+      cor: "--highlight",
+      times: [
+        { id: "parrots", nome: "Parrots", titulo: "Parrots Basquetebol", url: `${IG}/parrotsbasquetebol/` },
+        { id: "rosso", nome: "Rosso", titulo: "Rosso Basketball", url: `${IG}/rossobasketball/` },
+        { id: "joga", nome: "Joga Basquete", titulo: "Joga Basquete", url: `${IG}/jogabasquete/` },
+        { id: "avb", nome: "AVB", titulo: "Associação dos Veteranos de Basquete de Minas Gerais", url: `${IG}/avb.mg/` },
+      ],
+    },
+    {
+      id: "apoio",
+      cor: "--icon-location",
+      times: [
+        { id: "afcec", nome: "AFCEC", titulo: "Associação Formando Cidadãos de Esporte e Cultura", url: `${IG}/afcec2021/` },
+        { id: "mais-acessivel", nome: "+Acessível", titulo: "Associação +Acessível", url: `${IG}/associacaomaisacessivel/` },
+        { id: "thug-life", nome: "Thug Life BH", titulo: "Thug Life BH", url: `${IG}/thuglifebh/` },
+        { id: "serrao", nome: "Serrão", titulo: "Serrão Basketball", url: `${IG}/serraobasketball/` },
+      ],
+    },
+  ],
+  // Na ordem em que foram passados; sem url, o nome aparece sem link
+  tecnicos: [
+    { nome: "Rainer", url: `${IG}/coachrainer/` },
+    { nome: "Tomaz Rosso", url: `${IG}/tomazrosso/` },
+    { nome: "Abner", url: `${IG}/abnergomesr/` },
+    { nome: "André Medina", url: `${IG}/andremedinabasketball/` },
+    { nome: "Elmon Rabelo", url: `${IG}/rabeloelmon/` },
+    { nome: "Fernando" },
+    { nome: "Wilson Augusto", url: `${IG}/wilson_guto13/` },
+  ],
+};
+
 // Séries: nomes originais, não traduzidos
 export const serieFavorita = { nome: "The IT Crowd", url: "https://www.imdb.com/title/tt0487831/" };
 
