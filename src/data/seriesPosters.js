@@ -46,10 +46,15 @@ export const POSTERS = {
     "url": "https://www.imdb.com/title/tt3489184/",
     "tvmaze": 15
   },
-  "fear-the-walking-dead": {
-    "poster": "/series/fear-the-walking-dead.jpg",
-    "url": "https://www.imdb.com/title/tt3743822/",
-    "tvmaze": 1824
+  "the-leftovers": {
+    "poster": "/series/the-leftovers.jpg",
+    "url": "https://www.imdb.com/title/tt2699128/",
+    "tvmaze": 138
+  },
+  "american-horror-story": {
+    "poster": "/series/american-horror-story.jpg",
+    "url": "https://www.imdb.com/title/tt1844624/",
+    "tvmaze": 30
   },
   "alcatraz": {
     "poster": "/series/alcatraz.jpg",
@@ -105,6 +110,11 @@ export const POSTERS = {
     "poster": "/series/falling-skies.jpg",
     "url": "https://www.imdb.com/title/tt1462059/",
     "tvmaze": 95
+  },
+  "fear-the-walking-dead": {
+    "poster": "/series/fear-the-walking-dead.jpg",
+    "url": "https://www.imdb.com/title/tt3743822/",
+    "tvmaze": 1824
   },
   "the-following": {
     "poster": "/series/the-following.jpg",

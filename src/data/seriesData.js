@@ -27,10 +27,11 @@ export const SERIES = [
   { id: "pawn-stars", nome: "Pawn Stars", br: "Trato Feito", ano: 2009, lista: "assistindo" },
   { id: "masterchef-profissionais", nome: "MasterChef Profissionais", ano: 2016, lista: "assistindo" },
   { id: "constantine", nome: "Constantine", ano: 2014, lista: "assistindo", imdb: "tt3489184" },
-  { id: "fear-the-walking-dead", nome: "Fear the Walking Dead", ano: 2015, lista: "assistindo" },
+  { id: "the-leftovers", nome: "The Leftovers", ano: 2014, lista: "assistindo", imdb: "tt2699128" },
 
   // ---------- Já vi ----------
   { id: "24", nome: "24", br: "24 Horas", ano: 2001, lista: "vistas", imdb: "tt0285331" },
+  { id: "american-horror-story", nome: "American Horror Story", ano: 2011, lista: "vistas", imdb: "tt1844624" },
   { id: "alcatraz", nome: "Alcatraz", ano: 2012, lista: "vistas", imdb: "tt1728102" },
   { id: "arrow", nome: "Arrow", ano: 2012, lista: "vistas", imdb: "tt2193021" },
   { id: "the-big-bang-theory", nome: "The Big Bang Theory", ano: 2007, lista: "vistas", imdb: "tt0898266" },
@@ -42,6 +43,7 @@ export const SERIES = [
   { id: "dune-prophecy", nome: "Dune: Prophecy", br: "Duna: A Profecia", ano: 2024, lista: "vistas", imdb: "tt10466872" },
   { id: "elize-matsunaga", nome: "Elize Matsunaga: Era Uma Vez um Crime", ano: 2021, lista: "vistas", busca: "Elize Matsunaga" },
   { id: "falling-skies", nome: "Falling Skies", ano: 2011, lista: "vistas", imdb: "tt1462059" },
+  { id: "fear-the-walking-dead", nome: "Fear the Walking Dead", ano: 2015, lista: "vistas" },
   { id: "the-following", nome: "The Following", ano: 2013, lista: "vistas", imdb: "tt2071645" },
   { id: "foundation", nome: "Foundation", br: "Fundação", ano: 2021, lista: "vistas", imdb: "tt0804484" },
   { id: "the-fresh-prince-of-bel-air", nome: "The Fresh Prince of Bel-Air", br: "Um Maluco no Pedaço", ano: 1990, lista: "vistas", imdb: "tt0098800" },
