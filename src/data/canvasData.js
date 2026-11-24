@@ -1,4 +1,4 @@
-// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-11-23.
+// Gerado por "npm run canvas" (scripts/canvas.mjs) em 2026-11-24.
 // Não edite à mão: rode o script de novo. Ajustes de cursos ficam em
 // src/data/canvasCursos.js.
 //
@@ -12,7 +12,7 @@ export const canvasInfo = {
   semestre: "2026-2",
   inicio: "2026-08-03",
   fim: "2026-12-22",
-  geradoEm: "2026-11-23T16:35-03:00",
+  geradoEm: "2026-11-24T13:48-03:00",
   alunos: 323,
 };
 
@@ -29,7 +29,7 @@ export const cursos = [
     sga: "8148.1.01",
     curso: "ES",
     alunos: 14,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "290578",
@@ -43,7 +43,7 @@ export const cursos = [
     sga: "8148.1.02",
     curso: "ES",
     alunos: 24,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "292796",
@@ -57,7 +57,7 @@ export const cursos = [
     sga: "8218.1.01",
     curso: "ES",
     alunos: 19,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "292797",
@@ -71,7 +71,7 @@ export const cursos = [
     sga: "8218.1.02",
     curso: "ES",
     alunos: 21,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "290646",
@@ -85,7 +85,7 @@ export const cursos = [
     sga: "8218.1.03",
     curso: "ES",
     alunos: 13,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "291440",
@@ -99,7 +99,7 @@ export const cursos = [
     sga: "6162.1.01",
     curso: "CC",
     alunos: 22,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "289123",
@@ -112,7 +112,7 @@ export const cursos = [
     sga: "6288.1.01",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "291775",
@@ -125,7 +125,7 @@ export const cursos = [
     sga: "6288.1.00",
     curso: "CC",
     alunos: 14,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "292128",
@@ -138,7 +138,7 @@ export const cursos = [
     sga: "6904.1.00",
     curso: "ES",
     alunos: 46,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "292394",
@@ -152,7 +152,7 @@ export const cursos = [
     sga: "7546.1.02",
     curso: "ES",
     alunos: 9,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "292406",
@@ -166,7 +166,7 @@ export const cursos = [
     sga: "7555.1.01",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "290129",
@@ -180,7 +180,7 @@ export const cursos = [
     sga: "7555.1.02",
     curso: "ES",
     alunos: 22,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "287597",
@@ -194,7 +194,7 @@ export const cursos = [
     sga: "4347.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "286959",
@@ -207,7 +207,7 @@ export const cursos = [
     sga: "4354.1.03",
     curso: "CC",
     alunos: 11,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "286958",
@@ -220,7 +220,7 @@ export const cursos = [
     sga: "4354.1.00",
     curso: "CC",
     alunos: 50,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
   {
     id: "283169",
@@ -233,7 +233,7 @@ export const cursos = [
     sga: "0492.1.00",
     curso: "ES",
     alunos: 47,
-    atualizadoEm: "2026-11-23T16:35-03:00",
+    atualizadoEm: "2026-11-24T13:48-03:00",
   },
 ];
 
@@ -1541,7 +1541,7 @@ export const tarefas = [
     fecha: "2026-11-25T23:59-03:00",
     pontos: 2.5,
     tipo: "online",
-    entregas: { alunos: 22, noPrazo: 1, atrasadas: 0, faltando: 21, dispensados: 0, corrigidas: 0, aCorrigir: 1 },
+    entregas: { alunos: 22, noPrazo: 2, atrasadas: 0, faltando: 20, dispensados: 0, corrigidas: 0, aCorrigir: 2 },
   },
   {
     id: "1434355",
@@ -1961,6 +1961,86 @@ export const tarefas = [
     pontos: 15,
     tipo: "online",
     entregas: { alunos: 11, noPrazo: 0, atrasadas: 0, faltando: 11, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486205",
+    curso: "292753",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/292753/assignments/1486205",
+    prazo: "2026-12-14T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 14, noPrazo: 0, atrasadas: 0, faltando: 14, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486197",
+    curso: "292406",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/292406/assignments/1486197",
+    prazo: "2026-12-14T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486214",
+    curso: "292796",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/292796/assignments/1486214",
+    prazo: "2026-12-15T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 19, noPrazo: 0, atrasadas: 0, faltando: 19, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486216",
+    curso: "290646",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/290646/assignments/1486216",
+    prazo: "2026-12-15T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 13, noPrazo: 0, atrasadas: 0, faltando: 13, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486199",
+    curso: "292394",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/292394/assignments/1486199",
+    prazo: "2026-12-16T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 9, noPrazo: 0, atrasadas: 0, faltando: 9, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486200",
+    curso: "290129",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/290129/assignments/1486200",
+    prazo: "2026-12-16T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 22, noPrazo: 0, atrasadas: 0, faltando: 22, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486211",
+    curso: "290578",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/290578/assignments/1486211",
+    prazo: "2026-12-17T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 24, noPrazo: 0, atrasadas: 0, faltando: 24, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
+  },
+  {
+    id: "1486215",
+    curso: "292797",
+    nome: "Reavaliação - 25 pts",
+    url: "https://pucminas.instructure.com/courses/292797/assignments/1486215",
+    prazo: "2026-12-17T23:59-03:00",
+    pontos: 25,
+    tipo: "online",
+    entregas: { alunos: 21, noPrazo: 0, atrasadas: 0, faltando: 21, dispensados: 0, corrigidas: 0, aCorrigir: 0 },
   },
   {
     id: "1458331",
