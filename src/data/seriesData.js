@@ -20,12 +20,12 @@
 export const SERIES = [
   // ---------- Assistindo agora ----------
   { id: "silo", nome: "Silo", ano: 2023, lista: "assistindo", imdb: "tt14688458" },
+  { id: "blade-runner-2099", nome: "Blade Runner 2099", ano: 2026, lista: "assistindo" },
   { id: "rings-of-power", nome: "The Lord of the Rings: The Rings of Power", ano: 2022, lista: "assistindo", imdb: "tt7631058" },
   { id: "harry-potter", nome: "Harry Potter", ano: 2026, lista: "assistindo", tvmaze: 68803 },
   { id: "seal-team", nome: "SEAL Team", ano: 2017, lista: "assistindo", tvmaze: 28160 },
   { id: "the-purge", nome: "The Purge", br: "Uma Noite de Crime", ano: 2018, lista: "assistindo" },
   { id: "pawn-stars", nome: "Pawn Stars", br: "Trato Feito", ano: 2009, lista: "assistindo" },
-  { id: "masterchef-profissionais", nome: "MasterChef Profissionais", ano: 2016, lista: "assistindo" },
   { id: "constantine", nome: "Constantine", ano: 2014, lista: "assistindo", imdb: "tt3489184" },
   { id: "the-leftovers", nome: "The Leftovers", ano: 2014, lista: "assistindo", imdb: "tt2699128" },
 
@@ -59,6 +59,7 @@ export const SERIES = [
   { id: "lost", nome: "Lost", ano: 2004, lista: "vistas", imdb: "tt0411008" },
   { id: "masterchef-brasil", nome: "MasterChef Brasil", br: "MasterChef Amadores", ano: 2014, lista: "vistas" },
   { id: "masterchef-confeitaria", nome: "MasterChef Confeitaria", ano: 2024, lista: "vistas" },
+  { id: "masterchef-profissionais", nome: "MasterChef Profissionais", ano: 2016, lista: "vistas" },
   { id: "o-mecanismo", nome: "O Mecanismo", ano: 2018, lista: "vistas" },
   { id: "mr-bean", nome: "Mr. Bean", ano: 1990, lista: "vistas", imdb: "tt0096657" },
   { id: "oz", nome: "Oz", ano: 1997, lista: "vistas", imdb: "tt0118421" },

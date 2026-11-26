@@ -11,6 +11,11 @@ export const POSTERS = {
     "url": "https://www.imdb.com/title/tt14688458/",
     "tvmaze": 38052
   },
+  "blade-runner-2099": {
+    "poster": "/series/blade-runner-2099.jpg",
+    "url": "https://www.imdb.com/title/tt18224594/",
+    "tvmaze": 60458
+  },
   "rings-of-power": {
     "poster": "/series/rings-of-power.jpg",
     "url": "https://www.imdb.com/title/tt7631058/",
@@ -35,11 +40,6 @@ export const POSTERS = {
     "poster": "/series/pawn-stars.jpg",
     "url": "https://www.imdb.com/title/tt1492088/",
     "tvmaze": 534
-  },
-  "masterchef-profissionais": {
-    "poster": "/series/masterchef-profissionais.jpg",
-    "url": "https://www.tvmaze.com/shows/21807/masterchef-profissionais-brasil",
-    "tvmaze": 21807
   },
   "constantine": {
     "poster": "/series/constantine.jpg",
@@ -190,6 +190,11 @@ export const POSTERS = {
     "poster": "/series/masterchef-confeitaria.jpg",
     "url": "https://www.imdb.com/title/tt33225527/",
     "tvmaze": 81610
+  },
+  "masterchef-profissionais": {
+    "poster": "/series/masterchef-profissionais.jpg",
+    "url": "https://www.tvmaze.com/shows/21807/masterchef-profissionais-brasil",
+    "tvmaze": 21807
   },
   "o-mecanismo": {
     "poster": "/series/o-mecanismo.jpg",
